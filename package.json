@@ -23,8 +23,11 @@
     "build-storybook": "storybook build -o docs"
   },
   "dependencies": {
+    "@primevue/themes": "^4.0.7",
     "date-fns": "^4.1.0",
     "pinia": "^2.2.2",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.0.7",
     "vue": "^3.5.6",
     "vue3-emoji-picker": "^1.1.8"
   },
@@ -40,6 +43,7 @@
     "@storybook/vue3-vite": "^8.3.1",
     "@types/node": "^22.5.5",
     "@vitejs/plugin-vue": "^5.1.4",
+    "sass": "^1.79.1",
     "storybook": "^8.3.1",
     "typescript": "^5.6.2",
     "vite": "^5.4.6",

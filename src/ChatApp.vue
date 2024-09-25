@@ -1,27 +1,24 @@
 <template>
   <div class="chat-app">
-    <ChatList :chats="chatsStore.chats" @select="selectChat" />
-
-    <div v-if="selectedChat">
-      <ChatInfo :chat="selectedChat"/>
-      <MessageFeed :messages="messages" />
-      <ChatInput @send="addMessage" />
+    <div class="chat-app__container">
+      <LeftBar :selectChat="selectChat" />
+      <div class="chat-app__center-bar-container">
+        <CenterBar class="chat-app__messages-form" v-if="chatsStore.selectedChat" :addMessage="addMessage" />
+        <p class="chat-app__welcome-text" v-else>Выберите контакт для начала общения</p>
+      </div>
     </div>
-    <p v-else>Выберите контакт для начала общения</p>
-
-    <Profile :user="userProfile" />
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import { defineStore } from 'pinia'
+import { onMounted } from 'vue';
 
-import ChatInput from "./components/features/ChatInput2.vue";
-import ChatList from "./components/features/AdvancedChatList.vue";
-import ChatInfo from "./components/features/ChatInfo.vue";
-import MessageFeed from "./components/features/MessageFeed.vue";
-import Profile from "./components/features/Profile.vue";
+import { useChatsStore } from "./store/chatsStore.js"
+import LeftBar from './layouts/LeftBar.vue';
+import CenterBar from './layouts/CenterBar.vue'
+
+// Define store
+const chatsStore = useChatsStore();
 
 // Define props
 const props = defineProps({
@@ -39,78 +36,73 @@ const props = defineProps({
   },
 });
 
-const useChatsStore = defineStore('chats', () => {
-  const chats = ref([])
-
-  function setUnreadCounter(chatId, countUnread) {
-    const chat = chats.value.find(c => c.chatId === chatId);
-    chat.countUnread = countUnread;
-  }
-  return { chats, setUnreadCounter }
-})
-
-const chatsStore = useChatsStore();
-
-// Reactive data
-const selectedChat = ref(null);
-const messages = ref([]);
-const userProfile = ref({});
-
-// Methods
-const getUserProfile = () => {
-  return props.authProvider.getUserProfile();
-};
-
 const getFeed = () => {
-  // console.log('get feed')
-  if (selectedChat.value) {
-    return props.dataProvider.getFeed(selectedChat.value.chatId);
+  if (chatsStore.selectedChat) {
+    return props.dataProvider.getFeed(chatsStore.selectedChat.chatId);
   } else {
     return [];
   }
+};
+
+const selectChat = (chat) => {
+  chatsStore.selectedChat = chat;
+  chatsStore.setUnreadCounter(chat.chatId, 0);
+  chatsStore.messages = getFeed();
 };
 
 const addMessage = (message) => {
   props.dataProvider.addMessage({
     text: message,
     type: 'message.text',
-    chatId: selectedChat.value.chatId,
+    chatId: chatsStore.selectedChat.chatId,
     direction: 'outgoing',
     timestamp: new Date().toLocaleTimeString(),
   });
-  messages.value = getFeed();  // Обновление сообщений
-};
-
-const selectChat = (chat) => {
-  selectedChat.value = chat;
-  chatsStore.setUnreadCounter(chat.chatId, 0);
-  messages.value = getFeed(); // Обновляем сообщения при выборе контакта
+  chatsStore.messages = getFeed();  // Обновление сообщений
 };
 
 const handleEvent = (event) => {
-  if (event.type === 'message') {        
+  if (event.type === 'message') {
     chatsStore.setUnreadCounter(event.data.chatId, 1);
-    if (selectedChat?.value?.chatId) {
-      messages.value = props.dataProvider.getFeed(selectedChat.value.chatId);
+    if (chatsStore.selectedChat.chatId) {
+      chatsStore.messages = props.dataProvider.getFeed(chatsStore.selectedChat.chatId);
+
     }
   } else if (event.type === 'notification') {
     console.log('Системное уведомление:', event.data.text);
   }
 };
 
+
+
 // Lifecycle hook
 onMounted(() => {
   // console.log('mounted')
   props.eventor.subscribe(handleEvent);
-  userProfile.value = props.authProvider.getUserProfile();
+  chatsStore.userProfile = props.authProvider.getUserProfile();
   chatsStore.chats = props.dataProvider.getChats();
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .chat-app {
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr ;
-  gap: 16px;
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 100vh;
+  }
+
+  &__center-bar-container {
+    width: 100%;
+    position: relative;
+  }
+
+  &__welcome-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 </style>

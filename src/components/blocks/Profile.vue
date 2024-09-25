@@ -1,7 +1,9 @@
 <template>
-  <div class="chat-info">
-    <div v-if="chat">
-      <h2>{{ chat.name }}</h2>
+  <div class="profile">
+    <div class="profile__container" v-if="user">
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.email }}</p>
+      <p>{{ user.phone }}</p>
     </div>
   </div>
 </template>
@@ -10,7 +12,7 @@
 
 // Define props
 const props = defineProps({
-  chat: {
+  user: {
     type: Object,
     required: true,
   },
@@ -18,7 +20,7 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.chat-info {
+.profile {
   padding: 16px;
 }
 </style>

@@ -1,30 +1,37 @@
 <template>
   <div class="container">
-    <chat-app
-      :authProvider="authProvider"
-      :dataProvider="dataProvider"
-      :eventor="eventor"
-    />
+    <chat-app :authProvider="authProvider" :dataProvider="dataProvider" :eventor="eventor" />
   </div>
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue';
+import { onMounted } from 'vue';
 import ChatApp from './ChatApp.vue';
 
 // Mock data
 const data3 = {
   messages: [
-    { chatId: 1, type: "message.text", text: "Привет!", direction: 'incoming', status: 'read', timestamp: 1726316634},
-    { chatId: 1, type: "message.text", text: "Привет!", direction: 'outgoing', isRead: true},
-    { chatId: 1, type: "message.image", url: "https://example.com/image.jpg", alt: "Example Image", direction: 'outgoing'},
-    { chatId: 2, type: "message.file", url: "https://example.com/file.pdf", filename: "Документ.pdf" },
-    { chatId: 2, type: "message.text", text: "Привет!", direction: 'incoming', isRead: true},
-    { chatId: 2, type: "message.image", url: "https://example.com/image.jpg", alt: "Example Image", direction: 'outgoing'},
+    { chatId: 1, type: "message.text", text: "Привет!", direction: 'incoming', status: 'read', timestamp: 1726316634 },
+    { chatId: 1, type: "message.text", text: "Привет!", direction: 'outgoing', isRead: true },
+    { chatId: 1, type: "message.image", url: "https://madtest.ru/blog/marketing/images/tild3637-3733-4937-a361-656334356463__stocks-unsplash.png", alt: "Example Image", direction: 'outgoing' },
+    { chatId: 2, type: "message.file", url: "https://axiomabio.com/pdf/test.pdf", filename: "Документ.pdf" },
+    { chatId: 2, type: "message.text", text: "Привет!", direction: 'incoming', isRead: true },
+    { chatId: 2, type: "message.image", url: "https://example.com/image.jpg", alt: "Example Image", direction: 'outgoing' },
+    { chatId: 3, type: "message.text", text: "Привет!", direction: 'incoming', isRead: true },
+    { chatId: 3, type: "message.text", text: "Привет!", direction: 'incoming', isRead: true },
+    { chatId: 4, type: "message.text", text: "Привет!", direction: 'incoming', isRead: true },
+    { chatId: 4, type: "message.text", text: "Привет!", direction: 'incoming', isRead: true },
+    { chatId: 5, type: "message.text", text: "Привет!", direction: 'incoming', isRead: true },
+    { chatId: 6, type: "message.text", text: "Привет!", direction: 'incoming', isRead: true },
+
   ],
   chats: [
-    { chatId: 1, name: "Василий", countUnread: 0, lastMessage: 'test', 'lastActivity.timestamp': 1726316634,},
-    { chatId: 2, name: "Мария", countUnread: 0},
+    { chatId: 1, name: "Василий", countUnread: 0, lastMessage: 'test', 'lastActivity.timestamp': 1726316634, },
+    { chatId: 2, name: "Мария", countUnread: 0 },
+    { chatId: 3, name: "Иван", countUnread: 0 },
+    { chatId: 4, name: "Сергей", countUnread: 0 },
+    { chatId: 5, name: "Анна", countUnread: 0 },
+    { chatId: 6, name: "Ульяна", countUnread: 0 },
   ],
 };
 
@@ -63,14 +70,14 @@ const dataProvider = {
 const createEventor = () => {
   let cb = null;
   return {
-    push (event) {      
+    push(event) {
       // console.log('push', cb);
       if (cb) {
         // console.log('subscibe');
-        cb(event); 
+        cb(event);
       }
     },
-    subscribe (cb1) {
+    subscribe(cb1) {
       cb = cb1;
     },
   };
@@ -108,9 +115,4 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-.container {
-  width: 1200px;
-  margin: 0 auto;
-}
-</style>
+<style scoped lang="scss"></style>
