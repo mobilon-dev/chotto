@@ -68,20 +68,20 @@
         </div>
       </div>
 
-      <button 
-        v-if="buttonMenuVisible && message.actions" 
-        class="audio-message__menu-button" 
+      <button
+        v-if="buttonMenuVisible && message.actions"
+        class="audio-message__menu-button"
         @click="isOpenMenu = !isOpenMenu"
       >
         <span class="pi pi-ellipsis-h" />
       </button>
 
       <transition>
-        <ContextMenu 
-          v-if="isOpenMenu && message.actions" 
-          class="audio-message__context-menu" 
+        <ContextMenu
+          v-if="isOpenMenu && message.actions"
+          class="audio-message__context-menu"
           :actions="message.actions"
-          @click="clickAction" 
+          @click="clickAction"
         />
       </transition>
     </div>
@@ -162,6 +162,8 @@ const getStatus = computed(() => {
       return 'audio-message__status--read'
     case 'received':
       return 'audio-message__status--received'
+    default:
+      return ''
   }
 })
 
@@ -179,7 +181,10 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .audio-message {
 
   &__content {
@@ -188,7 +193,7 @@ onMounted(() => {
     grid-template-columns: min-content 1fr;
     column-gap: var(--audio-message-gap);
     padding: var(--audio-message-padding);
-    max-width: var(--audio-message-width);
+    width: var(--audio-message-width);
     border-radius: var(--audio-message-border-radius);
   }
 
@@ -248,7 +253,7 @@ onMounted(() => {
 
   &__subtext {
     font-size: 12px;
-    color: var(--neutral-500);
+    color: var(--subtext-color);
     font-weight: 500;
   }
 
@@ -318,6 +323,15 @@ onMounted(() => {
     position: absolute;
   }
 
+  &__play,
+  &__pause {
+    background-color: var(--audio-message-button-background-color-left);
+
+    span {
+      color: var(--audio-message-button-icon-color-left);
+    }
+  }
+
   &__left,
   &__right {
     display: grid;
@@ -342,15 +356,6 @@ onMounted(() => {
     .audio-message__content {
       grid-column: 2;
       background-color: var(--audio-message-background-left);
-    }
-
-    .audio-message__play,
-    .audio-message__pause {
-      background-color: var(--audio-message-button-background-color-left);
-
-      span {
-        color: var(--audio-message-button-icon-color-left);
-      }
     }
 
     .audio-message__menu-button {
@@ -384,15 +389,6 @@ onMounted(() => {
       background-color: var(--audio-message-background-right);
     }
 
-    .audio-message__play,
-    .audio-message__pause {
-      background-color: var(--audio-message-button-background-color-right);
-
-      span {
-        color: var(--audio-message-button-icon-color-right);
-      }
-    }
-
     .audio-message__menu-button {
       top: 50%;
       left: -40px;
@@ -404,63 +400,6 @@ onMounted(() => {
     }
   }
 
-}
-
-.dark {
-  .audio-message {
-    &__left {
-
-      .audio-message__content {
-        background-color: var(--d-audio-message-background-left);
-      }
-
-      .audio-message__play,
-      .audio-message__pause {
-        background-color: var(--d-audio-message-button-background-color-left);
-
-        span {
-          color: var(--d-audio-message-button-icon-color-left);
-        }
-      }
-    }
-
-    &__right {
-
-      .audio-message__content {
-        background-color: var(--d-audio-message-background-right);
-      }
-
-      .audio-message__play,
-      .audio-message__pause {
-        background-color: var(--d-audio-message-button-background-color-right);
-
-        span {
-          color: var(--d-audio-message-button-icon-color-right);
-        }
-      }
-    }
-
-    &__progress-bar-container {
-      background-color: var(--d-audio-message-pbc-background-color);
-    }
-
-    &__progress-bar {
-      background-color: var(--d-audio-message-pb-background-color);
-    }
-
-    &__status--received {
-      span {
-        color: var(--neutral-200);
-      }
-    }
-
-    &__menu-button {
-      &:hover span {
-        color: var(--neutral-200);
-      }
-    }
-
-  }
 }
 
 .v-enter-active {

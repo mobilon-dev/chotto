@@ -34,7 +34,10 @@ const click = (index) => {
 
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .context-menu {
   z-index: 200;
 
@@ -66,15 +69,6 @@ const click = (index) => {
   &__item:not(:last-child) {
     padding-bottom: 6px;
     border-bottom: 1px solid var(--neutral-300);
-  }
-}
-
-.dark {
-  .context-menu {
-
-    &__container {
-      background-color: var(--d-context-menu-background);
-    }
   }
 }
 </style>

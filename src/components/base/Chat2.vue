@@ -121,21 +121,12 @@ const hideMenu = () => {
   buttonMenuVisible.value = false;
   isOpenMenu.value = false
 };
-
-const getStatus = computed(() => {
-  switch (props.chat.status) {
-    case 'online':
-      return 'chat-item__status--online'
-    case 'offline':
-      return 'chat-item__status--offline'
-    case 'sleep':
-      return 'chat-item__status--sleep'
-  }
-})
-
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .chat-item {
 
   &__container {
@@ -223,7 +214,7 @@ const getStatus = computed(() => {
     top: 15px;
     right: 15px;
     border: none;
-    background-color: var(--default-white);
+    background-color: var(--chat-list-menu-button);
     cursor: pointer;
     padding: 0;
 
@@ -236,7 +227,7 @@ const getStatus = computed(() => {
     }
 
     &:hover span {
-      color: var(--neutral-700);
+      color: var(--chat-list-menu-button-color-hover);
       transition: 0.2s;
     }
   }
@@ -267,44 +258,6 @@ const getStatus = computed(() => {
     position: absolute;
     top: 40%;
     right: 0;
-  }
-}
-
-.dark {
-  .chat-item {
-
-    &__selected {
-      background: var(--d-chat-item-selected);
-
-      .chat-item__menu-button {
-        background: var(--d-chat-item-selected);
-      }
-    }
-
-    &__menu-button {
-      background-color: var(--neutral-900);
-
-      &:hover span {
-        color: var(--neutral-200);
-      }
-    }
-
-    &__avatar-container {
-      background-color: var(--d-avatar-background-color);
-
-      span {
-        color: var(--d-avatar-icon-color);
-      }
-    }
-
-    &__last-message {
-      color: var(--d-chat-item-color-last-name);
-    }
-
-    &__unread {
-      background-color: var(--d-chat-item-background-color-unread);
-      color: var(--d-chat-item-color-unread);
-    }
   }
 }
 

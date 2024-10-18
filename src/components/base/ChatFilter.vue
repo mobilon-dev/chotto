@@ -28,7 +28,10 @@ const update = () => {
 
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .chat-filter {
   &__input {
     width: var(--inputtext-width);
@@ -54,29 +57,6 @@ const update = () => {
       border-color: var(--inputtext-focus-border-color);
       outline: none;
     }
-  }
-}
-
-.dark {
-  .chat-filter {
-    &__input {
-      color: var(--d-inputtext-color);
-      background-color: var(--d-inputtext-background);
-      border: var(--d-inputtext-border);
-
-      &::placeholder {
-        color: var(--d-inputtext-placeholder-color);
-      }
-
-      &:hover {
-        border-color: var(--d-inputtext-hover-border-color);
-      }
-
-      &:focus-visible {
-        border-color: var(--d-inputtext-focus-border-color);
-      }
-    }
-
   }
 }
 </style>

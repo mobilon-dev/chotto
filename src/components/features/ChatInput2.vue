@@ -15,7 +15,7 @@
         :can-upload-file="canUploadFile"
         @file-uploaded="fileUploaded"
       />
-      
+
       <input
         ref="refInput"
         v-model="message"
@@ -107,7 +107,7 @@ const sendMessage = () => {
   message.value = '';
   unref(refInput).focus()
 
-  
+
 };
 
 const toogleDialogEmoji = () => {
@@ -126,7 +126,10 @@ const onSelectEmoji = (emoji) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .chat-input {
   &__container {
     position: relative;
@@ -194,37 +197,6 @@ const onSelectEmoji = (emoji) => {
     position: absolute;
     bottom: 80px;
     right: 1%;
-  }
-}
-
-.dark {
-  .chat-input {
-    &__container {
-      background-color: var(--d-chat-input-background);
-    }
-
-    &__button-file {
-      span {
-        color: var(--d-icon-color);
-      }
-    }
-
-    &__input {
-      color: var(--d-inputtext-color);
-      background-color: var(--d-inputtext-background);
-
-      &::placeholder {
-        color: var(--d-inputtext-placeholder-color);
-      }
-    }
-
-    &__button-emoji,
-    &__button-send {
-
-      span {
-        color: var(--d-icon-color);
-      }
-    }
   }
 }
 

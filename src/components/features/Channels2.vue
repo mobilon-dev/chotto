@@ -1,29 +1,4 @@
 <template>
-  <!-- <div class="channels" ref="customDiv">
-    <div @click="toggle">
-      <span v-if="channels.length > 0">
-        <div class="popover">
-          <span v-if="!selectedChannel">select channel</span>
-          <span v-if="selectedChannel">
-            <span v-if="selectedChannel.icon">
-              <img :src="selectedChannel.icon" height="16" width="16">&nbsp;
-            </span>
-            <span>{{ selectedChannel.title }}</span>
-          </span>
-        </div>
-      </span>
-      <span v-if="!(channels.length > 0)">no channels</span>
-    </div>
-    <div v-if="showPopup" @click.stop>
-      <div class="popover-content">
-        <ul>
-          <li v-for="channel in channels" :key="channel.channelId" @click="selectChannel(channel)">{{ channel.title }}
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
-
   <div
     ref="customDiv"
     class="channels"
@@ -125,7 +100,10 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .channels {
 
   &__button {
@@ -193,20 +171,6 @@ onUnmounted(() => {
   }
 }
 
-.dark {
-  .channels {
-    &__button {
-      span {
-        color: var(--d-icon-color);
-      }
-    }
-
-    &__popover {
-      background-color: var(--d-channels-popover-background-color);
-    }
-  }
-}
-
 .v-enter-active {
   transition: all 0.2s ease-out;
 }
@@ -220,32 +184,4 @@ onUnmounted(() => {
   transform: translateY(20px);
   opacity: 0;
 }
-
-/* .popover {
-  margin: 0;
-  font-size: 14px;
-  text-transform: uppercase;
-  background: #fff;
-  color: #3794ff;
-  padding: 12px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.popover:hover {
-  background: #2b2b2b;
-  color: #fff;
-}
-
-.popover-content {
-  position: absolute;
-  background: #fff;
-  border-radius: 6px;
-  margin-top: 4px;
-  padding: 16px;
-  color: #333;
-  min-width: 200px;
-  text-align: left;
-}*/
 </style>

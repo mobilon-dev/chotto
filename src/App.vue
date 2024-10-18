@@ -12,8 +12,8 @@
 import { onMounted, reactive } from 'vue';
 import ChatApp from './ChatApp.vue';
 
-import {messages} from './data/messages';
-import {chats} from './data/chats';
+import { messages } from './data/messages';
+import { chats } from './data/chats';
 
 // Mock data
 const data3 = {
@@ -130,7 +130,7 @@ onMounted(() => {
 
 <style scoped>
 .container {
-  width: 1200px;
+  width: 74vw;
   margin: 0 auto;
 }
 </style>

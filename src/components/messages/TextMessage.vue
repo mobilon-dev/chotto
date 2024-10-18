@@ -45,19 +45,19 @@
         </div>
 
         <button
-          v-if="buttonMenuVisible && message.actions" 
-          class="text-message__menu-button" 
+          v-if="buttonMenuVisible && message.actions"
+          class="text-message__menu-button"
           @click="isOpenMenu = !isOpenMenu"
         >
           <span class="pi pi-ellipsis-h" />
         </button>
 
         <transition>
-          <ContextMenu 
+          <ContextMenu
             v-if="isOpenMenu && message.actions"
             class="text-message__context-menu"
             :actions="message.actions"
-            @click="clickAction" 
+            @click="clickAction"
           />
         </transition>
       </div>
@@ -106,11 +106,16 @@ const getStatus = computed(() => {
       return 'text-message__status--read'
     case 'received':
       return 'text-message__status--received'
+    default:
+      return ''
   }
 })
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .text-message {
 
   &__content {
@@ -270,37 +275,6 @@ const getStatus = computed(() => {
     .text-message__context-menu {
       top: 56%;
       right: 100%;
-    }
-  }
-}
-
-.dark {
-  .text-message {
-    &__left {
-      .text-message__content {
-        background-color: var(--d-text-message-left-background-color);
-        color: var(--d-text-message-text-color);
-      }
-
-    }
-
-    &__right {
-      .text-message__content {
-        background-color: var(--d-text-message-right-background-color);
-        color: var(--d-text-message-text-color);
-      }
-    }
-
-    &__status--received {
-      span {
-        color: var(--neutral-200);
-      }
-    }
-
-    &__menu-button {
-      &:hover span {
-        color: var(--neutral-200);
-      }
     }
   }
 }

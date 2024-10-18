@@ -101,12 +101,15 @@ const action = (data) => emit('action', data);
 // watch(() => props.chats, getSortedChats);
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .chat-list {
   background-color: transparent;
 
   &__container {
-    padding: 30px 0;
+
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -122,12 +125,12 @@ const action = (data) => emit('action', data);
 
     &::-webkit-scrollbar {
       width: 6px;
-      background-color: var(--neutral-50);
+      background-color: var(--scrollbar-bg);
     }
 
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: var(--neutral-300);
+      background-color: var(--scrollbar-thumb-bg);
     }
 
     &::-webkit-scrollbar-track {
@@ -140,7 +143,7 @@ const action = (data) => emit('action', data);
     z-index: 100;
     display: block;
     position: sticky;
-    background-color: var(--default-white);
+    background-color: var(--chat-list-fixed-background-color);
   }
 
   &__fixed-items-top {
@@ -156,25 +159,6 @@ const action = (data) => emit('action', data);
     margin-bottom: 20px;
     font-size: var(--h2-font-size);
     font-weight: var(--h2-font-weight);
-  }
-}
-
-.dark {
-  .chat-list {
-    &__items {
-      &::-webkit-scrollbar {
-        background-color: var(--neutral-500);
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: var(--neutral-200);
-      }
-    }
-
-    &__fixed-items-top,
-    &__fixed-items-bottom {
-      background-color: var(--neutral-900);
-    }
   }
 }
 

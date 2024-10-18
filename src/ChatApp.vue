@@ -3,6 +3,12 @@
     <div class="chat-app">
       <div class="chat-app__container">
         <div class="chat-app__left-bar">
+          <ToolBar
+            :sidebar-items="sidebarItems"
+            @select-item="selectItem"
+          />
+        </div>
+        <div class="chat-app__center-bar">
           <Profile :user="userProfile" />
           <ChatList2
             class="chat-app__chat-list"
@@ -14,15 +20,22 @@
           <ThemeMode />
         </div>
 
-        <div class="chat-app__right-bar">
+        <div
+          class="chat-app__right-bar"
+          :style="{ gridColumn: isOpenChatPanel ? '3' : '3 / 5', }"
+        >
           <div
             v-if="selectedChat"
             class="chat-app__right-bar-container"
           >
-            <ChatInfo :chat="selectedChat" />
+            <ChatInfo
+              :chat="selectedChat"
+              @open-panel="isOpenChatPanel = !isOpenChatPanel"
+            />
             <Feed
               class="chat-app__feed"
               :objects="messages"
+              :style="{ padding: isOpenChatPanel ? '0 20px 50px 20px' : '0 80px 50px 80px' }"
             />
             <ChatInput2
               :enable-emoji="true"
@@ -37,6 +50,12 @@
             Выберите контакт для начала общения
           </p>
         </div>
+
+
+        <ChatPanel
+          v-if="isOpenChatPanel"
+          class="chat-app__chat-panel chat-app__chat-panel--active"
+        />
       </div>
     </div>
     <!-- <CreateNewChat :users="getUsers()" @createNewChat="createNewChat" title="+ чат" :isChatName="true"/>     -->
@@ -55,6 +74,8 @@ import {
   Profile,
   FileUploader,
   ThemeMode,
+  ToolBar,
+  ChatPanel,
 } from "./components/features";
 
 import {
@@ -89,6 +110,15 @@ const selectedChat = ref(null);
 const messages = ref([]);
 const userProfile = ref({});
 const channels = ref([]);
+const sidebarItems = ref([])
+
+const isOpenChatPanel = ref(false)
+
+const selectItem = (item) => {
+  sidebarItems.value.forEach(c => c.isSelected = false);
+  const c = sidebarItems.value.find(c => c.name === item.name);
+  c.isSelected = true;
+};
 
 const action = (data) => {
   console.log('action 1111', data);
@@ -177,38 +207,60 @@ onMounted(() => {
   userProfile.value = props.authProvider.getUserProfile();
   chatsStore.chats = props.dataProvider.getChats();
   channels.value = props.dataProvider.getChannels();
+  sidebarItems.value = props.dataProvider.getSidebarItems()
 });
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .chat-app {
   &__container {
     display: grid;
-    grid-template-columns: 1.25fr 3fr;
-  }
-
-  &__right-bar {
-    position: relative;
-    margin: 30px 0;
-    height: calc(100vh - 60px);
-    background-color: var(--neutral-100);
-    border-radius: 12px;
+    grid-template-columns: min-content 1.25fr 3fr 1.25fr;
+    transition: all 0.3s ease;
+    background-color: var(--app-container-bg, transparent);
+    margin: var(--app-margin, 0);
   }
 
   &__left-bar {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    margin-right: 20px;
+    grid-column: 1;
+    border-right: 1px solid var(--tool-bar-border-color);
   }
 
-  &__chat-list {
-    overflow-y: auto;
+  &__right-bar {
+    grid-column: 3;
+    position: relative;
+    height: calc(100vh - 60px);
+    border-radius: 12px;
+    margin: var(--right-bar-margin);
+    background-color: var(--rigth-bar-bg);
   }
 
   &__right-bar-container {
     display: flex;
     flex-direction: column;
     height: 100%;
+  }
+
+  &__center-bar {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+    grid-column: 2;
+    border-right: var(--center-bar-border, none);
+  }
+
+  &__chat-panel {
+    margin: var(--chat-pannel-margin);
+    border-left: var(--chat-pannel-border, none);
+  }
+
+  &__chat-list {
+    overflow-y: auto;
+    margin: 30px 0 16px 0;
   }
 
   &__welcome-text {
@@ -219,12 +271,14 @@ onMounted(() => {
   }
 }
 
-.dark {
-  .chat-app {
-    &__right-bar {
-      background-color: var(--neutral-800);
-    }
-  }
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
 
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

@@ -104,12 +104,17 @@ const getStatus = computed(() => {
       return 'file-message__status--read'
     case 'received':
       return 'file-message__status--received'
+    default:
+      return ''
   }
 })
 
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .file-message {
 
   &__avatar {
@@ -123,7 +128,7 @@ const getStatus = computed(() => {
 
   &__subtext {
     font-size: 12px;
-    color: var(--neutral-500);
+    color: var(--subtext-color);
     font-weight: 500;
   }
 
@@ -282,28 +287,6 @@ const getStatus = computed(() => {
     .file-message__context-menu {
       top: 100%;
       right: 100%;
-    }
-  }
-}
-
-.dark {
-  .file-message {
-    &__content {
-      background-color: var(--d-file-message-background-color);
-    }
-
-    &__link {
-      color: var(--d-file-message-link-color);
-
-      span {
-        color: var(--d-icon-color);
-      }
-    }
-
-    &__status--received {
-      span {
-        color: var(--neutral-200);
-      }
     }
   }
 }

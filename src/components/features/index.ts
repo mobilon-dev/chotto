@@ -8,6 +8,8 @@ import Profile from './Profile.vue';
 import CreateNewChat from './CreateNewChat.vue';
 import FileUploader from './FileUploader.vue';
 import ThemeMode from './ThemeMode.vue';
+import ToolBar from './ToolBar.vue';
+import ChatPanel from './ChatPanel.vue'
 
 export {
   CreateNewChat,
@@ -20,4 +22,6 @@ export {
   FileUploader,
   Profile,
   ThemeMode,
+  ToolBar,
+  ChatPanel
 }

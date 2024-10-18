@@ -77,7 +77,10 @@ function getClass(message) {
 
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .call-message {
 
   &__content {
@@ -245,37 +248,6 @@ function getClass(message) {
       margin-left: auto;
       background-color: var(--text-message-right-background-color);
       color: var(--text-message-text-color);
-    }
-  }
-}
-
-.dark {
-  .call-message {
-    &__left {
-      .call-message__content {
-        background-color: var(--d-text-message-left-background-color);
-        color: var(--d-text-message-text-color);
-      }
-
-    }
-
-    &__right {
-      .call-message__content {
-        background-color: var(--d-text-message-right-background-color);
-        color: var(--d-text-message-text-color);
-      }
-    }
-
-    &__status--received {
-      span {
-        color: var(--neutral-200);
-      }
-    }
-
-    &__menu-button {
-      &:hover span {
-        color: var(--neutral-200);
-      }
     }
   }
 }

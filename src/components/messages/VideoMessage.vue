@@ -40,20 +40,20 @@
         />
       </div>
 
-      <button 
-        v-if="buttonMenuVisible && message.actions" 
-        class="video-message__menu-button" 
+      <button
+        v-if="buttonMenuVisible && message.actions"
+        class="video-message__menu-button"
         @click="isOpenMenu = !isOpenMenu"
-      > 
+      >
         <span class="pi pi-ellipsis-h" />
       </button>
 
       <transition>
-        <ContextMenu 
-          v-if="isOpenMenu && message.actions" 
-          class="video-message__context-menu" 
+        <ContextMenu
+          v-if="isOpenMenu && message.actions"
+          class="video-message__context-menu"
           :actions="message.actions"
-          @click="clickAction" 
+          @click="clickAction"
         />
       </transition>
 
@@ -147,6 +147,8 @@ const getStatus = computed(() => {
       return 'video-message__status--read'
     case 'received':
       return 'video-message__status--received'
+    default:
+      return ''
   }
 })
 
@@ -160,7 +162,10 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .video-message {
   &__content {
     position: relative;
@@ -340,22 +345,6 @@ onMounted(() => {
     .video-message__context-menu {
       top: 56%;
       right: 100%;
-    }
-  }
-}
-
-.dark {
-  .video-message {
-    &__status--received {
-      span {
-        color: var(--neutral-200);
-      }
-    }
-
-    &__menu-button {
-      &:hover span {
-        color: var(--neutral-200);
-      }
     }
   }
 }

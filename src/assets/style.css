@@ -1,6 +1,5 @@
 @import url("variables.css");
-@import url("light.css");
-@import url("dark.css");
+@import url("themes.css");
 
 *,
 *::before,
@@ -20,12 +19,13 @@ body {
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    color: var(--neutral-900);
+    color: var(--app-color);
+    background-color: var(--app-bg);
 }
 
 .dark #app {
-    color: var(--neutral-100);
-    background-color: var(--neutral-900);
+    color: var(--app-color);
+    background-color: var(--app-bg);
 }
 
 ul {

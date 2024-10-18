@@ -1,0 +1,252 @@
+@import url("variables.css");
+
+:root {
+
+    --app-bg: var(--default-white);
+    --app-color: var(--neutral-900);
+
+    /* Blocks */
+    --rigth-bar-bg: var(--neutral-100);
+    --right-bar-margin: 30px 0;
+
+    /* Chat Panel */
+    --chat-panel-bg: var(--neutral-100);
+    --chat-pannel-widget-bg: var(--neutral-200);
+    --chat-pannel-margin: 30px 0 30px 10px;
+
+    /* Tool Bar */
+    --tool-bar-border-color: var(--neutral-200);
+    --tool-bar-box-shadow: -13px 0px 20px -21px rgba(0, 0, 0, 0.2);
+
+    /* Chat List */
+    --chat-list-fixed-background-color: var(--default-white);
+    --chat-list-menu-button: var(--default-white);
+    --chat-list-menu-button-color-hover: var(--neutral-700);
+    --chat-list-scrollbar-bg: var(--neutral-50);
+    --chat-list-scrollbar-thumb-bg: var(--neutral-300);
+
+    /* Inputs */
+    --inputtext-background: var(transparent);
+    --inputtext-color: var(--neutral-700);
+    --inputtext-border: 1px solid var(--neutral-400);
+    --inputtext-placeholder-color: var(--neutral-500);
+
+    --inputtext-hover-border-color: var(--neutral-500);
+    --inputtext-focus-border-color: var(--neutral-700);
+
+    /* Avatars */
+    --avatar-background-color: var(--neutral-300);
+    --avatar-icon-color: var(--neutral-500);
+
+    /* Icons */
+    --icon-color: var(--neutral-600);
+
+    /* Modals */
+    --modal-background-color: var(--default-white);
+
+    /* _____________________________________________ */
+
+    /* Chat Item */
+
+    /* Info Container */
+    --chat-item-selected: var(--neutral-200);
+    --chat-item-color-last-name: var(--neutral-400);
+
+    /* Details Container */
+    --chat-item-color-unread: var(--neutral-100);
+    --chat-item-background-color-unread: var(--emerald-500);
+
+    /* _____________________________________________ */
+
+    /* Text Message */
+    --text-message-right-background-color: var(--emerald-200);
+    --text-message-left-background-color: var(--neutral-200);
+    --text-message-text-color: var(--neutral-900);
+
+    /* File Message */
+    --file-message-background-color: var(--neutral-200);
+    --file-message-link-color: var(--neutral-900);
+
+    /* _____________________________________________ */
+
+    /* Audio Message */
+    --audio-message-background-left: var(--neutral-200);
+    --audio-message-background-right: var(--emerald-200);
+
+    --audio-message-button-background-color-left: var(--neutral-400);
+    --audio-message-button-background-color-right: var(--neutral-100);
+    --audio-message-button-icon-color-left: var(--neutral-100);
+    --audio-message-button-icon-color-right: var(--neutral-500);
+
+    /* progress-bar-container -> pbc */
+    --audio-message-pbc-background-color: var(--neutral-400);
+
+    /* progress-bar -> pb */
+    --audio-message-pb-background-color: var(--emerald-500);
+
+    /* _____________________________________________ */
+
+    /* Video Message */
+    --video-message-button-background: rgba(0, 0, 0, 0.67);
+
+    /* Call Message */
+    --call-message-backgroung-icon: var(--neutral-400);
+    --call-message-color-icon-error: #ff5454;
+
+    /* Date Message */
+    --date-message-color: var(--neutral-700);
+
+    /* Channels */
+    --channels-popover-background-color: var(--default-white);
+
+    /* Сontext Menu */
+    --context-menu-background: var(--default-white);
+
+    /* Chat Input */
+    --chat-input-background: var(--neutral-200);
+
+    /* Status Message */
+    --status-message-color-received: var(--neutral-500);
+    --status-message-color-read: #00c2ff;
+
+    /* Subtext */
+    --subtext-color: var(--neutral-500);
+
+    /* Scroll Bar */
+    --scrollbar-bg: var(--neutral-50);
+    --scrollbar-thumb-bg: var(--neutral-300);
+}
+
+[data-theme="dark"] {
+
+    --app-bg: var(--neutral-900);
+    --app-color: var(--neutral-100);
+
+    /* Blocks */
+    --rigth-bar-bg: var(--neutral-800);
+
+    /* Chat Panel */
+    --chat-panel-bg: var(--neutral-800);
+    --chat-pannel-widget-bg: var(--neutral-700);
+
+    /* Tool Bar */
+    --tool-bar-border-color: var(--neutral-500);
+    --tool-bar-box-shadow: -13px 0px 20px -21px rgba(255, 255, 255, 0.2);
+
+    /* Chat List */
+    --chat-list-fixed-background-color: var(--neutral-900);
+    --chat-list-menu-button: var(--neutral-900);
+    --chat-list-menu-button-color-hover: var(--neutral-200);
+
+    /* Inputs */
+    --inputtext-color: var(--neutral-200);
+    --inputtext-border: 1px solid var(--neutral-200);
+    --inputtext-placeholder-color: var(--neutral-400);
+
+    --inputtext-hover-border-color: var(--neutral-400);
+    --inputtext-focus-border-color: var(--neutral-600);
+
+    /* Avatars */
+    --avatar-background-color: var(--neutral-300);
+    --avatar-icon-color: var(--neutral-500);
+
+    /* Icons */
+    --icon-color: var(--neutral-300);
+
+    /* Modals */
+    --modal-background-color: var(--neutral-900);
+    --modal-border-color: var(--neutral-500);
+
+    /* _____________________________________________ */
+
+    /* Chat Item */
+
+    /* Info Container */
+    --chat-item-selected: var(--neutral-700);
+    --chat-item-color-last-name: var(--neutral-400);
+
+    /* Details Container */
+    --chat-item-color-unread: var(--neutral-900);
+    --chat-item-background-color-unread: var(--emerald-500);
+
+    /* _____________________________________________ */
+
+    /* Text Message */
+    --text-message-right-background-color: var(--emerald-800);
+    --text-message-left-background-color: var(--neutral-700);
+    --text-message-text-color: var(--neutral-200);
+
+    /* File Message */
+    --file-message-background-color: var(--neutral-700);
+    --file-message-link-color: var(--neutral-200);
+
+    /* _____________________________________________ */
+
+    /* Audio Message */
+    --audio-message-background-left: var(--neutral-700);
+    --audio-message-background-right: var(--emerald-800);
+
+    --audio-message-button-background-color-left: var(--neutral-400);
+    --audio-message-button-background-color-right: var(--neutral-400);
+    --audio-message-button-icon-color-left: var(--neutral-800);
+    --audio-message-button-icon-color-right: var(--neutral-800);
+
+    /* progress-bar-container -> pbc */
+    --audio-message-pbc-background-color: var(--neutral-400);
+
+    /* progress-bar -> pb */
+    --audio-message-pb-background-color: var(--emerald-600);
+
+    /* _____________________________________________ */
+
+    /* Video Message */
+    --video-message-button-background: rgba(0, 0, 0, 0.67);
+
+    /* Call Message */
+    --call-message-backgroung-icon: var(--neutral-400);
+    --call-message-color-icon-error: #ff5454;
+
+    /* Date Message */
+    --date-message-color: var(--neutral-200);
+
+    /* Channels */
+    --channels-popover-background-color: var(--neutral-600);
+
+    /* Сontext Menu */
+    --context-menu-background: var(--neutral-700);
+
+    /* Chat Input */
+    --chat-input-background: var(--neutral-700);
+
+    /* Status Message */
+    --status-message-color-received: var(--neutral-200);
+    --status-message-color-read: #00c2ff;
+
+    /* Subtext */
+    --subtext-color: var(--neutral-400);
+
+    /* Scroll Bar */
+    --scrollbar-bg: var(--neutral-500);
+    --scrollbar-thumb-bg: var(--neutral-200);
+}
+
+[data-theme="green"] {
+
+    --app-bg: var(--neutral-300);
+    --app-container-bg: var(--default-white);
+    --app-margin: 30px 0;
+
+    /* Blocks */
+    --rigth-bar-bg: transparent;
+    --right-bar-margin: 0;
+
+    --center-bar-border: 1px solid var(--neutral-200);
+
+    /* Chat Input */
+    --chat-input-background: transparent;
+
+    /* Chat Panel */
+    --chat-panel-bg: transparent;
+    --chat-pannel-margin: 0;
+    --chat-pannel-border: 1px solid var(--neutral-200)
+}

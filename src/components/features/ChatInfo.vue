@@ -11,9 +11,10 @@
           width="32"
           height="32"
         >
-        <span v-else>
-          <i class="pi pi-user" />
-        </span>
+        <span
+          v-else
+          class="pi pi-user"
+        />
       </div>
 
       <h2 class="chat-info__title">
@@ -22,6 +23,13 @@
       <p class="chat-info__time">
         {{ chat['lastActivity.time'] }}
       </p>
+
+      <button
+        class="chat-info__button-panel"
+        @click="$emit('open-panel')"
+      >
+        <span class="pi pi-info-circle" />
+      </button>
     </div>
   </div>
 </template>
@@ -35,14 +43,19 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(['open-panel']);
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .chat-info {
   &__container {
     padding: 20px 15px 20px 40px;
     display: grid;
-    grid-template-columns: min-content auto;
+    grid-template-columns: min-content auto min-content;
     column-gap: 20px;
     border-bottom: 1px solid var(--neutral-300);
   }
@@ -76,20 +89,17 @@ const props = defineProps({
     color: var(--neutral-400);
     grid-column: 2;
   }
-}
 
-.dark {
-  .chat-info {
-    &__container {
-      border-bottom: 1px solid var(--neutral-500);
-    }
+  &__button-panel {
+    background-color: transparent;
+    border: none;
+    grid-column: 3;
+    grid-row: 1 / 3;
+    cursor: pointer;
 
-    &__avatar-container {
-      background-color: var(--d-avatar-background-color);
-
-      span {
-        color: var(--d-avatar-icon-color);
-      }
+    span {
+      font-size: var(--icon-font-size-medium);
+      color: var(--neutral-600);
     }
   }
 }

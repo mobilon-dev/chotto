@@ -62,11 +62,14 @@ watch(() => props.objects, scrollToFeedBottom);
 
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .message-feed {
   height: fit-content;
   margin-top: auto;
-  padding: 0 80px 50px 80px;
+
   overflow-y: auto;
 
   &__message {
@@ -82,28 +85,16 @@ watch(() => props.objects, scrollToFeedBottom);
 
   &::-webkit-scrollbar {
     width: 6px;
-    background-color: var(--neutral-50);
+    background-color: var(--scrollbar-bg);
   }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: var(--neutral-300);
+    background-color: var(--scrollbar-thumb-bg);
   }
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;
-  }
-}
-
-.dark {
-  .message-feed {
-    &::-webkit-scrollbar {
-      background-color: var(--neutral-500);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--neutral-200);
-    }
   }
 }
 </style>

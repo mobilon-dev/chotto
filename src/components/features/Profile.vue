@@ -21,6 +21,6 @@ const props = defineProps({
 
 <style scoped>
 .profile {
-  padding: 16px;
+  padding: 16px 16px 16px 16px;
 }
 </style>

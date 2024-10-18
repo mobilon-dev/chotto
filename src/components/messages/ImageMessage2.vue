@@ -132,11 +132,16 @@ const getStatus = computed(() => {
       return 'image-message__status--read'
     case 'received':
       return 'image-message__status--received'
+    default:
+      return ''
   }
 })
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .image-message {
   &__avatar {
     align-self: center;
@@ -348,29 +353,6 @@ const getStatus = computed(() => {
     .image-message__context-menu {
       top: 56%;
       right: 100%;
-    }
-  }
-}
-
-.dark {
-  .image-message {
-
-    &__modal {
-      background-color: var(--d-modal-background-color);
-      border: 1px solid var(--d-modal-border-color);
-    }
-
-    &__modal-close-button {
-
-      span {
-        color: var(--d-icon-color);
-      }
-    }
-
-    &__menu-button {
-      &:hover span {
-        color: var(--neutral-200);
-      }
     }
   }
 }

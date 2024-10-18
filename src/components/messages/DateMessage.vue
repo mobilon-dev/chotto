@@ -16,7 +16,10 @@ const props = defineProps({
 });
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .date-message {
 
   &__container {
@@ -32,15 +35,7 @@ const props = defineProps({
   &__text {
     font-size: 12px;
     font-weight: 500;
-    color: var(--neutral-700);
-  }
-}
-
-.dark {
-  .date-message {
-    &__text {
-      color: var(--neutral-200);
-    }
+    color: var(--date-message-color);
   }
 }
 </style>
