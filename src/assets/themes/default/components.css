@@ -28,7 +28,7 @@
   /* Chat Info */
   --chotto-chat-info-padding: 10px 15px 10px 15px;
   --chotto-chat-info-border-radius: 0;
-  --chotto-chat-info-background-color: transparent;
+  --chotto-chat-info-background-color: #FFFFFF;
   --chotto-chat-info-additional-title-border-color: #25D366;
   
   /* Scroll Bar */
@@ -55,12 +55,12 @@
   --chotto-input-border: 1px solid var(--neutral-300);
   --chotto-input-hover-border-color: var(--neutral-500);
   --chotto-input-focus-border-color: var(--neutral-700);
-  --chotto-input-border-radius: 0px 0px 10px 10px;
+  --chotto-input-border-radius: 5px;
 
   --chotto-input-background: transparent;
   --chotto-input-padding: 0.5rem 0.75rem;
   --chotto-input-transition-duration: 0.2s;
-  --chotto-input-font-size: 16px;
+  --chotto-input-font-size: 14px;
 
   /*Avatar*/
 

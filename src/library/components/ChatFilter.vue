@@ -54,7 +54,6 @@ const update = () => {
 
   &__input {
     width: 100%;
-    background-color: transparent;
     color: var(--chotto-primary-text-color);
     padding: var(--chotto-input-padding);
     padding-left: 40px;

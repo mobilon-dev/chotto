@@ -248,6 +248,7 @@ const action = (data) => emit('action', data);
   display: flex;
   align-items: stretch;
   flex-direction: column;
+  width: 508px;
   height: 70%;
 
   &__filter {

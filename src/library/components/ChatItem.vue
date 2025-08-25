@@ -18,10 +18,12 @@
           height="48"
           width="48"
         >
-        <span
+        <img
           v-else
-          class="pi pi-user"
-        />
+          src="/icons/default-user.png"
+          height="48"
+          width="48"
+        >
       </div>
 
       <div class="chat-item__info-container">
@@ -303,7 +305,6 @@ const onMouseLeave = (event) => {
     align-self: center;
     object-fit: cover;
     margin-right: 15px;
-    background-color: var(--chotto-avatar-background-color);
     min-width: var(--chotto-avatar-medium);
     min-height: var(--chotto-avatar-medium);
     border-radius: var(--chotto-avatar-border-radius);
@@ -412,11 +413,11 @@ const onMouseLeave = (event) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
     margin-left: auto;
     margin-top: auto;
-    min-width: 25px;
-    min-height: 25px;
+    padding: 2.25px 5.1px;
+    min-width: 21px;
+    border-radius: 10px;
     font-size: var(--chotto-additional-text-font-size);
     color: var(--chotto-unread-text-color);
     background-color: var(--chotto-unread-background-color);

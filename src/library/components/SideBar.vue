@@ -29,9 +29,9 @@
         >{{ item.notificationCount > 99 ? '99+' :
           item.notificationCount }}</span>
 
-        <p v-if="item.name">
-          {{ getName(item.name) }}
-        </p>
+<!--        <p v-if="item.name">-->
+<!--          {{ getName(item.name) }}-->
+<!--        </p>-->
       </li>
     </ul>
 
@@ -120,6 +120,7 @@ const getName = (name) => {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    width: 70px;
     padding: var(--chotto-sidebar-padding-container);
     background-color: transparent;
   }
@@ -150,14 +151,14 @@ const getName = (name) => {
 
     span {
       position: absolute;
+      padding: 2.25px 5.1px;
+      border-radius: 10px;
       top: 2px;
       right: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
+      min-width: 18px;
       font-size: var(--chotto-small-text-font-size);
       color: var(--chotto-unread-text-color);
       background-color: var(--chotto-unread-background-color);

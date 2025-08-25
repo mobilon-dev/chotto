@@ -16,10 +16,12 @@
           width="48"
           height="48"
         >
-        <span
+        <img
           v-else
-          class="pi pi-user"
-        />
+          src="/icons/default-user.png"
+          width="48"
+          height="48"
+        >
       </div>
       <div class="chat-info__info-container">
         <span class="chat-info__title">
@@ -118,7 +120,6 @@ const chatDescription = computed(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--chotto-avatar-background-color);
     width: var(--chotto-avatar-small);
     height: var(--chotto-avatar-small);
     border-radius: var(--chotto-avatar-border-radius);

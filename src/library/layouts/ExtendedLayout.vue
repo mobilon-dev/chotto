@@ -43,6 +43,7 @@
   }
 
   &__second-col {
+    width: 508px;
     position: relative;
     grid-column: 2;
     display: flex;
