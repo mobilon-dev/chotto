@@ -1,0 +1,51 @@
+[data-theme="mobilon1"] {
+
+  --chotto-container-font-family: "Open Sans", sans-serif;
+  --chotto-container-font-weight: var(--regular-font-weight);
+  --chotto-container-borders: 1px solid var(--neutral-200);
+
+  --chotto-primary-color: #ffffff;
+  --chotto-secondary-color: #faf6f4;
+
+  --chotto-primary-text-color: #1e1e1e;
+  --chotto-secondary-text-color: #5f5f5f;
+
+  --chotto-header-font-size: 20px;
+  --chotto-title-font-size: 16px;
+  --chotto-text-font-size: 14px;
+  --chotto-additional-text-font-size: 14px;
+  --chotto-small-text-font-size: 11px;
+
+  --chotto-header-font-weight: 700;
+  --chotto-title-font-weight: 400;
+
+  --chotto-button-icon-size: 23px;
+  --chotto-text-icon-size: 14px;
+  --chotto-small-text-icon-size: 12px;
+
+  --chotto-button-color-active: var(--neutral-600);
+  --chotto-button-color-hover: var(--neutral-700);
+  --chotto-button-color-disabled: var(--neutral-200);
+
+  --chotto-shadow-color: var(--neutral-800);
+  --chotto-shadow-light-color: var(--neutral-300);
+  
+  --chotto-status-color-received: var(--neutral-500);
+  --chotto-status-color-read: #00c2ff;
+
+  --chotto-item-background-color-focus: #F3F3F3;
+  --chotto-item-background-color-hover: var(--neutral-200);
+
+  --chotto-item-border-color: var(--neutral-200);
+
+  --chotto-unread-background-color: var(--p-red-500);
+  --chotto-unread-text-color: var(--neutral-50); 
+
+  --chotto-action-button-color-active: #00cbfa;
+  --chotto-action-button-color-hover: #3fddff;
+  --chotto-action-button-color-disabled: #b4e8f9;
+/* не применяется*/
+  --chotto-danger-button-color-active: '';
+  --chotto-danger-button-color-hover: '';
+  --chotto-danger-button-color-disabled: '';
+}

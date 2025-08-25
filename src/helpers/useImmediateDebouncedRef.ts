@@ -1,7 +1,7 @@
 import { customRef } from 'vue'
 
-function useImmediateDebouncedRef(value: unknown, delay = 500) {
-  let timeout : number | undefined
+export function useImmediateDebouncedRef(value: unknown, delay = 500) {
+  let timeout: number | undefined
   return customRef((track, trigger) => {
     return {
       get() {
@@ -9,16 +9,14 @@ function useImmediateDebouncedRef(value: unknown, delay = 500) {
         return value
       },
       set(newValue) {
-        if (!timeout){
+        if (!timeout) {
           timeout = window.setTimeout(() => {
             value = newValue
             trigger() // уведомим, что значение изменилось
             timeout = undefined
           }, delay)
         }
-      }
+      },
     }
   })
 }
-
-export default useImmediateDebouncedRef

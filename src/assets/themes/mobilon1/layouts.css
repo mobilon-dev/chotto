@@ -1,0 +1,14 @@
+[data-theme="mobilon1"] {
+  /* Layouts */
+  /* Extended layout */
+  --chotto-layout-extended-third-col-bg: #FAF6F4;
+  --chotto-layout-extended-second-col-bg: #ffffff;
+  --chotto-layout-extended-first-col-bg: #FAF6F4;
+
+  /* Base layout */
+  --chotto-layout-base-second-col-bg: #FAF6F4;
+  --chotto-layout-base-first-col-bg: #ffffff;
+  
+  /* Feed layout */
+  --chotto-layout-feed-bg: #FAF6F4;
+}
