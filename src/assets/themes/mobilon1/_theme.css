@@ -1,0 +1,9 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');  */
+@import url("@fontsource/open-sans");
+
+@import url(variables.css);
+@import url(components.css);
+@import url(containers.css);
+@import url(layouts.css);
+@import url(messages.css);
+@import url(general.css);

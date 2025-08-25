@@ -3,74 +3,123 @@
     class="sidebar__container"
     :class="{'sidebar-horizontal__container' : horizontal}"
   >
-    <ul 
-      class="sidebar__list"
-      :class="{'sidebar-horizontal__list' : horizontal}"
-    >
-      <li
-        v-for="(item, index) in items.filter(i => !i.isFixedBottom)"
-        :key="index"
-        class="sidebar__item"
-        :class="{'sidebar-horizontal__item' : horizontal}"
-        @click="selectItem(item.itemId)"
+    <div>
+      <ul 
+        class="sidebar__list-fixed"
+        :class="{'sidebar-horizontal__list-fixed' : horizontal}"
       >
-        <img
-          :src="item.icon"
-          :alt="item.name"
-          class="sidebar__image"
-          :class="{ 
-            'sidebar__image--active': item.selected === true,
-            'sidebar-horizontal__image' : horizontal 
-          }"
+        <li
+          v-for="(item, index) in items.filter(i => i.isFixedBottom)"
+          :key="index"
+          class="sidebar__item"
+          :class="{'sidebar-horizontal__item' : horizontal}"
+          @click="selectItem(item.itemId)"
         >
-        <span
-          v-if="item.notificationCount"
-          :style="{ backgroundColor: item.notificationColor ? item.notificationColor : 'red' }"
-        >{{ item.notificationCount > 99 ? '99+' :
-          item.notificationCount }}</span>
+          <Tooltip 
+            v-if="item.name" 
+            :text="getName(item.name)" 
+            position="right" 
+            :offset="8"
+          >
+            <img
+              :src="item.icon"
+              :alt="item.name"
+              class="sidebar__image"
+              :class="{ 
+                'sidebar__image--active': item.selected === true,
+                'sidebar-horizontal__image' : horizontal 
+              }"
+            >
+            <p>Мои</p>
+          </Tooltip>
+          <span
+            v-if="item.notificationCount"
+          >{{ item.notificationCount > 99 ? '99+' :
+            item.notificationCount }}</span>
 
-        <p v-if="item.name">
-          {{ getName(item.name) }}
-        </p>
-      </li>
-    </ul>
+          <!-- :style="{ backgroundColor: item.notificationColor ? item.notificationColor : null }" -->
+          <!-- <p v-if="item.name">
+            {{ getName(item.name) }}
+          </p> -->
 
-    <ul 
-      class="sidebar__list-fixed"
-      :class="{'sidebar-horizontal__list-fixed' : horizontal}"
-    >
-      <li
-        v-for="(item, index) in items.filter(i => i.isFixedBottom)"
-        :key="index"
-        class="sidebar__item"
-        :class="{'sidebar-horizontal__item' : horizontal}"
-        @click="selectItem(item.itemId)"
+          <!-- <div
+            v-if="item.name"
+            class="sidebar__tooltip"
+          >
+            {{ getName(item.name) }}
+          </div> -->
+        </li>
+      </ul>
+
+      <ul 
+        class="sidebar__list"
+        :class="{'sidebar-horizontal__list' : horizontal}"
       >
-        <img
-          :src="item.icon"
-          :alt="item.name"
-          class="sidebar__image"
-          :class="{ 
-            'sidebar__image--active': item.selected === true,
-            'sidebar-horizontal__image' : horizontal 
-          }"
+        <li
+          v-for="(item, index) in items.filter(i => !i.isFixedBottom)"
+          :key="index"
+          class="sidebar__item"
+          :class="{'sidebar-horizontal__item' : horizontal}"
+          @click="selectItem(item.itemId)"
         >
-        <span
-          v-if="item.notificationCount"
-          :style="{ backgroundColor: item.notificationColor ? item.notificationColor : null }"
-        >{{ item.notificationCount > 99 ? '99+' :
-          item.notificationCount }}</span>
+          <Tooltip 
+            :text="item.name || 'Имя не указано'" 
+            position="right" 
+            :offset="8"
+          >
+            <img
+              :src="item.icon"
+              :alt="item.name"
+              class="sidebar__image"
+              :class="{ 
+                'sidebar__image--active': item.selected === true,
+                'sidebar-horizontal__image' : horizontal 
+              }"
+            >
+          </Tooltip>
+          <span
+            v-if="item.notificationCount"
+            :style="{ backgroundColor: item.notificationColor ? 'var(--chotto-unread-background-color)' : 'var(--chotto-unread-background-color)' }"
+          >{{ item.notificationCount > 99 ? '99+' :
+            item.notificationCount }}</span>
 
-        <p v-if="item.name">
-          {{ getName(item.name) }}
-        </p>
-      </li>
-    </ul>
+          <!-- <p v-if="item.name">
+            {{ getName(item.name) }}
+          </p> -->
+
+          <!-- <div
+            v-if="item.name"
+            class="sidebar__tooltip"
+          >
+            {{ getName(item.name) }}
+          </div> -->
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar__settings-container">
+      <ButtonContextMenu
+        :actions="menuActions"
+        mode="click"
+        menu-side="top-right"
+        @click="handleMenuAction"
+        @button-click="handleButtonClick"
+      >
+        <button class="sidebar__settings-btn">
+          <SettingsIcon />
+        </button>
+      </ButtonContextMenu>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { toRef } from 'vue'
+import { ref } from 'vue';
+import ButtonContextMenu from './ButtonContextMenu.vue';
+import SettingsIcon from '../../assets/icons/SettingsIcon.vue';
+import Tooltip from './Tooltip.vue';
+
+const lastAction = ref('');
 
 const props = defineProps({
   sidebarItems: {
@@ -107,6 +156,36 @@ const getName = (name) => {
   return parts.length > 2 ? parts.slice(0, 2).join(' ') : name;
 }
 
+const menuActions = [
+  {
+    id: 'profile',
+    title: 'Профиль',
+    disabled: false
+  },
+  {
+    id: 'settings',
+    title: 'Настройки',
+    disabled: false
+  },
+];
+
+const handleMenuAction = (action) => {
+  lastAction.value = action.label;
+  console.log('Выбрано действие:', action);
+  
+  switch (action.id) {
+    case 'profile':
+      console.log('Профиль...');
+      break;
+    case 'settings':
+      console.log('Настройки...');
+      break;
+  }
+};
+
+const handleButtonClick = () => {
+  console.log('Кнопка меню была нажата');
+};
 </script>
 
 <style
@@ -133,8 +212,23 @@ const getName = (name) => {
   }
 
   &__list-fixed {
-    padding-top: 10px;
-    border-top: var(--chotto-sidebar-list-fixed-border-top);
+    padding-top: 12px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-top: var(--chotto-sidebar-list-fixed-border-top, none);
+    position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: var(--chotto-sidebar-list-fixed-border-bottom-width, 1px);
+        background-color: var(--chotto-sidebar-list-fixed-border-bottom-color, #ccc);
+        display: var(--chotto-sidebar-list-fixed-border-bottom-display, block);
+    }
   }
 
   &__item {
@@ -155,10 +249,14 @@ const getName = (name) => {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
+      padding: 5px;
+      max-width: 29px;
+      min-width: 16px;
+      height: var(--chotto-sidebar-notification-count-height, 18px);
+      border-radius: 10px;
+      line-height: 16px;
       font-size: var(--chotto-small-text-font-size);
+      font-weight: var(--chotto-small-text-font-weight, 400);
       color: var(--chotto-unread-text-color);
       background-color: var(--chotto-unread-background-color);
     }
@@ -183,6 +281,31 @@ const getName = (name) => {
   &__image--active {
     border: var(--chotto-sidebar-image-active-border);
     opacity: 1;
+  }
+
+  &__settings-container {
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    margin-top: auto;
+  }
+
+  &__settings-btn {
+    background: none;
+    border: none;
+    padding: 12px;
+    margin: 0;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    
+    &:hover {
+      background-color: var(--neutral-125);
+    }
   }
 }
 

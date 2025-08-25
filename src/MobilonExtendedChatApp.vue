@@ -13,7 +13,7 @@
           />
           <ThemeMode
             :themes="themes"
-            :show="true"
+            :show="false"
             @selected-theme="setTheme"
           />
         </template>
@@ -313,11 +313,11 @@ const themes = [
     code: "light",
     name: "Light",
   },
-  /*{
+  {
     code: "mobilon1",
     name: "mobilon1",
     default: true,
-  },*/
+  },
   {
     code: "dark",
     name: "Dark",

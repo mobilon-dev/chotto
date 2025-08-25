@@ -62,20 +62,21 @@ const click = (index) => {
     position: absolute;
     width: max-content;
     box-shadow: 0px 2px 10px 1px var(--chotto-shadow-light-color);
-    border-radius: 8px;
-    font-size: var(--chotto-title-font-size);
+    border-radius: var(--chotto-context-menu-border-radius, 8px);
+    font-size: var(--chotto-context-menu-font-size, var(--chotto-title-font-size));
     color: var(--chotto-primary-text-color);
     background-color: var(--chotto-primary-color);
   }
 
   &__list {
-    padding: 12px 0;
+    padding: 12px 0 10px 0;
     margin: 0;
     display: grid;
     flex-direction: column;
     align-items: flex-start;
-    row-gap: 6px;
+    row-gap: var(--chotto-context-menu-items-row-gap, 6px);
     padding-left: 0px;
+    min-width: 115px;
   }
 
   &__item {
@@ -83,13 +84,17 @@ const click = (index) => {
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
-    padding: 0 16px;
+    padding: 6px 16px;
     width: inherit;
-    column-gap: 12px;
+    /* column-gap: 12px; */
+  }
+
+  &__item:hover {
+    background-color: var(--neutral-150);
   }
 
   &__item:not(:last-child) {
-    padding-bottom: 6px;
+    /* padding-bottom: 6px; */
     border-bottom: 1px solid var(--chotto-item-border-color);
   }
 }

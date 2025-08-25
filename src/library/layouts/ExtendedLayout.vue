@@ -37,6 +37,7 @@
     display: flex;
     flex-direction: column;
     height: inherit;
+    width: var(--chotto-layout-extended-first-col-width, 100%);
     border-right: var(--chotto-container-borders, none);
     border-bottom: var(--chotto-container-borders, none);
     background-color: var(--chotto-layout-extended-first-col-bg, transparent);
