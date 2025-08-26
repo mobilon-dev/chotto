@@ -4,19 +4,18 @@
       v-if="titleEnabled" 
       class="chat-panel__title-container"
     >
+      <button
+        class="chat-panel__button-close"
+        @click="$emit('close-panel', false)"
+      >
+        <span class="pi pi-times" />
+      </button>
       <p
         v-if="title"
         class="chat-panel__title"
       >
         {{ title }}
       </p>
-
-      <button
-        class="chat-panel__button-close"
-        @click="$emit('close-panel')"
-      >
-        <span class="pi pi-times" />
-      </button>
     </div>
 
     <div>
@@ -50,6 +49,7 @@ const emit = defineEmits(['close-panel']);
   display: flex;
   align-items: stretch;
   flex-direction: column;
+  gap: 8px;
   height: 100%;
 
   &::-webkit-scrollbar {
@@ -68,8 +68,9 @@ const emit = defineEmits(['close-panel']);
 
   &__title-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 10px;
+    padding: 20px;
   }
 
   &__title {

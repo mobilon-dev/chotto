@@ -209,18 +209,12 @@
             <template #chatpanel>
               <ChatPanel
                 v-if="isOpenChatPanel"
-                :title-enabled="false"
+                @close-panel="isOpenChatPanel = $event"
+                title="Данные контакта"
+                :title-enabled="true"
               >
                 <template #content>
-                  <div>
-                    {{ selectedChat.name }} 
-                    <button
-                      class="button-close"
-                      @click="isOpenChatPanel = !isOpenChatPanel"
-                    >
-                      <span class="pi pi-times" />
-                    </button>
-                  </div>
+                  <ContactSelector :channels="chanels" :contacts="contacts" />
                 </template>
               </ChatPanel>
             </template>
@@ -276,6 +270,8 @@ import { transformToFeed } from "./transform/transformToFeed";
 // import VideoRecorder from "./library/components/VideoRecorder.vue";
 import ButtonCommandsSelector from "./library/components/ButtonCommandsSelector.vue";
 import SplashScreen from "./library/components/SplashScreen.vue";
+import {TemplateSelector} from "./library/index.js";
+import ContactSelector from "@/library/components/ContactSelector.vue";
 
 // const { locale: currentLocale, locales } = useLocale()
 
@@ -303,6 +299,17 @@ const props = defineProps({
 
 // Use the locale from props or fallback to currentLocale
 // const locale = props.locale || currentLocale;
+
+const chanels = [
+  { label: 'Отдел продаж Mobilon Sales', value: 'sales' },
+  { label: 'Техподдержка', value: 'support' }
+ ]
+
+const contacts = [
+    { label: '+7 983 169-35-04', value: 'phone1', isCurrent: false },
+    { label: '+7 499 290-75-55', value: 'phone2', isCurrent: false },
+    { label: '@Ivan12345', value: 'telegram', isCurrent: true }
+ ]
 
 const buttonParams = {
   unreadAmount: 12
