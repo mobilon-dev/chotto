@@ -1,7 +1,8 @@
-.button {
+.button-emoji-picker {
   background-color: transparent;
   border: none;
   height: fit-content;
+
   span {
     display: block;
     cursor: pointer;
@@ -9,19 +10,20 @@
     font-size: 21px;
     color: var(--neutral-300);
   }
-}
 
-.button:hover span {
-  color: var(--neutral-200);
-}
+  &:hover span {
+    color: var(--neutral-200);
+  }
 
-.button-disabled {
-  pointer-events: none;
-  span {
-    cursor: auto;
-    color: var(--neutral-600);
+  &-disabled {
+    pointer-events: none;
+    span {
+      cursor: auto;
+      color: var(--neutral-600);
+    }
   }
 }
+
 .emoji {
   position: absolute;
   bottom: 50px;

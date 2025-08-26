@@ -168,7 +168,6 @@
           <div
             v-if="isFullTranscript"
             class="audio-message__modal-overlay"
-            :data-theme="getTheme().theme ? getTheme().theme : null"
           >
             <div class="audio-message__modal">
               <button
@@ -191,17 +190,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, watch, inject } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import linkifyStr from 'linkify-string'
 
 import { ContextMenu } from '../../components'
 import { getStatus, statuses } from '../../../helpers'
 import { IAudioMessage } from '../../../types'
-import { useTheme } from '../../../helpers/useTheme'
 import { BaseReplyMessage, LinkPreview, EmbedPreview } from '../'
-
-const chatAppId = inject('chatAppId')
-const { getTheme } = useTheme(chatAppId as string)
 
 // Define props
 const props = defineProps({
@@ -374,3 +369,34 @@ onMounted(() => {
   }
 })
 </script>
+
+<style scoped>
+.v-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.v-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+}
+</style>

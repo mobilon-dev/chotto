@@ -8,11 +8,10 @@
     <slot />
   </div>
   <Teleport to="body">
-    <Transition>
+    <Transition name="tooltip">
       <span
         v-if="show"
         ref="tooltip"
-        :data-theme="getTheme().theme ? getTheme().theme : 'light'"
         :class="tooltipClasses"
       >
         {{ text }}
@@ -22,11 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, unref, inject, nextTick } from 'vue'
-import { useTheme } from '../../../helpers/useTheme'
-
-const chatAppId = inject('chatAppId')
-const { getTheme } = useTheme(chatAppId as string)
+import { computed, ref, unref, nextTick } from 'vue'
 
 const container = ref<HTMLElement>()
 const tooltip = ref<HTMLElement>()
@@ -96,3 +91,15 @@ const hideTooltip = () => {
   })
 }
 </script>
+
+<style scoped lang="scss">
+.tooltip-enter-active,
+.tooltip-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.tooltip-enter-from,
+.tooltip-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,8 +1,9 @@
 <template>
-  <div class="container">
+  <div class="reply-text-message">
     <p v-if="message.header">
       {{ message.header }}
     </p>
+
     <p
       class="text"
       @click="inNewWindow"

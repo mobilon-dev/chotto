@@ -2,14 +2,15 @@
   <button
     v-if="!getMessage().isRecording"
     ref="emojiButton"
-    class="button"
-    :class="{ 'button-disabled': state == 'disabled' }"
+    class="button-emoji-picker"
+    :class="{ 'button-emoji-picker-disabled': state == 'disabled' }"
     @click="toggle"
     @mouseenter="hover"
     @mouseleave="hoverout"
   >
     <span class="pi pi-face-smile" />
   </button>
+
   <Transition>
     <div
       v-show="props.state === 'active'"

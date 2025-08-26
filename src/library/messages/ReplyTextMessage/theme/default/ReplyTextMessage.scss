@@ -1,23 +1,23 @@
-.container {
+.reply-text-message {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
 
-.text {
-  font-size: 15px;
-  color: #1e1e1e;
-}
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: #5f5f5f;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
 
-p {
-  margin: 0;
-  font-size: 13px;
-  color: #5f5f5f;
-  white-space: pre-wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  line-clamp: 5;
-  -webkit-box-orient: vertical;
+  .text {
+    font-size: 15px;
+    color: #1e1e1e;
+  }
 }

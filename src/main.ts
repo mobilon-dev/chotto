@@ -1,10 +1,9 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import 'primeicons/primeicons.css'
+import './assets/themes/green/_theme.scss'
 
 import App from './App.vue'
-
-import './assets/style.scss'
 
 const pinia = createPinia()
 

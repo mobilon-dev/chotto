@@ -76,7 +76,6 @@
           <div
             v-if="isFullTranscript"
             class="call-message__modal-overlay"
-            :data-theme="getTheme().theme ? getTheme().theme : 'light'"
           >
             <div class="call-message__modal">
               <button
@@ -105,12 +104,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue'
+import { ref } from 'vue'
 import { ICallMessage } from '../../../types'
-import { useTheme } from '../../../helpers/useTheme'
 
-const chatAppId = inject('chatAppId')
-const { getTheme } = useTheme(chatAppId as string)
 // Define props
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps({
@@ -147,3 +143,20 @@ function getClass(element, type) {
   }
 }
 </script>
+
+<style scoped>
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+}
+</style>

@@ -1,26 +1,28 @@
 <template>
   <div
-    class="image-message__preview-button"
+    class="reply-image-message__preview-button"
     @click="isOpenModal = true"
   >
     <img
-      class="image-message__preview-image"
+      class="reply-image-message__preview-image"
       :src="message.url"
       :alt="message.alt"
     />
   </div>
 
-  <div class="image-message__text-container">
+  <div class="reply-image-message__title">
     <p v-if="message.header">
       {{ message.header }}
     </p>
-    <div class="image-message__reply-description">
+
+    <div class="reply-image-message__description">
       <span class="pi pi-camera" />
       <p>Фотография</p>
     </div>
+
     <p
       v-if="message.text"
-      class="image-message__text"
+      class="reply-image-message__text"
       @click="inNewWindow"
       v-html="linkedText"
     />
@@ -34,7 +36,7 @@
         @close="closeModal"
       >
         <img
-          class="image-message__modal-image"
+          class="reply-image-message__modal-image"
           :src="message.url"
           :alt="message.alt"
         />
@@ -44,15 +46,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, inject } from 'vue'
+import { ref, watch } from 'vue'
 import linkifyStr from 'linkify-string'
 import { IImageMessage } from '../../../types'
 import { ModalFullscreen } from '../../modals'
-import { useTheme } from '../../../helpers/useTheme'
-
-const chatAppId = inject('chatAppId')
-
-const { getTheme } = useTheme(chatAppId as string)
 
 const props = defineProps({
   message: {
@@ -82,3 +79,20 @@ function inNewWindow(event) {
 
 const closeModal = () => (isOpenModal.value = false)
 </script>
+
+<style scoped>
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+}
+</style>

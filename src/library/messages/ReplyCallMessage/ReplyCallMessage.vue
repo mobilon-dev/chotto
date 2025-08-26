@@ -1,25 +1,25 @@
 <template>
   <div>
     <span
-      class="call-message__icon pi pi-phone"
-      :class="{ 'call-message__icon-missed': message.isMissedCall }"
+      class="reply-call-message__icon pi pi-phone"
+      :class="{ 'reply-call-message__icon-missed': message.isMissedCall }"
     />
   </div>
 
-  <div class="call-message__text-container">
+  <div class="reply-call-message__text-container">
     <p v-if="message.header">
       {{ message.header }}
     </p>
-    <div class="call-message__reply-description">
+    <div class="reply-call-message__reply-description">
       <span
         v-if="!message.isMissedCall"
-        class="call-message__title"
+        class="reply-call-message__title"
       >
         Аудиозвонок
       </span>
       <span
         v-else
-        class="call-message__title"
+        class="reply-call-message__title"
       >
         Пропущенный аудиозвонок
       </span>

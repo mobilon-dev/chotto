@@ -282,3 +282,25 @@ const onMouseLeave = (event) => {
   else buttonMenuVisible.value = false
 }
 </script>
+
+<style scoped>
+.text-enter-active,
+.text-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.text-enter-from,
+.text-leave-to {
+  opacity: 0;
+}
+
+.menu-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.menu-enter-from,
+.menu-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+</style>

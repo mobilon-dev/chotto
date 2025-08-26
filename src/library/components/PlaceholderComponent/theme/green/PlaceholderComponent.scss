@@ -3,12 +3,12 @@
   border-radius: 4px;
   cursor: pointer;
   line-height: 1.8;
-}
 
-.placeholder.filled {
-  background-color: var(--emerald-300);
-}
+  &.filled {
+    background-color: var(--emerald-300);
+  }
 
-.placeholder.empty {
-  background-color: var(--p-red-100);
+  &.empty {
+    background-color: var(--p-red-100);
+  }
 }

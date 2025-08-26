@@ -38,14 +38,12 @@ import { watch, ref, inject } from 'vue'
 import { FilePreview } from '../'
 import { useMessage } from '../../../helpers/useMessage'
 import { uploadFile } from '../../../helpers/uploadFile'
-import { useTheme } from '../../../helpers/useTheme'
 import { useModalVideoRecorder } from '../../modals/useVideoRecorder'
 import { IFilePreview } from '../../../types'
 
 const chatAppId = inject('chatAppId')
 const { getMessage, setMessageFile, setRecordingMessage, resetMessageFile } =
   useMessage(chatAppId as string)
-const { getTheme } = useTheme(chatAppId as string)
 
 const uploadStatus = ref('')
 const videoPreview = ref<IFilePreview>()

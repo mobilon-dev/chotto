@@ -1,4 +1,4 @@
-.template-selector {
+.waba-template-selector {
   position: absolute;
   bottom: 100%;
   left: 0;
@@ -327,7 +327,7 @@
 }
 
 @container templates (width < 700px) {
-  .template-selector {
+  .waba-template-selector {
     &__layout {
       grid-template-columns: 1fr;
     }

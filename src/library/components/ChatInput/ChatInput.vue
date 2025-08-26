@@ -186,3 +186,19 @@ const sendMessage = () => {
   }
 }
 </script>
+
+<style scoped>
+.v-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.v-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+</style>

@@ -11,51 +11,41 @@
   z-index: 99999;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-}
 
-.tooltip-wrapper {
-  position: relative;
-  width: fit-content;
-}
+  &-wrapper {
+    position: relative;
+    width: fit-content;
+  }
 
-.tooltip__text::after {
-  content: ' ';
-  position: absolute;
-  border-width: 5px;
-  border-style: solid;
-  border-color: var(--neutral-500) transparent transparent transparent;
-}
+  &__text::after {
+    content: ' ';
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--neutral-500) transparent transparent transparent;
+  }
 
-.tooltip--left::after {
-  inset-block-start: 50%;
-  inset-inline-start: 100%;
-  border-color: transparent transparent transparent var(--neutral-500);
-}
+  &--left::after {
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
+    border-color: transparent transparent transparent var(--neutral-500);
+  }
 
-.tooltip--right::after {
-  inset-block-start: 50%;
-  inset-inline-end: 100%;
-  border-color: transparent var(--neutral-500) transparent transparent;
-}
+  &--right::after {
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
+    border-color: transparent var(--neutral-500) transparent transparent;
+  }
 
-.tooltip--top::after {
-  inset-block-start: 100%;
-  inset-inline-start: 50%;
-  border-color: var(--neutral-500) transparent transparent transparent;
-}
+  &--top::after {
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    border-color: var(--neutral-500) transparent transparent transparent;
+  }
 
-.tooltip--bottom::after {
-  inset-block-end: 100%;
-  inset-inline-start: 50%;
-  border-color: transparent transparent var(--neutral-500) transparent;
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
+  &--bottom::after {
+    inset-block-end: 100%;
+    inset-inline-start: 50%;
+    border-color: transparent transparent var(--neutral-500) transparent;
+  }
 }

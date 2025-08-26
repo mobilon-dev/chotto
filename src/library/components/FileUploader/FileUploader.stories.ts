@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { FileUploader, ThemeMode } from '../'
-import BaseContainer from '../../containers/BaseContainer.vue'
+import { FileUploader } from '../'
+import { BaseContainer } from '../../containers'
 
 const meta: Meta<typeof FileUploader> = {
   component: FileUploader,
   render: (args) => ({
-    components: { BaseContainer, FileUploader, ThemeMode },
+    components: { BaseContainer, FileUploader },
     setup() {
       return { args }
     },

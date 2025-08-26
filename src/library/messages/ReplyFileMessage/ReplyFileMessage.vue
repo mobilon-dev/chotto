@@ -1,6 +1,6 @@
 <template>
   <a
-    class="file-message__link"
+    class="reply-file-message__link"
     :href="message.url"
     download
     target="_blank"
@@ -12,19 +12,21 @@
     <p v-if="message.header">
       {{ message.header }}
     </p>
+
     <a
-      class="file-message__link"
+      class="reply-file-message__link"
       :href="message.url"
       download
       target="_blank"
     >
-      <p class="file-message__filename-text">
+      <p class="reply-file-message__filename-text">
         {{ message.filename }}
       </p>
     </a>
+
     <p
       v-if="message.text"
-      class="file-message__text"
+      class="reply-file-message__text"
       @click="inNewWindow"
       v-html="linkedText"
     />

@@ -1,10 +1,5 @@
 @use 'variables';
 @use 'icons';
-@use 'components';
-@use 'containers';
-@use 'layouts';
-@use 'messages';
-@use 'general';
 
 /* component */
 @use '../../../library/components/AudioRecorder/theme/default/AudioRecorder';
@@ -30,7 +25,6 @@
 @use '../../../library/components/SideBar/theme/default/SideBar';
 @use '../../../library/components/SplashScreen/theme/default/SplashScreen';
 @use '../../../library/components/TemplateSelector/theme/default/TemplateSelector';
-@use '../../../library/components/ThemeMode/theme/default/ThemeMode';
 @use '../../../library/components/Tooltip/theme/default/Tooltip';
 @use '../../../library/components/UserProfile/theme/default/UserProfile';
 @use '../../../library/components/VideoRecorder/theme/default/VideoRecorder';

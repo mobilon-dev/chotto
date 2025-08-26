@@ -11,11 +11,6 @@
             :sidebar-items="sidebarItems"
             @select-item="selectItem"
           />
-          <ThemeMode
-            :themes="themes"
-            :show="true"
-            @selected-theme="setTheme"
-          />
         </template>
 
         <template #second-col>
@@ -253,7 +248,6 @@ import {
   ChatList,
   Feed,
   // UserProfile,
-  ThemeMode,
   SideBar,
   ChatPanel,
   BaseContainer,

@@ -136,7 +136,6 @@
       <transition name="modal-fade">
         <ModalFullscreen
           v-if="isOpenModal"
-          :data-theme="getTheme().theme ? getTheme().theme : 'light'"
           @close="closeModal"
         >
           <img
@@ -151,20 +150,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, inject } from 'vue'
+import { ref, computed, watch } from 'vue'
 import linkifyStr from 'linkify-string'
 
 import { ContextMenu } from '../../components'
 import { getStatus, statuses } from '../../../helpers'
 import { IImageMessage } from '../../../types'
 import { BaseReplyMessage, LinkPreview, EmbedPreview } from '../'
-import { useTheme } from '../../../helpers/useTheme'
 
 import { ModalFullscreen } from '../../modals'
-
-const chatAppId = inject('chatAppId')
-
-const { getTheme } = useTheme(chatAppId as string)
 
 const props = defineProps({
   message: {
@@ -240,3 +234,34 @@ function getClass(message) {
 
 const closeModal = () => (isOpenModal.value = false)
 </script>
+
+<style scoped>
+.context-menu-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.context-menu-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.context-menu-enter-from,
+.context-menu-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+}
+</style>

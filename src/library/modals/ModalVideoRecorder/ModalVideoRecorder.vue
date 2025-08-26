@@ -1,7 +1,7 @@
 <template>
-  <div class="video-recorder__header">
+  <div class="modal-video-recorder__header">
     <button
-      class="video-recorder__button video-recorder__button-close"
+      class="modal-video-recorder__button modal-video-recorder__button-close"
       @click="emit('close')"
     >
       <span class="pi pi-times" />
@@ -12,19 +12,19 @@
     <video
       v-show="!videoURL"
       ref="refVideo"
-      class="video-recorder__view-area"
+      class="modal-video-recorder__view-area"
     />
     <video
       v-show="videoURL"
       ref="refRecord"
-      class="video-recorder__view-area"
+      class="modal-video-recorder__view-area"
       controls
     />
-    <div class="video-recorder__controls">
-      <div class="video-recorder__recording-container">
+    <div class="modal-video-recorder__controls">
+      <div class="modal-video-recorder__recording-container">
         <button
           v-if="!videoRecording && !videoURL"
-          class="video-recorder__button"
+          class="modal-video-recorder__button"
           @click="changeRecordSource"
         >
           <span
@@ -36,14 +36,15 @@
         </button>
         <button
           v-if="!videoURL"
-          class="video-recorder__button"
-          :class="{ 'video-recorder__recording-button': videoRecording }"
+          class="modal-video-recorder__button"
+          :class="{ 'modal-video-recorder__recording-button': videoRecording }"
           @click="startVideoRecording"
         >
           <span
             class="pi"
             :class="{
-              'pi-circle-fill video-recorder__recording-icon': videoRecording,
+              'pi-circle-fill modal-video-recorder__recording-icon':
+                videoRecording,
               'pi-video': !videoRecording,
             }"
           />
@@ -51,29 +52,31 @@
 
         <button
           v-if="!videoRecording && videoURL"
-          class="video-recorder__button"
+          class="modal-video-recorder__button"
           @click="cancelVideoRecording"
         >
           <span class="pi pi-trash" />
         </button>
         <button
           v-if="videoRecording"
-          class="video-recorder__button"
+          class="modal-video-recorder__button"
           @click="stopVideoRecording"
         >
           <!--span class="pi pi-stop" /-->
-          <div class="video-recorder__stop" />
+          <div class="modal-video-recorder__stop" />
         </button>
-        <span class="video-recorder__recording-time">
+        <span class="modal-video-recorder__recording-time">
           {{ elapsedTime }}
         </span>
       </div>
       <button
-        class="video-recorder__button"
-        :class="{ 'video-recorder__button-disabled': !videoURL }"
+        class="modal-video-recorder__button"
+        :class="{ 'modal-video-recorder__button-disabled': !videoURL }"
         @click="saveRecordedVideo"
       >
-        <span class="video-recorder__save-button"> Прикрепить видео </span>
+        <span class="modal-video-recorder__save-button">
+          Прикрепить видео
+        </span>
       </button>
     </div>
   </div>

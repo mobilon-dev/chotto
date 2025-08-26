@@ -27,38 +27,38 @@
   &__reset:hover {
     cursor: pointer;
   }
-}
 
-.grid {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 10px;
-  padding: 6px 10px 6px 10px;
-}
+  .grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    padding: 6px 10px 6px 10px;
+  }
 
-.left {
-  background-color: var(--neutral-300);
-}
+  .left {
+    background-color: var(--neutral-300);
+  }
 
-.right {
-  background-color: var(--emerald-200);
-}
+  .right {
+    background-color: var(--emerald-200);
+  }
 
-.chat-input-reply {
-  padding-right: 30px;
-  border: 1px solid var(--neutral-200);
-  border-radius: 0;
-  word-break: break-word;
-  margin-bottom: 0;
+  .chat-input-reply {
+    padding-right: 30px;
+    border: 1px solid var(--neutral-200);
+    border-radius: 0;
+    word-break: break-word;
+    margin-bottom: 0;
 
-  .reply__reset {
-    font-size: 1.1rem;
-    display: flex;
-    height: 100%;
-    margin-right: 10px;
+    .reply__reset {
+      font-size: 1.1rem;
+      display: flex;
+      height: 100%;
+      margin-right: 10px;
 
-    span {
-      margin: auto;
+      span {
+        margin: auto;
+      }
     }
   }
 }

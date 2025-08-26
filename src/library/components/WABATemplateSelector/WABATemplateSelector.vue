@@ -4,15 +4,15 @@
       :id="'waba-template-selector-container-' + chatAppId"
       ref="refContainer"
       :class="{
-        'template-selector__container-inline': !elevatedWindow,
-        'template-selector__container-elevated': elevatedWindow,
+        'waba-template-selector__container-inline': !elevatedWindow,
+        'waba-template-selector__container-elevated': elevatedWindow,
       }"
     >
       <div style="display: flex">
         <div style="display: flex">
           <button
             v-if="allowTurnLeft"
-            class="template-selector__button-close"
+            class="waba-template-selector__button-close"
           >
             <span
               class="pi pi-arrow-left"
@@ -21,7 +21,7 @@
           </button>
           <button
             v-if="allowTurnRight"
-            class="template-selector__button-close"
+            class="waba-template-selector__button-close"
           >
             <span
               class="pi pi-arrow-right"
@@ -30,7 +30,7 @@
           </button>
         </div>
 
-        <button class="template-selector__button-close">
+        <button class="waba-template-selector__button-close">
           <span
             class="pi pi-times"
             @click="closeTemplateWindow"
@@ -38,22 +38,22 @@
         </button>
       </div>
 
-      <div class="template-selector__layout">
-        <div class="template-selector__first-col">
-          <ul class="template-selector__list-groups">
+      <div class="waba-template-selector__layout">
+        <div class="waba-template-selector__first-col">
+          <ul class="waba-template-selector__list-groups">
             <li
               v-for="(item, index) in groupTemplates"
               :key="index"
-              class="template-selector__item-group"
+              class="waba-template-selector__item-group"
               :class="{
-                'template-selector__item-selected': selectedGroup === item,
+                'waba-template-selector__item-selected': selectedGroup === item,
               }"
               @click="clearSelectedTemplate"
             >
-              <label class="template-selector__label-group">
+              <label class="waba-template-selector__label-group">
                 <img
                   v-if="item.iconUrl"
-                  class="template-selector__item-group-icon"
+                  class="waba-template-selector__item-group-icon"
                   :src="item.iconUrl"
                   :alt="item.title"
                 />
@@ -61,7 +61,7 @@
                   :id="index"
                   v-model="selectedGroup"
                   :value="item"
-                  class="template-selector__input-group"
+                  class="waba-template-selector__input-group"
                   type="radio"
                 />
                 <span>{{ item.title }}</span>
@@ -70,33 +70,35 @@
           </ul>
         </div>
 
-        <div class="template-selector__second-col">
-          <div class="template-selector__searching-container">
+        <div class="waba-template-selector__second-col">
+          <div class="waba-template-selector__searching-container">
             <input
               v-model="searchQuery"
-              class="template-selector__searching-input"
+              class="waba-template-selector__searching-input"
               type="text"
               placeholder="Поиск шаблона"
             />
           </div>
 
-          <div class="template-selector__templates">
+          <div class="waba-template-selector__templates">
             <ul
               v-if="searchedTemplate.length !== 0"
-              class="template-selector__list-templates"
+              class="waba-template-selector__list-templates"
             >
               <li
                 v-for="(item, index) in searchedTemplate"
                 :key="index"
-                class="template-selector__item-template"
-                :class="{ 'template-selector__item-selected': item.isSelected }"
+                class="waba-template-selector__item-template"
+                :class="{
+                  'waba-template-selector__item-selected': item.isSelected,
+                }"
                 @click="selectTemplate(item)"
               >
-                <div class="template-selector__item-template-info">
-                  <p class="template-selector__item-title">
+                <div class="waba-template-selector__item-template-info">
+                  <p class="waba-template-selector__item-title">
                     {{ item.title }}
                   </p>
-                  <p class="template-selector__item-text">
+                  <p class="waba-template-selector__item-text">
                     {{ item.template }}
                   </p>
                 </div>
@@ -105,29 +107,29 @@
 
             <p
               v-else
-              class="template-selector__plug"
+              class="waba-template-selector__plug"
             >
               Шаблоны отсутствуют
             </p>
           </div>
         </div>
-        <div class="template-selector__third-col">
+        <div class="waba-template-selector__third-col">
           <div
             ref="previewContainer"
-            class="template-selector__preview-container"
+            class="waba-template-selector__preview-container"
           >
             <div
               v-if="templateParts.length > 0"
-              class="template-selector__preview"
+              class="waba-template-selector__preview"
             >
-              <div class="template-selector__preview-wrapper">
+              <div class="waba-template-selector__preview-wrapper">
                 <WABAAttachmentSection
                   v-if="selectedTemplate.type != 'TEXT'"
                   :type="selectedTemplate.type"
                   :template-id="selectedTemplate.templateId"
                   @file-selected="handleFileSelected"
                 />
-                <div class="template-selector__preview-text-container">
+                <div class="waba-template-selector__preview-text-container">
                   <template
                     v-for="(item, index) in templateParts"
                     :key="index"
@@ -143,7 +145,7 @@
                     />
                   </template>
                 </div>
-                <p class="template-selector__preview-time">22:22</p>
+                <p class="waba-template-selector__preview-time">22:22</p>
                 <WABAQuickReplyButtons
                   v-if="selectedTemplate.buttons"
                   :buttons="selectedTemplate.buttons"
@@ -153,16 +155,16 @@
             </div>
             <p
               v-else
-              class="template-selector__plug"
+              class="waba-template-selector__plug"
             >
               Предпросмотр шаблона
             </p>
             <div
               v-if="allVariantsShow"
-              class="template-selector__reply-buttons"
+              class="waba-template-selector__reply-buttons"
             >
               <div
-                class="template-selector__semitransparent-overlay"
+                class="waba-template-selector__semitransparent-overlay"
                 @click="selectAllVariants"
               />
               <WABASeparatedQuickButtons
@@ -173,7 +175,7 @@
           </div>
 
           <button
-            class="template-selector__button-paste"
+            class="waba-template-selector__button-paste"
             :disabled="allFieldsUnFilled"
             @click="handlePutMessage"
           >

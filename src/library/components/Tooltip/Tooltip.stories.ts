@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 // import { h } from 'vue'
-import { Tooltip, ThemeMode } from '../'
-import BaseContainer from '../../containers/BaseContainer.vue'
+import { Tooltip } from '../'
+import { BaseContainer } from '../../containers'
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
@@ -9,7 +9,7 @@ const meta: Meta<typeof Tooltip> = {
     layout: 'centered',
   },
   render: (args) => ({
-    components: { BaseContainer, Tooltip, ThemeMode },
+    components: { BaseContainer, Tooltip },
     setup() {
       return { args }
     },

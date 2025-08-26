@@ -30,7 +30,6 @@ import {
   Feed,
   // UserProfile,
   // FileUploader,
-  // ThemeMode,
   // SideBar,
   // ChatPanel,
   BaseContainer,

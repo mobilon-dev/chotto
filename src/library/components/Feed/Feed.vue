@@ -373,3 +373,19 @@ watch(
   }
 )
 </script>
+
+<style scoped>
+.v-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.v-leave-active {
+  transition: all 0.1s;
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}
+</style>

@@ -1,26 +1,28 @@
 <template>
   <div
-    class="video-message__preview-button"
+    class="reply-video-message__preview-button"
     @click="isOpenModal = true"
   >
     <video
-      class="video-message__video"
+      class="reply-video-message__video"
       :src="message.url"
       :muted="true"
     />
   </div>
 
-  <div class="video-message__text-container">
+  <div class="reply-video-message__title">
     <p v-if="message.header">
       {{ message.header }}
     </p>
-    <div class="video-message__reply-description">
+
+    <div class="reply-video-message__description">
       <span class="pi pi-video" />
       <p>Видео</p>
     </div>
+
     <p
       v-if="message.text"
-      class="video-message__text"
+      class="reply-video-message__text"
       @click="inNewWindow"
       v-html="linkedText"
     />
@@ -29,12 +31,11 @@
     <transition name="modal-fade">
       <ModalFullscreen
         v-if="isOpenModal"
-        :data-theme="getTheme().theme ? getTheme().theme : 'light'"
         @close="closeModal"
       >
         <video
           ref="player"
-          class="video-message__modal-video"
+          class="reply-video-message__modal-video"
           :src="message.url"
           :alt="message.alt"
           controls
@@ -46,15 +47,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, inject } from 'vue'
+import { ref, watch } from 'vue'
 import linkifyStr from 'linkify-string'
 import { IVideoMessage } from '../../../types'
 import { ModalFullscreen } from '../../modals'
-import { useTheme } from '../../../helpers/useTheme'
-
-const chatAppId = inject('chatAppId')
-
-const { getTheme } = useTheme(chatAppId as string)
 
 const props = defineProps({
   message: {
@@ -84,3 +80,20 @@ function inNewWindow(event) {
 
 const closeModal = () => (isOpenModal.value = false)
 </script>
+
+<style scoped>
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+}
+</style>

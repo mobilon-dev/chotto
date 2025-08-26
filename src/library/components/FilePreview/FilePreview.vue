@@ -94,7 +94,6 @@
       <transition name="modal-fade">
         <ModalFullscreen
           v-if="isOpenModal"
-          :theme="getTheme().theme ? getTheme().theme : ''"
           @close="closeModal"
         >
           <video
@@ -117,14 +116,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed, inject } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { IFilePreview } from '../../../types'
 import { ModalFullscreen } from '../../modals'
-import { useTheme } from '../../../helpers/useTheme'
-
-const chatAppId = inject('chatAppId')
-
-const { getTheme } = useTheme(chatAppId as string)
 
 defineProps({
   fileInfo: {
@@ -229,3 +223,20 @@ onMounted(() => {
   }
 })
 </script>
+
+<style scoped>
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+}
+</style>

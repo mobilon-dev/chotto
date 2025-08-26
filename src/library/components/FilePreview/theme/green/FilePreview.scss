@@ -116,18 +116,3 @@
     flex: 1;
   }
 }
-
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-  opacity: 0;
-}
-
-.modal-fade-enter-to,
-.modal-fade-leave-from {
-  opacity: 1;
-}

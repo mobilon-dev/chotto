@@ -1,0 +1,98 @@
+// CSS Reset для Chotto компонентов
+// Этот файл содержит базовые reset стили, которые можно импортировать
+// только если нужно сбросить стили родительского приложения
+
+// Базовые reset стили
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Сброс margin и padding для основных элементов
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+// Сброс списков
+ul,
+ol {
+  list-style: none;
+}
+
+// Сброс ссылок
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Сброс кнопок
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+// Сброс input элементов
+input,
+textarea,
+select {
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+// Сброс изображений
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Сброс таблиц
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// Сброс формы
+fieldset {
+  border: none;
+}
+
+// Сброс цитат
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}

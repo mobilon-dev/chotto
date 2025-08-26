@@ -73,3 +73,19 @@ onMounted(() => {
   el?.focus()
 })
 </script>
+
+<style scoped>
+.v-enter-active {
+  transition: all 2s ease-out;
+}
+
+.v-leave-active {
+  transition: all 2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}
+</style>

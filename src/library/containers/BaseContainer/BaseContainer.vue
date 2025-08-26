@@ -19,20 +19,32 @@ import { useId, provide } from 'vue'
 const props = defineProps({
   height: {
     type: String,
-    default: '100%'
+    default: '100%',
   },
   width: {
     type: String,
-    default: '100%'
+    default: '100%',
   },
   extChatAppId: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 })
 
 const chatAppId = useId()
 provide('chatAppId', chatAppId)
 provide('extChatAppId', props.extChatAppId ? props.extChatAppId : '')
-
 </script>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>

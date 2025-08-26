@@ -2,6 +2,7 @@
   background-color: transparent;
   border: 0px;
   height: fit-content;
+
   span {
     display: block;
     cursor: pointer;
@@ -9,16 +10,16 @@
     font-size: 21px;
     color: var(--neutral-600);
   }
-}
 
-.button-template:hover span {
-  color: var(--neutral-700);
-}
+  &:hover span {
+    color: var(--neutral-700);
+  }
 
-.button-template-disabled {
-  pointer-events: none;
-  span {
-    cursor: auto;
-    color: var(--neutral-200);
+  &-disabled {
+    pointer-events: none;
+    span {
+      cursor: auto;
+      color: var(--neutral-200);
+    }
   }
 }

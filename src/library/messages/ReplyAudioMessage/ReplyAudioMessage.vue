@@ -1,21 +1,23 @@
 <template>
   <div
     v-show="!isPlaying"
-    class="audio-message__play"
+    class="reply-audio-message__play"
   >
     <span class="pi pi-play" />
   </div>
-  <div class="audio-message__text-container">
+  <div class="reply-audio-message__title">
     <p v-if="message.header">
       {{ message.header }}
     </p>
-    <div class="audio-message__reply-description">
+
+    <div class="reply-audio-message__description">
       <span class="pi pi-microphone" />
       <p>Аудиосообщение</p>
     </div>
+
     <p
       v-if="message.text"
-      class="audio-message__text"
+      class="reply-audio-message__text"
       @click="inNewWindow"
       v-html="linkedText"
     />

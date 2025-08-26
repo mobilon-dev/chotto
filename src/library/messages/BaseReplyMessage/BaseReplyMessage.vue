@@ -1,6 +1,6 @@
 <template>
   <div
-    class="reply__container"
+    class="reply__container reply"
     :class="componentsClassMap(message?.type)"
     @click="onReply"
   >
@@ -68,6 +68,4 @@ const componentsClassMap = (type) => {
 }
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

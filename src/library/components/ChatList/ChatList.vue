@@ -255,3 +255,19 @@ const getFilter = (value) => {
 
 const action = (data) => emit('action', data)
 </script>
+
+<style scoped>
+.menu-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.menu-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.menu-enter-from,
+.menu-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}
+</style>

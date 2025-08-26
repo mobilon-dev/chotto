@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 
-import { ButtonContextMenu, ThemeMode } from '../'
+import { ButtonContextMenu } from '../'
 
-import BaseContainer from '../../containers/BaseContainer.vue'
+import { BaseContainer } from '../../containers'
 const meta: Meta<typeof ButtonContextMenu> = {
   component: ButtonContextMenu,
   render: (args) => ({
-    components: { BaseContainer, ButtonContextMenu, ThemeMode },
+    components: { BaseContainer, ButtonContextMenu },
     setup() {
       return { args }
     },
@@ -75,11 +75,13 @@ const actionsFileDropDown = [
 const actionsLA = [
   {
     action: 'edit',
-    description: 'слишком длинное-длинное поле в слишком коротком-коротком меню',
+    description:
+      'слишком длинное-длинное поле в слишком коротком-коротком меню',
   },
   {
     action: 'delete',
-    description: 'слишком длинное-длинное поле в слишком коротком-коротком меню',
+    description:
+      'слишком длинное-длинное поле в слишком коротком-коротком меню',
   },
 ]
 

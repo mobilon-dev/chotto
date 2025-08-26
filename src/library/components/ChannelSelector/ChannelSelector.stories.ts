@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { ChannelSelector, ThemeMode } from '../'
-import BaseContainer from '../../containers/BaseContainer.vue'
+import { ChannelSelector } from '../'
+import { BaseContainer } from '../../containers'
 
 const meta: Meta<typeof ChannelSelector> = {
   component: ChannelSelector,
   render: (args) => ({
-    components: { BaseContainer, ChannelSelector, ThemeMode },
+    components: { BaseContainer, ChannelSelector },
     setup() {
       return { args }
     },

@@ -397,32 +397,3 @@
     }
   }
 }
-
-.v-enter-active {
-  transition: all 0.1s ease-out;
-}
-
-.v-leave-active {
-  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.v-enter-from,
-.v-leave-to {
-  transform: scale(0.9);
-  opacity: 0;
-}
-
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-  opacity: 0;
-}
-
-.modal-fade-enter-to,
-.modal-fade-leave-from {
-  opacity: 1;
-}

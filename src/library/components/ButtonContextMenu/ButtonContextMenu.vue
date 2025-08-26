@@ -19,7 +19,6 @@
       <ContextMenu
         :id="'context-menu-' + buttonContextMenuId + extChatAppId"
         :actions="actions"
-        :data-theme="getTheme().theme ? getTheme().theme : 'light'"
         @mouseenter="hoverCM"
         @mouseleave="hoverOutCM"
         @click="click"
@@ -31,12 +30,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, useId, inject, nextTick } from 'vue'
 import { ContextMenu } from '../'
-import { useTheme } from '../../../helpers/useTheme'
 
-const chatAppId = inject('chatAppId')
 const extChatAppId = inject('extChatAppId')
-
-const { getTheme } = useTheme(chatAppId as string)
 
 const props = defineProps({
   actions: {
