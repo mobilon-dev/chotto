@@ -1,53 +1,34 @@
-import ChatInfo from './ChatInfo.vue';
-import ChatInput from './ChatInput.vue';
-import ChatList from './ChatList.vue';
-import Feed from './Feed.vue';
-import UserProfile from './UserProfile.vue';
-import FileUploader from './FileUploader.vue';
-import ThemeMode from './ThemeMode.vue';
-import SideBar from './SideBar.vue';
-import ChatPanel from './ChatPanel.vue'
-import ChannelSelector from './ChannelSelector.vue';
-import ChatItem from './ChatItem.vue';
-import ChatFilter from './ChatFilter.vue';
-import ButtonContextMenu from './ButtonContextMenu.vue';
-import TemplateSelector from './TemplateSelector.vue'
-import ButtonTemplateSelector from './ButtonTemplateSelector.vue';
-import ButtonWabaTemplateSelector from './ButtonWabaTemplateSelector.vue'
-import ButtonEmojiPicker from './ButtonEmojiPicker.vue';
-import ContextMenu from './ContextMenu.vue';
-import FeedSearch from './FeedSearch.vue';
-import FeedFoundObjects from './FeedFoundObjects.vue'
-import Tooltip from './Tooltip.vue';
-import AudioRecorder from './AudioRecorder.vue';
-import VideoRecorder from './VideoRecorder.vue';
-import ButtonCommandsSelector from './ButtonCommandsSelector.vue';
-import SplashScreen from './SplashScreen.vue';
 
-export {
-  ChatInfo,
-  ChatInput,
-  ChatList,
-  Feed,
-  FileUploader,
-  UserProfile,
-  ThemeMode,
-  SideBar,
-  ChatPanel,
-  ChannelSelector,
-  ChatItem,
-  ChatFilter,
-  ButtonContextMenu,
-  TemplateSelector,
-  ButtonTemplateSelector,
-  ButtonWabaTemplateSelector,
-  ButtonEmojiPicker,
-  ContextMenu,
-  FeedSearch,
-  FeedFoundObjects,
-  Tooltip,
-  AudioRecorder,
-  VideoRecorder,
-  ButtonCommandsSelector,
-  SplashScreen,
-}
+export * from './AudioRecorder'
+export * from './ButtonCommandsSelector'
+export * from './ButtonContextMenu'
+export * from './ButtonEmojiPicker'
+export * from './ButtonTemplateSelector'
+export * from './ButtonWabaTemplateSelector' 
+export * from './ChannelSelector'
+export * from './ChatFilter' 
+export * from './ChatInfo' 
+export * from './ChatInput' 
+export * from './ChatItem' 
+export * from './ChatList' 
+export * from './ChatPanel' 
+export * from './ContextMenu' 
+export * from './Feed' 
+export * from './FeedFoundItem'
+export * from './FeedFoundObjects'
+export * from './FeedSearch'
+export * from './FilePreview'
+export * from './FileUploader'
+export * from './MessageKeyboard'
+export * from './PlaceholderComponent'
+export * from './SideBar'
+export * from './SplashScreen'
+export * from './TemplateSelector'
+export * from './ThemeMode'
+export * from './Tooltip'
+export * from './UserProfile'
+export * from './VideoRecorder'
+export * from './WABAAttachmentSection'
+export * from './WABAQuickReplyButtons'
+export * from './WABASeparatedQuickButtons'
+export * from './WABATemplateSelector'

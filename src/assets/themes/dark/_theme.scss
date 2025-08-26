@@ -1,0 +1,80 @@
+@use 'variables';
+@use 'icons';
+@use 'components';
+@use 'containers';
+@use 'layouts';
+@use 'messages';
+@use 'general';
+
+/* component */
+@use '../../../library/components/AudioRecorder/theme/dark/AudioRecorder';
+@use '../../../library/components/ButtonCommandsSelector/theme/dark/ButtonCommandsSelector';
+@use '../../../library/components/ButtonEmojiPicker/theme/dark/ButtonEmojiPicker';
+@use '../../../library/components/ButtonTemplateSelector/theme/dark/ButtonTemplateSelector';
+@use '../../../library/components/ChannelSelector/theme/dark/ChannelSelector';
+@use '../../../library/components/ChatFilter/theme/dark/ChatFilter';
+@use '../../../library/components/ChatInfo/theme/dark/ChatInfo';
+@use '../../../library/components/ChatInput/theme/dark/ChatInput';
+@use '../../../library/components/ChatItem/theme/dark/ChatItem';
+@use '../../../library/components/ChatList/theme/dark/ChatList';
+@use '../../../library/components/ChatPanel/theme/dark/ChatPanel';
+@use '../../../library/components/ContextMenu/theme/dark/ContextMenu';
+@use '../../../library/components/Feed/theme/dark/Feed';
+@use '../../../library/components/FeedFoundItem/theme/dark/FeedFoundItem';
+@use '../../../library/components/FeedFoundObjects/theme/dark/FeedFoundObjects';
+@use '../../../library/components/FeedSearch/theme/dark/FeedSearch';
+@use '../../../library/components/FilePreview/theme/dark/FilePreview';
+@use '../../../library/components/FileUploader/theme/dark/FileUploader';
+@use '../../../library/components/MessageKeyboard/theme/dark/MessageKeyboard';
+@use '../../../library/components/PlaceholderComponent/theme/dark/PlaceholderComponent';
+@use '../../../library/components/SideBar/theme/dark/SideBar';
+@use '../../../library/components/SplashScreen/theme/dark/SplashScreen';
+@use '../../../library/components/TemplateSelector/theme/dark/TemplateSelector';
+@use '../../../library/components/ThemeMode/theme/dark/ThemeMode';
+@use '../../../library/components/Tooltip/theme/dark/Tooltip';
+@use '../../../library/components/UserProfile/theme/dark/UserProfile';
+@use '../../../library/components/VideoRecorder/theme/dark/VideoRecorder';
+@use '../../../library/components/WABAAttachmentSection/theme/dark/WABAAttachmentSection';
+@use '../../../library/components/WABAQuickReplyButtons/theme/dark/WABAQuickReplyButtons';
+@use '../../../library/components/WABASeparatedQuickButtons/theme/dark/WABASeparatedQuickButtons';
+@use '../../../library/components/WABATemplateSelector/theme/dark/WABATemplateSelector';
+
+/* containers */
+@use '../../../library/containers/BaseContainer/theme/dark/BaseContainer.scss';
+@use '../../../library/containers/FloatContainer/theme/dark/FloatContainer.scss';
+
+/* layouts */
+@use '../../../library/layouts/AdaptiveExtendedLayout/theme/dark/AdaptiveExtendedLayout.scss';
+@use '../../../library/layouts/BaseLayout/theme/dark/BaseLayout.scss';
+@use '../../../library/layouts/ChatWrapper/theme/dark/ChatWrapper.scss';
+@use '../../../library/layouts/ExtendedLayout/theme/dark/ExtendedLayout.scss';
+@use '../../../library/layouts/FeedLayout/theme/dark/FeedLayout.scss';
+
+/* messages */
+@use '../../../library/messages/AudioMessage/theme/dark/AudioMessage.scss';
+@use '../../../library/messages/BaseReplyMessage/theme/dark/BaseReplyMessage.scss';
+@use '../../../library/messages/CallMessage/theme/dark/CallMessage.scss';
+@use '../../../library/messages/DateMessage/theme/dark/DateMessage.scss';
+@use '../../../library/messages/EmbedPreview/theme/dark/EmbedPreview.scss';
+@use '../../../library/messages/FileMessage/theme/dark/FileMessage.scss';
+@use '../../../library/messages/ImageMessage/theme/dark/ImageMessage.scss';
+@use '../../../library/messages/LinkPreview/theme/dark/LinkPreview.scss';
+@use '../../../library/messages/ReplyAudioMessage/theme/dark/ReplyAudioMessage.scss';
+@use '../../../library/messages/ReplyCallMessage/theme/dark/ReplyCallMessage.scss';
+@use '../../../library/messages/ReplyFileMessage/theme/dark/ReplyFileMessage.scss';
+@use '../../../library/messages/ReplyImageMessage/theme/dark/ReplyImageMessage.scss';
+@use '../../../library/messages/ReplyTextMessage/theme/dark/ReplyTextMessage.scss';
+@use '../../../library/messages/ReplyVideoMessage/theme/dark/ReplyVideoMessage.scss';
+@use '../../../library/messages/SystemMessage/theme/dark/SystemMessage.scss';
+@use '../../../library/messages/TextMessage/theme/dark/TextMessage.scss';
+@use '../../../library/messages/TypingMessage/theme/dark/TypingMessage.scss';
+@use '../../../library/messages/VideoMessage/theme/dark/VideoMessage.scss';
+
+/* modals */
+@use '../../../library/modals/Modal/theme/dark/Modal.scss';
+@use '../../../library/modals/ModalFullscreen/theme/dark/ModalFullscreen.scss';
+@use '../../../library/modals/ModalNoFooter/theme/dark/ModalNoFooter.scss';
+@use '../../../library/modals/ModalVideoRecorder/theme/dark/ModalVideoRecorder.scss';
+
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');  */
+@import url('@fontsource/open-sans');

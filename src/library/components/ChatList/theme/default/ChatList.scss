@@ -1,0 +1,107 @@
+.chat-list {
+  background-color: transparent;
+  flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  height: 70%;
+
+  &__filter {
+    margin: var(--chotto-chat-list-filter-margin);
+  }
+
+  &__items {
+    display: block;
+    scroll-behavior: smooth;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: var(--chotto-chat-list-items-padding);
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: var(--chotto-scrollbar-bg);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: var(--chotto-scrollbar-thumb-bg);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+  }
+
+  &__fixed-items-top,
+  &__fixed-items-bottom {
+    z-index: 100;
+    display: block;
+    position: sticky;
+    background-color: var(--chotto-chat-list-fixed-background-color);
+  }
+
+  &__fixed-items-top {
+    top: 0;
+  }
+
+  &__fixed-items-bottom {
+    bottom: 0;
+  }
+
+  &__title {
+    font-size: var(--chotto-header-font-size);
+    font-weight: var(--chotto-header-font-weight);
+  }
+
+  &__title-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 50px;
+    padding: var(--chotto-chat-list-title-container-padding);
+  }
+
+  &__context-menu {
+    position: absolute;
+    top: 46px;
+    right: 20px;
+  }
+
+  &__button-up {
+    position: absolute;
+    z-index: 100;
+    bottom: 15px;
+    right: 25px;
+    margin-left: auto;
+    border: none;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--chotto-button-color-disabled);
+  }
+
+  &__icon-up {
+    font-size: var(--chotto-button-icon-size);
+    color: var(--chotto-button-color-active);
+  }
+}
+
+.menu-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.menu-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.menu-enter-from,
+.menu-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}

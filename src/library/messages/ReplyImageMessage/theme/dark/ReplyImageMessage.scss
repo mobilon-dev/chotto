@@ -1,0 +1,78 @@
+.image-message__text-container {
+  p {
+    margin: 0;
+    font-size: var(--chotto-additional-text-font-size);
+    color: var(--chotto-secondary-text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.image-message {
+  &__preview-button {
+    grid-column: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  &__preview-image {
+    width: 60px;
+    height: 60px;
+    cursor: zoom-in;
+    object-fit: cover;
+    border-radius: 4px;
+    margin: auto;
+  }
+
+  &__modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    max-height: 80vh;
+  }
+
+  &__text-container {
+    word-wrap: break-word;
+    align-content: center;
+    word-break: break-word;
+  }
+
+  &__text {
+    margin-top: 8px;
+    font-size: var(--chotto-text-font-size);
+    color: var(--chotto-primary-text-color);
+  }
+
+  &__reply-description {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    span {
+      color: var(--chotto-secondary-text-color);
+    }
+  }
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+}

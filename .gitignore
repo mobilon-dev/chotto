@@ -132,3 +132,8 @@ dist
 .vscode
 
 *.mp4
+
+
+cursorrules
+prettierrc
+.prettierrc

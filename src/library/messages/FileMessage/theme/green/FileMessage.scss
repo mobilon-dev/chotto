@@ -1,0 +1,233 @@
+.file-message {
+  &__content {
+    position: relative;
+    width: fit-content;
+    border-radius: 14px;
+    padding: 10px 10px 4px 16px;
+    max-width: 25rem;
+  }
+
+  &__avatar {
+    align-self: center;
+    object-fit: cover;
+    min-width: var(--chotto-avatar-small);
+    min-height: var(--chotto-avatar-small);
+    border-radius: var(--chotto-avatar-border-radius);
+  }
+
+  &__subtext {
+    font-size: var(--chotto-additional-text-font-size);
+    color: var(--chotto-secondary-text-color);
+  }
+
+  &__text-container {
+    margin-top: 6px;
+    word-wrap: break-word;
+
+    p {
+      white-space: pre-wrap;
+      font-size: var(--chotto-text-font-size);
+    }
+  }
+
+  &__link {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 12px;
+
+    span {
+      color: var(--chotto-secondary-text-color);
+      font-size: var(--chotto-button-icon-size);
+    }
+  }
+
+  &__filename-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-right: 40px;
+    font-size: var(--chotto-text-font-size);
+    color: var(--chotto-primary-text-color);
+  }
+
+  &__info-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 2px;
+  }
+
+  &__download-button {
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 12px;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+
+    span {
+      color: var(--chotto-secondary-text-color);
+      font-size: var(--chotto-text-icon-size);
+    }
+  }
+
+  &__status {
+    display: flex;
+
+    span {
+      color: var(--chotto-status-color-received);
+      font-size: var(--chotto-small-text-icon-size);
+      font-weight: 400;
+    }
+  }
+
+  .status--received {
+    span {
+      color: var(--chotto-status-color-received);
+
+      &:first-child {
+        margin-right: -8px;
+      }
+    }
+  }
+
+  .status--read {
+    span {
+      color: var(--chotto-status-color-read);
+
+      &:first-child {
+        margin-right: -8px;
+      }
+    }
+  }
+
+  &__views {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+
+    span {
+      font-size: var(--chotto-small-text-icon-size);
+      color: var(--chotto-secondary-text-color);
+    }
+
+    p {
+      font-size: var(--chotto-small-text-font-size);
+      color: var(--chotto-secondary-text-color);
+    }
+  }
+
+  &__time {
+    font-size: var(--chotto-small-text-font-size);
+    color: var(--chotto-secondary-text-color);
+  }
+
+  &__menu-button {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: 0.2s;
+
+    span {
+      color: var(--chotto-button-color-active);
+      font-size: var(--chotto-button-icon-size);
+    }
+
+    &:hover span {
+      color: var(--chotto-button-color-hover);
+      transition: 0.2s;
+    }
+  }
+
+  &__context-menu {
+    position: absolute;
+  }
+
+  &__left,
+  &__right {
+    display: grid;
+    margin: var(--chotto-message-margin);
+  }
+
+  &__left {
+    grid-template-columns: min-content 1fr;
+
+    .file-message__avatar {
+      grid-column: 1;
+      margin-right: 12px;
+    }
+
+    .file-message__subtext {
+      grid-column: 2;
+      grid-row: 1;
+      margin: 0 0 2px 10px;
+    }
+
+    .file-message__content {
+      grid-column: 2;
+      background-color: var(--chotto-message-left-bg);
+    }
+
+    .file-message__menu-button {
+      top: 50%;
+      right: -40px;
+    }
+
+    .file-message__context-menu {
+      top: 50%;
+      left: 100%;
+      margin-top: 20px;
+    }
+  }
+
+  &__right {
+    grid-template-columns: 1fr min-content;
+
+    .file-message__avatar {
+      grid-column: 2;
+      margin-left: 12px;
+    }
+
+    .file-message__subtext {
+      grid-column: 1;
+      grid-row: 1;
+      margin: 0 10px 2px auto;
+    }
+
+    .file-message__content {
+      grid-column: 1;
+      margin-left: auto;
+      background-color: var(--chotto-message-right-bg);
+    }
+
+    .file-message__menu-button {
+      top: 50%;
+      left: -40px;
+    }
+
+    .file-message__context-menu {
+      top: 50%;
+      right: 100%;
+      margin-top: 20px;
+    }
+  }
+}
+
+.v-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.v-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}

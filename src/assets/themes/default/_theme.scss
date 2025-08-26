@@ -1,0 +1,80 @@
+@use 'variables';
+@use 'icons';
+@use 'components';
+@use 'containers';
+@use 'layouts';
+@use 'messages';
+@use 'general';
+
+/* component */
+@use '../../../library/components/AudioRecorder/theme/default/AudioRecorder';
+@use '../../../library/components/ButtonCommandsSelector/theme/default/ButtonCommandsSelector';
+@use '../../../library/components/ButtonEmojiPicker/theme/default/ButtonEmojiPicker';
+@use '../../../library/components/ButtonTemplateSelector/theme/default/ButtonTemplateSelector';
+@use '../../../library/components/ChannelSelector/theme/default/ChannelSelector';
+@use '../../../library/components/ChatFilter/theme/default/ChatFilter';
+@use '../../../library/components/ChatInfo/theme/default/ChatInfo';
+@use '../../../library/components/ChatInput/theme/default/ChatInput';
+@use '../../../library/components/ChatItem/theme/default/ChatItem';
+@use '../../../library/components/ChatList/theme/default/ChatList';
+@use '../../../library/components/ChatPanel/theme/default/ChatPanel';
+@use '../../../library/components/ContextMenu/theme/default/ContextMenu';
+@use '../../../library/components/Feed/theme/default/Feed';
+@use '../../../library/components/FeedFoundItem/theme/default/FeedFoundItem';
+@use '../../../library/components/FeedFoundObjects/theme/default/FeedFoundObjects';
+@use '../../../library/components/FeedSearch/theme/default/FeedSearch';
+@use '../../../library/components/FilePreview/theme/default/FilePreview';
+@use '../../../library/components/FileUploader/theme/default/FileUploader';
+@use '../../../library/components/MessageKeyboard/theme/default/MessageKeyboard';
+@use '../../../library/components/PlaceholderComponent/theme/default/PlaceholderComponent';
+@use '../../../library/components/SideBar/theme/default/SideBar';
+@use '../../../library/components/SplashScreen/theme/default/SplashScreen';
+@use '../../../library/components/TemplateSelector/theme/default/TemplateSelector';
+@use '../../../library/components/ThemeMode/theme/default/ThemeMode';
+@use '../../../library/components/Tooltip/theme/default/Tooltip';
+@use '../../../library/components/UserProfile/theme/default/UserProfile';
+@use '../../../library/components/VideoRecorder/theme/default/VideoRecorder';
+@use '../../../library/components/WABAAttachmentSection/theme/default/WABAAttachmentSection';
+@use '../../../library/components/WABAQuickReplyButtons/theme/default/WABAQuickReplyButtons';
+@use '../../../library/components/WABASeparatedQuickButtons/theme/default/WABASeparatedQuickButtons';
+@use '../../../library/components/WABATemplateSelector/theme/default/WABATemplateSelector';
+
+/* containers */
+@use '../../../library/containers/BaseContainer/theme/default/BaseContainer.scss';
+@use '../../../library/containers/FloatContainer/theme/default/FloatContainer.scss';
+
+/* layout */
+@use '../../../library/layouts/AdaptiveExtendedLayout/theme/default/AdaptiveExtendedLayout.scss';
+@use '../../../library/layouts/BaseLayout/theme/default/BaseLayout.scss';
+@use '../../../library/layouts/ChatWrapper/theme/default/ChatWrapper.scss';
+@use '../../../library/layouts/ExtendedLayout/theme/default/ExtendedLayout.scss';
+@use '../../../library/layouts/FeedLayout/theme/default/FeedLayout.scss';
+
+/* messages */
+@use '../../../library/messages/AudioMessage/theme/default/AudioMessage.scss';
+@use '../../../library/messages/BaseReplyMessage/theme/default/BaseReplyMessage.scss';
+@use '../../../library/messages/CallMessage/theme/default/CallMessage.scss';
+@use '../../../library/messages/DateMessage/theme/default/DateMessage.scss';
+@use '../../../library/messages/EmbedPreview/theme/default/EmbedPreview.scss';
+@use '../../../library/messages/FileMessage/theme/default/FileMessage.scss';
+@use '../../../library/messages/ImageMessage/theme/default/ImageMessage.scss';
+@use '../../../library/messages/LinkPreview/theme/default/LinkPreview.scss';
+@use '../../../library/messages/ReplyAudioMessage/theme/default/ReplyAudioMessage.scss';
+@use '../../../library/messages/ReplyCallMessage/theme/default/ReplyCallMessage.scss';
+@use '../../../library/messages/ReplyFileMessage/theme/default/ReplyFileMessage.scss';
+@use '../../../library/messages/ReplyImageMessage/theme/default/ReplyImageMessage.scss';
+@use '../../../library/messages/ReplyTextMessage/theme/default/ReplyTextMessage.scss';
+@use '../../../library/messages/ReplyVideoMessage/theme/default/ReplyVideoMessage.scss';
+@use '../../../library/messages/SystemMessage/theme/default/SystemMessage.scss';
+@use '../../../library/messages/TextMessage/theme/default/TextMessage.scss';
+@use '../../../library/messages/TypingMessage/theme/default/TypingMessage.scss';
+@use '../../../library/messages/VideoMessage/theme/default/VideoMessage.scss';
+
+/* modals */
+@use '../../../library/modals/Modal/theme/default/Modal.scss';
+@use '../../../library/modals/ModalFullscreen/theme/default/ModalFullscreen.scss';
+@use '../../../library/modals/ModalNoFooter/theme/default/ModalNoFooter.scss';
+@use '../../../library/modals/ModalVideoRecorder/theme/default/ModalVideoRecorder.scss';
+
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');  */
+@import url('@fontsource/montserrat');

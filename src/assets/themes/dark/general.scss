@@ -1,0 +1,50 @@
+[data-theme='dark'] {
+  --chotto-container-font-family: 'Open Sans', sans-serif;
+  --chotto-container-font-weight: 400;
+  --chotto-container-borders: 1px solid var(--neutral-400);
+
+  --chotto-primary-color: var(--neutral-950);
+  --chotto-secondary-color: var(--neutral-800);
+
+  --chotto-primary-text-color: var(
+    --neutral-100
+  ); /*основной текст на контрастном фоне*/
+  --chotto-secondary-text-color: var(
+    --neutral-300
+  ); /*дополнительный текст на контрастном фоне*/
+
+  --chotto-header-font-size: 20px;
+  --chotto-title-font-size: 16px;
+  --chotto-text-font-size: 14px;
+  --chotto-additional-text-font-size: 12px;
+  --chotto-small-text-font-size: 10px;
+
+  --chotto-header-font-weight: 700;
+  --chotto-title-font-weight: 600;
+
+  --chotto-button-icon-size: 21px;
+  --chotto-text-icon-size: 14px;
+  --chotto-small-text-icon-size: 12px;
+
+  --chotto-button-color-active: var(--neutral-300);
+  --chotto-button-color-hover: var(--neutral-200);
+  --chotto-button-color-disabled: var(--neutral-600);
+
+  --chotto-shadow-color: var(--neutral-800);
+  --chotto-shadow-light-color: var(--neutral-600);
+
+  --chotto-status-color-received: var(--neutral-300);
+  --chotto-status-color-read: #00c2ff;
+
+  --chotto-item-background-color-focus: var(--neutral-700);
+  --chotto-item-background-color-hover: var(--neutral-600);
+
+  --chotto-item-border-color: var(--neutral-100);
+
+  --chotto-unread-background-color: var(--p-red-500);
+  --chotto-unread-text-color: var(--neutral-50);
+
+  --chotto-action-button-color-active: #00cbfa;
+  --chotto-action-button-color-hover: #3fddff;
+  --chotto-action-button-color-disabled: #b4e8f9;
+}

@@ -1,22 +1,22 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
-import pluginVue from 'eslint-plugin-vue';
-import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import storybook from 'eslint-plugin-storybook'
+import pluginVue from 'eslint-plugin-vue'
+import js from '@eslint/js'
+import tseslint from 'typescript-eslint'
 
 export default [
   // Base JavaScript recommended rules
   js.configs.recommended,
-  
+
   // TypeScript recommended rules
   ...tseslint.configs.recommended,
-  
+
   // Vue recommended rules
   ...pluginVue.configs['flat/recommended'],
-  
+
   // Storybook recommended rules
-  ...storybook.configs["flat/recommended"],
-  
+  ...storybook.configs['flat/recommended'],
+
   {
     files: ['**/*.vue'],
     languageOptions: {
@@ -33,11 +33,12 @@ export default [
       'vue/require-toggle-inside-transition': 'off',
       'vue/require-default-prop': 'warn',
       'vue/no-dupe-keys': 'error',
+      'vue/html-self-closing': 'off',
       'vue/require-v-for-key': 'error',
       'vue/return-in-computed-property': 'error',
-    }
+    },
   },
-  
+
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
@@ -48,7 +49,7 @@ export default [
       },
     },
   },
-  
+
   {
     files: ['**/*.js', '**/*.jsx'],
     languageOptions: {
@@ -56,8 +57,8 @@ export default [
       sourceType: 'module',
     },
   },
-  
+
   {
-    ignores: ["dist/**", "node_modules/**"]
-  }
-];
+    ignores: ['dist/**', 'node_modules/**'],
+  },
+]

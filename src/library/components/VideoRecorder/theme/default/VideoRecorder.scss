@@ -1,0 +1,34 @@
+.video-recorder {
+  &__container {
+    position: relative;
+    display: grid;
+    align-items: center;
+    background-color: transparent;
+    height: fit-content;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: 0px;
+
+    span {
+      display: block;
+      cursor: pointer;
+      padding: var(--chotto-chat-input-button-padding);
+      font-size: var(--chotto-button-icon-size);
+      color: var(--chotto-button-color-active);
+    }
+  }
+
+  &__button:hover span {
+    color: var(--chotto-button-color-hover);
+  }
+
+  &__button-disabled {
+    pointer-events: none;
+    span {
+      cursor: auto;
+      color: var(--chotto-button-color-disabled);
+    }
+  }
+}

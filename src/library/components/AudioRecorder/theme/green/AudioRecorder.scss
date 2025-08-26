@@ -1,0 +1,92 @@
+.audio-recorder {
+  &__container {
+    position: relative;
+    display: grid;
+    align-items: center;
+    background-color: transparent;
+    height: fit-content;
+  }
+
+  &__recording-container {
+    display: flex;
+    gap: 3px;
+    line-height: 56px;
+  }
+
+  &__recording-icon {
+    line-height: 56px;
+    font-size: 10px;
+    -webkit-animation: blink 3s linear infinite;
+    animation: blink 3s linear infinite;
+  }
+
+  &__stop {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  @-webkit-keyframes blink {
+    0% {
+      color: red;
+    }
+    50% {
+      color: transparent;
+    }
+    100% {
+      color: red;
+    }
+  }
+  @keyframes blink {
+    0% {
+      color: red;
+    }
+    50% {
+      color: transparent;
+    }
+    100% {
+      color: red;
+    }
+  }
+
+  &__button {
+    background-color: transparent;
+    border: 0px;
+
+    span {
+      display: block;
+      cursor: pointer;
+      padding: var(--chotto-chat-input-button-padding);
+      font-size: var(--chotto-button-icon-size);
+      color: var(--chotto-button-color-active);
+    }
+  }
+
+  &__button-record {
+    span {
+      display: block;
+      cursor: pointer;
+      padding: 0;
+      font-size: var(--chotto-button-icon-size);
+      color: var(--chotto-button-color-active);
+    }
+  }
+
+  &__button:hover span {
+    color: var(--chotto-button-color-hover);
+  }
+
+  &__button-record:hover span {
+    color: var(--chotto-button-color-hover);
+  }
+
+  &__button-disabled {
+    pointer-events: none;
+    span {
+      cursor: auto;
+      color: var(--chotto-button-color-disabled);
+    }
+  }
+}

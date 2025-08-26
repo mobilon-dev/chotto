@@ -1,0 +1,106 @@
+.chat-input {
+  &__container {
+    position: relative;
+    display: grid;
+    align-items: center;
+    border-top: var(--chotto-input-border);
+    background-color: var(--chotto-chat-input-container-bg);
+    padding: 5px;
+    grid-gap: 5px;
+    grid-template-columns: min-content auto min-content;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  &__reply-line {
+    grid-column: 2;
+    grid-row: 1;
+    display: none;
+  }
+
+  &__file-line {
+    grid-column: 2;
+    grid-row: 2;
+    display: none;
+  }
+
+  &__third-line {
+    display: flex;
+    grid-row: 4;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  &__input {
+    grid-row: 3;
+    grid-column: 2;
+    border: var(--chotto-input-border);
+    background-color: var(--chotto-input-background);
+    padding: var(--chotto-input-padding);
+    color: var(--chotto-primary-text-color);
+    font-size: var(--chotto-input-font-size);
+    overflow-y: hidden;
+    resize: none;
+    white-space: pre-wrap;
+    max-height: 140px;
+    border-radius: var(--chotto-input-border-radius);
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--chotto-secondary-text-color);
+    }
+  }
+
+  &__disabled-placeholder {
+    color: var(--chotto-secondary-text-color);
+    text-align: center;
+    user-select: none;
+  }
+
+  &__button {
+    grid-row: 3;
+    grid-column: 3;
+    background-color: transparent;
+    border: 0px;
+    height: fit-content;
+    width: fit-content;
+    margin: auto 0;
+    span {
+      display: block;
+      cursor: pointer;
+      padding: var(--chotto-chat-input-button-padding);
+      font-size: var(--chotto-button-icon-size);
+      color: var(--chotto-chat-input-icon-color);
+    }
+  }
+
+  &__button-disabled {
+    span {
+      cursor: auto;
+      color: var(--chotto-chat-input-icon-color-disabled);
+    }
+  }
+
+  &__inline-buttons {
+    display: flex;
+    margin: auto 0;
+    grid-row: 3;
+    grid-column: 1;
+  }
+}
+
+.v-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.v-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}

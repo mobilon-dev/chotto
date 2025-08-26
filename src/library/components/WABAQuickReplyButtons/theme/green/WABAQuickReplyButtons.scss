@@ -1,0 +1,29 @@
+.quick-reply-buttons {
+  padding-bottom: 15px;
+
+  &__preview-action {
+    position: relative;
+    font-size: var(--chotto-text-font-size);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--chotto-quick-reply-buttons-color);
+  }
+
+  &__line {
+    display: flex;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  &__icon {
+    margin-right: 5px;
+    line-height: 19px;
+  }
+
+  &__separator {
+    height: 1px;
+    width: 100%;
+    margin: 15px;
+  }
+}

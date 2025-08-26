@@ -1,0 +1,132 @@
+.preview {
+  &__container {
+    position: relative;
+    display: flex;
+    border: 1px solid var(--chotto-item-border-color);
+  }
+
+  &__image,
+  &__video {
+    max-width: 130px;
+    max-height: 130px;
+  }
+  &__modal-video,
+  &__modal-image {
+    /*width: 100%;*/
+    height: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+    max-height: 90vh;
+    max-width: 90vw;
+  }
+
+  &__shadow {
+    display: none;
+  }
+
+  &__block:hover &__shadow {
+    display: inherit;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.3;
+    span {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: relative;
+      color: white;
+    }
+  }
+
+  &__audio-control {
+    border: none;
+    cursor: pointer;
+    position: relative;
+    grid-row: 1 / 3;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--chotto-message-type-icon-bg-color);
+
+    span {
+      display: flex;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: var(--chotto-button-icon-size);
+      color: var(--chotto-message-type-icon-color);
+    }
+  }
+
+  &__block {
+    --chotto-file-preview-resolution: 60px;
+    max-width: var(--chotto-file-preview-resolution);
+    max-height: var(--chotto-file-preview-resolution);
+    min-width: var(--chotto-file-preview-resolution);
+    min-height: var(--chotto-file-preview-resolution);
+    margin: 5px;
+    overflow: hidden;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__information {
+    margin-left: 5px;
+    display: grid;
+    span {
+      display: flex;
+      font-size: small;
+    }
+  }
+
+  &__name {
+    align-items: end;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-word;
+    text-overflow: ellipsis;
+  }
+
+  &__reset {
+    display: flex;
+    margin-right: 10px;
+    font-size: 1.1rem;
+    span {
+      margin: auto;
+    }
+  }
+
+  &__reset:hover {
+    cursor: pointer;
+  }
+
+  &__control-block {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+  }
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+}

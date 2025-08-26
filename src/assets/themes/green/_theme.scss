@@ -1,0 +1,80 @@
+@use 'variables';
+@use 'icons';
+@use 'components';
+@use 'containers';
+@use 'layouts';
+@use 'messages';
+@use 'general';
+
+/* component */
+@use '../../../library/components/AudioRecorder/theme/green/AudioRecorder';
+@use '../../../library/components/ButtonCommandsSelector/theme/green/ButtonCommandsSelector';
+@use '../../../library/components/ButtonEmojiPicker/theme/green/ButtonEmojiPicker';
+@use '../../../library/components/ButtonTemplateSelector/theme/green/ButtonTemplateSelector';
+@use '../../../library/components/ChannelSelector/theme/green/ChannelSelector';
+@use '../../../library/components/ChatFilter/theme/green/ChatFilter';
+@use '../../../library/components/ChatInfo/theme/green/ChatInfo';
+@use '../../../library/components/ChatInput/theme/green/ChatInput';
+@use '../../../library/components/ChatItem/theme/green/ChatItem';
+@use '../../../library/components/ChatList/theme/green/ChatList';
+@use '../../../library/components/ChatPanel/theme/green/ChatPanel';
+@use '../../../library/components/ContextMenu/theme/green/ContextMenu';
+@use '../../../library/components/Feed/theme/green/Feed';
+@use '../../../library/components/FeedFoundItem/theme/green/FeedFoundItem';
+@use '../../../library/components/FeedFoundObjects/theme/green/FeedFoundObjects';
+@use '../../../library/components/FeedSearch/theme/green/FeedSearch';
+@use '../../../library/components/FilePreview/theme/green/FilePreview';
+@use '../../../library/components/FileUploader/theme/green/FileUploader';
+@use '../../../library/components/MessageKeyboard/theme/green/MessageKeyboard';
+@use '../../../library/components/PlaceholderComponent/theme/green/PlaceholderComponent';
+@use '../../../library/components/SideBar/theme/green/SideBar';
+@use '../../../library/components/SplashScreen/theme/green/SplashScreen';
+@use '../../../library/components/TemplateSelector/theme/green/TemplateSelector';
+@use '../../../library/components/ThemeMode/theme/green/ThemeMode';
+@use '../../../library/components/Tooltip/theme/green/Tooltip';
+@use '../../../library/components/UserProfile/theme/green/UserProfile';
+@use '../../../library/components/VideoRecorder/theme/green/VideoRecorder';
+@use '../../../library/components/WABAAttachmentSection/theme/green/WABAAttachmentSection';
+@use '../../../library/components/WABAQuickReplyButtons/theme/green/WABAQuickReplyButtons';
+@use '../../../library/components/WABASeparatedQuickButtons/theme/green/WABASeparatedQuickButtons';
+@use '../../../library/components/WABATemplateSelector/theme/green/WABATemplateSelector';
+
+/* containers */
+@use '../../../library/containers/BaseContainer/theme/green/BaseContainer.scss';
+@use '../../../library/containers/FloatContainer/theme/green/FloatContainer.scss';
+
+/* layout */
+@use '../../../library/layouts/AdaptiveExtendedLayout/theme/green/AdaptiveExtendedLayout.scss';
+@use '../../../library/layouts/BaseLayout/theme/green/BaseLayout.scss';
+@use '../../../library/layouts/ChatWrapper/theme/green/ChatWrapper.scss';
+@use '../../../library/layouts/ExtendedLayout/theme/green/ExtendedLayout.scss';
+@use '../../../library/layouts/FeedLayout/theme/green/FeedLayout.scss';
+
+/* messages */
+@use '../../../library/messages/AudioMessage/theme/green/AudioMessage.scss';
+@use '../../../library/messages/BaseReplyMessage/theme/green/BaseReplyMessage.scss';
+@use '../../../library/messages/CallMessage/theme/green/CallMessage.scss';
+@use '../../../library/messages/DateMessage/theme/green/DateMessage.scss';
+@use '../../../library/messages/EmbedPreview/theme/green/EmbedPreview.scss';
+@use '../../../library/messages/FileMessage/theme/green/FileMessage.scss';
+@use '../../../library/messages/ImageMessage/theme/green/ImageMessage.scss';
+@use '../../../library/messages/LinkPreview/theme/green/LinkPreview.scss';
+@use '../../../library/messages/ReplyAudioMessage/theme/green/ReplyAudioMessage.scss';
+@use '../../../library/messages/ReplyCallMessage/theme/green/ReplyCallMessage.scss';
+@use '../../../library/messages/ReplyFileMessage/theme/green/ReplyFileMessage.scss';
+@use '../../../library/messages/ReplyImageMessage/theme/green/ReplyImageMessage.scss';
+@use '../../../library/messages/ReplyTextMessage/theme/green/ReplyTextMessage.scss';
+@use '../../../library/messages/ReplyVideoMessage/theme/green/ReplyVideoMessage.scss';
+@use '../../../library/messages/SystemMessage/theme/green/SystemMessage.scss';
+@use '../../../library/messages/TextMessage/theme/green/TextMessage.scss';
+@use '../../../library/messages/TypingMessage/theme/green/TypingMessage.scss';
+@use '../../../library/messages/VideoMessage/theme/green/VideoMessage.scss';
+
+/* modals */
+@use '../../../library/modals/Modal/theme/green/Modal.scss';
+@use '../../../library/modals/ModalFullscreen/theme/green/ModalFullscreen.scss';
+@use '../../../library/modals/ModalNoFooter/theme/green/ModalNoFooter.scss';
+@use '../../../library/modals/ModalVideoRecorder/theme/green/ModalVideoRecorder.scss';
+
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');  */
+@import url('@fontsource/open-sans');

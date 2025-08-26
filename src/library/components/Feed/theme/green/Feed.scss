@@ -1,0 +1,100 @@
+.message-feed {
+  height: 100%;
+  max-height: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-image: url('/chat-background.svg');
+  scroll-behavior: smooth;
+  padding: 10px 30px 10px 30px;
+  position: relative;
+
+  &__message {
+    position: relative;
+    transition: all 2s;
+  }
+
+  &__button-down {
+    position: sticky;
+    z-index: 100;
+    bottom: 0;
+    margin-left: auto;
+    border: none;
+    min-width: 46px;
+    min-height: 46px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--chotto-button-color-disabled);
+  }
+
+  &__keyboard {
+    position: sticky;
+    bottom: 0;
+    max-width: 25rem;
+    width: fit-content;
+  }
+
+  &__icon-down {
+    font-size: var(--chotto-button-icon-size);
+    color: var(--chotto-button-color-active);
+  }
+
+  &__unread-amount {
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--chotto-additional-text-font-size);
+    width: 22px;
+    height: 22px;
+    color: var(--chotto-unread-text-color);
+    background-color: var(--chotto-unread-background-color);
+    border-radius: 50%;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: var(--chotto-scrollbar-bg);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--chotto-scrollbar-thumb-bg);
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+}
+
+.focused-message {
+  background-color: color-mix(
+    in srgb,
+    var(--chotto-message-focused-color) 30%,
+    transparent
+  );
+  box-shadow: 0px 0px 12px 2px
+    color-mix(in srgb, var(--chotto-message-focused-color) 30%, transparent);
+}
+
+.v-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.v-leave-active {
+  transition: all 0.1s;
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}

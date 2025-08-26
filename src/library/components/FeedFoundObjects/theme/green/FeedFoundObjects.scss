@@ -1,0 +1,33 @@
+.feed-found-objects {
+  &__items {
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: var(--chotto-scrollbar-bg);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: var(--chotto-scrollbar-thumb-bg);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+  }
+
+  &__placeholder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    p {
+      text-align: center;
+    }
+  }
+}

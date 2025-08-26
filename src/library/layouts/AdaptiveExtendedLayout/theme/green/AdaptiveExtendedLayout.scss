@@ -1,0 +1,107 @@
+.extend-layout {
+  &__container {
+    --chotto-adaptive-extended-layout-second-col-display: flex;
+    --chotto-adaptive-extended-layout-second-col-width: 100%;
+
+    --chotto-adaptive-extended-layout-third-col-display: none;
+    --chotto-adaptive-extended-layout-third-col-width: 0%;
+
+    --chotto-adaptive-extended-layout-first-col-width: 0px;
+
+    height: inherit;
+    display: grid;
+    transition: all 0.3s ease;
+    position: relative;
+    border-top: var(--chotto-container-borders, none);
+    border-left: var(--chotto-container-borders, none);
+  }
+
+  &__first-col {
+    position: relative;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    border-right: var(--chotto-container-borders, none);
+    border-bottom: var(--chotto-container-borders, none);
+    background-color: var(--chotto-layout-extended-first-col-bg, transparent);
+  }
+
+  &__second-col {
+    position: relative;
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    overflow: hidden;
+    border-right: var(--chotto-container-borders, none);
+    border-bottom: var(--chotto-container-borders, none);
+    background-color: var(--chotto-layout-extended-second-col-bg, transparent);
+  }
+
+  &__third-col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    grid-column: 3;
+    height: inherit;
+    border-right: var(--chotto-container-borders, none);
+    border-bottom: var(--chotto-container-borders, none);
+    background-color: var(--chotto-layout-extended-third-col-bg, transparent);
+    width: auto;
+  }
+}
+
+@container all (width > 920px) {
+  .extend-layout {
+    &__container {
+      grid-template-columns: min-content 30% calc(
+          70% - var(--chotto-adaptive-extended-layout-first-col-width)
+        );
+    }
+  }
+}
+
+@container all (width < 920px) {
+  .extend-layout {
+    &__container {
+      grid-template-columns: min-content calc(
+          var(--chotto-adaptive-extended-layout-second-col-width) -
+            var(--chotto-adaptive-extended-layout-first-col-width)
+        ) calc(
+          var(--chotto-adaptive-extended-layout-third-col-width) -
+            var(--chotto-adaptive-extended-layout-first-col-width)
+        );
+    }
+    &__second-col {
+      display: var(--chotto-adaptive-extended-layout-second-col-display);
+    }
+    &__third-col {
+      display: var(--chotto-adaptive-extended-layout-third-col-display);
+    }
+  }
+}
+
+@container all (width < 720px) {
+  .extend-layout {
+    &__container {
+      grid-template-columns: min-content var(
+          --chotto-adaptive-extended-layout-second-col-width
+        ) var(--chotto-adaptive-extended-layout-third-col-width);
+    }
+    &__first-col {
+      display: none;
+    }
+  }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}

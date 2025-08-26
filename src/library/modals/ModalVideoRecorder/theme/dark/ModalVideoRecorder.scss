@@ -1,0 +1,97 @@
+.video-recorder {
+  &__container {
+    position: relative;
+    display: grid;
+    align-items: center;
+  }
+
+  &__view-area {
+    width: 640px;
+    height: 480px;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__recording-container {
+    display: flex;
+    gap: 3px;
+  }
+
+  &__recording-icon {
+    font-size: 10px;
+    -webkit-animation: blink 3s linear infinite;
+    animation: blink 3s linear infinite;
+  }
+
+  &__stop {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  &__recording-time {
+    margin: auto;
+  }
+
+  @-webkit-keyframes blink {
+    0% {
+      color: red;
+    }
+    50% {
+      color: transparent;
+    }
+    100% {
+      color: red;
+    }
+  }
+  @keyframes blink {
+    0% {
+      color: red;
+    }
+    50% {
+      color: transparent;
+    }
+    100% {
+      color: red;
+    }
+  }
+
+  &__button {
+    background-color: transparent;
+    border: 0px;
+    span {
+      cursor: pointer;
+      display: block;
+      font-size: var(--chotto-button-icon-size);
+      color: var(--chotto-button-color-active);
+    }
+  }
+
+  &__header {
+    text-align: right;
+    width: 100%;
+  }
+
+  &__button-close span {
+    padding-bottom: 5px;
+  }
+
+  &__button-disabled {
+    cursor: auto;
+    span {
+      color: var(--chotto-button-color-disabled);
+    }
+  }
+
+  &__recording-button {
+    cursor: auto;
+    span {
+      cursor: auto;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+p {
+  margin: 0;
+  font-size: var(--chotto-additional-text-font-size);
+  color: var(--chotto-secondary-text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.audio-message {
+  &__play {
+    border: none;
+    position: relative;
+    align-self: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--chotto-message-type-icon-bg-color);
+
+    span {
+      display: flex;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: var(--chotto-button-icon-size);
+      color: var(--chotto-message-type-icon-color);
+    }
+  }
+
+  &__text-container {
+    align-content: center;
+    word-break: break-word;
+  }
+
+  &__text {
+    margin-top: 8px;
+    font-size: var(--chotto-text-font-size);
+    color: var(--chotto-primary-text-color);
+  }
+
+  &__reply-description {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+    margin-bottom: 4px;
+
+    span {
+      color: var(--chotto-secondary-text-color);
+    }
+  }
+}
