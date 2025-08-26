@@ -1,0 +1,349 @@
+.waba-template-selector {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  container: templates / inline-size;
+
+  &__container-inline {
+    max-height: 500px;
+    padding: 16px 5px 5px 5px;
+    background-color: #ffffff;
+    border-top: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
+    box-sizing: border-box;
+    min-width: 478px;
+  }
+
+  &__container-elevated {
+    position: absolute;
+    max-height: 500px;
+    padding: 16px 5px 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid var(--neutral-200);
+    min-width: 478px;
+    box-shadow: 5px 5px 29px -15px var(--neutral-800);
+    bottom: 20px;
+    right: 20px;
+  }
+
+  &__layout {
+    max-height: 400px;
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: 0.5fr 1.3fr 1fr;
+    grid-template-rows: min-content min-content 1fr min-content;
+    column-gap: 5px;
+  }
+
+  &__first-col {
+    display: grid;
+    grid-column: 1;
+    grid-row: 2 / 5;
+    grid-template-rows: min-content auto;
+  }
+
+  &__second-col {
+    display: grid;
+    grid-column: 2;
+    grid-row: 2 / 5;
+    grid-template-rows: min-content min-content auto;
+  }
+
+  &__third-col {
+    display: grid;
+    grid-column: 3;
+    grid-row: 2 / 5;
+    grid-template-rows: min-content auto min-content;
+  }
+
+  &__button-close {
+    grid-column: 3;
+    align-self: flex-start;
+    display: block;
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    cursor: pointer;
+    margin: 0 16px 20px auto;
+
+    span {
+      font-size: 21px;
+      color: var(--neutral-600);
+    }
+  }
+
+  &__list-groups {
+    grid-column: 1;
+    grid-row: 2 / 5;
+    overflow-y: auto;
+    border: 1px solid var(--neutral-200);
+    padding: 0;
+    margin: 0;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: var(--neutral-50);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: var(--neutral-300);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+  }
+
+  &__list-templates {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__templates {
+    grid-row: 3 / 5;
+    border: 1px solid var(--neutral-200);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: var(--neutral-50);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: var(--neutral-300);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+  }
+
+  &__item-template,
+  &__item-group {
+    transition: 0.2s;
+
+    &:hover {
+      background-color: var(--neutral-200);
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--neutral-200);
+    }
+  }
+
+  &__item-group {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item-selected {
+    background-color: var(--neutral-100);
+
+    &:hover {
+      background-color: var(--neutral-200);
+    }
+  }
+
+  &__item-template {
+    cursor: pointer;
+    padding: 10px 12px;
+  }
+
+  &__label-group {
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+
+    input {
+      display: none;
+    }
+
+    span {
+      line-height: 1;
+    }
+  }
+
+  &__item-title {
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  &__item-text {
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &__searching-container {
+    grid-row: 2;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  &__searching-input {
+    background-color: transparent;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: 16px;
+    color: #1e1e1e;
+    border: 1px solid var(--neutral-300);
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: #5f5f5f;
+    }
+
+    &:hover {
+      border-color: var(--neutral-500);
+    }
+
+    &:focus-visible {
+      border-color: var(--neutral-700);
+      outline: none;
+    }
+  }
+
+  &__preview-container {
+    grid-row: 2;
+    border: 1px solid var(--neutral-200);
+    max-height: 375px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #faf6f4;
+    background-image: url('/chat-background.svg');
+    position: relative;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: var(--neutral-50);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: var(--neutral-300);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+  }
+
+  &__preview {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+  }
+
+  &__preview-wrapper {
+    padding: 10px 10px 4px 16px;
+    background-color: var(--default-white);
+    border-radius: 14px;
+    max-width: 90%;
+    margin-bottom: 15px;
+  }
+
+  &__semitransparent-overlay {
+    height: 100%;
+    background: var(--neutral-800);
+    opacity: 0.5;
+  }
+
+  &__reply-buttons {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+  }
+
+  &__plug {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    line-height: 20;
+  }
+
+  &__preview-text-container {
+    font-size: 14px;
+    word-break: break-word;
+    white-space: pre-line;
+  }
+
+  &__preview-time {
+    width: fit-content;
+    font-size: 12px;
+    color: #5f5f5f;
+    margin-left: auto;
+  }
+
+  &__button-paste {
+    grid-row: 3;
+    display: block;
+    width: fit-content;
+    justify-self: flex-end;
+    margin: 16px 0 0 0;
+    font-size: 16px;
+    background-color: #00cbfa;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #b4e8f9;
+      cursor: default;
+      pointer-events: none;
+    }
+    &:hover {
+      background-color: #3fddff;
+    }
+  }
+}
+
+@container templates (width < 700px) {
+  .waba-template-selector {
+    &__layout {
+      grid-template-columns: 1fr;
+    }
+
+    &__first-col {
+      display: none;
+      grid-column: 1;
+    }
+
+    &__second-col {
+      display: grid;
+      grid-column: 1;
+    }
+
+    &__third-col {
+      display: none;
+      grid-column: 1;
+    }
+  }
+}

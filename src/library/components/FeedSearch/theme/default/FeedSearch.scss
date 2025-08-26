@@ -1,0 +1,44 @@
+.feed-search {
+  &__container {
+    display: flex;
+    position: relative;
+    margin-top: 10px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 10px;
+
+    i {
+      position: absolute;
+      right: 20px;
+      top: 11px;
+    }
+
+    i:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    background-color: transparent;
+    color: #1e1e1e;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--neutral-300);
+    border-radius: 0px 0px 10px 10px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+    margin-left: 10px;
+    &::placeholder {
+      color: #5f5f5f;
+    }
+
+    &:hover {
+      border-color: var(--neutral-500);
+    }
+
+    &:focus-visible {
+      border-color: var(--neutral-700);
+      outline: none;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.video-recorder {
+  &__container {
+    position: relative;
+    display: grid;
+    align-items: center;
+    background-color: transparent;
+    height: fit-content;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: 0px;
+
+    span {
+      display: block;
+      cursor: pointer;
+      padding: 14px;
+      font-size: 21px;
+      color: var(--neutral-300);
+    }
+  }
+
+  &__button:hover span {
+    color: var(--neutral-200);
+  }
+
+  &__button-disabled {
+    pointer-events: none;
+    
+    span {
+      cursor: auto;
+      color: var(--neutral-600);
+    }
+  }
+}

@@ -1,0 +1,51 @@
+.tooltip__text {
+  max-width: 300px;
+  color: var(--neutral-100);
+  text-align: center;
+  padding: 7px;
+  border-radius: 2px;
+  background: var(--neutral-500);
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 99999;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+
+  &-wrapper {
+    position: relative;
+    width: fit-content;
+  }
+
+  &__text::after {
+    content: ' ';
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--neutral-500) transparent transparent transparent;
+  }
+
+  &--left::after {
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
+    border-color: transparent transparent transparent var(--neutral-500);
+  }
+
+  &--right::after {
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
+    border-color: transparent var(--neutral-500) transparent transparent;
+  }
+
+  &--top::after {
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    border-color: var(--neutral-500) transparent transparent transparent;
+  }
+
+  &--bottom::after {
+    inset-block-end: 100%;
+    inset-inline-start: 50%;
+    border-color: transparent transparent var(--neutral-500) transparent;
+  }
+}

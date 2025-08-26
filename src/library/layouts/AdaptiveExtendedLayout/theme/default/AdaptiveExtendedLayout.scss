@@ -1,0 +1,81 @@
+.extend-layout {
+  &__container {
+    height: inherit;
+    display: grid;
+    transition: all 0.3s ease;
+    position: relative;
+    border-top: 1px solid var(--neutral-200);
+    border-left: 1px solid var(--neutral-200);
+  }
+
+  &__first-col {
+    position: relative;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    border-right: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
+    background-color: var(--neutral-100);
+  }
+
+  &__second-col {
+    position: relative;
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    overflow: hidden;
+    border-right: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
+    background-color: var(--default-white);
+  }
+
+  &__third-col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    grid-column: 3;
+    height: inherit;
+    border-right: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
+    background-color: var(--neutral-100);
+    width: auto;
+  }
+}
+
+@container all (width > 920px) {
+  .extend-layout {
+    &__container {
+      grid-template-columns: min-content 30% calc(70% - 0px);
+    }
+  }
+}
+
+@container all (width < 920px) {
+  .extend-layout {
+    &__container {
+      grid-template-columns: min-content calc(100% - 0px) calc(0% - 0px);
+    }
+
+    &__second-col {
+      display: flex;
+    }
+
+    &__third-col {
+      display: none;
+    }
+  }
+}
+
+@container all (width < 720px) {
+  .extend-layout {
+    &__container {
+      grid-template-columns: min-content 100% 0%;
+    }
+
+    &__first-col {
+      display: none;
+    }
+  }
+}

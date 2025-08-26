@@ -1,0 +1,19 @@
+.file-uploader {
+  &__trigger {
+    padding: 8px;
+    display: block;
+    cursor: pointer;
+    font-size: 21px;
+    color: var(--neutral-600);
+  }
+
+  &__trigger:hover {
+    color: var(--neutral-700);
+  }
+
+  &__disabled {
+    color: var(--neutral-200);
+    cursor: auto;
+    pointer-events: none;
+  }
+}

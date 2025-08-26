@@ -1,0 +1,18 @@
+.date-message {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 6px 18px;
+    margin-bottom: 18px;
+    width: fit-content;
+    background-color: var(--neutral-800, transparent);
+    border: 1px solid var(--neutral-100);
+  }
+
+  &__text {
+    font-size: 12px;
+    color: var(--neutral-300);
+  }
+}

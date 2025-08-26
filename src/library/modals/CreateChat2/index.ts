@@ -1,0 +1,1 @@
+export { default as CreateChat2 } from './CreateChat2.vue'

@@ -1,0 +1,25 @@
+.button-template {
+  background-color: transparent;
+  border: 0px;
+  height: fit-content;
+
+  span {
+    display: block;
+    cursor: pointer;
+    padding: 14px;
+    font-size: 21px;
+    color: var(--neutral-600);
+  }
+
+  &:hover span {
+    color: var(--neutral-700);
+  }
+
+  &-disabled {
+    pointer-events: none;
+    span {
+      cursor: auto;
+      color: var(--neutral-200);
+    }
+  }
+}

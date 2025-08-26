@@ -1,0 +1,41 @@
+.base {
+  &__container {
+    transition: all 0.3s ease;
+    font-weight: 400;
+    color: #1e1e1e;
+    font-family: 'Open Sans', sans-serif;
+    container: all / inline-size;
+    min-width: 480px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  input,
+  button {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  p,
+  h1,
+  h2 {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

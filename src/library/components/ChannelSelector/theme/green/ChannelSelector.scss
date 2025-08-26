@@ -1,0 +1,48 @@
+.channels {
+  &__container {
+    display: flex;
+  }
+
+  &__container-disabled {
+    color: var(--neutral-200);
+  }
+
+  &__title {
+    font-size: 14px;
+  }
+
+  &__selected {
+    height: fit-content;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 6px;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  &__icon {
+    display: block;
+    height: fit-content;
+    width: 14px;
+    height: 14px;
+  }
+
+  &__trigger {
+    padding: 8px 8px;
+    display: block;
+    cursor: pointer;
+    font-size: 21px;
+    color: var(--neutral-600);
+  }
+
+  &__trigger:hover {
+    color: var(--neutral-700);
+  }
+
+  &__disabled {
+    color: var(--neutral-200);
+    cursor: auto;
+    pointer-events: none;
+  }
+}

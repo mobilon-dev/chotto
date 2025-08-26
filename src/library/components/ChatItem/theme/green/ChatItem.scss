@@ -1,0 +1,246 @@
+.chat-item {
+  &__container {
+    grid-row: 1;
+    grid-column: 1 / 2;
+    display: flex;
+    position: relative;
+    padding: 10px 20px 10px 15px;
+    cursor: pointer;
+  }
+
+  &__selected {
+    cursor: pointer;
+    border-radius: 0;
+    background: var(--neutral-100);
+
+    .chat-item__menu-button {
+      background: var(--neutral-100);
+    }
+  }
+
+  &__avatar-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    object-fit: cover;
+    margin-right: 15px;
+    background-color: var(--neutral-300);
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
+
+    span {
+      font-size: 21px;
+      color: var(--neutral-500);
+    }
+
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  &__status-user {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: transparent;
+    z-index: 1;
+  }
+
+  &__info-container {
+    flex-grow: 1;
+    align-self: flex-start;
+    margin-right: 15px;
+    overflow: hidden;
+  }
+
+  &__name {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  &__last-message {
+    font-size: 14px;
+    color: #5f5f5f;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  &__details-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+
+    span {
+      color: var(--neutral-600);
+    }
+  }
+
+  &__actions-trigger {
+    display: block;
+    cursor: pointer;
+    font-size: 21px;
+    color: var(--neutral-600);
+  }
+
+  &__actions-trigger:hover {
+    color: var(--neutral-700);
+  }
+
+  &__menu-button {
+    order: 0;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+
+    span {
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      font-size: 18px;
+      transition: 0.2s;
+    }
+
+    &:hover span {
+      color: var(--neutral-700);
+      transition: 0.2s;
+    }
+  }
+
+  &__unread {
+    order: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-top: auto;
+    min-width: 25px;
+    min-height: 25px;
+    font-size: 12px;
+    color: var(--neutral-50);
+    background-color: var(--p-red-500);
+  }
+
+  &__time {
+    font-size: 12px;
+    color: #5f5f5f;
+    white-space: nowrap;
+  }
+
+  &__context-menu {
+    position: absolute;
+    top: 40%;
+    right: 0;
+  }
+
+  &__status-chat-container {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    margin-top: auto;
+  }
+
+  &__status-message {
+    display: flex;
+
+    span {
+      color: var(--neutral-500);
+      font-size: 14px;
+    }
+  }
+
+  &__dialog-buttons {
+    display: flex;
+    margin-left: 8px;
+  }
+}
+
+.dialog {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    gap: 5px;
+    padding: 5px 0 0 75px;
+  }
+
+  &__icon {
+    margin: auto;
+  }
+
+  &__item {
+    display: flex;
+    padding: 3px;
+  }
+
+  &__selected {
+    cursor: pointer;
+    border-radius: 0;
+    background: var(--neutral-100);
+  }
+
+  &__text-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #1e1e1e;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    padding: 0 5px;
+    margin: auto;
+  }
+
+  &__name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  &__time {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: #5f5f5f;
+    font-size: 12px;
+  }
+}
+
+.status--received span {
+  color: var(--neutral-500);
+}
+
+.status--read span {
+  color: #00c2ff;
+}
+
+.status--received span:first-child,
+.status--read span:first-child {
+  margin-right: -8px;
+}

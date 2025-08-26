@@ -1,0 +1,14 @@
+.placeholder {
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 1.8;
+
+  &.filled {
+    background-color: var(--emerald-300);
+  }
+
+  &.empty {
+    background-color: var(--p-red-100);
+  }
+}

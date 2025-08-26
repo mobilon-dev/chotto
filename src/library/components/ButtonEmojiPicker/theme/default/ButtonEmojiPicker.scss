@@ -1,0 +1,30 @@
+.button-emoji-picker {
+  background-color: transparent;
+  border: none;
+  height: fit-content;
+
+  span {
+    display: block;
+    cursor: pointer;
+    padding: 14px;
+    font-size: 21px;
+    color: var(--neutral-600);
+  }
+
+  &:hover span {
+    color: var(--neutral-700);
+  }
+
+  &-disabled {
+    pointer-events: none;
+    span {
+      cursor: auto;
+      color: var(--neutral-200);
+    }
+  }
+}
+
+.emoji {
+  position: absolute;
+  bottom: 50px;
+}

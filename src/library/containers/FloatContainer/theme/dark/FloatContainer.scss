@@ -1,0 +1,81 @@
+.float-window {
+  z-index: 1000;
+  width: fit-content;
+  position: absolute;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    font-weight: 400;
+    color: var(--neutral-100);
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: 0px 0px 20px -7px rgba(0, 0, 0, 0.2);
+    container: all / inline-size;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
+    padding: 18px 20px;
+    background-color: var(--neutral-600);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+
+  &__close-button {
+    display: block;
+    background-color: transparent;
+    border: none;
+    font-size: 21px;
+    color: var(--neutral-300);
+    width: fit-content;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  input,
+  button {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  p,
+  h1,
+  h2 {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

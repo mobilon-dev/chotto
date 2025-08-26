@@ -1,0 +1,40 @@
+.modal-full-screen {
+  &__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 101;
+    color: #1e1e1e;
+    background-color: var(--default-white);
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 95%;
+    width: fit-content;
+    box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+  }
+
+  &__close-button {
+    display: block;
+    background-color: transparent;
+    border: none;
+    padding: 4px;
+    margin: 0 0 14px auto;
+    cursor: pointer;
+
+    span {
+      color: #5f5f5f;
+      font-size: 21px;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.chat-filter {
+  &__container {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    left: 15px;
+    top: 25%;
+    color: #5f5f5f;
+  }
+
+  &__input {
+    width: 100%;
+    background-color: transparent;
+    color: #1e1e1e;
+    padding: 0.5rem 0.75rem;
+    padding-left: 40px;
+    border: 1px solid var(--neutral-300);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+    background-color: transparent;
+
+    &::placeholder {
+      color: #5f5f5f;
+    }
+
+    &:hover {
+      border-color: var(--neutral-500);
+    }
+
+    &:focus-visible {
+      border-color: var(--neutral-700);
+      outline: none;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.chat-panel {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: var(--neutral-50);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--neutral-300);
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  &__title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  &__button-close {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    span {
+      font-size: 21px;
+      color: var(--neutral-600);
+    }
+  }
+}
