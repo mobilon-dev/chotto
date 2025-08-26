@@ -1,9 +1,9 @@
 .base {
   &__container {
     transition: all 0.3s ease;
-    font-weight: var(--chotto-container-font-weight);
-    color: var(--chotto-primary-text-color);
-    font-family: var(--chotto-container-font-family);
+    font-weight: 400;
+    color: #1e1e1e;
+    font-family: 'Montserrat', sans-serif;
     container: all / inline-size;
     min-width: 480px;
   }
@@ -26,7 +26,7 @@
 
   input,
   button {
-    font-family: var(--chotto-container-font-family);
+    font-family: 'Montserrat', sans-serif;
   }
 
   p,
@@ -38,7 +38,6 @@
   a {
     text-decoration: none;
   }
-
 }
 
 .v-enter-active,

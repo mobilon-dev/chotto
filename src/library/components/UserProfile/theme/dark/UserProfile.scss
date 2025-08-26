@@ -32,10 +32,10 @@
     display: flex;
     margin: auto 15px auto 0;
     position: relative;
-    border-radius: var(--chotto-avatar-border-radius);
+    border-radius: 50%;
 
     img {
-      border-radius: var(--chotto-avatar-border-radius);
+      border-radius: 50%;
       object-fit: cover;
     }
   }

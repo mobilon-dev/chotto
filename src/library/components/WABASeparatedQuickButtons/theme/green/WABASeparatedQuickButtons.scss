@@ -6,7 +6,7 @@
   bottom: 0;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: var(--chotto-primary-color);
+  background: #ffffff;
   white-space: pre-wrap;
 
   &__title {
@@ -16,7 +16,7 @@
     margin: 15px;
 
     p {
-      font-size: var(--chotto-text-font-size);
+      font-size: 14px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -27,7 +27,7 @@
   }
 
   &__actions {
-    border-top: 1px solid var(--chotto-item-border-color);
+    border-top: 1px solid var(--neutral-200);
     max-height: 200px;
     overflow-y: auto;
   }
@@ -36,7 +36,7 @@
     position: relative;
     z-index: 0;
     width: 90%;
-    font-size: var(--chotto-text-font-size);
+    font-size: 14px;
     margin-right: auto;
     margin-left: 25px;
     display: flex;

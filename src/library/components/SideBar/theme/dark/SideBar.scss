@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding: var(--chotto-sidebar-padding-container);
+    padding: 10px 8px 22px 8px;
     background-color: transparent;
   }
 
@@ -12,13 +12,13 @@
   &__list-fixed {
     display: flex;
     flex-direction: column;
-    row-gap: var(--chotto-sidebar-row-gap-list);
+    row-gap: 14px;
     padding: 0;
   }
 
   &__list-fixed {
     padding-top: 10px;
-    border-top: var(--chotto-sidebar-list-fixed-border-top);
+    border-top: 1px solid var(--neutral-300);
   }
 
   &__item {
@@ -42,13 +42,13 @@
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      font-size: var(--chotto-small-text-font-size);
-      color: var(--chotto-unread-text-color);
-      background-color: var(--chotto-unread-background-color);
+      font-size: 10px;
+      color: var(--neutral-50);
+      background-color: var(--p-red-500);
     }
 
     p {
-      font-size: var(--chotto-small-text-font-size);
+      font-size: 10px;
       text-align: center;
       line-height: 1;
     }
@@ -60,12 +60,12 @@
     border: 3px solid transparent;
     opacity: 0.8;
     transition: all 0.2s;
-    width: var(--chotto-avatar-small);
-    height: var(--chotto-avatar-small);
+    width: 40px;
+    height: 40px;
   }
 
   &__image--active {
-    border: var(--chotto-sidebar-image-active-border);
+    border: 3px solid var(--emerald-500);
     opacity: 1;
   }
 }
@@ -80,32 +80,38 @@
     border-right: 0px;
     background-color: transparent;
   }
+
   &__list {
     flex-direction: row;
-    gap: var(--chotto-sidebar-row-gap-list);
+    gap: 14px;
   }
+
   &__item {
     display: block;
     max-width: 70px;
     text-align: center;
+
     span {
       width: 24px;
       height: 24px;
       left: 45px;
     }
+
     p {
       font-size: 14px;
     }
   }
+
   &__list-fixed {
     padding-left: 10px;
-    border-left: var(--chotto-sidebar-list-fixed-border-top);
+    border-left: 1px solid var(--neutral-300);
     padding-top: 0;
     border-top: 0px;
     margin-right: 10px;
   }
+
   &__image {
-    width: calc(var(--chotto-avatar-small) * 1.2);
-    height: calc(var(--chotto-avatar-small) * 1.2);
+    width: calc(40px * 1.2);
+    height: calc(40px * 1.2);
   }
 }

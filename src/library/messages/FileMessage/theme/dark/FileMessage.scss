@@ -10,14 +10,14 @@
   &__avatar {
     align-self: center;
     object-fit: cover;
-    min-width: var(--chotto-avatar-small);
-    min-height: var(--chotto-avatar-small);
-    border-radius: var(--chotto-avatar-border-radius);
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
   }
 
   &__subtext {
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 12px;
+    color: var(--neutral-300);
   }
 
   &__text-container {
@@ -26,7 +26,7 @@
 
     p {
       white-space: pre-wrap;
-      font-size: var(--chotto-text-font-size);
+      font-size: 14px;
     }
   }
 
@@ -37,8 +37,8 @@
     column-gap: 12px;
 
     span {
-      color: var(--chotto-secondary-text-color);
-      font-size: var(--chotto-button-icon-size);
+      color: var(--neutral-300);
+      font-size: 21px;
     }
   }
 
@@ -49,8 +49,8 @@
     line-clamp: 1;
     -webkit-box-orient: vertical;
     margin-right: 40px;
-    font-size: var(--chotto-text-font-size);
-    color: var(--chotto-primary-text-color);
+    font-size: 14px;
+    color: var(--neutral-100);
   }
 
   &__info-container {
@@ -69,8 +69,8 @@
     cursor: pointer;
 
     span {
-      color: var(--chotto-secondary-text-color);
-      font-size: var(--chotto-text-icon-size);
+      color: var(--neutral-300);
+      font-size: 14px;
     }
   }
 
@@ -78,15 +78,15 @@
     display: flex;
 
     span {
-      color: var(--chotto-status-color-received);
-      font-size: var(--chotto-small-text-icon-size);
+      color: var(--neutral-300);
+      font-size: 12px;
       font-weight: 400;
     }
   }
 
   .status--received {
     span {
-      color: var(--chotto-status-color-received);
+      color: var(--neutral-300);
 
       &:first-child {
         margin-right: -8px;
@@ -96,7 +96,7 @@
 
   .status--read {
     span {
-      color: var(--chotto-status-color-read);
+      color: #00c2ff;
 
       &:first-child {
         margin-right: -8px;
@@ -110,19 +110,19 @@
     column-gap: 4px;
 
     span {
-      font-size: var(--chotto-small-text-icon-size);
-      color: var(--chotto-secondary-text-color);
+      font-size: 12px;
+      color: var(--neutral-300);
     }
 
     p {
-      font-size: var(--chotto-small-text-font-size);
-      color: var(--chotto-secondary-text-color);
+      font-size: 10px;
+      color: var(--neutral-300);
     }
   }
 
   &__time {
-    font-size: var(--chotto-small-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 10px;
+    color: var(--neutral-300);
   }
 
   &__menu-button {
@@ -134,12 +134,12 @@
     transition: 0.2s;
 
     span {
-      color: var(--chotto-button-color-active);
-      font-size: var(--chotto-button-icon-size);
+      color: var(--neutral-300);
+      font-size: 21px;
     }
 
     &:hover span {
-      color: var(--chotto-button-color-hover);
+      color: var(--neutral-200);
       transition: 0.2s;
     }
   }
@@ -151,7 +151,7 @@
   &__left,
   &__right {
     display: grid;
-    margin: var(--chotto-message-margin);
+    margin: 0 0 8px 0;
   }
 
   &__left {
@@ -170,7 +170,7 @@
 
     .file-message__content {
       grid-column: 2;
-      background-color: var(--chotto-message-left-bg);
+      background-color: var(--neutral-700);
     }
 
     .file-message__menu-button {
@@ -202,7 +202,7 @@
     .file-message__content {
       grid-column: 1;
       margin-left: auto;
-      background-color: var(--chotto-message-right-bg);
+      background-color: var(--emerald-800);
     }
 
     .file-message__menu-button {

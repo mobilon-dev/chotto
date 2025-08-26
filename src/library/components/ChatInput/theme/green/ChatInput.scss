@@ -3,8 +3,8 @@
     position: relative;
     display: grid;
     align-items: center;
-    border-top: var(--chotto-input-border);
-    background-color: var(--chotto-chat-input-container-bg);
+    border-top: 1px solid var(--neutral-300);
+    background-color: var(--default-white);
     padding: 5px;
     grid-gap: 5px;
     grid-template-columns: min-content auto min-content;
@@ -33,28 +33,28 @@
   &__input {
     grid-row: 3;
     grid-column: 2;
-    border: var(--chotto-input-border);
-    background-color: var(--chotto-input-background);
-    padding: var(--chotto-input-padding);
-    color: var(--chotto-primary-text-color);
-    font-size: var(--chotto-input-font-size);
+    border: 1px solid var(--neutral-300);
+    background-color: transparent;
+    padding: 0.5rem 0.75rem;
+    color: #1e1e1e;
+    font-size: 16px;
     overflow-y: hidden;
     resize: none;
     white-space: pre-wrap;
     max-height: 140px;
-    border-radius: var(--chotto-input-border-radius);
+    border-radius: 5px;
 
     &:focus-visible {
       outline: none;
     }
 
     &::placeholder {
-      color: var(--chotto-secondary-text-color);
+      color: #5f5f5f;
     }
   }
 
   &__disabled-placeholder {
-    color: var(--chotto-secondary-text-color);
+    color: #5f5f5f;
     text-align: center;
     user-select: none;
   }
@@ -70,16 +70,16 @@
     span {
       display: block;
       cursor: pointer;
-      padding: var(--chotto-chat-input-button-padding);
-      font-size: var(--chotto-button-icon-size);
-      color: var(--chotto-chat-input-icon-color);
+      padding: 8px;
+      font-size: 21px;
+      color: var(--neutral-600);
     }
   }
 
   &__button-disabled {
     span {
       cursor: auto;
-      color: var(--chotto-chat-input-icon-color-disabled);
+      color: var(--neutral-200);
     }
   }
 

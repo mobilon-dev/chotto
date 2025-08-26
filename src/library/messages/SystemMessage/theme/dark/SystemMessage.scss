@@ -4,13 +4,13 @@
     border-radius: 10px;
     padding: 10px;
     margin: 0 auto 18px auto;
-    background-color: var(--chotto-system-message-bg-color);
+    background-color: #5c4c2e;
   }
 
   &__text {
-    font-size: var(--chotto-text-font-size);
+    font-size: 14px;
     line-height: 1.5;
     text-align: center;
-    color: var(--chotto-secondary-text-color);
+    color: var(--neutral-300);
   }
 }

@@ -1,7 +1,4 @@
 .chat-wrapper {
-  --chotto-chat-panel-width: 50%;
-  --chotto-chat-panel-left: 50%;
-
   display: flex;
   height: 100%;
   width: 100%;
@@ -16,13 +13,13 @@
   }
 
   &__chat-panel {
-    background-color: var(--chotto-primary-color);
-    border-left: 1px solid var(--chotto-item-border-color, none);
-    border-radius: var(--chotto-chat-panel-border-radius);
+    background-color: var(--neutral-950);
+    border-left: 1px solid var(--neutral-100);
+    border-radius: 10px;
     position: absolute;
     height: 100%;
     z-index: 100;
-    width: var(--chotto-chat-panel-width);
-    left: var(--chotto-chat-panel-left);
+    width: 50%;
+    left: 50%;
   }
 }

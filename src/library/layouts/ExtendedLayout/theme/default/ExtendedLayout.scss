@@ -5,8 +5,8 @@
     grid-template-columns: min-content 1.8fr 3fr min-content;
     transition: all 0.3s ease;
     position: relative;
-    border-top: var(--chotto-container-borders, none);
-    border-left: var(--chotto-container-borders, none);
+    border-top: 1px solid var(--neutral-200);
+    border-left: 1px solid var(--neutral-200);
   }
 
   &__first-col {
@@ -15,9 +15,9 @@
     display: flex;
     flex-direction: column;
     height: inherit;
-    border-right: var(--chotto-container-borders, none);
-    border-bottom: var(--chotto-container-borders, none);
-    background-color: var(--chotto-layout-extended-first-col-bg, transparent);
+    border-right: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
+    background-color: var(--neutral-100);
   }
 
   &__second-col {
@@ -27,9 +27,9 @@
     flex-direction: column;
     height: inherit;
     overflow: hidden;
-    border-right: var(--chotto-container-borders, none);
-    border-bottom: var(--chotto-container-borders, none);
-    background-color: var(--chotto-layout-extended-second-col-bg, transparent);
+    border-right: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
+    background-color: var(--default-white);
   }
 
   &__third-col {
@@ -38,9 +38,9 @@
     flex-direction: column;
     grid-column: 3;
     height: inherit;
-    border-right: var(--chotto-container-borders, none);
-    border-bottom: var(--chotto-container-borders, none);
-    background-color: var(--chotto-layout-extended-third-col-bg, transparent);
+    border-right: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
+    background-color: var(--neutral-100);
   }
 }
 

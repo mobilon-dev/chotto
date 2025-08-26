@@ -1,18 +1,18 @@
 .file-uploader {
   &__trigger {
-    padding: var(--chotto-chat-input-button-padding);
+    padding: 14px;
     display: block;
     cursor: pointer;
-    font-size: var(--chotto-button-icon-size);
-    color: var(--chotto-button-color-active);
+    font-size: 21px;
+    color: var(--neutral-600);
   }
 
   &__trigger:hover {
-    color: var(--chotto-button-color-hover);
+    color: var(--neutral-700);
   }
 
   &__disabled {
-    color: var(--chotto-button-color-disabled);
+    color: var(--neutral-200);
     cursor: auto;
     pointer-events: none;
   }

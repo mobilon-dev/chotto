@@ -6,8 +6,8 @@
     grid-template-columns: 1.8fr 3fr;
     transition: all 0.3s ease;
     position: relative;
-    border-top: var(--chotto-container-borders, none);
-    border-left: var(--chotto-container-borders, none);
+    border-top: 1px solid var(--neutral-200);
+    border-left: 1px solid var(--neutral-200);
   }
 
   &__first-col {
@@ -16,9 +16,9 @@
     display: flex;
     flex-direction: column;
     height: inherit;
-    background-color: var(--chotto-layout-base-first-col-bg, transparent);
-    border-right: var(--chotto-container-borders, none);
-    border-bottom: var(--chotto-container-borders, none);
+    background-color: var(--default-white, transparent);
+    border-right: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
     width: 100%;
   }
 
@@ -29,9 +29,9 @@
     grid-column: 2;
     height: inherit;
     width: 100%;
-    background-color: var(--chotto-layout-base-second-col-bg, transparent);
-    border-right: var(--chotto-container-borders, none);
-    border-bottom: var(--chotto-container-borders, none);
+    background-color: var(--neutral-100, transparent);
+    border-right: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
   }
 }
 

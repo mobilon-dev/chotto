@@ -1,17 +1,17 @@
 .context-menu {
   &__container {
     display: none;
-    font-weight: var(--chotto-container-font-weight);
-    color: var(--chotto-primary-text-color);
-    font-family: var(--chotto-container-font-family);
+    font-weight: 400;
+    color: #1e1e1e;
+    font-family: 'Open Sans', sans-serif;
     z-index: 1000;
     position: absolute;
     width: max-content;
-    box-shadow: 0px 2px 10px 1px var(--chotto-shadow-light-color);
+    box-shadow: 0px 2px 10px 1px var(--neutral-300);
     border-radius: 8px;
-    font-size: var(--chotto-title-font-size);
-    color: var(--chotto-primary-text-color);
-    background-color: var(--chotto-primary-color);
+    font-size: 16px;
+    color: #1e1e1e;
+    background-color: #ffffff;
   }
 
   &__list {
@@ -36,6 +36,6 @@
 
   &__item:not(:last-child) {
     padding-bottom: 6px;
-    border-bottom: 1px solid var(--chotto-item-border-color);
+    border-bottom: 1px solid var(--neutral-200);
   }
 }

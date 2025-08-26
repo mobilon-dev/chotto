@@ -7,10 +7,10 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    font-weight: var(--chotto-container-font-weight);
-    color: var(--chotto-primary-text-color);
-    font-family: var(--chotto-container-font-family);
-    box-shadow: var(--chotto-float-container-box-shadow);
+    font-weight: 400;
+    color: var(--neutral-100);
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: 0px 0px 20px -7px rgba(0, 0, 0, 0.2);
     container: all / inline-size;
   }
 
@@ -20,20 +20,20 @@
     align-items: center;
     cursor: grab;
     padding: 18px 20px;
-    background-color: var(--chotto-float-container-bg-header);
-    border-top-left-radius: var(--chotto-float-container-border-radius-header);
-    border-top-right-radius: var(--chotto-float-container-border-radius-header);
+    background-color: var(--neutral-600);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
   }
 
   &__avatar {
-    width: var(--chotto-avatar-small);
-    height: var(--chotto-avatar-small);
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
   }
 
   &__title {
-    font-size: var(--chotto-title-font-size);
-    font-weight: var(--chotto-title-font-weight);
+    font-size: 16px;
+    font-weight: 600;
     margin-left: 10px;
   }
 
@@ -41,8 +41,8 @@
     display: block;
     background-color: transparent;
     border: none;
-    font-size: var(--chotto-button-icon-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 21px;
+    color: var(--neutral-300);
     width: fit-content;
     margin-left: auto;
     cursor: pointer;
@@ -66,7 +66,7 @@
 
   input,
   button {
-    font-family: var(--chotto-container-font-family);
+    font-family: 'Open Sans', sans-serif;
   }
 
   p,

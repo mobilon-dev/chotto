@@ -1,21 +1,21 @@
 .feed-found-item {
   &__container {
-    padding: var(--chotto-chat-item-padding-container);
+    padding: 10px 20px 10px 15px;
     display: flex;
     position: relative;
     cursor: pointer;
     width: 100%;
     word-wrap: anywhere;
     background-color: transparent;
-    border-radius: var(--chotto-chat-item-border-radius);
+    border-radius: 0;
   }
 
   &__container:hover {
-    background-color: var(--chotto-item-background-color-hover);
+    background-color: var(--neutral-200);
   }
 
   &__selected-container {
-    background-color: var(--chotto-item-background-color-focus);
+    background-color: var(--neutral-100);
   }
 
   &__info {
@@ -34,8 +34,8 @@
   }
 
   &__time {
-    color: var(--chotto-secondary-text-color);
-    font-size: var(--chotto-additional-text-font-size);
+    color: #5f5f5f;
+    font-size: 13px;
     margin: 0;
     padding: 0;
   }
@@ -46,8 +46,8 @@
     p {
       margin: 0;
       padding: 0;
-      font-size: var(--chotto-text-font-size);
-      color: var(--chotto-secondary-text-color);
+      font-size: 15px;
+      color: #5f5f5f;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -61,21 +61,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--chotto-avatar-background-color);
-    width: var(--chotto-avatar-medium);
-    height: var(--chotto-avatar-medium);
-    border-radius: var(--chotto-avatar-border-radius);
+    background-color: var(--neutral-300);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     background-size: cover;
     margin-right: 10px;
     span {
-      font-size: var(--chotto-avatar-medium-icon-size);
-      color: var(--chotto-avatar-color);
+      font-size: 21px;
+      color: var(--neutral-500);
       line-height: 24px;
       width: 24px;
     }
 
     img {
-      border-radius: var(--chotto-avatar-border-radius);
+      border-radius: 50%;
       object-fit: cover;
     }
   }

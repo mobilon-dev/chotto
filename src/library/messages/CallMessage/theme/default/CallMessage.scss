@@ -21,7 +21,7 @@
   }
 
   &__title {
-    font-size: var(--chotto-title-font-size);
+    font-size: 16px;
     margin-bottom: 2px;
   }
 
@@ -35,23 +35,23 @@
     border-radius: 50%;
     height: 38px;
     width: 38px;
-    background-color: var(--chotto-message-type-icon-bg-color);
-    color: var(--chotto-message-type-icon-color);
-    font-size: var(--chotto-button-icon-size);
+    background-color: var(--neutral-400);
+    color: var(--neutral-100);
+    font-size: 21px;
   }
 
   &__icon-missed {
-    color: var(--chotto-call-message-phone-icon-missed-color);
+    color: var(--p-red-500);
   }
 
   &__duration {
-    color: var(--chotto-secondary-text-color);
-    font-size: var(--chotto-text-font-size);
+    color: #5f5f5f;
+    font-size: 15px;
   }
 
   &__time {
-    font-size: var(--chotto-small-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 11px;
+    color: #5f5f5f;
   }
 
   &__download-button {
@@ -68,8 +68,8 @@
     cursor: pointer;
 
     span {
-      color: var(--chotto-button-color-active);
-      font-size: var(--chotto-text-icon-size);
+      color: var(--neutral-600);
+      font-size: 14px;
     }
   }
 
@@ -77,14 +77,14 @@
     display: flex;
 
     span {
-      color: var(--chotto-status-color-received);
-      font-size: var(--chotto-small-text-icon-size);
+      color: var(--neutral-500);
+      font-size: 12px;
     }
   }
 
   &__status--received {
     span {
-      color: var(--chotto-status-color-received);
+      color: var(--neutral-500);
 
       &:first-child {
         margin-right: -8px;
@@ -94,7 +94,7 @@
 
   &__status--read {
     span {
-      color: var(--chotto-status-color-read);
+      color: #00c2ff;
 
       &:first-child {
         margin-right: -8px;
@@ -103,16 +103,16 @@
   }
 
   &__subtext {
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 13px;
+    color: #5f5f5f;
   }
 
   &__avatar {
     align-self: center;
     object-fit: cover;
-    min-width: var(--chotto-avatar-small);
-    min-height: var(--chotto-avatar-small);
-    border-radius: var(--chotto-avatar-border-radius);
+    min-width: 45px;
+    min-height: 45px;
+    border-radius: 50%;
   }
 
   &__menu-button {
@@ -124,12 +124,12 @@
     transition: 0.2s;
 
     span {
-      color: var(--chotto-button-color-active);
-      font-size: var(--chotto-button-icon-size);
+      color: var(--neutral-600);
+      font-size: 21px;
     }
 
     &:hover span {
-      color: var(--chotto-button-color-hover);
+      color: var(--neutral-700);
       transition: 0.2s;
     }
   }
@@ -152,17 +152,17 @@
       left: 0;
       width: 16px;
       height: 2px;
-      background-color: var(--chotto-secondary-text-color);
+      background-color: #5f5f5f;
     }
 
     p {
-      font-size: var(--chotto-title-font-size);
+      font-size: 16px;
       margin: 0;
     }
 
     span {
-      color: var(--chotto-secondary-text-color);
-      font-size: var(--chotto-additional-text-font-size);
+      color: #5f5f5f;
+      font-size: 13px;
     }
   }
 
@@ -186,7 +186,7 @@
   &__left,
   &__right {
     display: grid;
-    margin: var(--chotto-message-margin);
+    margin: 0 0 8px 0;
   }
 
   &__left {
@@ -206,7 +206,7 @@
 
     .call-message__content {
       grid-column: 2;
-      background-color: var(--chotto-message-left-bg);
+      background-color: var(--neutral-200);
     }
   }
 
@@ -228,39 +228,39 @@
     .call-message__content {
       grid-column: 1;
       margin-left: auto;
-      background-color: var(--chotto-message-right-bg);
+      background-color: var(--emerald-100);
     }
   }
 
   &__modal {
     position: absolute;
-    font-family: var(--chotto-container-font-family);
-    font-weight: var(--chotto-container-font-weight);
-    font-size: var(--chotto-text-font-size);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 101;
-    color: var(--chotto-primary-text-color);
-    background-color: var(--chotto-modal-bg);
-    border-radius: var(--chotto-modal-border-radius);
-    padding: var(--chotto-modal-padding);
+    color: #1e1e1e;
+    background-color: var(--default-white);
+    border-radius: 12px;
+    padding: 20px;
     width: 32%;
     max-height: 80vh;
     overflow-y: auto;
-    box-shadow: var(--chotto-modal-overlay-shadow);
+    box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     row-gap: 10px;
 
     &::-webkit-scrollbar {
       width: 8px;
-      background-color: var(--chotto-scrollbar-bg);
+      background-color: var(--neutral-50);
     }
 
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: var(--chotto-scrollbar-thumb-bg);
+      background-color: var(--neutral-300);
     }
 
     &::-webkit-scrollbar-track {
@@ -274,7 +274,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--chotto-modal-mask-background);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 1000;
   }
 
@@ -287,8 +287,8 @@
     cursor: pointer;
 
     span {
-      color: var(--chotto-secondary-text-color);
-      font-size: var(--chotto-button-icon-size);
+      color: #5f5f5f;
+      font-size: 21px;
     }
   }
 }

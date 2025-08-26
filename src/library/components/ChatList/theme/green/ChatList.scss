@@ -7,7 +7,7 @@
   height: 70%;
 
   &__filter {
-    margin: var(--chotto-chat-list-filter-margin);
+    margin: 0 15px 10px 15px;
   }
 
   &__items {
@@ -16,16 +16,16 @@
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: var(--chotto-chat-list-items-padding);
+    padding: 0;
 
     &::-webkit-scrollbar {
       width: 6px;
-      background-color: var(--chotto-scrollbar-bg);
+      background-color: var(--neutral-50);
     }
 
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: var(--chotto-scrollbar-thumb-bg);
+      background-color: var(--neutral-300);
     }
 
     &::-webkit-scrollbar-track {
@@ -38,7 +38,7 @@
     z-index: 100;
     display: block;
     position: sticky;
-    background-color: var(--chotto-chat-list-fixed-background-color);
+    background-color: var(--default-white);
   }
 
   &__fixed-items-top {
@@ -50,8 +50,8 @@
   }
 
   &__title {
-    font-size: var(--chotto-header-font-size);
-    font-weight: var(--chotto-header-font-weight);
+    font-size: 20px;
+    font-weight: 700;
   }
 
   &__title-container {
@@ -60,7 +60,7 @@
     justify-content: space-between;
     align-items: center;
     column-gap: 50px;
-    padding: var(--chotto-chat-list-title-container-padding);
+    padding: 16px 0 16px 15px;
   }
 
   &__context-menu {
@@ -83,12 +83,12 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    background-color: var(--chotto-button-color-disabled);
+    background-color: var(--neutral-200);
   }
 
   &__icon-up {
-    font-size: var(--chotto-button-icon-size);
-    color: var(--chotto-button-color-active);
+    font-size: 21px;
+    color: var(--neutral-600);
   }
 }
 

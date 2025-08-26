@@ -1,18 +1,18 @@
 .commands {
   &__trigger {
-    padding: var(--chotto-chat-input-button-padding);
+    padding: 14px;
     display: block;
     cursor: pointer;
-    font-size: calc(var(--chotto-button-icon-size) - 7px);
-    color: var(--chotto-button-color-active);
+    font-size: calc(21px - 7px);
+    color: var(--neutral-600);
   }
 
   &__trigger:hover {
-    color: var(--chotto-button-color-hover);
+    color: var(--neutral-700);
   }
 
   &__disabled {
-    color: var(--chotto-button-color-disabled);
+    color: var(--neutral-200);
     cursor: auto;
     pointer-events: none;
   }

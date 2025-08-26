@@ -4,11 +4,11 @@
   }
 
   &__container-disabled {
-    color: var(--chotto-button-color-disabled);
+    color: var(--neutral-200);
   }
 
   &__title {
-    font-size: var(--chotto-text-font-size);
+    font-size: 15px;
   }
 
   &__selected {
@@ -24,25 +24,24 @@
   &__icon {
     display: block;
     height: fit-content;
-    width: var(--chotto-text-font-size);
-    height: var(--chotto-text-font-size);
+    width: 15px;
+    height: 15px;
   }
 
   &__trigger {
-    padding: var(--chotto-chat-input-button-padding)
-      var(--chotto-chat-input-button-padding);
+    padding: 14px 14px;
     display: block;
     cursor: pointer;
-    font-size: var(--chotto-button-icon-size);
-    color: var(--chotto-button-color-active);
+    font-size: 21px;
+    color: var(--neutral-600);
   }
 
   &__trigger:hover {
-    color: var(--chotto-button-color-hover);
+    color: var(--neutral-700);
   }
 
   &__disabled {
-    color: var(--chotto-button-color-disabled);
+    color: var(--neutral-200);
     cursor: auto;
     pointer-events: none;
   }

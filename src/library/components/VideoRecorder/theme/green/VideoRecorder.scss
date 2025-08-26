@@ -14,21 +14,21 @@
     span {
       display: block;
       cursor: pointer;
-      padding: var(--chotto-chat-input-button-padding);
-      font-size: var(--chotto-button-icon-size);
-      color: var(--chotto-button-color-active);
+      padding: 8px;
+      font-size: 21px;
+      color: var(--neutral-600);
     }
   }
 
   &__button:hover span {
-    color: var(--chotto-button-color-hover);
+    color: var(--neutral-700);
   }
 
   &__button-disabled {
     pointer-events: none;
     span {
       cursor: auto;
-      color: var(--chotto-button-color-disabled);
+      color: var(--neutral-200);
     }
   }
 }

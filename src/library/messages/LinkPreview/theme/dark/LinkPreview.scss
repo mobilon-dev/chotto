@@ -12,14 +12,14 @@
     left: 0;
     width: 4px;
     height: 100%;
-    background-color: var(--chotto-message-accent-line-color);
+    background-color: var(--emerald-400);
   }
 
   &__link-container {
     display: flex;
     flex-direction: column;
-    color: var(--chotto-primary-text-color);
-    font-size: var(--chotto-text-font-size);
+    color: var(--neutral-100);
+    font-size: 14px;
   }
 
   &__title {
@@ -39,10 +39,10 @@
   }
 
   .left {
-    background-color: var(--chotto-message-left-secondary-bg);
+    background-color: var(--neutral-600);
   }
 
   .right {
-    background-color: var(--chotto-message-right-secondary-bg);
+    background-color: var(--emerald-700);
   }
 }

@@ -9,9 +9,9 @@
     border-radius: 50%;
     height: 38px;
     width: 38px;
-    background-color: var(--chotto-message-type-icon-bg-color);
-    color: var(--chotto-message-type-icon-color);
-    font-size: var(--chotto-button-icon-size);
+    background-color: var(--neutral-400);
+    color: var(--neutral-100);
+    font-size: 21px;
   }
 
   &__text-container {
@@ -19,8 +19,8 @@
     word-break: break-word;
     p {
       margin: 0;
-      font-size: var(--chotto-additional-text-font-size);
-      color: var(--chotto-secondary-text-color);
+      font-size: 12px;
+      color: var(--neutral-300);
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -37,7 +37,7 @@
     margin-bottom: 4px;
 
     span {
-      color: var(--chotto-secondary-text-color);
+      color: var(--neutral-300);
     }
   }
 }

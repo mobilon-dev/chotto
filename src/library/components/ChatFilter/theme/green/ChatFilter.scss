@@ -7,31 +7,31 @@
     position: absolute;
     left: 15px;
     top: 25%;
-    color: var(--chotto-secondary-text-color);
+    color: #5f5f5f;
   }
 
   &__input {
     width: 100%;
     background-color: transparent;
-    color: var(--chotto-primary-text-color);
-    padding: var(--chotto-input-padding);
+    color: #1e1e1e;
+    padding: 0.5rem 0.75rem;
     padding-left: 40px;
-    border: var(--chotto-input-border);
-    border-radius: var(--chotto-input-border-radius);
-    font-size: var(--chotto-input-font-size);
-    transition: border-color var(--chotto-input-transition-duration);
-    background-color: var(--chotto-input-background);
+    border: 1px solid var(--neutral-300);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+    background-color: transparent;
 
     &::placeholder {
-      color: var(--chotto-secondary-text-color);
+      color: #5f5f5f;
     }
 
     &:hover {
-      border-color: var(--chotto-input-hover-border-color);
+      border-color: var(--neutral-500);
     }
 
     &:focus-visible {
-      border-color: var(--chotto-input-focus-border-color);
+      border-color: var(--neutral-700);
       outline: none;
     }
   }

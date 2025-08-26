@@ -31,7 +31,7 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background-color: var(--chotto-message-type-icon-bg-color);
+    background-color: var(--neutral-400);
 
     span {
       display: flex;
@@ -39,15 +39,15 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: var(--chotto-button-icon-size);
-      color: var(--chotto-message-type-icon-color);
+      font-size: 21px;
+      color: var(--neutral-100);
     }
   }
 
   &__progress-bar-container {
     -webkit-appearance: none;
     appearance: none;
-    background: var(--chotto-audio-message-pbc-background-color);
+    background: var(--neutral-400);
     cursor: pointer;
     height: 10px;
     overflow: hidden;
@@ -55,24 +55,23 @@
     margin-top: 5px;
     margin-left: -1px;
   }
+
   &__progress-bar-container::-webkit-slider-thumb {
     width: 10px;
     height: 10px;
-    background-color: var(--chotto-audio-message-pb-background-color);
+    background-color: var(--emerald-500);
     appearance: none;
-    box-shadow: -10000px 0 0 10000px
-      var(--chotto-audio-message-pb-background-color);
+    box-shadow: -10000px 0 0 10000px var(--emerald-500);
   }
 
   &__progress-bar-container::-moz-range-thumb {
     width: 10px;
     height: 10px;
-    background-color: var(--chotto-audio-message-pb-background-color);
+    background-color: var(--emerald-500);
     appearance: none;
     border: 0;
     border-radius: 0;
-    box-shadow: -10000px 0 0 10000px
-      var(--chotto-audio-message-pb-background-color);
+    box-shadow: -10000px 0 0 10000px var(--emerald-500);
   }
 
   &__player-controls {
@@ -90,7 +89,7 @@
     background-color: transparent;
     border: 0;
     width: 25px;
-    font-size: var(--chotto-additional-text-font-size);
+    font-size: 12px;
     font-weight: 400;
   }
 
@@ -106,21 +105,21 @@
   &__remaining-time {
     grid-column: 2;
     margin-bottom: -10px;
-    font-size: var(--chotto-small-text-font-size);
+    font-size: 10px;
     height: fit-content;
   }
 
   &__avatar {
     align-self: center;
     object-fit: cover;
-    min-width: var(--chotto-avatar-small);
-    min-height: var(--chotto-avatar-small);
-    border-radius: var(--chotto-avatar-border-radius);
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
   }
 
   &__subtext {
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 12px;
+    color: #5f5f5f;
   }
 
   &__info-container {
@@ -145,8 +144,8 @@
     cursor: pointer;
 
     span {
-      color: var(--chotto-secondary-text-color);
-      font-size: var(--chotto-text-icon-size);
+      color: #5f5f5f;
+      font-size: 14px;
     }
   }
 
@@ -154,14 +153,14 @@
     display: flex;
 
     span {
-      color: var(--chotto-status-color-received);
-      font-size: var(--chotto-small-text-icon-size);
+      color: var(--neutral-500);
+      font-size: 12px;
     }
   }
 
   .status--received {
     span {
-      color: var(--chotto-status-color-received);
+      color: var(--neutral-500);
 
       &:first-child {
         margin-right: -8px;
@@ -171,7 +170,7 @@
 
   .status--read {
     span {
-      color: var(--chotto-status-color-read);
+      color: #00c2ff;
 
       &:first-child {
         margin-right: -8px;
@@ -185,19 +184,19 @@
     column-gap: 4px;
 
     span {
-      font-size: var(--chotto-small-text-icon-size);
-      color: var(--chotto-secondary-text-color);
+      font-size: 12px;
+      color: #5f5f5f;
     }
 
     p {
-      font-size: var(--chotto-small-text-font-size);
-      color: var(--chotto-secondary-text-color);
+      font-size: 10px;
+      color: #5f5f5f;
     }
   }
 
   &__time {
-    font-size: var(--chotto-small-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 10px;
+    color: #5f5f5f;
   }
 
   &__menu-button {
@@ -209,12 +208,12 @@
     transition: 0.2s;
 
     span {
-      color: var(--chotto-button-color-active);
-      font-size: var(--chotto-button-icon-size);
+      color: var(--neutral-600);
+      font-size: 21px;
     }
 
     &:hover span {
-      color: var(--chotto-button-color-hover);
+      color: var(--neutral-700);
       transition: 0.2s;
     }
   }
@@ -231,7 +230,7 @@
 
     p {
       white-space: pre-wrap;
-      font-size: var(--chotto-text-font-size);
+      font-size: 14px;
     }
   }
 
@@ -247,7 +246,7 @@
     user-select: none;
 
     p {
-      color: var(--chotto-secondary-text-color);
+      color: #5f5f5f;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -264,7 +263,7 @@
       transform: translateY(-50%);
       width: 2px;
       height: 84%;
-      background-color: var(--chotto-audio-message-transcript-delimiter-color);
+      background-color: var(--neutral-400);
       border-radius: 6px;
     }
   }
@@ -283,7 +282,7 @@
   &__left,
   &__right {
     display: grid;
-    margin: var(--chotto-message-margin);
+    margin: 0 0 8px 0;
   }
 
   &__left {
@@ -303,7 +302,7 @@
 
     .audio-message__content {
       grid-column: 2;
-      background-color: var(--chotto-message-left-bg);
+      background-color: var(--default-white);
     }
 
     .audio-message__menu-button {
@@ -336,7 +335,7 @@
     .audio-message__content {
       grid-column: 1;
       margin-left: auto;
-      background-color: var(--chotto-message-right-bg);
+      background-color: #d9fdd3;
     }
 
     .audio-message__menu-button {
@@ -352,24 +351,25 @@
   }
 
   &__modal {
-    font-family: var(--chotto-container-font-family);
-    font-weight: var(--chotto-container-font-weight);
-    font-size: var(--chotto-text-font-size);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 101;
-    color: var(--chotto-primary-text-color);
-    background-color: var(--chotto-modal-bg);
-    border-radius: var(--chotto-modal-border-radius);
-    padding: var(--chotto-modal-padding);
+    color: #1e1e1e;
+    background-color: var(--default-white);
+    border-radius: 12px;
+    padding: 20px;
     max-width: 30%;
-    box-shadow: var(--chotto-modal-overlay-shadow);
+    box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0px 8px 10px -6px rgba(0, 0, 0, 0.1);
 
     p {
       margin: 0;
-      font-size: var(--chotto-title-font-size);
+      font-size: 16px;
     }
   }
 
@@ -379,7 +379,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--chotto-modal-mask-background);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 1000;
   }
 
@@ -392,8 +392,8 @@
     cursor: pointer;
 
     span {
-      color: var(--chotto-secondary-text-color);
-      font-size: var(--chotto-button-icon-size);
+      color: #5f5f5f;
+      font-size: 21px;
     }
   }
 }

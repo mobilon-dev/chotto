@@ -5,14 +5,14 @@
 }
 
 .text {
-  font-size: var(--chotto-text-font-size);
-  color: var(--chotto-primary-text-color);
+  font-size: 14px;
+  color: #1e1e1e;
 }
 
 p {
   margin: 0;
-  font-size: var(--chotto-additional-text-font-size);
-  color: var(--chotto-secondary-text-color);
+  font-size: 12px;
+  color: #5f5f5f;
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -4,6 +4,7 @@
     gap: 5px;
     justify-content: right;
     flex-wrap: wrap;
+
     &--left {
       justify-content: flex-start;
       margin-left: 0;
@@ -22,15 +23,16 @@
       margin-right: 0;
     }
   }
+
   &__key {
-    background: var(--chotto-secondary-color);
-    border: 1px solid var(--chotto-item-border-color);
+    background: var(--neutral-800);
+    border: 1px solid var(--neutral-100);
     border-radius: 3px;
     word-wrap: break-word;
-    box-shadow: 0px 0px 10px 5px var(--chotto-shadow-light-color);
+    box-shadow: 0px 0px 10px 5px var(--neutral-600);
     max-width: 100%;
     p {
-      font-size: var(--chotto-title-font-size);
+      font-size: 16px;
       padding: 5px;
       margin: 0;
     }

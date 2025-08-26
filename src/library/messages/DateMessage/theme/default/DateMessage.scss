@@ -7,12 +7,13 @@
     padding: 6px 18px;
     margin-bottom: 18px;
     width: fit-content;
-    background-color: var(--chotto-secondary-color, transparent);
-    border: 1px solid var(--chotto-item-border-color);
+
+    background-color: #faf6f4;
+    border: 1px solid var(--neutral-200);
   }
 
   &__text {
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 13px;
+    color: #5f5f5f;
   }
 }

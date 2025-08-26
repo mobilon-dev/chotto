@@ -7,43 +7,43 @@
   justify-content: center;
   gap: 8px;
   border-radius: 5px;
-  background-color: var(--chotto-attachment-section-color);
+  background-color: #fef3b8;
 
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 5px;
 
   &__error {
-    border: 1px solid var(--chotto-attachment-section-error-color);
+    border: 1px solid var(--p-red-600);
   }
 
   &__icon {
     padding-left: 10px;
-    color: var(--chotto-primary-text-color);
+    color: #1e1e1e;
   }
 
   &__title {
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-primary-text-color);
+    font-size: 12px;
+    color: #1e1e1e;
     font-weight: 600;
   }
 
   &__info {
     margin-top: 1px;
-    color: var(--chotto-secondary-text-color);
-    font-size: var(--chotto-additional-text-font-size);
+    color: #5f5f5f;
+    font-size: 12px;
     word-break: break-word;
     font-weight: 600;
   }
 
   &__error-text {
-    color: var(--chotto-attachment-section-error-color);
+    color: var(--p-red-600);
     margin-left: 5px;
-    font-size: var(--chotto-small-text-font-size);
+    font-size: 10px;
   }
 }
 
 .attachment-section:hover {
   cursor: pointer;
-  background-color: var(--chotto-attachment-section-hover-color);
+  background-color: #fef3b890;
 }

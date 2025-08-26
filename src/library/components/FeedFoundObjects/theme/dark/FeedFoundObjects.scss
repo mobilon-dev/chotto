@@ -8,12 +8,12 @@
     height: 100%;
     &::-webkit-scrollbar {
       width: 6px;
-      background-color: var(--chotto-scrollbar-bg);
+      background-color: var(--neutral-50);
     }
 
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: var(--chotto-scrollbar-thumb-bg);
+      background-color: var(--neutral-300);
     }
 
     &::-webkit-scrollbar-track {

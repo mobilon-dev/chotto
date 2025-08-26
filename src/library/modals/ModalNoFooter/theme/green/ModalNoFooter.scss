@@ -12,9 +12,9 @@
 }
 
 .modal-no-footer__container {
-  background: var(--chotto-modal-bg);
-  color: var(--chotto-primary-text-color);
-  font-family: var(--chotto-container-font-family);
+  background: var(--default-white);
+  color: #1e1e1e;
+  font-family: 'Open Sans', sans-serif;
   overflow-x: auto;
   display: flex;
   flex-direction: column;

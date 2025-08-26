@@ -13,7 +13,7 @@
       left: 0;
       width: 4px;
       height: 100%;
-      background-color: var(--chotto-message-accent-line-color);
+      background-color: var(--emerald-400);
     }
   }
 
@@ -37,16 +37,16 @@
 }
 
 .left {
-  background-color: var(--chotto-message-left-secondary-bg);
+  background-color: var(--neutral-600);
 }
 
 .right {
-  background-color: var(--chotto-message-right-secondary-bg);
+  background-color: var(--emerald-700);
 }
 
 .chat-input-reply {
   padding-right: 30px;
-  border: 1px solid var(--chotto-item-border-color);
+  border: 1px solid var(--neutral-100);
   border-radius: 0;
   word-break: break-word;
   margin-bottom: 0;

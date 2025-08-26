@@ -2,7 +2,7 @@
   &__container {
     position: relative;
     display: flex;
-    border: 1px solid var(--chotto-item-border-color);
+    border: 1px solid var(--neutral-200);
   }
 
   &__image,
@@ -52,7 +52,7 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background-color: var(--chotto-message-type-icon-bg-color);
+    background-color: var(--neutral-400);
 
     span {
       display: flex;
@@ -60,17 +60,16 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: var(--chotto-button-icon-size);
-      color: var(--chotto-message-type-icon-color);
+      font-size: 21px;
+      color: var(--neutral-100);
     }
   }
 
   &__block {
-    --chotto-file-preview-resolution: 60px;
-    max-width: var(--chotto-file-preview-resolution);
-    max-height: var(--chotto-file-preview-resolution);
-    min-width: var(--chotto-file-preview-resolution);
-    min-height: var(--chotto-file-preview-resolution);
+    max-width: 60px;
+    max-height: 60px;
+    min-width: 60px;
+    min-height: 60px;
     margin: 5px;
     overflow: hidden;
     border-radius: 5px;

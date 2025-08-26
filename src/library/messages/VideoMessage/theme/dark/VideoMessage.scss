@@ -14,8 +14,8 @@
     column-gap: 4px;
     border-radius: 12px;
     padding: 6px 10px;
-    background-color: var(--chotto-message-popup-info-bg-color);
-    color: var(--chotto-message-popup-info-color);
+    background-color: rgb(0 0 0 / 39%);
+    color: var(--default-white);
   }
 
   &__download-button {
@@ -28,12 +28,12 @@
     border: none;
     border-radius: 12px;
     padding: 6px 6px;
-    background-color: var(--chotto-message-popup-info-bg-color);
+    background-color: rgb(0 0 0 / 39%);
     cursor: pointer;
 
     span {
-      color: var(--chotto-message-popup-info-color);
-      font-size: var(--chotto-small-text-icon-size);
+      color: var(--default-white);
+      font-size: 12px;
     }
   }
 
@@ -43,23 +43,23 @@
     column-gap: 4px;
 
     span {
-      font-size: var(--chotto-small-text-icon-size);
+      font-size: 12px;
     }
 
     p {
-      font-size: var(--chotto-small-text-font-size);
+      font-size: 10px;
     }
   }
 
   &__time {
-    font-size: var(--chotto-small-text-font-size);
+    font-size: 10px;
   }
 
   &__status {
     display: flex;
 
     span {
-      font-size: var(--chotto-small-text-icon-size);
+      font-size: 12px;
     }
   }
 
@@ -73,7 +73,7 @@
 
   .status--read {
     span {
-      color: var(--chotto-status-color-read);
+      color: #00c2ff;
 
       &:first-child {
         margin-right: -8px;
@@ -86,9 +86,9 @@
     align-self: end;
     margin-bottom: 6px;
     object-fit: cover;
-    min-width: var(--chotto-avatar-small);
-    min-height: var(--chotto-avatar-small);
-    border-radius: var(--chotto-avatar-border-radius);
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
   }
 
   &__video {
@@ -99,12 +99,12 @@
   }
 
   &__time {
-    font-size: var(--chotto-small-text-font-size);
+    font-size: 10px;
   }
 
   &__subtext {
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 12px;
+    color: var(--neutral-300);
   }
 
   &__preview-button {
@@ -122,12 +122,12 @@
     transition: 0.2s;
 
     span {
-      color: var(--chotto-button-color-active);
-      font-size: var(--chotto-button-icon-size);
+      color: var(--neutral-300);
+      font-size: 21px;
     }
 
     &:hover span {
-      color: var(--chotto-button-color-hover);
+      color: var(--neutral-200);
       transition: 0.2s;
     }
   }
@@ -144,7 +144,7 @@
 
     p {
       white-space: pre-wrap;
-      font-size: var(--chotto-text-font-size);
+      font-size: 14px;
     }
   }
 
@@ -156,7 +156,7 @@
   &__right {
     display: grid;
     grid-template-rows: min-content 1fr min-content;
-    margin: var(--chotto-message-margin);
+    margin: 0 0 8px 0;
   }
 
   &__left {
@@ -175,7 +175,7 @@
 
     .video-message__content {
       grid-column: 2;
-      background-color: var(--chotto-message-left-bg);
+      background-color: var(--neutral-700);
     }
 
     .video-message__text-container {
@@ -211,7 +211,7 @@
     .video-message__content {
       grid-column: 1;
       margin-left: auto;
-      background-color: var(--chotto-message-right-bg);
+      background-color: var(--emerald-800);
     }
 
     .video-message__text-container {

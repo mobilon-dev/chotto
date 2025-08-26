@@ -1,8 +1,8 @@
 .image-message__text-container {
   p {
     margin: 0;
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 12px;
+    color: var(--neutral-300);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -46,8 +46,8 @@
 
   &__text {
     margin-top: 8px;
-    font-size: var(--chotto-text-font-size);
-    color: var(--chotto-primary-text-color);
+    font-size: 14px;
+    color: var(--neutral-100);
   }
 
   &__reply-description {
@@ -57,7 +57,7 @@
     margin-bottom: 4px;
     white-space: nowrap;
     span {
-      color: var(--chotto-secondary-text-color);
+      color: var(--neutral-300);
     }
   }
 }

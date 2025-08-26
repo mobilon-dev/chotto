@@ -5,13 +5,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 101;
-    color: var(--chotto-primary-text-color);
-    background-color: var(--chotto-modal-bg);
-    border-radius: var(--chotto-modal-border-radius);
-    padding: var(--chotto-modal-padding);
+    color: var(--neutral-100);
+    background-color: var(--neutral-700);
+    border-radius: 12px;
+    padding: 20px;
     max-width: 95%;
     width: fit-content;
-    box-shadow: var(--chotto-modal-overlay-shadow);
+    box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0px 8px 10px -6px rgba(0, 0, 0, 0.1);
   }
 
   &__overlay {
@@ -20,7 +21,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--chotto-modal-mask-background);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 1000;
   }
 
@@ -33,8 +34,8 @@
     cursor: pointer;
 
     span {
-      color: var(--chotto-secondary-text-color);
-      font-size: var(--chotto-button-icon-size);
+      color: var(--neutral-300);
+      font-size: 21px;
     }
   }
 }

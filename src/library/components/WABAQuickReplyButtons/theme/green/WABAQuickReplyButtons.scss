@@ -3,11 +3,11 @@
 
   &__preview-action {
     position: relative;
-    font-size: var(--chotto-text-font-size);
+    font-size: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--chotto-quick-reply-buttons-color);
+    color: var(--emerald-500);
   }
 
   &__line {

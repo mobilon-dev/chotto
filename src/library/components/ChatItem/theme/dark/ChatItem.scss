@@ -4,17 +4,17 @@
     grid-column: 1 / 2;
     display: flex;
     position: relative;
-    padding: var(--chotto-chat-item-padding-container);
+    padding: 10px 20px 10px 15px;
     cursor: pointer;
   }
 
   &__selected {
     cursor: pointer;
-    border-radius: var(--chotto-chat-item-border-radius);
-    background: var(--chotto-item-background-color-focus);
+    border-radius: 0;
+    background: var(--neutral-700);
 
     .chat-item__menu-button {
-      background: var(--chotto-item-background-color-focus);
+      background: var(--neutral-700);
     }
   }
 
@@ -26,18 +26,18 @@
     align-self: center;
     object-fit: cover;
     margin-right: 15px;
-    background-color: var(--chotto-avatar-background-color);
-    min-width: var(--chotto-avatar-medium);
-    min-height: var(--chotto-avatar-medium);
-    border-radius: var(--chotto-avatar-border-radius);
+    background-color: var(--neutral-400);
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
 
     span {
-      font-size: var(--chotto-avatar-medium-icon-size);
-      color: var(--chotto-avatar-color);
+      font-size: 21px;
+      color: var(--neutral-300);
     }
 
     img {
-      border-radius: var(--chotto-avatar-border-radius);
+      border-radius: 50%;
       object-fit: cover;
     }
   }
@@ -63,8 +63,8 @@
 
   &__name {
     margin-bottom: 8px;
-    font-size: var(--chotto-title-font-size);
-    font-weight: var(--chotto-title-font-weight);
+    font-size: 16px;
+    font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -74,8 +74,8 @@
   }
 
   &__last-message {
-    font-size: var(--chotto-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 14px;
+    color: var(--neutral-300);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -92,19 +92,19 @@
     align-items: end;
 
     span {
-      color: var(--chotto-button-color-active);
+      color: var(--neutral-300);
     }
   }
 
   &__actions-trigger {
     display: block;
     cursor: pointer;
-    font-size: var(--chotto-button-icon-size);
-    color: var(--chotto-button-color-active);
+    font-size: 21px;
+    color: var(--neutral-300);
   }
 
   &__actions-trigger:hover {
-    color: var(--chotto-button-color-hover);
+    color: var(--neutral-200);
   }
 
   &__menu-button {
@@ -124,7 +124,7 @@
     }
 
     &:hover span {
-      color: var(--chotto-button-color-hover);
+      color: var(--neutral-200);
       transition: 0.2s;
     }
   }
@@ -139,14 +139,14 @@
     margin-top: auto;
     min-width: 25px;
     min-height: 25px;
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-unread-text-color);
-    background-color: var(--chotto-unread-background-color);
+    font-size: 12px;
+    color: var(--neutral-50);
+    background-color: var(--p-red-500);
   }
 
   &__time {
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 12px;
+    color: var(--neutral-300);
     white-space: nowrap;
   }
 
@@ -167,8 +167,8 @@
     display: flex;
 
     span {
-      color: var(--chotto-status-color-received);
-      font-size: var(--chotto-text-font-size);
+      color: var(--neutral-300);
+      font-size: 14px;
     }
   }
 
@@ -185,7 +185,7 @@
     position: relative;
     cursor: pointer;
     gap: 5px;
-    padding: var(--chotto-chat-item-dialog-padding);
+    padding: 5px 0 0 75px;
   }
 
   &__icon {
@@ -199,15 +199,15 @@
 
   &__selected {
     cursor: pointer;
-    border-radius: var(--chotto-chat-item-border-radius);
-    background: var(--chotto-item-background-color-focus);
+    border-radius: 0;
+    background: var(--neutral-700);
   }
 
   &__text-container {
     display: flex;
     justify-content: space-between;
-    font-size: var(--chotto-text-font-size);
-    color: var(--chotto-primary-text-color);
+    font-size: 14px;
+    color: var(--neutral-100);
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
@@ -227,17 +227,17 @@
     -webkit-line-clamp: 1;
     line-clamp: 1;
     -webkit-box-orient: vertical;
-    color: var(--chotto-secondary-text-color);
-    font-size: var(--chotto-additional-text-font-size);
+    color: var(--neutral-300);
+    font-size: 12px;
   }
 }
 
 .status--received span {
-  color: var(--chotto-status-color-received);
+  color: var(--neutral-300);
 }
 
 .status--read span {
-  color: var(--chotto-status-color-read);
+  color: #00c2ff;
 }
 
 .status--received span:first-child,

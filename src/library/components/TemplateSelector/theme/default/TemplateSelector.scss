@@ -1,10 +1,4 @@
 .template-selector {
-  --chotto-template-first-col-display: none;
-
-  --chotto-template-second-col-display: grid;
-
-  --chotto-template-third-col-display: none;
-
   position: absolute;
   bottom: 100%;
   left: 0;
@@ -15,9 +9,9 @@
   &__container-inline {
     max-height: 500px;
     padding: 16px 5px 5px 5px;
-    background-color: var(--chotto-primary-color);
-    border-top: 1px solid var(--chotto-item-border-color);
-    border-bottom: 1px solid var(--chotto-item-border-color);
+    background-color: #ffffff;
+    border-top: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
     box-sizing: border-box;
     min-width: 478px;
   }
@@ -26,10 +20,10 @@
     position: absolute;
     max-height: 500px;
     padding: 16px 5px 5px 5px;
-    background-color: var(--chotto-primary-color);
-    border: 1px solid var(--chotto-item-border-color);
+    background-color: #ffffff;
+    border: 1px solid var(--neutral-200);
     min-width: 478px;
-    box-shadow: 5px 5px 29px -15px var(--chotto-shadow-color);
+    box-shadow: 5px 5px 29px -15px var(--neutral-800);
     bottom: 20px;
     right: 20px;
   }
@@ -75,15 +69,15 @@
     margin: 0 16px 20px auto;
 
     span {
-      font-size: var(--chotto-button-icon-size);
-      color: var(--chotto-button-color-active);
+      font-size: 21px;
+      color: var(--neutral-600);
     }
   }
 
   &__list-groups {
     grid-row: 2;
     overflow-y: auto;
-    border: 1px solid var(--chotto-item-border-color);
+    border: 1px solid var(--neutral-200);
     padding: 0;
     margin: 0;
 
@@ -109,17 +103,17 @@
 
   &__templates {
     grid-row: 3;
-    border: 1px solid var(--chotto-item-border-color);
+    border: 1px solid var(--neutral-200);
     overflow-y: auto;
 
     &::-webkit-scrollbar {
       width: 6px;
-      background-color: var(--chotto-scrollbar-bg);
+      background-color: var(--neutral-50);
     }
 
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: var(--chotto-scrollbar-thumb-bg);
+      background-color: var(--neutral-300);
     }
 
     &::-webkit-scrollbar-track {
@@ -132,11 +126,11 @@
     transition: 0.2s;
 
     &:hover {
-      background-color: var(--chotto-item-background-color-hover);
+      background-color: var(--neutral-200);
     }
 
     &:not(:last-child) {
-      border-bottom: 1px solid var(--chotto-item-border-color);
+      border-bottom: 1px solid var(--neutral-200);
     }
   }
 
@@ -146,10 +140,10 @@
   }
 
   &__item-selected {
-    background-color: var(--chotto-item-background-color-focus);
+    background-color: var(--neutral-100);
 
     &:hover {
-      background-color: var(--chotto-item-background-color-hover);
+      background-color: var(--neutral-200);
     }
   }
 
@@ -183,12 +177,12 @@
 
   &__item-title {
     margin-bottom: 8px;
-    font-weight: var(--chotto-title-font-weight);
-    font-size: var(--chotto-title-font-size);
+    font-weight: 600;
+    font-size: 16px;
   }
 
   &__item-text {
-    font-size: var(--chotto-text-font-size);
+    font-size: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -207,45 +201,45 @@
   &__searching-input {
     background-color: transparent;
     width: 100%;
-    padding: var(--chotto-input-padding);
-    background-color: var(--chotto-input-background);
-    border-radius: var(--chotto-input-border-radius);
-    font-size: var(--chotto-input-font-size);
-    color: var(--chotto-primary-text-color);
-    border: var(--chotto-input-border);
-    transition: border-color var(--chotto-input-transition-duration);
+    padding: 0.5rem 0.75rem;
+    background-color: transparent;
+    border-radius: 0px 0px 10px 10px;
+    font-size: 16px;
+    color: #1e1e1e;
+    border: 1px solid var(--neutral-300);
+    transition: border-color 0.2s;
     box-sizing: border-box;
 
     &::placeholder {
-      color: var(--chotto-secondary-text-color);
+      color: #5f5f5f;
     }
 
     &:hover {
-      border-color: var(--chotto-input-hover-border-color);
+      border-color: var(--neutral-500);
     }
 
     &:focus-visible {
-      border-color: var(--chotto-input-focus-border-color);
+      border-color: var(--neutral-700);
       outline: none;
     }
   }
 
   &__preview-container {
     grid-row: 2;
-    border: 1px solid var(--chotto-item-border-color);
+    border: 1px solid var(--neutral-200);
     max-height: 375px;
     overflow-y: auto;
-    background-color: var(--chotto-secondary-color);
+    background-color: #faf6f4;
     background-image: url('/chat-background.svg');
 
     &::-webkit-scrollbar {
       width: 6px;
-      background-color: var(--chotto-scrollbar-bg);
+      background-color: var(--neutral-50);
     }
 
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: var(--chotto-scrollbar-thumb-bg);
+      background-color: var(--neutral-300);
     }
 
     &::-webkit-scrollbar-track {
@@ -261,7 +255,7 @@
 
   &__preview-wrapper {
     padding: 10px 10px 4px 16px;
-    background-color: var(--chotto-message-left-bg);
+    background-color: var(--neutral-200);
     border-radius: 14px;
     max-width: 90%;
     margin-bottom: 15px;
@@ -270,7 +264,7 @@
   &__plug {
     width: 100%;
     height: 100%;
-    font-size: var(--chotto-text-font-size);
+    font-size: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -280,15 +274,15 @@
   }
 
   &__preview-text {
-    font-size: var(--chotto-text-font-size);
+    font-size: 15px;
     word-break: break-word;
     white-space: pre-line;
   }
 
   &__preview-time {
     width: fit-content;
-    font-size: var(--chotto-additional-text-font-size);
-    color: var(--chotto-secondary-text-color);
+    font-size: 13px;
+    color: #5f5f5f;
     margin-left: auto;
   }
 
@@ -298,15 +292,15 @@
     width: fit-content;
     justify-self: flex-end;
     margin: 16px 0 0 0;
-    font-size: var(--chotto-title-font-size);
-    background-color: var(--chotto-action-button-color-active);
+    font-size: 16px;
+    background-color: #00cbfa;
     border: none;
     padding: 8px 16px;
     border-radius: 10px;
     cursor: pointer;
 
     &:hover {
-      background-color: var(--chotto-action-button-color-hover);
+      background-color: #3fddff;
     }
   }
 }
@@ -316,16 +310,19 @@
     &__layout {
       grid-template-columns: 1fr;
     }
+
     &__first-col {
-      display: var(--chotto-template-first-col-display);
+      display: none;
       grid-column: 1;
     }
+
     &__second-col {
-      display: var(--chotto-template-second-col-display);
+      display: grid;
       grid-column: 1;
     }
+
     &__third-col {
-      display: var(--chotto-template-third-col-display);
+      display: none;
       grid-column: 1;
     }
   }

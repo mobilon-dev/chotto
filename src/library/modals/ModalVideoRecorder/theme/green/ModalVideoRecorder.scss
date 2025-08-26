@@ -49,6 +49,7 @@
       color: red;
     }
   }
+
   @keyframes blink {
     0% {
       color: red;
@@ -67,8 +68,8 @@
     span {
       cursor: pointer;
       display: block;
-      font-size: var(--chotto-button-icon-size);
-      color: var(--chotto-button-color-active);
+      font-size: 21px;
+      color: var(--neutral-600);
     }
   }
 
@@ -84,7 +85,7 @@
   &__button-disabled {
     cursor: auto;
     span {
-      color: var(--chotto-button-color-disabled);
+      color: var(--neutral-200);
     }
   }
 
