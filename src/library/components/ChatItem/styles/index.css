@@ -1,0 +1,278 @@
+/* ChatItem Component Styles */
+
+/* Import themes */
+@import './themes/default.css';
+@import './themes/dark.css';
+@import './themes/green.css';
+
+/* ChatItem Component Styles */
+.chat-item {
+  &__container {
+    grid-row: 1;
+    grid-column: 1 / 2;
+    display: flex;
+    position: relative;
+    padding: var(--chat-item-padding-container);
+    cursor: pointer;
+    background: var(--chat-item-background);
+    border-radius: var(--chat-item-border-radius);
+    border: var(--chat-item-border);
+  }
+
+  &__selected {
+    cursor: pointer;
+    border-radius: var(--chat-item-border-radius);
+    background: var(--chat-item-background-selected);
+
+    .chat-item__menu-button {
+      background: var(--chat-item-background-selected);
+    }
+  }
+
+  &__avatar-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    object-fit: cover;
+    margin-right: var(--chat-item-avatar-margin-right);
+    background-color: var(--chat-item-avatar-background);
+    min-width: var(--chat-item-avatar-size);
+    min-height: var(--chat-item-avatar-size);
+    border-radius: var(--chotto-avatar-border-radius);
+
+    span {
+      font-size: var(--chotto-avatar-medium-icon-size);
+      color: var(--chat-item-avatar-icon-color);
+    }
+
+    img {
+      border-radius: var(--chotto-avatar-border-radius);
+      object-fit: cover;
+    }
+  }
+
+  &__status-user {
+    position: absolute;
+    bottom: 0;
+    right: var(--chat-item-status-indicator-position);
+    display: block;
+    width: var(--chat-item-status-indicator-size);
+    height: var(--chat-item-status-indicator-size);
+    border-radius: 50%;
+    background-color: transparent;
+    z-index: 1;
+  }
+
+  &__info-container {
+    flex-grow: 1;
+    align-self: flex-start;
+    margin-right: var(--chat-item-info-margin-right);
+    overflow: hidden;
+  }
+
+  &__name {
+    margin-bottom: var(--chat-item-name-margin-bottom);
+    font-size: var(--chotto-title-font-size);
+    font-weight: var(--chotto-title-font-weight);
+    color: var(--chat-item-name-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  &__last-message {
+    font-size: var(--chotto-text-font-size);
+    color: var(--chat-item-message-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  &__details-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    
+    span {
+      color: var(--chat-item-actions-color);
+    }
+  }
+
+  &__actions-trigger {
+    display: block;
+    cursor: pointer;
+    font-size: var(--chotto-button-icon-size);
+    color: var(--chat-item-actions-color);
+  }
+
+  &__actions-trigger:hover {
+    color: var(--chat-item-actions-hover-color);
+  }
+
+  &__menu-button {
+    order: 0;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+
+    span {
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      font-size: 18px;
+      transition: 0.2s;
+    }
+
+    &:hover span {
+      color: var(--chat-item-actions-hover-color);
+      transition: 0.2s;
+    }
+  }
+
+  &__unread {
+    order: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-top: auto;
+    min-width: var(--chat-item-unread-min-size);
+    min-height: var(--chat-item-unread-min-size);
+    font-size: var(--chotto-additional-text-font-size);
+    color: var(--chat-item-unread-text-color);
+    background-color: var(--chat-item-unread-background);
+  }
+
+  &__time {
+    font-size: var(--chotto-additional-text-font-size);
+    color: var(--chat-item-time-color);
+    white-space: nowrap;
+  }
+
+  &__context-menu {
+    position: absolute;
+    top: 40%;
+    right: 0;
+  }
+
+  &__status-chat-container {
+    display: flex;
+    align-items: center;
+    column-gap: var(--chat-item-details-gap);
+    margin-top: auto;
+  }
+
+  &__status-message {
+    display: flex;
+
+    span {
+      color: var(--chat-item-status-received-color);
+      font-size: var(--chotto-text-font-size);
+    }
+  }
+
+  &__dialog-buttons {
+    display: flex;
+    margin-left: 8px;
+  }
+}
+
+.dialog {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    gap: var(--chat-item-dialog-gap);
+    padding: var(--chat-item-dialog-padding);
+  }
+
+  &__icon {
+    margin: auto;
+  }
+
+  &__item {
+    display: flex;
+    padding: var(--chat-item-dialog-item-padding);
+  }
+
+  &__selected {
+    cursor: pointer;
+    border-radius: var(--chat-item-border-radius);
+    background: var(--chat-item-dialog-background-selected);
+  }
+
+  &__text-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--chotto-text-font-size);
+    color: var(--chat-item-dialog-text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    padding: var(--chat-item-dialog-text-padding);
+    margin: auto;
+  }
+
+  &__name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  &__time {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: var(--chat-item-dialog-time-color);
+    font-size: var(--chotto-additional-text-font-size);
+  }
+}
+
+.status--received span {
+  color: var(--chat-item-status-received-color);
+}
+
+.status--read span {
+  color: var(--chat-item-status-read-color);
+}
+
+.status--received span:first-child,
+.status--read span:first-child {
+  margin-right: -8px;
+}
+
+.text-enter-active,
+.text-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.text-enter-from,
+.text-leave-to {
+  opacity: 0;
+}
+
+.menu-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.menu-enter-from,
+.menu-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
