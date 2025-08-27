@@ -1,0 +1,57 @@
+[data-theme="dark"] {
+  /* ChatItem Layout */
+  --chat-item-padding-container: 10px 20px 10px 15px;
+  --chat-item-dialog-padding: 5px 0 0 75px;
+  --chat-item-border-radius: 4px;
+  
+  /* ChatItem Avatar */
+  --chat-item-avatar-size: 48px;
+  --chat-item-avatar-margin-right: 15px;
+  --chat-item-status-indicator-size: 10px;
+  --chat-item-status-indicator-position: 5px;
+  
+  /* ChatItem Info */
+  --chat-item-info-margin-right: 15px;
+  --chat-item-name-margin-bottom: 8px;
+  
+  /* ChatItem Details */
+  --chat-item-details-gap: 4px;
+  --chat-item-unread-min-size: 25px;
+  
+  /* ChatItem Dialog */
+  --chat-item-dialog-gap: 5px;
+  --chat-item-dialog-item-padding: 3px;
+  --chat-item-dialog-text-padding: 0 5px;
+  
+  /* ChatItem Colors - Темная палитра */
+  --chat-item-background: var(--neutral-800);
+  --chat-item-background-selected: var(--neutral-700);
+  --chat-item-border: 1px solid var(--neutral-600);
+  
+  /* ChatItem Text Colors */
+  --chat-item-name-color: var(--neutral-100);
+  --chat-item-message-color: var(--neutral-300);
+  --chat-item-time-color: var(--neutral-400);
+  
+  /* ChatItem Avatar */
+  --chat-item-avatar-background: var(--neutral-600);
+  --chat-item-avatar-icon-color: var(--neutral-400);
+  
+  /* ChatItem Status */
+  --chat-item-status-received-color: var(--neutral-500);
+  --chat-item-status-read-color: var(--emerald-400);
+  
+  /* ChatItem Unread */
+  --chat-item-unread-background: var(--emerald-500);
+  --chat-item-unread-text-color: var(--neutral-900);
+  
+  /* ChatItem Actions */
+  --chat-item-actions-color: var(--neutral-300);
+  --chat-item-actions-hover-color: var(--neutral-100);
+  
+  /* ChatItem Dialog */
+  --chat-item-dialog-background: var(--neutral-800);
+  --chat-item-dialog-background-selected: var(--neutral-700);
+  --chat-item-dialog-text-color: var(--neutral-100);
+  --chat-item-dialog-time-color: var(--neutral-400);
+}
