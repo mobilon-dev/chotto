@@ -38,6 +38,7 @@
         ref="keyboardRef"
         class="message-feed__keyboard"
         :keyboard="objects[objects.length - 1].keyboard!"
+        :align="keyboardAlign"
         @action="keyboardAction"
       />
     </Transition>
@@ -141,6 +142,11 @@ const props = defineProps({
   applyStyle: {
     type: Function,
     default: () => {return null}
+  },
+  keyboardAlign: {
+    type: String as () => 'left' | 'center' | 'right',
+    default: 'right',
+    validator: (value: string) => ['left', 'center', 'right'].includes(value)
   }
 });
 
@@ -397,11 +403,9 @@ watch(
 
   &__keyboard {
     position: sticky;
-    z-index: 100;
     bottom: 0;
     max-width: 25rem;
     width: fit-content;
-    margin-left: auto;
   }
 
   &__icon-down {
