@@ -1,14 +1,18 @@
+import borisImage from '../data/images/image.png';
+import vasiliyImage from '../data/images/image34.png';
+import radijImage from '../data/images/image35.png';
+
 export const sidebarItems = [
   {
     itemId: 'itemId0',
-    icon: 'https://placehold.jp/30/dd6699/ffffff/64x64.png?text=SD',
+    icon: vasiliyImage,
     name: 'Василий Петрович',
     notificationCount: 100,
     selected: false,
   },
   {
     itemId: 'itemId1',
-    icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN',
+    icon: radijImage,
     name: 'Радий Юсупович',
     notificationCount: 10,
     notificationColor: '#FF0000',
@@ -20,7 +24,7 @@ export const sidebarItems = [
     name: 'Виталий',
     notificationCount: 7,
     notificationColor: '#FF0000',
-    selected: true,
+    selected: false,
   },
   {
     itemId: 'itemId3',
@@ -31,11 +35,11 @@ export const sidebarItems = [
   },
   {
     itemId: 'itemId4',
-    icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN',
+    icon: borisImage,
     name: 'Борис',
     isFixedBottom: true,
     notificationCount: 99,
     notificationColor: '#00FF00',
-    selected: false,
+    selected: true,
   },
 ];

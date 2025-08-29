@@ -1,0 +1,29 @@
+[data-theme="mobilon1"] {
+
+  --chotto-message-right-bg: var(--emerald-100);
+  --chotto-message-right-secondary-bg: var(--emerald-200);
+  --chotto-message-left-bg: var(--neutral-200);
+  --chotto-message-left-secondary-bg: var(--neutral-300);
+  
+  --chotto-message-accent-line-color: var(--emerald-400);
+  --chotto-message-focused-color: #8df392;
+
+  --chotto-message-margin: 0 0 8px 0;
+
+  --chotto-message-type-icon-bg-color: var(--neutral-400);
+  --chotto-message-type-icon-color: var(--neutral-100);
+
+  --chotto-message-popup-info-bg-color: rgb(0 0 0 / 39%);
+  --chotto-message-popup-info-color: var(--default-white);
+
+  /* Audio Message */
+  --chotto-audio-message-transcript-delimiter-color: var(--neutral-400);
+  --chotto-audio-message-pbc-background-color: var(--neutral-400);
+  --chotto-audio-message-pb-background-color: var(--emerald-500);
+
+  /* Call Message */
+  --chotto-call-message-phone-icon-missed-color: var(--p-red-500);
+
+  /* System Message */
+  --chotto-system-message-bg-color: #ffeecc;
+}

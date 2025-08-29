@@ -13,7 +13,7 @@
           />
           <ThemeMode
             :themes="themes"
-            :show="true"
+            :show="false"
             @selected-theme="setTheme"
           />
         </template>
@@ -24,14 +24,14 @@
             ref="refChatList"
             :chats="chatsStore.chats"
             filter-enabled
-            :title-enabled="false"
+            :title-enabled="true"
             @select="selectChat"
             @expand="expandChat"
             @action="chatAction"
             @load-more-chats="loadMoreChats"
           >
             <template #actions>
-              <h2>Чаты</h2>
+              <!-- <h2>Чаты</h2> -->
             </template>
           </ChatList>
           <FeedSearch 
@@ -84,14 +84,16 @@
                         class="chat-info__button-panel"
                         @click="isOpenChatPanel = !isOpenChatPanel"
                       >
-                        <span class="pi pi-info-circle" />
+                        <span class="">
+                          <MenuIcon />
+                        </span>
                       </button>
-                      <button
+                      <!-- <button
                         class="chat-info__button-panel"
                         @click="handleOpenSearchPanel"
                       >
                         <span class="pi pi-search" />
-                      </button>
+                      </button> -->
                     </div>
                   </template>
                 </ChatInfo>
@@ -148,22 +150,22 @@
                   :focus-on-input-area="inputFocus"
                 >
                   <template #inline-buttons>
-                    <ButtonCommandsSelector
+                    <!-- <ButtonCommandsSelector
                       :mode="'hover'"
                       :commands="commands"
                       @send="addMessage"
-                    />
+                    /> -->
                     <FileUploader
                       :filebump-url="filebumpUrl"
-                    />
-                    <ButtonEmojiPicker
-                      :mode="'hover'"
                     />
                     <ButtonTemplateSelector
                       :templates="templates"
                       :group-templates="groupTemplates"
                       :mode="'click'"
                       :elevated-window="false"
+                    />
+                    <ButtonEmojiPicker
+                      :mode="'hover'"
                     />
                   </template>
                   <!--template #buttons>
@@ -235,6 +237,7 @@
 import { onMounted, ref, computed, unref } from "vue";
 // import { nextTick } from "vue";
 import moment from 'moment';
+import MenuIcon from "./library/icons/MenuIcon.vue"
 
 import {
   ChatInfo,
@@ -313,11 +316,11 @@ const themes = [
     code: "light",
     name: "Light",
   },
-  /*{
+  {
     code: "mobilon1",
     name: "mobilon1",
     default: true,
-  },*/
+  },
   {
     code: "dark",
     name: "Dark",
@@ -745,4 +748,23 @@ onMounted(() => {
   --chotto-chat-input-icon-color: #25D366;
 }
 
+.chat-info__button-panel {
+  background: none;
+  border: none;
+  padding: 5px;
+  margin-right: 16px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+
+  &:hover {
+    background-color: var(--neutral-125);
+    box-shadow: 0 0 0 6px var(--neutral-125);
+  }
+}
 </style>

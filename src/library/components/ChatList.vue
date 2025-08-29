@@ -21,6 +21,11 @@
       @update="getFilter"
     />
 
+    <ChatTabs
+      :tabs="dialogTabs"
+      @tab-click="handleTabClick"
+    />
+
     <div 
       ref="refChatList"
       class="chat-list__items"
@@ -81,6 +86,7 @@ import { ref, unref, watch, nextTick } from 'vue';
 import { ChatItem, ChatFilter } from "./";
 // import { ContextMenu } from "./";
 import { t } from '../../locale/useLocale';
+import ChatTabs from '@/library/components/ChatTabs.vue';
 
 // Define props
 const props = defineProps({
@@ -236,6 +242,18 @@ const getFilter = (value) => {
 }
 
 const action = (data) => emit('action', data);
+
+const dialogTabs = ref([
+  { id: 'all', label: 'Все', count: 2, active: true },
+  { id: 'deal', label: 'По сделке', count: 3, active: false },
+  { id: 'rejected', label: 'Непринятые', count: 1, active: false },
+]);
+
+const handleTabClick = (tabId) => {
+  dialogTabs.value.forEach(tab => {
+    tab.active = tab.id === tabId;
+  });
+};
 </script>
 
 <style
@@ -295,8 +313,10 @@ const action = (data) => emit('action', data);
   }
 
   &__title {
+    font-family: var(--chotto-header-font, var(--chotto-container-font-family));
     font-size: var(--chotto-header-font-size);
     font-weight: var(--chotto-header-font-weight);
+    color: var(--chotto-header-font-color, var(--chotto-primary-text-color));
   }
 
   &__title-container {

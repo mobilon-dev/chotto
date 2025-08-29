@@ -35,7 +35,9 @@
       :class="{ 'chat-input__button-disabled': disabledSendButton }"
       @click="sendMessage"
     >
-      <span class="pi pi-send" />
+      <span class="">
+        <WhatsAppSendIcon />
+      </span>
     </button>
 
     <div class="chat-input__third-line">
@@ -50,6 +52,7 @@ import { useMessage } from '../../helpers/useMessage';
 import { t } from '../../locale/useLocale';
 import { IFilePreview, IInputMessage } from '../../types';
 import useImmediateDebouncedRef from '../../helpers/useImmediateDebouncedRef';
+import WhatsAppSendIcon from '../icons/WhatsAppSendIcon.vue';
 
 const emit = defineEmits(['send','typing']);
 
@@ -106,19 +109,33 @@ watch(
 watch(
   () => getMessage().text,
   () => {
-    nextTick(function () {
-      typing.value = getMessage().text
-      if (refInput.value){
-        refInput.value.style.height = 'auto'
-        refInput.value.style.height = refInput.value.scrollHeight + 'px'
-        if (getMessage().text.length == 0){
-          refInput.value.style.height = '40px'
-        }
+    nextTick(() => {
+      const el = refInput.value;
+      if (!el) return;
+
+      const scrollTop = el.scrollTop;
+      el.style.height = 'auto';
+
+      const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+      const maxHeight = lineHeight * 11;
+      const scrollHeight = el.scrollHeight;
+
+      if (!getMessage().text.trim()) {
+        el.style.height = '40px';
+        el.style.overflowY = 'hidden';
       }
-      
-    })
+      else if (scrollHeight <= maxHeight) {
+        el.style.height = scrollHeight + 'px';
+        el.style.overflowY = 'hidden';
+      }
+      else {
+        el.style.height = maxHeight + 'px';
+        el.style.overflowY = 'auto';
+        el.scrollTop = scrollTop;
+      }
+    });
   },
-  {immediate: true}
+  { immediate: true }
 );
 
 watch(
@@ -137,7 +154,7 @@ const sendTyping = (event: Event) => {
 }
 
 const keyEnter = (event: KeyboardEvent) => {
-  if (event.ctrlKey) {
+  if (event.shiftKey) {
     if (refInput.value instanceof HTMLTextAreaElement){
       let caret = refInput.value.selectionStart;
       if (caret){
@@ -145,6 +162,17 @@ const keyEnter = (event: KeyboardEvent) => {
         setMessageText(refInput.value.value)
       }
     }
+    event.preventDefault();
+  }
+  else if (event.ctrlKey) {
+    if (refInput.value instanceof HTMLTextAreaElement){
+      let caret = refInput.value.selectionStart;
+      if (caret){
+        refInput.value.setRangeText("\n", caret, caret, "end");
+        setMessageText(refInput.value.value)
+      }
+    }
+    event.preventDefault();
   }
   else {
     event.preventDefault()
@@ -196,10 +224,10 @@ const sendMessage = () => {
     position: relative;
     display: grid;
     align-items: center;
-    border-top: var(--chotto-input-border);
+    border-top: var(--chotto-input-container-border-top, var(--chotto-input-border));
     background-color: var(--chotto-chat-input-container-bg);
-    padding: 5px;
-    grid-gap: 5px;
+    padding: var(--chotto-input-container-padding, 5px);
+    grid-gap: var(--chotto-input-container-grid-gap, 5px);
     grid-template-columns: min-content auto min-content;
     grid-template-rows: auto auto auto auto;
   }
@@ -228,14 +256,17 @@ const sendMessage = () => {
     grid-column: 2;
     border: var(--chotto-input-border);
     background-color: var(--chotto-input-background);
-    padding: var(--chotto-input-padding);
+    padding: var(--chotto-input-message-padding, var(--chotto-input-padding));
     color: var(--chotto-primary-text-color);
-    font-size: var(--chotto-input-font-size);
+    font-size: var(--chotto-input-message-font-size, var(--chotto-input-font-size));
     overflow-y: hidden;
     resize: none;
     white-space: pre-wrap;
-    max-height: 140px;
-    border-radius: var(--chotto-input-border-radius);
+    line-height: 1.4;
+    min-height: 40px;
+    max-height: calc(1.5em * 10);
+    border-radius: var(--chotto-input-message-border-radius, var(--chotto-input-border-radius));
+    font-family: var(--chotto-container-font-family);
 
     &:focus-visible {
       outline: none;
@@ -243,6 +274,20 @@ const sendMessage = () => {
 
     &::placeholder {
       color: var(--chotto-secondary-text-color);
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: var(--chotto-scrollbar-bg);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: var(--chotto-scrollbar-thumb-bg);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
     }
   }
 
@@ -259,13 +304,18 @@ const sendMessage = () => {
     border: 0px;
     height: fit-content;
     width: fit-content;
-    margin: auto 0;
+    display: flex;
+    align-self: end;
+    margin-bottom: 4px;
+
     span {
       display: block;
       cursor: pointer;
       padding: var(--chotto-chat-input-button-padding);
       font-size: var(--chotto-button-icon-size);
       color: var(--chotto-chat-input-icon-color);
+      height: var(--chotto-input-message-send-button-height, auto);
+      margin: var(--chotto-chat-input-button-margin, 0);
     }
   }
 
@@ -281,6 +331,10 @@ const sendMessage = () => {
     margin: auto 0;
     grid-row: 3;
     grid-column: 1;
+    margin: var(--chotto-input-container-inline-buttons-margin, 0);
+    gap: var(--chotto-input-container-inline-buttons-gap, 0);
+    height: var(--chotto-input-container-inline-buttons-height, auto);
+    align-self: flex-end;
   }
 }
 

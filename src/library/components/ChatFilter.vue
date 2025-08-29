@@ -1,6 +1,8 @@
 <template>
   <div class="chat-filter__container">
-    <span class="pi pi-search chat-filter__icon" />
+    <div class="chat-filter__icon">
+      <SearchIcon />
+    </div>
     <input
       ref="refInput"
       class="chat-filter__input"
@@ -14,6 +16,7 @@
 <script setup>
 import { ref, unref } from 'vue';
 import { t } from '../../locale/useLocale';
+import SearchIcon from '../icons/SearchIcon.vue';
 const refInput = ref('');
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,7 +50,7 @@ const update = () => {
 
   &__icon{
     position: absolute;
-    left: 15px;
+    left: 14px;
     top: 25%;
     color: var(--chotto-secondary-text-color);
   }

@@ -1,3 +1,5 @@
+import tatianaImg from '../data/images/image1.png'
+
 export const chats = [
   {
     chatId: 1, name: "Василий ВасилийВасилийВасилий Василий",
@@ -111,9 +113,10 @@ export const chats = [
     },
   },*/
   {
-    chatId: 2, name: "Мария",
+    chatId: 2, name: "Васильева Татьяна Александровна",
+    avatar: tatianaImg,
     colorUnread: 'green',
-    lastMessage: 'Длинное сообщение сомнительного характера в контексте размещения на малой строке',
+    lastMessage: 'Лучше отправьте документы Алексею, он бухгалтер',
     countUnread: 0, isFixedTop: true,
     'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727027359',
@@ -121,6 +124,7 @@ export const chats = [
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'unpin', title: 'открепить' },
     ],
+    status: "#00b972",
     metadata: '',
     contact: {
       attributes: [
@@ -138,24 +142,24 @@ export const chats = [
         },
       ],
     },
-    commands: [
-      {
-        action: 'start',
-        title: '/start',
-        description: 'начать работу с чатботом'
-      },
-      {
-        action: 'info',
-        title: '/info',
-        description: 'информация о чатботе'
-      }
-    ]
+    // commands: [
+    //   {
+    //     action: 'start',
+    //     title: '/start',
+    //     description: 'начать работу с чатботом'
+    //   },
+    //   {
+    //     action: 'info',
+    //     title: '/info',
+    //     description: 'информация о чатботе'
+    //   }
+    // ]
   },
   {
     chatId: 3, name: "Анна",
     countUnread: 0, isFixedBottom: true,
     lastMessage: 'text',
-    'lastMessage.status': 'se',
+    'lastMessage.status': 'sent',
     'lastActivity.timestamp': '1727027359',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'unpin', title: 'открепить' },
@@ -192,6 +196,7 @@ export const chats = [
     chatId: 7, name: "Василий 2",
     countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727021159',
+    'lastMessage.status': 'received',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },
     ],
@@ -211,6 +216,7 @@ export const chats = [
     chatId: 9, name: "Василий",
     countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727021159',
+    'lastMessage.status': 'read',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },
     ],

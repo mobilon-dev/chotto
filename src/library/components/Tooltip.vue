@@ -95,7 +95,7 @@ const hideTooltip = () => {
   color: var(--chotto-tooltip-text-color);
   text-align: center;
   padding: 7px;
-  border-radius: 2px;
+  border-radius: 8px;
   background: var(--chotto-tooltip-bg-color);
   top: 0;
   left: 0;

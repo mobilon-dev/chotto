@@ -5,7 +5,7 @@
   <div v-else-if="uploadStatus === 'error'">
     <p>Ошибка при загрузке файла.</p>
   </div>
-  <ButtonContextMenu
+  <!-- <ButtonContextMenu
     v-else-if="!getMessage().isRecording"
     :actions="actions"
     :mode="'hover'"
@@ -13,12 +13,17 @@
     :disabled="!canUploadFile || state == 'disabled'"
     @click="triggerFileUpload"
     @button-click="triggerFileUploadDefault"
+  > -->
+  <span 
+    class="file-uploader__trigger"
+    :class="{'file-uploader__disabled' : !canUploadFile || state == 'disabled'}"
+    :disabled="!canUploadFile || state == 'disabled'"
+    @click="triggerFileUpload"
+    @button-click="triggerFileUploadDefault"
   >
-    <span 
-      class="pi pi-file-arrow-up file-uploader__trigger"
-      :class="{'file-uploader__disabled' : !canUploadFile || state == 'disabled'}"
-    />
-  </ButtonContextMenu>
+    <FileUploaderIcon />
+  </span>
+  <!-- </ButtonContextMenu> -->
   <input
     ref="fileInput"
     style="display: none;"
@@ -39,11 +44,12 @@
 
 <script setup lang="ts">
 import { ref, computed, inject, onMounted } from "vue";
-import ButtonContextMenu from "./ButtonContextMenu.vue";
+// import ButtonContextMenu from "./ButtonContextMenu.vue";
 import FilePreview from "./FilePreview.vue";
 import { useMessage } from "../../helpers/useMessage";
 import { uploadFile } from "../../helpers/uploadFile";
 import { IFilePreview } from "../../types";
+import FileUploaderIcon from "../icons/FileUploaderIcon.vue";
 
 const props = defineProps({
   filebumpUrl: {
@@ -63,28 +69,28 @@ const fileInfo = ref<IFilePreview>()
 const chatAppId = inject('chatAppId')
 const { setMessageFile, resetMessageFile, getMessage, setRecordingMessage } = useMessage(chatAppId as string)
 
-const actions = [
-  {
-    action: 'audio/*',
-    title: 'Аудио',
-    prime: 'headphones',
-  },
-  {
-    action: 'image/*',
-    title: 'Фото',
-    prime: 'image',
-  },
-  {
-    action: 'video/*',
-    title: 'Видео',
-    prime: 'video',
-  },
-  {
-    action: '',
-    title: 'Файл',
-    prime: 'file',
-  },
-]
+// const actions = [
+//   {
+//     action: 'audio/*',
+//     title: 'Аудио',
+//     prime: 'headphones',
+//   },
+//   {
+//     action: 'image/*',
+//     title: 'Фото',
+//     prime: 'image',
+//   },
+//   {
+//     action: 'video/*',
+//     title: 'Видео',
+//     prime: 'video',
+//   },
+//   {
+//     action: '',
+//     title: 'Файл',
+//     prime: 'file',
+//   },
+// ]
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const emit = defineEmits(["fileUploaded"]);

@@ -13,13 +13,15 @@
         <img
           v-if="props.chat.avatar"
           :src="props.chat.avatar"
-          width="48"
-          height="48"
+          width="40"
+          height="40"
         >
         <span
           v-else
-          class="pi pi-user"
-        />
+          class=""
+        >
+          <AvatarIcon :size="40" />
+        </span>
       </div>
       <div class="chat-info__info-container">
         <span class="chat-info__title">
@@ -56,6 +58,7 @@
 
 <script setup>
 import { inject, computed } from 'vue';
+import AvatarIcon from '../icons/AvatarIcon.vue';
 // Define props
 const props = defineProps({
   chat: {
@@ -118,20 +121,19 @@ const chatDescription = computed(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--chotto-avatar-background-color);
-    width: var(--chotto-avatar-small);
-    height: var(--chotto-avatar-small);
     border-radius: var(--chotto-avatar-border-radius);
     background-size: cover;
 
     span {
-      font-size: var(--chotto-avatar-small-icon-size);
       color: var(--chotto-avatar-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     img {
-      width: var(--chotto-avatar-small);
-      height: var(--chotto-avatar-small);
+      width: var(--chotto-chat-avatar-small, var(--chotto-avatar-small));
+      height: var(--chotto-chat-avatar-small, var(--chotto-avatar-small));
       border-radius: var(--chotto-avatar-border-radius);
       object-fit: cover;
     }

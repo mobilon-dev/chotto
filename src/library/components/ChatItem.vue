@@ -18,10 +18,12 @@
           height="48"
           width="48"
         >
-        <span
+        <div
           v-else
-          class="pi pi-user"
-        />
+          class="chat-item__avatar-placeholder"
+        >
+          <AvatarIcon />
+        </div>
       </div>
 
       <div class="chat-item__info-container">
@@ -57,7 +59,6 @@
         <div
           v-if="chat.countUnread > 0"
           class="chat-item__unread"
-          :style="{backgroundColor: chat.colorUnread ? chat.colorUnread : null}"
         >
           {{ chat.countUnread > 99 ? '99+' : chat.countUnread }}
         </div>
@@ -174,6 +175,7 @@ import { getStatus, statuses } from "../../helpers";
 import { t } from '../../locale/useLocale'
 import Tooltip from './Tooltip.vue';
 import ButtonContextMenu from './ButtonContextMenu.vue';
+import AvatarIcon from '../icons/AvatarIcon.vue';
 
 const props = defineProps({
   chat: {
@@ -283,7 +285,22 @@ const onMouseLeave = (event) => {
     position: relative;
     padding: var(--chotto-chat-item-padding-container);
     cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      transform: translateX(15%);
+      width: var(--chotto-chat-list-container-border-bottom-width, 416px);
+      height: var(--chotto-chat-list-container-border-bottom-height, 1px);
+      background-color: var(--chotto-chat-list-container-border-bottom-color, #F3F3F3);
+    }
+
+    &:hover {
+      background-color: var(--chotto-item-background-color-hover, #F6F6F6);
+    }
   }
+
 
   &__selected {
     cursor: pointer;
@@ -303,7 +320,7 @@ const onMouseLeave = (event) => {
     align-self: center;
     object-fit: cover;
     margin-right: 15px;
-    background-color: var(--chotto-avatar-background-color);
+    /* background-color: var(--chotto-avatar-background-color); */
     min-width: var(--chotto-avatar-medium);
     min-height: var(--chotto-avatar-medium);
     border-radius: var(--chotto-avatar-border-radius);
@@ -317,6 +334,11 @@ const onMouseLeave = (event) => {
       border-radius: var(--chotto-avatar-border-radius);
       object-fit: cover;
     }
+  }
+
+  &__avatar-placeholder {
+    width: 48px;
+    height: 48px;
   }
 
   &__status-user {
@@ -339,7 +361,8 @@ const onMouseLeave = (event) => {
   }
 
   &__name {
-    margin-bottom: 8px;
+    margin-top: var(--chotto-chat-item-name-margin-top, 0);
+    margin-bottom: var(--chotto-chat-item-name-margin-bottom, 8px);
     font-size: var(--chotto-title-font-size);
     font-weight: var(--chotto-title-font-weight);
     overflow: hidden;
@@ -412,14 +435,17 @@ const onMouseLeave = (event) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    border-radius: var(--chotto-unread-border-radius, 50%);
     margin-left: auto;
     margin-top: auto;
-    min-width: 25px;
-    min-height: 25px;
+    min-width: var(--chotto-unread-min-width, 25px);
+    min-height: var(--chotto-unread-min-height, 25px);
+    max-height: 20px;
     font-size: var(--chotto-additional-text-font-size);
+    font-weight: var(--chotto-unread-font-weight, 400);
     color: var(--chotto-unread-text-color);
     background-color: var(--chotto-unread-background-color);
+    padding: 0 6px;
   }
 
   &__time {

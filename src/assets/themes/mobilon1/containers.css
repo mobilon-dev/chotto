@@ -1,0 +1,17 @@
+[data-theme="mobilon1"] {
+
+  /* General */
+
+  /* Float Container */
+  --chotto-float-container-border-radius-header: 15px;
+  --chotto-float-container-box-shadow: 0px 0px 20px -7px rgba(0, 0, 0, 0.2);
+  --chotto-float-container-bg-header: var(--neutral-300);
+  
+  /* Modal Container */
+
+  --chotto-modal-padding: 20px;
+  --chotto-modal-border-radius: 12px;
+  --chotto-modal-mask-background: rgba(0, 0, 0, 0.4);
+  --chotto-modal-overlay-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --chotto-modal-bg: var(--default-white);
+}
