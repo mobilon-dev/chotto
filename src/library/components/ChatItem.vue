@@ -218,8 +218,12 @@ const clickAction = (action) => {
 
 
 const getSortedDialogs = () => {
-  return props.chat.dialogs
-    .toSorted((a, b) => {
+  if (!props.chat || !props.chat.dialogs || !Array.isArray(props.chat.dialogs)) {
+    return [];
+  }
+  
+  return [...props.chat.dialogs]
+    .sort((a, b) => {
       if (Number(a['lastActivity.timestamp']) > Number(b['lastActivity.timestamp'])) return -1;
       if (Number(a['lastActivity.timestamp']) < Number(b['lastActivity.timestamp'])) return 1;
       if (Number(a['lastActivity.timestamp']) == Number(b['lastActivity.timestamp'])) return 0;

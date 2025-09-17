@@ -182,9 +182,13 @@ const expandChat = (args) => {
 
 // Define method
 const selectChat = (args) => {
+  if (!props.chats || !Array.isArray(props.chats)) {
+    return;
+  }
+  
   props.chats.forEach(c => {
     c.isSelected = false
-    if (c.dialogs) 
+    if (c.dialogs && Array.isArray(c.dialogs)) 
       c.dialogs.forEach(d => {
         d.isSelected = false
       })
@@ -193,14 +197,20 @@ const selectChat = (args) => {
     selectDialog(args.dialog)
   }
   const c = props.chats.find(c => c.chatId === args.chat.chatId);
-  c.isSelected = true;
+  if (c) {
+    c.isSelected = true;
+  }
   emit('select', args);
 };
 
 const selectDialog = (dialog) => {
+  if (!props.chats || !Array.isArray(props.chats)) {
+    return;
+  }
+  
   props.chats.forEach(c => {
     c.isSelected = false
-    if (c.dialogs) 
+    if (c.dialogs && Array.isArray(c.dialogs)) 
       c.dialogs.forEach(d => {
         d.isSelected = false
         if (d.dialogId == dialog.dialogId)
@@ -210,24 +220,28 @@ const selectDialog = (dialog) => {
 }
 
 const getSortedAndFilteredChats = () => {
-  return props.chats
-    .toSorted((a, b) => {
+  if (!props.chats || !Array.isArray(props.chats)) {
+    return [];
+  }
+  
+  return [...props.chats]
+    .sort((a, b) => {
       if (Number(a['lastActivity.timestamp']) > Number(b['lastActivity.timestamp'])) return -1;
       if (Number(a['lastActivity.timestamp']) < Number(b['lastActivity.timestamp'])) return 1;
       if (Number(a['lastActivity.timestamp']) == Number(b['lastActivity.timestamp'])) return 0;
     })
-    .toSorted((a, b) => {   // immutable sort
+    .sort((a, b) => {   // immutable sort
       if (a.countUnread > b.countUnread) return -1;
       if (a.countUnread < b.countUnread) return 1;
       if (a.countUnread == b.countUnread) return 0;
     })
     .filter(c => {
       if (!props.filterQuery)
-        return c.name.includes(filter.value) ||
-          c.metadata.includes(filter.value);
+        return c.name && c.name.includes(filter.value) ||
+          c.metadata && c.metadata.includes(filter.value);
       else 
-        return c.name.includes(props.filterQuery) ||
-          c.metadata.includes(props.filterQuery);
+        return c.name && c.name.includes(props.filterQuery) ||
+          c.metadata && c.metadata.includes(props.filterQuery);
     });
 }
 
