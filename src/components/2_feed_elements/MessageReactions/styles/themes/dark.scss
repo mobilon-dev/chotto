@@ -1,0 +1,148 @@
+[data-theme="dark"] {
+  // MessageReactions base variables
+  --chotto-messagereactions-display: inline-flex;
+  --chotto-messagereactions-align-items: center;
+  --chotto-messagereactions-gap: 6px;
+  --chotto-messagereactions-position: relative;
+  --chotto-messagereactions-min-height: 0;
+  --chotto-messagereactions-z-index: 1;
+
+  // MessageReactions no reactions variables
+  --chotto-messagereactions-no-reactions-position: absolute;
+  --chotto-messagereactions-no-reactions-bottom: 0;
+  --chotto-messagereactions-no-reactions-height: 22px;
+  --chotto-messagereactions-no-reactions-width: 22px;
+  --chotto-messagereactions-no-reactions-overflow: visible;
+  --chotto-messagereactions-no-reactions-min-height: 0;
+  --chotto-messagereactions-no-reactions-margin: 0;
+  --chotto-messagereactions-no-reactions-padding: 0;
+  --chotto-messagereactions-no-reactions-z-index: 1000;
+
+  // MessageReactions left no reactions variables
+  --chotto-messagereactions-left-no-reactions-right: -30px;
+  --chotto-messagereactions-left-no-reactions-left: auto;
+
+  // MessageReactions right no reactions variables
+  --chotto-messagereactions-right-no-reactions-left: -30px;
+  --chotto-messagereactions-right-no-reactions-right: auto;
+
+  // MessageReactions chip variables
+  --chotto-messagereactions-chip-display: inline-flex;
+  --chotto-messagereactions-chip-align-items: center;
+  --chotto-messagereactions-chip-gap: 4px;
+  --chotto-messagereactions-chip-border: 1px solid rgba(255,255,255,0.15);
+  --chotto-messagereactions-chip-bg: rgba(255,255,255,0.08);
+  --chotto-messagereactions-chip-fg: inherit;
+  --chotto-messagereactions-chip-border-radius: 12px;
+  --chotto-messagereactions-chip-padding: 2px 8px;
+  --chotto-messagereactions-chip-font-size: 12px;
+  --chotto-messagereactions-chip-cursor: pointer;
+
+  // MessageReactions chip active variables
+  --chotto-messagereactions-chip-active-border: rgba(255,255,255,0.25);
+  --chotto-messagereactions-chip-active-bg: rgba(255,255,255,0.15);
+  --chotto-messagereactions-chip-active-font-weight: 600;
+
+  // MessageReactions emoji variables
+  --chotto-messagereactions-emoji-line-height: 1;
+
+  // MessageReactions count variables
+  --chotto-messagereactions-count-line-height: 1;
+
+  // MessageReactions add button variables
+  --chotto-messagereactions-add-display: inline-flex;
+  --chotto-messagereactions-add-align-items: center;
+  --chotto-messagereactions-add-justify-content: center;
+  --chotto-messagereactions-add-width: 22px;
+  --chotto-messagereactions-add-height: 22px;
+  --chotto-messagereactions-add-border-radius: 50%;
+  --chotto-messagereactions-add-border: 1px dashed rgba(255,255,255,0.2);
+  --chotto-messagereactions-add-bg: transparent;
+  --chotto-messagereactions-add-color: inherit;
+  --chotto-messagereactions-add-cursor: pointer;
+  --chotto-messagereactions-add-font-size: 14px;
+  --chotto-messagereactions-add-opacity: 0;
+  --chotto-messagereactions-add-transition: opacity 0.15s ease;
+  --chotto-messagereactions-add-pointer-events: none;
+  --chotto-messagereactions-add-position: absolute;
+  --chotto-messagereactions-add-bottom: 0;
+  --chotto-messagereactions-add-z-index: 1;
+
+  // MessageReactions add button left/right variables
+  --chotto-messagereactions-add-left-right: 0;
+  --chotto-messagereactions-add-left-left: auto;
+  --chotto-messagereactions-add-right-left: 0;
+  --chotto-messagereactions-add-right-right: auto;
+
+  // MessageReactions add button has reactions variables
+  --chotto-messagereactions-add-has-reactions-position: relative;
+  --chotto-messagereactions-add-has-reactions-bottom: auto;
+  --chotto-messagereactions-add-has-reactions-transform: none;
+
+  // MessageReactions add button has chip variables
+  --chotto-messagereactions-add-has-chip-opacity: 1;
+  --chotto-messagereactions-add-has-chip-pointer-events: auto;
+
+  // MessageReactions quick panel variables
+  --chotto-messagereactions-quick-panel-position: absolute;
+  --chotto-messagereactions-quick-panel-top: 100%;
+  --chotto-messagereactions-quick-panel-left: 0;
+  --chotto-messagereactions-quick-panel-margin-top: 6px;
+  --chotto-messagereactions-quick-panel-bg: var(--chotto-theme-secondary-color, #1e1e1e);
+  --chotto-messagereactions-quick-panel-border: 1px solid rgba(255,255,255,0.15);
+  --chotto-messagereactions-quick-panel-border-radius: 8px;
+  --chotto-messagereactions-quick-panel-box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  --chotto-messagereactions-quick-panel-padding: 6px;
+  --chotto-messagereactions-quick-panel-display: inline-flex;
+  --chotto-messagereactions-quick-panel-align-items: center;
+  --chotto-messagereactions-quick-panel-gap: 4px;
+  --chotto-messagereactions-quick-panel-z-index: 1000;
+
+  // MessageReactions quick panel right variables
+  --chotto-messagereactions-quick-panel-right-left: auto;
+  --chotto-messagereactions-quick-panel-right-right: 0;
+
+  // MessageReactions quick item variables
+  --chotto-messagereactions-quick-item-display: inline-flex;
+  --chotto-messagereactions-quick-item-align-items: center;
+  --chotto-messagereactions-quick-item-justify-content: center;
+  --chotto-messagereactions-quick-item-width: 32px;
+  --chotto-messagereactions-quick-item-height: 32px;
+  --chotto-messagereactions-quick-item-border-radius: 6px;
+  --chotto-messagereactions-quick-item-border: 1px solid transparent;
+  --chotto-messagereactions-quick-item-bg: transparent;
+  --chotto-messagereactions-quick-item-cursor: pointer;
+  --chotto-messagereactions-quick-item-font-size: 18px;
+  --chotto-messagereactions-quick-item-transition: background 0.15s ease;
+  --chotto-messagereactions-quick-item-hover-bg: rgba(255,255,255,0.1);
+
+  // MessageReactions expand button variables
+  --chotto-messagereactions-expand-display: inline-flex;
+  --chotto-messagereactions-expand-align-items: center;
+  --chotto-messagereactions-expand-justify-content: center;
+  --chotto-messagereactions-expand-width: 32px;
+  --chotto-messagereactions-expand-height: 32px;
+  --chotto-messagereactions-expand-border-radius: 6px;
+  --chotto-messagereactions-expand-border: 1px solid rgba(255,255,255,0.15);
+  --chotto-messagereactions-expand-bg: transparent;
+  --chotto-messagereactions-expand-cursor: pointer;
+  --chotto-messagereactions-expand-font-size: 16px;
+  --chotto-messagereactions-expand-color: inherit;
+  --chotto-messagereactions-expand-transition: background 0.15s ease;
+  --chotto-messagereactions-expand-hover-bg: rgba(255,255,255,0.1);
+
+  // MessageReactions expand span variables
+  --chotto-messagereactions-expand-span-line-height: 1;
+  --chotto-messagereactions-expand-span-font-weight: 600;
+
+  // MessageReactions picker variables
+  --chotto-messagereactions-picker-z-index: 1;
+  --chotto-messagereactions-picker-emoji-picker-position: relative;
+  --chotto-messagereactions-picker-emoji-picker-z-index: 1;
+
+  // MessageReactions popover transition variables
+  --chotto-messagereactions-popover-transition: opacity .15s ease, transform .15s ease;
+  --chotto-messagereactions-popover-enter-from-opacity: 0;
+  --chotto-messagereactions-popover-enter-from-transform: translateY(-4px);
+}
+

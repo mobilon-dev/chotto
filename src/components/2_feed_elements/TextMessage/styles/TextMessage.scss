@@ -234,3 +234,8 @@
   transform: var(--chotto-textmessage-v-enter-from-transform, scale(0.9));
   opacity: var(--chotto-textmessage-v-enter-from-opacity, 0);
 }
+
+.text-message:hover :deep(.message-reactions__add) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

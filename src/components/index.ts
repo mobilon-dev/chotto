@@ -61,6 +61,7 @@ export { default as FeedKeyboard } from './2_feed_elements/FeedKeyboard/FeedKeyb
 export { default as FileMessage } from './2_feed_elements/FileMessage/FileMessage.vue';
 export { default as ImageMessage } from './2_feed_elements/ImageMessage/ImageMessage.vue';
 export { default as MessageKeyboard } from './2_feed_elements/MessageKeyboard/MessageKeyboard.vue';
+export { default as MessageReactions } from './2_feed_elements/MessageReactions/MessageReactions.vue';
 export { default as StickerMessage } from './2_feed_elements/StickerMessage/StickerMessage.vue';
 export { default as ReplyAudioMessage } from './2_feed_elements/ReplyAudioMessage/ReplyAudioMessage.vue';
 export { default as ReplyCallMessage } from './2_feed_elements/ReplyCallMessage/ReplyCallMessage.vue';

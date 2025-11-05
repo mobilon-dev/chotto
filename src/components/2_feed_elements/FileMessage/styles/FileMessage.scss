@@ -277,3 +277,8 @@
   transform: var(--chotto-filemessage-v-enter-from-transform, scale(0.9));
   opacity: var(--chotto-filemessage-v-enter-from-opacity, 0);
 }
+
+.file-message:hover :deep(.message-reactions__add) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

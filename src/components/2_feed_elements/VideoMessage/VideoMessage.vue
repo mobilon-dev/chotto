@@ -150,6 +150,14 @@
         :class="message.position"
         :embed="message.embed"
       />
+
+      <MessageReactions
+        :reactions="message.reactions"
+        :message-id="message.messageId"
+        @toggle-reaction="onToggleReaction"
+        @add-reaction="onAddReaction"
+        @remove-reaction="onRemoveReaction"
+      />
     </div>
   </div>
   <Teleport to="body">
@@ -178,9 +186,9 @@
 >
 import { ref, computed, watch, inject } from 'vue'
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, Tooltip } from '@/components';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, Tooltip, MessageReactions } from '@/components';
 import { useMessageLinks, useMessageActions } from '@/hooks/messages';
-import { getStatus, statuses, getMessageClass, getStatusTitle } from "@/functions";
+import { getStatus, statuses, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IVideoMessage } from '@/types';
 
@@ -274,6 +282,8 @@ const videoBorderRadius = computed(() => {
 })
 
 const closeModal = () => isOpenModal.value = false
+
+const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
 
 </script>
 

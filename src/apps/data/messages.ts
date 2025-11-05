@@ -536,6 +536,11 @@ export const messages = [
       type: 'message.file',
       text: "Держи актуальный отчет.",
       filename: "Отчет_за_квартал.pdf"
+    },
+    reactions: {
+      items: [
+        { key: '🔥', count: 1, reactedByMe: true }
+      ],
     }
   },
   {
@@ -567,6 +572,14 @@ export const messages = [
     header: 'Виктор',
     subText: 'Виктор',
     avatar:'https://placehold.jp/30/336633/ffffff/64x64.png?text=VIK',
+    reactions: {
+      items: [
+        { key: '🔥', count: 1, reactedByMe: true }
+      ],
+      meta: {
+        mode: 'multi'
+      }
+    }
   },
   {
     chatId: 6,
@@ -644,6 +657,14 @@ export const messages = [
       type: 'rutube',
       url: 'https://rutube.ru/play/embed/6eb0c597c11c89ad5a5fafa3030d0e53/',
     },
+    reactions: {
+      items: [
+        { key: '🔥', count: 1, reactedByMe: true }
+      ],
+      meta: {
+        mode: 'multi'
+      }
+    }
   },
   {
     chatId: 6,
@@ -824,6 +845,14 @@ export const messages = [
     header: 'Ярослав',
     subText: 'Ярослав',
     avatar:'https://placehold.jp/30/1b97e4/ffffff/64x64.png?text=Jar',
+    reactions: {
+      items: [
+        { key: '🔥', count: 1, reactedByMe: true }
+      ],
+      meta: {
+        mode: 'multi'
+      }
+    }
   },
   {
     chatId: 6,
@@ -851,6 +880,14 @@ export const messages = [
     header: 'Анна',
     subText: 'Анна',
     avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
+    reactions: {
+      items: [
+        { key: '🔥', count: 1, reactedByMe: true }
+      ],
+      meta: {
+        mode: 'multi'
+      }
+    }
   },
   {
     chatId: 6,
@@ -866,6 +903,36 @@ export const messages = [
     header: 'Анна',
     subText: 'Анна',
     avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
+    reactions: {
+      items: [
+        { key: '🤣', count: 4 },
+        { key: '🔥', count: 1, reactedByMe: true }
+      ],
+      meta: {
+        mode: 'multi'
+      }
+    }
+  },
+  {
+    chatId: 6, 
+    dialogId: 'dlg_6_new',
+    messageId: '630',
+    type: "message.audio", 
+    url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    text: "Привет!", 
+    direction: 'outgoing', 
+    status: 'received', 
+    subText: '89829445678', 
+    timestamp: '1757497513',
+    header: 'Анна',
+    avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
+    reactions: {
+      items: [
+        { key: '👍', count: 1 },
+        { key: '❤️', count: 2 },
+        { key: '🔥', count: 3 },
+      ]
+    },
   },
 
   /**============================================================================================================ */

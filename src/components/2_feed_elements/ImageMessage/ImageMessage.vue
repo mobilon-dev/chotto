@@ -147,6 +147,14 @@
         :class="message.position"
         :embed="message.embed"
       />
+
+      <MessageReactions
+        :reactions="message.reactions"
+        :message-id="message.messageId"
+        @toggle-reaction="onToggleReaction"
+        @add-reaction="onAddReaction"
+        @remove-reaction="onRemoveReaction"
+      />
     </div>
 
 
@@ -174,9 +182,9 @@
 >
 import { ref, computed, inject } from 'vue';
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, Tooltip } from '@/components';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, Tooltip, MessageReactions } from '@/components';
 import { useMessageLinks, useMessageActions } from '@/hooks/messages';
-import { getStatus, statuses, getMessageClass, getStatusTitle } from "@/functions";
+import { getStatus, statuses, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IImageMessage } from '@/types';
 
@@ -237,6 +245,8 @@ function getClass(message: IImageMessage) {
 }
 
 const closeModal = () => isOpenModal.value = false
+
+const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
 
 </script>
 

@@ -283,3 +283,8 @@
 .modal-fade-leave-from {
   opacity: var(--chotto-imagemessage-modal-fade-enter-to-opacity, 1);
 }
+
+.image-message:hover :deep(.message-reactions__add) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

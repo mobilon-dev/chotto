@@ -308,3 +308,8 @@
 .modal-fade-leave-from {
   opacity: var(--chotto-callmessage-modal-fade-opacity-to, 1);
 }
+
+.call-message:hover :deep(.message-reactions__add) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

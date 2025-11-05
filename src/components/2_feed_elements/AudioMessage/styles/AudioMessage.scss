@@ -468,3 +468,8 @@
 .modal-fade-leave-from {
   opacity: 1;
 }
+
+.audio-message:hover :deep(.message-reactions__add) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

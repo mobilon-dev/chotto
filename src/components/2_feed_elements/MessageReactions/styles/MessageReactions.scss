@@ -1,0 +1,190 @@
+.message-reactions {
+  display: var(--chotto-messagereactions-display, inline-flex);
+  align-items: var(--chotto-messagereactions-align-items, center);
+  gap: var(--chotto-messagereactions-gap, 6px);
+  position: var(--chotto-messagereactions-position, relative);
+  min-height: var(--chotto-messagereactions-min-height, 0);
+  z-index: var(--chotto-messagereactions-z-index, 1);
+}
+
+// Когда нет реакций, компонент не занимает место в потоке
+.message-reactions:not(.has-reactions) {
+  position: var(--chotto-messagereactions-no-reactions-position, absolute);
+  bottom: var(--chotto-messagereactions-no-reactions-bottom, 0);
+  height: var(--chotto-messagereactions-no-reactions-height, 22px);
+  width: var(--chotto-messagereactions-no-reactions-width, 22px);
+  overflow: var(--chotto-messagereactions-no-reactions-overflow, visible);
+  min-height: var(--chotto-messagereactions-no-reactions-min-height, 0);
+  margin: var(--chotto-messagereactions-no-reactions-margin, 0);
+  padding: var(--chotto-messagereactions-no-reactions-padding, 0);
+  z-index: var(--chotto-messagereactions-no-reactions-z-index, 1000);
+}
+
+// Для левых сообщений без реакций - позиционируем справа от содержимого
+.message-reactions:not(.has-reactions):not(.is-right-message) {
+  right: var(--chotto-messagereactions-left-no-reactions-right, -30px);
+  left: var(--chotto-messagereactions-left-no-reactions-left, auto);
+}
+
+// Для правых сообщений без реакций - позиционируем слева от содержимого
+.message-reactions:not(.has-reactions).is-right-message {
+  left: var(--chotto-messagereactions-right-no-reactions-left, -30px);
+  right: var(--chotto-messagereactions-right-no-reactions-right, auto);
+}
+
+.message-reactions__chip {
+  display: var(--chotto-messagereactions-chip-display, inline-flex);
+  align-items: var(--chotto-messagereactions-chip-align-items, center);
+  gap: var(--chotto-messagereactions-chip-gap, 4px);
+  border: var(--chotto-messagereactions-chip-border, 1px solid rgba(0,0,0,0.1));
+  background: var(--chotto-messagereactions-chip-bg, rgba(0,0,0,0.04));
+  color: var(--chotto-messagereactions-chip-fg, inherit);
+  border-radius: var(--chotto-messagereactions-chip-border-radius, 12px);
+  padding: var(--chotto-messagereactions-chip-padding, 2px 8px);
+  font-size: var(--chotto-messagereactions-chip-font-size, 12px);
+  cursor: var(--chotto-messagereactions-chip-cursor, pointer);
+}
+
+.message-reactions__chip.is-active {
+  border-color: var(--chotto-messagereactions-chip-active-border, rgba(0,0,0,0.25));
+  background: var(--chotto-messagereactions-chip-active-bg, rgba(0,0,0,0.08));
+  font-weight: var(--chotto-messagereactions-chip-active-font-weight, 600);
+}
+
+.message-reactions__emoji {
+  line-height: var(--chotto-messagereactions-emoji-line-height, 1);
+}
+
+.message-reactions__count {
+  line-height: var(--chotto-messagereactions-count-line-height, 1);
+}
+
+.message-reactions__add {
+  display: var(--chotto-messagereactions-add-display, inline-flex);
+  align-items: var(--chotto-messagereactions-add-align-items, center);
+  justify-content: var(--chotto-messagereactions-add-justify-content, center);
+  width: var(--chotto-messagereactions-add-width, 22px);
+  height: var(--chotto-messagereactions-add-height, 22px);
+  border-radius: var(--chotto-messagereactions-add-border-radius, 50%);
+  border: var(--chotto-messagereactions-add-border, 1px dashed rgba(0,0,0,0.15));
+  background: var(--chotto-messagereactions-add-bg, transparent);
+  color: var(--chotto-messagereactions-add-color, inherit);
+  cursor: var(--chotto-messagereactions-add-cursor, pointer);
+  font-size: var(--chotto-messagereactions-add-font-size, 14px);
+  opacity: var(--chotto-messagereactions-add-opacity, 0);
+  transition: var(--chotto-messagereactions-add-transition, opacity 0.15s ease);
+  pointer-events: var(--chotto-messagereactions-add-pointer-events, none);
+  position: var(--chotto-messagereactions-add-position, absolute);
+  bottom: var(--chotto-messagereactions-add-bottom, 0);
+  z-index: var(--chotto-messagereactions-add-z-index, 1);
+}
+
+// Для левых сообщений - кнопка справа от компонента
+.message-reactions:not(.is-right-message) .message-reactions__add {
+  right: var(--chotto-messagereactions-add-left-right, 0);
+  left: var(--chotto-messagereactions-add-left-left, auto);
+}
+
+// Для правых сообщений - кнопка слева от компонента
+.message-reactions.is-right-message .message-reactions__add {
+  left: var(--chotto-messagereactions-add-right-left, 0);
+  right: var(--chotto-messagereactions-add-right-right, auto);
+}
+
+// Когда есть реакции, кнопка "+" позиционируется нормально
+.message-reactions.has-reactions .message-reactions__add {
+  position: var(--chotto-messagereactions-add-has-reactions-position, relative);
+  bottom: var(--chotto-messagereactions-add-has-reactions-bottom, auto);
+  transform: var(--chotto-messagereactions-add-has-reactions-transform, none);
+}
+
+// Кнопка "+" всегда видна, если есть реакции
+.message-reactions:has(.message-reactions__chip) .message-reactions__add {
+  opacity: var(--chotto-messagereactions-add-has-chip-opacity, 1);
+  pointer-events: var(--chotto-messagereactions-add-has-chip-pointer-events, auto);
+}
+
+.message-reactions__quick-panel {
+  position: var(--chotto-messagereactions-quick-panel-position, absolute);
+  top: var(--chotto-messagereactions-quick-panel-top, 100%);
+  left: var(--chotto-messagereactions-quick-panel-left, 0);
+  margin-top: var(--chotto-messagereactions-quick-panel-margin-top, 6px);
+  background: var(--chotto-messagereactions-quick-panel-bg, #fff);
+  border: var(--chotto-messagereactions-quick-panel-border, 1px solid rgba(0,0,0,0.1));
+  border-radius: var(--chotto-messagereactions-quick-panel-border-radius, 8px);
+  box-shadow: var(--chotto-messagereactions-quick-panel-box-shadow, 0 6px 18px rgba(0,0,0,0.12));
+  padding: var(--chotto-messagereactions-quick-panel-padding, 6px);
+  display: var(--chotto-messagereactions-quick-panel-display, inline-flex);
+  align-items: var(--chotto-messagereactions-quick-panel-align-items, center);
+  gap: var(--chotto-messagereactions-quick-panel-gap, 4px);
+  z-index: var(--chotto-messagereactions-quick-panel-z-index, 1000);
+}
+
+// Для правых сообщений - позиционируем панель справа
+.message-reactions.is-right-message .message-reactions__quick-panel {
+  left: var(--chotto-messagereactions-quick-panel-right-left, auto);
+  right: var(--chotto-messagereactions-quick-panel-right-right, 0);
+}
+
+.message-reactions__quick-item {
+  display: var(--chotto-messagereactions-quick-item-display, inline-flex);
+  align-items: var(--chotto-messagereactions-quick-item-align-items, center);
+  justify-content: var(--chotto-messagereactions-quick-item-justify-content, center);
+  width: var(--chotto-messagereactions-quick-item-width, 32px);
+  height: var(--chotto-messagereactions-quick-item-height, 32px);
+  border-radius: var(--chotto-messagereactions-quick-item-border-radius, 6px);
+  border: var(--chotto-messagereactions-quick-item-border, 1px solid transparent);
+  background: var(--chotto-messagereactions-quick-item-bg, transparent);
+  cursor: var(--chotto-messagereactions-quick-item-cursor, pointer);
+  font-size: var(--chotto-messagereactions-quick-item-font-size, 18px);
+  transition: var(--chotto-messagereactions-quick-item-transition, background 0.15s ease);
+}
+
+.message-reactions__quick-item:hover {
+  background: var(--chotto-messagereactions-quick-item-hover-bg, rgba(0,0,0,0.06));
+}
+
+.message-reactions__expand {
+  display: var(--chotto-messagereactions-expand-display, inline-flex);
+  align-items: var(--chotto-messagereactions-expand-align-items, center);
+  justify-content: var(--chotto-messagereactions-expand-justify-content, center);
+  width: var(--chotto-messagereactions-expand-width, 32px);
+  height: var(--chotto-messagereactions-expand-height, 32px);
+  border-radius: var(--chotto-messagereactions-expand-border-radius, 6px);
+  border: var(--chotto-messagereactions-expand-border, 1px solid rgba(0,0,0,0.1));
+  background: var(--chotto-messagereactions-expand-bg, transparent);
+  cursor: var(--chotto-messagereactions-expand-cursor, pointer);
+  font-size: var(--chotto-messagereactions-expand-font-size, 16px);
+  color: var(--chotto-messagereactions-expand-color, inherit);
+  transition: var(--chotto-messagereactions-expand-transition, background 0.15s ease);
+}
+
+.message-reactions__expand:hover {
+  background: var(--chotto-messagereactions-expand-hover-bg, rgba(0,0,0,0.06));
+}
+
+.message-reactions__expand span {
+  line-height: var(--chotto-messagereactions-expand-span-line-height, 1);
+  font-weight: var(--chotto-messagereactions-expand-span-font-weight, 600);
+}
+
+.message-reactions__picker {
+  z-index: var(--chotto-messagereactions-picker-z-index, 1);
+
+  :deep(.v3-emoji-picker) {
+    position: var(--chotto-messagereactions-picker-emoji-picker-position, relative);
+    z-index: var(--chotto-messagereactions-picker-emoji-picker-z-index, 1);
+  }
+}
+
+.message-reactions-popover-enter-active,
+.message-reactions-popover-leave-active {
+  transition: var(--chotto-messagereactions-popover-transition, opacity .15s ease, transform .15s ease);
+}
+
+.message-reactions-popover-enter-from,
+.message-reactions-popover-leave-to {
+  opacity: var(--chotto-messagereactions-popover-enter-from-opacity, 0);
+  transform: var(--chotto-messagereactions-popover-enter-from-transform, translateY(-4px));
+}
+

@@ -18,6 +18,43 @@ export interface ILinkPreview {
   description: string
 }
 
+// Reactions types (унифицировано для Telegram/WhatsApp)
+export type ReactionKey = string
+
+export interface MessageReactionItem {
+  key: ReactionKey
+  count: number
+  reactedByMe?: boolean
+}
+
+export interface MessageRecentReaction {
+  userId: string | number
+  key: ReactionKey
+  date?: number
+}
+
+export interface MessageReactions {
+  items: MessageReactionItem[]
+  meta?: {
+    mode?: 'single' | 'multi'
+  }
+  recent?: MessageRecentReaction[]
+  vendor?: {
+    telegram?: {
+      total_count?: number
+      recent_reactions?: Array<{
+        type: { type: string; emoji?: string }
+        actor?: { id?: number; is_bot?: boolean; first_name?: string }
+        date?: number
+      }>
+      counts?: Array<{ type: { type: string; emoji: string }; count: number }>
+    }
+    whatsapp?: {
+      lastEventAt?: number
+    }
+  }
+}
+
 export interface IKeyBoard {
   key: string,
   text: string,
@@ -46,6 +83,7 @@ export interface IAudioMessage {
   linkPreview?: ILinkPreview,
   embed?: object
   keyboard?: IKeyBoard[]
+  reactions?: MessageReactions
 }
 
 export interface ICallMessage {
@@ -64,6 +102,7 @@ export interface ICallMessage {
   transcript?: {
     dialog: IDialog[];
   };
+  reactions?: MessageReactions
 }
 
 export interface IDateMessage {
@@ -89,6 +128,7 @@ export interface IFileMessage {
   linkPreview?: ILinkPreview
   embed?: object
   keyboard?: IKeyBoard[]
+  reactions?: MessageReactions
 }
 
 export interface IImageMessage {
@@ -109,6 +149,7 @@ export interface IImageMessage {
   linkPreview?: ILinkPreview
   embed?: object
   keyboard?: IKeyBoard[]
+  reactions?: MessageReactions
 }
 
 export interface ISystemMessage {
@@ -132,6 +173,7 @@ export interface ITextMessage {
   linkPreview?: ILinkPreview
   embed?: object
   keyboard?: IKeyBoard[]
+  reactions?: MessageReactions
 }
 
 export interface ITypingMessage {
@@ -157,6 +199,7 @@ export interface IVideoMessage {
   linkPreview?: ILinkPreview,
   embed?: object
   keyboard?: IKeyBoard[]
+  reactions?: MessageReactions
 }
 
 export interface IStickerMessage {
@@ -178,4 +221,5 @@ export interface IStickerMessage {
   linkPreview?: ILinkPreview
   embed?: object
   keyboard?: IKeyBoard[]
+  reactions?: MessageReactions
 }

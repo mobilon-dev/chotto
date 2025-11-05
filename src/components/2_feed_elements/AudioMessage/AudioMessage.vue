@@ -123,6 +123,14 @@
         :embed="message.embed"
       />
 
+      <MessageReactions
+        :reactions="message.reactions"
+        :message-id="message.messageId"
+        @toggle-reaction="onToggleReaction"
+        @add-reaction="onAddReaction"
+        @remove-reaction="onRemoveReaction"
+      />
+
       <div class="audio-message__info-container">
         <div
           v-if="message.views"
@@ -214,9 +222,9 @@
 >
 import { ref, onMounted, computed, watch, inject } from 'vue'
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, Tooltip } from '@/components';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, Tooltip, MessageReactions } from '@/components';
 import { useMessageActions, useMessageLinks } from '@/hooks/messages';
-import { getStatus, statuses, getMessageClass, getStatusTitle } from '@/functions';
+import { getStatus, statuses, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
 import { useTheme } from '@/hooks';
 import { IAudioMessage } from '@/types';
 
@@ -350,6 +358,8 @@ const formatDuration = computed(() => {
 function getClass(message: IAudioMessage) {
   return getMessageClass(message.position, 'audio-message')
 }
+
+const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
 
 onMounted(() => {
   if (player.value != null) {

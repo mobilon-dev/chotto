@@ -287,3 +287,8 @@
 .modal-fade-leave-from {
   opacity: var(--chotto-videomessage-modal-fade-enter-to-opacity, 1);
 }
+
+.video-message:hover :deep(.message-reactions__add) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

@@ -72,6 +72,14 @@
         :embed="message.embed"
       />
 
+      <MessageReactions
+        :reactions="message.reactions"
+        :message-id="message.messageId"
+        @toggle-reaction="onToggleReaction"
+        @add-reaction="onAddReaction"
+        @remove-reaction="onRemoveReaction"
+      />
+
       <div class="file-message__info-container">
         <div
           v-if="message.views"
@@ -137,9 +145,9 @@
 import { computed } from 'vue'
 
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, Tooltip } from '@/components';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, Tooltip, MessageReactions } from '@/components';
 import { useMessageLinks, useMessageActions } from '@/hooks/messages';
-import { getStatus, statuses, getMessageClass, getStatusTitle } from "@/functions";
+import { getStatus, statuses, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { IFileMessage } from '@/types';
 
 // Define props
@@ -179,6 +187,8 @@ const statusTitle = computed(() => getStatusTitle(props.message.status, props.me
 function getClass(message: { position: string }) {
   return getMessageClass(message.position, 'file-message')
 }
+
+const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
 
 </script>
 

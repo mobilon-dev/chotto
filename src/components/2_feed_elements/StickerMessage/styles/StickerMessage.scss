@@ -301,4 +301,8 @@
   opacity: var(--chotto-stickermessage-modal-fade-enter-to-opacity, 1);
 }
 
+.sticker-message:hover :deep(.message-reactions__add) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
 
