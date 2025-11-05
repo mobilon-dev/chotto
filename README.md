@@ -116,7 +116,7 @@ import {
   ChatInput,
   ThemeMode
 } from '@mobilon-dev/chotto'
-import '@mobilon-dev/chotto/style.css'
+import '@mobilon-dev/chotto/themes/index.scss'
 
 // Ваша логика...
 </script>
@@ -167,9 +167,18 @@ src/
 ├── helpers/          # Утилиты и хелперы
 ├── types/            # TypeScript типы
 ├── data/             # Mock данные для демонстрации
-├── assets/           # Стили и темы
-│   └── themes/       # CSS темы (default, dark, green)
+├── themes/           # Стили и темы (default, dark, green)
 └── locale/           # Локализация (EN, RU)
+```
+
+Дополнительно в корне:
+
+```
+.storybook/           # Storybook конфигурация
+docs/                 # Сборка Storybook (output)
+scripts/              # Скрипты (валидатор тем)
+PUBLISH.md            # Шаги публикации пакета
+THEME_ARCHITECTURE_PROMPT.md  # Черновик архитектуры тем
 ```
 
 ## 🎨 Темы и кастомизация
@@ -182,8 +191,8 @@ src/
 ### Кастомизация CSS переменных
 ```css
 [data-theme="light"] {
-  --chotto-primary-color: #10b981;
-  --chotto-secondary-color: #6b7280;
+  --chotto-theme-primary-color: #10b981;
+  --chotto-theme-secondary-color: #6b7280;
   --chotto-background-color: #ffffff;
   /* ... другие переменные */
 }

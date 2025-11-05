@@ -1,0 +1,44 @@
+.new-chat-modal {
+	position: var(--chotto-selectuser-modal-position, fixed);
+	top: var(--chotto-selectuser-modal-top, 0);
+	left: var(--chotto-selectuser-modal-left, 0);
+	width: var(--chotto-selectuser-modal-width, 100%);
+	height: var(--chotto-selectuser-modal-height, 100%);
+	background-color: var(--chotto-selectuser-modal-background-color, rgba(0, 0, 0, 0.5));
+	display: var(--chotto-selectuser-modal-display, flex);
+	justify-content: var(--chotto-selectuser-modal-justify-content, center);
+	align-items: var(--chotto-selectuser-modal-align-items, center);
+  z-index: var(--chotto-selectuser-modal-z-index, 1000);
+}
+
+.modal-content {
+	background-color: var(--chotto-selectuser-modal-content-background-color, white);
+	padding: var(--chotto-selectuser-modal-content-padding, 20px);
+	border-radius: var(--chotto-selectuser-modal-content-border-radius, 8px);
+	width: var(--chotto-selectuser-modal-content-width, 300px);
+}
+
+.participant-list {
+  margin-top: var(--chotto-selectuser-participant-list-margin-top, 10px);
+	max-height: var(--chotto-selectuser-participant-list-max-height, 200px);
+}
+
+.participant-item {
+	display: var(--chotto-selectuser-participant-item-display, flex);
+	align-items: var(--chotto-selectuser-participant-item-align-items, center);
+	margin-bottom: var(--chotto-selectuser-participant-item-margin-bottom, 10px);
+}
+
+.participant-item input[type='checkbox'] {
+	margin-right: var(--chotto-selectuser-participant-item-checkbox-margin-right, 10px);
+}
+
+.modal-actions {
+	display: var(--chotto-selectuser-modal-actions-display, flex);
+	justify-content: var(--chotto-selectuser-modal-actions-justify-content, flex-end);
+	margin-top: var(--chotto-selectuser-modal-actions-margin-top, 20px);
+}
+
+.modal-actions button {
+	margin-left: var(--chotto-selectuser-modal-actions-button-margin-left, 10px);
+}

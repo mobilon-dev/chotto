@@ -1,0 +1,13 @@
+[data-theme="green"] {
+  // SplashScreen container variables
+  --chotto-splashscreen-container-border-radius: 10px;
+  --chotto-splashscreen-container-background-color: inherit;
+  --chotto-splashscreen-container-backdrop-filter: brightness(140%);
+  --chotto-splashscreen-container-padding: 20px;
+
+  // SplashScreen container children variables
+  --chotto-splashscreen-container-children-text-align: center;
+
+  // SplashScreen image variables
+  --chotto-splashscreen-img-cursor: pointer;
+}

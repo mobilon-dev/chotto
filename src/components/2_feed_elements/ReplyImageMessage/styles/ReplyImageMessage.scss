@@ -1,0 +1,78 @@
+p {
+  margin: var(--chotto-replyimagemessage-p-margin, 0);
+  font-size: var(--chotto-replyimagemessage-p-font-size, 14px);
+  color: var(--chotto-replyimagemessage-p-color, #5F5F5F);
+  overflow: var(--chotto-replyimagemessage-p-overflow, hidden);
+  text-overflow: var(--chotto-replyimagemessage-p-text-overflow, ellipsis);
+  display: var(--chotto-replyimagemessage-p-display, -webkit-box);
+  -webkit-line-clamp: var(--chotto-replyimagemessage-p-webkit-line-clamp, 5);
+  line-clamp: var(--chotto-replyimagemessage-p-line-clamp, 5);
+  -webkit-box-orient: var(--chotto-replyimagemessage-p-webkit-box-orient, vertical);
+}
+
+.image-message {
+
+  &__preview-button {
+    grid-column: var(--chotto-replyimagemessage-preview-button-grid-column, 1);
+    position: var(--chotto-replyimagemessage-preview-button-position, relative);
+    display: var(--chotto-replyimagemessage-preview-button-display, flex);
+    flex-direction: var(--chotto-replyimagemessage-preview-button-flex-direction, column);
+    padding: var(--chotto-replyimagemessage-preview-button-padding, 0);
+
+  }
+
+  &__preview-image {
+    width: var(--chotto-replyimagemessage-preview-image-width, 60px);
+    height: var(--chotto-replyimagemessage-preview-image-height, 60px);
+    cursor: var(--chotto-replyimagemessage-preview-image-cursor, zoom-in);
+    object-fit: var(--chotto-replyimagemessage-preview-image-object-fit, cover);
+    border-radius: var(--chotto-replyimagemessage-preview-image-border-radius, 4px);
+    margin: var(--chotto-replyimagemessage-preview-image-margin, auto);
+  }
+
+  &__modal-image {
+    width: var(--chotto-replyimagemessage-modal-image-width, 100%);
+    height: var(--chotto-replyimagemessage-modal-image-height, 100%);
+    object-fit: var(--chotto-replyimagemessage-modal-image-object-fit, cover);
+    border-radius: var(--chotto-replyimagemessage-modal-image-border-radius, 5px);
+    max-height: var(--chotto-replyimagemessage-modal-image-max-height, 80vh);
+  }
+
+  &__text-container {
+    word-wrap: var(--chotto-replyimagemessage-text-container-word-wrap, break-word);
+    align-content: var(--chotto-replyimagemessage-text-container-align-content, center);
+    word-break: var(--chotto-replyimagemessage-text-container-word-break, break-word);
+  }
+
+  &__text{
+    margin-top: var(--chotto-replyimagemessage-text-margin-top, 8px);
+    font-size: var(--chotto-replyimagemessage-text-font-size, 14px);
+    color: var(--chotto-replyimagemessage-text-color, #1E1E1E);
+  }
+
+  &__reply-description {
+    display: var(--chotto-replyimagemessage-reply-description-display, flex);
+    align-items: var(--chotto-replyimagemessage-reply-description-align-items, center);
+    column-gap: var(--chotto-replyimagemessage-reply-description-column-gap, 6px);
+    margin-bottom: var(--chotto-replyimagemessage-reply-description-margin-bottom, 4px);
+    white-space: var(--chotto-replyimagemessage-reply-description-white-space, nowrap);
+    span {
+      color: var(--chotto-replyimagemessage-reply-description-span-color, #5F5F5F);
+    }
+  }
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: var(--chotto-replyimagemessage-modal-fade-enter-active-transition, opacity 0.2s ease);
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: var(--chotto-replyimagemessage-modal-fade-enter-from-opacity, 0);
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: var(--chotto-replyimagemessage-modal-fade-enter-to-opacity, 1);
+}

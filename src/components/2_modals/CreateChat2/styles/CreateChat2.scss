@@ -1,0 +1,87 @@
+.create-chat-form {
+  display: var(--chotto-createchat2-form-display, flex);
+  flex-direction: var(--chotto-createchat2-form-flex-direction, column);
+  gap: var(--chotto-createchat2-form-gap, 10px);
+  font-family: var(--chotto-createchat2-form-font-family, "Open Sans", sans-serif);
+  padding: var(--chotto-createchat2-form-padding, 10px);
+}
+
+.create-chat-title {
+  padding-bottom: var(--chotto-createchat2-title-padding-bottom, 5px);
+  margin-bottom: var(--chotto-createchat2-title-margin-bottom, 10px);
+  font-size: var(--chotto-createchat2-title-font-size, 20px);
+  font-weight: var(--chotto-createchat2-title-font-weight, 600);
+  color: var(--chotto-createchat2-title-color, #1e1e1e);
+  text-align: var(--chotto-createchat2-title-text-align, center);
+  border-bottom: var(--chotto-createchat2-title-border-bottom, 1px solid #e5e5e5);
+}
+
+.form-field {
+  display: var(--chotto-createchat2-form-field-display, flex);
+  flex-direction: var(--chotto-createchat2-form-field-flex-direction, column);
+  gap: var(--chotto-createchat2-form-field-gap, 3px);
+}
+
+.form-label {
+  font-weight: var(--chotto-createchat2-form-label-font-weight, 500);
+  color: var(--chotto-createchat2-form-label-color, #5f5f5f);
+  display: var(--chotto-createchat2-form-label-display, block);
+  font-size: var(--chotto-createchat2-form-label-font-size, 14px);
+  margin-bottom: var(--chotto-createchat2-form-label-margin-bottom, 4px);
+}
+
+.form-input {
+  border: var(--chotto-createchat2-form-input-border, 1px solid #d4d4d4);
+  border-radius: var(--chotto-createchat2-form-input-border-radius, 6px);
+  background: var(--chotto-createchat2-form-input-background, #ffffff);
+  padding: var(--chotto-createchat2-form-input-padding, 0.5rem 0.75rem);
+  font-size: var(--chotto-createchat2-form-input-font-size, 16px);
+  color: var(--chotto-createchat2-form-input-color, #1e1e1e);
+  font-family: var(--chotto-createchat2-form-input-font-family, "Open Sans", sans-serif);
+  transition: var(--chotto-createchat2-form-input-transition, all 0.2s ease);
+  width: var(--chotto-createchat2-form-input-width, 100%);
+  box-sizing: var(--chotto-createchat2-form-input-box-sizing, border-box);
+  
+  &:hover {
+    border-color: var(--chotto-createchat2-form-input-hover-border-color, #737373);
+    background: var(--chotto-createchat2-form-input-hover-background, #fafafa);
+  }
+  
+  &:focus {
+    border-color: var(--chotto-createchat2-form-input-focus-border-color, #404040);
+    outline: var(--chotto-createchat2-form-input-focus-outline, none);
+    box-shadow: var(--chotto-createchat2-form-input-focus-box-shadow, 0 0 0 3px rgba(64, 64, 64, 0.1));
+    background: var(--chotto-createchat2-form-input-focus-background, #ffffff);
+  }
+  
+  &::placeholder {
+    color: var(--chotto-createchat2-form-input-placeholder-color, #9ca3af);
+    font-size: var(--chotto-createchat2-form-input-placeholder-font-size, 14px);
+  }
+  
+  &--error {
+    border-color: var(--chotto-createchat2-form-input-error-border-color, #dc2626);
+    background: var(--chotto-createchat2-form-input-error-background, #fef2f2);
+    
+    &:hover {
+      border-color: var(--chotto-createchat2-form-input-error-hover-border-color, #b91c1c);
+      background: var(--chotto-createchat2-form-input-error-hover-background, #fee2e2);
+    }
+    
+    &:focus {
+      border-color: var(--chotto-createchat2-form-input-error-focus-border-color, #dc2626);
+      box-shadow: var(--chotto-createchat2-form-input-error-focus-box-shadow, 0 0 0 3px rgba(220, 38, 38, 0.1));
+      background: var(--chotto-createchat2-form-input-error-focus-background, #fef2f2);
+    }
+  }
+}
+
+.form-error {
+  color: var(--chotto-createchat2-form-error-color, #dc2626);
+  font-size: var(--chotto-createchat2-form-error-font-size, 12px);
+  font-weight: var(--chotto-createchat2-form-error-font-weight, 500);
+  margin-top: var(--chotto-createchat2-form-error-margin-top, 2px);
+  padding-left: var(--chotto-createchat2-form-error-padding-left, 4px);
+  display: var(--chotto-createchat2-form-error-display, block);
+  min-height: var(--chotto-createchat2-form-error-min-height, 16px);
+}

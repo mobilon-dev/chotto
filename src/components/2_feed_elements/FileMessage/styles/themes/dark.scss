@@ -1,0 +1,184 @@
+[data-theme="dark"] {
+  // FileMessage content variables
+  --chotto-filemessage-content-position: relative;
+  --chotto-filemessage-content-width: fit-content;
+  --chotto-filemessage-content-border-radius: var(--chotto-theme-message-border-radius, 14px);
+  --chotto-filemessage-content-padding: 10px 10px 4px 16px;
+  --chotto-filemessage-content-max-width: 25rem;
+
+  // FileMessage triangle variables
+  --chotto-filemessage-left-triangle-content: '';
+  --chotto-filemessage-left-triangle-position: absolute;
+  --chotto-filemessage-left-triangle-top: 0;
+  --chotto-filemessage-left-triangle-left: -8px;
+  --chotto-filemessage-left-triangle-width: 0;
+  --chotto-filemessage-left-triangle-height: 0;
+  --chotto-filemessage-left-triangle-border: 20px solid transparent;
+  --chotto-filemessage-left-triangle-border-top: 15px solid var(--chotto-theme-message-left-bg);
+  --chotto-filemessage-left-triangle-z-index: 1;
+
+  --chotto-filemessage-right-triangle-content: '';
+  --chotto-filemessage-right-triangle-position: absolute;
+  --chotto-filemessage-right-triangle-top: 0;
+  --chotto-filemessage-right-triangle-right: -8px;
+  --chotto-filemessage-right-triangle-width: 0;
+  --chotto-filemessage-right-triangle-height: 0;
+  --chotto-filemessage-right-triangle-border: 20px solid transparent;
+  --chotto-filemessage-right-triangle-border-top: 15px solid var(--chotto-theme-message-right-bg);
+  --chotto-filemessage-right-triangle-z-index: 1;
+
+  // FileMessage background variables
+  --chotto-filemessage-left-bg: var(--chotto-theme-message-left-bg);
+  --chotto-filemessage-right-bg: var(--chotto-theme-message-right-bg);
+
+  // FileMessage avatar variables
+  --chotto-filemessage-avatar-min-width: var(--chotto-theme-avatar-small-size);
+  --chotto-filemessage-avatar-min-height: var(--chotto-theme-avatar-small-size);
+  --chotto-filemessage-avatar-border-radius: 50%;
+
+  // FileMessage text container variables
+  --chotto-filemessage-text-container-p-font-size: var(--chotto-theme-text-font-size);
+
+  // FileMessage subtext variables
+  --chotto-filemessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-filemessage-subtext-color: var(--chotto-theme-secondary-text-color);
+
+  // FileMessage link variables
+  --chotto-filemessage-link-span-color: var(--chotto-theme-secondary-text-color);
+  --chotto-filemessage-link-span-font-size: var(--chotto-theme-button-icon-size);
+
+  // FileMessage filename text variables
+  --chotto-filemessage-filename-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-filemessage-filename-text-color: var(--chotto-theme-primary-text-color);
+
+  // FileMessage download button variables
+  --chotto-filemessage-download-button-span-color: var(--chotto-theme-secondary-text-color);
+  --chotto-filemessage-download-button-span-font-size: var(--chotto-theme-text-icon-size);
+
+  // FileMessage status variables
+  --chotto-filemessage-status-span-color: var(--chotto-theme-status-color-received);
+  --chotto-filemessage-status-span-font-size: var(--chotto-theme-small-text-icon-size);
+  --chotto-filemessage-status-received-color: var(--chotto-theme-status-color-received);
+  --chotto-filemessage-status-read-color: var(--chotto-theme-status-color-read);
+  --chotto-filemessage-status-pending-color: var(--chotto-theme-status-color-pending);
+  --chotto-filemessage-status-error-color: var(--chotto-theme-status-color-error);
+
+  // FileMessage views variables
+  --chotto-filemessage-views-span-font-size: var(--chotto-theme-small-text-icon-size);
+  --chotto-filemessage-views-span-color: var(--chotto-theme-secondary-text-color);
+  --chotto-filemessage-views-p-font-size: var(--chotto-theme-small-text-font-size);
+  --chotto-filemessage-views-p-color: var(--chotto-theme-secondary-text-color);
+
+  // FileMessage time variables
+  --chotto-filemessage-time-font-size: var(--chotto-theme-text-font-size);
+  --chotto-filemessage-time-color: var(--chotto-theme-secondary-text-color);
+
+  // FileMessage menu button variables
+  --chotto-filemessage-menu-button-span-color: var(--chotto-theme-button-color-active);
+  --chotto-filemessage-menu-button-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-filemessage-menu-button-span-hover-color: var(--chotto-theme-button-color-hover);
+
+  // FileMessage left/right variables
+  --chotto-filemessage-left-right-margin: var(--chotto-theme-message-margin);
+
+  // FileMessage avatar variables
+  --chotto-filemessage-avatar-align-self: auto;
+  --chotto-filemessage-avatar-object-fit: cover;
+
+  // FileMessage text container variables
+  --chotto-filemessage-text-container-margin-top: 6px;
+  --chotto-filemessage-text-container-word-wrap: break-word;
+  --chotto-filemessage-text-container-p-white-space: pre-wrap;
+
+  // FileMessage link variables
+  --chotto-filemessage-link-display: flex;
+  --chotto-filemessage-link-justify-content: flex-start;
+  --chotto-filemessage-link-align-items: center;
+  --chotto-filemessage-link-column-gap: 12px;
+
+  // FileMessage filename text variables
+  --chotto-filemessage-filename-text-overflow: hidden;
+  --chotto-filemessage-filename-text-text-overflow: ellipsis;
+  --chotto-filemessage-filename-text-webkit-line-clamp: 1;
+  --chotto-filemessage-filename-text-line-clamp: 1;
+  --chotto-filemessage-filename-text-webkit-box-orient: vertical;
+  --chotto-filemessage-filename-text-margin-right: 40px;
+
+  // FileMessage info container variables
+  --chotto-filemessage-info-container-display: flex;
+  --chotto-filemessage-info-container-align-items: center;
+  --chotto-filemessage-info-container-justify-content: flex-end;
+  --chotto-filemessage-info-container-column-gap: 2px;
+
+  // FileMessage download button variables
+  --chotto-filemessage-download-button-margin-bottom: 5px;
+  --chotto-filemessage-download-button-border: none;
+  --chotto-filemessage-download-button-border-radius: 12px;
+  --chotto-filemessage-download-button-background-color: transparent;
+  --chotto-filemessage-download-button-padding: 0;
+  --chotto-filemessage-download-button-cursor: pointer;
+
+  // FileMessage status variables
+  --chotto-filemessage-status-display: flex;
+  --chotto-filemessage-status-span-font-weight: 400;
+  --chotto-filemessage-status-received-first-child-margin-right: -8px;
+  --chotto-filemessage-status-read-first-child-margin-right: -8px;
+
+  // FileMessage views variables
+  --chotto-filemessage-views-display: flex;
+  --chotto-filemessage-views-align-items: center;
+  --chotto-filemessage-views-column-gap: 4px;
+
+  // FileMessage menu button variables
+  --chotto-filemessage-menu-button-position: absolute;
+  --chotto-filemessage-menu-button-background-color: transparent;
+  --chotto-filemessage-menu-button-border: none;
+  --chotto-filemessage-menu-button-transform: translateY(-50%);
+  --chotto-filemessage-menu-button-cursor: pointer;
+  --chotto-filemessage-menu-button-transition: 0.2s;
+  --chotto-filemessage-menu-button-hover-transition: 0.2s;
+
+  // FileMessage context menu variables
+  --chotto-filemessage-context-menu-position: absolute;
+
+  // FileMessage left/right variables
+  --chotto-filemessage-left-right-display: grid;
+
+  // FileMessage left variables
+  --chotto-filemessage-left-grid-template-columns: min-content 1fr;
+  --chotto-filemessage-left-avatar-grid-column: 1;
+  --chotto-filemessage-left-avatar-margin-right: 12px;
+  --chotto-filemessage-left-subtext-grid-column: 2;
+  --chotto-filemessage-left-subtext-grid-row: 1;
+  --chotto-filemessage-left-subtext-margin: 0 0 2px 10px;
+  --chotto-filemessage-left-content-grid-column: 2;
+  --chotto-filemessage-left-content-with-avatar-indent-margin-left: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-filemessage-left-menu-button-top: 50%;
+  --chotto-filemessage-left-menu-button-right: -40px;
+  --chotto-filemessage-left-context-menu-top: 50%;
+  --chotto-filemessage-left-context-menu-left: 100%;
+  --chotto-filemessage-left-context-menu-margin-top: 20px;
+
+  // FileMessage right variables
+  --chotto-filemessage-right-grid-template-columns: 1fr min-content;
+  --chotto-filemessage-right-avatar-grid-column: 2;
+  --chotto-filemessage-right-avatar-grid-row: 2;
+  --chotto-filemessage-right-avatar-margin-left: 12px;
+  --chotto-filemessage-right-subtext-grid-column: 1;
+  --chotto-filemessage-right-subtext-grid-row: 1;
+  --chotto-filemessage-right-subtext-margin: 0 10px 2px auto;
+  --chotto-filemessage-right-content-grid-column: 1;
+  --chotto-filemessage-right-content-margin-left: auto;
+  --chotto-filemessage-right-content-with-avatar-indent-margin-right: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-filemessage-right-menu-button-top: 50%;
+  --chotto-filemessage-right-menu-button-left: -40px;
+  --chotto-filemessage-right-context-menu-top: 50%;
+  --chotto-filemessage-right-context-menu-right: 100%;
+  --chotto-filemessage-right-context-menu-margin-top: 20px;
+
+  // FileMessage Vue animation variables
+  --chotto-filemessage-v-enter-active-transition: all 0.1s ease-out;
+  --chotto-filemessage-v-leave-active-transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+  --chotto-filemessage-v-enter-from-transform: scale(0.9);
+  --chotto-filemessage-v-enter-from-opacity: 0;
+}

@@ -1,0 +1,19 @@
+.commands{
+  &__trigger{
+    padding: var(--chotto-buttoncommandsselector-trigger-padding, 1px 0 0 3px);
+    display: var(--chotto-buttoncommandsselector-trigger-display, block);
+    cursor: var(--chotto-buttoncommandsselector-trigger-cursor, pointer);
+    font-size: var(--chotto-buttoncommandsselector-trigger-font-size, 16px);
+    color: var(--chotto-buttoncommandsselector-trigger-color, #525252);
+  }
+
+  &__trigger:hover{
+    color: var(--chotto-buttoncommandsselector-trigger-hover-color, #404040);
+  }
+
+  &__disabled {
+    color: var(--chotto-buttoncommandsselector-disabled-color, #e5e5e5);
+    cursor: var(--chotto-buttoncommandsselector-disabled-cursor, auto);
+    pointer-events: var(--chotto-buttoncommandsselector-disabled-pointer-events, none);
+  }
+}

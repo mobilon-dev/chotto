@@ -1,0 +1,89 @@
+[data-theme="mobilon1"] {
+  // FilePreview container variables
+  --chotto-filepreview-container-position: relative;
+  --chotto-filepreview-container-display: flex;
+  --chotto-filepreview-container-border: 1px solid var(--chotto-theme-item-border-color);
+
+  // FilePreview image/video variables
+  --chotto-filepreview-image-max-width: 130px;
+  --chotto-filepreview-image-max-height: 130px;
+
+  // FilePreview modal variables
+  --chotto-filepreview-modal-height: 100%;
+  --chotto-filepreview-modal-object-fit: contain;
+  --chotto-filepreview-modal-border-radius: 5px;
+  --chotto-filepreview-modal-max-height: 90vh;
+  --chotto-filepreview-modal-max-width: 90vw;
+
+  // FilePreview shadow variables
+  --chotto-filepreview-shadow-display: none;
+  --chotto-filepreview-shadow-hover-display: inherit;
+  --chotto-filepreview-shadow-hover-cursor: pointer;
+  --chotto-filepreview-shadow-hover-position: absolute;
+  --chotto-filepreview-shadow-hover-top: 50%;
+  --chotto-filepreview-shadow-hover-left: 50%;
+  --chotto-filepreview-shadow-hover-transform: translate(-50%, -50%);
+  --chotto-filepreview-shadow-hover-width: 100%;
+  --chotto-filepreview-shadow-hover-height: 100%;
+  --chotto-filepreview-shadow-hover-background: black;
+  --chotto-filepreview-shadow-hover-opacity: 0.3;
+  --chotto-filepreview-shadow-hover-span-top: 50%;
+  --chotto-filepreview-shadow-hover-span-left: 50%;
+  --chotto-filepreview-shadow-hover-span-transform: translate(-50%, -50%);
+  --chotto-filepreview-shadow-hover-span-position: relative;
+  --chotto-filepreview-shadow-hover-span-color: white;
+
+  // FilePreview audio control variables
+  --chotto-filepreview-audio-control-border: none;
+  --chotto-filepreview-audio-control-cursor: pointer;
+  --chotto-filepreview-audio-control-position: relative;
+  --chotto-filepreview-audio-control-grid-row: 1 / 3;
+  --chotto-filepreview-audio-control-width: 38px;
+  --chotto-filepreview-audio-control-height: 38px;
+  --chotto-filepreview-audio-control-border-radius: 50%;
+  --chotto-filepreview-audio-control-background-color: var(--chotto-theme-message-type-icon-bg-color);
+  --chotto-filepreview-audio-control-span-display: flex;
+  --chotto-filepreview-audio-control-span-position: absolute;
+  --chotto-filepreview-audio-control-span-top: 50%;
+  --chotto-filepreview-audio-control-span-left: 50%;
+  --chotto-filepreview-audio-control-span-transform: translate(-50%, -50%);
+  --chotto-filepreview-audio-control-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-filepreview-audio-control-span-color: var(--chotto-theme-message-type-icon-color);
+
+  // FilePreview block variables
+  --chotto-filepreview-block-max-width: 60px;
+  --chotto-filepreview-block-max-height: 60px;
+  --chotto-filepreview-block-min-width: 60px;
+  --chotto-filepreview-block-min-height: 60px;
+  --chotto-filepreview-block-margin: 5px;
+  --chotto-filepreview-block-overflow: hidden;
+  --chotto-filepreview-block-border-radius: 5px;
+  --chotto-filepreview-block-display: flex;
+  --chotto-filepreview-block-align-items: center;
+  --chotto-filepreview-block-justify-content: center;
+
+  // FilePreview information variables
+  --chotto-filepreview-information-margin-left: 5px;
+  --chotto-filepreview-information-display: grid;
+  --chotto-filepreview-information-span-display: flex;
+  --chotto-filepreview-information-span-font-size: small;
+
+  // FilePreview name variables
+  --chotto-filepreview-name-align-items: end;
+  --chotto-filepreview-name-overflow: hidden;
+  --chotto-filepreview-name-white-space: normal;
+  --chotto-filepreview-name-word-break: break-word;
+  --chotto-filepreview-name-text-overflow: ellipsis;
+
+  // FilePreview reset variables
+  --chotto-filepreview-reset-display: flex;
+  --chotto-filepreview-reset-margin-right: 10px;
+  --chotto-filepreview-reset-font-size: 1.1rem;
+  --chotto-filepreview-reset-span-margin: auto;
+  --chotto-filepreview-reset-hover-cursor: pointer;
+
+  // FilePreview control block variables
+  --chotto-filepreview-control-block-display: flex;
+  --chotto-filepreview-control-block-justify-content: space-between;
+  --chotto-filepreview-control-block-flex: 1;
+}

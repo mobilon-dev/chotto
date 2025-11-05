@@ -1,0 +1,232 @@
+[data-theme="mobilon1"] {
+  // WABATemplateSelector main variables
+  --chotto-wabatemplateselector-position: absolute;
+  --chotto-wabatemplateselector-bottom: 100%;
+  --chotto-wabatemplateselector-left: 0;
+  --chotto-wabatemplateselector-right: 0;
+  --chotto-wabatemplateselector-z-index: 100;
+  --chotto-wabatemplateselector-container: templates / inline-size;
+
+  // WABATemplateSelector container inline variables
+  --chotto-wabatemplateselector-container-inline-max-height: 500px;
+  --chotto-wabatemplateselector-container-inline-padding: 16px 5px 5px 5px;
+  --chotto-wabatemplateselector-container-inline-background-color: var(--chotto-theme-primary-color);
+  --chotto-wabatemplateselector-container-inline-border-top: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-wabatemplateselector-container-inline-border-bottom: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-wabatemplateselector-container-inline-box-sizing: border-box;
+  --chotto-wabatemplateselector-container-inline-min-width: 478px;
+
+  // WABATemplateSelector container elevated variables
+  --chotto-wabatemplateselector-container-elevated-position: absolute;
+  --chotto-wabatemplateselector-container-elevated-max-height: 500px;
+  --chotto-wabatemplateselector-container-elevated-padding: 16px 5px 5px 5px;
+  --chotto-wabatemplateselector-container-elevated-background-color: var(--chotto-theme-primary-color);
+  --chotto-wabatemplateselector-container-elevated-border: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-wabatemplateselector-container-elevated-min-width: 478px;
+  --chotto-wabatemplateselector-container-elevated-box-shadow: 5px 5px 29px -15px var(--chotto-theme-shadow-color);
+  --chotto-wabatemplateselector-container-elevated-bottom: 20px;
+  --chotto-wabatemplateselector-container-elevated-right: 20px;
+
+  // WABATemplateSelector layout variables
+  --chotto-wabatemplateselector-layout-max-height: 400px;
+  --chotto-wabatemplateselector-layout-display: grid;
+  --chotto-wabatemplateselector-layout-box-sizing: border-box;
+  --chotto-wabatemplateselector-layout-grid-template-columns: 0.5fr 1.3fr 1fr;
+  --chotto-wabatemplateselector-layout-grid-template-rows: min-content min-content 1fr min-content;
+  --chotto-wabatemplateselector-layout-column-gap: 5px;
+  --chotto-wabatemplateselector-layout-mobile-grid-template-columns: 1fr;
+
+  // WABATemplateSelector first col variables
+  --chotto-wabatemplateselector-first-col-display: grid;
+  --chotto-wabatemplateselector-first-col-grid-column: 1;
+  --chotto-wabatemplateselector-first-col-grid-row: 2 / 5;
+  --chotto-wabatemplateselector-first-col-grid-template-rows: min-content auto;
+  --chotto-wabatemplateselector-first-col-mobile-grid-column: 1;
+
+  // WABATemplateSelector second col variables
+  --chotto-wabatemplateselector-second-col-display: grid;
+  --chotto-wabatemplateselector-second-col-grid-column: 2;
+  --chotto-wabatemplateselector-second-col-grid-row: 2 / 5;
+  --chotto-wabatemplateselector-second-col-grid-template-rows: min-content min-content auto;
+  --chotto-wabatemplateselector-second-col-mobile-grid-column: 1;
+
+  // WABATemplateSelector third col variables
+  --chotto-wabatemplateselector-third-col-display: grid;
+  --chotto-wabatemplateselector-third-col-grid-column: 3;
+  --chotto-wabatemplateselector-third-col-grid-row: 2 / 5;
+  --chotto-wabatemplateselector-third-col-grid-template-rows: min-content auto min-content;
+  --chotto-wabatemplateselector-third-col-mobile-grid-column: 1;
+
+  // WABATemplateSelector button close variables
+  --chotto-wabatemplateselector-button-close-grid-column: 3;
+  --chotto-wabatemplateselector-button-close-align-self: flex-start;
+  --chotto-wabatemplateselector-button-close-display: block;
+  --chotto-wabatemplateselector-button-close-background-color: transparent;
+  --chotto-wabatemplateselector-button-close-border: none;
+  --chotto-wabatemplateselector-button-close-width: fit-content;
+  --chotto-wabatemplateselector-button-close-cursor: pointer;
+  --chotto-wabatemplateselector-button-close-margin: 0 16px 20px auto;
+  --chotto-wabatemplateselector-button-close-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-wabatemplateselector-button-close-span-color: var(--chotto-theme-button-color-active);
+
+  // WABATemplateSelector list groups variables
+  --chotto-wabatemplateselector-list-groups-grid-column: 1;
+  --chotto-wabatemplateselector-list-groups-grid-row: 2 / 5;
+  --chotto-wabatemplateselector-list-groups-overflow-y: auto;
+  --chotto-wabatemplateselector-list-groups-border: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-wabatemplateselector-list-groups-padding: 0;
+  --chotto-wabatemplateselector-list-groups-margin: 0;
+  --chotto-wabatemplateselector-list-groups-scrollbar-width: 6px;
+  --chotto-wabatemplateselector-list-groups-scrollbar-background-color: var(--chotto-theme-scrollbar-bg);
+  --chotto-wabatemplateselector-list-groups-scrollbar-thumb-border-radius: 10px;
+  --chotto-wabatemplateselector-list-groups-scrollbar-thumb-background-color: var(--chotto-theme-scrollbar-thumb-bg);
+  --chotto-wabatemplateselector-list-groups-scrollbar-track-border-radius: 10px;
+
+  // WABATemplateSelector list templates variables
+  --chotto-wabatemplateselector-list-templates-padding: 0;
+  --chotto-wabatemplateselector-list-templates-margin: 0;
+
+  // WABATemplateSelector templates variables
+  --chotto-wabatemplateselector-templates-grid-row: 3 / 5;
+  --chotto-wabatemplateselector-templates-border: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-wabatemplateselector-templates-overflow-y: auto;
+  --chotto-wabatemplateselector-templates-scrollbar-width: 6px;
+  --chotto-wabatemplateselector-templates-scrollbar-background-color: var(--chotto-theme-scrollbar-bg);
+  --chotto-wabatemplateselector-templates-scrollbar-thumb-border-radius: 10px;
+  --chotto-wabatemplateselector-templates-scrollbar-thumb-background-color: var(--chotto-theme-scrollbar-thumb-bg);
+  --chotto-wabatemplateselector-templates-scrollbar-track-border-radius: 10px;
+
+  // WABATemplateSelector item variables
+  --chotto-wabatemplateselector-item-transition: 0.2s;
+  --chotto-wabatemplateselector-item-hover-background-color: var(--chotto-theme-item-background-color-hover);
+  --chotto-wabatemplateselector-item-not-last-child-border-bottom: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-wabatemplateselector-item-group-display: flex;
+  --chotto-wabatemplateselector-item-group-align-items: center;
+  --chotto-wabatemplateselector-item-selected-background-color: var(--chotto-theme-item-background-color-focus);
+  --chotto-wabatemplateselector-item-selected-hover-background-color: var(--chotto-theme-item-background-color-hover);
+  --chotto-wabatemplateselector-item-template-cursor: pointer;
+  --chotto-wabatemplateselector-item-template-padding: 10px 12px;
+
+  // WABATemplateSelector label group variables
+  --chotto-wabatemplateselector-label-group-padding: 10px 12px;
+  --chotto-wabatemplateselector-label-group-display: flex;
+  --chotto-wabatemplateselector-label-group-align-items: center;
+  --chotto-wabatemplateselector-label-group-column-gap: 10px;
+  --chotto-wabatemplateselector-label-group-width: 100%;
+  --chotto-wabatemplateselector-label-group-height: 100%;
+  --chotto-wabatemplateselector-label-group-cursor: pointer;
+  --chotto-wabatemplateselector-label-group-img-width: 30px;
+  --chotto-wabatemplateselector-label-group-img-height: 30px;
+  --chotto-wabatemplateselector-label-group-input-display: none;
+  --chotto-wabatemplateselector-label-group-span-line-height: 1;
+
+  // WABATemplateSelector item title variables
+  --chotto-wabatemplateselector-item-title-margin-bottom: 8px;
+  --chotto-wabatemplateselector-item-title-font-weight: var(--chotto-theme-title-font-weight);
+  --chotto-wabatemplateselector-item-title-font-size: var(--chotto-theme-title-font-size);
+
+  // WABATemplateSelector item text variables
+  --chotto-wabatemplateselector-item-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-wabatemplateselector-item-text-overflow: hidden;
+  --chotto-wabatemplateselector-item-text-text-overflow: ellipsis;
+  --chotto-wabatemplateselector-item-text-display: -webkit-box;
+  --chotto-wabatemplateselector-item-text-webkit-line-clamp: 3;
+  --chotto-wabatemplateselector-item-text-line-clamp: 3;
+  --chotto-wabatemplateselector-item-text-webkit-box-orient: vertical;
+
+  // WABATemplateSelector searching container variables
+  --chotto-wabatemplateselector-searching-container-grid-row: 2;
+  --chotto-wabatemplateselector-searching-container-width: 100%;
+  --chotto-wabatemplateselector-searching-container-margin-bottom: 16px;
+
+  // WABATemplateSelector searching input variables
+  --chotto-wabatemplateselector-searching-input-background-color: transparent;
+  --chotto-wabatemplateselector-searching-input-width: 100%;
+  --chotto-wabatemplateselector-searching-input-padding: 0.5rem 0.75rem;
+  --chotto-wabatemplateselector-searching-input-border-radius: 5px;
+  --chotto-wabatemplateselector-searching-input-font-size: var(--chotto-theme-text-font-size);
+  --chotto-wabatemplateselector-searching-input-color: var(--chotto-theme-primary-text-color);
+  --chotto-wabatemplateselector-searching-input-border: 1px solid #d0d0d0;
+  --chotto-wabatemplateselector-searching-input-transition: border-color 0.2s;
+  --chotto-wabatemplateselector-searching-input-box-sizing: border-box;
+  --chotto-wabatemplateselector-searching-input-placeholder-color: var(--chotto-theme-secondary-text-color);
+  --chotto-wabatemplateselector-searching-input-hover-border-color: var(--chotto-theme-quaternary-color);
+  --chotto-wabatemplateselector-searching-input-focus-border-color: var(--chotto-theme-quinary-color);
+  --chotto-wabatemplateselector-searching-input-focus-outline: none;
+
+  // WABATemplateSelector preview container variables
+  --chotto-wabatemplateselector-preview-container-grid-row: 2;
+  --chotto-wabatemplateselector-preview-container-border: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-wabatemplateselector-preview-container-max-height: 375px;
+  --chotto-wabatemplateselector-preview-container-overflow-y: auto;
+  --chotto-wabatemplateselector-preview-container-overflow-x: hidden;
+  --chotto-wabatemplateselector-preview-container-background-color: var(--chotto-theme-secondary-color);
+  --chotto-wabatemplateselector-preview-container-position: relative;
+  --chotto-wabatemplateselector-preview-container-scrollbar-width: 6px;
+  --chotto-wabatemplateselector-preview-container-scrollbar-background-color: var(--chotto-theme-scrollbar-bg);
+  --chotto-wabatemplateselector-preview-container-scrollbar-thumb-border-radius: 10px;
+  --chotto-wabatemplateselector-preview-container-scrollbar-thumb-background-color: var(--chotto-theme-scrollbar-thumb-bg);
+  --chotto-wabatemplateselector-preview-container-scrollbar-track-border-radius: 10px;
+
+  // WABATemplateSelector preview variables
+  --chotto-wabatemplateselector-preview-height: 100%;
+  --chotto-wabatemplateselector-preview-box-sizing: border-box;
+  --chotto-wabatemplateselector-preview-padding: 5px;
+
+  // WABATemplateSelector preview wrapper variables
+  --chotto-wabatemplateselector-preview-wrapper-padding: 10px 10px 4px 16px;
+  --chotto-wabatemplateselector-preview-wrapper-background-color: var(--chotto-theme-message-left-bg);
+  --chotto-wabatemplateselector-preview-wrapper-border-radius: 14px;
+  --chotto-wabatemplateselector-preview-wrapper-max-width: 90%;
+  --chotto-wabatemplateselector-preview-wrapper-margin-bottom: 15px;
+
+  // WABATemplateSelector semitransparent overlay variables
+  --chotto-wabatemplateselector-semitransparent-overlay-height: 100%;
+  --chotto-wabatemplateselector-semitransparent-overlay-background: var(--chotto-theme-shadow-color);
+  --chotto-wabatemplateselector-semitransparent-overlay-opacity: 0.5;
+
+  // WABATemplateSelector reply buttons variables
+  --chotto-wabatemplateselector-reply-buttons-position: absolute;
+  --chotto-wabatemplateselector-reply-buttons-height: 100%;
+  --chotto-wabatemplateselector-reply-buttons-width: 100%;
+  --chotto-wabatemplateselector-reply-buttons-bottom: 0;
+
+  // WABATemplateSelector plug variables
+  --chotto-wabatemplateselector-plug-width: 100%;
+  --chotto-wabatemplateselector-plug-height: 100%;
+  --chotto-wabatemplateselector-plug-font-size: var(--chotto-theme-text-font-size);
+  --chotto-wabatemplateselector-plug-display: flex;
+  --chotto-wabatemplateselector-plug-justify-content: center;
+  --chotto-wabatemplateselector-plug-align-items: center;
+  --chotto-wabatemplateselector-plug-padding: 0;
+  --chotto-wabatemplateselector-plug-margin: 0;
+  --chotto-wabatemplateselector-plug-line-height: 20;
+
+  // WABATemplateSelector preview text container variables
+  --chotto-wabatemplateselector-preview-text-container-font-size: var(--chotto-theme-text-font-size);
+  --chotto-wabatemplateselector-preview-text-container-word-break: break-word;
+  --chotto-wabatemplateselector-preview-text-container-white-space: pre-line;
+
+  // WABATemplateSelector preview time variables
+  --chotto-wabatemplateselector-preview-time-width: fit-content;
+  --chotto-wabatemplateselector-preview-time-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-wabatemplateselector-preview-time-color: var(--chotto-theme-secondary-text-color);
+  --chotto-wabatemplateselector-preview-time-margin-left: auto;
+
+  // WABATemplateSelector button paste variables
+  --chotto-wabatemplateselector-button-paste-grid-row: 3;
+  --chotto-wabatemplateselector-button-paste-display: block;
+  --chotto-wabatemplateselector-button-paste-width: fit-content;
+  --chotto-wabatemplateselector-button-paste-justify-self: flex-end;
+  --chotto-wabatemplateselector-button-paste-margin: 16px 0 0 0;
+  --chotto-wabatemplateselector-button-paste-font-size: var(--chotto-theme-title-font-size);
+  --chotto-wabatemplateselector-button-paste-background-color: var(--chotto-theme-action-button-color-active);
+  --chotto-wabatemplateselector-button-paste-border: none;
+  --chotto-wabatemplateselector-button-paste-padding: 8px 16px;
+  --chotto-wabatemplateselector-button-paste-border-radius: 10px;
+  --chotto-wabatemplateselector-button-paste-cursor: pointer;
+  --chotto-wabatemplateselector-button-paste-disabled-background-color: var(--chotto-theme-action-button-color-disabled);
+  --chotto-wabatemplateselector-button-paste-disabled-cursor: default;
+  --chotto-wabatemplateselector-button-paste-disabled-pointer-events: none;
+  --chotto-wabatemplateselector-button-paste-hover-background-color: var(--chotto-theme-action-button-color-hover);
+}

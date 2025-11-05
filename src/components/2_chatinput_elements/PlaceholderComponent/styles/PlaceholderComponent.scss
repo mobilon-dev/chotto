@@ -1,0 +1,14 @@
+.placeholder {
+  padding: var(--chotto-placeholdercomponent-placeholder-padding, 2px 6px);
+  border-radius: var(--chotto-placeholdercomponent-placeholder-border-radius, 4px);
+  cursor: var(--chotto-placeholdercomponent-placeholder-cursor, pointer);
+  line-height: var(--chotto-placeholdercomponent-placeholder-line-height, 1.8);
+
+  &.filled {
+    background-color: var(--chotto-placeholdercomponent-placeholder-filled-background-color, #6ee7b7);
+  }
+
+  &.empty {
+    background-color: var(--chotto-placeholdercomponent-placeholder-empty-background-color, #fee2e2);
+  }
+}

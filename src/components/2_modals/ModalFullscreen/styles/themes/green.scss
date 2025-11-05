@@ -1,0 +1,77 @@
+[data-theme="green"] {
+  // Modal container
+  --chotto-modalfullscreen-container-position: absolute;
+  --chotto-modalfullscreen-container-top: 50%;
+  --chotto-modalfullscreen-container-left: 50%;
+  --chotto-modalfullscreen-container-right: auto;
+  --chotto-modalfullscreen-container-bottom: auto;
+  --chotto-modalfullscreen-container-transform: translate(-50%, -50%);
+  --chotto-modalfullscreen-container-z-index: 101;
+  --chotto-modalfullscreen-text-color: var(--chotto-theme-primary-text-color);
+  --chotto-modalfullscreen-background: var(--chotto-theme-primary-color, #f8fff8);
+  --chotto-modalfullscreen-border: 2px solid var(--chotto-theme-accent-color, #4CAF50);
+  --chotto-modalfullscreen-border-radius: 16px;
+  --chotto-modalfullscreen-padding: 24px;
+  --chotto-modalfullscreen-margin: 0;
+  --chotto-modalfullscreen-max-width: 90%;
+  --chotto-modalfullscreen-max-height: 85vh;
+  --chotto-modalfullscreen-min-width: 350px;
+  --chotto-modalfullscreen-min-height: 250px;
+  --chotto-modalfullscreen-width: fit-content;
+  --chotto-modalfullscreen-height: auto;
+  --chotto-modalfullscreen-box-shadow: 0 6px 24px var(--chotto-theme-shadow-color, rgba(76, 175, 80, 0.4));
+  --chotto-modalfullscreen-overflow: visible;
+  --chotto-modalfullscreen-display: block;
+  --chotto-modalfullscreen-flex-direction: column;
+  --chotto-modalfullscreen-align-items: stretch;
+  --chotto-modalfullscreen-justify-content: flex-start;
+
+  // Modal overlay
+  --chotto-modalfullscreen-overlay-position: fixed;
+  --chotto-modalfullscreen-overlay-top: 0;
+  --chotto-modalfullscreen-overlay-left: 0;
+  --chotto-modalfullscreen-overlay-right: 0;
+  --chotto-modalfullscreen-overlay-bottom: 0;
+  --chotto-modalfullscreen-overlay-bg: rgba(76, 175, 80, 0.2);
+  --chotto-modalfullscreen-overlay-backdrop-filter: none;
+  --chotto-modalfullscreen-overlay-z-index: 1000;
+  --chotto-modalfullscreen-overlay-display: block;
+  --chotto-modalfullscreen-overlay-opacity: 1;
+  --chotto-modalfullscreen-overlay-transition: opacity 0.3s ease;
+
+  // Close button
+  --chotto-modalfullscreen-close-button-display: block;
+  --chotto-modalfullscreen-close-button-position: relative;
+  --chotto-modalfullscreen-close-button-bg: transparent;
+  --chotto-modalfullscreen-close-button-border: 2px solid var(--chotto-theme-accent-color, #4CAF50);
+  --chotto-modalfullscreen-close-button-border-radius: 8px;
+  --chotto-modalfullscreen-close-button-padding: 8px;
+  --chotto-modalfullscreen-close-button-margin: 0 0 18px auto;
+  --chotto-modalfullscreen-close-button-cursor: pointer;
+  --chotto-modalfullscreen-close-button-width: auto;
+  --chotto-modalfullscreen-close-button-height: auto;
+  --chotto-modalfullscreen-close-button-min-width: 40px;
+  --chotto-modalfullscreen-close-button-min-height: 40px;
+  --chotto-modalfullscreen-close-button-transition: all 0.3s ease;
+  --chotto-modalfullscreen-close-button-outline: none;
+  --chotto-modalfullscreen-close-button-box-shadow: 0 3px 6px rgba(76, 175, 80, 0.3);
+
+  // Close button states
+  --chotto-modalfullscreen-close-button-hover-bg: rgba(76, 175, 80, 0.1);
+  --chotto-modalfullscreen-close-button-hover-transform: scale(1.2) rotate(90deg);
+  --chotto-modalfullscreen-close-button-hover-box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+  --chotto-modalfullscreen-close-button-active-bg: rgba(76, 175, 80, 0.2);
+  --chotto-modalfullscreen-close-button-active-transform: scale(0.9) rotate(90deg);
+  --chotto-modalfullscreen-close-button-focus-outline: 3px solid rgba(76, 175, 80, 0.5);
+  --chotto-modalfullscreen-close-button-focus-outline-offset: 3px;
+
+  // Close button span
+  --chotto-modalfullscreen-close-button-text-color: var(--chotto-theme-accent-color, #4CAF50);
+  --chotto-modalfullscreen-close-button-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-modalfullscreen-close-button-span-display: block;
+  --chotto-modalfullscreen-close-button-span-text-align: center;
+  --chotto-modalfullscreen-close-button-span-line-height: 1;
+  --chotto-modalfullscreen-close-button-span-transition: all 0.3s ease;
+}
+
+

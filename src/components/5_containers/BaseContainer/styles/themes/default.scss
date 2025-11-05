@@ -1,0 +1,9 @@
+[data-theme="light"] {
+  // BaseContainer base variables
+  --chotto-basecontainer-base-container-transition: all 0.3s ease;
+  --chotto-basecontainer-base-container-font-weight: var(--chotto-theme-default-font-weight);
+  --chotto-basecontainer-base-container-color: var(--chotto-theme-primary-text-color);
+  --chotto-basecontainer-base-container-font-family: var(--chotto-theme-font-family);
+  --chotto-basecontainer-base-container-container: all / inline-size;
+  --chotto-basecontainer-base-container-min-width: 480px;
+}

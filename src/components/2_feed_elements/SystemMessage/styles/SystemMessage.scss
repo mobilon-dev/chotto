@@ -1,0 +1,16 @@
+.system-message {
+  &__container {
+    width: var(--chotto-systemmessage-container-width, 54%);
+    border-radius: var(--chotto-systemmessage-container-border-radius, 10px);
+    padding: var(--chotto-systemmessage-container-padding, 10px);
+    margin: var(--chotto-systemmessage-container-margin, 0 auto 18px auto);
+    background-color: var(--chotto-systemmessage-container-background-color, #ffeecc);
+  }
+
+  &__text {
+    font-size: var(--chotto-systemmessage-text-font-size, 14px);
+    line-height: var(--chotto-systemmessage-text-line-height, 1.5);
+    text-align: var(--chotto-systemmessage-text-text-align, center);
+    color: var(--chotto-systemmessage-text-color, #5F5F5F);
+  }
+}

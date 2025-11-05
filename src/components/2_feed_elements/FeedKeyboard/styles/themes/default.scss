@@ -1,0 +1,34 @@
+[data-theme="light"] {
+  // FeedKeyboard container variables
+  --chotto-feedkeyboard-container-display: flex;
+  --chotto-feedkeyboard-container-margin-top: 10px;
+  --chotto-feedkeyboard-container-margin-bottom: 10px;
+  --chotto-feedkeyboard-container-flex-wrap: wrap;
+  --chotto-feedkeyboard-container-max-width: 100%;
+  --chotto-feedkeyboard-container-gap: 10px;
+
+  // FeedKeyboard container alignment variables
+  --chotto-feedkeyboard-container-left-justify-content: flex-start;
+  --chotto-feedkeyboard-container-left-margin-left: 0;
+  --chotto-feedkeyboard-container-left-margin-right: auto;
+  --chotto-feedkeyboard-container-center-justify-content: center;
+  --chotto-feedkeyboard-container-center-margin-left: auto;
+  --chotto-feedkeyboard-container-center-margin-right: auto;
+  --chotto-feedkeyboard-container-right-justify-content: flex-end;
+  --chotto-feedkeyboard-container-right-margin-left: auto;
+  --chotto-feedkeyboard-container-right-margin-right: 0;
+
+  // FeedKeyboard button variables
+  --chotto-feedkeyboard-button-background: #ffffff;
+  --chotto-feedkeyboard-button-word-wrap: break-word;
+  --chotto-feedkeyboard-button-max-width: 100%;
+  --chotto-feedkeyboard-button-cursor: pointer;
+  --chotto-feedkeyboard-button-padding: 3px 16px;
+  --chotto-feedkeyboard-button-border: 1px solid #6C757D;
+  --chotto-feedkeyboard-button-border-radius: 15px;
+
+  // FeedKeyboard button text variables
+  --chotto-feedkeyboard-button-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-feedkeyboard-button-text-margin: 0;
+  --chotto-feedkeyboard-button-text-font-weight: 600;
+}

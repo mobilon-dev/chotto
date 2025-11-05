@@ -1,0 +1,290 @@
+.communication-panel {
+  position: var(--chotto-communicationpanel-main-position, relative);
+  display: var(--chotto-communicationpanel-main-display, inline-block);
+}
+
+.channels-panel {
+  display: var(--chotto-communicationpanel-channels-display, flex);
+  background: var(--chotto-communicationpanel-background, white);
+  border: var(--chotto-communicationpanel-border-width, 0.01rem) solid;
+  border-radius: var(--chotto-communicationpanel-border-radius, 5px);
+  border-color: var(--chotto-communicationpanel-border-color, #EEEEEE);
+  padding: var(--chotto-communicationpanel-padding, 0px);
+  gap: var(--chotto-communicationpanel-gap, 0);
+  position: var(--chotto-communicationpanel-channels-position, relative);
+  height: var(--chotto-communicationpanel-height, 40px);
+  box-shadow: var(--chotto-communicationpanel-box-shadow, none);
+}
+
+.channel-btn {
+  display: var(--chotto-communicationpanel-btn-display, flex);
+  align-items: var(--chotto-communicationpanel-btn-align-items, center);
+  justify-content: var(--chotto-communicationpanel-btn-justify-content, center);
+  padding: var(--chotto-communicationpanel-btn-padding, 0);
+  border: var(--chotto-communicationpanel-btn-border, none);
+  background: var(--chotto-communicationpanel-btn-background, transparent);
+  border-radius: var(--chotto-communicationpanel-btn-border-radius, 0);
+  cursor: var(--chotto-communicationpanel-btn-cursor, pointer);
+  transition: var(--chotto-communicationpanel-btn-transition, all 0.2s ease);
+  position: var(--chotto-communicationpanel-btn-position, relative);
+  width: var(--chotto-communicationpanel-btn-width, 50px);
+  height: var(--chotto-communicationpanel-btn-height, 100%);
+  color: var(--chotto-communicationpanel-btn-color, inherit);
+  font-size: var(--chotto-communicationpanel-btn-font-size, inherit);
+  font-weight: var(--chotto-communicationpanel-btn-font-weight, normal);
+}
+
+.channel-btn:not(:last-child)::after {
+  content: var(--chotto-communicationpanel-btn-divider-content, '');
+  position: var(--chotto-communicationpanel-btn-divider-position, absolute);
+  right: var(--chotto-communicationpanel-btn-divider-right, 0);
+  top: var(--chotto-communicationpanel-btn-divider-top, 25%);
+  bottom: var(--chotto-communicationpanel-btn-divider-bottom, 25%);
+  width: var(--chotto-communicationpanel-btn-divider-width, 1px);
+  background-color: var(--chotto-communicationpanel-btn-divider-color, #F6F6F6);
+  border-radius: var(--chotto-communicationpanel-btn-divider-border-radius, 0);
+}
+
+.channel-btn:first-child {
+  border-top-left-radius: var(--chotto-communicationpanel-btn-first-border-radius, 8px);
+  border-bottom-left-radius: var(--chotto-communicationpanel-btn-first-border-radius, 8px);
+}
+
+.channel-btn:last-child {
+  border-top-right-radius: var(--chotto-communicationpanel-btn-last-border-radius, 8px);
+  border-bottom-right-radius: var(--chotto-communicationpanel-btn-last-border-radius, 8px);
+}
+
+.channel-btn.hover {
+  background: var(--chotto-communicationpanel-btn-hover-background, #F6F6F6);
+  color: var(--chotto-communicationpanel-btn-hover-color, inherit);
+  transform: var(--chotto-communicationpanel-btn-hover-transform, none);
+}
+
+.channel-btn.active {
+  color: var(--chotto-communicationpanel-btn-active-color, #007CFF);
+  background: var(--chotto-communicationpanel-btn-active-background, transparent);
+  font-weight: var(--chotto-communicationpanel-btn-active-font-weight, inherit);
+}
+
+.active-indicator {
+  position: var(--chotto-communicationpanel-active-indicator-position, absolute);
+  bottom: var(--chotto-communicationpanel-active-indicator-bottom, 1px);
+  left: var(--chotto-communicationpanel-active-indicator-left, 50%);
+  transform: var(--chotto-communicationpanel-active-indicator-transform, translateX(-50%));
+  width: var(--chotto-communicationpanel-active-indicator-width, 48%);
+  height: var(--chotto-communicationpanel-active-indicator-height, 2px);
+  background: var(--chotto-communicationpanel-active-indicator-background, var(--chotto-communicationpanel-btn-active-color, #007CFF));
+  border-radius: var(--chotto-communicationpanel-active-indicator-border-radius, 20px);
+  opacity: var(--chotto-communicationpanel-active-indicator-opacity, 1);
+  transition: var(--chotto-communicationpanel-active-indicator-transition, all 0.2s ease);
+}
+
+.channel-icon {
+  display: var(--chotto-communicationpanel-icon-display, flex);
+  align-items: var(--chotto-communicationpanel-icon-align-items, center);
+  justify-content: var(--chotto-communicationpanel-icon-justify-content, center);
+  width: var(--chotto-communicationpanel-icon-width, auto);
+  height: var(--chotto-communicationpanel-icon-height, auto);
+  color: var(--chotto-communicationpanel-icon-color, inherit);
+  font-size: var(--chotto-communicationpanel-icon-font-size, inherit);
+  transition: var(--chotto-communicationpanel-icon-transition, all 0.2s ease);
+}
+
+.attributes-menu {
+  position: var(--chotto-communicationpanel-menu-position, absolute);
+  top: var(--chotto-communicationpanel-menu-top, 108%);
+  left: var(--chotto-communicationpanel-menu-left, 0);
+  right: var(--chotto-communicationpanel-menu-right, auto);
+  background: var(--chotto-communicationpanel-menu-background, white);
+  border: var(--chotto-communicationpanel-menu-border, 1px solid #e9e7e7);
+  border-radius: var(--chotto-communicationpanel-menu-border-radius, 4px);
+  box-shadow: var(--chotto-communicationpanel-menu-box-shadow, 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.08));
+  padding: var(--chotto-communicationpanel-menu-padding, 8px 0);
+  z-index: var(--chotto-communicationpanel-menu-z-index, 1000);
+  max-height: var(--chotto-communicationpanel-menu-max-height, 300px);
+  min-width: var(--chotto-communicationpanel-menu-min-width, auto);
+  gap: var(--chotto-communicationpanel-menu-gap, 2px);
+  opacity: var(--chotto-communicationpanel-menu-opacity, 1);
+  transform: var(--chotto-communicationpanel-menu-transform, none);
+  transition: var(--chotto-communicationpanel-menu-transition, all 0.2s ease);
+}
+
+.menu-header {
+  padding: var(--chotto-communicationpanel-menu-header-padding, 8px 16px 4px);
+  font-size: var(--chotto-communicationpanel-menu-header-font-size, 14px);
+  color: var(--chotto-communicationpanel-menu-header-color, #737373);
+  font-weight: var(--chotto-communicationpanel-menu-header-font-weight, 500);
+  letter-spacing: var(--chotto-communicationpanel-menu-header-letter-spacing, 0.5px);
+  text-transform: var(--chotto-communicationpanel-menu-header-text-transform, none);
+  border-bottom: var(--chotto-communicationpanel-menu-header-border-bottom, none);
+  margin-bottom: var(--chotto-communicationpanel-menu-header-margin-bottom, 0);
+}
+
+.recent-attribute,
+.attribute-item {
+  display: var(--chotto-communicationpanel-attribute-display, flex);
+  justify-content: var(--chotto-communicationpanel-attribute-justify-content, space-between);
+  align-items: var(--chotto-communicationpanel-attribute-align-items, center);
+  padding: var(--chotto-communicationpanel-attribute-padding, 6px 16px);
+  cursor: var(--chotto-communicationpanel-attribute-cursor, pointer);
+  transition: var(--chotto-communicationpanel-attribute-transition, background 0.2s ease);
+  border-radius: var(--chotto-communicationpanel-attribute-border-radius, 0);
+  margin: var(--chotto-communicationpanel-attribute-margin, 0);
+  background: var(--chotto-communicationpanel-attribute-background, transparent);
+  color: var(--chotto-communicationpanel-attribute-color, inherit);
+  font-size: var(--chotto-communicationpanel-attribute-font-size, inherit);
+}
+
+.recent-attribute:hover,
+.attribute-item:hover {
+  background: var(--chotto-communicationpanel-attribute-hover-background, #e5e5e5);
+  color: var(--chotto-communicationpanel-attribute-hover-color, inherit);
+  transform: var(--chotto-communicationpanel-attribute-hover-transform, none);
+}
+
+.attribute-info {
+  display: var(--chotto-communicationpanel-attribute-info-display, flex);
+  flex-direction: var(--chotto-communicationpanel-attribute-info-flex-direction, column);
+  gap: var(--chotto-communicationpanel-attribute-info-gap, 0);
+  flex: var(--chotto-communicationpanel-attribute-info-flex, 1);
+}
+
+.attribute-value {
+  font-weight: var(--chotto-communicationpanel-attribute-value-font-weight, 500);
+  font-size: var(--chotto-communicationpanel-attribute-value-font-size, 14px);
+  color: var(--chotto-communicationpanel-attribute-value-color, #262626);
+  line-height: var(--chotto-communicationpanel-attribute-value-line-height, normal);
+}
+
+.channel-icon-small {
+  display: var(--chotto-communicationpanel-icon-small-display, flex);
+  align-items: var(--chotto-communicationpanel-icon-small-align-items, center);
+  justify-content: var(--chotto-communicationpanel-icon-small-justify-content, center);
+  width: var(--chotto-communicationpanel-icon-small-width, 20px);
+  height: var(--chotto-communicationpanel-icon-small-height, 20px);
+  margin-left: var(--chotto-communicationpanel-icon-small-margin-left, 8px);
+  color: var(--chotto-communicationpanel-icon-small-color, inherit);
+  font-size: var(--chotto-communicationpanel-icon-small-font-size, inherit);
+  flex-shrink: var(--chotto-communicationpanel-icon-small-flex-shrink, 0);
+}
+
+.menu-icon-grey {
+  color: var(--chotto-communicationpanel-menu-icon-grey-color, #5F5F5F);
+  font-size: var(--chotto-communicationpanel-menu-icon-grey-font-size, inherit);
+}
+
+.menu-icon {
+  color: var(--chotto-communicationpanel-menu-icon-color, #999);
+  font-weight: var(--chotto-communicationpanel-menu-icon-font-weight, bold);
+  margin-left: var(--chotto-communicationpanel-menu-icon-margin-left, 8px);
+  display: var(--chotto-communicationpanel-menu-icon-display, flex);
+  align-items: var(--chotto-communicationpanel-menu-icon-align-items, center);
+  justify-content: var(--chotto-communicationpanel-menu-icon-justify-content, center);
+  font-size: var(--chotto-communicationpanel-menu-icon-font-size, inherit);
+  width: var(--chotto-communicationpanel-menu-icon-width, auto);
+  height: var(--chotto-communicationpanel-menu-icon-height, auto);
+}
+
+.menu-icon-arrow {
+  width: var(--chotto-communicationpanel-menu-arrow-width, 9px);
+  height: var(--chotto-communicationpanel-menu-arrow-height, 9px);
+  border-top: var(--chotto-communicationpanel-menu-arrow-border-top, 1px solid #5F5F5F);
+  border-right: var(--chotto-communicationpanel-menu-arrow-border-right, 1px solid #5F5F5F);
+  transform: var(--chotto-communicationpanel-menu-arrow-transform, rotate(45deg));
+  transition: var(--chotto-communicationpanel-menu-arrow-transition, all 0.2s ease);
+}
+
+.menu-divider {
+  height: var(--chotto-communicationpanel-menu-divider-height, 1px);
+  background: var(--chotto-communicationpanel-menu-divider-background, #e0e0e0);
+  margin: var(--chotto-communicationpanel-menu-divider-margin, 4px 12px);
+  border-radius: var(--chotto-communicationpanel-menu-divider-border-radius, 0);
+  opacity: var(--chotto-communicationpanel-menu-divider-opacity, 1);
+}
+
+.attribute-item.frozen-hover,
+.recent-attribute.frozen-hover {
+  background: var(--chotto-communicationpanel-attribute-hover-background, #e5e5e5);
+}
+
+.sub-menu {
+  position: var(--chotto-communicationpanel-submenu-position, absolute);
+  top: var(--chotto-communicationpanel-submenu-top, 0);
+  right: var(--chotto-communicationpanel-submenu-right, 100%);
+  left: var(--chotto-communicationpanel-submenu-left, auto);
+  background: var(--chotto-communicationpanel-submenu-background, white);
+  border: var(--chotto-communicationpanel-submenu-border, 1px solid #e0e0e0);
+  border-radius: var(--chotto-communicationpanel-submenu-border-radius, 4px);
+  box-shadow: var(--chotto-communicationpanel-submenu-box-shadow, 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.08));
+  padding: var(--chotto-communicationpanel-submenu-padding, 8px 0);
+  min-width: var(--chotto-communicationpanel-submenu-min-width, 250px);
+  max-width: var(--chotto-communicationpanel-submenu-max-width, none);
+  z-index: var(--chotto-communicationpanel-submenu-z-index, 1001);
+  display: var(--chotto-communicationpanel-submenu-display, flex);
+  flex-direction: var(--chotto-communicationpanel-submenu-flex-direction, column);
+  gap: var(--chotto-communicationpanel-submenu-gap, 0);
+  opacity: var(--chotto-communicationpanel-submenu-opacity, 1);
+  transform: var(--chotto-communicationpanel-submenu-transform, none);
+  transition: var(--chotto-communicationpanel-submenu-transition, all 0.2s ease);
+}
+
+.sub-menu-header {
+  padding: var(--chotto-communicationpanel-submenu-header-padding, 8px 12px 2px);
+  font-size: var(--chotto-communicationpanel-submenu-header-font-size, 14px);
+  color: var(--chotto-communicationpanel-submenu-header-color, #737373);
+  font-weight: var(--chotto-communicationpanel-submenu-header-font-weight, 500);
+  letter-spacing: var(--chotto-communicationpanel-submenu-header-letter-spacing, 0.5px);
+  margin-bottom: var(--chotto-communicationpanel-submenu-header-margin-bottom, 4px);
+  text-transform: var(--chotto-communicationpanel-submenu-header-text-transform, none);
+  border-bottom: var(--chotto-communicationpanel-submenu-header-border-bottom, none);
+}
+
+.sub-menu-item {
+  display: var(--chotto-communicationpanel-submenu-item-display, flex);
+  align-items: var(--chotto-communicationpanel-submenu-item-align-items, center);
+  justify-content: var(--chotto-communicationpanel-submenu-item-justify-content, space-between);
+  padding: var(--chotto-communicationpanel-submenu-item-padding, 6px 12px);
+  cursor: var(--chotto-communicationpanel-submenu-item-cursor, pointer);
+  transition: var(--chotto-communicationpanel-submenu-item-transition, background 0.2s ease);
+  border-radius: var(--chotto-communicationpanel-submenu-item-border-radius, 4px);
+  gap: var(--chotto-communicationpanel-submenu-item-gap, 12px);
+  background: var(--chotto-communicationpanel-submenu-item-background, transparent);
+  color: var(--chotto-communicationpanel-submenu-item-color, inherit);
+  font-size: var(--chotto-communicationpanel-submenu-item-font-size, inherit);
+  margin: var(--chotto-communicationpanel-submenu-item-margin, 0);
+}
+
+.sub-menu-item:hover {
+  background: var(--chotto-communicationpanel-submenu-item-hover-background, #e5e5e5);
+  color: var(--chotto-communicationpanel-submenu-item-hover-color, inherit);
+  transform: var(--chotto-communicationpanel-submenu-item-hover-transform, none);
+}
+
+.sub-menu-icon {
+  display: var(--chotto-communicationpanel-submenu-icon-display, flex);
+  align-items: var(--chotto-communicationpanel-submenu-icon-align-items, center);
+  justify-content: var(--chotto-communicationpanel-submenu-icon-justify-content, center);
+  width: var(--chotto-communicationpanel-submenu-icon-width, 20px);
+  height: var(--chotto-communicationpanel-submenu-icon-height, 20px);
+  flex-shrink: var(--chotto-communicationpanel-submenu-icon-flex-shrink, 0);
+  margin-left: var(--chotto-communicationpanel-submenu-icon-margin-left, auto);
+  color: var(--chotto-communicationpanel-submenu-icon-color, inherit);
+  font-size: var(--chotto-communicationpanel-submenu-icon-font-size, inherit);
+}
+
+.sub-menu-title {
+  font-size: var(--chotto-communicationpanel-submenu-title-font-size, 14px);
+  color: var(--chotto-communicationpanel-submenu-title-color, #262626);
+  white-space: var(--chotto-communicationpanel-submenu-title-white-space, nowrap);
+  overflow: var(--chotto-communicationpanel-submenu-title-overflow, hidden);
+  text-overflow: var(--chotto-communicationpanel-submenu-title-text-overflow, ellipsis);
+  flex-grow: var(--chotto-communicationpanel-submenu-title-flex-grow, 1);
+  font-weight: var(--chotto-communicationpanel-submenu-title-font-weight, normal);
+  line-height: var(--chotto-communicationpanel-submenu-title-line-height, normal);
+}
+
+.attributes-menu :deep(.tooltip-wrapper) {
+  display: var(--chotto-communicationpanel-tooltip-display, block);
+  width: var(--chotto-communicationpanel-tooltip-width, 100%);
+}

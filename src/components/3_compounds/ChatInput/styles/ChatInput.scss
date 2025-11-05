@@ -1,0 +1,132 @@
+.chat-input {
+  &__container {
+    position: var(--chotto-chatinput-container-position, relative);
+    display: var(--chotto-chatinput-container-display, grid);
+    align-items: var(--chotto-chatinput-container-align-items, center);
+    border-top: var(--chotto-chatinput-container-border-top, none);
+    background-color: var(--chotto-chatinput-container-bg, #ffffff);
+    padding: var(--chotto-chatinput-container-padding, 12px 0 8px 15px);
+    grid-gap: var(--chotto-chatinput-container-grid-gap, 0);
+    grid-template-columns: var(--chotto-chatinput-container-grid-template-columns, min-content auto min-content);
+    grid-template-rows: var(--chotto-chatinput-container-grid-template-rows, auto auto auto auto);
+  }
+
+  &__reply-line {
+    grid-column: var(--chotto-chatinput-reply-line-grid-column, 2);
+    grid-row: var(--chotto-chatinput-reply-line-grid-row, 1);
+    display: var(--chotto-chatinput-reply-line-display, none);
+  }
+
+  &__file-line {
+    grid-column: var(--chotto-chatinput-file-line-grid-column, 2);
+    grid-row: var(--chotto-chatinput-file-line-grid-row, 2);
+    display: var(--chotto-chatinput-file-line-display, none);
+  }
+
+  &__third-line {
+    display: var(--chotto-chatinput-third-line-display, flex);
+    grid-row: var(--chotto-chatinput-third-line-grid-row, 4);
+    grid-column-start: var(--chotto-chatinput-third-line-grid-column-start, 1);
+    grid-column-end: var(--chotto-chatinput-third-line-grid-column-end, 3);
+  }
+
+  &__input {
+    grid-row: var(--chotto-chatinput-input-grid-row, 3);
+    grid-column: var(--chotto-chatinput-input-grid-column, 2);
+    border: var(--chotto-chatinput-input-border, 1px solid #d0d0d0);
+    background-color: var(--chotto-chatinput-input-background-color, transparent);
+    padding: var(--chotto-chatinput-input-padding, 0.5rem 0.60rem);
+    color: var(--chotto-chatinput-input-text-color, #1E1E1E);
+    font-size: var(--chotto-chatinput-input-font-size, 16px);
+    overflow-y: var(--chotto-chatinput-input-overflow-y, hidden);
+    resize: var(--chotto-chatinput-input-resize, none);
+    white-space: var(--chotto-chatinput-input-white-space, pre-wrap);
+    line-height: var(--chotto-chatinput-input-line-height, 1.4);
+    min-height: var(--chotto-chatinput-input-min-height, 40px);
+    max-height: calc(1.5em * var(--chotto-chatinput-input-max-rows, 10));
+    border-radius: var(--chotto-chatinput-input-border-radius, 2px);
+    font-family: var(--chotto-chatinput-font-family, "Open Sans", sans-serif);
+
+    &:focus-visible {
+      outline: var(--chotto-chatinput-input-focus-outline, none);
+    }
+
+    &::placeholder {
+      color: var(--chotto-chatinput-secondary-text-color, #5F5F5F);
+    }
+
+    &::-webkit-scrollbar {
+      width: var(--chotto-chatinput-scrollbar-width, 6px);
+      background-color: var(--chotto-chatinput-scrollbar-bg, #fafafa);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: var(--chotto-chatinput-scrollbar-thumb-radius, 10px);
+      background-color: var(--chotto-chatinput-scrollbar-thumb-bg, #d4d4d4);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: var(--chotto-chatinput-scrollbar-track-radius, 10px);
+    }
+  }
+
+  &__disabled-placeholder {
+    color: var(--chotto-chatinput-disabled-placeholder-text-color, #5F5F5F);
+    text-align: var(--chotto-chatinput-disabled-placeholder-text-align, center);
+    user-select: var(--chotto-chatinput-disabled-placeholder-user-select, none);
+  }
+
+  &__button {
+    grid-row: var(--chotto-chatinput-button-grid-row, 3);
+    grid-column: var(--chotto-chatinput-button-grid-column, 3);
+    background-color: var(--chotto-chatinput-button-background-color, transparent);
+    border: var(--chotto-chatinput-button-border, 0px);
+    height: var(--chotto-chatinput-button-height-fit, fit-content);
+    width: var(--chotto-chatinput-button-width-fit, fit-content);
+    display: var(--chotto-chatinput-button-display, flex);
+    align-self: var(--chotto-chatinput-button-align-self, end);
+    margin-bottom: var(--chotto-chatinput-button-margin-bottom, 4px);
+
+    span {
+      display: var(--chotto-chatinput-button-span-display, block);
+      cursor: var(--chotto-chatinput-button-span-cursor, pointer);
+      padding: var(--chotto-chatinput-button-padding, 1px 0 0 3px);
+      font-size: var(--chotto-chatinput-button-icon-size, 23px);
+      color: var(--chotto-chatinput-icon-color, #525252);
+      height: var(--chotto-chatinput-button-height, 30px);
+      margin: var(--chotto-chatinput-button-margin, 0);
+    }
+  }
+
+  &__button-disabled {
+    span {
+      cursor: var(--chotto-chatinput-button-disabled-cursor, auto);
+      color: var(--chotto-chatinput-icon-color-disabled, #e5e5e5);
+    }
+  }
+
+  &__inline-buttons{
+    display: var(--chotto-chatinput-inline-buttons-display, flex);
+    margin: var(--chotto-chatinput-inline-buttons-margin-auto, auto 0);
+    grid-row: var(--chotto-chatinput-inline-buttons-grid-row, 3);
+    grid-column: var(--chotto-chatinput-inline-buttons-grid-column, 1);
+    margin: var(--chotto-chatinput-inline-buttons-margin, 0 5px 4px 2px);
+    gap: var(--chotto-chatinput-inline-buttons-gap, 7px);
+    height: var(--chotto-chatinput-inline-buttons-height, 30px);
+    align-self: var(--chotto-chatinput-inline-buttons-align-self, flex-end);
+  }
+}
+
+.v-enter-active {
+  transition: var(--chotto-chatinput-enter-transition, all var(--chotto-chatinput-enter-duration, 0.2s) ease-out);
+}
+
+.v-leave-active {
+  transition: var(--chotto-chatinput-leave-transition, all var(--chotto-chatinput-leave-duration, 0.2s) cubic-bezier(1, 0.5, 0.8, 1));
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: var(--chotto-chatinput-enter-transform, translateY(var(--chotto-chatinput-enter-translate-y, 20px)));
+  opacity: var(--chotto-chatinput-enter-opacity, 0);
+}

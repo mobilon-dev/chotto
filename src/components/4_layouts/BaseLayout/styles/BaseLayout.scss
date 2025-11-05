@@ -1,0 +1,47 @@
+.base-layout {
+  &__container {
+    height: var(--chotto-baselayout-container-height, inherit);
+    width: var(--chotto-baselayout-container-width, 100%);
+    display: var(--chotto-baselayout-container-display, grid);
+    grid-template-columns: var(--chotto-baselayout-container-grid-template-columns, 1.8fr 3fr);
+    transition: var(--chotto-baselayout-container-transition, all 0.3s ease);
+    position: var(--chotto-baselayout-container-position, relative);
+    border-top: var(--chotto-baselayout-container-border-top, var(--chotto-theme-border, none));
+    border-left: var(--chotto-baselayout-container-border-left, var(--chotto-theme-border, none));
+  }
+
+  &__first-col {
+    position: var(--chotto-baselayout-first-col-position, relative);
+    grid-column: var(--chotto-baselayout-first-col-grid-column, 1);
+    display: var(--chotto-baselayout-first-col-display, flex);
+    flex-direction: var(--chotto-baselayout-first-col-flex-direction, column);
+    height: var(--chotto-baselayout-first-col-height, inherit);
+    background-color: var(--chotto-baselayout-first-col-background-color, #ffffff);
+    border-right: var(--chotto-baselayout-first-col-border-right, var(--chotto-theme-border, none));
+    border-bottom: var(--chotto-baselayout-first-col-border-bottom, var(--chotto-theme-border, none));
+    width: var(--chotto-baselayout-first-col-width, 100%);
+  }
+
+  &__second-col {
+    position: var(--chotto-baselayout-second-col-position, relative);
+    display: var(--chotto-baselayout-second-col-display, flex);
+    flex-direction: var(--chotto-baselayout-second-col-flex-direction, column);
+    grid-column: var(--chotto-baselayout-second-col-grid-column, 2);
+    height: var(--chotto-baselayout-second-col-height, inherit);
+    width: var(--chotto-baselayout-second-col-width, 100%);
+    background-color: var(--chotto-baselayout-second-col-background-color, #FAF6F4);
+    border-right: var(--chotto-baselayout-second-col-border-right, var(--chotto-theme-border, none));
+    border-bottom: var(--chotto-baselayout-second-col-border-bottom, var(--chotto-theme-border, none));
+  }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: var(--chotto-baselayout-transition-enter-active-transition, opacity 0.5s ease);
+  opacity: var(--chotto-baselayout-transition-enter-active-opacity, 1);
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: var(--chotto-baselayout-transition-enter-from-opacity, 0);
+}

@@ -1,0 +1,19 @@
+.file-uploader {
+  &__trigger {
+    padding: var(--chotto-fileuploader-trigger-padding, 1px 0 0 3px);
+    display: var(--chotto-fileuploader-trigger-display, block);
+    cursor: var(--chotto-fileuploader-trigger-cursor, pointer);
+    font-size: var(--chotto-fileuploader-trigger-font-size, 23px);
+    color: var(--chotto-fileuploader-trigger-color, #525252);
+  }
+
+  &__trigger:hover {
+    color: var(--chotto-fileuploader-trigger-hover-color, #404040);
+  }
+
+  &__disabled {
+    color: var(--chotto-fileuploader-disabled-color, #e5e5e5);
+    cursor: var(--chotto-fileuploader-disabled-cursor, auto);
+    pointer-events: var(--chotto-fileuploader-disabled-pointer-events, none);
+  }
+}

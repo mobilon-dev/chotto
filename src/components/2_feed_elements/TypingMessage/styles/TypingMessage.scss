@@ -1,0 +1,76 @@
+.typing-message {
+  &__container {
+    display: var(--chotto-typingmessage-container-display, grid);
+    grid-template-columns: var(--chotto-typingmessage-container-grid-template-columns, min-content 1fr);
+    position: var(--chotto-typingmessage-container-position, relative);
+    margin: var(--chotto-typingmessage-container-margin, 0 0 10px 0);
+  }
+
+  &__subtext {
+    grid-column: var(--chotto-typingmessage-subtext-grid-column, 2);
+    grid-row: var(--chotto-typingmessage-subtext-grid-row, 1);
+    margin: var(--chotto-typingmessage-subtext-margin, 0 0 2px 10px);
+    font-size: var(--chotto-typingmessage-subtext-font-size, 14px);
+    color: var(--chotto-typingmessage-subtext-color, #5F5F5F);
+  }
+
+  &__avatar {
+    align-self: var(--chotto-typingmessage-avatar-align-self, center);
+    object-fit: var(--chotto-typingmessage-avatar-object-fit, cover);
+    min-width: var(--chotto-typingmessage-avatar-min-width, 40px);
+    min-height: var(--chotto-typingmessage-avatar-min-height, 40px);
+    border-radius: var(--chotto-typingmessage-avatar-border-radius, 50%);
+    grid-column: var(--chotto-typingmessage-avatar-grid-column, 1);
+    grid-row: var(--chotto-typingmessage-avatar-grid-row, 2);
+    margin-right: var(--chotto-typingmessage-avatar-margin-right, 12px);
+  }
+
+  &__loader-container {
+    min-height: var(--chotto-typingmessage-loader-container-min-height, 40px);
+    grid-column: var(--chotto-typingmessage-loader-container-grid-column, 2);
+    border-radius: var(--chotto-typingmessage-loader-container-border-radius, 10px);
+    padding: var(--chotto-typingmessage-loader-container-padding, 6px 6px 6px 6px);
+    max-width: var(--chotto-typingmessage-loader-container-max-width, 80px);
+    background-color: var(--chotto-typingmessage-loader-container-background-color, #d4d4d4);
+  }
+
+  &__loader {
+    width: var(--chotto-typingmessage-loader-width, 8px);
+    height: var(--chotto-typingmessage-loader-height, 8px);
+    position: var(--chotto-typingmessage-loader-position, relative);
+    top: var(--chotto-typingmessage-loader-top, 50%);
+    border-radius: var(--chotto-typingmessage-loader-border-radius, 50%);
+    animation: typing-message__loader 0.8s 0.25s ease alternate infinite;
+    margin: var(--chotto-typingmessage-loader-margin, -20px auto 0);
+
+    &::after,
+    &::before {
+      content: var(--chotto-typingmessage-loader-pseudo-content, '');
+      position: var(--chotto-typingmessage-loader-pseudo-position, absolute);
+      width: var(--chotto-typingmessage-loader-pseudo-width, 8px);
+      height: var(--chotto-typingmessage-loader-pseudo-height, 8px);
+      border-radius: var(--chotto-typingmessage-loader-pseudo-border-radius, 50%);
+      animation: typing-message__loader 0.8s ease alternate infinite;
+    }
+
+    &::before {
+      left: var(--chotto-typingmessage-loader-before-left, -20px);
+      animation-delay: var(--chotto-typingmessage-loader-before-animation-delay, 0.1s);
+    }
+
+    &::after {
+      right: var(--chotto-typingmessage-loader-after-right, -20px);
+      animation-delay: var(--chotto-typingmessage-loader-after-animation-delay, 0.4s);
+    }
+  }
+
+  @keyframes typing-message__loader {
+    0% {
+      box-shadow: var(--chotto-typingmessage-keyframes-0-box-shadow, 0 15px 0 -15px #5f5f5f);
+    }
+
+    100% {
+      box-shadow: var(--chotto-typingmessage-keyframes-100-box-shadow, 0 15px 0 #5f5f5f);
+    }
+  }
+}

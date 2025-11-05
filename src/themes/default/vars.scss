@@ -1,0 +1,99 @@
+[data-theme="light"] {
+
+  /* ===========================================
+     CHOTTO THEME VARIABLES
+     =========================================== */
+
+  /* Messages */
+  --chotto-theme-message-right-bg: #d1fae5;
+  --chotto-theme-message-right-secondary-bg: #a7f3d0;
+  --chotto-theme-message-left-bg: #e5e5e5;
+  --chotto-theme-message-left-secondary-bg: #d4d4d4;
+  
+  --chotto-theme-message-accent-line-color: #34d399;
+  --chotto-theme-message-focused-color: #8df392;
+
+  --chotto-theme-message-margin: 0 0 8px 0;
+
+  --chotto-theme-message-type-icon-bg-color: #a3a3a3;
+  --chotto-theme-message-type-icon-color: #f5f5f5;
+
+  --chotto-theme-message-border-radius: 5px;
+
+  --chotto-theme-message-modal-padding: 20px;
+  --chotto-theme-message-modal-border-radius: 12px;
+  --chotto-theme-message-modal-mask-background: rgba(0, 0, 0, 0.4);
+  --chotto-theme-message-modal-overlay-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --chotto-theme-message-modal-bg: #ffffff;
+
+  /* Primary colors */
+  --chotto-theme-primary-color: #ffffff;
+  --chotto-theme-secondary-color: #faf6f4;
+  --chotto-theme-tertiary-color: #a3a3a3;
+  --chotto-theme-quaternary-color: #737373;
+  --chotto-theme-quinary-color: #404040;
+
+  /* Text colors */
+  --chotto-theme-primary-text-color: #1e1e1e;
+  --chotto-theme-secondary-text-color: #5f5f5f;
+
+  /* Typography */
+  --chotto-theme-header-font: 'Montserrat', sans-serif;
+  --chotto-theme-header-font-size: 20px;
+  --chotto-theme-header-font-color: #1e1e1e;
+  --chotto-theme-title-font-size: 16px;
+  --chotto-theme-font-family: 'Montserrat', sans-serif;
+  --chotto-theme-text-font-size: 15px;
+  --chotto-theme-additional-text-font-size: 13px;
+  --chotto-theme-small-text-font-size: 11px;
+  --chotto-theme-context-menu-font-size: 14px;
+
+  /* Font weights */
+  --chotto-theme-header-font-weight: 700;
+  --chotto-theme-title-font-weight: 600;
+  --chotto-theme-small-text-font-weight: 400;
+  --chotto-theme-default-font-weight: 400;
+
+  /* Icon sizes */
+  --chotto-theme-button-icon-size: 21px;
+  --chotto-theme-text-icon-size: 14px;
+  --chotto-theme-small-text-icon-size: 12px;
+  --chotto-theme-avatar-small-size: 40px;
+  --chotto-theme-avatar-medium-size: 50px;
+
+  /* Button colors */
+  --chotto-theme-button-color-active: #525252;
+  --chotto-theme-button-color-hover: #404040;
+  --chotto-theme-button-color-disabled: #e5e5e5;
+
+  /* Borders */
+  --chotto-theme-border: 1px solid #e5e5e5;
+
+  /* Action button colors */
+  --chotto-theme-action-button-color-active: #00cbfa;
+  --chotto-theme-action-button-color-hover: #3fddff;
+  --chotto-theme-action-button-color-disabled: #b4e8f9;
+
+  /* Shadows */
+  --chotto-theme-shadow-color: #262626;
+  --chotto-theme-shadow-light-color: #d4d4d4;
+
+  /* Status colors */
+  --chotto-theme-status-color-received: #737373;
+  --chotto-theme-status-color-read: #00c2ff;
+  --chotto-theme-status-color-error: #dc2626;
+  --chotto-theme-status-color-pending: #9ca3af;
+  
+  /* Item states */
+  --chotto-theme-item-background-color-focus: #f5f5f5;
+  --chotto-theme-item-background-color-hover: #e5e5e5;
+  --chotto-theme-item-border-color: #e5e5e5;
+
+  /* Unread states */
+  --chotto-theme-unread-background-color: #ef4444;
+  --chotto-theme-unread-text-color: #fafafa;
+
+  /* Scroll Bar */
+  --chotto-theme-scrollbar-bg: #fafafa;
+  --chotto-theme-scrollbar-thumb-bg: #d4d4d4;
+}

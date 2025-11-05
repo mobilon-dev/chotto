@@ -15,8 +15,8 @@ const config: StorybookConfig = {
   },
 
   viteFinal: async (config) => {
-    config.base = 'https://mobilon-dev.github.io/chotto/';
-    // config.base = 'http://localhost:3000/';
+    // Use local base in dev and GitHub Pages base in production builds
+    config.base = process.env.NODE_ENV === 'production' ? '/chotto/' : '/';
     return config;
   }
 };

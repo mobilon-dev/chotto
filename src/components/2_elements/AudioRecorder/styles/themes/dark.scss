@@ -1,0 +1,54 @@
+[data-theme="dark"] {
+  // AudioRecorder container variables
+  --chotto-audiorecorder-container-position: relative;
+  --chotto-audiorecorder-container-display: grid;
+  --chotto-audiorecorder-container-align-items: center;
+  --chotto-audiorecorder-container-background-color: transparent;
+  --chotto-audiorecorder-container-height: fit-content;
+
+  // AudioRecorder recording-container variables
+  --chotto-audiorecorder-recording-container-display: flex;
+  --chotto-audiorecorder-recording-container-gap: 3px;
+  --chotto-audiorecorder-recording-container-line-height: 56px;
+
+  // AudioRecorder recording-icon variables
+  --chotto-audiorecorder-recording-icon-line-height: 56px;
+  --chotto-audiorecorder-recording-icon-font-size: 10px;
+  --chotto-audiorecorder-recording-icon-webkit-animation: blink 3s linear infinite;
+  --chotto-audiorecorder-recording-icon-animation: blink 3s linear infinite;
+
+  // AudioRecorder stop variables
+  --chotto-audiorecorder-stop-width: 20px;
+  --chotto-audiorecorder-stop-height: 20px;
+  --chotto-audiorecorder-stop-background-color: black;
+  --chotto-audiorecorder-stop-cursor: pointer;
+  --chotto-audiorecorder-stop-border-radius: 2px;
+
+  // AudioRecorder blink keyframes variables
+  --chotto-audiorecorder-blink-keyframes-0-color: red;
+  --chotto-audiorecorder-blink-keyframes-50-color: transparent;
+  --chotto-audiorecorder-blink-keyframes-100-color: red;
+
+  // AudioRecorder button variables
+  --chotto-audiorecorder-button-background-color: transparent;
+  --chotto-audiorecorder-button-border: 0px;
+  --chotto-audiorecorder-button-span-display: block;
+  --chotto-audiorecorder-button-span-cursor: pointer;
+  --chotto-audiorecorder-button-span-padding: 14px;
+  --chotto-audiorecorder-button-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-audiorecorder-button-span-color: var(--chotto-theme-button-color-active);
+  --chotto-audiorecorder-button-span-hover-color: var(--chotto-theme-button-color-hover);
+
+  // AudioRecorder button-record variables
+  --chotto-audiorecorder-button-record-span-display: block;
+  --chotto-audiorecorder-button-record-span-cursor: pointer;
+  --chotto-audiorecorder-button-record-span-padding: 0;
+  --chotto-audiorecorder-button-record-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-audiorecorder-button-record-span-color: var(--chotto-theme-button-color-active);
+  --chotto-audiorecorder-button-record-span-hover-color: var(--chotto-theme-button-color-hover);
+
+  // AudioRecorder button-disabled variables
+  --chotto-audiorecorder-button-disabled-pointer-events: none;
+  --chotto-audiorecorder-button-disabled-span-cursor: auto;
+  --chotto-audiorecorder-button-disabled-span-color: var(--chotto-theme-button-color-disabled);
+}

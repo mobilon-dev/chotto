@@ -1,0 +1,14 @@
+[data-theme="dark"] {
+  // FileUploader trigger variables
+  --chotto-fileuploader-trigger-padding: 1px 0 0 3px;
+  --chotto-fileuploader-trigger-display: block;
+  --chotto-fileuploader-trigger-cursor: pointer;
+  --chotto-fileuploader-trigger-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-fileuploader-trigger-color: var(--chotto-theme-button-color-active);
+  --chotto-fileuploader-trigger-hover-color: var(--chotto-theme-button-color-hover);
+
+  // FileUploader disabled variables
+  --chotto-fileuploader-disabled-color: var(--chotto-theme-button-color-disabled);
+  --chotto-fileuploader-disabled-cursor: auto;
+  --chotto-fileuploader-disabled-pointer-events: none;
+}

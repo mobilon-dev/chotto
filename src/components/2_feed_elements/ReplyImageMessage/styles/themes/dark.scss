@@ -1,0 +1,57 @@
+[data-theme="dark"] {
+  // ReplyImageMessage p variables
+  --chotto-replyimagemessage-p-margin: 0;
+  --chotto-replyimagemessage-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replyimagemessage-p-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replyimagemessage-p-overflow: hidden;
+  --chotto-replyimagemessage-p-text-overflow: ellipsis;
+  --chotto-replyimagemessage-p-display: -webkit-box;
+  --chotto-replyimagemessage-p-webkit-line-clamp: 5;
+  --chotto-replyimagemessage-p-line-clamp: 5;
+  --chotto-replyimagemessage-p-webkit-box-orient: vertical;
+
+  // ReplyImageMessage preview button variables
+  --chotto-replyimagemessage-preview-button-grid-column: 1;
+  --chotto-replyimagemessage-preview-button-position: relative;
+  --chotto-replyimagemessage-preview-button-display: flex;
+  --chotto-replyimagemessage-preview-button-flex-direction: column;
+  --chotto-replyimagemessage-preview-button-padding: 0;
+
+  // ReplyImageMessage preview image variables
+  --chotto-replyimagemessage-preview-image-width: 60px;
+  --chotto-replyimagemessage-preview-image-height: 60px;
+  --chotto-replyimagemessage-preview-image-cursor: zoom-in;
+  --chotto-replyimagemessage-preview-image-object-fit: cover;
+  --chotto-replyimagemessage-preview-image-border-radius: 4px;
+  --chotto-replyimagemessage-preview-image-margin: auto;
+
+  // ReplyImageMessage modal image variables
+  --chotto-replyimagemessage-modal-image-width: 100%;
+  --chotto-replyimagemessage-modal-image-height: 100%;
+  --chotto-replyimagemessage-modal-image-object-fit: cover;
+  --chotto-replyimagemessage-modal-image-border-radius: 5px;
+  --chotto-replyimagemessage-modal-image-max-height: 80vh;
+
+  // ReplyImageMessage text container variables
+  --chotto-replyimagemessage-text-container-word-wrap: break-word;
+  --chotto-replyimagemessage-text-container-align-content: center;
+  --chotto-replyimagemessage-text-container-word-break: break-word;
+
+  // ReplyImageMessage text variables
+  --chotto-replyimagemessage-text-margin-top: 8px;
+  --chotto-replyimagemessage-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-replyimagemessage-text-color: var(--chotto-theme-primary-text-color);
+
+  // ReplyImageMessage reply description variables
+  --chotto-replyimagemessage-reply-description-display: flex;
+  --chotto-replyimagemessage-reply-description-align-items: center;
+  --chotto-replyimagemessage-reply-description-column-gap: 6px;
+  --chotto-replyimagemessage-reply-description-margin-bottom: 4px;
+  --chotto-replyimagemessage-reply-description-white-space: nowrap;
+  --chotto-replyimagemessage-reply-description-span-color: var(--chotto-theme-secondary-text-color);
+
+  // ReplyImageMessage animation variables
+  --chotto-replyimagemessage-modal-fade-enter-active-transition: opacity 0.2s ease;
+  --chotto-replyimagemessage-modal-fade-enter-from-opacity: 0;
+  --chotto-replyimagemessage-modal-fade-enter-to-opacity: 1;
+}

@@ -1,0 +1,35 @@
+[data-theme="green"] {
+  // ChannelSelector container variables
+  --chotto-channelselector-container-display: flex;
+  --chotto-channelselector-container-disabled-color: var(--chotto-theme-button-color-disabled);
+
+  // ChannelSelector title variables
+  --chotto-channelselector-title-font-size: var(--chotto-theme-text-font-size);
+
+  // ChannelSelector selected variables
+  --chotto-channelselector-selected-height: fit-content;
+  --chotto-channelselector-selected-margin: auto;
+  --chotto-channelselector-selected-display: flex;
+  --chotto-channelselector-selected-justify-content: flex-start;
+  --chotto-channelselector-selected-column-gap: 6px;
+  --chotto-channelselector-selected-align-items: center;
+  --chotto-channelselector-selected-margin-left: 10px;
+
+  // ChannelSelector icon variables
+  --chotto-channelselector-icon-display: block;
+  --chotto-channelselector-icon-height: var(--chotto-theme-text-font-size);
+  --chotto-channelselector-icon-width: var(--chotto-theme-text-font-size);
+
+  // ChannelSelector trigger variables
+  --chotto-channelselector-trigger-padding: 8px;
+  --chotto-channelselector-trigger-display: block;
+  --chotto-channelselector-trigger-cursor: pointer;
+  --chotto-channelselector-trigger-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-channelselector-trigger-color: var(--chotto-theme-button-color-active);
+  --chotto-channelselector-trigger-hover-color: var(--chotto-theme-button-color-hover);
+
+  // ChannelSelector disabled variables
+  --chotto-channelselector-disabled-color: var(--chotto-theme-button-color-disabled);
+  --chotto-channelselector-disabled-cursor: auto;
+  --chotto-channelselector-disabled-pointer-events: none;
+}

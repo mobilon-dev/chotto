@@ -1,0 +1,35 @@
+[data-theme="mobilon1"] {
+  // Container
+  --chotto-messagekeyboard-container-display: flex;
+  --chotto-messagekeyboard-container-justify: right;
+  --chotto-messagekeyboard-container-flex-wrap: wrap;
+  --chotto-messagekeyboard-gap: 5px;
+  
+  // Container left alignment
+  --chotto-messagekeyboard-container-left-justify: flex-start;
+  --chotto-messagekeyboard-container-left-margin-left: 0;
+  --chotto-messagekeyboard-container-left-margin-right: auto;
+  
+  // Container center alignment
+  --chotto-messagekeyboard-container-center-justify: center;
+  --chotto-messagekeyboard-container-center-margin-left: auto;
+  --chotto-messagekeyboard-container-center-margin-right: auto;
+  
+  // Container right alignment
+  --chotto-messagekeyboard-container-right-justify: flex-end;
+  --chotto-messagekeyboard-container-right-margin-left: auto;
+  --chotto-messagekeyboard-container-right-margin-right: 0;
+  
+  // Key
+  --chotto-messagekeyboard-key-border: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-messagekeyboard-key-border-radius: 3px;
+  --chotto-messagekeyboard-key-word-wrap: break-word;
+  --chotto-messagekeyboard-key-box-shadow: 0px 0px 10px 5px var(--chotto-theme-shadow-light-color);
+  --chotto-messagekeyboard-key-max-width: 100%;
+  --chotto-messagekeyboard-key-padding: 5px;
+  --chotto-messagekeyboard-key-p-margin: 0;
+  --chotto-messagekeyboard-key-p-hover-cursor: pointer;
+  --chotto-messagekeyboard-key-background-color: var(--chotto-theme-secondary-color);
+  --chotto-messagekeyboard-key-font-size: var(--chotto-theme-title-font-size);
+}
+

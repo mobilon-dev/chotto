@@ -1,0 +1,61 @@
+[data-theme="mobilon1"] {
+  // Modal backdrop
+  --chotto-modalnofooter-backdrop-position: fixed;
+  --chotto-modalnofooter-backdrop-top: 0;
+  --chotto-modalnofooter-backdrop-bottom: 0;
+  --chotto-modalnofooter-backdrop-left: 0;
+  --chotto-modalnofooter-backdrop-right: 0;
+  --chotto-modalnofooter-backdrop-bg: rgba(0, 0, 0, 0.4);
+  --chotto-modalnofooter-backdrop-filter: blur(2px);
+  --chotto-modalnofooter-backdrop-display: flex;
+  --chotto-modalnofooter-backdrop-justify: center;
+  --chotto-modalnofooter-backdrop-align: center;
+  --chotto-modalnofooter-backdrop-z-index: 1000;
+  --chotto-modalnofooter-backdrop-opacity: 1;
+  --chotto-modalnofooter-backdrop-transition: opacity 0.25s ease;
+
+  // Modal container
+  --chotto-modalnofooter-background: var(--chotto-theme-primary-color, #ffffff);
+  --chotto-modalnofooter-text-color: var(--chotto-theme-primary-text-color);
+  --chotto-modalnofooter-font-family: var(--chotto-theme-font-family);
+  --chotto-modalnofooter-font-size: inherit;
+  --chotto-modalnofooter-font-weight: inherit;
+  --chotto-modalnofooter-line-height: inherit;
+  --chotto-modalnofooter-text-align: left;
+  --chotto-modalnofooter-overflow-x: auto;
+  --chotto-modalnofooter-overflow-y: auto;
+  --chotto-modalnofooter-display: flex;
+  --chotto-modalnofooter-flex-direction: column;
+  --chotto-modalnofooter-position: relative;
+  --chotto-modalnofooter-body-padding: 18px 14px;
+  --chotto-modalnofooter-margin: 0;
+  --chotto-modalnofooter-border: 1px solid var(--chotto-theme-border-color, #e0e0e0);
+  --chotto-modalnofooter-border-radius: 10px;
+  --chotto-modalnofooter-box-shadow: 0 4px 16px var(--chotto-theme-shadow-color, rgba(0,0,0,0.15));
+  --chotto-modalnofooter-min-width: 280px;
+  --chotto-modalnofooter-min-height: 200px;
+  --chotto-modalnofooter-max-width: 95vw;
+  --chotto-modalnofooter-max-height: 90vh;
+  --chotto-modalnofooter-width: auto;
+  --chotto-modalnofooter-height: auto;
+  --chotto-modalnofooter-align-items: stretch;
+  --chotto-modalnofooter-justify-content: flex-start;
+
+  // Modal buttons container
+  --chotto-modalnofooter-buttons-display: block;
+  --chotto-modalnofooter-buttons-margin: 14px 14px 14px 14px;
+  --chotto-modalnofooter-buttons-padding: 0;
+  --chotto-modalnofooter-buttons-gap: 8px;
+  --chotto-modalnofooter-buttons-justify: flex-end;
+  --chotto-modalnofooter-buttons-align: center;
+  --chotto-modalnofooter-buttons-wrap: wrap;
+
+  // Modal animations
+  --chotto-modalnofooter-transition: opacity 0.3s ease, transform 0.3s ease;
+  --chotto-modalnofooter-enter-opacity: 0;
+  --chotto-modalnofooter-enter-transform: scale(0.95) translateY(10px);
+  --chotto-modalnofooter-enter-to-opacity: 1;
+  --chotto-modalnofooter-enter-to-transform: scale(1) translateY(0);
+}
+
+

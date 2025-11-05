@@ -1,0 +1,78 @@
+[data-theme="green"] {
+  // Основной контейнер Feed
+  --chotto-feed-height: 100%;
+  --chotto-feed-max-height: inherit;
+  --chotto-feed-display: flex;
+  --chotto-feed-flex-direction: column;
+  --chotto-feed-overflow-y: auto;
+  --chotto-feed-overflow-x: hidden;
+  --chotto-feed-scroll-behavior: smooth;
+  --chotto-feed-padding: 10px 30px 10px 30px;
+  --chotto-feed-position: relative;
+
+  // Сообщения
+  --chotto-feed-message-position: relative;
+  --chotto-feed-message-transition: all 2s;
+
+  // Кнопка прокрутки вниз
+  --chotto-feed-button-down-position: sticky;
+  --chotto-feed-button-down-z-index: 100;
+  --chotto-feed-button-down-bottom: 0;
+  --chotto-feed-button-down-margin-left: auto;
+  --chotto-feed-button-down-border: none;
+  --chotto-feed-button-down-min-width: 46px;
+  --chotto-feed-button-down-min-height: 46px;
+  --chotto-feed-button-down-border-radius: 50%;
+  --chotto-feed-button-down-display: flex;
+  --chotto-feed-button-down-justify-content: center;
+  --chotto-feed-button-down-align-items: center;
+  --chotto-feed-button-down-cursor: pointer;
+  --chotto-feed-button-down-background-color: #e8f5e8;
+
+  // Клавиатура
+  --chotto-feed-keyboard-position: sticky;
+  --chotto-feed-keyboard-bottom: 0;
+  --chotto-feed-keyboard-max-width: 25rem;
+  --chotto-feed-keyboard-width: fit-content;
+
+  // Иконка прокрутки
+  --chotto-feed-icon-down-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-feed-icon-down-color: #4caf50;
+
+  // Счетчик непрочитанных
+  --chotto-feed-unread-amount-position: absolute;
+  --chotto-feed-unread-amount-top: -8px;
+  --chotto-feed-unread-amount-left: 0;
+  --chotto-feed-unread-amount-right: 0;
+  --chotto-feed-unread-amount-margin: 0 auto;
+  --chotto-feed-unread-amount-display: flex;
+  --chotto-feed-unread-amount-justify-content: center;
+  --chotto-feed-unread-amount-align-items: center;
+  --chotto-feed-unread-amount-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-feed-unread-amount-width: 22px;
+  --chotto-feed-unread-amount-height: 22px;
+  --chotto-feed-unread-amount-color: white;
+  --chotto-feed-unread-amount-background-color: #4caf50;
+  --chotto-feed-unread-amount-border-radius: 50%;
+
+  // Скроллбар
+  --chotto-feed-scrollbar-width: 6px;
+  --chotto-feed-scrollbar-background-color: #e8f5e8;
+  --chotto-feed-scrollbar-bg: var(--chotto-theme-scrollbar-bg);
+  --chotto-feed-scrollbar-thumb-border-radius: 10px;
+  --chotto-feed-scrollbar-thumb-background-color: #4caf50;
+  --chotto-feed-scrollbar-thumb-bg: var(--chotto-theme-scrollbar-thumb-bg);
+  --chotto-feed-scrollbar-track-border-radius: 10px;
+
+  // Сфокусированное сообщение
+  --chotto-feed-focused-message-background-color: color-mix(in srgb, #4caf50 30%, transparent);
+  --chotto-feed-focused-message-box-shadow: 0px 0px 12px 2px color-mix(in srgb, #4caf50 30%, transparent);
+
+  // Анимации
+  --chotto-feed-enter-active-transition: all 0.1s ease-out;
+  --chotto-feed-leave-active-transition: all 0.1s;
+  --chotto-feed-enter-leave-transform: translateY(10px);
+  --chotto-feed-enter-leave-opacity: 0;
+}
+
+

@@ -1,0 +1,39 @@
+[data-theme="light"] {
+  // WABASeparatedQuickButtons main variables
+  --chotto-wabaseparatedquickbuttons-width: 100%;
+  --chotto-wabaseparatedquickbuttons-position: absolute;
+  --chotto-wabaseparatedquickbuttons-left: 0;
+  --chotto-wabaseparatedquickbuttons-right: 0;
+  --chotto-wabaseparatedquickbuttons-bottom: 0;
+  --chotto-wabaseparatedquickbuttons-border-top-left-radius: 10px;
+  --chotto-wabaseparatedquickbuttons-border-top-right-radius: 10px;
+  --chotto-wabaseparatedquickbuttons-background: var(--chotto-theme-primary-color);
+  --chotto-wabaseparatedquickbuttons-white-space: pre-wrap;
+
+  // WABASeparatedQuickButtons title variables
+  --chotto-wabaseparatedquickbuttons-title-display: flex;
+  --chotto-wabaseparatedquickbuttons-title-justify-content: space-between;
+  --chotto-wabaseparatedquickbuttons-title-align-items: center;
+  --chotto-wabaseparatedquickbuttons-title-margin: 15px;
+  --chotto-wabaseparatedquickbuttons-title-p-font-size: var(--chotto-theme-text-font-size);
+  --chotto-wabaseparatedquickbuttons-title-p-margin-left: auto;
+  --chotto-wabaseparatedquickbuttons-title-p-margin-right: auto;
+  --chotto-wabaseparatedquickbuttons-title-span-cursor: pointer;
+
+  // WABASeparatedQuickButtons actions variables
+  --chotto-wabaseparatedquickbuttons-actions-border-top: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-wabaseparatedquickbuttons-actions-max-height: 200px;
+  --chotto-wabaseparatedquickbuttons-actions-overflow-y: auto;
+
+  // WABASeparatedQuickButtons action variables
+  --chotto-wabaseparatedquickbuttons-action-position: relative;
+  --chotto-wabaseparatedquickbuttons-action-z-index: 0;
+  --chotto-wabaseparatedquickbuttons-action-width: 90%;
+  --chotto-wabaseparatedquickbuttons-action-font-size: var(--chotto-theme-text-font-size);
+  --chotto-wabaseparatedquickbuttons-action-margin-right: auto;
+  --chotto-wabaseparatedquickbuttons-action-margin-left: 25px;
+  --chotto-wabaseparatedquickbuttons-action-display: flex;
+  --chotto-wabaseparatedquickbuttons-action-margin-top: 20px;
+  --chotto-wabaseparatedquickbuttons-action-margin-bottom: 20px;
+  --chotto-wabaseparatedquickbuttons-action-gap: 10px;
+}

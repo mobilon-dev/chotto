@@ -1,0 +1,63 @@
+[data-theme="dark"] {
+  // ChatInfo container variables
+  --chotto-chatinfo-container-border-radius: 0;
+  --chotto-chatinfo-container-padding: 10px 15px 10px 15px;;
+  --chotto-chatinfo-container-border-bottom: var(--chotto-chat-info-border-bottom, 1px solid var(--chotto-theme-item-border-color));
+  --chotto-chatinfo-container-background-color: transparent;
+
+  // ChatInfo base-line variables
+  --chotto-chatinfo-base-line-display: flex;
+  --chotto-chatinfo-base-line-align-items: center;
+  --chotto-chatinfo-base-line-gap: 10px;
+
+  // ChatInfo avatar-container variables
+  --chotto-chatinfo-avatar-container-display: flex;
+  --chotto-chatinfo-avatar-container-justify-content: center;
+  --chotto-chatinfo-avatar-container-align-items: center;
+  --chotto-chatinfo-avatar-container-border-radius: 50%;
+  --chotto-chatinfo-avatar-container-background-size: cover;
+  --chotto-chatinfo-avatar-container-span-color: #737373;
+  --chotto-chatinfo-avatar-container-span-display: flex;
+  --chotto-chatinfo-avatar-container-span-justify-content: center;
+  --chotto-chatinfo-avatar-container-span-align-items: center;
+  --chotto-chatinfo-avatar-container-img-width: 40px;
+  --chotto-chatinfo-avatar-container-img-height: 40px;
+  --chotto-chatinfo-avatar-container-img-border-radius: 50%;
+  --chotto-chatinfo-avatar-container-img-object-fit: cover;
+
+  // ChatInfo info-container variables
+  --chotto-chatinfo-info-container-display: flex;
+  --chotto-chatinfo-info-container-flex-direction: column;
+
+  // ChatInfo title variables
+  --chotto-chatinfo-title-display: flex;
+  --chotto-chatinfo-title-grid-column: 2;
+  --chotto-chatinfo-title-color: var(--chotto-theme-primary-text-color);
+  --chotto-chatinfo-title-font-size: var(--chotto-theme-title-font-size);
+  --chotto-chatinfo-title-font-weight: var(--chotto-theme-title-font-weight);
+  --chotto-chatinfo-title-margin: 0;
+
+  // ChatInfo additional-title variables
+  --chotto-chatinfo-additional-title-margin: auto;
+  --chotto-chatinfo-additional-title-font-size: var(--chotto-theme-text-font-size);
+  --chotto-chatinfo-additional-title-padding: 0 10px;
+  --chotto-chatinfo-additional-title-border: 1px solid #25D366;
+  --chotto-chatinfo-additional-title-border-radius: 5px;
+  --chotto-chatinfo-additional-title-margin-left: 15px;
+
+  // ChatInfo time variables
+  --chotto-chatinfo-time-display: flex;
+  --chotto-chatinfo-time-font-size: var(--chotto-theme-text-font-size);
+  --chotto-chatinfo-time-color: var(--chotto-theme-secondary-text-color);
+  --chotto-chatinfo-time-grid-column: 2;
+  --chotto-chatinfo-time-margin: 0;
+
+  // ChatInfo actions variables
+  --chotto-chatinfo-actions-margin-left: auto;
+
+  // ChatInfo return-button variables
+  --chotto-chatinfo-return-button-border: 0px;
+  --chotto-chatinfo-return-button-background-color: transparent;
+  --chotto-chatinfo-return-button-cursor: pointer;
+  --chotto-chatinfo-return-button-color: var(--chotto-theme-button-color-active);
+}

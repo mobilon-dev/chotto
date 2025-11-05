@@ -1,0 +1,126 @@
+.modal-backdrop {
+  position: var(--chotto-modal-backdrop-position, fixed);
+  top: var(--chotto-modal-backdrop-top, 0);
+  bottom: var(--chotto-modal-backdrop-bottom, 0);
+  left: var(--chotto-modal-backdrop-left, 0);
+  right: var(--chotto-modal-backdrop-right, 0);
+  background-color: var(--chotto-modal-backdrop-bg, rgba(0, 0, 0, 0.3));
+  display: var(--chotto-modal-backdrop-display, flex);
+  justify-content: var(--chotto-modal-backdrop-justify, center);
+  align-items: var(--chotto-modal-backdrop-align, center);
+  z-index: var(--chotto-modal-z-index, 1000);
+  backdrop-filter: var(--chotto-modal-backdrop-filter, none);
+}
+
+.modal {
+  background: var(--chotto-modal-background, #fff);
+  box-shadow: var(--chotto-modal-box-shadow, 2px 2px 10px 1px);
+  min-width: var(--chotto-modal-min-width, 300px);
+  min-height: var(--chotto-modal-min-height, 300px);
+  max-width: var(--chotto-modal-max-width, 90vw);
+  max-height: var(--chotto-modal-max-height, 90vh);
+  width: var(--chotto-modal-width, auto);
+  height: var(--chotto-modal-height, auto);
+  overflow-x: var(--chotto-modal-overflow-x, auto);
+  overflow-y: var(--chotto-modal-overflow-y, auto);
+  display: var(--chotto-modal-display, flex);
+  flex-direction: var(--chotto-modal-flex-direction, column);
+  border: var(--chotto-modal-border, none);
+  border-radius: var(--chotto-modal-border-radius, 8px);
+  position: var(--chotto-modal-position, relative);
+}
+
+.buttons {
+  display: var(--chotto-modal-buttons-display, block);
+  margin: var(--chotto-modal-buttons-margin, 10px 10px 10px 10px);
+  padding: var(--chotto-modal-buttons-padding, 0);
+  gap: var(--chotto-modal-buttons-gap, 10px);
+  justify-content: var(--chotto-modal-buttons-justify, flex-end);
+  align-items: var(--chotto-modal-buttons-align, center);
+  flex-wrap: var(--chotto-modal-buttons-wrap, wrap);
+}
+
+.modal-body {
+  position: var(--chotto-modal-body-position, relative);
+  padding: var(--chotto-modal-body-padding, 20px 10px);
+  margin: var(--chotto-modal-body-margin, 0);
+  flex-grow: var(--chotto-modal-body-flex-grow, 1);
+  color: var(--chotto-modal-text-color, inherit);
+  font-size: var(--chotto-modal-font-size, inherit);
+  font-family: var(--chotto-modal-font-family, inherit);
+  line-height: var(--chotto-modal-line-height, inherit);
+  text-align: var(--chotto-modal-text-align, left);
+  overflow: var(--chotto-modal-body-overflow, visible);
+}
+
+.modal-fade-enter,
+.modal-fade-leave-to {
+  opacity: var(--chotto-modal-enter-opacity, 0);
+  transform: var(--chotto-modal-enter-transform, scale(0.9));
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: var(
+    --chotto-modal-transition,
+    opacity 0.5s ease,
+    transform 0.5s ease
+  );
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave {
+  opacity: var(--chotto-modal-enter-to-opacity, 1);
+  transform: var(--chotto-modal-enter-to-transform, scale(1));
+}
+
+// Button styles
+.btn-green {
+  background-color: var(--chotto-modal-button-bg, #4caf50);
+  color: var(--chotto-modal-button-text-color, #ffffff);
+  border: var(--chotto-modal-button-border, none);
+  border-radius: var(--chotto-modal-button-border-radius, 4px);
+  padding: var(--chotto-modal-button-padding, 8px 16px);
+  margin: var(--chotto-modal-button-margin, 0 5px);
+  font-size: var(--chotto-modal-button-font-size, 14px);
+  font-family: var(--chotto-modal-button-font-family, inherit);
+  font-weight: var(--chotto-modal-button-font-weight, 500);
+  cursor: var(--chotto-modal-button-cursor, pointer);
+  transition: var(--chotto-modal-button-transition, all 0.2s ease);
+  min-width: var(--chotto-modal-button-min-width, 80px);
+  min-height: var(--chotto-modal-button-min-height, 36px);
+  display: var(--chotto-modal-button-display, inline-block);
+  text-align: var(--chotto-modal-button-text-align, center);
+  text-decoration: var(--chotto-modal-button-text-decoration, none);
+  outline: var(--chotto-modal-button-outline, none);
+  box-shadow: var(--chotto-modal-button-box-shadow, 0 2px 4px rgba(0, 0, 0, 0.1));
+
+  &:hover {
+    background-color: var(--chotto-modal-button-hover-bg, #45a049);
+    transform: var(--chotto-modal-button-hover-transform, translateY(-1px));
+    box-shadow: var(--chotto-modal-button-hover-box-shadow, 0 4px 8px rgba(0, 0, 0, 0.15));
+  }
+
+  &:active {
+    background-color: var(--chotto-modal-button-active-bg, #3d8b40);
+    transform: var(--chotto-modal-button-active-transform, translateY(0));
+    box-shadow: var(--chotto-modal-button-active-box-shadow, 0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+
+  &:focus {
+    outline: var(--chotto-modal-button-focus-outline, 2px solid #4caf50);
+    outline-offset: var(--chotto-modal-button-focus-outline-offset, 2px);
+  }
+
+  &:disabled {
+    background-color: var(--chotto-modal-button-disabled-bg, #cccccc);
+    color: var(--chotto-modal-button-disabled-text-color, #666666);
+    cursor: var(--chotto-modal-button-disabled-cursor, not-allowed);
+    opacity: var(--chotto-modal-button-disabled-opacity, 0.6);
+  }
+}
+
+.btn-gray {
+  background-color: var(--chotto-modal-cancel-button-bg, #a3a3a3);
+  border: var(--chotto-modal-cancel-button-border, none);
+}

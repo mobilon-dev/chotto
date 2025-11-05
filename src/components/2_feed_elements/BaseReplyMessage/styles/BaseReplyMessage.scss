@@ -1,0 +1,64 @@
+.reply {
+  &__container {
+    position: var(--chotto-basereplymessage-container-position, relative);
+    padding: var(--chotto-basereplymessage-container-padding, 10px 6px 10px 20px);
+    border-radius: var(--chotto-basereplymessage-container-border-radius, 10px);
+    overflow: var(--chotto-basereplymessage-container-overflow, hidden);
+    margin-bottom: var(--chotto-basereplymessage-container-margin-bottom, 6px);
+
+    &::before {
+      content: var(--chotto-basereplymessage-container-before-content, "");
+      position: var(--chotto-basereplymessage-container-before-position, absolute);
+      top: var(--chotto-basereplymessage-container-before-top, 0);
+      left: var(--chotto-basereplymessage-container-before-left, 0);
+      width: var(--chotto-basereplymessage-container-before-width, 4px);
+      height: var(--chotto-basereplymessage-container-before-height, 100%);
+      background-color: var(--chotto-basereplymessage-accent-line-color, #34d399);
+    }
+  }
+
+  &__reset {
+    display: var(--chotto-basereplymessage-reset-display, none);
+    position: var(--chotto-basereplymessage-reset-position, absolute);
+    right: var(--chotto-basereplymessage-reset-right, 0);
+    top: var(--chotto-basereplymessage-reset-top, 0);
+  }
+
+  &__reset:hover {
+    cursor: var(--chotto-basereplymessage-reset-hover-cursor, pointer);
+  }
+}
+
+.grid {
+  display: var(--chotto-basereplymessage-grid-display, grid);
+  grid-template-columns: var(--chotto-basereplymessage-grid-template-columns, auto 1fr);
+  column-gap: var(--chotto-basereplymessage-grid-column-gap, 10px);
+  padding: var(--chotto-basereplymessage-grid-padding, 6px 10px 6px 10px);
+}
+
+.left {
+  background-color: var(--chotto-basereplymessage-left-secondary-bg, #d4d4d4);
+}
+
+.right {
+  background-color: var(--chotto-basereplymessage-right-secondary-bg, #a7f3d0);
+}
+
+.chat-input-reply {
+  padding-right: var(--chotto-basereplymessage-chat-input-reply-padding-right, 30px);
+  border: var(--chotto-basereplymessage-chat-input-reply-border, 1px solid var(--chotto-basereplymessage-item-border-color, #d0d0d0));
+  border-radius: var(--chotto-basereplymessage-chat-input-reply-border-radius, 0);
+  word-break: var(--chotto-basereplymessage-chat-input-reply-word-break, break-word);
+  margin-bottom: var(--chotto-basereplymessage-chat-input-reply-margin-bottom, 0);
+
+  .reply__reset {
+    font-size: var(--chotto-basereplymessage-chat-input-reset-font-size, 1.1rem);
+    display: var(--chotto-basereplymessage-chat-input-reset-display, flex);
+    height: var(--chotto-basereplymessage-chat-input-reset-height, 100%);
+    margin-right: var(--chotto-basereplymessage-chat-input-reset-margin-right, 10px);
+
+    span{
+      margin: var(--chotto-basereplymessage-chat-input-reset-span-margin, auto);
+    }
+  }
+}

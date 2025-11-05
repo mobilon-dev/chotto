@@ -1,0 +1,64 @@
+[data-theme="green"] {
+  // Main form container
+  --chotto-createchat2-form-display: flex;
+  --chotto-createchat2-form-flex-direction: column;
+  --chotto-createchat2-form-gap: 10px;
+  --chotto-createchat2-form-font-family: var(--chotto-theme-font-family);
+  --chotto-createchat2-form-padding: 0;
+
+  // Title
+  --chotto-createchat2-title-padding-bottom: 5px;
+  --chotto-createchat2-title-margin-bottom: 10px;
+  --chotto-createchat2-title-font-size: var(--chotto-theme-header-font-size);
+  --chotto-createchat2-title-font-weight: var(--chotto-theme-header-font-weight);
+  --chotto-createchat2-title-color: var(--chotto-theme-primary-text-color);
+  --chotto-createchat2-title-text-align: center;
+  --chotto-createchat2-title-border-bottom: 1px solid var(--chotto-theme-border-color);
+
+  // Form field
+  --chotto-createchat2-form-field-display: flex;
+  --chotto-createchat2-form-field-flex-direction: column;
+  --chotto-createchat2-form-field-gap: 3px;
+
+  // Form label
+  --chotto-createchat2-form-label-font-weight: 500;
+  --chotto-createchat2-form-label-color: var(--chotto-theme-secondary-text-color);
+  --chotto-createchat2-form-label-display: block;
+  --chotto-createchat2-form-label-font-size: 14px;
+  --chotto-createchat2-form-label-margin-bottom: 4px;
+
+  // Form input
+  --chotto-createchat2-form-input-border: 1px solid var(--chotto-theme-border-color);
+  --chotto-createchat2-form-input-border-radius: 6px;
+  --chotto-createchat2-form-input-background: var(--chotto-theme-background-color);
+  --chotto-createchat2-form-input-padding: 0.5rem 0.75rem;
+  --chotto-createchat2-form-input-font-size: 16px;
+  --chotto-createchat2-form-input-color: var(--chotto-theme-primary-text-color);
+  --chotto-createchat2-form-input-font-family: var(--chotto-theme-font-family);
+  --chotto-createchat2-form-input-transition: all 0.2s ease;
+  --chotto-createchat2-form-input-width: 100%;
+  --chotto-createchat2-form-input-box-sizing: border-box;
+
+  // Form input hover
+  --chotto-createchat2-form-input-hover-border-color: var(--chotto-theme-border-color-hover);
+  --chotto-createchat2-form-input-hover-background: var(--chotto-theme-background-color-hover);
+
+  // Form input focus
+  --chotto-createchat2-form-input-focus-border-color: var(--chotto-theme-border-color-focus);
+  --chotto-createchat2-form-input-focus-outline: none;
+  --chotto-createchat2-form-input-focus-box-shadow: 0 0 0 3px var(--chotto-theme-focus-ring-color);
+  --chotto-createchat2-form-input-focus-background: var(--chotto-theme-background-color);
+
+  // Form input placeholder
+  --chotto-createchat2-form-input-placeholder-color: var(--chotto-theme-placeholder-color);
+  --chotto-createchat2-form-input-placeholder-font-size: 14px;
+
+  // Form error
+  --chotto-createchat2-form-error-color: #dc2626;
+  --chotto-createchat2-form-error-font-size: 12px;
+  --chotto-createchat2-form-error-font-weight: 500;
+  --chotto-createchat2-form-error-margin-top: 2px;
+  --chotto-createchat2-form-error-padding-left: 4px;
+  --chotto-createchat2-form-error-display: block;
+  --chotto-createchat2-form-error-min-height: 16px;
+}

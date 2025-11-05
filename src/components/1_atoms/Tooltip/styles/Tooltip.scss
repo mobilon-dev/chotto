@@ -1,0 +1,76 @@
+.tooltip__text {
+  max-width: var(--chotto-tooltip-max-width, 372px);
+  color: var(--chotto-tooltip-text-color, #1E1E1E);
+  text-align: var(--chotto-tooltip-text-align, left);
+  padding: var(--chotto-tooltip-padding, 5px 9px 5px 12px);
+  border-radius: var(--chotto-tooltip-border-radius, 5px);
+  background: var(--chotto-tooltip-bg-color, #ffffff);
+  top: var(--chotto-tooltip-top, 0);
+  left: var(--chotto-tooltip-left, 0);
+  position: var(--chotto-tooltip-position, absolute);
+  z-index: var(--chotto-tooltip-z-index, 99999);
+  font-family: var(--chotto-tooltip-font-family, "Open Sans", sans-serif);
+  font-weight: var(--chotto-tooltip-font-weight, 400);
+  border: var(--chotto-tooltip-border, 1px solid #5F5F5F);
+  font-size: var(--chotto-tooltip-font-size, 14px);
+  line-height: var(--chotto-tooltip-line-height, inherit);
+  box-shadow: var(--chotto-tooltip-box-shadow, none);
+  opacity: var(--chotto-tooltip-opacity, 1);
+  transform: var(--chotto-tooltip-transform, none);
+  transition: var(--chotto-tooltip-transition, opacity 0.5s ease);
+}
+
+.tooltip-wrapper {
+  position: var(--chotto-tooltip-wrapper-position, relative);
+  width: var(--chotto-tooltip-wrapper-width, fit-content);
+  cursor: var(--chotto-tooltip-wrapper-cursor, pointer);
+}
+
+// .tooltip__text::after {
+//   content: " ";
+//   position: absolute;
+//   border-width: 5px;
+//   border-style: solid;
+//   border-color: var(--chotto-tooltip-bg-color, #ffffff) transparent transparent transparent;
+// }
+
+// .tooltip--left::after {
+//   inset-block-start: 50%;
+//   inset-inline-start: 100%;
+//   border-color: transparent transparent transparent var(--chotto-tooltip-bg-color, #ffffff);
+// }
+
+// .tooltip--right::after {
+//   inset-block-start: 50%;
+//   inset-inline-end: 100%;
+//   border-color: transparent var(--chotto-tooltip-bg-color, #ffffff) transparent transparent;
+// }
+
+// .tooltip--top::after {
+//   inset-block-start: 100%;
+//   inset-inline-start: 50%;
+//   border-color: var(--chotto-tooltip-bg-color, #ffffff) transparent transparent  transparent;
+// }
+
+// .tooltip--bottom::after {
+//   inset-block-end: 100%;
+//   inset-inline-start: 50%;
+//   border-color: transparent transparent var(--chotto-tooltip-bg-color, #ffffff) transparent;
+// }
+
+.v-enter-active,
+.v-leave-active {
+  transition: var(--chotto-tooltip-transition, opacity 0.5s ease);
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: var(--chotto-tooltip-enter-opacity, 0);
+  transform: var(--chotto-tooltip-enter-transform, none);
+}
+
+.v-enter-to,
+.v-leave-from {
+  opacity: var(--chotto-tooltip-enter-to-opacity, 1);
+  transform: var(--chotto-tooltip-enter-to-transform, none);
+}

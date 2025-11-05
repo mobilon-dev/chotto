@@ -1,0 +1,16 @@
+.splash {
+  &__container {
+    border-radius: var(--chotto-splashscreen-container-border-radius, 10px);
+    background-color: var(--chotto-splashscreen-container-background-color, inherit);
+    backdrop-filter: var(--chotto-splashscreen-container-backdrop-filter, brightness(140%));
+    padding: var(--chotto-splashscreen-container-padding, 20px);
+
+    * {
+      text-align: var(--chotto-splashscreen-container-children-text-align, center);
+    }
+  }
+
+  &__img {
+    cursor: var(--chotto-splashscreen-img-cursor, pointer);
+  }
+}

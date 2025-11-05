@@ -1,0 +1,21 @@
+[data-theme="dark"] {
+  // FeedLayout container variables
+  --chotto-feedlayout-container-height: inherit;
+  --chotto-feedlayout-container-display: grid;
+  --chotto-feedlayout-container-grid-template-columns: 1fr;
+  --chotto-feedlayout-container-transition: all 0.3s ease;
+  --chotto-feedlayout-container-position: relative;
+
+  // FeedLayout first-col variables
+  --chotto-feedlayout-first-col-position: relative;
+  --chotto-feedlayout-first-col-grid-column: 1;
+  --chotto-feedlayout-first-col-display: flex;
+  --chotto-feedlayout-first-col-flex-direction: column;
+  --chotto-feedlayout-first-col-height: inherit;
+  --chotto-feedlayout-first-col-background-color: #171717;
+
+  // FeedLayout transition variables
+  --chotto-feedlayout-transition-enter-active-transition: opacity 0.5s ease;
+  --chotto-feedlayout-transition-enter-active-opacity: 1;
+  --chotto-feedlayout-transition-enter-from-opacity: 0;
+}

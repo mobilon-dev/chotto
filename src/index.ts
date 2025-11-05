@@ -1,7 +1,6 @@
 import 'primeicons/primeicons.css'
-import './assets/style.css'
+import './themes/global.scss'
 
-export * from './library';
-
-export * from './helpers';
-
+export * from './components';
+export * from './hooks';
+export * from './functions';

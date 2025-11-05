@@ -1,0 +1,51 @@
+.profile {
+
+  &__container {
+    display: var(--chotto-userprofile-container-display, grid);
+    grid-template-columns: var(--chotto-userprofile-container-grid-template-columns, min-content 1fr);
+    padding: var(--chotto-userprofile-container-padding, 20px 12px 20px 9px);
+  }
+
+  &__name {
+    grid-column: var(--chotto-userprofile-name-grid-column, 2);
+    font-size: var(--chotto-userprofile-name-font-size, 20px);
+    margin: var(--chotto-userprofile-name-margin, 0);
+  }
+
+  &__email {
+    grid-column: var(--chotto-userprofile-email-grid-column, 2);
+    font-size: var(--chotto-userprofile-email-font-size, 16px);
+    margin: var(--chotto-userprofile-email-margin, 0);
+  }
+
+  &__phone {
+    grid-column: var(--chotto-userprofile-phone-grid-column, 2);
+    font-size: var(--chotto-userprofile-phone-font-size, 16px);
+    margin: var(--chotto-userprofile-phone-margin, 0);
+  }
+
+  &__avatar-container {
+    grid-row: var(--chotto-userprofile-avatar-container-grid-row, 1 / 4);
+    position: var(--chotto-userprofile-avatar-container-position, relative);
+    display: var(--chotto-userprofile-avatar-container-display, flex);
+    margin: var(--chotto-userprofile-avatar-container-margin, auto 15px auto 0);
+    border-radius: var(--chotto-userprofile-avatar-container-border-radius, 50%);
+
+    img {
+      border-radius: var(--chotto-userprofile-avatar-container-img-border-radius, 50%);
+      object-fit: var(--chotto-userprofile-avatar-container-img-object-fit, cover);
+    }
+  }
+
+  &__status {
+    position: var(--chotto-userprofile-status-position, absolute);
+    bottom: var(--chotto-userprofile-status-bottom, 0);
+    right: var(--chotto-userprofile-status-right, 5px);
+    display: var(--chotto-userprofile-status-display, block);
+    width: var(--chotto-userprofile-status-width, 10px);
+    height: var(--chotto-userprofile-status-height, 10px);
+    border-radius: var(--chotto-userprofile-status-border-radius, 50%);
+    background-color: var(--chotto-userprofile-status-background-color, transparent);
+    z-index: var(--chotto-userprofile-status-z-index, 1);
+  }
+}

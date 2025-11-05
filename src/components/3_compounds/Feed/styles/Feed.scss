@@ -1,0 +1,94 @@
+.message-feed {
+  height: var(--chotto-feed-height, 100%);
+  max-height: var(--chotto-feed-max-height, inherit);
+  display: var(--chotto-feed-display, flex);
+  flex-direction: var(--chotto-feed-flex-direction, column);
+  overflow-y: var(--chotto-feed-overflow-y, auto);
+  overflow-x: var(--chotto-feed-overflow-x, hidden);
+  scroll-behavior: var(--chotto-feed-scroll-behavior, smooth);
+  padding: var(--chotto-feed-padding, 10px 30px 10px 30px);
+  position: var(--chotto-feed-position, relative);
+  
+  &__message {
+    position: var(--chotto-feed-message-position, relative);
+    transition: var(--chotto-feed-message-transition, all 2s);
+  }
+
+  &__button-down {
+    position: var(--chotto-feed-button-down-position, sticky);
+    z-index: var(--chotto-feed-button-down-z-index, 100);
+    bottom: var(--chotto-feed-button-down-bottom, 0);
+    margin-left: var(--chotto-feed-button-down-margin-left, auto);
+    border: var(--chotto-feed-button-down-border, none);
+    min-width: var(--chotto-feed-button-down-min-width, 46px);
+    min-height: var(--chotto-feed-button-down-min-height, 46px);
+    border-radius: var(--chotto-feed-button-down-border-radius, 50%);
+    display: var(--chotto-feed-button-down-display, flex);
+    justify-content: var(--chotto-feed-button-down-justify-content, center);
+    align-items: var(--chotto-feed-button-down-align-items, center);
+    cursor: var(--chotto-feed-button-down-cursor, pointer);
+    background-color: var(--chotto-feed-button-down-background-color, #e5e5e5);
+  }
+
+  &__keyboard {
+    position: var(--chotto-feed-keyboard-position, sticky);
+    bottom: var(--chotto-feed-keyboard-bottom, 0);
+    max-width: var(--chotto-feed-keyboard-max-width, 25rem);
+    width: var(--chotto-feed-keyboard-width, fit-content);
+  }
+
+  &__icon-down {
+    font-size: var(--chotto-feed-icon-down-font-size, 23px);
+    color: var(--chotto-feed-icon-down-color, #525252);
+  }
+
+  &__unread-amount {
+    position: var(--chotto-feed-unread-amount-position, absolute);
+    top: var(--chotto-feed-unread-amount-top, -8px);
+    left: var(--chotto-feed-unread-amount-left, 0);
+    right: var(--chotto-feed-unread-amount-right, 0);
+    margin: var(--chotto-feed-unread-amount-margin, 0 auto);
+    display: var(--chotto-feed-unread-amount-display, flex);
+    justify-content: var(--chotto-feed-unread-amount-justify-content, center);
+    align-items: var(--chotto-feed-unread-amount-align-items, center);
+    font-size: var(--chotto-feed-unread-amount-font-size, 14px);
+    width: var(--chotto-feed-unread-amount-width, 22px);
+    height: var(--chotto-feed-unread-amount-height, 22px);
+    color: var(--chotto-feed-unread-amount-color, #fafafa);
+    background-color: var(--chotto-feed-unread-amount-background-color, #ef4444);
+    border-radius: var(--chotto-feed-unread-amount-border-radius, 50%);
+  }
+
+  &::-webkit-scrollbar {
+    width: var(--chotto-feed-scrollbar-width, 6px);
+    background-color: var(--chotto-feed-scrollbar-bg, var(--chotto-theme-scrollbar-bg, #fafafa));
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: var(--chotto-feed-scrollbar-thumb-border-radius, 10px);
+    background-color: var(--chotto-feed-scrollbar-thumb-bg, var(--chotto-theme-scrollbar-thumb-bg, #d4d4d4));
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: var(--chotto-feed-scrollbar-track-border-radius, 10px);
+  }
+}
+
+.focused-message {
+  background-color: var(--chotto-feed-focused-message-background-color, color-mix(in srgb, #007CFF 30%, transparent));
+  box-shadow: var(--chotto-feed-focused-message-box-shadow, 0px 0px 12px 2px color-mix(in srgb, #007CFF 30%, transparent));
+}
+
+.v-enter-active {
+  transition: var(--chotto-feed-enter-active-transition, all 0.1s ease-out);
+}
+
+.v-leave-active {
+  transition: var(--chotto-feed-leave-active-transition, all 0.1s);
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: var(--chotto-feed-enter-leave-transform, translateY(10px));
+  opacity: var(--chotto-feed-enter-leave-opacity, 0);
+}

@@ -1,0 +1,41 @@
+.keyboard{
+  &__container{
+    display: var(--chotto-messagekeyboard-container-display, flex);
+    gap: var(--chotto-messagekeyboard-gap, 5px);
+    justify-content: var(--chotto-messagekeyboard-container-justify, right);
+    flex-wrap: var(--chotto-messagekeyboard-container-flex-wrap, wrap);
+    &--left {
+    justify-content: var(--chotto-messagekeyboard-container-left-justify, flex-start);
+    margin-left: var(--chotto-messagekeyboard-container-left-margin-left, 0);
+    margin-right: var(--chotto-messagekeyboard-container-left-margin-right, auto);
+  }
+  
+  &--center {
+    justify-content: var(--chotto-messagekeyboard-container-center-justify, center);
+    margin-left: var(--chotto-messagekeyboard-container-center-margin-left, auto);
+    margin-right: var(--chotto-messagekeyboard-container-center-margin-right, auto);
+  }
+  
+  &--right {
+    justify-content: var(--chotto-messagekeyboard-container-right-justify, flex-end);
+    margin-left: var(--chotto-messagekeyboard-container-right-margin-left, auto);
+    margin-right: var(--chotto-messagekeyboard-container-right-margin-right, 0);
+  }
+}
+  &__key {
+    background: var(--chotto-messagekeyboard-key-background-color, #a3a3a3);
+    border: var(--chotto-messagekeyboard-key-border, 1px solid #d0d0d0);
+    border-radius: var(--chotto-messagekeyboard-key-border-radius, 3px);
+    word-wrap: var(--chotto-messagekeyboard-key-word-wrap, break-word);
+    box-shadow: var(--chotto-messagekeyboard-key-box-shadow, 0px 0px 10px 5px #d4d4d4);
+    max-width: var(--chotto-messagekeyboard-key-max-width, 100%);
+    p {
+      font-size: var(--chotto-messagekeyboard-key-font-size, 16px);
+      padding: var(--chotto-messagekeyboard-key-padding, 5px);
+      margin: var(--chotto-messagekeyboard-key-p-margin, 0);
+    }
+    p:hover{
+      cursor: var(--chotto-messagekeyboard-key-p-hover-cursor, pointer);
+    }
+  }
+}

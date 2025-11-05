@@ -1,0 +1,29 @@
+.base-layout {
+  &__container {
+    height: var(--chotto-feedlayout-container-height, inherit);
+    display: var(--chotto-feedlayout-container-display, grid);
+    grid-template-columns: var(--chotto-feedlayout-container-grid-template-columns, 1fr);
+    transition: var(--chotto-feedlayout-container-transition, all 0.3s ease);
+    position: var(--chotto-feedlayout-container-position, relative);
+  }
+
+  &__first-col {
+    position: var(--chotto-feedlayout-first-col-position, relative);
+    grid-column: var(--chotto-feedlayout-first-col-grid-column, 1);
+    display: var(--chotto-feedlayout-first-col-display, flex);
+    flex-direction: var(--chotto-feedlayout-first-col-flex-direction, column);
+    height: var(--chotto-feedlayout-first-col-height, inherit);
+    background-color: var(--chotto-feedlayout-first-col-background-color, #FAF6F4);
+  }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: var(--chotto-feedlayout-transition-enter-active-transition, opacity 0.5s ease);
+  opacity: var(--chotto-feedlayout-transition-enter-active-opacity, 1);
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: var(--chotto-feedlayout-transition-enter-from-opacity, 0);
+}

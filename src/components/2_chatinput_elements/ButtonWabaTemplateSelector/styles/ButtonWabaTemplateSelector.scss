@@ -1,0 +1,24 @@
+.button-template {
+  background-color: var(--chotto-buttonwabatemplateselector-button-background-color, transparent);
+  border: var(--chotto-buttonwabatemplateselector-button-border, 0px);
+  height: var(--chotto-buttonwabatemplateselector-button-height, fit-content);
+  span {
+    display: var(--chotto-buttonwabatemplateselector-button-span-display, block);
+    cursor: var(--chotto-buttonwabatemplateselector-button-span-cursor, pointer);
+    padding: var(--chotto-buttonwabatemplateselector-button-span-padding, 1px 0 0 3px);
+    font-size: var(--chotto-buttonwabatemplateselector-button-span-font-size, 23px);
+    color: var(--chotto-buttonwabatemplateselector-button-span-color, #525252);
+  }
+}
+
+.button-template:hover span{
+  color: var(--chotto-buttonwabatemplateselector-button-span-hover-color, #404040);
+}
+
+.button-template-disabled {
+  pointer-events: var(--chotto-buttonwabatemplateselector-button-disabled-pointer-events, none);
+  span {
+    cursor: var(--chotto-buttonwabatemplateselector-button-disabled-span-cursor, auto);
+    color: var(--chotto-buttonwabatemplateselector-button-disabled-span-color, #e5e5e5);
+  }
+}

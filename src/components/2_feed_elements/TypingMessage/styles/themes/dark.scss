@@ -1,0 +1,61 @@
+[data-theme="dark"] {
+  // TypingMessage container variables
+  --chotto-typingmessage-container-display: grid;
+  --chotto-typingmessage-container-grid-template-columns: min-content 1fr;
+  --chotto-typingmessage-container-position: relative;
+  --chotto-typingmessage-container-margin: var(--chotto-theme-message-margin);
+
+  // TypingMessage subtext variables
+  --chotto-typingmessage-subtext-grid-column: 2;
+  --chotto-typingmessage-subtext-grid-row: 1;
+  --chotto-typingmessage-subtext-margin: 0 0 2px 10px;
+  --chotto-typingmessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-typingmessage-subtext-color: var(--chotto-theme-secondary-text-color);
+
+  // TypingMessage avatar variables
+  --chotto-typingmessage-avatar-align-self: center;
+  --chotto-typingmessage-avatar-object-fit: cover;
+  --chotto-typingmessage-avatar-min-width: 40px;
+  --chotto-typingmessage-avatar-min-height: 40px;
+  --chotto-typingmessage-avatar-border-radius: 50%;
+  --chotto-typingmessage-avatar-grid-column: 1;
+  --chotto-typingmessage-avatar-grid-row: 2;
+  --chotto-typingmessage-avatar-margin-right: 12px;
+
+  // TypingMessage loader-container variables
+  --chotto-typingmessage-loader-container-min-height: 40px;
+  --chotto-typingmessage-loader-container-grid-column: 2;
+  --chotto-typingmessage-loader-container-border-radius: var(--chotto-theme-message-border-radius, 10px);
+  --chotto-typingmessage-loader-container-padding: 6px 6px 6px 6px;
+  --chotto-typingmessage-loader-container-max-width: 80px;
+  --chotto-typingmessage-loader-container-background-color: var(--chotto-theme-message-left-bg);
+
+  // TypingMessage loader variables
+  --chotto-typingmessage-loader-width: 8px;
+  --chotto-typingmessage-loader-height: 8px;
+  --chotto-typingmessage-loader-position: relative;
+  --chotto-typingmessage-loader-top: 50%;
+  --chotto-typingmessage-loader-border-radius: 50%;
+  --chotto-typingmessage-loader-animation: typing-message__loader 0.8s 0.25s ease alternate infinite;
+  --chotto-typingmessage-loader-margin: -20px auto 0;
+
+  // TypingMessage loader pseudo-elements variables
+  --chotto-typingmessage-loader-pseudo-content: '';
+  --chotto-typingmessage-loader-pseudo-position: absolute;
+  --chotto-typingmessage-loader-pseudo-width: 8px;
+  --chotto-typingmessage-loader-pseudo-height: 8px;
+  --chotto-typingmessage-loader-pseudo-border-radius: 50%;
+  --chotto-typingmessage-loader-pseudo-animation: typing-message__loader 0.8s ease alternate infinite;
+
+  // TypingMessage loader before variables
+  --chotto-typingmessage-loader-before-left: -20px;
+  --chotto-typingmessage-loader-before-animation-delay: 0.1s;
+
+  // TypingMessage loader after variables
+  --chotto-typingmessage-loader-after-right: -20px;
+  --chotto-typingmessage-loader-after-animation-delay: 0.4s;
+
+  // TypingMessage keyframes variables
+  --chotto-typingmessage-keyframes-0-box-shadow: 0 15px 0 -15px var(--chotto-theme-secondary-text-color);
+  --chotto-typingmessage-keyframes-100-box-shadow: 0 15px 0 var(--chotto-theme-secondary-text-color);
+}

@@ -1,10 +1,12 @@
+import './utils/suppress-lit-warning';
+
 import { createApp } from 'vue';
 import { createPinia } from 'pinia'
 import 'primeicons/primeicons.css'
 
 import App from './App.vue';
 
-import './assets/style.css'
+import './themes/index.scss'
 
 const pinia = createPinia()
 

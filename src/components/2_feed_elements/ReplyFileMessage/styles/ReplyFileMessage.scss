@@ -1,0 +1,48 @@
+p {
+  margin: var(--chotto-replyfilemessage-p-margin, 0);
+  margin-top: var(--chotto-replyfilemessage-p-margin-top, 6px);
+  word-wrap: var(--chotto-replyfilemessage-p-word-wrap, break-word);
+  white-space: var(--chotto-replyfilemessage-p-white-space, pre-wrap);
+  font-size: var(--chotto-replyfilemessage-p-font-size, 14px);
+  color: var(--chotto-replyfilemessage-p-color, #5F5F5F);
+  overflow: var(--chotto-replyfilemessage-p-overflow, hidden);
+  text-overflow: var(--chotto-replyfilemessage-p-text-overflow, ellipsis);
+  display: var(--chotto-replyfilemessage-p-display, -webkit-box);
+  -webkit-line-clamp: var(--chotto-replyfilemessage-p-webkit-line-clamp, 5);
+  line-clamp: var(--chotto-replyfilemessage-p-line-clamp, 5);
+  -webkit-box-orient: var(--chotto-replyfilemessage-p-webkit-box-orient, vertical);
+}
+
+.file-message {
+
+  &__text {
+    margin-top: var(--chotto-replyfilemessage-text-margin-top, 8px);
+    font-size: var(--chotto-replyfilemessage-text-font-size, 14px);
+    color: var(--chotto-replyfilemessage-text-color, #1E1E1E);
+  }
+
+  &__link {
+    display: var(--chotto-replyfilemessage-link-display, flex);
+    justify-content: var(--chotto-replyfilemessage-link-justify-content, flex-start);
+    align-items: var(--chotto-replyfilemessage-link-align-items, center);
+    column-gap: var(--chotto-replyfilemessage-link-column-gap, 13px);
+
+    span {
+      color: var(--chotto-replyfilemessage-link-span-color, #5F5F5F);
+      font-size: var(--chotto-replyfilemessage-link-span-font-size, 23px);
+    }
+  }
+
+  &__filename-text {
+    margin: var(--chotto-replyfilemessage-filename-text-margin, 0);
+    overflow: var(--chotto-replyfilemessage-filename-text-overflow, hidden);
+    text-overflow: var(--chotto-replyfilemessage-filename-text-text-overflow, ellipsis);
+    -webkit-line-clamp: var(--chotto-replyfilemessage-filename-text-webkit-line-clamp, 1);
+    line-clamp: var(--chotto-replyfilemessage-filename-text-line-clamp, 1);
+    -webkit-box-orient: var(--chotto-replyfilemessage-filename-text-webkit-box-orient, vertical);
+    margin-right: var(--chotto-replyfilemessage-filename-text-margin-right, 40px);
+    font-size: var(--chotto-replyfilemessage-filename-text-font-size, 14px);
+    color: var(--chotto-replyfilemessage-filename-text-color, #5F5F5F);
+    text-decoration: var(--chotto-replyfilemessage-filename-text-text-decoration, underline);
+  }
+}

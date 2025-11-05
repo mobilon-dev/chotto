@@ -1,0 +1,100 @@
+[data-theme="green"] {
+  // Modal backdrop
+  --chotto-modal-backdrop-position: fixed;
+  --chotto-modal-backdrop-top: 0;
+  --chotto-modal-backdrop-bottom: 0;
+  --chotto-modal-backdrop-left: 0;
+  --chotto-modal-backdrop-right: 0;
+  --chotto-modal-backdrop-bg: rgba(76, 175, 80, 0.2);
+  --chotto-modal-backdrop-display: flex;
+  --chotto-modal-backdrop-justify: center;
+  --chotto-modal-backdrop-align: center;
+  --chotto-modal-backdrop-filter: none;
+  --chotto-modal-z-index: 1000;
+
+  // Modal container
+  --chotto-modal-background: var(--chotto-theme-primary-color, #f8fff8);
+  --chotto-modal-box-shadow: 0 4px 20px var(--chotto-theme-shadow-color, rgba(76, 175, 80, 0.3));
+  --chotto-modal-border: none;
+  --chotto-modal-border-radius: 16px;
+  --chotto-modal-position: relative;
+  --chotto-modal-display: flex;
+  --chotto-modal-flex-direction: column;
+
+  // Modal sizing
+  --chotto-modal-min-width: 320px;
+  --chotto-modal-min-height: 320px;
+  --chotto-modal-max-width: 90vw;
+  --chotto-modal-max-height: 90vh;
+  --chotto-modal-width: auto;
+  --chotto-modal-height: auto;
+  --chotto-modal-overflow-x: auto;
+  --chotto-modal-overflow-y: auto;
+
+  // Modal body
+  --chotto-modal-body-position: relative;
+  --chotto-modal-body-padding: 30px;
+  --chotto-modal-body-margin: 0;
+  --chotto-modal-body-flex-grow: 1;
+  --chotto-modal-body-overflow: visible;
+  --chotto-modal-text-color: var(--chotto-theme-text-color, #2e7d32);
+  --chotto-modal-font-size: inherit;
+  --chotto-modal-font-family: inherit;
+  --chotto-modal-line-height: inherit;
+  --chotto-modal-text-align: left;
+
+  // Modal buttons container
+  --chotto-modal-buttons-display: flex;
+  --chotto-modal-buttons-margin: 10px 20px 25px 20px;
+  --chotto-modal-buttons-padding: 0;
+  --chotto-modal-buttons-gap: 8px;
+  --chotto-modal-buttons-justify: center;
+  --chotto-modal-buttons-align: center;
+  --chotto-modal-buttons-wrap: wrap;
+
+  // Modal buttons
+  --chotto-modal-button-bg: var(--chotto-theme-accent-color, #4CAF50);
+  --chotto-modal-button-text-color: #ffffff;
+  --chotto-modal-button-border: none;
+  --chotto-modal-button-border-radius: 5px;
+  --chotto-modal-button-padding: 9px 18px;
+  --chotto-modal-button-margin: 0 4px;
+  --chotto-modal-button-font-size: 15px;
+  --chotto-modal-button-font-family: var(--chotto-theme-font-family);
+  --chotto-modal-button-font-weight: 600;
+  --chotto-modal-button-cursor: pointer;
+  --chotto-modal-button-transition: all 0.3s ease;
+  --chotto-modal-button-min-width: 138px;
+  --chotto-modal-button-min-height: 34px;
+  --chotto-modal-button-display: inline-block;
+  --chotto-modal-button-text-align: center;
+  --chotto-modal-button-text-decoration: none;
+  --chotto-modal-button-outline: none;
+  --chotto-modal-button-box-shadow: 0 3px 6px rgba(76, 175, 80, 0.3);
+
+  --chotto-modal-cancel-button-bg: var(--chotto-theme-quaternary-color, #a3a3a3);
+  --chotto-modal-cancel-button-border: none;
+
+  // Button states
+  --chotto-modal-button-hover-bg: #45a049;
+  --chotto-modal-button-hover-transform: translateY(-3px) scale(1.05);
+  --chotto-modal-button-hover-box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+  --chotto-modal-button-active-bg: #3d8b40;
+  --chotto-modal-button-active-transform: translateY(-1px) scale(1.02);
+  --chotto-modal-button-active-box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+  --chotto-modal-button-focus-outline: 3px solid rgba(76, 175, 80, 0.5);
+  --chotto-modal-button-focus-outline-offset: 3px;
+  --chotto-modal-button-disabled-bg: #c8e6c9;
+  --chotto-modal-button-disabled-text-color: #81c784;
+  --chotto-modal-button-disabled-cursor: not-allowed;
+  --chotto-modal-button-disabled-opacity: 0.7;
+
+  // Modal animations
+  --chotto-modal-transition: opacity 0.4s ease, transform 0.4s ease;
+  --chotto-modal-enter-opacity: 0;
+  --chotto-modal-enter-transform: scale(0.7) rotate(-5deg);
+  --chotto-modal-enter-to-opacity: 1;
+  --chotto-modal-enter-to-transform: scale(1) rotate(0deg);
+}
+
+

@@ -1,0 +1,55 @@
+[data-theme="green"] {
+  // ReplyVideoMessage p variables
+  --chotto-replyvideomessage-p-margin: 0;
+  --chotto-replyvideomessage-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replyvideomessage-p-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replyvideomessage-p-overflow: hidden;
+  --chotto-replyvideomessage-p-text-overflow: ellipsis;
+  --chotto-replyvideomessage-p-display: -webkit-box;
+  --chotto-replyvideomessage-p-webkit-line-clamp: 5;
+  --chotto-replyvideomessage-p-line-clamp: 5;
+  --chotto-replyvideomessage-p-webkit-box-orient: vertical;
+
+  // ReplyVideoMessage video variables
+  --chotto-replyvideomessage-video-width: 60px;
+  --chotto-replyvideomessage-video-height: 60px;
+  --chotto-replyvideomessage-video-border-radius: 4px;
+  --chotto-replyvideomessage-video-object-fit: cover;
+  --chotto-replyvideomessage-video-cursor: zoom-in;
+  --chotto-replyvideomessage-video-margin: auto;
+
+  // ReplyVideoMessage preview-button variables
+  --chotto-replyvideomessage-preview-button-position: relative;
+  --chotto-replyvideomessage-preview-button-display: flex;
+  --chotto-replyvideomessage-preview-button-flex-direction: column;
+
+  // ReplyVideoMessage text-container variables
+  --chotto-replyvideomessage-text-container-word-wrap: break-word;
+  --chotto-replyvideomessage-text-container-align-content: center;
+  --chotto-replyvideomessage-text-container-word-break: break-word;
+
+  // ReplyVideoMessage text variables
+  --chotto-replyvideomessage-text-margin-top: 8px;
+  --chotto-replyvideomessage-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-replyvideomessage-text-color: var(--chotto-theme-primary-text-color);
+
+  // ReplyVideoMessage reply-description variables
+  --chotto-replyvideomessage-reply-description-display: flex;
+  --chotto-replyvideomessage-reply-description-align-items: center;
+  --chotto-replyvideomessage-reply-description-column-gap: 6px;
+  --chotto-replyvideomessage-reply-description-margin-bottom: 4px;
+  --chotto-replyvideomessage-reply-description-span-color: var(--chotto-theme-secondary-text-color);
+
+  // ReplyVideoMessage modal-video variables
+  --chotto-replyvideomessage-modal-video-width: 100%;
+  --chotto-replyvideomessage-modal-video-height: 100%;
+  --chotto-replyvideomessage-modal-video-max-height: 60%;
+  --chotto-replyvideomessage-modal-video-object-fit: cover;
+  --chotto-replyvideomessage-modal-video-border-radius: 5px;
+  --chotto-replyvideomessage-modal-video-max-height-vh: 80vh;
+
+  // ReplyVideoMessage modal-fade variables
+  --chotto-replyvideomessage-modal-fade-transition: opacity 0.2s ease;
+  --chotto-replyvideomessage-modal-fade-opacity-hidden: 0;
+  --chotto-replyvideomessage-modal-fade-opacity-visible: 1;
+}

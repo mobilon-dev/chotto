@@ -12,18 +12,18 @@
 import { onMounted } from 'vue';
 import moment from 'moment';
 
-// import ChatApp from './BaseBaseChatApp.vue';
-// import ChatApp from './BaseExtendedChatApp.vue';
-//import ChatApp from './BaseAdaptiveExtendedChatApp.vue';
-import ChatApp from './MobilonExtendedChatApp.vue'
-// import ChatApp from './BaseFeedChatApp.vue';
+// import ChatApp from './apps/BaseBaseChatApp/BaseBaseChatApp.vue';
+// import ChatApp from './apps/BaseExtendedChatApp/BaseExtendedChatApp.vue';
+//import ChatApp from './apps/BaseAdaptiveExtendedChatApp/BaseAdaptiveExtendedChatApp.vue';
+import ChatApp from './apps/MobilonExtendedChatApp/MobilonExtendedChatApp.vue'
+// import ChatApp from './apps/BaseFeedChatApp/BaseFeedChatApp.vue';
 
-// import ChatApp from './FloatExtendedChatApp.vue';
+// import ChatApp from './apps/FloatExtendedChatApp/FloatExtendedChatApp.vue';
 
 import {
   messages, chats, channels,
   sidebarItems, userProfile, users, templates, groupTemplates, wabaTemplates,
-} from './data';
+} from './apps/data';
 
 // Mock data
 const data3 = {

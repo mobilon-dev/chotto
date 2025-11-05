@@ -1,0 +1,51 @@
+// @disable-validation
+[data-theme="dark"] {
+  // AdaptiveExtendedLayout container variables
+  --chotto-adaptiveextendedlayout-container-height: inherit;
+  --chotto-adaptiveextendedlayout-container-display: grid;
+  --chotto-adaptiveextendedlayout-container-transition: all 0.3s ease;
+  --chotto-adaptiveextendedlayout-container-position: relative;
+  --chotto-adaptiveextendedlayout-container-border-top: var(--chotto-theme-border, none);
+  --chotto-adaptiveextendedlayout-container-border-left: var(--chotto-theme-border, none);
+  --chotto-adaptiveextendedlayout-container-desktop-grid-template-columns: min-content 30% calc(70% - var(--chotto-adaptive-extended-layout-first-col-width));
+  --chotto-adaptiveextendedlayout-container-tablet-grid-template-columns: min-content calc(var(--chotto-adaptive-extended-layout-second-col-width) - var(--chotto-adaptive-extended-layout-first-col-width)) calc(var(--chotto-adaptive-extended-layout-third-col-width) - var(--chotto-adaptive-extended-layout-first-col-width));
+  --chotto-adaptiveextendedlayout-container-mobile-grid-template-columns: min-content var(--chotto-adaptive-extended-layout-second-col-width) var(--chotto-adaptive-extended-layout-third-col-width);
+
+  // AdaptiveExtendedLayout first-col variables
+  --chotto-adaptiveextendedlayout-first-col-position: relative;
+  --chotto-adaptiveextendedlayout-first-col-grid-column: 1;
+  --chotto-adaptiveextendedlayout-first-col-display: flex;
+  --chotto-adaptiveextendedlayout-first-col-flex-direction: column;
+  --chotto-adaptiveextendedlayout-first-col-height: inherit;
+  --chotto-adaptiveextendedlayout-first-col-border-right: var(--chotto-theme-border, none);
+  --chotto-adaptiveextendedlayout-first-col-border-bottom: var(--chotto-theme-border, none);
+  --chotto-adaptiveextendedlayout-first-col-background-color: #262626;
+  --chotto-adaptiveextendedlayout-first-col-mobile-display: none;
+
+  // AdaptiveExtendedLayout second-col variables
+  --chotto-adaptiveextendedlayout-second-col-position: relative;
+  --chotto-adaptiveextendedlayout-second-col-grid-column: 2;
+  --chotto-adaptiveextendedlayout-second-col-display: flex;
+  --chotto-adaptiveextendedlayout-second-col-flex-direction: column;
+  --chotto-adaptiveextendedlayout-second-col-height: inherit;
+  --chotto-adaptiveextendedlayout-second-col-overflow: hidden;
+  --chotto-adaptiveextendedlayout-second-col-border-right: var(--chotto-theme-border, none);
+  --chotto-adaptiveextendedlayout-second-col-border-bottom: var(--chotto-theme-border, none);
+  --chotto-adaptiveextendedlayout-second-col-background-color: #171717;
+
+  // AdaptiveExtendedLayout third-col variables
+  --chotto-adaptiveextendedlayout-third-col-position: relative;
+  --chotto-adaptiveextendedlayout-third-col-display: flex;
+  --chotto-adaptiveextendedlayout-third-col-flex-direction: column;
+  --chotto-adaptiveextendedlayout-third-col-grid-column: 3;
+  --chotto-adaptiveextendedlayout-third-col-height: inherit;
+  --chotto-adaptiveextendedlayout-third-col-border-right: var(--chotto-theme-border, none);
+  --chotto-adaptiveextendedlayout-third-col-border-bottom: var(--chotto-theme-border, none);
+  --chotto-adaptiveextendedlayout-third-col-background-color: #262626;
+  --chotto-adaptiveextendedlayout-third-col-width: auto;
+
+  // AdaptiveExtendedLayout transition variables
+  --chotto-adaptiveextendedlayout-transition-enter-active-transition: opacity 0.5s ease;
+  --chotto-adaptiveextendedlayout-transition-enter-active-opacity: 1;
+  --chotto-adaptiveextendedlayout-transition-enter-from-opacity: 0;
+}

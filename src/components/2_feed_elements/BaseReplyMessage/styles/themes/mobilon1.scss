@@ -1,0 +1,48 @@
+[data-theme="mobilon1"] {
+  --chotto-basereplymessage-accent-line-color: #007CFF;
+  --chotto-basereplymessage-left-secondary-bg: #f5f5f5;
+  --chotto-basereplymessage-right-secondary-bg: #f5f5f5;
+  --chotto-basereplymessage-item-border-color: #e5e5e5;
+
+  // BaseReplyMessage container variables
+  --chotto-basereplymessage-container-position: relative;
+  --chotto-basereplymessage-container-padding: 10px 6px 10px 20px;
+  --chotto-basereplymessage-container-border-radius: 10px;
+  --chotto-basereplymessage-container-overflow: hidden;
+  --chotto-basereplymessage-container-margin-bottom: 6px;
+
+  // BaseReplyMessage container before pseudo-element variables
+  --chotto-basereplymessage-container-before-content: "";
+  --chotto-basereplymessage-container-before-position: absolute;
+  --chotto-basereplymessage-container-before-top: 0;
+  --chotto-basereplymessage-container-before-left: 0;
+  --chotto-basereplymessage-container-before-width: 4px;
+  --chotto-basereplymessage-container-before-height: 100%;
+
+  // BaseReplyMessage reset variables
+  --chotto-basereplymessage-reset-display: none;
+  --chotto-basereplymessage-reset-position: absolute;
+  --chotto-basereplymessage-reset-right: 0;
+  --chotto-basereplymessage-reset-top: 0;
+  --chotto-basereplymessage-reset-hover-cursor: pointer;
+
+  // Grid variables
+  --chotto-basereplymessage-grid-display: grid;
+  --chotto-basereplymessage-grid-template-columns: auto 1fr;
+  --chotto-basereplymessage-grid-column-gap: 10px;
+  --chotto-basereplymessage-grid-padding: 6px 10px 6px 10px;
+
+  // Chat input reply variables
+  --chotto-basereplymessage-chat-input-reply-padding-right: 30px;
+  --chotto-basereplymessage-chat-input-reply-border: 1px solid #e5e5e5;
+  --chotto-basereplymessage-chat-input-reply-border-radius: 0;
+  --chotto-basereplymessage-chat-input-reply-word-break: break-word;
+  --chotto-basereplymessage-chat-input-reply-margin-bottom: 0;
+
+  // Chat input reply reset variables
+  --chotto-basereplymessage-chat-input-reset-font-size: 1.1rem;
+  --chotto-basereplymessage-chat-input-reset-display: flex;
+  --chotto-basereplymessage-chat-input-reset-height: 100%;
+  --chotto-basereplymessage-chat-input-reset-margin-right: 10px;
+  --chotto-basereplymessage-chat-input-reset-span-margin: auto;
+}

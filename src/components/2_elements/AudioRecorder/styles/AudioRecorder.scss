@@ -1,0 +1,80 @@
+.audio-recorder {
+  &__container {
+    position: var(--chotto-audiorecorder-container-position, relative);
+    display: var(--chotto-audiorecorder-container-display, grid);
+    align-items: var(--chotto-audiorecorder-container-align-items, center);
+    background-color: var(--chotto-audiorecorder-container-background-color, transparent);
+    height: var(--chotto-audiorecorder-container-height, fit-content);
+  }
+
+  &__recording-container{
+    display: var(--chotto-audiorecorder-recording-container-display, flex);
+    gap: var(--chotto-audiorecorder-recording-container-gap, 3px);
+    line-height: var(--chotto-audiorecorder-recording-container-line-height, 56px);
+  }
+
+  &__recording-icon {
+    line-height: var(--chotto-audiorecorder-recording-icon-line-height, 56px);
+    font-size: var(--chotto-audiorecorder-recording-icon-font-size, 10px);
+    -webkit-animation: var(--chotto-audiorecorder-recording-icon-webkit-animation, blink 3s linear infinite);
+    animation: var(--chotto-audiorecorder-recording-icon-animation, blink 3s linear infinite);
+  }
+
+  &__stop {
+    width: var(--chotto-audiorecorder-stop-width, 20px);
+    height: var(--chotto-audiorecorder-stop-height, 20px);
+    background-color: var(--chotto-audiorecorder-stop-background-color, black);
+    cursor: var(--chotto-audiorecorder-stop-cursor, pointer);
+    border-radius: var(--chotto-audiorecorder-stop-border-radius, 2px);
+  }
+
+  @-webkit-keyframes blink {
+    0% { color: var(--chotto-audiorecorder-blink-keyframes-0-color, red); }
+    50% { color: var(--chotto-audiorecorder-blink-keyframes-50-color, transparent); }
+    100% { color: var(--chotto-audiorecorder-blink-keyframes-100-color, red); }
+  }
+  @keyframes blink {
+    0% { color: var(--chotto-audiorecorder-blink-keyframes-0-color, red); }
+    50% { color: var(--chotto-audiorecorder-blink-keyframes-50-color, transparent); }
+    100% { color: var(--chotto-audiorecorder-blink-keyframes-100-color, red); }
+  }
+
+  &__button {
+    background-color: var(--chotto-audiorecorder-button-background-color, transparent);
+    border: var(--chotto-audiorecorder-button-border, 0px);
+
+    span {
+      display: var(--chotto-audiorecorder-button-span-display, block);
+      cursor: var(--chotto-audiorecorder-button-span-cursor, pointer);
+      padding: var(--chotto-audiorecorder-button-span-padding, 1px 0 0 3px);
+      font-size: var(--chotto-audiorecorder-button-span-font-size, 23px);
+      color: var(--chotto-audiorecorder-button-span-color, #525252);
+    }
+  }
+
+  &__button-record {
+    span {
+      display: var(--chotto-audiorecorder-button-record-span-display, block);
+      cursor: var(--chotto-audiorecorder-button-record-span-cursor, pointer);
+      padding: var(--chotto-audiorecorder-button-record-span-padding, 0);
+      font-size: var(--chotto-audiorecorder-button-record-span-font-size, 23px);
+      color: var(--chotto-audiorecorder-button-record-span-color, #525252);
+    }
+  }
+
+  &__button:hover span{
+    color: var(--chotto-audiorecorder-button-span-hover-color, #404040);
+  }
+
+  &__button-record:hover span{
+    color: var(--chotto-audiorecorder-button-record-span-hover-color, #404040);
+  }
+
+  &__button-disabled {
+    pointer-events: var(--chotto-audiorecorder-button-disabled-pointer-events, none);
+    span {
+      cursor: var(--chotto-audiorecorder-button-disabled-span-cursor, auto);
+      color: var(--chotto-audiorecorder-button-disabled-span-color, #e5e5e5);
+    }
+  }
+}

@@ -1,0 +1,205 @@
+[data-theme="mobilon1"] {
+  // Container
+  --chotto-chatitem-container-grid-row: 1;
+  --chotto-chatitem-container-grid-column: 1 / 2;
+  --chotto-chatitem-container-display: flex;
+  --chotto-chatitem-container-position: relative;
+  --chotto-chatitem-container-cursor: pointer;
+  
+  // Divider
+  --chotto-chatitem-divider-content: '';
+  --chotto-chatitem-divider-position: absolute;
+  --chotto-chatitem-divider-translate-x: 15%;
+  --chotto-chatitem-divider-width: 416px;
+  --chotto-chatitem-divider-height: 1px;
+  --chotto-chatitem-divider-color: #F3F3F3;
+  --chotto-chatitem-divider-bottom: 0;
+  
+  // Selected state
+  --chotto-chatitem-selected-cursor: pointer;
+  --chotto-chatitem-container-hover-bg: var(--chotto-theme-item-background-color-hover);
+  --chotto-chatitem-selected-bg: var(--chotto-theme-item-background-color-focus);
+  
+  // Avatar container
+  --chotto-chatitem-avatar-container-position: relative;
+  --chotto-chatitem-avatar-container-display: flex;
+  --chotto-chatitem-avatar-container-justify: center;
+  --chotto-chatitem-avatar-container-align: center;
+  --chotto-chatitem-avatar-container-align-self: center;
+  --chotto-chatitem-avatar-container-object-fit: cover;
+  --chotto-chatitem-avatar-margin-right: 15px;
+  --chotto-chatitem-avatar-placeholder-size: 48px;
+  --chotto-chatitem-avatar-min-width: 50px;
+  --chotto-chatitem-avatar-min-height: 50px;
+  --chotto-chatitem-avatar-border-radius: 50%;
+  --chotto-chatitem-avatar-text-font-size: 21px;
+  
+  --chotto-chatitem-avatar-img-border-radius: 50%;
+  --chotto-chatitem-avatar-img-object-fit: cover;
+  
+  // Status user
+  --chotto-chatitem-status-user-position: absolute;
+  --chotto-chatitem-status-user-right: 5px;
+  --chotto-chatitem-status-user-size: 10px;
+  --chotto-chatitem-status-user-border-radius: 50%;
+  --chotto-chatitem-status-user-bottom: 0;
+  --chotto-chatitem-status-user-display: block;
+  --chotto-chatitem-status-user-bg: transparent;
+  --chotto-chatitem-status-user-z-index: 1;
+  
+  // Info container
+  --chotto-chatitem-info-container-flex-grow: 1;
+  --chotto-chatitem-info-container-align-self: flex-start;
+  --chotto-chatitem-info-container-overflow: hidden;
+  --chotto-chatitem-info-margin-right: 15px;
+  
+  // Name
+  --chotto-chatitem-name-margin-top: 0;
+  --chotto-chatitem-name-margin-bottom: 8px;
+  --chotto-chatitem-name-overflow: hidden;
+  --chotto-chatitem-name-text-overflow: ellipsis;
+  --chotto-chatitem-name-display: -webkit-box;
+  --chotto-chatitem-name-line-clamp: 1;
+  --chotto-chatitem-name-box-orient: vertical;
+  --chotto-chatitem-name-font-size: var(--chotto-theme-title-font-size);
+  --chotto-chatitem-name-font-weight: var(--chotto-theme-title-font-weight);
+  
+  // Last message
+  --chotto-chatitem-last-message-overflow: hidden;
+  --chotto-chatitem-last-message-text-overflow: ellipsis;
+  --chotto-chatitem-last-message-display: -webkit-box;
+  --chotto-chatitem-last-message-line-clamp: 1;
+  --chotto-chatitem-last-message-box-orient: vertical;
+  --chotto-chatitem-last-message-font-size: var(--chotto-theme-text-font-size);
+  --chotto-chatitem-last-message-text-color: var(--chotto-theme-secondary-text-color);
+  
+  // Details container
+  --chotto-chatitem-details-container-position: relative;
+  --chotto-chatitem-details-container-display: flex;
+  --chotto-chatitem-details-container-flex-direction: column;
+  --chotto-chatitem-details-container-justify: space-between;
+  --chotto-chatitem-details-container-align: end;
+  --chotto-chatitem-button-color-active: var(--chotto-theme-button-color-active);
+  
+  // Actions trigger
+  --chotto-chatitem-actions-trigger-display: block;
+  --chotto-chatitem-actions-trigger-cursor: pointer;
+  --chotto-chatitem-actions-trigger-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-chatitem-actions-trigger-color: var(--chotto-theme-button-color-active);
+  --chotto-chatitem-actions-trigger-color-hover: var(--chotto-theme-button-color-hover);
+  
+  // Menu button
+  --chotto-chatitem-menu-button-order: 0;
+  --chotto-chatitem-menu-button-font-size: 18px;
+  --chotto-chatitem-menu-button-width: 100%;
+  --chotto-chatitem-menu-button-border: none;
+  --chotto-chatitem-menu-button-bg: transparent;
+  --chotto-chatitem-menu-button-cursor: pointer;
+  --chotto-chatitem-menu-button-padding: 0;
+  --chotto-chatitem-menu-button-transition: 0.2s;
+  --chotto-chatitem-menu-button-hover-transition: 0.2s;
+  --chotto-chatitem-menu-button-span-display: block;
+  --chotto-chatitem-menu-button-span-width: fit-content;
+  --chotto-chatitem-menu-button-span-margin-left: auto;
+  --chotto-chatitem-menu-button-hover-color: var(--chotto-theme-button-color-hover);
+  
+  // Unread
+  --chotto-chatitem-unread-order: 1;
+  --chotto-chatitem-unread-display: flex;
+  --chotto-chatitem-unread-justify: center;
+  --chotto-chatitem-unread-align: center;
+  --chotto-chatitem-unread-margin-left: auto;
+  --chotto-chatitem-unread-margin-top: auto;
+  --chotto-chatitem-unread-max-height: 20px;
+  --chotto-chatitem-unread-padding: 0 6px;
+  --chotto-chatitem-unread-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-chatitem-unread-text-color: var(--chotto-theme-unread-text-color);
+  --chotto-chatitem-unread-background-color: var(--chotto-theme-unread-background-color);
+  
+  // Time
+  --chotto-chatitem-time-white-space: nowrap;
+  --chotto-chatitem-time-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-chatitem-time-text-color: var(--chotto-theme-secondary-text-color);
+  
+  // Context menu
+  --chotto-chatitem-context-menu-position: absolute;
+  --chotto-chatitem-context-menu-top: 40%;
+  --chotto-chatitem-context-menu-right: 0;
+  
+  // Status chat container
+  --chotto-chatitem-status-chat-container-display: flex;
+  --chotto-chatitem-status-chat-container-align: center;
+  --chotto-chatitem-status-chat-container-margin-top: auto;
+  --chotto-chatitem-status-gap: 4px;
+  
+  // Status message
+  --chotto-chatitem-status-message-display: flex;
+  --chotto-chatitem-status-color-received: var(--chotto-theme-status-color-received);
+  --chotto-chatitem-status-color-read: var(--chotto-theme-status-color-read);
+  --chotto-chatitem-status-font-size: var(--chotto-theme-text-font-size);
+  --chotto-chatitem-status-color-received: var(--chotto-theme-status-color-received);
+  --chotto-chatitem-status-font-size: var(--chotto-theme-text-font-size);
+  
+  // Dialog buttons
+  --chotto-chatitem-dialog-buttons-display: flex;
+  --chotto-chatitem-dialog-buttons-margin-left: 8px;
+  
+  // Dialog container
+  --chotto-chatitem-dialog-container-display: flex;
+  --chotto-chatitem-dialog-container-flex-direction: column;
+  --chotto-chatitem-dialog-container-position: relative;
+  --chotto-chatitem-dialog-container-cursor: pointer;
+  --chotto-chatitem-dialog-gap: 5px;
+  --chotto-chatitem-dialog-padding: 5px 0 0 75px;
+  
+  // Dialog icon
+  --chotto-chatitem-dialog-icon-margin: auto;
+  
+  // Dialog item
+  --chotto-chatitem-dialog-item-display: flex;
+  --chotto-chatitem-dialog-item-padding: 3px;
+  
+  // Dialog selected
+  --chotto-chatitem-dialog-selected-cursor: pointer;
+  --chotto-chatitem-dialog-selected-bg: var(--chotto-theme-item-background-color-focus);
+  
+  // Dialog text container
+  --chotto-chatitem-dialog-text-container-display: flex;
+  --chotto-chatitem-dialog-text-container-justify: space-between;
+  --chotto-chatitem-dialog-text-container-overflow: hidden;
+  --chotto-chatitem-dialog-text-container-text-overflow: ellipsis;
+  --chotto-chatitem-dialog-text-container-width: 100%;
+  --chotto-chatitem-dialog-text-container-margin: auto;
+  --chotto-chatitem-text-container-padding: 0 5px;
+  --chotto-chatitem-dialog-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-chatitem-dialog-text-color: var(--chotto-theme-primary-text-color);
+  
+  // Dialog name
+  --chotto-chatitem-dialog-name-display: -webkit-box;
+  --chotto-chatitem-dialog-name-line-clamp: 1;
+  --chotto-chatitem-dialog-name-box-orient: vertical;
+  
+  // Dialog time
+  --chotto-chatitem-dialog-time-display: -webkit-box;
+  --chotto-chatitem-dialog-time-line-clamp: 1;
+  --chotto-chatitem-dialog-time-box-orient: vertical;
+  --chotto-chatitem-dialog-time-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-chatitem-dialog-time-font-size: var(--chotto-theme-additional-text-font-size);
+  
+  // Status first icon
+  --chotto-chatitem-status-first-icon-margin-right: -8px;
+  
+  // Animations
+  --chotto-chatitem-text-transition: opacity 0.2s ease;
+  --chotto-chatitem-text-opacity: 0;
+  --chotto-chatitem-menu-leave-transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+  --chotto-chatitem-menu-enter-translate-y: 20px;
+  --chotto-chatitem-menu-opacity: 0;
+  
+  // Layout
+  --chotto-chatitem-padding-container: 10px 8px 10px 14px;
+  --chotto-chatitem-border-radius: 0;
+  --chotto-chatitem-name-margin-top: 2px;
+  --chotto-chatitem-name-margin-bottom: 4px;
+}
+

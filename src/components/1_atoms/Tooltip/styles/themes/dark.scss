@@ -1,0 +1,37 @@
+[data-theme="dark"] {
+  // Tooltip text
+  --chotto-tooltip-text-color: var(--chotto-theme-text-color, #e0e0e0);
+  --chotto-tooltip-bg-color: var(--chotto-theme-primary-color, #2a2a2a);
+  --chotto-tooltip-border: 1px solid var(--chotto-theme-border-color, #444444);
+  --chotto-tooltip-border-radius: 8px;
+  --chotto-tooltip-padding: 10px 14px;
+  --chotto-tooltip-max-width: 320px;
+  --chotto-tooltip-text-align: left;
+  --chotto-tooltip-font-size: 13px;
+  --chotto-tooltip-font-family: var(--chotto-theme-font-family);
+  --chotto-tooltip-font-weight: var(--chotto-theme-default-font-weight);
+  --chotto-tooltip-line-height: 1.4;
+  --chotto-tooltip-box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  --chotto-tooltip-z-index: 99999;
+  --chotto-tooltip-position: absolute;
+  --chotto-tooltip-top: 0;
+  --chotto-tooltip-left: 0;
+  --chotto-tooltip-opacity: 1;
+  --chotto-tooltip-transform: none;
+  
+  // Tooltip animations
+  --chotto-tooltip-transition: opacity 0.4s ease, transform 0.4s ease;
+  --chotto-tooltip-enter-opacity: 0;
+  --chotto-tooltip-enter-transform: scale(0.8) translateY(10px);
+  --chotto-tooltip-enter-to-opacity: 1;
+  --chotto-tooltip-enter-to-transform: scale(1) translateY(0);
+  
+  // Tooltip wrapper
+  --chotto-tooltip-wrapper-position: relative;
+  --chotto-tooltip-wrapper-width: fit-content;
+  --chotto-tooltip-wrapper-height: auto;
+  --chotto-tooltip-wrapper-display: block;
+  --chotto-tooltip-wrapper-cursor: pointer;
+}
+
+

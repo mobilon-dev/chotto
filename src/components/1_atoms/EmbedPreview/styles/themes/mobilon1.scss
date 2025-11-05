@@ -1,0 +1,19 @@
+[data-theme="mobilon1"] {
+  // EmbedPreview main container variables
+  --chotto-embedpreview-border-radius: 10px;
+  --chotto-embedpreview-position: relative;
+  --chotto-embedpreview-margin: 10px 0 4px 0;
+  --chotto-embedpreview-padding: 8px 8px 8px 12px;
+  --chotto-embedpreview-overflow: hidden;
+
+  // EmbedPreview player variables
+  --chotto-embedpreview-player-object-fit: cover;
+  --chotto-embedpreview-player-width: 100%;
+  --chotto-embedpreview-player-max-height: 300px;
+  --chotto-embedpreview-player-border-radius: 8px;
+  --chotto-embedpreview-player-border: none;
+
+  // EmbedPreview background colors
+  --chotto-embedpreview-left-background-color: var(--chotto-theme-message-left-secondary-bg);
+  --chotto-embedpreview-right-background-color: var(--chotto-theme-message-right-secondary-bg);
+}

@@ -1,0 +1,161 @@
+[data-theme="green"] {
+  // StickerMessage content variables
+  --chotto-stickermessage-content-position: relative;
+  --chotto-stickermessage-content-max-width: 200px;
+  --chotto-stickermessage-content-border-radius: 0;
+
+  // StickerMessage avatar variables
+  --chotto-stickermessage-avatar-grid-row: 1 / -1;
+  --chotto-stickermessage-avatar-align-self: end;
+  --chotto-stickermessage-avatar-object-fit: cover;
+  --chotto-stickermessage-avatar-margin-bottom: 6px;
+  --chotto-stickermessage-avatar-min-width: var(--chotto-theme-avatar-small-size);
+  --chotto-stickermessage-avatar-min-height: var(--chotto-theme-avatar-small-size);
+  --chotto-stickermessage-avatar-border-radius: 50%;
+
+  // StickerMessage info container variables
+  --chotto-stickermessage-info-container-position: absolute;
+  --chotto-stickermessage-info-container-right: 8px;
+  --chotto-stickermessage-info-container-bottom: 4px;
+  --chotto-stickermessage-info-container-display: flex;
+  --chotto-stickermessage-info-container-align-items: center;
+  --chotto-stickermessage-info-container-column-gap: 4px;
+  --chotto-stickermessage-info-container-border-radius: 12px;
+  --chotto-stickermessage-info-container-padding: 6px 10px;
+  --chotto-stickermessage-info-container-color: white;
+  --chotto-stickermessage-info-container-background-color: rgba(0, 0, 0, 0.7);
+
+  // StickerMessage download button variables
+  --chotto-stickermessage-download-button-position: absolute;
+  --chotto-stickermessage-download-button-left: 8px;
+  --chotto-stickermessage-download-button-bottom: 4px;
+  --chotto-stickermessage-download-button-display: flex;
+  --chotto-stickermessage-download-button-justify-content: center;
+  --chotto-stickermessage-download-button-align-items: center;
+  --chotto-stickermessage-download-button-border: none;
+  --chotto-stickermessage-download-button-border-radius: 12px;
+  --chotto-stickermessage-download-button-padding: 6px 6px;
+  --chotto-stickermessage-download-button-background-color: rgba(0, 0, 0, 0.7);
+  --chotto-stickermessage-download-button-cursor: pointer;
+  --chotto-stickermessage-download-button-span-color: white;
+  --chotto-stickermessage-download-button-span-font-size: var(--chotto-theme-small-text-icon-size);
+
+  // StickerMessage views variables
+  --chotto-stickermessage-views-display: flex;
+  --chotto-stickermessage-views-align-items: center;
+  --chotto-stickermessage-views-column-gap: 4px;
+  --chotto-stickermessage-views-cursor: pointer;
+  --chotto-stickermessage-views-span-font-size: var(--chotto-theme-small-text-icon-size);
+  --chotto-stickermessage-views-p-font-size: var(--chotto-theme-small-text-font-size);
+
+  // StickerMessage time variables
+  --chotto-stickermessage-time-font-size: var(--chotto-theme-small-text-font-size);
+
+  // StickerMessage status variables
+  --chotto-stickermessage-status-display: flex;
+  --chotto-stickermessage-status-span-font-size: var(--chotto-theme-small-text-icon-size);
+  --chotto-stickermessage-status-received-first-child-margin-right: -8px;
+  --chotto-stickermessage-status-read-first-child-margin-right: -8px;
+  --chotto-stickermessage-status-read-color: var(--chotto-theme-status-color-read);
+  --chotto-stickermessage-status-pending-color: var(--chotto-theme-status-color-pending);
+  --chotto-stickermessage-status-error-color: var(--chotto-theme-status-color-error);
+
+  // StickerMessage subtext variables
+  --chotto-stickermessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-stickermessage-subtext-color: var(--chotto-theme-secondary-text-color);
+
+  // StickerMessage preview button variables
+  --chotto-stickermessage-preview-button-position: relative;
+  --chotto-stickermessage-preview-button-display: flex;
+  --chotto-stickermessage-preview-button-flex-direction: column;
+  --chotto-stickermessage-preview-button-padding: 0;
+
+  // StickerMessage preview image variables
+  --chotto-stickermessage-preview-image-width: auto;
+  --chotto-stickermessage-preview-image-height: auto;
+  --chotto-stickermessage-preview-image-max-width: 200px;
+  --chotto-stickermessage-preview-image-max-height: 200px;
+  --chotto-stickermessage-preview-image-cursor: zoom-in;
+  --chotto-stickermessage-preview-image-object-fit: contain;
+
+  // StickerMessage preview image animated variables (для TGS анимированных стикеров)
+  --chotto-stickermessage-preview-image-animated-width: auto;
+  --chotto-stickermessage-preview-image-animated-height: auto;
+  --chotto-stickermessage-preview-image-animated-max-width: 200px;
+  --chotto-stickermessage-preview-image-animated-max-height: 200px;
+  --chotto-stickermessage-preview-image-animated-cursor: zoom-in;
+  --chotto-stickermessage-preview-image-animated-object-fit: contain;
+
+  // StickerMessage menu button variables
+  --chotto-stickermessage-menu-button-position: absolute;
+  --chotto-stickermessage-menu-button-background-color: transparent;
+  --chotto-stickermessage-menu-button-border: none;
+  --chotto-stickermessage-menu-button-transform: translateY(-50%);
+  --chotto-stickermessage-menu-button-cursor: pointer;
+  --chotto-stickermessage-menu-button-transition: 0.2s;
+  --chotto-stickermessage-menu-button-span-color: var(--chotto-theme-button-color-active);
+  --chotto-stickermessage-menu-button-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-stickermessage-menu-button-span-hover-color: var(--chotto-theme-button-color-hover);
+  --chotto-stickermessage-menu-button-hover-transition: 0.2s;
+
+  // StickerMessage context menu variables
+  --chotto-stickermessage-context-menu-position: absolute;
+
+  // StickerMessage text container variables
+  --chotto-stickermessage-text-container-padding: 6px 10px 6px 10px;
+  --chotto-stickermessage-text-container-border-radius: 0 0 8px 8px;
+  --chotto-stickermessage-text-container-word-wrap: break-word;
+  --chotto-stickermessage-text-container-p-font-size: var(--chotto-theme-text-font-size);
+  --chotto-stickermessage-text-container-p-word-break: break-all;
+
+  // StickerMessage link preview variables
+  --chotto-stickermessage-link-preview-margin: 8px;
+
+  // StickerMessage left/right variables
+  --chotto-stickermessage-left-right-display: grid;
+  --chotto-stickermessage-left-right-grid-template-rows: min-content 1fr min-content;
+  --chotto-stickermessage-left-right-margin: var(--chotto-theme-message-margin);
+
+  // StickerMessage left variables
+  --chotto-stickermessage-left-grid-template-columns: min-content 1fr;
+  --chotto-stickermessage-left-avatar-grid-column: 1;
+  --chotto-stickermessage-left-avatar-margin-right: 12px;
+  --chotto-stickermessage-left-subtext-grid-column: 2;
+  --chotto-stickermessage-left-subtext-grid-row: 1;
+  --chotto-stickermessage-left-subtext-margin: 0 0 2px 10px;
+  --chotto-stickermessage-left-content-grid-column: 2;
+  --chotto-stickermessage-left-content-with-avatar-indent-margin-left: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-stickermessage-left-menu-button-top: 50%;
+  --chotto-stickermessage-left-menu-button-right: -40px;
+  --chotto-stickermessage-left-context-menu-top: 50%;
+  --chotto-stickermessage-left-context-menu-left: 100%;
+  --chotto-stickermessage-left-context-menu-margin-top: 20px;
+
+  // StickerMessage right variables
+  --chotto-stickermessage-right-grid-template-columns: 1fr min-content;
+  --chotto-stickermessage-right-avatar-grid-column: 2;
+  --chotto-stickermessage-right-avatar-margin-left: 12px;
+  --chotto-stickermessage-right-subtext-grid-column: 1;
+  --chotto-stickermessage-right-subtext-grid-row: 1;
+  --chotto-stickermessage-right-subtext-margin: 0 10px 2px auto;
+  --chotto-stickermessage-right-content-grid-column: 1;
+  --chotto-stickermessage-right-content-margin-left: auto;
+  --chotto-stickermessage-right-content-with-avatar-indent-margin-right: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-stickermessage-right-text-container-margin-left: auto;
+  --chotto-stickermessage-right-menu-button-top: 50%;
+  --chotto-stickermessage-right-menu-button-left: -40px;
+  --chotto-stickermessage-right-context-menu-top: 50%;
+  --chotto-stickermessage-right-context-menu-right: 100%;
+  --chotto-stickermessage-right-context-menu-margin-top: 20px;
+
+  // StickerMessage animation variables
+  --chotto-stickermessage-context-menu-enter-active-transition: all 0.1s ease-out;
+  --chotto-stickermessage-context-menu-leave-active-transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+  --chotto-stickermessage-context-menu-enter-from-transform: scale(0.9);
+  --chotto-stickermessage-context-menu-enter-from-opacity: 0;
+  --chotto-stickermessage-modal-fade-enter-active-transition: opacity 0.2s ease;
+  --chotto-stickermessage-modal-fade-enter-from-opacity: 0;
+  --chotto-stickermessage-modal-fade-enter-to-opacity: 1;
+}
+
+

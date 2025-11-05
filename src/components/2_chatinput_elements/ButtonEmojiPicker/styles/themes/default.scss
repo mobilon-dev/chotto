@@ -1,0 +1,22 @@
+[data-theme="light"] {
+  // ButtonEmojiPicker button variables
+  --chotto-buttonemojipicker-button-background-color: transparent;
+  --chotto-buttonemojipicker-button-border: none;
+  --chotto-buttonemojipicker-button-height: fit-content;
+  --chotto-buttonemojipicker-button-span-display: block;
+  --chotto-buttonemojipicker-button-span-cursor: pointer;
+  --chotto-buttonemojipicker-button-span-padding: 0;
+  --chotto-buttonemojipicker-button-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-buttonemojipicker-button-span-color: var(--chotto-theme-button-color-active);
+  --chotto-buttonemojipicker-button-span-hover-color: var(--chotto-theme-button-color-hover);
+
+  // ButtonEmojiPicker button-disabled variables
+  --chotto-buttonemojipicker-button-disabled-pointer-events: none;
+  --chotto-buttonemojipicker-button-disabled-span-cursor: auto;
+  --chotto-buttonemojipicker-button-disabled-span-color: var(--chotto-theme-button-color-disabled);
+
+  // ButtonEmojiPicker emoji variables
+  --chotto-buttonemojipicker-emoji-position: absolute;
+  --chotto-buttonemojipicker-emoji-bottom: 50px;
+  --chotto-buttonemojipicker-emoji-z-index: 2;
+}

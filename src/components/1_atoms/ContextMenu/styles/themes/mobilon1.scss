@@ -1,0 +1,34 @@
+[data-theme="mobilon1"] {
+  // ContextMenu container variables
+  --chotto-contextmenu-container-display: none;
+  --chotto-contextmenu-container-font-weight: var(--chotto-theme-default-font-weight);
+  --chotto-contextmenu-container-color: var(--chotto-theme-primary-text-color);
+  --chotto-contextmenu-container-font-family: var(--chotto-theme-font-family);
+  --chotto-contextmenu-container-z-index: 1000;
+  --chotto-contextmenu-container-position: absolute;
+  --chotto-contextmenu-container-width: max-content;
+  --chotto-contextmenu-container-box-shadow: 0px 2px 10px 1px var(--chotto-theme-shadow-light-color);
+  --chotto-contextmenu-container-border-radius: 8px;
+  --chotto-contextmenu-container-font-size: 14px;
+  --chotto-contextmenu-container-background-color: var(--chotto-theme-primary-color);
+
+  // ContextMenu list variables
+  --chotto-contextmenu-list-padding: 12px 0 10px 0;
+  --chotto-contextmenu-list-margin: 0;
+  --chotto-contextmenu-list-display: grid;
+  --chotto-contextmenu-list-flex-direction: column;
+  --chotto-contextmenu-list-align-items: flex-start;
+  --chotto-contextmenu-list-row-gap: 6px;
+  --chotto-contextmenu-list-padding-left: 0px;
+  --chotto-contextmenu-list-min-width: 115px;
+
+  // ContextMenu item variables
+  --chotto-contextmenu-item-display: flex;
+  --chotto-contextmenu-item-justify-content: flex-start;
+  --chotto-contextmenu-item-align-items: center;
+  --chotto-contextmenu-item-cursor: pointer;
+  --chotto-contextmenu-item-padding: 6px 16px;
+  --chotto-contextmenu-item-width: inherit;
+  --chotto-contextmenu-item-hover-background-color: #EEF0F3;
+  --chotto-contextmenu-item-not-last-child-border-bottom: none;
+}

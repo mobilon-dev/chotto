@@ -1,0 +1,304 @@
+.sticker-message {
+
+  &__content {
+    position: var(--chotto-stickermessage-content-position, relative);
+    max-width: var(--chotto-stickermessage-content-max-width, 200px);
+    border-radius: var(--chotto-stickermessage-content-border-radius, 0);
+  }
+
+  &__avatar {
+    grid-row: var(--chotto-stickermessage-avatar-grid-row, 1 / -1);
+    align-self: var(--chotto-stickermessage-avatar-align-self, end);
+    object-fit: var(--chotto-stickermessage-avatar-object-fit, cover);
+    margin-bottom: var(--chotto-stickermessage-avatar-margin-bottom, 6px);
+    min-width: var(--chotto-stickermessage-avatar-min-width, 40px);
+    min-height: var(--chotto-stickermessage-avatar-min-height, 40px);
+    border-radius: var(--chotto-stickermessage-avatar-border-radius, 50%);
+  }
+
+  &__info-container {
+    position: var(--chotto-stickermessage-info-container-position, absolute);
+    right: var(--chotto-stickermessage-info-container-right, 8px);
+    bottom: var(--chotto-stickermessage-info-container-bottom, 4px);
+    display: var(--chotto-stickermessage-info-container-display, flex);
+    align-items: var(--chotto-stickermessage-info-container-align-items, center);
+    column-gap: var(--chotto-stickermessage-info-container-column-gap, 4px);
+    border-radius: var(--chotto-stickermessage-info-container-border-radius, 12px);
+    padding: var(--chotto-stickermessage-info-container-padding, 6px 10px);
+    color: var(--chotto-stickermessage-info-container-color, #262626);
+    background-color: var(--chotto-stickermessage-info-container-background-color, #e5e5e5);
+  }
+
+  &__download-button {
+    position: var(--chotto-stickermessage-download-button-position, absolute);
+    left: var(--chotto-stickermessage-download-button-left, 8px);
+    bottom: var(--chotto-stickermessage-download-button-bottom, 4px);
+    display: var(--chotto-stickermessage-download-button-display, flex);
+    justify-content: var(--chotto-stickermessage-download-button-justify-content, center);
+    align-items: var(--chotto-stickermessage-download-button-align-items, center);
+    border: var(--chotto-stickermessage-download-button-border, none);
+    border-radius: var(--chotto-stickermessage-download-button-border-radius, 12px);
+    padding: var(--chotto-stickermessage-download-button-padding, 6px 6px);
+    background-color: var(--chotto-stickermessage-download-button-background-color, #e5e5e5);
+    cursor: var(--chotto-stickermessage-download-button-cursor, pointer);
+
+    span {
+      color: var(--chotto-stickermessage-download-button-span-color, #262626);
+      font-size: var(--chotto-stickermessage-download-button-span-font-size, 12px);
+    }
+  }
+
+  &__views {
+    display: var(--chotto-stickermessage-views-display, flex);
+    align-items: var(--chotto-stickermessage-views-align-items, center);
+    column-gap: var(--chotto-stickermessage-views-column-gap, 4px);
+    cursor: var(--chotto-stickermessage-views-cursor, pointer);
+
+    span {
+      font-size: var(--chotto-stickermessage-views-span-font-size, 12px);
+    }
+
+    p {
+      font-size: var(--chotto-stickermessage-views-p-font-size, 12px);
+    }
+  }
+
+  &__time {
+    font-size: var(--chotto-stickermessage-time-font-size, 12px);
+  }
+
+  &__status {
+    display: var(--chotto-stickermessage-status-display, flex);
+
+    span {
+      font-size: var(--chotto-stickermessage-status-span-font-size, 12px);
+    }
+  }
+
+  .status--received {
+    span {
+
+      &:first-child {
+        margin-right: var(--chotto-stickermessage-status-received-first-child-margin-right, -8px);
+      }
+    }
+  }
+
+  .status--read {
+    span {
+      color: var(--chotto-stickermessage-status-read-color, #5F5F5F);
+
+      &:first-child {
+        margin-right: var(--chotto-stickermessage-status-read-first-child-margin-right, -8px);
+      }
+    }
+  }
+
+  .status--pending {
+    span {
+      color: var(--chotto-stickermessage-status-pending-color, #9ca3af);
+    }
+  }
+
+  .status--error {
+    span {
+      color: var(--chotto-stickermessage-status-error-color, #ef4444);
+    }
+  }
+
+  &__subtext {
+    font-size: var(--chotto-stickermessage-subtext-font-size, 14px);
+    color: var(--chotto-stickermessage-subtext-color, #5F5F5F);
+  }
+
+  &__preview-button {
+    position: var(--chotto-stickermessage-preview-button-position, relative);
+    display: var(--chotto-stickermessage-preview-button-display, flex);
+    flex-direction: var(--chotto-stickermessage-preview-button-flex-direction, column);
+    padding: var(--chotto-stickermessage-preview-button-padding, 0);
+  }
+
+  &__preview-image {
+    width: var(--chotto-stickermessage-preview-image-width, auto);
+    height: var(--chotto-stickermessage-preview-image-height, auto);
+    max-width: var(--chotto-stickermessage-preview-image-max-width, 200px);
+    max-height: var(--chotto-stickermessage-preview-image-max-height, 200px);
+    cursor: var(--chotto-stickermessage-preview-image-cursor, zoom-in);
+    object-fit: var(--chotto-stickermessage-preview-image-object-fit, contain);
+  }
+
+  // Стили для анимированных TGS стикеров
+  &__preview-image-animated {
+    width: var(--chotto-stickermessage-preview-image-animated-width, auto);
+    height: var(--chotto-stickermessage-preview-image-animated-height, auto);
+    max-width: var(--chotto-stickermessage-preview-image-animated-max-width, 200px);
+    max-height: var(--chotto-stickermessage-preview-image-animated-max-height, 200px);
+    cursor: var(--chotto-stickermessage-preview-image-animated-cursor, zoom-in);
+    object-fit: var(--chotto-stickermessage-preview-image-animated-object-fit, contain);
+  }
+
+  &__modal-image {
+    height: var(--chotto-stickermessage-modal-image-height, 100%);
+    object-fit: var(--chotto-stickermessage-modal-image-object-fit, contain);
+    border-radius: var(--chotto-stickermessage-modal-image-border-radius, 5px);
+    max-height: var(--chotto-stickermessage-modal-image-max-height, 90vh);
+    max-width: var(--chotto-stickermessage-modal-image-max-width, 95vw);
+  }
+
+  &__modal-image-animated {
+    height: var(--chotto-stickermessage-modal-image-animated-height, 100%);
+    object-fit: var(--chotto-stickermessage-modal-image-animated-object-fit, contain);
+    border-radius: var(--chotto-stickermessage-modal-image-animated-border-radius, 5px);
+    max-height: var(--chotto-stickermessage-modal-image-animated-max-height, 90vh);
+    max-width: var(--chotto-stickermessage-modal-image-animated-max-width, 95vw);
+  }
+
+  &__menu-button {
+    position: var(--chotto-stickermessage-menu-button-position, absolute);
+    background-color: var(--chotto-stickermessage-menu-button-background-color, transparent);
+    border: var(--chotto-stickermessage-menu-button-border, none);
+    transform: var(--chotto-stickermessage-menu-button-transform, translateY(-50%));
+    cursor: var(--chotto-stickermessage-menu-button-cursor, pointer);
+    transition: var(--chotto-stickermessage-menu-button-transition, 0.2s);
+
+    span {
+      color: var(--chotto-stickermessage-menu-button-span-color, #525252);
+      font-size: var(--chotto-stickermessage-menu-button-span-font-size, 23px);
+    }
+
+    &:hover span {
+      color: var(--chotto-stickermessage-menu-button-span-hover-color, #404040);
+      transition: var(--chotto-stickermessage-menu-button-hover-transition, 0.2s);
+    }
+  }
+
+  &__context-menu {
+    position: var(--chotto-stickermessage-context-menu-position, absolute);
+  }
+
+  &__text-container {
+    padding: var(--chotto-stickermessage-text-container-padding, 6px 10px 6px 10px);
+    border-radius: var(--chotto-stickermessage-text-container-border-radius, 0 0 8px 8px);
+    word-wrap: var(--chotto-stickermessage-text-container-word-wrap, break-word);
+
+    p {
+      font-size: var(--chotto-stickermessage-text-container-p-font-size, 14px);
+      word-break: var(--chotto-stickermessage-text-container-p-word-break, break-all);
+    }
+  }
+
+  &__link-preview {
+    margin: var(--chotto-stickermessage-link-preview-margin, 8px);
+  }
+
+  &__left,
+  &__right {
+    display: var(--chotto-stickermessage-left-right-display, grid);
+    grid-template-rows: var(--chotto-stickermessage-left-right-grid-template-rows, min-content 1fr min-content);
+    margin: var(--chotto-stickermessage-left-right-margin, 0 0 10px 0);
+  }
+
+  &__left {
+    grid-template-columns: var(--chotto-stickermessage-left-grid-template-columns, min-content 1fr);
+
+    .sticker-message__avatar {
+      grid-column: var(--chotto-stickermessage-left-avatar-grid-column, 1);
+      margin-right: var(--chotto-stickermessage-left-avatar-margin-right, 12px);
+    }
+
+    .sticker-message__subtext {
+      grid-column: var(--chotto-stickermessage-left-subtext-grid-column, 2);
+      grid-row: var(--chotto-stickermessage-left-subtext-grid-row, 1);
+      margin: var(--chotto-stickermessage-left-subtext-margin, 0 0 2px 10px);
+    }
+
+    .sticker-message__content {
+      grid-column: var(--chotto-stickermessage-left-content-grid-column, 2);
+    }
+
+    .sticker-message__content.with-avatar-indent {
+      margin-left: var(--chotto-stickermessage-left-content-with-avatar-indent-margin-left, calc(var(--chotto-stickermessage-avatar-min-width, 40px) + 12px));
+    }
+
+    .sticker-message__menu-button {
+      top: var(--chotto-stickermessage-left-menu-button-top, 50%);
+      right: var(--chotto-stickermessage-left-menu-button-right, -40px);
+    }
+
+    .sticker-message__context-menu {
+      top: var(--chotto-stickermessage-left-context-menu-top, 50%);
+      left: var(--chotto-stickermessage-left-context-menu-left, 100%);
+      margin-top: var(--chotto-stickermessage-left-context-menu-margin-top, 20px);
+    }
+  }
+
+  &__right {
+    grid-template-columns: var(--chotto-stickermessage-right-grid-template-columns, 1fr min-content);
+
+    .sticker-message__avatar {
+      grid-column: var(--chotto-stickermessage-right-avatar-grid-column, 2);
+      margin-left: var(--chotto-stickermessage-right-avatar-margin-left, 12px);
+    }
+
+    .sticker-message__subtext {
+      grid-column: var(--chotto-stickermessage-right-subtext-grid-column, 1);
+      grid-row: var(--chotto-stickermessage-right-subtext-grid-row, 1);
+      margin: var(--chotto-stickermessage-right-subtext-margin, 0 10px 2px auto);
+    }
+
+    .sticker-message__content {
+      grid-column: var(--chotto-stickermessage-right-content-grid-column, 1);
+      margin-left: var(--chotto-stickermessage-right-content-margin-left, auto);
+    }
+
+    .sticker-message__content.with-avatar-indent {
+      margin-right: var(--chotto-stickermessage-right-content-with-avatar-indent-margin-right, calc(var(--chotto-stickermessage-avatar-min-width, 40px) + 12px));
+    }
+
+    .sticker-message__text-container {
+      margin-left: var(--chotto-stickermessage-right-text-container-margin-left, auto);
+    }
+
+    .sticker-message__menu-button {
+      top: var(--chotto-stickermessage-right-menu-button-top, 50%);
+      left: var(--chotto-stickermessage-right-menu-button-left, -40px);
+    }
+
+    .sticker-message__context-menu {
+      top: var(--chotto-stickermessage-right-context-menu-top, 50%);
+      right: var(--chotto-stickermessage-right-context-menu-right, 100%);
+      margin-top: var(--chotto-stickermessage-right-context-menu-margin-top, 20px);
+    }
+  }
+}
+
+.context-menu-enter-active {
+  transition: var(--chotto-stickermessage-context-menu-enter-active-transition, all 0.1s ease-out);
+}
+
+.context-menu-leave-active {
+  transition: var(--chotto-stickermessage-context-menu-leave-active-transition, all 0.1s cubic-bezier(1, 0.5, 0.8, 1));
+}
+
+.context-menu-enter-from,
+.context-menu-leave-to {
+  transform: var(--chotto-stickermessage-context-menu-enter-from-transform, scale(0.9));
+  opacity: var(--chotto-stickermessage-context-menu-enter-from-opacity, 0);
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: var(--chotto-stickermessage-modal-fade-enter-active-transition, opacity 0.2s ease);
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: var(--chotto-stickermessage-modal-fade-enter-from-opacity, 0);
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: var(--chotto-stickermessage-modal-fade-enter-to-opacity, 1);
+}
+
+

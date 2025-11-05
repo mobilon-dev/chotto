@@ -1,0 +1,56 @@
+.chat-filter {
+  &__container{
+    position: var(--chotto-chatfilter-container-position, relative);
+  }
+
+  &__icon{
+    position: var(--chotto-chatfilter-icon-position, absolute);
+    left: var(--chotto-chatfilter-icon-left, 14px);
+    top: var(--chotto-chatfilter-icon-top, 25%);
+    color: var(--chotto-chatfilter-icon-color, #5F5F5F);
+  }
+
+  &__clear{
+    position: var(--chotto-chatfilter-clear-position, absolute);
+    right: var(--chotto-chatfilter-clear-right, 14px);
+    top: var(--chotto-chatfilter-clear-top, 25%);
+    color: var(--chotto-chatfilter-clear-color, #5F5F5F);
+    cursor: var(--chotto-chatfilter-clear-cursor, pointer);
+    transition: var(--chotto-chatfilter-clear-transition, color 0.2s);
+    display: var(--chotto-chatfilter-clear-display, flex);
+    align-items: var(--chotto-chatfilter-clear-align-items, center);
+    justify-content: var(--chotto-chatfilter-clear-justify-content, center);
+    width: var(--chotto-chatfilter-clear-width, 18px);
+    height: var(--chotto-chatfilter-clear-height, 18px);
+
+    &:hover {
+      color: var(--chotto-chatfilter-clear-hover-color, #404040);
+    }
+  }
+
+  &__input {
+    width: var(--chotto-chatfilter-input-width, 100%);
+    background-color: var(--chotto-chatfilter-input-background-color, transparent);
+    color: var(--chotto-chatfilter-input-color, #1E1E1E);
+    padding: var(--chotto-chatfilter-input-padding, 0.5rem 0.75rem);
+    padding-left: var(--chotto-chatfilter-input-padding-left, 40px);
+    border: var(--chotto-chatfilter-input-border, 1px solid #d0d0d0);
+    border-radius: var(--chotto-chatfilter-input-border-radius, 5px);
+    font-size: var(--chotto-chatfilter-input-font-size, 14px);
+    transition: var(--chotto-chatfilter-input-transition, border-color 0.2s);
+    background-color: var(--chotto-chatfilter-input-background, transparent);
+
+    &::placeholder {
+      color: var(--chotto-chatfilter-input-placeholder-color, #5F5F5F);
+    }
+
+    &:hover {
+      border-color: var(--chotto-chatfilter-input-hover-border-color, #737373);
+    }
+
+    &:focus-visible {
+      border-color: var(--chotto-chatfilter-input-focus-border-color, #404040);
+      outline: var(--chotto-chatfilter-input-focus-outline, none);
+    }
+  }
+}

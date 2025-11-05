@@ -1,0 +1,94 @@
+// Импорты компонентов для темы green
+
+// 1_atoms
+@use '../../components/1_atoms/ButtonContextMenu/styles/themes/green.scss' as buttoncontextmenu-green;
+@use '../../components/1_atoms/ContextMenu/styles/themes/green.scss' as contextmenu-green;
+@use '../../components/1_atoms/EmbedPreview/styles/themes/green.scss' as embedpreview-green;
+@use '../../components/1_atoms/LinkPreview/styles/themes/green.scss' as linkpreview-green;
+@use '../../components/1_atoms/Tooltip/styles/themes/green.scss' as tooltip-green;
+
+// 2_blocks
+@use '../../components/2_blocks/CommunicationPanel/styles/themes/green.scss' as communicationpanel-green;
+@use '../../components/2_blocks/FeedFoundItem/styles/themes/green.scss' as feedfounditem-green;
+@use '../../components/2_blocks/FeedFoundObjects/styles/themes/green.scss' as feedfoundobjects-green;
+@use '../../components/2_blocks/FeedSearch/styles/themes/green.scss' as feedsearch-green;
+@use '../../components/2_modals/SelectUser/styles/themes/green.scss' as selectuser-green;
+@use '../../components/2_modals/SelectUser2/styles/themes/green.scss' as selectuser2-green;
+
+// 2_chatinput_elements
+@use '../../components/2_chatinput_elements/ButtonCommandsSelector/styles/themes/green.scss' as buttoncommandssel-green;
+@use '../../components/2_chatinput_elements/ButtonEmojiPicker/styles/themes/green.scss' as buttonemojipicker-green;
+@use '../../components/2_chatinput_elements/ButtonTemplateSelector/styles/themes/green.scss' as buttontemplatesel-green;
+@use '../../components/2_chatinput_elements/ButtonWabaTemplateSelector/styles/themes/green.scss' as buttonwabatemplatesel-green;
+@use '../../components/2_chatinput_elements/FilePreview/styles/themes/green.scss' as filepreview-green;
+@use '../../components/2_chatinput_elements/FileUploader/styles/themes/green.scss' as fileuploader-green;
+@use '../../components/2_chatinput_elements/TemplateSelector/styles/themes/green.scss' as templateselector-green;
+@use '../../components/2_chatinput_elements/WABAAttachmentSection/styles/themes/green.scss' as wabaattachment-green;
+@use '../../components/2_chatinput_elements/WABAQuickReplyButtons/styles/themes/green.scss' as wabaquickreply-green;
+@use '../../components/2_chatinput_elements/WABASeparatedQuickButtons/styles/themes/green.scss' as wabaseparatedquick-green;
+@use '../../components/2_chatinput_elements/WABATemplateSelector/styles/themes/green.scss' as wabatemplatesel-green;
+
+// 2_chatlist_elements
+@use '../../components/2_chatlist_elements/ChatFilter/styles/themes/green.scss' as chatfilter-green;
+@use '../../components/2_chatlist_elements/ChatItem/styles/themes/green.scss' as chatitem-green;
+@use '../../components/2_chatlist_elements/ChatTabs/styles/themes/green.scss' as chattabs-green;
+
+// 2_elements
+@use '../../components/2_elements/AudioRecorder/styles/themes/green.scss' as audiorecorder-green;
+@use '../../components/2_elements/ChannelSelector/styles/themes/green.scss' as channelselector-green;
+@use '../../components/2_elements/ChatInfo/styles/themes/green.scss' as chatinfo-green;
+@use '../../components/2_elements/ChatPanel/styles/themes/green.scss' as chatpanel-green;
+@use '../../components/2_elements/ContactInfo/styles/themes/green.scss' as contactinfo-green;
+@use '../../components/2_elements/ThemeMode/styles/themes/green.scss' as thememode-green;
+@use '../../components/2_elements/UserProfile/styles/themes/green.scss' as userprofile-green;
+@use '../../components/2_elements/VideoRecorder/styles/themes/green.scss' as videorecorder-green;
+
+// 2_feed_elements
+@use '../../components/2_feed_elements/AudioMessage/styles/themes/green.scss' as audiomessage-green;
+@use '../../components/2_feed_elements/BaseReplyMessage/styles/themes/green.scss' as basereplymessage-green;
+@use '../../components/2_feed_elements/CallMessage/styles/themes/green.scss' as callmessage-green;
+@use '../../components/2_feed_elements/DateMessage/styles/themes/green.scss' as datemessage-green;
+@use '../../components/2_feed_elements/DateMessageSticky/styles/themes/green.scss' as datemessagesticky-green;
+@use '../../components/2_feed_elements/FeedKeyboard/styles/themes/green.scss' as feedkeyboard-green;
+@use '../../components/2_feed_elements/FileMessage/styles/themes/green.scss' as filemessage-green;
+@use '../../components/2_feed_elements/ImageMessage/styles/themes/green.scss' as imagemessage-green;
+@use '../../components/2_feed_elements/MessageKeyboard/styles/themes/green.scss' as messagekeyboard-green;
+@use '../../components/2_feed_elements/ReplyAudioMessage/styles/themes/green.scss' as replyaudiomessage-green;
+@use '../../components/2_feed_elements/ReplyCallMessage/styles/themes/green.scss' as replycallmessage-green;
+@use '../../components/2_feed_elements/ReplyFileMessage/styles/themes/green.scss' as replyfilemessage-green;
+@use '../../components/2_feed_elements/ReplyImageMessage/styles/themes/green.scss' as replyimagemessage-green;
+@use '../../components/2_feed_elements/ReplyStickerMessage/styles/themes/green.scss' as replystickermessage-green;
+@use '../../components/2_feed_elements/ReplyTextMessage/styles/themes/green.scss' as replytextmessage-green;
+@use '../../components/2_feed_elements/ReplyVideoMessage/styles/themes/green.scss' as replyvideomessage-green;
+@use '../../components/2_feed_elements/StickerMessage/styles/themes/green.scss' as stickermessage-green;
+@use '../../components/2_feed_elements/SystemMessage/styles/themes/green.scss' as systemmessage-green;
+@use '../../components/2_feed_elements/TextMessage/styles/themes/green.scss' as textmessage-green;
+@use '../../components/2_feed_elements/TypingMessage/styles/themes/green.scss' as typingmessage-green;
+@use '../../components/2_feed_elements/VideoMessage/styles/themes/green.scss' as videomessage-green;
+
+// 2_modals
+@use '../../components/2_modals/CreateChat2/styles/themes/green.scss' as createchat2-green;
+@use '../../components/2_modals/CreateDialog/styles/themes/green.scss' as createdialog-green;
+@use '../../components/2_modals/Modal/styles/themes/green.scss' as modal-green;
+@use '../../components/2_modals/ModalFullscreen/styles/themes/green.scss' as modalfullscreen-green;
+@use '../../components/2_modals/ModalNoFooter/styles/themes/green.scss' as modalnofooter-green;
+@use '../../components/2_modals/ModalVideoRecorder/styles/themes/green.scss' as modalvideorecorder-green;
+
+// 3_compounds
+@use '../../components/3_compounds/ChatInput/styles/themes/green.scss' as chatinput-green;
+@use '../../components/3_compounds/ChatList/styles/themes/green.scss' as chatlist-green;
+@use '../../components/3_compounds/Feed/styles/themes/green.scss' as feed-green;
+@use '../../components/3_compounds/SideBar/styles/themes/green.scss' as sidebar-green;
+
+// 4_layouts
+@use '../../components/4_layouts/AdaptiveExtendedLayout/styles/themes/green.scss' as adaptiveextendedlayout-green;
+@use '../../components/4_layouts/BaseLayout/styles/themes/green.scss' as baselayout-green;
+@use '../../components/4_layouts/ChatWrapper/styles/themes/green.scss' as chatwrapper-green;
+@use '../../components/4_layouts/ExtendedLayout/styles/themes/green.scss' as extendedlayout-green;
+@use '../../components/4_layouts/FeedLayout/styles/themes/green.scss' as feedlayout-green;
+
+// 5_containers
+@use '../../components/5_containers/BaseContainer/styles/themes/green.scss' as basecontainer-green;
+@use '../../components/5_containers/FloatContainer/styles/themes/green.scss' as floatcontainer-green;
+@use '../../components/2_chatinput_elements/PlaceholderComponent/styles/themes/green.scss' as placeholdercomponent-green;
+@use '../../components/2_feed_elements/SplashScreen/styles/themes/green.scss' as splashscreen-green;

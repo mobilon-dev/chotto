@@ -1,0 +1,48 @@
+[data-theme="green"] {
+  // ExtendedLayout container variables
+  --chotto-extendedlayout-container-height: inherit;
+  --chotto-extendedlayout-container-display: grid;
+  --chotto-extendedlayout-container-grid-template-columns: min-content 1fr 3fr min-content;
+  --chotto-extendedlayout-container-transition: all 0.3s ease;
+  --chotto-extendedlayout-container-position: relative;
+  --chotto-extendedlayout-container-border-top: var(--chotto-theme-border, none);
+  --chotto-extendedlayout-container-border-left: var(--chotto-theme-border, none);
+
+  // ExtendedLayout first-col variables
+  --chotto-extendedlayout-first-col-position: relative;
+  --chotto-extendedlayout-first-col-grid-column: 1;
+  --chotto-extendedlayout-first-col-display: flex;
+  --chotto-extendedlayout-first-col-flex-direction: column;
+  --chotto-extendedlayout-first-col-height: inherit;
+  --chotto-extendedlayout-first-col-width: 70px;
+  --chotto-extendedlayout-first-col-border-right: var(--chotto-theme-border, none);
+  --chotto-extendedlayout-first-col-border-bottom: var(--chotto-theme-border, none);
+  --chotto-extendedlayout-first-col-background-color: #f5f5f5;
+
+  // ExtendedLayout second-col variables
+  --chotto-extendedlayout-second-col-position: relative;
+  --chotto-extendedlayout-second-col-grid-column: 2;
+  --chotto-extendedlayout-second-col-display: flex;
+  --chotto-extendedlayout-second-col-flex-direction: column;
+  --chotto-extendedlayout-second-col-height: inherit;
+  --chotto-extendedlayout-second-col-width: 508px;
+  --chotto-extendedlayout-second-col-overflow: hidden;
+  --chotto-extendedlayout-second-col-border-right: var(--chotto-theme-border, none);
+  --chotto-extendedlayout-second-col-border-bottom: var(--chotto-theme-border, none);
+  --chotto-extendedlayout-second-col-background-color: #ffffff;
+
+  // ExtendedLayout third-col variables
+  --chotto-extendedlayout-third-col-position: relative;
+  --chotto-extendedlayout-third-col-display: flex;
+  --chotto-extendedlayout-third-col-flex-direction: column;
+  --chotto-extendedlayout-third-col-grid-column: 3;
+  --chotto-extendedlayout-third-col-height: inherit;
+  --chotto-extendedlayout-third-col-border-right: var(--chotto-theme-border, none);
+  --chotto-extendedlayout-third-col-border-bottom: var(--chotto-theme-border, none);
+  --chotto-extendedlayout-third-col-background-color: #fcfafa;
+
+  // ExtendedLayout transition variables
+  --chotto-extendedlayout-transition-enter-active-transition: opacity 0.5s ease;
+  --chotto-extendedlayout-transition-enter-active-opacity: 1;
+  --chotto-extendedlayout-transition-enter-from-opacity: 0;
+}

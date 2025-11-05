@@ -1,0 +1,60 @@
+[data-theme="green"] {
+  // Container
+  --chotto-feedfounditem-container-display: flex;
+  --chotto-feedfounditem-container-position: relative;
+  --chotto-feedfounditem-container-cursor: pointer;
+  --chotto-feedfounditem-container-width: 100%;
+  --chotto-feedfounditem-container-word-wrap: anywhere;
+  --chotto-feedfounditem-container-bg: transparent;
+  
+  // Info
+  --chotto-feedfounditem-info-width: 80%;
+  
+  // First line
+  --chotto-feedfounditem-first-line-display: flex;
+  --chotto-feedfounditem-first-line-justify: space-between;
+  --chotto-feedfounditem-first-line-margin-bottom: 10px;
+  
+  // Name
+  --chotto-feedfounditem-name-margin: 0;
+  --chotto-feedfounditem-name-padding: 0;
+  
+  // Time
+  --chotto-feedfounditem-time-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-feedfounditem-time-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-feedfounditem-time-margin: 0;
+  --chotto-feedfounditem-time-padding: 0;
+  
+  // Second line
+  --chotto-feedfounditem-second-line-display: flex;
+  --chotto-feedfounditem-second-line-word-break: break-word;
+  --chotto-feedfounditem-second-line-p-font-size: var(--chotto-theme-text-font-size);
+  --chotto-feedfounditem-second-line-p-margin: 0;
+  --chotto-feedfounditem-second-line-p-padding: 0;
+  --chotto-feedfounditem-second-line-p-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-feedfounditem-second-line-p-overflow: hidden;
+  --chotto-feedfounditem-second-line-p-text-overflow: ellipsis;
+  --chotto-feedfounditem-second-line-p-display: -webkit-box;
+  --chotto-feedfounditem-second-line-p-line-clamp: 2;
+  --chotto-feedfounditem-second-line-p-box-orient: vertical;
+  
+  // Avatar container
+  --chotto-feedfounditem-avatar-container-display: flex;
+  --chotto-feedfounditem-avatar-container-justify: center;
+  --chotto-feedfounditem-avatar-container-align: center;
+  --chotto-feedfounditem-avatar-container-bg: #d4d4d4;
+  --chotto-feedfounditem-avatar-container-width: 50px;
+  --chotto-feedfounditem-avatar-container-height: 50px;
+  --chotto-feedfounditem-avatar-container-border-radius: 50%;
+  --chotto-feedfounditem-avatar-container-background-size: cover;
+  --chotto-feedfounditem-avatar-margin-right: 10px;
+  --chotto-feedfounditem-avatar-icon-size: 24px;
+  --chotto-feedfounditem-avatar-span-font-size: 21px;
+  --chotto-feedfounditem-avatar-span-color: #737373;
+  --chotto-feedfounditem-avatar-img-object-fit: cover;
+
+  // Container states
+  --chotto-feedfounditem-container-hover-bg: var(--chotto-theme-item-background-color-hover);
+  --chotto-feedfounditem-selected-container-bg: var(--chotto-theme-item-background-color-focus);
+}
+

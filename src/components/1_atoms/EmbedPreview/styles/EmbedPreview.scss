@@ -1,0 +1,23 @@
+.embed-preview {
+  border-radius: var(--chotto-embedpreview-border-radius, 10px);
+  position: var(--chotto-embedpreview-position, relative);
+  margin: var(--chotto-embedpreview-margin, 10px 0 4px 0);
+  padding: var(--chotto-embedpreview-padding, 8px 8px 8px 12px);
+  overflow: var(--chotto-embedpreview-overflow, hidden);
+
+  &__player {
+    object-fit: var(--chotto-embedpreview-player-object-fit, cover);
+    width: var(--chotto-embedpreview-player-width, 100%);
+    max-height: var(--chotto-embedpreview-player-max-height, 300px);
+    border-radius: var(--chotto-embedpreview-player-border-radius, 8px);
+    border: var(--chotto-embedpreview-player-border, none);
+  }
+
+  .left {
+    background-color: var(--chotto-embedpreview-left-background-color, #d4d4d4);
+  }
+
+  .right {
+    background-color: var(--chotto-embedpreview-right-background-color, #a7f3d0);
+  }
+}

@@ -1,0 +1,94 @@
+// Импорты компонентов для темы dark
+
+// 1_atoms
+@use '../../components/1_atoms/ButtonContextMenu/styles/themes/dark.scss' as buttoncontextmenu-dark;
+@use '../../components/1_atoms/ContextMenu/styles/themes/dark.scss' as contextmenu-dark;
+@use '../../components/1_atoms/EmbedPreview/styles/themes/dark.scss' as embedpreview-dark;
+@use '../../components/1_atoms/LinkPreview/styles/themes/dark.scss' as linkpreview-dark;
+@use '../../components/1_atoms/Tooltip/styles/themes/dark.scss' as tooltip-dark;
+
+// 2_blocks
+@use '../../components/2_blocks/CommunicationPanel/styles/themes/dark.scss' as communicationpanel-dark;
+@use '../../components/2_blocks/FeedFoundItem/styles/themes/dark.scss' as feedfounditem-dark;
+@use '../../components/2_blocks/FeedFoundObjects/styles/themes/dark.scss' as feedfoundobjects-dark;
+@use '../../components/2_blocks/FeedSearch/styles/themes/dark.scss' as feedsearch-dark;
+@use '../../components/2_modals/SelectUser/styles/themes/dark.scss' as selectuser-dark;
+@use '../../components/2_modals/SelectUser2/styles/themes/dark.scss' as selectuser2-dark;
+
+// 2_chatinput_elements
+@use '../../components/2_chatinput_elements/ButtonCommandsSelector/styles/themes/dark.scss' as buttoncommandssel-dark;
+@use '../../components/2_chatinput_elements/ButtonEmojiPicker/styles/themes/dark.scss' as buttonemojipicker-dark;
+@use '../../components/2_chatinput_elements/ButtonTemplateSelector/styles/themes/dark.scss' as buttontemplatesel-dark;
+@use '../../components/2_chatinput_elements/ButtonWabaTemplateSelector/styles/themes/dark.scss' as buttonwabatemplatesel-dark;
+@use '../../components/2_chatinput_elements/FilePreview/styles/themes/dark.scss' as filepreview-dark;
+@use '../../components/2_chatinput_elements/FileUploader/styles/themes/dark.scss' as fileuploader-dark;
+@use '../../components/2_chatinput_elements/TemplateSelector/styles/themes/dark.scss' as templateselector-dark;
+@use '../../components/2_chatinput_elements/WABAAttachmentSection/styles/themes/dark.scss' as wabaattachment-dark;
+@use '../../components/2_chatinput_elements/WABAQuickReplyButtons/styles/themes/dark.scss' as wabaquickreply-dark;
+@use '../../components/2_chatinput_elements/WABASeparatedQuickButtons/styles/themes/dark.scss' as wabaseparatedquick-dark;
+@use '../../components/2_chatinput_elements/WABATemplateSelector/styles/themes/dark.scss' as wabatemplatesel-dark;
+
+// 2_chatlist_elements
+@use '../../components/2_chatlist_elements/ChatFilter/styles/themes/dark.scss' as chatfilter-dark;
+@use '../../components/2_chatlist_elements/ChatItem/styles/themes/dark.scss' as chatitem-dark;
+@use '../../components/2_chatlist_elements/ChatTabs/styles/themes/dark.scss' as chattabs-dark;
+
+// 2_elements
+@use '../../components/2_elements/AudioRecorder/styles/themes/dark.scss' as audiorecorder-dark;
+@use '../../components/2_elements/ChannelSelector/styles/themes/dark.scss' as channelselector-dark;
+@use '../../components/2_elements/ChatInfo/styles/themes/dark.scss' as chatinfo-dark;
+@use '../../components/2_elements/ChatPanel/styles/themes/dark.scss' as chatpanel-dark;
+@use '../../components/2_elements/ContactInfo/styles/themes/dark.scss' as contactinfo-dark;
+@use '../../components/2_elements/ThemeMode/styles/themes/dark.scss' as thememode-dark;
+@use '../../components/2_elements/UserProfile/styles/themes/dark.scss' as userprofile-dark;
+@use '../../components/2_elements/VideoRecorder/styles/themes/dark.scss' as videorecorder-dark;
+
+// 2_feed_elements
+@use '../../components/2_feed_elements/AudioMessage/styles/themes/dark.scss' as audiomessage-dark;
+@use '../../components/2_feed_elements/BaseReplyMessage/styles/themes/dark.scss' as basereplymessage-dark;
+@use '../../components/2_feed_elements/CallMessage/styles/themes/dark.scss' as callmessage-dark;
+@use '../../components/2_feed_elements/DateMessage/styles/themes/dark.scss' as datemessage-dark;
+@use '../../components/2_feed_elements/DateMessageSticky/styles/themes/dark.scss' as datemessagesticky-dark;
+@use '../../components/2_feed_elements/FeedKeyboard/styles/themes/dark.scss' as feedkeyboard-dark;
+@use '../../components/2_feed_elements/FileMessage/styles/themes/dark.scss' as filemessage-dark;
+@use '../../components/2_feed_elements/ImageMessage/styles/themes/dark.scss' as imagemessage-dark;
+@use '../../components/2_feed_elements/MessageKeyboard/styles/themes/dark.scss' as messagekeyboard-dark;
+@use '../../components/2_feed_elements/ReplyAudioMessage/styles/themes/dark.scss' as replyaudiomessage-dark;
+@use '../../components/2_feed_elements/ReplyCallMessage/styles/themes/dark.scss' as replycallmessage-dark;
+@use '../../components/2_feed_elements/ReplyFileMessage/styles/themes/dark.scss' as replyfilemessage-dark;
+@use '../../components/2_feed_elements/ReplyImageMessage/styles/themes/dark.scss' as replyimagemessage-dark;
+@use '../../components/2_feed_elements/ReplyStickerMessage/styles/themes/dark.scss' as replystickermessage-dark;
+@use '../../components/2_feed_elements/ReplyTextMessage/styles/themes/dark.scss' as replytextmessage-dark;
+@use '../../components/2_feed_elements/ReplyVideoMessage/styles/themes/dark.scss' as replyvideomessage-dark;
+@use '../../components/2_feed_elements/StickerMessage/styles/themes/dark.scss' as stickermessage-dark;
+@use '../../components/2_feed_elements/SystemMessage/styles/themes/dark.scss' as systemmessage-dark;
+@use '../../components/2_feed_elements/TextMessage/styles/themes/dark.scss' as textmessage-dark;
+@use '../../components/2_feed_elements/TypingMessage/styles/themes/dark.scss' as typingmessage-dark;
+@use '../../components/2_feed_elements/VideoMessage/styles/themes/dark.scss' as videomessage-dark;
+
+// 2_modals
+@use '../../components/2_modals/CreateChat2/styles/themes/dark.scss' as createchat2-dark;
+@use '../../components/2_modals/CreateDialog/styles/themes/dark.scss' as createdialog-dark;
+@use '../../components/2_modals/Modal/styles/themes/dark.scss' as modal-dark;
+@use '../../components/2_modals/ModalFullscreen/styles/themes/dark.scss' as modalfullscreen-dark;
+@use '../../components/2_modals/ModalNoFooter/styles/themes/dark.scss' as modalnofooter-dark;
+@use '../../components/2_modals/ModalVideoRecorder/styles/themes/dark.scss' as modalvideorecorder-dark;
+
+// 3_compounds
+@use '../../components/3_compounds/ChatInput/styles/themes/dark.scss' as chatinput-dark;
+@use '../../components/3_compounds/ChatList/styles/themes/dark.scss' as chatlist-dark;
+@use '../../components/3_compounds/Feed/styles/themes/dark.scss' as feed-dark;
+@use '../../components/3_compounds/SideBar/styles/themes/dark.scss' as sidebar-dark;
+
+// 4_layouts
+@use '../../components/4_layouts/AdaptiveExtendedLayout/styles/themes/dark.scss' as adaptiveextendedlayout-dark;
+@use '../../components/4_layouts/BaseLayout/styles/themes/dark.scss' as baselayout-dark;
+@use '../../components/4_layouts/ChatWrapper/styles/themes/dark.scss' as chatwrapper-dark;
+@use '../../components/4_layouts/ExtendedLayout/styles/themes/dark.scss' as extendedlayout-dark;
+@use '../../components/4_layouts/FeedLayout/styles/themes/dark.scss' as feedlayout-dark;
+
+// 5_containers
+@use '../../components/5_containers/BaseContainer/styles/themes/dark.scss' as basecontainer-dark;
+@use '../../components/5_containers/FloatContainer/styles/themes/dark.scss' as floatcontainer-dark;
+@use '../../components/2_chatinput_elements/PlaceholderComponent/styles/themes/dark.scss' as placeholdercomponent-dark;
+@use '../../components/2_feed_elements/SplashScreen/styles/themes/dark.scss' as splashscreen-dark;

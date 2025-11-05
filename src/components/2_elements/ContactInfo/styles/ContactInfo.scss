@@ -1,0 +1,180 @@
+.contact-info {
+  margin-top: var(--chotto-contactinfo-margin-top, 28px);
+  min-width: var(--chotto-contactinfo-min-width, 300px);
+  font-size: var(--chotto-contactinfo-font-size, 16px);
+
+  &__attribute-list {
+    padding-bottom: var(--chotto-contactinfo-attribute-list-padding-bottom, 15px);
+    margin-left: var(--chotto-contactinfo-attribute-list-margin-left, 6px);
+  }
+
+  &__attribute-item {
+    display: var(--chotto-contactinfo-attribute-item-display, flex);
+    align-items: var(--chotto-contactinfo-attribute-item-align-items, center);
+    margin-bottom: var(--chotto-contactinfo-attribute-item-margin-bottom, 15px);
+
+    input[type="radio"] {
+      opacity: var(--chotto-contactinfo-attribute-item-input-opacity, 0);
+      position: var(--chotto-contactinfo-attribute-item-input-position, absolute);
+      width: var(--chotto-contactinfo-attribute-item-input-width, 0);
+      height: var(--chotto-contactinfo-attribute-item-input-height, 0);
+    }
+
+    label {
+      display: var(--chotto-contactinfo-attribute-item-label-display, flex);
+      align-items: var(--chotto-contactinfo-attribute-item-label-align-items, center);
+      cursor: var(--chotto-contactinfo-attribute-item-label-cursor, pointer);
+      margin: var(--chotto-contactinfo-attribute-item-label-margin, 0);
+    }
+
+    &--current-chat {
+      .contact-info__badge {
+        margin-left: var(--chotto-contactinfo-attribute-item-current-chat-badge-margin-left, 8px);
+        font-size: var(--chotto-contactinfo-attribute-item-current-chat-badge-font-size, 14px);
+        color: var(--chotto-contactinfo-attribute-item-current-chat-badge-color, #5F5F5F);
+      }
+    }
+  }
+
+  &__custom-radio {
+    display: var(--chotto-contactinfo-custom-radio-display, inline-flex);
+    align-items: var(--chotto-contactinfo-custom-radio-align-items, center);
+    justify-content: var(--chotto-contactinfo-custom-radio-justify-content, center);
+    width: var(--chotto-contactinfo-custom-radio-width, 18px);
+    height: var(--chotto-contactinfo-custom-radio-height, 18px);
+    border: var(--chotto-contactinfo-custom-radio-border, 1px solid #5F5F5F);
+    border-radius: var(--chotto-contactinfo-custom-radio-border-radius, 50%);
+    margin-right: var(--chotto-contactinfo-custom-radio-margin-right, 11px);
+    flex-shrink: var(--chotto-contactinfo-custom-radio-flex-shrink, 0);
+    transition: var(--chotto-contactinfo-custom-radio-transition, border-color 0.2s ease);
+  }
+
+  &__radio-inner {
+    position: var(--chotto-contactinfo-radio-inner-position, relative);
+    width: var(--chotto-contactinfo-radio-inner-width, 14px);
+    height: var(--chotto-contactinfo-radio-inner-height, 14px);
+    display: var(--chotto-contactinfo-radio-inner-display, flex);
+    align-items: var(--chotto-contactinfo-radio-inner-align-items, center);
+    justify-content: var(--chotto-contactinfo-radio-inner-justify-content, center);
+    transition: var(--chotto-contactinfo-radio-inner-transition, opacity 0.2s ease);
+  }
+
+  &__attribute-item label:hover &__custom-radio {
+    border-color: var(--chotto-contactinfo-attribute-item-label-hover-custom-radio-border-color, #404040);
+  }
+
+  &__channel-section {
+    margin-bottom: var(--chotto-contactinfo-channel-section-margin-bottom, 20px);
+  }
+
+  &__channel-label {
+    display: var(--chotto-contactinfo-channel-label-display, block);
+    font-size: var(--chotto-contactinfo-channel-label-font-size, 14px);
+    color: var(--chotto-contactinfo-channel-label-color, #5F5F5F);
+    margin: var(--chotto-contactinfo-channel-label-margin, 1px 0 7px 3px);
+  }
+
+  &__custom-select {
+    position: var(--chotto-contactinfo-custom-select-position, relative);
+    width: var(--chotto-contactinfo-custom-select-width, 100%);
+  }
+
+  &__select-trigger {
+    display: var(--chotto-contactinfo-select-trigger-display, flex);
+    align-items: var(--chotto-contactinfo-select-trigger-align-items, center);
+    padding: var(--chotto-contactinfo-select-trigger-padding, 8px 13px);
+    border: var(--chotto-contactinfo-select-trigger-border, 1px solid #d0d0d0);
+    border-radius: var(--chotto-contactinfo-select-trigger-border-radius, 1px);
+    background: var(--chotto-contactinfo-select-trigger-background, #ffffff);
+    cursor: var(--chotto-contactinfo-select-trigger-cursor, pointer);
+    font-size: var(--chotto-contactinfo-select-trigger-font-size, 16px);
+    color: var(--chotto-contactinfo-select-trigger-color, #1E1E1E);
+    user-select: var(--chotto-contactinfo-select-trigger-user-select, none);
+    margin-left: var(--chotto-contactinfo-select-trigger-margin-left, 3px);
+  }
+
+  &__icon {
+    width: var(--chotto-contactinfo-icon-width, 22px);
+    height: var(--chotto-contactinfo-icon-height, 22px);
+    margin-right: var(--chotto-contactinfo-icon-margin-right, 10px);
+    display: var(--chotto-contactinfo-icon-display, flex);
+    align-items: var(--chotto-contactinfo-icon-align-items, center);
+    justify-content: var(--chotto-contactinfo-icon-justify-content, center);
+
+    svg {
+      width: var(--chotto-contactinfo-icon-svg-width, 100%);
+      height: var(--chotto-contactinfo-icon-svg-height, 100%);
+    }
+  }
+
+  &__arrow {
+    margin-left: var(--chotto-contactinfo-arrow-margin-left, auto);
+    transition: var(--chotto-contactinfo-arrow-transition, transform 0.2s ease);
+
+    &--open {
+      transform: var(--chotto-contactinfo-arrow-open-transform, rotate(180deg));
+    }
+  }
+
+  &__select-options {
+    position: var(--chotto-contactinfo-select-options-position, absolute);
+    top: var(--chotto-contactinfo-select-options-top, 100%);
+    left: var(--chotto-contactinfo-select-options-left, 3px);
+    right: var(--chotto-contactinfo-select-options-right, 0);
+    background: var(--chotto-contactinfo-select-options-background, #ffffff);
+    border: var(--chotto-contactinfo-select-options-border, 1px solid #d0d0d0);
+    border-top: var(--chotto-contactinfo-select-options-border-top, none);
+    border-radius: var(--chotto-contactinfo-select-options-border-radius, 0 0 4px 4px);
+    max-height: var(--chotto-contactinfo-select-options-max-height, 200px);
+    overflow-y: var(--chotto-contactinfo-select-options-overflow-y, auto);
+    z-index: var(--chotto-contactinfo-select-options-z-index, 10);
+    box-shadow: var(--chotto-contactinfo-select-options-box-shadow, 0 4px 6px rgba(0, 0, 0, 0.1));
+  }
+
+  &__select-option {
+    display: var(--chotto-contactinfo-select-option-display, flex);
+    align-items: var(--chotto-contactinfo-select-option-align-items, center);
+    padding: var(--chotto-contactinfo-select-option-padding, 8px 12px);
+    cursor: var(--chotto-contactinfo-select-option-cursor, pointer);
+    font-size: var(--chotto-contactinfo-select-option-font-size, 16px);
+    color: var(--chotto-contactinfo-select-option-color, #1E1E1E);
+    user-select: var(--chotto-contactinfo-select-option-user-select, none);
+
+    &:hover {
+      background-color: var(--chotto-contactinfo-select-option-hover-background-color, #F6F6F6);
+    }
+  }
+
+  &__divider {
+    width: var(--chotto-contactinfo-divider-width, 368px);
+    height: var(--chotto-contactinfo-divider-height, 1px);
+    background-color: var(--chotto-contactinfo-divider-background-color, #F3F3F3);
+    margin-bottom: var(--chotto-contactinfo-divider-margin-bottom, 13px);
+    margin-left: var(--chotto-contactinfo-divider-margin-left, 3px);
+  }
+
+  &__button {
+    display: var(--chotto-contactinfo-button-display, flex);
+    align-items: var(--chotto-contactinfo-button-align-items, center);
+    gap: var(--chotto-contactinfo-button-gap, 10px);
+    padding: var(--chotto-contactinfo-button-padding, 8px 6px);
+    width: var(--chotto-contactinfo-button-width, 100%);
+    border: var(--chotto-contactinfo-button-border, none);
+    background: var(--chotto-contactinfo-button-background, transparent);
+    cursor: var(--chotto-contactinfo-button-cursor, pointer);
+    color: var(--chotto-contactinfo-button-color, #1E1E1E);
+    font-size: var(--chotto-contactinfo-button-font-size, 16px);
+    text-align: var(--chotto-contactinfo-button-text-align, left);
+    border-radius: var(--chotto-contactinfo-button-border-radius, 4px);
+    transition: var(--chotto-contactinfo-button-transition, background-color 0.2s ease);
+
+    &:hover {
+      background-color: var(--chotto-contactinfo-button-hover-background-color, #F6F6F6);
+    }
+
+    svg, img {
+      width: var(--chotto-contactinfo-button-svg-img-width, 22px);
+      height: var(--chotto-contactinfo-button-svg-img-height, 22px);
+    }
+  }
+}

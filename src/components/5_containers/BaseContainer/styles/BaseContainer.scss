@@ -1,0 +1,10 @@
+.base {
+  &__container {
+    transition: var(--chotto-basecontainer-base-container-transition, all 0.3s ease);
+    font-weight: var(--chotto-basecontainer-base-container-font-weight, 400);
+    color: var(--chotto-basecontainer-base-container-color, #1E1E1E);
+    font-family: var(--chotto-basecontainer-base-container-font-family, "Open Sans", sans-serif);
+    container: var(--chotto-basecontainer-base-container-container, all / inline-size);
+    min-width: var(--chotto-basecontainer-base-container-min-width, 480px);
+  }
+}

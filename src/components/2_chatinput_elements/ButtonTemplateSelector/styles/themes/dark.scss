@@ -1,0 +1,17 @@
+[data-theme="dark"] {
+  // ButtonTemplateSelector button variables
+  --chotto-buttontemplateselector-button-background-color: transparent;
+  --chotto-buttontemplateselector-button-border: 0px;
+  --chotto-buttontemplateselector-button-height: fit-content;
+  --chotto-buttontemplateselector-button-span-display: block;
+  --chotto-buttontemplateselector-button-span-cursor: pointer;
+  --chotto-buttontemplateselector-button-span-padding: 1px 0 0 3px;
+  --chotto-buttontemplateselector-button-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-buttontemplateselector-button-span-color: var(--chotto-theme-button-color-active);
+  --chotto-buttontemplateselector-button-span-hover-color: var(--chotto-theme-button-color-hover);
+
+  // ButtonTemplateSelector button-disabled variables
+  --chotto-buttontemplateselector-button-disabled-pointer-events: none;
+  --chotto-buttontemplateselector-button-disabled-span-cursor: auto;
+  --chotto-buttontemplateselector-button-disabled-span-color: var(--chotto-theme-button-color-disabled);
+}

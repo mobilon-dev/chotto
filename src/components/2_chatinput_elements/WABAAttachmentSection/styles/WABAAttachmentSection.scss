@@ -1,0 +1,47 @@
+.attachment-section {
+  position: var(--chotto-wabaattachmentsection-position, relative);
+  display: var(--chotto-wabaattachmentsection-display, flex);
+  text-align: var(--chotto-wabaattachmentsection-text-align, center);
+  align-items: var(--chotto-wabaattachmentsection-align-items, center);
+  justify-content: var(--chotto-wabaattachmentsection-justify-content, center);
+  gap: var(--chotto-wabaattachmentsection-gap, 8px);
+  border-radius: var(--chotto-wabaattachmentsection-border-radius, 5px);
+  background-color: var(--chotto-wabaattachmentsection-background-color, #FEF3B8);
+  padding-top: var(--chotto-wabaattachmentsection-padding-top, 10px);
+  padding-bottom: var(--chotto-wabaattachmentsection-padding-bottom, 10px);
+  margin-bottom: var(--chotto-wabaattachmentsection-margin-bottom, 5px);
+
+  &__error{
+    border: var(--chotto-wabaattachmentsection-error-border, 1px solid #dc2626);
+  }
+
+  &__icon{
+    padding-left: var(--chotto-wabaattachmentsection-icon-padding-left, 10px);
+    color: var(--chotto-wabaattachmentsection-icon-color, #1E1E1E);
+  }
+
+  &__title{
+    font-size: var(--chotto-wabaattachmentsection-title-font-size, 14px);
+    color: var(--chotto-wabaattachmentsection-title-color, #1E1E1E);
+    font-weight: var(--chotto-wabaattachmentsection-title-font-weight, 600);
+  }
+
+  &__info{
+    margin-top: var(--chotto-wabaattachmentsection-info-margin-top, 1px);
+    color: var(--chotto-wabaattachmentsection-info-color, #5F5F5F);
+    font-size: var(--chotto-wabaattachmentsection-info-font-size, 14px);
+    word-break: var(--chotto-wabaattachmentsection-info-word-break, break-word);
+    font-weight: var(--chotto-wabaattachmentsection-info-font-weight, 600);
+  }
+
+  &__error-text{
+    color: var(--chotto-wabaattachmentsection-error-text-color, #dc2626);
+    margin-left: var(--chotto-wabaattachmentsection-error-text-margin-left, 5px);
+    font-size: var(--chotto-wabaattachmentsection-error-text-font-size, 12px);
+  }
+}
+
+.attachment-section:hover {
+  cursor: var(--chotto-wabaattachmentsection-hover-cursor, pointer);
+  background-color: var(--chotto-wabaattachmentsection-hover-background-color, #fef3b890);
+}

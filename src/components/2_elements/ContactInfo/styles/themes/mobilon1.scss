@@ -1,0 +1,140 @@
+[data-theme="mobilon1"] {
+  // ContactInfo main variables
+  --chotto-contactinfo-margin-top: 28px;
+  --chotto-contactinfo-min-width: 300px;
+  --chotto-contactinfo-font-size: var(--chotto-theme-title-font-size, 16px);
+
+  // ContactInfo attribute-list variables
+  --chotto-contactinfo-attribute-list-padding-bottom: 15px;
+  --chotto-contactinfo-attribute-list-margin-left: 6px;
+
+  // ContactInfo attribute-item variables
+  --chotto-contactinfo-attribute-item-display: flex;
+  --chotto-contactinfo-attribute-item-align-items: center;
+  --chotto-contactinfo-attribute-item-margin-bottom: 15px;
+  --chotto-contactinfo-attribute-item-input-opacity: 0;
+  --chotto-contactinfo-attribute-item-input-position: absolute;
+  --chotto-contactinfo-attribute-item-input-width: 0;
+  --chotto-contactinfo-attribute-item-input-height: 0;
+  --chotto-contactinfo-attribute-item-label-display: flex;
+  --chotto-contactinfo-attribute-item-label-align-items: center;
+  --chotto-contactinfo-attribute-item-label-cursor: pointer;
+  --chotto-contactinfo-attribute-item-label-margin: 0;
+  --chotto-contactinfo-attribute-item-current-chat-badge-margin-left: 8px;
+  --chotto-contactinfo-attribute-item-current-chat-badge-font-size: var(--chotto-theme-text-font-size, 14px);
+  --chotto-contactinfo-attribute-item-current-chat-badge-color: var(--chotto-theme-secondary-text-color);
+
+  // ContactInfo custom-radio variables
+  --chotto-contactinfo-custom-radio-display: inline-flex;
+  --chotto-contactinfo-custom-radio-align-items: center;
+  --chotto-contactinfo-custom-radio-justify-content: center;
+  --chotto-contactinfo-custom-radio-width: 18px;
+  --chotto-contactinfo-custom-radio-height: 18px;
+  --chotto-contactinfo-custom-radio-border: 1px solid var(--chotto-theme-secondary-text-color);
+  --chotto-contactinfo-custom-radio-border-radius: 50%;
+  --chotto-contactinfo-custom-radio-margin-right: 11px;
+  --chotto-contactinfo-custom-radio-flex-shrink: 0;
+  --chotto-contactinfo-custom-radio-transition: border-color 0.2s ease;
+
+  // ContactInfo radio-inner variables
+  --chotto-contactinfo-radio-inner-position: relative;
+  --chotto-contactinfo-radio-inner-width: 14px;
+  --chotto-contactinfo-radio-inner-height: 14px;
+  --chotto-contactinfo-radio-inner-display: flex;
+  --chotto-contactinfo-radio-inner-align-items: center;
+  --chotto-contactinfo-radio-inner-justify-content: center;
+  --chotto-contactinfo-radio-inner-transition: opacity 0.2s ease;
+
+  // ContactInfo attribute-item label hover custom-radio variables
+  --chotto-contactinfo-attribute-item-label-hover-custom-radio-border-color: var(--chotto-theme-quinary-color);
+
+  // ContactInfo channel-section variables
+  --chotto-contactinfo-channel-section-margin-bottom: 20px;
+
+  // ContactInfo channel-label variables
+  --chotto-contactinfo-channel-label-display: block;
+  --chotto-contactinfo-channel-label-font-size: var(--chotto-theme-text-font-size, 14px);
+  --chotto-contactinfo-channel-label-color: var(--chotto-theme-secondary-text-color);
+  --chotto-contactinfo-channel-label-margin: 1px 0 7px 3px;
+
+  // ContactInfo custom-select variables
+  --chotto-contactinfo-custom-select-position: relative;
+  --chotto-contactinfo-custom-select-width: 100%;
+
+  // ContactInfo select-trigger variables
+  --chotto-contactinfo-select-trigger-display: flex;
+  --chotto-contactinfo-select-trigger-align-items: center;
+  --chotto-contactinfo-select-trigger-padding: 8px 13px;
+  --chotto-contactinfo-select-trigger-border: var(--chotto-input-border, 1px solid #d0d0d0);
+  --chotto-contactinfo-select-trigger-border-radius: 1px;
+  --chotto-contactinfo-select-trigger-background: var(--chotto-theme-primary-color);
+  --chotto-contactinfo-select-trigger-cursor: pointer;
+  --chotto-contactinfo-select-trigger-font-size: var(--chotto-theme-title-font-size, 16px);
+  --chotto-contactinfo-select-trigger-color: var(--chotto-theme-primary-text-color);
+  --chotto-contactinfo-select-trigger-user-select: none;
+  --chotto-contactinfo-select-trigger-margin-left: 3px;
+
+  // ContactInfo icon variables
+  --chotto-contactinfo-icon-width: 22px;
+  --chotto-contactinfo-icon-height: 22px;
+  --chotto-contactinfo-icon-margin-right: 10px;
+  --chotto-contactinfo-icon-display: flex;
+  --chotto-contactinfo-icon-align-items: center;
+  --chotto-contactinfo-icon-justify-content: center;
+  --chotto-contactinfo-icon-svg-width: 100%;
+  --chotto-contactinfo-icon-svg-height: 100%;
+
+  // ContactInfo arrow variables
+  --chotto-contactinfo-arrow-margin-left: auto;
+  --chotto-contactinfo-arrow-transition: transform 0.2s ease;
+  --chotto-contactinfo-arrow-open-transform: rotate(180deg);
+
+  // ContactInfo select-options variables
+  --chotto-contactinfo-select-options-position: absolute;
+  --chotto-contactinfo-select-options-top: 100%;
+  --chotto-contactinfo-select-options-left: 3px;
+  --chotto-contactinfo-select-options-right: 0;
+  --chotto-contactinfo-select-options-background: var(--chotto-theme-primary-color);
+  --chotto-contactinfo-select-options-border: var(--chotto-input-border, 1px solid #d0d0d0);
+  --chotto-contactinfo-select-options-border-top: none;
+  --chotto-contactinfo-select-options-border-radius: 0 0 4px 4px;
+  --chotto-contactinfo-select-options-max-height: 200px;
+  --chotto-contactinfo-select-options-overflow-y: auto;
+  --chotto-contactinfo-select-options-z-index: 10;
+  --chotto-contactinfo-select-options-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  // ContactInfo select-option variables
+  --chotto-contactinfo-select-option-display: flex;
+  --chotto-contactinfo-select-option-align-items: center;
+  --chotto-contactinfo-select-option-padding: 8px 12px;
+  --chotto-contactinfo-select-option-cursor: pointer;
+  --chotto-contactinfo-select-option-font-size: var(--chotto-theme-title-font-size, 16px);
+  --chotto-contactinfo-select-option-color: var(--chotto-theme-primary-text-color);
+  --chotto-contactinfo-select-option-user-select: none;
+  --chotto-contactinfo-select-option-hover-background-color: var(--chotto-theme-item-background-color-hover, #F6F6F6);
+
+  // ContactInfo divider variables
+  --chotto-contactinfo-divider-width: 368px;
+  --chotto-contactinfo-divider-height: 1px;
+  --chotto-contactinfo-divider-background-color: var(--chotto-theme-item-background-color-focus, #F3F3F3);
+  --chotto-contactinfo-divider-margin-bottom: 13px;
+  --chotto-contactinfo-divider-margin-left: 3px;
+
+  // ContactInfo button variables
+  --chotto-contactinfo-button-display: flex;
+  --chotto-contactinfo-button-align-items: center;
+  --chotto-contactinfo-button-gap: 10px;
+  --chotto-contactinfo-button-padding: 8px 6px;
+  --chotto-contactinfo-button-width: 100%;
+  --chotto-contactinfo-button-border: none;
+  --chotto-contactinfo-button-background: transparent;
+  --chotto-contactinfo-button-cursor: pointer;
+  --chotto-contactinfo-button-color: var(--chotto-theme-primary-text-color, #1E1E1E);
+  --chotto-contactinfo-button-font-size: 16px;
+  --chotto-contactinfo-button-text-align: left;
+  --chotto-contactinfo-button-border-radius: 4px;
+  --chotto-contactinfo-button-transition: background-color 0.2s ease;
+  --chotto-contactinfo-button-hover-background-color: var(--chotto-theme-item-background-color-hover, #F6F6F6);
+  --chotto-contactinfo-button-svg-img-width: 22px;
+  --chotto-contactinfo-button-svg-img-height: 22px;
+}

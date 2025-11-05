@@ -1,0 +1,85 @@
+.video-recorder {
+  &__container {
+    position: var(--chotto-modalvideorecorder-container-position, relative);
+    display: var(--chotto-modalvideorecorder-container-display, grid);
+    align-items: var(--chotto-modalvideorecorder-container-align-items, center);
+  }
+
+  &__view-area{
+    width: var(--chotto-modalvideorecorder-view-area-width, 640px);
+    height: var(--chotto-modalvideorecorder-view-area-height, 480px);
+  }
+
+  &__controls{ 
+    display: var(--chotto-modalvideorecorder-controls-display, flex);
+    justify-content: var(--chotto-modalvideorecorder-controls-justify-content, space-between);
+  }
+
+  &__recording-container{
+    display: var(--chotto-modalvideorecorder-recording-container-display, flex);
+    gap: var(--chotto-modalvideorecorder-recording-container-gap, 3px);
+  }
+
+  &__recording-icon {
+    font-size: var(--chotto-modalvideorecorder-recording-icon-font-size, 10px);
+    -webkit-animation: var(--chotto-modalvideorecorder-recording-icon-animation, blink 3s linear infinite);
+    animation: var(--chotto-modalvideorecorder-recording-icon-animation, blink 3s linear infinite);
+  }
+
+  &__stop {
+    width: var(--chotto-modalvideorecorder-stop-width, 20px);
+    height: var(--chotto-modalvideorecorder-stop-height, 20px);
+    background-color: var(--chotto-modalvideorecorder-stop-background-color, black);
+    cursor: var(--chotto-modalvideorecorder-stop-cursor, pointer);
+    border-radius: var(--chotto-modalvideorecorder-stop-border-radius, 2px);
+  }
+
+  &__recording-time {
+    margin: var(--chotto-modalvideorecorder-recording-time-margin, auto);
+  }
+
+  @-webkit-keyframes blink {
+    0% { color: var(--chotto-modalvideorecorder-blink-color-start, red); }
+    50% { color: var(--chotto-modalvideorecorder-blink-color-middle, transparent); }
+    100% { color: var(--chotto-modalvideorecorder-blink-color-end, red); }
+  }
+  @keyframes blink {
+    0% { color: var(--chotto-modalvideorecorder-blink-color-start, red); }
+    50% { color: var(--chotto-modalvideorecorder-blink-color-middle, transparent); }
+    100% { color: var(--chotto-modalvideorecorder-blink-color-end, red); }
+  }
+
+  &__button {
+    background-color: var(--chotto-modalvideorecorder-button-background-color, transparent);
+    border: var(--chotto-modalvideorecorder-button-border, 0px);
+    span {
+      cursor: var(--chotto-modalvideorecorder-button-span-cursor, pointer);
+      display: var(--chotto-modalvideorecorder-button-span-display, block);
+      font-size: var(--chotto-modalvideorecorder-button-icon-size, 23px);
+      color: var(--chotto-modalvideorecorder-button-color-active, #525252);
+    }
+  }
+
+  &__header{
+    text-align: var(--chotto-modalvideorecorder-header-text-align, right);
+    width: var(--chotto-modalvideorecorder-header-width, 100%);
+  }
+
+  &__button-close span{
+    padding-bottom: var(--chotto-modalvideorecorder-button-close-span-padding-bottom, 5px);
+  }
+
+  &__button-disabled {
+    cursor: var(--chotto-modalvideorecorder-button-disabled-cursor, auto);
+    span {
+      color: var(--chotto-modalvideorecorder-button-color-disabled, #e5e5e5);
+    }
+  }
+
+  &__recording-button {
+    cursor: var(--chotto-modalvideorecorder-recording-button-cursor, auto);
+    span{
+      cursor: var(--chotto-modalvideorecorder-recording-button-span-cursor, auto);
+    }
+  }
+}

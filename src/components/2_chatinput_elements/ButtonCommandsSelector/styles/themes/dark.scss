@@ -1,0 +1,14 @@
+[data-theme="dark"] {
+  // ButtonCommandsSelector trigger variables
+  --chotto-buttoncommandsselector-trigger-padding: 14px;
+  --chotto-buttoncommandsselector-trigger-display: block;
+  --chotto-buttoncommandsselector-trigger-cursor: pointer;
+  --chotto-buttoncommandsselector-trigger-font-size: calc(var(--chotto-theme-button-icon-size) - 7px);
+  --chotto-buttoncommandsselector-trigger-color: var(--chotto-theme-button-color-active);
+  --chotto-buttoncommandsselector-trigger-hover-color: var(--chotto-theme-button-color-hover);
+
+  // ButtonCommandsSelector disabled variables
+  --chotto-buttoncommandsselector-disabled-color: var(--chotto-theme-button-color-disabled);
+  --chotto-buttoncommandsselector-disabled-cursor: auto;
+  --chotto-buttoncommandsselector-disabled-pointer-events: none;
+}

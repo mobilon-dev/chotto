@@ -1,0 +1,86 @@
+.modal {
+  &__container{
+    position: var(--chotto-modalfullscreen-container-position, absolute);
+    top: var(--chotto-modalfullscreen-container-top, 50%);
+    left: var(--chotto-modalfullscreen-container-left, 50%);
+    right: var(--chotto-modalfullscreen-container-right, auto);
+    bottom: var(--chotto-modalfullscreen-container-bottom, auto);
+    transform: var(--chotto-modalfullscreen-container-transform, translate(-50%, -50%));
+    z-index: var(--chotto-modalfullscreen-container-z-index, 101);
+    color: var(--chotto-modalfullscreen-text-color, #1E1E1E);
+    background-color: var(--chotto-modalfullscreen-background, #ffffff);
+    border: var(--chotto-modalfullscreen-border, none);
+    border-radius: var(--chotto-modalfullscreen-border-radius, 8px);
+    padding: var(--chotto-modalfullscreen-padding, 16px);
+    margin: var(--chotto-modalfullscreen-margin, 0);
+    max-width: var(--chotto-modalfullscreen-max-width, 95%);
+    max-height: var(--chotto-modalfullscreen-max-height, 90vh);
+    min-width: var(--chotto-modalfullscreen-min-width, 300px);
+    min-height: var(--chotto-modalfullscreen-min-height, 200px);
+    width: var(--chotto-modalfullscreen-width, fit-content);
+    height: var(--chotto-modalfullscreen-height, auto);
+    box-shadow: var(--chotto-modalfullscreen-box-shadow, 2px 2px 10px 1px rgba(0,0,0,0.2));
+    overflow: var(--chotto-modalfullscreen-overflow, visible);
+    display: var(--chotto-modalfullscreen-display, block);
+    flex-direction: var(--chotto-modalfullscreen-flex-direction, column);
+    align-items: var(--chotto-modalfullscreen-align-items, stretch);
+    justify-content: var(--chotto-modalfullscreen-justify-content, flex-start);
+  }
+    
+  &__overlay {
+    position: var(--chotto-modalfullscreen-overlay-position, fixed);
+    top: var(--chotto-modalfullscreen-overlay-top, 0);
+    left: var(--chotto-modalfullscreen-overlay-left, 0);
+    right: var(--chotto-modalfullscreen-overlay-right, 0);
+    bottom: var(--chotto-modalfullscreen-overlay-bottom, 0);
+    background-color: var(--chotto-modalfullscreen-overlay-bg, rgba(0, 0, 0, 0.4));
+    backdrop-filter: var(--chotto-modalfullscreen-overlay-backdrop-filter, none);
+    z-index: var(--chotto-modalfullscreen-overlay-z-index, 1000);
+    display: var(--chotto-modalfullscreen-overlay-display, block);
+    opacity: var(--chotto-modalfullscreen-overlay-opacity, 1);
+    transition: var(--chotto-modalfullscreen-overlay-transition, opacity 0.3s ease);
+  }
+
+  &__close-button {
+    display: var(--chotto-modalfullscreen-close-button-display, block);
+    position: var(--chotto-modalfullscreen-close-button-position, relative);
+    background-color: var(--chotto-modalfullscreen-close-button-bg, transparent);
+    border: var(--chotto-modalfullscreen-close-button-border, none);
+    border-radius: var(--chotto-modalfullscreen-close-button-border-radius, 4px);
+    padding: var(--chotto-modalfullscreen-close-button-padding, 4px);
+    margin: var(--chotto-modalfullscreen-close-button-margin, 0 0 14px auto);
+    cursor: var(--chotto-modalfullscreen-close-button-cursor, pointer);
+    width: var(--chotto-modalfullscreen-close-button-width, auto);
+    height: var(--chotto-modalfullscreen-close-button-height, auto);
+    min-width: var(--chotto-modalfullscreen-close-button-min-width, 32px);
+    min-height: var(--chotto-modalfullscreen-close-button-min-height, 32px);
+    transition: var(--chotto-modalfullscreen-close-button-transition, all 0.2s ease);
+    outline: var(--chotto-modalfullscreen-close-button-outline, none);
+    box-shadow: var(--chotto-modalfullscreen-close-button-box-shadow, none);
+
+    &:hover {
+      background-color: var(--chotto-modalfullscreen-close-button-hover-bg, rgba(0, 0, 0, 0.1));
+      transform: var(--chotto-modalfullscreen-close-button-hover-transform, scale(1.1));
+      box-shadow: var(--chotto-modalfullscreen-close-button-hover-box-shadow, 0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    &:active {
+      background-color: var(--chotto-modalfullscreen-close-button-active-bg, rgba(0, 0, 0, 0.2));
+      transform: var(--chotto-modalfullscreen-close-button-active-transform, scale(0.95));
+    }
+
+    &:focus {
+      outline: var(--chotto-modalfullscreen-close-button-focus-outline, 2px solid #007bff);
+      outline-offset: var(--chotto-modalfullscreen-close-button-focus-outline-offset, 2px);
+    }
+
+    span {
+      color: var(--chotto-modalfullscreen-close-button-text-color, #5F5F5F);
+      font-size: var(--chotto-modalfullscreen-close-button-font-size, 23px);
+      display: var(--chotto-modalfullscreen-close-button-span-display, block);
+      text-align: var(--chotto-modalfullscreen-close-button-span-text-align, center);
+      line-height: var(--chotto-modalfullscreen-close-button-span-line-height, 1);
+      transition: var(--chotto-modalfullscreen-close-button-span-transition, color 0.2s ease);
+    }
+  }
+}

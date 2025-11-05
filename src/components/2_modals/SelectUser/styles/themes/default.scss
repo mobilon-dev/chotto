@@ -1,0 +1,35 @@
+[data-theme="light"] {
+  // SelectUser modal overlay variables
+  --chotto-selectuser-modal-position: fixed;
+  --chotto-selectuser-modal-top: 0;
+  --chotto-selectuser-modal-left: 0;
+  --chotto-selectuser-modal-width: 100%;
+  --chotto-selectuser-modal-height: 100%;
+  --chotto-selectuser-modal-background-color: rgba(0, 0, 0, 0.5);
+  --chotto-selectuser-modal-display: flex;
+  --chotto-selectuser-modal-justify-content: center;
+  --chotto-selectuser-modal-align-items: center;
+  --chotto-selectuser-modal-z-index: 1000;
+
+  // SelectUser modal content variables
+  --chotto-selectuser-modal-content-background-color: white;
+  --chotto-selectuser-modal-content-padding: 20px;
+  --chotto-selectuser-modal-content-border-radius: 8px;
+  --chotto-selectuser-modal-content-width: 300px;
+
+  // SelectUser participant list variables
+  --chotto-selectuser-participant-list-margin-top: 10px;
+  --chotto-selectuser-participant-list-max-height: 200px;
+
+  // SelectUser participant item variables
+  --chotto-selectuser-participant-item-display: flex;
+  --chotto-selectuser-participant-item-align-items: center;
+  --chotto-selectuser-participant-item-margin-bottom: 10px;
+  --chotto-selectuser-participant-item-checkbox-margin-right: 10px;
+
+  // SelectUser modal actions variables
+  --chotto-selectuser-modal-actions-display: flex;
+  --chotto-selectuser-modal-actions-justify-content: flex-end;
+  --chotto-selectuser-modal-actions-margin-top: 20px;
+  --chotto-selectuser-modal-actions-button-margin-left: 10px;
+}

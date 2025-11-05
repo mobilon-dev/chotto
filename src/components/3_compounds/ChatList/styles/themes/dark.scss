@@ -1,0 +1,107 @@
+[data-theme="dark"] {
+  // Main container
+  --chotto-chatlist-background-color: transparent;
+  --chotto-chatlist-flex-grow: 1;
+  --chotto-chatlist-display: flex;
+  --chotto-chatlist-align-items: stretch;
+  --chotto-chatlist-flex-direction: column;
+  --chotto-chatlist-height: 70%;
+  
+  // Filter
+  --chotto-chatlist-filter-margin: 0 15px 10px 15px;
+  
+  // Items container
+  --chotto-chatlist-items-display: block;
+  --chotto-chatlist-items-scroll-behavior: smooth;
+  --chotto-chatlist-items-height: 100%;
+  --chotto-chatlist-items-overflow-y: auto;
+  --chotto-chatlist-items-overflow-x: hidden;
+  --chotto-chatlist-items-padding: 0;
+  
+  // Scrollbar
+  --chotto-chatlist-scrollbar-width: 6px;
+  --chotto-chatlist-scrollbar-bg: var(--chotto-theme-scrollbar-bg);
+  --chotto-chatlist-scrollbar-thumb-radius: 10px;
+  --chotto-chatlist-scrollbar-thumb-bg: var(--chotto-theme-scrollbar-thumb-bg);
+  --chotto-chatlist-scrollbar-track-radius: 10px;
+  
+  // Fixed items
+  --chotto-chatlist-fixed-z-index: 100;
+  --chotto-chatlist-fixed-display: block;
+  --chotto-chatlist-fixed-position: sticky;
+  --chotto-chatlist-fixed-background-color: #262626;
+  --chotto-chatlist-fixed-top: 0;
+  --chotto-chatlist-fixed-bottom: 0;
+  
+  // Title container
+  --chotto-chatlist-title-container-position: relative;
+  --chotto-chatlist-title-container-display: flex;
+  --chotto-chatlist-title-container-justify: space-between;
+  --chotto-chatlist-title-container-align: center;
+  --chotto-chatlist-title-column-gap: 50px;
+  --chotto-chatlist-title-container-padding: 16px 0 16px 15px;
+  
+  // Title
+  --chotto-chatlist-title-font-family: var(--chotto-theme-header-font, var(--chotto-theme-font-family));
+  --chotto-chatlist-title-font-size: var(--chotto-theme-header-font-size);
+  --chotto-chatlist-title-font-weight: var(--chotto-theme-header-font-weight);
+  --chotto-chatlist-title-text-color: var(--chotto-theme-secondary-text-color);
+  
+  // Context menu
+  --chotto-chatlist-context-menu-position: absolute;
+  --chotto-chatlist-context-menu-top: 46px;
+  --chotto-chatlist-context-menu-right: 20px;
+  
+  // Button up
+  --chotto-chatlist-button-position: absolute;
+  --chotto-chatlist-button-z-index: 100;
+  --chotto-chatlist-button-bottom: 15px;
+  --chotto-chatlist-button-right: 25px;
+  --chotto-chatlist-button-margin-left: auto;
+  --chotto-chatlist-button-border: none;
+  --chotto-chatlist-button-min: 40px;
+  --chotto-chatlist-button-border-radius: 50%;
+  --chotto-chatlist-button-display: flex;
+  --chotto-chatlist-button-justify: center;
+  --chotto-chatlist-button-align: center;
+  --chotto-chatlist-button-cursor: pointer;
+  --chotto-chatlist-button-background-color: var(--chotto-theme-button-color-disabled);
+  --chotto-chatlist-button-icon-size: var(--chotto-theme-button-icon-size);
+  --chotto-chatlist-button-color-active: var(--chotto-theme-button-color-active);
+  
+  // Menu animations
+  --chotto-chatlist-menu-enter-duration: 0.1s;
+  --chotto-chatlist-menu-leave-duration: 0.1s;
+  --chotto-chatlist-menu-scale: 0.9;
+  --chotto-chatlist-menu-enter-transition: all var(--chotto-chatlist-menu-enter-duration, 0.1s) ease-out;
+  --chotto-chatlist-menu-leave-transition: all var(--chotto-chatlist-menu-leave-duration, 0.1s) cubic-bezier(1, 0.5, 0.8, 1);
+  --chotto-chatlist-menu-transform: scale(var(--chotto-chatlist-menu-scale, 0.9));
+  --chotto-chatlist-menu-opacity: 0;
+
+  // Search indicator
+  --chotto-chatlist-search-indicator-margin: 0 15px 10px 15px;
+  --chotto-chatlist-search-indicator-padding: 8px 12px;
+  --chotto-chatlist-search-indicator-bg: #404040;
+  --chotto-chatlist-search-indicator-radius: 6px;
+  --chotto-chatlist-search-indicator-border: 1px solid #555555;
+  --chotto-chatlist-search-content-display: flex;
+  --chotto-chatlist-search-content-align-items: center;
+  --chotto-chatlist-search-content-gap: 8px;
+  --chotto-chatlist-search-icon-color: #cccccc;
+  --chotto-chatlist-search-icon-font-size: 14px;
+  --chotto-chatlist-search-text-color: #e0e0e0;
+  --chotto-chatlist-search-text-font-size: 14px;
+  --chotto-chatlist-search-progress-color: #4a9eff;
+  --chotto-chatlist-search-query-font-weight: 500;
+  --chotto-chatlist-search-stats-color: #999999;
+  --chotto-chatlist-search-stats-font-size: 12px;
+  --chotto-chatlist-search-stats-font-weight: normal;
+  --chotto-chatlist-search-clear-color: #888888;
+  --chotto-chatlist-search-clear-font-size: 12px;
+  --chotto-chatlist-search-clear-padding: 4px;
+  --chotto-chatlist-search-clear-border-radius: 4px;
+  --chotto-chatlist-search-clear-transition: color 0.2s ease;
+  --chotto-chatlist-search-clear-hover-color: #bbbbbb;
+  --chotto-chatlist-search-clear-hover-bg: #555555;
+}
+

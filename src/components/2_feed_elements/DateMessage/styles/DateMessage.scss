@@ -1,0 +1,21 @@
+.date-message {
+
+  &__container {
+    display: var(--chotto-datemessage-container-display, flex);
+    align-items: var(--chotto-datemessage-container-align-items, center);
+    justify-content: var(--chotto-datemessage-container-justify-content, center);
+    margin: var(--chotto-datemessage-container-margin, 0 auto);
+    padding: var(--chotto-datemessage-container-padding, 6px 18px);
+    margin-bottom: var(--chotto-datemessage-container-margin-bottom, 18px);
+    width: var(--chotto-datemessage-container-width, fit-content);
+    background-color: var(--chotto-datemessage-container-background-color, transparent);
+  }
+
+  &__text {
+    font-size: var(--chotto-datemessage-text-font-size, 14px);
+    color: var(--chotto-datemessage-text-color, #1E1E1E);
+    background-color: var(--chotto-datemessage-text-background-color, #ffffff);
+    padding: var(--chotto-datemessage-text-padding, 4px 11px);
+    border-radius: var(--chotto-datemessage-text-border-radius, 4px);
+  }
+}

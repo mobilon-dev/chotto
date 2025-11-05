@@ -1,0 +1,163 @@
+[data-theme="green"] {
+  --chotto-sidebar-padding-container: 10px 8px 22px 8px;
+  --chotto-sidebar-row-gap-list: 14px;
+  --chotto-sidebar-image-active-border: 3px solid #10b981;
+  --chotto-sidebar-list-fixed-border-top: none;
+  --chotto-sidebar-list-fixed-border-bottom: 1px solid #4CAF50;
+  
+  // Container
+  --chotto-sidebar-container-display: flex;
+  --chotto-sidebar-container-flex-direction: column;
+  --chotto-sidebar-container-height: 100%;
+  --chotto-sidebar-container-background-color: transparent;
+  --chotto-sidebar-container-position: relative;
+  --chotto-sidebar-container-overflow: hidden;
+  
+  // Scroll container
+  --chotto-sidebar-scroll-container-flex: 1;
+  --chotto-sidebar-scroll-container-overflow-y: auto;
+  --chotto-sidebar-scroll-container-overflow-x: hidden;
+  --chotto-sidebar-scroll-container-padding-bottom: 60px;
+  --chotto-sidebar-scroll-container-scrollbar-width: none;
+  --chotto-sidebar-scroll-container-ms-overflow-style: none;
+  --chotto-sidebar-scroll-container-webkit-scrollbar-display: none;
+  
+  // List fixed
+  --chotto-sidebar-list-fixed-position: sticky;
+  --chotto-sidebar-list-fixed-top: 0;
+  --chotto-sidebar-list-fixed-z-index: 3;
+  --chotto-sidebar-layout-extended-first-col-bg: #f5f5f5;
+  --chotto-sidebar-list-fixed-padding: 12px 10px 22px;
+  --chotto-sidebar-list-fixed-margin-bottom: 15px;
+  --chotto-sidebar-list-fixed-display: flex;
+  --chotto-sidebar-list-fixed-flex-direction: column;
+  --chotto-sidebar-list-fixed-after-content: '';
+  --chotto-sidebar-list-fixed-after-position: absolute;
+  --chotto-sidebar-list-fixed-after-bottom: 7px;
+  --chotto-sidebar-list-fixed-after-left: 50%;
+  --chotto-sidebar-list-fixed-after-transform: translateX(-50%);
+  --chotto-sidebar-list-fixed-after-width: 40px;
+  --chotto-sidebar-list-fixed-border-bottom-width: 1px;
+  --chotto-sidebar-list-fixed-border-bottom-color: #4CAF50;
+  --chotto-sidebar-list-fixed-border-bottom-display: block;
+  
+  // List
+  --chotto-sidebar-list-display: flex;
+  --chotto-sidebar-list-flex-direction: column;
+  --chotto-sidebar-list-padding: 0;
+  --chotto-sidebar-list-z-index: 2;
+  
+  // Item
+  --chotto-sidebar-item-position: relative;
+  --chotto-sidebar-item-cursor: pointer;
+  --chotto-sidebar-item-display: flex;
+  --chotto-sidebar-item-flex-direction: column;
+  --chotto-sidebar-item-row-gap: 2px;
+  --chotto-sidebar-item-align-items: center;
+  --chotto-sidebar-item-background-color: transparent;
+  --chotto-sidebar-item-border-radius: 0;
+  --chotto-sidebar-item-before-content: '';
+  --chotto-sidebar-item-before-position: absolute;
+  --chotto-sidebar-item-before-width: calc(var(--chotto-theme-avatar-small-size) + 15px);
+  --chotto-sidebar-item-before-height: var(--chotto-theme-avatar-small-size);
+  --chotto-sidebar-hover-radius: 10px;
+  --chotto-sidebar-item-before-background-color: transparent;
+  --chotto-sidebar-item-before-top: 0;
+  --chotto-sidebar-item-before-left: 50%;
+  --chotto-sidebar-item-before-transform: translateX(-50%);
+  --chotto-sidebar-item-before-z-index: 0;
+  --chotto-sidebar-item-before-transition: background-color 0.2s ease;
+  --chotto-sidebar-item-before-pointer-events: none;
+  --chotto-sidebar-item-before-background-color-hover: var(--chotto-theme-item-background-color-hover);
+  
+  // Item span
+  --chotto-sidebar-unread-text-color: var(--chotto-theme-unread-text-color);
+  --chotto-sidebar-unread-background-color: var(--chotto-theme-unread-background-color);
+  --chotto-sidebar-item-span-position: absolute;
+  --chotto-sidebar-item-span-top: 2px;
+  --chotto-sidebar-item-span-right: 0;
+  --chotto-sidebar-item-span-display: flex;
+  --chotto-sidebar-item-span-justify-content: center;
+  --chotto-sidebar-item-span-align-items: center;
+  --chotto-sidebar-item-span-padding: 5px;
+  --chotto-sidebar-item-span-max-width: 29px;
+  --chotto-sidebar-item-span-min-width: 16px;
+  --chotto-sidebar-notification-count-height: 18px;
+  --chotto-sidebar-item-span-border-radius: 10px;
+  --chotto-sidebar-item-span-line-height: 16px;
+  --chotto-sidebar-item-span-z-index: 2;
+  
+  // Item paragraph
+  --chotto-sidebar-small-text-font-size: var(--chotto-theme-small-text-font-size);
+  --chotto-sidebar-small-text-font-weight: var(--chotto-theme-small-text-font-weight, 400);
+  --chotto-sidebar-header-font-color: var(--chotto-theme-header-font-color, #5F5F5F);
+  --chotto-sidebar-item-p-text-align: center;
+  --chotto-sidebar-item-p-line-height: 1;
+  
+  // Image
+  --chotto-sidebar-image-position: relative;
+  --chotto-sidebar-image-z-index: 1;
+  --chotto-sidebar-image-border-radius: 50%;
+  --chotto-sidebar-image-object-fit: cover;
+  --chotto-sidebar-image-transition: all 0.2s;
+  --chotto-sidebar-image-opacity: 0.8;
+  --chotto-sidebar-image-active-opacity: 1;
+  
+  // Settings container
+  --chotto-sidebar-settings-container-position: absolute;
+  --chotto-sidebar-settings-container-bottom: 7px;
+  --chotto-sidebar-settings-container-left: 0;
+  --chotto-sidebar-settings-container-right: 0;
+  --chotto-sidebar-settings-container-display: flex;
+  --chotto-sidebar-settings-container-justify-content: center;
+  --chotto-sidebar-settings-container-z-index: 2;
+  
+  // Settings button
+  --chotto-sidebar-settings-btn-background: none;
+  --chotto-sidebar-settings-btn-border: none;
+  --chotto-sidebar-settings-btn-padding: 12px;
+  --chotto-sidebar-settings-btn-margin: 0;
+  --chotto-sidebar-settings-btn-outline: none;
+  --chotto-sidebar-settings-btn-cursor: pointer;
+  --chotto-sidebar-settings-btn-display: inline-flex;
+  --chotto-sidebar-settings-btn-align-items: center;
+  --chotto-sidebar-settings-btn-justify-content: center;
+  --chotto-sidebar-settings-btn-border-radius: 50%;
+  --chotto-sidebar-settings-btn-transition: background-color 0.2s;
+  --chotto-sidebar-settings-btn-hover-background-color: var(--chotto-theme-item-background-color-hover, #E8F5E9);
+  
+  // Selected bar
+  --chotto-sidebar-selected-bar-position: absolute;
+  --chotto-sidebar-selected-bar-width: 2px;
+  --chotto-sidebar-selected-bar-height: 40px;
+  --chotto-sidebar-selected-bar-left: 3px;
+  --chotto-sidebar-selected-bar-top: 0;
+  --chotto-sidebar-selected-bar-border-radius: 2px;
+  --chotto-sidebar-selected-bar-background-color: #4CAF50;
+  --chotto-sidebar-selected-bar-z-index: 4;
+  --chotto-sidebar-selected-bar-transition: top 0.16s ease, height 0.16s ease;
+  
+  // Horizontal sidebar
+  --chotto-sidebar-horizontal-container-flex-direction: row;
+  --chotto-sidebar-horizontal-container-height: fit-content;
+  --chotto-sidebar-horizontal-container-padding-top: 0;
+  --chotto-sidebar-horizontal-container-padding-bottom: 5px;
+  --chotto-sidebar-horizontal-container-background-color: transparent;
+  --chotto-sidebar-horizontal-list-flex-direction: row;
+  --chotto-sidebar-horizontal-list-fixed-position: static;
+  --chotto-sidebar-horizontal-list-fixed-padding-left: 10px;
+  --chotto-sidebar-horizontal-list-fixed-padding-top: 0;
+  --chotto-sidebar-horizontal-list-fixed-border-top: 0;
+  --chotto-sidebar-horizontal-list-fixed-margin-right: 10px;
+  --chotto-sidebar-horizontal-list-fixed-margin-bottom: 0;
+  --chotto-sidebar-horizontal-list-fixed-flex-shrink: 0;
+  --chotto-sidebar-horizontal-item-display: block;
+  --chotto-sidebar-horizontal-item-max-width: 70px;
+  --chotto-sidebar-horizontal-item-text-align: center;
+  --chotto-sidebar-horizontal-item-span-width: 24px;
+  --chotto-sidebar-horizontal-item-span-height: 24px;
+  --chotto-sidebar-horizontal-item-span-left: 45px;
+  --chotto-sidebar-horizontal-item-p-font-size: 14px;
+  --chotto-sidebar-horizontal-image-width: calc(var(--chotto-theme-avatar-small-size) * 1.2);
+  --chotto-sidebar-horizontal-image-height: calc(var(--chotto-theme-avatar-small-size) * 1.2);
+}

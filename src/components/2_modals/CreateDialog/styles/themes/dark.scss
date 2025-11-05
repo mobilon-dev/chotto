@@ -1,0 +1,14 @@
+[data-theme="dark"] {
+  // CreateDialog contact line variables
+  --chotto-createdialog-contact-line-display: flex;
+  --chotto-createdialog-contact-line-margin: 10px 0;
+  --chotto-createdialog-contact-line-justify-content: space-between;
+
+  // CreateDialog channel line variables
+  --chotto-createdialog-channel-line-display: flex;
+  --chotto-createdialog-channel-line-margin: 10px 0;
+  --chotto-createdialog-channel-line-justify-content: space-between;
+
+  // CreateDialog button start variables
+  --chotto-createdialog-button-start-margin-left: calc(100% - 98px);
+}

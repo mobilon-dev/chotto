@@ -1,0 +1,39 @@
+[data-theme="light"] {
+  // Main container
+  --chotto-chatpanel-display: flex;
+  --chotto-chatpanel-align-items: stretch;
+  --chotto-chatpanel-flex-direction: column;
+  --chotto-chatpanel-height: 100%;
+  
+  // Header
+  --chotto-chatpanel-header-display: flex;
+  --chotto-chatpanel-header-gap: 6px;
+  
+  // Title container
+  --chotto-chatpanel-title-container-display: flex;
+  --chotto-chatpanel-title-container-justify: space-between;
+  --chotto-chatpanel-title-container-align: center;
+  
+  // Title
+  --chotto-chatpanel-title-letter-spacing: 0.5px;
+  --chotto-chatpanel-title-font-size: var(--chotto-theme-header-font-size);
+  --chotto-chatpanel-title-font-weight: var(--chotto-theme-header-font-weight);
+  --chotto-chatpanel-title-font-family: var(--chotto-theme-header-font);
+  --chotto-chatpanel-title-text-color: var(--chotto-theme-secondary-text-color);
+  
+  // Button close
+  --chotto-chatpanel-button-close-bg: transparent;
+  --chotto-chatpanel-button-close-border: none;
+  --chotto-chatpanel-button-close-cursor: pointer;
+  --chotto-chatpanel-button-icon-size: var(--chotto-theme-button-icon-size);
+  --chotto-chatpanel-button-color-active: var(--chotto-theme-button-color-active);
+  
+  // Scrollbar
+  --chotto-chatpanel-scrollbar-width: 6px;
+  --chotto-chatpanel-scrollbar-bg: var(--chotto-theme-scrollbar-bg);
+  --chotto-chatpanel-scrollbar-thumb-radius: 10px;
+  --chotto-chatpanel-scrollbar-thumb-bg: var(--chotto-theme-scrollbar-thumb-bg);
+  --chotto-chatpanel-scrollbar-track-radius: 10px;
+}
+
+

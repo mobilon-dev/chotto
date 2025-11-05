@@ -1,0 +1,40 @@
+[data-theme="light"] {
+  // ReplyFileMessage p variables
+  --chotto-replyfilemessage-p-margin: 0;
+  --chotto-replyfilemessage-p-margin-top: 6px;
+  --chotto-replyfilemessage-p-word-wrap: break-word;
+  --chotto-replyfilemessage-p-white-space: pre-wrap;
+  --chotto-replyfilemessage-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replyfilemessage-p-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replyfilemessage-p-overflow: hidden;
+  --chotto-replyfilemessage-p-text-overflow: ellipsis;
+  --chotto-replyfilemessage-p-display: -webkit-box;
+  --chotto-replyfilemessage-p-webkit-line-clamp: 5;
+  --chotto-replyfilemessage-p-line-clamp: 5;
+  --chotto-replyfilemessage-p-webkit-box-orient: vertical;
+
+  // ReplyFileMessage text variables
+  --chotto-replyfilemessage-text-margin-top: 8px;
+  --chotto-replyfilemessage-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-replyfilemessage-text-color: var(--chotto-theme-primary-text-color);
+
+  // ReplyFileMessage link variables
+  --chotto-replyfilemessage-link-display: flex;
+  --chotto-replyfilemessage-link-justify-content: flex-start;
+  --chotto-replyfilemessage-link-align-items: center;
+  --chotto-replyfilemessage-link-column-gap: 13px;
+  --chotto-replyfilemessage-link-span-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replyfilemessage-link-span-font-size: var(--chotto-theme-button-icon-size);
+
+  // ReplyFileMessage filename text variables
+  --chotto-replyfilemessage-filename-text-margin: 0;
+  --chotto-replyfilemessage-filename-text-overflow: hidden;
+  --chotto-replyfilemessage-filename-text-text-overflow: ellipsis;
+  --chotto-replyfilemessage-filename-text-webkit-line-clamp: 1;
+  --chotto-replyfilemessage-filename-text-line-clamp: 1;
+  --chotto-replyfilemessage-filename-text-webkit-box-orient: vertical;
+  --chotto-replyfilemessage-filename-text-margin-right: 40px;
+  --chotto-replyfilemessage-filename-text-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replyfilemessage-filename-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replyfilemessage-filename-text-text-decoration: underline;
+}

@@ -1,9 +1,9 @@
 export const ru = {
-    'component.ChatList.Title': 'Чаты',
-    'component.ChatFilter.InputPlaceholder': 'Поиск диалога',
+    'component.ChatList.Title': 'Mobilon One',
+    'component.ChatFilter.InputPlaceholder': 'Поиск чата',
     'layout.ChatWrapper.noSelectedChat': 'Выберите контакт для начала общения',
     'component.ChatItem.typing': 'печатает',
-    'component.ChatInput.InputPlaceholder': 'Введите сообщение...',
+    'component.ChatInput.InputPlaceholder': 'Введите сообщение',
     'component.FeedFoundObjects.results' : 'Результаты поиска',
     'component.FeedFoundObjects.notFound' : 'Сообщения не найдены',
     'component.FeedFoundObjects.notSearched' : 'Поиск по сообщениям в чате',

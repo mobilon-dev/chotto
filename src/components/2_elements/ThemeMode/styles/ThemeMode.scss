@@ -1,0 +1,79 @@
+.theme-button {
+  margin: var(--chotto-thememode-button-margin, 0 auto);
+
+  &__switch {
+    position: var(--chotto-thememode-switch-position, relative);
+    display: var(--chotto-thememode-switch-display, inline-block);
+    box-sizing: var(--chotto-thememode-switch-box-sizing, border-box);
+    width: var(--chotto-thememode-switch-width, 56px);
+    height: var(--chotto-thememode-switch-height, 28px);
+    border: var(--chotto-thememode-switch-border, 1px solid #a3a3a3);
+    border-radius: var(--chotto-thememode-switch-border-radius, 25%/50%);
+    background: var(--chotto-thememode-switch-background, #fafafa);
+    transition: var(--chotto-thememode-switch-transition, .15s);
+    cursor: var(--chotto-thememode-switch-cursor, pointer);
+
+    span {
+      position: var(--chotto-thememode-switch-span-position, absolute);
+      top: var(--chotto-thememode-switch-span-top, 0);
+      bottom: var(--chotto-thememode-switch-span-bottom, 0);
+      margin: var(--chotto-thememode-switch-span-margin, auto 0);
+      display: var(--chotto-thememode-switch-span-display, flex);
+      justify-content: var(--chotto-thememode-switch-span-justify-content, center);
+      align-items: var(--chotto-thememode-switch-span-align-items, center);
+    }
+
+    span.pi-sun {
+      background-color: var(--chotto-thememode-switch-sun-background-color, #a3a3a3);
+      color: var(--chotto-thememode-switch-sun-color, #404040);
+      left: var(--chotto-thememode-switch-sun-left, 1px);
+      width: var(--chotto-thememode-switch-sun-width, 24px);
+      height: var(--chotto-thememode-switch-sun-height, 24px);
+      border-radius: var(--chotto-thememode-switch-sun-border-radius, 50%);
+      transition: var(--chotto-thememode-switch-sun-transition, .15s);
+    }
+
+    span.pi-moon {
+      opacity: var(--chotto-thememode-switch-moon-opacity, 0);
+      background-color: var(--chotto-thememode-switch-moon-background-color, #a3a3a3);
+      color: var(--chotto-thememode-switch-moon-color, #404040);
+      width: var(--chotto-thememode-switch-moon-width, 24px);
+      height: var(--chotto-thememode-switch-moon-height, 24px);
+      border-radius: var(--chotto-thememode-switch-moon-border-radius, 50%);
+      transition: var(--chotto-thememode-switch-moon-transition, .15s);
+    }
+  }
+}
+
+.theme-button input[type=checkbox] {
+  display: var(--chotto-thememode-input-display, block);
+  width: var(--chotto-thememode-input-width, 0);
+  height: var(--chotto-thememode-input-height, 0);
+  position: var(--chotto-thememode-input-position, absolute);
+  z-index: var(--chotto-thememode-input-z-index, -1);
+  opacity: var(--chotto-thememode-input-opacity, 0);
+}
+
+.theme-button input[type=checkbox]:checked+.theme-button__switch {
+  background: var(--chotto-thememode-switch-checked-background, #404040);
+  transition: var(--chotto-thememode-switch-checked-transition, .15s);
+}
+
+.theme-button input[type=checkbox]:checked+.theme-button__switch {
+  span.pi-sun {
+    transform: var(--chotto-thememode-switch-sun-checked-transform, translateX(29px));
+    opacity: var(--chotto-thememode-switch-sun-checked-opacity, 0);
+    transition: var(--chotto-thememode-switch-sun-checked-transition, all .15s);
+  }
+
+  span.pi-moon {
+    transform: var(--chotto-thememode-switch-moon-checked-transform, translateX(29px));
+    opacity: var(--chotto-thememode-switch-moon-checked-opacity, 1);
+    transition: var(--chotto-thememode-switch-moon-checked-transition, all .15s);
+  }
+
+}
+
+select {
+  width: var(--chotto-thememode-select-width, 70px);
+}

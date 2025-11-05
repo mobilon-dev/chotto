@@ -1,0 +1,41 @@
+[data-theme="dark"] {
+  // Container
+  --chotto-feedsearch-container-display: flex;
+  --chotto-feedsearch-container-position: relative;
+  --chotto-feedsearch-container-margin-top: 10px;
+  --chotto-feedsearch-container-padding-left: 12px;
+  --chotto-feedsearch-container-padding-right: 12px;
+  --chotto-feedsearch-container-margin-bottom: 10px;
+  
+  // Icon
+  --chotto-feedsearch-icon-position: absolute;
+  --chotto-feedsearch-icon-right: 20px;
+  --chotto-feedsearch-icon-top: 11px;
+  --chotto-feedsearch-icon-hover-cursor: pointer;
+  
+  // Input
+  --chotto-feedsearch-input-width: 100%;
+  --chotto-feedsearch-input-text-color: var(--chotto-theme-primary-text-color);
+  --chotto-feedsearch-input-transition: border-color 0.2s;
+  --chotto-feedsearch-input-margin-left: 10px;
+  --chotto-feedsearch-input-focus-outline: none;
+  --chotto-feedsearch-input-placeholder-text-color: var(--chotto-theme-secondary-text-color);
+  
+  // Animations
+  --chotto-feedsearch-enter-duration: 2s;
+  --chotto-feedsearch-leave-duration: 2s;
+  --chotto-feedsearch-scale: 0.9;
+  --chotto-feedsearch-enter-transition: all var(--chotto-feedsearch-enter-duration, 2s) ease-out;
+  --chotto-feedsearch-leave-transition: all var(--chotto-feedsearch-leave-duration, 2s) cubic-bezier(1, 0.5, 0.8, 1);
+  --chotto-feedsearch-transform: scale(var(--chotto-feedsearch-scale, 0.9));
+  --chotto-feedsearch-opacity: 0;
+
+  // Input styling
+  --chotto-feedsearch-input-font-size: var(--chotto-theme-text-font-size);
+  --chotto-feedsearch-input-border-color-hover: var(--chotto-theme-quaternary-color);
+  --chotto-feedsearch-input-border-color-focus: var(--chotto-theme-quinary-color);
+  --chotto-feedsearch-input-padding: 0.5rem 0.75rem;
+  --chotto-feedsearch-input-border-radius: 5px;
+  --chotto-feedsearch-input-border-color: #d0d0d0;
+}
+

@@ -1,0 +1,76 @@
+p {
+  margin: var(--chotto-replyvideomessage-p-margin, 0);
+  font-size: var(--chotto-replyvideomessage-p-font-size, 14px);
+  color: var(--chotto-replyvideomessage-p-color, #5F5F5F);
+  overflow: var(--chotto-replyvideomessage-p-overflow, hidden);
+  text-overflow: var(--chotto-replyvideomessage-p-text-overflow, ellipsis);
+  display: var(--chotto-replyvideomessage-p-display, -webkit-box);
+  -webkit-line-clamp: var(--chotto-replyvideomessage-p-webkit-line-clamp, 5);
+  line-clamp: var(--chotto-replyvideomessage-p-line-clamp, 5);
+  -webkit-box-orient: var(--chotto-replyvideomessage-p-webkit-box-orient, vertical);
+}
+
+.video-message {
+
+  &__video {
+    width: var(--chotto-replyvideomessage-video-width, 60px);
+    height: var(--chotto-replyvideomessage-video-height, 60px);
+    border-radius: var(--chotto-replyvideomessage-video-border-radius, 4px);
+    object-fit: var(--chotto-replyvideomessage-video-object-fit, cover);
+    cursor: var(--chotto-replyvideomessage-video-cursor, zoom-in);
+    margin: var(--chotto-replyvideomessage-video-margin, auto);
+  }
+
+  &__preview-button {
+    position: var(--chotto-replyvideomessage-preview-button-position, relative);
+    display: var(--chotto-replyvideomessage-preview-button-display, flex);
+    flex-direction: var(--chotto-replyvideomessage-preview-button-flex-direction, column);
+  }
+
+  &__text-container {
+    word-wrap: var(--chotto-replyvideomessage-text-container-word-wrap, break-word);
+    align-content: var(--chotto-replyvideomessage-text-container-align-content, center);
+    word-break: var(--chotto-replyvideomessage-text-container-word-break, break-word);
+  }
+
+  &__text{
+    margin-top: var(--chotto-replyvideomessage-text-margin-top, 8px);
+    font-size: var(--chotto-replyvideomessage-text-font-size, 14px);
+    color: var(--chotto-replyvideomessage-text-color, #1E1E1E);
+  }
+
+  &__reply-description {
+    display: var(--chotto-replyvideomessage-reply-description-display, flex);
+    align-items: var(--chotto-replyvideomessage-reply-description-align-items, center);
+    column-gap: var(--chotto-replyvideomessage-reply-description-column-gap, 6px);
+    margin-bottom: var(--chotto-replyvideomessage-reply-description-margin-bottom, 4px);
+
+    span {
+      color: var(--chotto-replyvideomessage-reply-description-span-color, #5F5F5F);
+    }
+  }
+
+  &__modal-video {
+    width: var(--chotto-replyvideomessage-modal-video-width, 100%);
+    height: var(--chotto-replyvideomessage-modal-video-height, 100%);
+    max-height: var(--chotto-replyvideomessage-modal-video-max-height, 60%);
+    object-fit: var(--chotto-replyvideomessage-modal-video-object-fit, cover);
+    border-radius: var(--chotto-replyvideomessage-modal-video-border-radius, 5px);
+    max-height: var(--chotto-replyvideomessage-modal-video-max-height-vh, 80vh);
+  }
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: var(--chotto-replyvideomessage-modal-fade-transition, opacity 0.2s ease);
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: var(--chotto-replyvideomessage-modal-fade-opacity-hidden, 0);
+}
+
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: var(--chotto-replyvideomessage-modal-fade-opacity-visible, 1);
+}

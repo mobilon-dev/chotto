@@ -1,0 +1,29 @@
+.button {
+  background-color: var(--chotto-buttonemojipicker-button-background-color, transparent);
+  border: var(--chotto-buttonemojipicker-button-border, none);
+  height: var(--chotto-buttonemojipicker-button-height, fit-content);
+  span {
+    display: var(--chotto-buttonemojipicker-button-span-display, block);
+    cursor: var(--chotto-buttonemojipicker-button-span-cursor, pointer);
+    padding: var(--chotto-buttonemojipicker-button-span-padding, 0);
+    font-size: var(--chotto-buttonemojipicker-button-span-font-size, 23px);
+    color: var(--chotto-buttonemojipicker-button-span-color, #525252);
+  }
+}
+
+.button:hover span{
+  color: var(--chotto-buttonemojipicker-button-span-hover-color, #404040);
+}
+
+.button-disabled{
+  pointer-events: var(--chotto-buttonemojipicker-button-disabled-pointer-events, none);
+  span{
+    cursor: var(--chotto-buttonemojipicker-button-disabled-span-cursor, auto);
+    color: var(--chotto-buttonemojipicker-button-disabled-span-color, #e5e5e5);
+  }
+}
+.emoji {
+  position: var(--chotto-buttonemojipicker-emoji-position, absolute);
+  bottom: var(--chotto-buttonemojipicker-emoji-bottom, 50px);
+  z-index: var(--chotto-buttonemojipicker-emoji-z-index, 2);
+}

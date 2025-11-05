@@ -1,0 +1,197 @@
+[data-theme="mobilon1"] {
+  --chotto-callmessage-icon-missed-color: #ef4444;
+
+  // CallMessage content variables
+  --chotto-callmessage-content-position: relative;
+  --chotto-callmessage-content-word-wrap: break-word;
+  --chotto-callmessage-content-width: fit-content;
+  --chotto-callmessage-content-display: grid;
+  --chotto-callmessage-content-grid-template-columns: min-content 1fr;
+  --chotto-callmessage-content-column-gap: 12px;
+  --chotto-callmessage-content-max-width: 51%;
+  --chotto-callmessage-content-min-width: 30%;
+  --chotto-callmessage-content-padding: 10px 16px 4px 16px;
+  --chotto-callmessage-content-border-radius: var(--chotto-theme-message-border-radius, 14px);
+
+  // Info container variables
+  --chotto-callmessage-info-container-grid-column: 1 / 3;
+  --chotto-callmessage-info-container-margin-left: auto;
+  --chotto-callmessage-info-container-display: flex;
+  --chotto-callmessage-info-container-align-items: center;
+  --chotto-callmessage-info-container-column-gap: 4px;
+
+  // Title variables
+  --chotto-callmessage-title-margin-bottom: 2px;
+  --chotto-callmessage-title-font-size: var(--chotto-theme-title-font-size);
+
+  // Icon variables
+  --chotto-callmessage-icon-grid-column: 1;
+  --chotto-callmessage-icon-grid-row: 1 / 3;
+  --chotto-callmessage-icon-align-self: center;
+  --chotto-callmessage-icon-display: flex;
+  --chotto-callmessage-icon-justify-content: center;
+  --chotto-callmessage-icon-align-items: center;
+  --chotto-callmessage-icon-border-radius: 50%;
+  --chotto-callmessage-icon-height: 38px;
+  --chotto-callmessage-icon-width: 38px;
+  --chotto-callmessage-icon-background-color: var(--chotto-theme-message-type-icon-bg-color);
+  --chotto-callmessage-icon-color: var(--chotto-theme-message-type-icon-color);
+  --chotto-callmessage-icon-font-size: var(--chotto-theme-button-icon-size);
+
+  // Download button variables
+  --chotto-callmessage-download-button-position: absolute;
+  --chotto-callmessage-download-button-right: 8px;
+  --chotto-callmessage-download-button-top: 10px;
+  --chotto-callmessage-download-button-display: flex;
+  --chotto-callmessage-download-button-justify-content: center;
+  --chotto-callmessage-download-button-align-items: center;
+  --chotto-callmessage-download-button-border: none;
+  --chotto-callmessage-download-button-border-radius: 12px;
+  --chotto-callmessage-download-button-background-color: transparent;
+  --chotto-callmessage-download-button-padding: 0;
+  --chotto-callmessage-download-button-cursor: pointer;
+  --chotto-callmessage-download-button-icon-color: var(--chotto-theme-button-color-active);
+  --chotto-callmessage-download-button-icon-size: var(--chotto-theme-text-icon-size);
+
+  // Status variables
+  --chotto-callmessage-status-display: flex;
+  --chotto-callmessage-status-color-received: var(--chotto-theme-status-color-received);
+  --chotto-callmessage-status-color-read: var(--chotto-theme-status-color-read);
+  --chotto-callmessage-small-text-icon-size: var(--chotto-theme-small-text-icon-size);
+
+  // Subtext
+  --chotto-callmessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-callmessage-subtext-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-callmessage-duration-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-callmessage-duration-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-callmessage-time-font-size: var(--chotto-theme-text-font-size);
+  --chotto-callmessage-time-text-color: var(--chotto-theme-secondary-text-color);
+
+  // Avatar variables
+  --chotto-callmessage-avatar-align-self: center;
+  --chotto-callmessage-avatar-object-fit: cover;
+  --chotto-callmessage-avatar-min-width: var(--chotto-theme-avatar-small-size);
+  --chotto-callmessage-avatar-min-height: var(--chotto-theme-avatar-small-size);
+  --chotto-callmessage-avatar-border-radius: 50%;
+
+  // Menu button variables
+  --chotto-callmessage-menu-button-position: absolute;
+  --chotto-callmessage-menu-button-background-color: transparent;
+  --chotto-callmessage-menu-button-border: none;
+  --chotto-callmessage-menu-button-transform: translateY(-50%);
+  --chotto-callmessage-menu-button-cursor: pointer;
+  --chotto-callmessage-menu-button-transition: 0.2s;
+  --chotto-callmessage-menu-button-icon-color: var(--chotto-theme-button-color-active);
+  --chotto-callmessage-menu-button-icon-size: var(--chotto-theme-button-icon-size);
+  --chotto-callmessage-menu-button-icon-color-hover: var(--chotto-theme-button-color-hover);
+
+  // Context menu variables
+  --chotto-callmessage-context-menu-position: absolute;
+
+  // Text dialog variables
+  --chotto-callmessage-text-dialog-position: relative;
+  --chotto-callmessage-text-dialog-width: fit-content;
+  --chotto-callmessage-text-dialog-max-width: 46%;
+  --chotto-callmessage-text-dialog-left-padding-left: 24px;
+  --chotto-callmessage-text-dialog-before-background-color: var(--chotto-theme-secondary-text-color);
+  --chotto-callmessage-text-dialog-title-font-size: var(--chotto-theme-title-font-size);
+  --chotto-callmessage-text-dialog-subtext-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-callmessage-text-dialog-subtext-font-size: var(--chotto-theme-additional-text-font-size);
+
+  // Text dialog before pseudo-element variables
+  --chotto-callmessage-text-dialog-before-content: "";
+  --chotto-callmessage-text-dialog-before-position: absolute;
+  --chotto-callmessage-text-dialog-before-top: 12px;
+  --chotto-callmessage-text-dialog-before-left: 0;
+  --chotto-callmessage-text-dialog-before-width: 16px;
+  --chotto-callmessage-text-dialog-before-height: 2px;
+
+  // Text dialog right variables
+  --chotto-callmessage-text-dialog-right-padding-left: 0;
+  --chotto-callmessage-text-dialog-right-padding-right: 24px;
+  --chotto-callmessage-text-dialog-right-margin-left: auto;
+  --chotto-callmessage-text-dialog-right-before-right: 0;
+  --chotto-callmessage-text-dialog-right-before-left: auto;
+  --chotto-callmessage-text-dialog-right-span-width: fit-content;
+  --chotto-callmessage-text-dialog-right-span-display: block;
+  --chotto-callmessage-text-dialog-right-span-margin-left: auto;
+
+  // Left/Right layout variables
+  --chotto-callmessage-left-right-display: grid;
+  --chotto-callmessage-message-margin: var(--chotto-theme-message-margin);
+
+  // Left layout variables
+  --chotto-callmessage-left-grid-template-columns: min-content 1fr;
+  --chotto-callmessage-left-avatar-grid-column: 1;
+  --chotto-callmessage-left-avatar-grid-row: 2;
+  --chotto-callmessage-left-avatar-margin-right: 12px;
+  --chotto-callmessage-left-subtext-grid-column: 2;
+  --chotto-callmessage-left-subtext-grid-row: 1;
+  --chotto-callmessage-left-subtext-margin: 0 0 2px 10px;
+  --chotto-callmessage-left-content-grid-column: 2;
+  --chotto-callmessage-left-background-color: var(--chotto-theme-message-left-bg);
+
+  // Right layout variables
+  --chotto-callmessage-right-grid-template-columns: 1fr min-content;
+  --chotto-callmessage-right-avatar-grid-column: 2;
+  --chotto-callmessage-right-avatar-grid-row: 2;
+  --chotto-callmessage-right-avatar-margin-left: 12px;
+  --chotto-callmessage-right-subtext-grid-column: 1;
+  --chotto-callmessage-right-subtext-grid-row: 1;
+  --chotto-callmessage-right-subtext-margin: 0 10px 2px auto;
+  --chotto-callmessage-right-content-grid-column: 1;
+  --chotto-callmessage-right-content-margin-left: auto;
+  --chotto-callmessage-right-background-color: var(--chotto-theme-message-right-bg);
+
+  // Modal variables
+  --chotto-callmessage-modal-position: absolute;
+  --chotto-callmessage-modal-top: 50%;
+  --chotto-callmessage-modal-left: 50%;
+  --chotto-callmessage-modal-transform: translate(-50%, -50%);
+  --chotto-callmessage-modal-z-index: 101;
+  --chotto-callmessage-modal-width: 32%;
+  --chotto-callmessage-modal-max-height: 80vh;
+  --chotto-callmessage-modal-overflow-y: auto;
+  --chotto-callmessage-modal-display: flex;
+  --chotto-callmessage-modal-flex-direction: column;
+  --chotto-callmessage-modal-row-gap: 10px;
+  --chotto-callmessage-modal-font-family: var(--chotto-theme-font-family);
+  --chotto-callmessage-modal-font-weight: var(--chotto-theme-default-font-weight);
+  --chotto-callmessage-modal-font-size: var(--chotto-theme-text-font-size);
+  --chotto-callmessage-modal-text-color: var(--chotto-theme-primary-text_color);
+  --chotto-callmessage-modal-background-color: var(--chotto-theme-message-modal-bg);
+  --chotto-callmessage-modal-border-radius: var(--chotto-theme-message-modal-border-radius);
+  --chotto-callmessage-modal-padding: var(--chotto-theme-message-modal-padding);
+  --chotto-callmessage-modal-overlay-shadow: var(--chotto-theme-message-modal-overlay-shadow);
+
+  // Modal scrollbar variables
+  --chotto-callmessage-modal-scrollbar-width: 8px;
+  --chotto-callmessage-modal-scrollbar-bg: var(--chotto-theme-scrollbar-bg);
+  --chotto-callmessage-modal-scrollbar-thumb-border-radius: 10px;
+  --chotto-callmessage-modal-scrollbar-thumb-bg: var(--chotto-theme-scrollbar-thumb-bg);
+  --chotto-callmessage-modal-scrollbar-track-border-radius: 10px;
+
+  // Modal overlay variables
+  --chotto-callmessage-modal-overlay-position: fixed;
+  --chotto-callmessage-modal-overlay-top: 0;
+  --chotto-callmessage-modal-overlay-left: 0;
+  --chotto-callmessage-modal-overlay-right: 0;
+  --chotto-callmessage-modal-overlay-bottom: 0;
+  --chotto-callmessage-modal-overlay-z-index: 1000;
+  --chotto-callmessage-modal-mask-background: var(--chotto-theme-message-modal-mask-background);
+
+  // Modal close button variables
+  --chotto-callmessage-modal-close-button-display: block;
+  --chotto-callmessage-modal-close-button-background-color: transparent;
+  --chotto-callmessage-modal-close-button-border: none;
+  --chotto-callmessage-modal-close-button-padding: 4px;
+  --chotto-callmessage-modal-close-button-margin: 0 0 14px auto;
+  --chotto-callmessage-modal-close-button-cursor: pointer;
+  --chotto-callmessage-modal-close-button-icon-color: var(--chotto-theme-secondary-text-color);
+  --chotto-callmessage-modal-close-button-icon-size: var(--chotto-theme-button-icon-size);
+
+  // Animation variables
+  --chotto-callmessage-modal-fade-transition: opacity 0.2s ease;
+  --chotto-callmessage-modal-fade-opacity-from: 0;
+  --chotto-callmessage-modal-fade-opacity-to: 1;
+}

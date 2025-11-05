@@ -1,0 +1,43 @@
+[data-theme="light"] {
+  // Container
+  --chotto-userprofile-container-display: grid;
+  --chotto-userprofile-container-grid-template-columns: min-content 1fr;
+  --chotto-userprofile-container-padding: 20px 12px 20px 9px;
+
+  // Name
+  --chotto-userprofile-name-grid-column: 2;
+  --chotto-userprofile-name-font-size: 20px;
+  --chotto-userprofile-name-margin: 0;
+
+  // Email
+  --chotto-userprofile-email-grid-column: 2;
+  --chotto-userprofile-email-font-size: 16px;
+  --chotto-userprofile-email-margin: 0;
+
+  // Phone
+  --chotto-userprofile-phone-grid-column: 2;
+  --chotto-userprofile-phone-font-size: 16px;
+  --chotto-userprofile-phone-margin: 0;
+
+  // Avatar container
+  --chotto-userprofile-avatar-container-grid-row: 1 / 4;
+  --chotto-userprofile-avatar-container-position: relative;
+  --chotto-userprofile-avatar-container-display: flex;
+  --chotto-userprofile-avatar-container-margin: auto 15px auto 0;
+  --chotto-userprofile-avatar-container-border-radius: 50%;
+  --chotto-userprofile-avatar-container-img-border-radius: 50%;
+  --chotto-userprofile-avatar-container-img-object-fit: cover;
+
+  // Status
+  --chotto-userprofile-status-position: absolute;
+  --chotto-userprofile-status-bottom: 0;
+  --chotto-userprofile-status-right: 5px;
+  --chotto-userprofile-status-display: block;
+  --chotto-userprofile-status-width: 10px;
+  --chotto-userprofile-status-height: 10px;
+  --chotto-userprofile-status-border-radius: 50%;
+  --chotto-userprofile-status-background-color: transparent;
+  --chotto-userprofile-status-z-index: 1;
+}
+
+

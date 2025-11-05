@@ -1,0 +1,157 @@
+[data-theme="light"] {
+  // ImageMessage content variables
+  --chotto-imagemessage-content-position: relative;
+  --chotto-imagemessage-content-max-width: 60%;
+  --chotto-imagemessage-content-border-radius: 14px;
+
+  // ImageMessage avatar variables
+  --chotto-imagemessage-avatar-grid-row: 1 / -1;
+  --chotto-imagemessage-avatar-align-self: end;
+  --chotto-imagemessage-avatar-object-fit: cover;
+  --chotto-imagemessage-avatar-margin-bottom: 6px;
+  --chotto-imagemessage-avatar-min-width: var(--chotto-theme-avatar-small-size);
+  --chotto-imagemessage-avatar-min-height: var(--chotto-theme-avatar-small-size);
+  --chotto-imagemessage-avatar-border-radius: 50%;
+
+  // ImageMessage info container variables
+  --chotto-imagemessage-info-container-position: absolute;
+  --chotto-imagemessage-info-container-right: 8px;
+  --chotto-imagemessage-info-container-bottom: 4px;
+  --chotto-imagemessage-info-container-display: flex;
+  --chotto-imagemessage-info-container-align-items: center;
+  --chotto-imagemessage-info-container-column-gap: 4px;
+  --chotto-imagemessage-info-container-border-radius: 12px;
+  --chotto-imagemessage-info-container-padding: 6px 10px;
+  --chotto-imagemessage-info-container-color: white;
+  --chotto-imagemessage-info-container-background-color: rgba(0, 0, 0, 0.7);
+
+  // ImageMessage download button variables
+  --chotto-imagemessage-download-button-position: absolute;
+  --chotto-imagemessage-download-button-left: 8px;
+  --chotto-imagemessage-download-button-bottom: 4px;
+  --chotto-imagemessage-download-button-display: flex;
+  --chotto-imagemessage-download-button-justify-content: center;
+  --chotto-imagemessage-download-button-align-items: center;
+  --chotto-imagemessage-download-button-border: none;
+  --chotto-imagemessage-download-button-border-radius: 12px;
+  --chotto-imagemessage-download-button-padding: 6px 6px;
+  --chotto-imagemessage-download-button-background-color: rgba(0, 0, 0, 0.7);
+  --chotto-imagemessage-download-button-cursor: pointer;
+  --chotto-imagemessage-download-button-span-color: white;
+  --chotto-imagemessage-download-button-span-font-size: var(--chotto-theme-small-text-icon-size);
+
+  // ImageMessage views variables
+  --chotto-imagemessage-views-display: flex;
+  --chotto-imagemessage-views-align-items: center;
+  --chotto-imagemessage-views-column-gap: 4px;
+  --chotto-imagemessage-views-cursor: pointer;
+  --chotto-imagemessage-views-span-font-size: var(--chotto-theme-small-text-icon-size);
+  --chotto-imagemessage-views-p-font-size: var(--chotto-theme-small-text-font-size);
+
+  // ImageMessage time variables
+  --chotto-imagemessage-time-font-size: var(--chotto-theme-small-text-font-size);
+
+  // ImageMessage status variables
+  --chotto-imagemessage-status-display: flex;
+  --chotto-imagemessage-status-span-font-size: var(--chotto-theme-small-text-icon-size);
+  --chotto-imagemessage-status-received-first-child-margin-right: -8px;
+  --chotto-imagemessage-status-read-first-child-margin-right: -8px;
+  --chotto-imagemessage-status-read-color: var(--chotto-theme-status-color-read);
+  --chotto-imagemessage-status-pending-color: var(--chotto-theme-status-color-pending);
+  --chotto-imagemessage-status-error-color: var(--chotto-theme-status-color-error);
+
+  // ImageMessage subtext variables
+  --chotto-imagemessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-imagemessage-subtext-color: var(--chotto-theme-secondary-text-color);
+
+  // ImageMessage preview button variables
+  --chotto-imagemessage-preview-button-position: relative;
+  --chotto-imagemessage-preview-button-display: flex;
+  --chotto-imagemessage-preview-button-flex-direction: column;
+  --chotto-imagemessage-preview-button-padding: 0;
+
+  // ImageMessage preview image variables
+  --chotto-imagemessage-preview-image-width: 100%;
+  --chotto-imagemessage-preview-image-max-height: 500px;
+  --chotto-imagemessage-preview-image-cursor: zoom-in;
+
+  // ImageMessage modal image variables
+  --chotto-imagemessage-modal-image-height: 100%;
+  --chotto-imagemessage-modal-image-object-fit: contain;
+  --chotto-imagemessage-modal-image-border-radius: 5px;
+  --chotto-imagemessage-modal-image-max-height: 90vh;
+  --chotto-imagemessage-modal-image-max-width: 95vw;
+
+  // ImageMessage menu button variables
+  --chotto-imagemessage-menu-button-position: absolute;
+  --chotto-imagemessage-menu-button-background-color: transparent;
+  --chotto-imagemessage-menu-button-border: none;
+  --chotto-imagemessage-menu-button-transform: translateY(-50%);
+  --chotto-imagemessage-menu-button-cursor: pointer;
+  --chotto-imagemessage-menu-button-transition: 0.2s;
+  --chotto-imagemessage-menu-button-span-color: var(--chotto-theme-button-color-active);
+  --chotto-imagemessage-menu-button-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-imagemessage-menu-button-span-hover-color: var(--chotto-theme-button-color-hover);
+  --chotto-imagemessage-menu-button-hover-transition: 0.2s;
+
+  // ImageMessage context menu variables
+  --chotto-imagemessage-context-menu-position: absolute;
+
+  // ImageMessage text container variables
+  --chotto-imagemessage-text-container-padding: 6px 10px 6px 10px;
+  --chotto-imagemessage-text-container-border-radius: 0 0 8px 8px;
+  --chotto-imagemessage-text-container-word-wrap: break-word;
+  --chotto-imagemessage-text-container-p-font-size: var(--chotto-theme-text-font-size);
+  --chotto-imagemessage-text-container-p-word-break: break-all;
+
+  // ImageMessage link preview variables
+  --chotto-imagemessage-link-preview-margin: 8px;
+
+  // ImageMessage left/right variables
+  --chotto-imagemessage-left-right-display: grid;
+  --chotto-imagemessage-left-right-grid-template-rows: min-content 1fr min-content;
+  --chotto-imagemessage-left-right-margin: var(--chotto-theme-message-margin);
+
+  // ImageMessage left variables
+  --chotto-imagemessage-left-grid-template-columns: min-content 1fr;
+  --chotto-imagemessage-left-avatar-grid-column: 1;
+  --chotto-imagemessage-left-avatar-margin-right: 12px;
+  --chotto-imagemessage-left-subtext-grid-column: 2;
+  --chotto-imagemessage-left-subtext-grid-row: 1;
+  --chotto-imagemessage-left-subtext-margin: 0 0 2px 10px;
+  --chotto-imagemessage-left-content-grid-column: 2;
+  --chotto-imagemessage-left-bg: var(--chotto-theme-message-left-bg);
+  --chotto-imagemessage-left-content-with-avatar-indent-margin-left: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-imagemessage-left-menu-button-top: 50%;
+  --chotto-imagemessage-left-menu-button-right: -40px;
+  --chotto-imagemessage-left-context-menu-top: 50%;
+  --chotto-imagemessage-left-context-menu-left: 100%;
+  --chotto-imagemessage-left-context-menu-margin-top: 20px;
+
+  // ImageMessage right variables
+  --chotto-imagemessage-right-grid-template-columns: 1fr min-content;
+  --chotto-imagemessage-right-avatar-grid-column: 2;
+  --chotto-imagemessage-right-avatar-margin-left: 12px;
+  --chotto-imagemessage-right-subtext-grid-column: 1;
+  --chotto-imagemessage-right-subtext-grid-row: 1;
+  --chotto-imagemessage-right-subtext-margin: 0 10px 2px auto;
+  --chotto-imagemessage-right-content-grid-column: 1;
+  --chotto-imagemessage-right-content-margin-left: auto;
+  --chotto-imagemessage-right-bg: var(--chotto-theme-message-right-bg);
+  --chotto-imagemessage-right-content-with-avatar-indent-margin-right: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-imagemessage-right-text-container-margin-left: auto;
+  --chotto-imagemessage-right-menu-button-top: 50%;
+  --chotto-imagemessage-right-menu-button-left: -40px;
+  --chotto-imagemessage-right-context-menu-top: 50%;
+  --chotto-imagemessage-right-context-menu-right: 100%;
+  --chotto-imagemessage-right-context-menu-margin-top: 20px;
+
+  // ImageMessage animation variables
+  --chotto-imagemessage-context-menu-enter-active-transition: all 0.1s ease-out;
+  --chotto-imagemessage-context-menu-leave-active-transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+  --chotto-imagemessage-context-menu-enter-from-transform: scale(0.9);
+  --chotto-imagemessage-context-menu-enter-from-opacity: 0;
+  --chotto-imagemessage-modal-fade-enter-active-transition: opacity 0.2s ease;
+  --chotto-imagemessage-modal-fade-enter-from-opacity: 0;
+  --chotto-imagemessage-modal-fade-enter-to-opacity: 1;
+}

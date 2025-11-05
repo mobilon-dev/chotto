@@ -1,0 +1,80 @@
+.chat-info {
+  &__container {
+    border-radius: var(--chotto-chatinfo-container-border-radius, 0);
+    padding: var(--chotto-chatinfo-container-padding, 10px 0 10px 15px);
+    border-bottom: var(--chotto-chatinfo-container-border-bottom, none);
+    background-color: var(--chotto-chatinfo-container-background-color, #ffffff);
+  }
+
+  &__base-line{
+    display: var(--chotto-chatinfo-base-line-display, flex);
+    align-items: var(--chotto-chatinfo-base-line-align-items, center);
+    gap: var(--chotto-chatinfo-base-line-gap, 10px);
+  }
+
+  &__avatar-container {
+    display: var(--chotto-chatinfo-avatar-container-display, flex);
+    justify-content: var(--chotto-chatinfo-avatar-container-justify-content, center);
+    align-items: var(--chotto-chatinfo-avatar-container-align-items, center);
+    border-radius: var(--chotto-chatinfo-avatar-container-border-radius, 50%);
+    background-size: var(--chotto-chatinfo-avatar-container-background-size, cover);
+
+    span {
+      color: var(--chotto-chatinfo-avatar-container-span-color, #737373);
+      display: var(--chotto-chatinfo-avatar-container-span-display, flex);
+      justify-content: var(--chotto-chatinfo-avatar-container-span-justify-content, center);
+      align-items: var(--chotto-chatinfo-avatar-container-span-align-items, center);
+    }
+
+    img {
+      width: var(--chotto-chatinfo-avatar-container-img-width, 40px);
+      height: var(--chotto-chatinfo-avatar-container-img-height, 40px);
+      border-radius: var(--chotto-chatinfo-avatar-container-img-border-radius, 50%);
+      object-fit: var(--chotto-chatinfo-avatar-container-img-object-fit, cover);
+    }
+  }
+
+  &__info-container {
+    display: var(--chotto-chatinfo-info-container-display, flex);
+    flex-direction: var(--chotto-chatinfo-info-container-flex-direction, column);
+  }
+
+  &__title {
+    display: var(--chotto-chatinfo-title-display, flex);
+    grid-column: var(--chotto-chatinfo-title-grid-column, 2);
+    color: var(--chotto-chatinfo-title-color, #1E1E1E);
+    font-size: var(--chotto-chatinfo-title-font-size, 16px);
+    font-weight: var(--chotto-chatinfo-title-font-weight, 400);
+    margin: var(--chotto-chatinfo-title-margin, 0);
+  }
+
+  &__additional-title{
+    margin: var(--chotto-chatinfo-additional-title-margin, auto);
+    font-size: var(--chotto-chatinfo-additional-title-font-size, 14px);
+    padding: var(--chotto-chatinfo-additional-title-padding, 0 10px);
+    border: var(--chotto-chatinfo-additional-title-border, 1px solid #25D366);
+    border-radius: var(--chotto-chatinfo-additional-title-border-radius, 5px);
+    margin-left: var(--chotto-chatinfo-additional-title-margin-left, 15px);
+  }
+
+  &__time {
+    display: var(--chotto-chatinfo-time-display, flex);
+    font-size: var(--chotto-chatinfo-time-font-size, 14px);
+    color: var(--chotto-chatinfo-time-color, #5F5F5F);
+    grid-column: var(--chotto-chatinfo-time-grid-column, 2);
+    margin: var(--chotto-chatinfo-time-margin, 0);
+  }
+
+  &__actions {
+    margin-left: var(--chotto-chatinfo-actions-margin-left, auto);
+  }
+
+  &__return-button{
+    border: var(--chotto-chatinfo-return-button-border, 0px);
+    background-color: var(--chotto-chatinfo-return-button-background-color, transparent);
+    cursor: var(--chotto-chatinfo-return-button-cursor, pointer);
+    color: var(--chotto-chatinfo-return-button-color, #525252);
+  }
+}
+
+

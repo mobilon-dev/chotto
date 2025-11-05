@@ -1,0 +1,59 @@
+
+.feed-search {
+  &__container{
+    display: var(--chotto-feedsearch-container-display, flex);
+    position: var(--chotto-feedsearch-container-position, relative);
+    margin-top: var(--chotto-feedsearch-container-margin-top, 10px);
+    padding-left: var(--chotto-feedsearch-container-padding-left, 12px);
+    padding-right: var(--chotto-feedsearch-container-padding-right, 12px);
+    margin-bottom: var(--chotto-feedsearch-container-margin-bottom, 10px);
+    
+    i{
+      position: var(--chotto-feedsearch-icon-position, absolute);
+      right: var(--chotto-feedsearch-icon-right, 20px);
+      top: var(--chotto-feedsearch-icon-top, 11px)
+    }
+
+    i:hover{
+      cursor: var(--chotto-feedsearch-icon-hover-cursor, pointer);
+    }
+  }
+
+  &__input {
+    width: var(--chotto-feedsearch-input-width, 100%);
+    background-color: var(--chotto-input-background, transparent);
+    color: var(--chotto-feedsearch-input-text-color, #1E1E1E);
+    padding: var(--chotto-feedsearch-input-padding, 0.5rem 0.75rem);
+    border: 1px solid var(--chotto-feedsearch-input-border-color, #d0d0d0);
+    border-radius: var(--chotto-feedsearch-input-border-radius, 5px);
+    font-size: var(--chotto-feedsearch-input-font-size, 14px);
+    transition: var(--chotto-feedsearch-input-transition, border-color 0.2s);
+    margin-left: var(--chotto-feedsearch-input-margin-left, 10px);
+    &::placeholder {
+      color: var(--chotto-feedsearch-input-placeholder-text-color, #5F5F5F);
+    }
+
+    &:hover {
+      border-color: var(--chotto-feedsearch-input-border-color-hover, #737373);
+    }
+
+    &:focus-visible {
+      border-color: var(--chotto-feedsearch-input-border-color-focus, #404040);
+      outline: var(--chotto-feedsearch-input-focus-outline, none);
+    }
+  }
+}
+
+.v-enter-active {
+  transition: var(--chotto-feedsearch-enter-transition, all var(--chotto-feedsearch-enter-duration, 2s) ease-out);
+}
+
+.v-leave-active {
+  transition: var(--chotto-feedsearch-leave-transition, all var(--chotto-feedsearch-leave-duration, 2s) cubic-bezier(1, 0.5, 0.8, 1));
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: var(--chotto-feedsearch-transform, scale(var(--chotto-feedsearch-scale, 0.9)));
+  opacity: var(--chotto-feedsearch-opacity, 0);
+}

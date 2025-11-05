@@ -1,0 +1,44 @@
+.feed-keyboard {
+  &__container {
+    display: var(--chotto-feedkeyboard-container-display, flex);
+    margin-top: var(--chotto-feedkeyboard-container-margin-top, 10px);
+    margin-bottom: var(--chotto-feedkeyboard-container-margin-bottom, 10px);
+    flex-wrap: var(--chotto-feedkeyboard-container-flex-wrap, wrap);
+    max-width: var(--chotto-feedkeyboard-container-max-width, 100%);
+    gap: var(--chotto-feedkeyboard-container-gap, 10px);
+  }
+
+  &__container--left {
+    justify-content: var(--chotto-feedkeyboard-container-left-justify-content, flex-start);
+    margin-left: var(--chotto-feedkeyboard-container-left-margin-left, 0);
+    margin-right: var(--chotto-feedkeyboard-container-left-margin-right, auto);
+  }
+
+  &__container--center {
+    justify-content: var(--chotto-feedkeyboard-container-center-justify-content, center);
+    margin-left: var(--chotto-feedkeyboard-container-center-margin-left, auto);
+    margin-right: var(--chotto-feedkeyboard-container-center-margin-right, auto);
+  }
+
+  &__container--right {
+    justify-content: var(--chotto-feedkeyboard-container-right-justify-content, flex-end);
+    margin-left: var(--chotto-feedkeyboard-container-right-margin-left, auto);
+    margin-right: var(--chotto-feedkeyboard-container-right-margin-right, 0);
+  }
+
+  &__button {
+    background: var(--chotto-feedkeyboard-button-background, #ffffff);
+    word-wrap: var(--chotto-feedkeyboard-button-word-wrap, break-word);
+    max-width: var(--chotto-feedkeyboard-button-max-width, 100%);
+    cursor: var(--chotto-feedkeyboard-button-cursor, pointer);
+    padding: var(--chotto-feedkeyboard-button-padding, 2.5px 14px);
+    border: var(--chotto-feedkeyboard-button-border, 1px solid #6C757D);
+    border-radius: var(--chotto-feedkeyboard-button-border-radius, 15px);
+
+    p {
+      font-size: var(--chotto-feedkeyboard-button-text-font-size, 14px);
+      margin: var(--chotto-feedkeyboard-button-text-margin, 0);
+      font-weight: var(--chotto-feedkeyboard-button-text-font-weight, 600);
+    }
+  }
+}

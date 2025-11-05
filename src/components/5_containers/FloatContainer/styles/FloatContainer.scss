@@ -1,0 +1,51 @@
+.float-window {
+  z-index: var(--chotto-floatcontainer-float-window-z-index, 1000);
+  width: var(--chotto-floatcontainer-float-window-width, fit-content);
+  position: var(--chotto-floatcontainer-float-window-position, absolute);
+
+  &__container {
+    width: var(--chotto-floatcontainer-container-width, 100%);
+    height: var(--chotto-floatcontainer-container-height, 100%);
+    position: var(--chotto-floatcontainer-container-position, absolute);
+    font-weight: var(--chotto-floatcontainer-container-font-weight, 400);
+    color: var(--chotto-floatcontainer-container-color, #1E1E1E);
+    font-family: var(--chotto-floatcontainer-container-font-family, "Open Sans", sans-serif);
+    box-shadow: var(--chotto-floatcontainer-container-box-shadow, 0px 0px 20px -7px rgba(0, 0, 0, 0.2));
+    container: var(--chotto-floatcontainer-container-container, all / inline-size);
+  }
+
+  &__controls {
+    display: var(--chotto-floatcontainer-controls-display, flex);
+    justify-content: var(--chotto-floatcontainer-controls-justify-content, space-between);
+    align-items: var(--chotto-floatcontainer-controls-align-items, center);
+    cursor: var(--chotto-floatcontainer-controls-cursor, grab);
+    padding: var(--chotto-floatcontainer-controls-padding, 18px 20px);
+    background-color: var(--chotto-floatcontainer-controls-background-color, #d4d4d4);
+    border-top-left-radius: var(--chotto-floatcontainer-controls-border-top-left-radius, 15px);
+    border-top-right-radius: var(--chotto-floatcontainer-controls-border-top-right-radius, 15px);
+    gap: var(--chotto-floatcontainer-controls-gap, 5px);
+  }
+
+  &__avatar {
+    width: var(--chotto-floatcontainer-avatar-width, 40px);
+    height: var(--chotto-floatcontainer-avatar-height, 40px);
+    border-radius: var(--chotto-floatcontainer-avatar-border-radius, 50%);
+  }
+
+  &__title {
+    font-size: var(--chotto-floatcontainer-title-font-size, 16px);
+    font-weight: var(--chotto-floatcontainer-title-font-weight, 400);
+    margin-left: var(--chotto-floatcontainer-title-margin-left, 10px);
+  }
+
+  &__close-button {
+    display: var(--chotto-floatcontainer-close-button-display, block);
+    background-color: var(--chotto-floatcontainer-close-button-background-color, transparent);
+    border: var(--chotto-floatcontainer-close-button-border, none);
+    font-size: var(--chotto-floatcontainer-close-button-font-size, 23px);
+    color: var(--chotto-floatcontainer-close-button-color, #5F5F5F);
+    width: var(--chotto-floatcontainer-close-button-width, fit-content);
+    margin-left: var(--chotto-floatcontainer-close-button-margin-left, auto);
+    cursor: var(--chotto-floatcontainer-close-button-cursor, pointer);
+  }
+}

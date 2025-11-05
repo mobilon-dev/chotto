@@ -1,0 +1,15 @@
+.participant-list {
+  margin-top: var(--chotto-selectuser2-participant-list-margin-top, 10px);
+  max-height: var(--chotto-selectuser2-participant-list-max-height, 200px);
+  overflow: var(--chotto-selectuser2-participant-list-overflow, auto);
+}
+
+.participant-item {
+	display: var(--chotto-selectuser2-participant-item-display, flex);
+	align-items: var(--chotto-selectuser2-participant-item-align-items, center);
+	margin-bottom: var(--chotto-selectuser2-participant-item-margin-bottom, 10px);
+}
+
+.participant-item input[type='checkbox'] {
+	margin-right: var(--chotto-selectuser2-participant-item-checkbox-margin-right, 10px);
+}

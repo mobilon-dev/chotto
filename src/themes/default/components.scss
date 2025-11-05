@@ -1,0 +1,94 @@
+// Импорты компонентов для темы default
+
+// 1_atoms
+@use '../../components/1_atoms/ButtonContextMenu/styles/themes/default.scss' as buttoncontextmenu-default;
+@use '../../components/1_atoms/ContextMenu/styles/themes/default.scss' as contextmenu-default;
+@use '../../components/1_atoms/EmbedPreview/styles/themes/default.scss' as embedpreview-default;
+@use '../../components/1_atoms/LinkPreview/styles/themes/default.scss' as linkpreview-default;
+@use '../../components/1_atoms/Tooltip/styles/themes/default.scss' as tooltip-default;
+
+// 2_blocks
+@use '../../components/2_blocks/CommunicationPanel/styles/themes/default.scss' as communicationpanel-default;
+@use '../../components/2_blocks/FeedFoundItem/styles/themes/default.scss' as feedfounditem-default;
+@use '../../components/2_blocks/FeedFoundObjects/styles/themes/default.scss' as feedfoundobjects-default;
+@use '../../components/2_blocks/FeedSearch/styles/themes/default.scss' as feedsearch-default;
+@use '../../components/2_modals/SelectUser/styles/themes/default.scss' as selectuser-default;
+@use '../../components/2_modals/SelectUser2/styles/themes/default.scss' as selectuser2-default;
+
+// 2_chatinput_elements
+@use '../../components/2_chatinput_elements/ButtonCommandsSelector/styles/themes/default.scss' as buttoncommandssel-default;
+@use '../../components/2_chatinput_elements/ButtonEmojiPicker/styles/themes/default.scss' as buttonemojipicker-default;
+@use '../../components/2_chatinput_elements/ButtonTemplateSelector/styles/themes/default.scss' as buttontemplatesel-default;
+@use '../../components/2_chatinput_elements/ButtonWabaTemplateSelector/styles/themes/default.scss' as buttonwabatemplatesel-default;
+@use '../../components/2_chatinput_elements/FilePreview/styles/themes/default.scss' as filepreview-default;
+@use '../../components/2_chatinput_elements/FileUploader/styles/themes/default.scss' as fileuploader-default;
+@use '../../components/2_chatinput_elements/TemplateSelector/styles/themes/default.scss' as templateselector-default;
+@use '../../components/2_chatinput_elements/WABAAttachmentSection/styles/themes/default.scss' as wabaattachment-default;
+@use '../../components/2_chatinput_elements/WABAQuickReplyButtons/styles/themes/default.scss' as wabaquickreply-default;
+@use '../../components/2_chatinput_elements/WABASeparatedQuickButtons/styles/themes/default.scss' as wabaseparatedquick-default;
+@use '../../components/2_chatinput_elements/WABATemplateSelector/styles/themes/default.scss' as wabatemplatesel-default;
+
+// 2_chatlist_elements
+@use '../../components/2_chatlist_elements/ChatFilter/styles/themes/default.scss' as chatfilter-default;
+@use '../../components/2_chatlist_elements/ChatItem/styles/themes/default.scss' as chatitem-default;
+@use '../../components/2_chatlist_elements/ChatTabs/styles/themes/default.scss' as chattabs-default;
+
+// 2_elements
+@use '../../components/2_elements/AudioRecorder/styles/themes/default.scss' as audiorecorder-default;
+@use '../../components/2_elements/ChannelSelector/styles/themes/default.scss' as channelselector-default;
+@use '../../components/2_elements/ChatInfo/styles/themes/default.scss' as chatinfo-default;
+@use '../../components/2_elements/ChatPanel/styles/themes/default.scss' as chatpanel-default;
+@use '../../components/2_elements/ContactInfo/styles/themes/default.scss' as contactinfo-default;
+@use '../../components/2_elements/ThemeMode/styles/themes/default.scss' as thememode-default;
+@use '../../components/2_elements/UserProfile/styles/themes/default.scss' as userprofile-default;
+@use '../../components/2_elements/VideoRecorder/styles/themes/default.scss' as videorecorder-default;
+
+// 2_feed_elements
+@use '../../components/2_feed_elements/AudioMessage/styles/themes/default.scss' as audiomessage-default;
+@use '../../components/2_feed_elements/BaseReplyMessage/styles/themes/default.scss' as basereplymessage-default;
+@use '../../components/2_feed_elements/CallMessage/styles/themes/default.scss' as callmessage-default;
+@use '../../components/2_feed_elements/DateMessage/styles/themes/default.scss' as datemessage-default;
+@use '../../components/2_feed_elements/DateMessageSticky/styles/themes/default.scss' as datemessagesticky-default;
+@use '../../components/2_feed_elements/FeedKeyboard/styles/themes/default.scss' as feedkeyboard-default;
+@use '../../components/2_feed_elements/FileMessage/styles/themes/default.scss' as filemessage-default;
+@use '../../components/2_feed_elements/ImageMessage/styles/themes/default.scss' as imagemessage-default;
+@use '../../components/2_feed_elements/MessageKeyboard/styles/themes/default.scss' as messagekeyboard-default;
+@use '../../components/2_feed_elements/ReplyAudioMessage/styles/themes/default.scss' as replyaudiomessage-default;
+@use '../../components/2_feed_elements/ReplyCallMessage/styles/themes/default.scss' as replycallmessage-default;
+@use '../../components/2_feed_elements/ReplyFileMessage/styles/themes/default.scss' as replyfilemessage-default;
+@use '../../components/2_feed_elements/ReplyImageMessage/styles/themes/default.scss' as replyimagemessage-default;
+@use '../../components/2_feed_elements/ReplyStickerMessage/styles/themes/default.scss' as replystickermessage-default;
+@use '../../components/2_feed_elements/ReplyTextMessage/styles/themes/default.scss' as replytextmessage-default;
+@use '../../components/2_feed_elements/ReplyVideoMessage/styles/themes/default.scss' as replyvideomessage-default;
+@use '../../components/2_feed_elements/StickerMessage/styles/themes/default.scss' as stickermessage-default;
+@use '../../components/2_feed_elements/SystemMessage/styles/themes/default.scss' as systemmessage-default;
+@use '../../components/2_feed_elements/TextMessage/styles/themes/default.scss' as textmessage-default;
+@use '../../components/2_feed_elements/TypingMessage/styles/themes/default.scss' as typingmessage-default;
+@use '../../components/2_feed_elements/VideoMessage/styles/themes/default.scss' as videomessage-default;
+
+// 2_modals
+@use '../../components/2_modals/CreateChat2/styles/themes/default.scss' as createchat2-default;
+@use '../../components/2_modals/CreateDialog/styles/themes/default.scss' as createdialog-default;
+@use '../../components/2_modals/Modal/styles/themes/default.scss' as modal-default;
+@use '../../components/2_modals/ModalFullscreen/styles/themes/default.scss' as modalfullscreen-default;
+@use '../../components/2_modals/ModalNoFooter/styles/themes/default.scss' as modalnofooter-default;
+@use '../../components/2_modals/ModalVideoRecorder/styles/themes/default.scss' as modalvideorecorder-default;
+
+// 3_compounds
+@use '../../components/3_compounds/ChatInput/styles/themes/default.scss' as chatinput-default;
+@use '../../components/3_compounds/ChatList/styles/themes/default.scss' as chatlist-default;
+@use '../../components/3_compounds/Feed/styles/themes/default.scss' as feed-default;
+@use '../../components/3_compounds/SideBar/styles/themes/default.scss' as sidebar-default;
+
+// 4_layouts
+@use '../../components/4_layouts/AdaptiveExtendedLayout/styles/themes/default.scss' as adaptiveextendedlayout-default;
+@use '../../components/4_layouts/BaseLayout/styles/themes/default.scss' as baselayout-default;
+@use '../../components/4_layouts/ChatWrapper/styles/themes/default.scss' as chatwrapper-default;
+@use '../../components/4_layouts/ExtendedLayout/styles/themes/default.scss' as extendedlayout-default;
+@use '../../components/4_layouts/FeedLayout/styles/themes/default.scss' as feedlayout-default;
+
+// 5_containers
+@use '../../components/5_containers/BaseContainer/styles/themes/default.scss' as basecontainer-default;
+@use '../../components/5_containers/FloatContainer/styles/themes/default.scss' as floatcontainer-default;
+@use '../../components/2_chatinput_elements/PlaceholderComponent/styles/themes/default.scss' as placeholdercomponent-default;
+@use '../../components/2_feed_elements/SplashScreen/styles/themes/default.scss' as splashscreen-default;
