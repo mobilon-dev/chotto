@@ -21,32 +21,46 @@ const meta: Meta<typeof Feed> = {
 export default meta;
 type Story = StoryObj<typeof Feed>;
 
-// Генерируем timestamp'ы для разных временных точек
-const now = Math.floor(Date.now() / 1000); // Текущее время в секундах
-const twoHoursAgo = now - (2 * 60 * 60);
-const oneHourAgo = now - (1 * 60 * 60);
-const thirtyMinutesAgo = now - (30 * 60);
-const fifteenMinutesAgo = now - (15 * 60);
-const tenMinutesAgo = now - (10 * 60);
-const fiveMinutesAgo = now - (5 * 60);
-const threeMinutesAgo = now - (3 * 60);
-const twoMinutesAgo = now - (2 * 60);
-const oneMinuteAgo = now - 60;
-
-const objects = [
+// Основной набор сообщений для Primary
+const primaryObjects = [
   { type: "system.date",   messageId: '1', text: 'Сегодня' },
-  { type: "message.text",  messageId: '2', text: "Привет!", position: 'left', status: 'read', time: '12:30', timestamp: twoHoursAgo},
-  { type: "message.text",  messageId: '3', text: "Привет!", position: 'right',  status: 'read', time: '13 часов назад', timestamp: oneHourAgo},
-  { type: "message.text",  messageId: '4', text: "Отправляется...", position: 'right', status: 'pending', time: '12:35', timestamp: fiveMinutesAgo},
-  { type: "message.text",  messageId: '5', text: "Отправлено", position: 'right', status: 'sent', time: '12:36', timestamp: threeMinutesAgo},
-  { type: "message.text",  messageId: '6', text: "Доставлено", position: 'right', status: 'received', time: '12:37', timestamp: twoMinutesAgo},
-  { type: "message.text",  messageId: '7', text: "Ошибка отправки", position: 'right', status: 'error', time: '12:38', statusMsg: 'Не удалось отправить сообщение', timestamp: oneMinuteAgo},
-  { type: "message.image", messageId: '8', url: "https://sun9-59.userapi.com/s/v1/if2/halgZJOi4Om6wnFsofNfRxloQs-WAqQVNlV3Z7kfQm2KWKjp0dsXQnk6ZjpkmQ_lqKJZonw5u7pHi6uhK0xbTvuX.jpg?quality=95&as=32x16,48x24,72x36,108x54,160x80,240x120,360x180,480x240,540x270,640x320,720x360,1080x540,1280x640,1440x720,1500x750&from=bu&cs=640x0",
-    time: '15 часов назад', alt: "Example Image", position: 'left', status: 'read', timestamp: thirtyMinutesAgo},
-  { type: "message.file",  messageId: '9', url: "https://example.com/file.pdf",
-    time: '15 часов назад', position: 'right', status: 'read', filename: "Документ.pdf", timestamp: fifteenMinutesAgo},
-  { type: "message.text",  messageId: '10', text: "Привет!",position: 'right', time: '16:30', timestamp: tenMinutesAgo},
-  { type: "message.image", messageId: '11', url: "https://sun9-51.userapi.com/s/v1/if1/QzSMgis9Z4h7XVu0R8oNhcWIlPf_6-5h0CwKnXSRMUziaTwixP57Zhvlamh1vutNWFnNZ5lg.jpg?quality=96&as=32x19,48x29,72x43,108x65,160x96,240x144,360x216,480x288,540x324,640x384,720x432,1080x648,1280x768,1440x864,2560x1536&from=bu&cs=640x0",position: 'right', time: '17:00', alt: "Example Image", timestamp: now, status: 'read'},
+  { type: "message.text",  messageId: '2', text: "Привет!", position: 'left', status: 'read', time: '12:30', timestamp: 1700000000},
+  { type: "message.text",  messageId: '3', text: "Как дела?", position: 'right',  status: 'read', time: '12:31', timestamp: 1700000100},
+  { type: "message.audio", messageId: '4', url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    position: 'right', status: 'pending', time: '12:35', text: "Аудиосообщение - отправляется", timestamp: 1700000200},
+  { type: "message.video", messageId: '5', url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
+    position: 'right', status: 'sent', time: '12:36', text: "Видеосообщение - отправлено", timestamp: 1700000300},
+  { type: "message.image", messageId: '6', url: "https://sun9-59.userapi.com/s/v1/if2/halgZJOi4Om6wnFsofNfRxloQs-WAqQVNlV3Z7kfQm2KWKjp0dsXQnk6ZjpkmQ_lqKJZonw5u7pHi6uhK0xbTvuX.jpg?quality=95&as=32x16,48x24,72x36,108x54,160x80,240x120,360x180,480x240,540x270,640x320,720x360,1080x540,1280x640,1440x720,1500x750&from=bu&cs=640x0",
+    time: '12:37', alt: "Example Image", position: 'left', status: 'received', timestamp: 1700000400},
+  { type: "message.text",  messageId: '7', text: "Ошибка отправки", position: 'right', status: 'error', time: '12:38', statusMsg: 'Не удалось отправить сообщение', timestamp: 1700000500},
+  { type: "message.file",  messageId: '8', url: "https://example.com/file.pdf",
+    time: '12:40', position: 'right', status: 'read', filename: "Документ.pdf", timestamp: 1700000600},
+  { type: "message.text",  messageId: '9', text: "Всё отлично!", position: 'left', status: 'read', time: '12:41', timestamp: 1700000700},
+];
+
+// Упрощенный набор для примеров с кнопкой и typing
+const simpleObjects = [
+  { type: "system.date",   messageId: '1', text: 'Сегодня' },
+  { type: "message.text",  messageId: '2', text: "Привет!", position: 'left', status: 'read', time: '12:30', timestamp: 1700000000},
+  { type: "message.text",  messageId: '3', text: "Как дела?", position: 'right',  status: 'read', time: '12:31', timestamp: 1700000100},
+  { type: "message.text",  messageId: '4', text: "Всё отлично!", position: 'left', status: 'read', time: '12:32', timestamp: 1700000200},
+];
+
+// Набор для демонстрации кнопки непрочитанных (длинный список для скролла)
+const unreadObjects = [
+  { type: 'system.date', messageId: 'd1', text: 'Сегодня' },
+  ...Array.from({ length: 24 }, (_, idx) => {
+    const i = idx + 1;
+    return {
+      type: 'message.text',
+      messageId: `u${i}`,
+      text: `Сообщение №${i}`,
+      position: i % 2 === 0 ? 'right' : 'left',
+      status: 'read',
+      time: `12:${(20 + i).toString().padStart(2, '0')}`,
+      timestamp: 1700001000 + i * (2 * 24 * 60 * 60),
+    };
+  }),
 ];
 
 
@@ -106,8 +120,9 @@ const buttonParams = {
 
 export const Primary: Story = {
   args: {
-    objects,
+    objects: primaryObjects,
     typing: false,
+    chatBackground: undefined,
     //@ts-expect-error theme используется только для ThemeMode в доках
     theme: themes,
   },
@@ -151,38 +166,34 @@ export const Primary: Story = {
   }),
 };
 
-export const WithDates: Story = {
-  args: {
-    objects,
-    typing: false,
-  },
-};
-
 export const WithButtonUnread: Story = {
   args: {
-    objects,
+    objects: unreadObjects,
     buttonParams: buttonParams,
     typing: false,
+    chatBackground: undefined,
   },
   decorators: [() => ({ 
-    template: '<div style="max-height: 300px;"><story/></div>' 
+    template: '<div style="height: 300px; overflow-y: auto; overflow-x: hidden;"><story/></div>' 
   })],
 };
 
 export const PrimaryTyping: Story = {
   args: {
-    objects,
+    objects: simpleObjects,
     typing: true,
+    chatBackground: undefined,
   },
 };
 
 export const PrimaryTypingWithAvatarAndTitle: Story = {
   args: {
-    objects,
+    objects: simpleObjects,
     typing: {
       title: 'test sergey 1',
       avatar: "https://placehold.jp/30/336633/ffffff/64x64.png?text=MV",
-    }
+    },
+    chatBackground: undefined,
   },
 };
 
@@ -190,6 +201,7 @@ export const FeedMaxWidth500pxWithLongMessages: Story = {
   args: {
     objects: longobjects,
     typing: false,
+    chatBackground: undefined,
   },
   decorators: [() => ({ 
     template: '<div style="max-width: 500px;"><story/></div>' 
@@ -200,6 +212,7 @@ export const FeedMaxWidth700pxWithLongMessages: Story = {
   args: {
     objects: longobjects,
     typing: false,
+    chatBackground: undefined,
   },
   decorators: [() => ({ 
     template: '<div style="max-width: 700px;"><story/></div>' 
