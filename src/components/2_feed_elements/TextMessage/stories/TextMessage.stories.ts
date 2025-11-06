@@ -5,7 +5,6 @@ import TextMessage from '../TextMessage.vue';
 import { ITextMessage } from '@/types';
 import BaseContainer from '../../../5_containers/BaseContainer/BaseContainer.vue';
 import ThemeMode from '../../../2_elements/ThemeMode/ThemeMode.vue';
-import chatBackgroundRaw from '../../../3_compounds/Feed/assets/chat-background.svg?raw';
 
 const themes = [
   { code: 'light', name: 'Light', default: true },
@@ -42,8 +41,13 @@ const messageLink = {
 };
 
 const embed = {
-  type: 'youtube',
-  url: 'https://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1',
+  type: 'yamusic',
+  url: 'https://music.yandex.ru/iframe/track/36812773/4773768'
+}
+
+const embedRutube = {
+  type: 'rutube',
+  url: 'https://rutube.ru/play/embed/6eb0c597c11c89ad5a5fafa3030d0e53/',
 }
 
 const actions = [
@@ -76,11 +80,9 @@ const messageLongText = {
   status: 'read',
 };
 
-const defaultBackground = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(chatBackgroundRaw)}`;
-
 // Общий декоратор для всех stories кроме Default (добавляет паддинги, фоновый контейнер и убирает горизонтальный скролл)
 const commonDecorator = [() => ({
-  template: `<div style="padding: 24px; overflow-x: hidden; background: var(--chotto-theme-primary-color, #ffffff);"><div style="padding: 40px 20px; background-color: var(--chotto-theme-secondary-color, #f5f5f5); background-image: url(${defaultBackground}); border-radius: 8px;"><story/></div></div>`
+  template: `<div class="message-feed" style="padding: 24px; overflow-x: hidden; background: var(--chotto-theme-primary-color, #ffffff);"><div style="padding: 40px 20px; background-color: var(--chotto-theme-secondary-color, #f5f5f5); border-radius: 8px;"><story/></div></div>`
 })];
 
 export const Default: Story = {
@@ -111,7 +113,7 @@ export const Default: Story = {
 
       // Примеры сообщений: левое и правое с разными статусами
       const leftMessage: ITextMessage = {
-        text: 'Привет!',
+        text: 'Left message',
         position: 'left',
         messageId: 'left1',
         time: '12:00',
@@ -119,7 +121,7 @@ export const Default: Story = {
       };
 
       const rightMessagePending: ITextMessage = {
-        text: 'Отправляется...',
+        text: 'Message with status: pending',
         position: 'right',
         messageId: 'right1',
         time: '12:05',
@@ -127,7 +129,7 @@ export const Default: Story = {
       };
 
       const rightMessageSent: ITextMessage = {
-        text: 'Отправлено',
+        text: 'Message with status: sent',
         position: 'right',
         messageId: 'right2',
         time: '12:06',
@@ -135,7 +137,7 @@ export const Default: Story = {
       };
 
       const rightMessageReceived: ITextMessage = {
-        text: 'Доставлено',
+        text: 'Message with status: received',
         position: 'right',
         messageId: 'right3',
         time: '12:07',
@@ -143,7 +145,7 @@ export const Default: Story = {
       };
 
       const rightMessageRead: ITextMessage = {
-        text: 'Прочитано',
+        text: 'Message with status: read',
         position: 'right',
         messageId: 'right4',
         time: '12:08',
@@ -151,7 +153,7 @@ export const Default: Story = {
       };
 
       const rightMessageError: ITextMessage = {
-        text: 'Ошибка отправки',
+        text: 'Message with status: error',
         position: 'right',
         messageId: 'right5',
         time: '12:09',
@@ -159,13 +161,10 @@ export const Default: Story = {
         statusMsg: 'Не удалось отправить сообщение',
       };
 
-      const defaultBackgroundValue = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(chatBackgroundRaw)}`;
-
       const containerStyle = {
         minWidth: '360px',
         padding: '40px 20px',
         backgroundColor: 'var(--chotto-theme-secondary-color, #f5f5f5)',
-        backgroundImage: `url(${defaultBackgroundValue})`,
         borderRadius: '8px'
       };
 
@@ -177,7 +176,7 @@ export const Default: Story = {
           <ThemeMode :themes="themesList" :show="true" @selected-theme="handleThemeChange" />
         </div>
         <div :style="containerStyle">
-          <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="message-feed" style="display: flex; flex-direction: column; gap: 16px;">
             <TextMessage :message="leftMessage" />
             <TextMessage :message="rightMessagePending" />
             <TextMessage :message="rightMessageSent" />
@@ -191,231 +190,59 @@ export const Default: Story = {
   }),
 };
 
-export const LeftMessage: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'left',
+// Комбинированный пример для левых сообщений
+export const LeftMessages: Story = {
+  render: () => ({
+    components: { TextMessage },
+    setup() {
+      const messages = [
+        { ...message, text: 'Basic left message', position: 'left' as const, messageId: 'left1' },
+        { ...message, text: 'Message with views', position: 'left' as const, views: 18495, messageId: 'left2' },
+        { ...messageLongText, text: 'Message with long text: ' + messageLongText.text, position: 'left' as const, messageId: 'left3' },
+        { ...message, text: 'Message with subtext', position: 'left' as const, subText: '+79135292926', messageId: 'left4' },
+        { ...messageWithoutTime, text: 'Message without time', position: 'left' as const, time: '', messageId: 'left5' },
+        { ...message, text: 'Message with actions', position: 'left' as const, actions, messageId: 'left6' },
+        { ...message, text: 'Message with avatar', position: 'left' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'left7' },
+        { ...message, text: 'Message with long time', position: 'left' as const, time: 'двенадцать дней назад', messageId: 'left8' },
+      ];
+      return { messages };
     },
-  },
+    template: `
+      <div class="message-feed" style="display: flex; flex-direction: column; gap: 16px;">
+        <TextMessage v-for="msg in messages" :key="msg.messageId" :message="msg" />
+      </div>
+    `,
+  }),
   decorators: commonDecorator,
 };
 
-export const LeftMessageWithViews: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'left',
-      views: 18495,
+// Комбинированный пример для правых сообщений с разными статусами и вариантами
+export const RightMessages: Story = {
+  render: () => ({
+    components: { TextMessage },
+    setup() {
+      const messages = [
+        { ...message, text: 'Basic right message', position: 'right' as const, messageId: 'right1' },
+        { ...message, text: 'Message with views', position: 'right' as const, views: 18495, messageId: 'right2' },
+        { ...messageLongText, text: 'Message with long text: ' + messageLongText.text, position: 'right' as const, messageId: 'right3' },
+        { ...message, text: 'Message with subtext', position: 'right' as const, subText: 'Это Коля', messageId: 'right4' },
+        { ...messageWithoutTime, text: 'Message without time', position: 'right' as const, time: '', messageId: 'right5' },
+        { ...message, text: 'Message with status: pending', position: 'right' as const, status: 'pending' as const, messageId: 'right6' },
+        { ...message, text: 'Message with status: sent', position: 'right' as const, status: 'sent' as const, messageId: 'right7' },
+        { ...message, text: 'Message with status: received', position: 'right' as const, status: 'received' as const, messageId: 'right8' },
+        { ...message, text: 'Message with status: read', position: 'right' as const, status: 'read' as const, messageId: 'right9' },
+        { ...message, text: 'Message with status: error', position: 'right' as const, status: 'error' as const, statusMsg: 'Не удалось отправить сообщение', messageId: 'right10' },
+        { ...message, text: 'Message with avatar', position: 'right' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'right12' },
+        { ...message, text: 'Message with long time', position: 'right' as const, time: 'двенадцать дней назад', messageId: 'right13' },
+      ];
+      return { messages };
     },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageLongText: Story = {
-  args: {
-    message: {
-      ...messageLongText,
-      position: 'left',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithSubtext: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'left',
-      subText: '+79135292926',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithoutTime: Story = {
-  args: {
-    message: {
-      ...messageWithoutTime,
-      position: 'left',
-      time: '',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithActions: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'left',
-      actions,
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithAvatar: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'left',
-      avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithLongTime: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'left',
-      time: 'двенадцать дней назад',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessage: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithViews: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      views: 18495,
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageLongText: Story = {
-  args: {
-    message: {
-      ...messageLongText,
-      position: 'right',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithSubtext: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      subText: 'Это Коля',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithoutTime: Story = {
-  args: {
-    message: {
-      ...messageWithoutTime,
-      position: 'right',
-      time: '',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageStatusSent: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      status: 'sent',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageStatusReceived: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      status: 'received',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageStatusRead: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      status: 'read',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageStatusPending: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      status: 'pending',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageStatusError: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      status: 'error',
-      statusMsg: 'Не удалось отправить сообщение',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithActions: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      actions,
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithAvatar: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithLongTime: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      time: 'двенадцать дней назад',
-    },
-  },
+    template: `
+      <div class="message-feed" style="display: flex; flex-direction: column; gap: 16px;">
+        <TextMessage v-for="msg in messages" :key="msg.messageId" :message="msg" />
+      </div>
+    `,
+  }),
   decorators: commonDecorator,
 };
 
@@ -423,6 +250,7 @@ export const LeftMessageMax: Story = {
   args: {
     message: {
       ...messageLongText,
+      text: 'Message with all features: long text, subtext, actions, avatar, long time',
       position: 'left',
       subText: 'тест тест тест тест',
       actions,
@@ -437,6 +265,7 @@ export const RightMessageMax: Story = {
   args: {
     message: {
       ...messageLongText,
+      text: 'Message with all features: long text, subtext, actions, avatar, long time',
       position: 'right',
       subText: 'тест тест тест тест',
       actions,
@@ -447,282 +276,76 @@ export const RightMessageMax: Story = {
   decorators: commonDecorator,
 };
 
-export const LeftMessageWithLink: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'left',
+// Комбинированный пример для сообщений со ссылками
+export const MessagesWithLinks: Story = {
+  render: () => ({
+    components: { TextMessage },
+    setup() {
+      const messages = [
+        { ...messageLink, text: 'Left message with link: github.com', position: 'left' as const, messageId: 'link1' },
+        { ...messageLink, text: 'Right message with link: github.com', position: 'right' as const, messageId: 'link2' },
+      ];
+      return { messages };
     },
-  },
+    template: `
+      <div class="message-feed" style="display: flex; flex-direction: column; gap: 16px;">
+        <TextMessage v-for="msg in messages" :key="msg.messageId" :message="msg" />
+      </div>
+    `,
+  }),
   decorators: commonDecorator,
 };
 
-export const RightMessageWithLink: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'right',
+// Комбинированный пример для сообщений с reply
+export const MessagesWithReply: Story = {
+  render: () => ({
+    components: { TextMessage },
+    setup() {
+      const messages = [
+        { ...messageLink, text: 'Left message with reply to text', position: 'left' as const, reply: { messageId: '324324', type: 'message.text' as const, text: 'previous message', header: 'Мария' }, messageId: 'reply1' },
+        { ...messageLink, text: 'Right message with reply to text', position: 'right' as const, reply: { messageId: '324324', type: 'message.text' as const, text: 'previous message', header: 'Мария' }, messageId: 'reply2' },
+        { ...messageLink, text: 'Left message with reply to image', position: 'left' as const, reply: { messageId: '324324', type: 'message.image' as const, text: messageLongText.text, url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg", header: 'Мария' }, messageId: 'reply3' },
+        { ...messageLink, text: 'Right message with reply to image', position: 'right' as const, reply: { messageId: '324324', type: 'message.image' as const, text: messageLongText.text, url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg", header: 'Мария' }, messageId: 'reply4' },
+        { ...messageLink, text: 'Left message with reply to video', position: 'left' as const, reply: { messageId: '324324', type: 'message.video' as const, text: messageLongText.text, url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT", header: 'Мария' }, messageId: 'reply5' },
+        { ...messageLink, text: 'Right message with reply to video', position: 'right' as const, reply: { messageId: '324324', type: 'message.video' as const, text: messageLongText.text, url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT", header: 'Мария' }, messageId: 'reply6' },
+        { ...messageLink, text: 'Left message with reply to file', position: 'left' as const, reply: { messageId: '324324', type: 'message.file' as const, filename: 'video.mp4', text: messageLongText.text, url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT", header: 'Мария' }, messageId: 'reply7' },
+        { ...messageLink, text: 'Right message with reply to file', position: 'right' as const, reply: { messageId: '324324', type: 'message.file' as const, filename: 'video.mp4', text: messageLongText.text, url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT", header: 'Мария' }, messageId: 'reply8' },
+        { ...messageLink, text: 'Left message with reply to audio', position: 'left' as const, reply: { messageId: '324324', type: 'message.audio' as const, filename: 'video.mp4', text: messageLongText.text, url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT", header: 'Мария' }, messageId: 'reply9' },
+        { ...messageLink, text: 'Right message with reply to audio', position: 'right' as const, reply: { messageId: '324324', type: 'message.audio' as const, text: messageLongText.text, url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT", header: 'Мария' }, messageId: 'reply10' },
+        { ...messageLink, text: 'Left message with reply to call (missed)', position: 'left' as const, reply: { messageId: '324324', type: 'message.call' as const, callDuration: '18 минут', isMissedCall: true, header: 'Мария' }, messageId: 'reply11' },
+        { ...messageLink, text: 'Right message with reply to call', position: 'right' as const, reply: { messageId: '324324', type: 'message.call' as const, callDuration: '18 минут', isMissedCall: false, header: 'Мария' }, messageId: 'reply12' },
+      ];
+      return { messages };
     },
-  },
+    template: `
+      <div class="message-feed" style="display: flex; flex-direction: column; gap: 16px;">
+        <TextMessage v-for="msg in messages" :key="msg.messageId" :message="msg" />
+      </div>
+    `,
+  }),
   decorators: commonDecorator,
 };
 
-export const LeftMessageWithReplyText: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'left',
-      reply: {
-        messageId: '324324',
-        type: 'message.text',
-        text: 'previous message',
-        header: 'Мария',
-      },
+// Комбинированный пример для сообщений с link preview и embed
+export const MessagesWithPreviewAndEmbed: Story = {
+  render: () => ({
+    components: { TextMessage },
+    setup() {
+      const messages = [
+        { ...messageLink, text: 'Left message with link preview', position: 'left' as const, linkPreview: { title: 'Яндекс', imageUrl: 'https://yastatic.net/s3/home-static/_/37/37a02b5dc7a51abac55d8a5b6c865f0e.png', url: 'https://yandex.ru', description: 'Найдётся всё' }, messageId: 'preview1' },
+        { ...messageLink, text: 'Right message with link preview', position: 'right' as const, linkPreview: { title: 'Яндекс', imageUrl: 'https://yastatic.net/s3/home-static/_/37/37a02b5dc7a51abac55d8a5b6c865f0e.png', url: 'https://yandex.ru', description: 'Найдётся всё' }, messageId: 'preview2' },
+        { ...message, text: 'Left message with Yandex Music embed', position: 'left' as const, embed, messageId: 'embed1' },
+        { ...message, text: 'Right message with Yandex Music embed', position: 'right' as const, embed, messageId: 'embed2' },
+        { ...message, text: 'Left message with Rutube embed', position: 'left' as const, embed: embedRutube, messageId: 'embed3' },
+        { ...message, text: 'Right message with Rutube embed', position: 'right' as const, embed: embedRutube, messageId: 'embed4' },
+      ];
+      return { messages };
     },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithReplyText: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'right',
-      reply: {
-        messageId: '324324',
-        type: 'message.text',
-        text: 'previous message',
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithReplyImage: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'left',
-      reply: {
-        messageId: '324324',
-        type: 'message.image',
-        text: messageLongText.text,
-        url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg",
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithReplyImage: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'right',
-      reply: {
-        messageId: '324324',
-        type: 'message.image',
-        text: messageLongText.text,
-        url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg",
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithReplyVideo: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'left',
-      reply: {
-        messageId: '324324',
-        type: 'message.video',
-        text: messageLongText.text,
-        url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithReplyVideo: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'right',
-      reply: {
-        messageId: '324324',
-        type: 'message.video',
-        text: messageLongText.text,
-        url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-
-export const LeftMessageWithReplyFile: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'left',
-      reply: {
-        messageId: '324324',
-        type: 'message.file',
-        filename: 'video.mp4',
-        text: messageLongText.text,
-        url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithReplyFile: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'right',
-      reply: {
-        messageId: '324324',
-        type: 'message.file',
-        filename: 'video.mp4',
-        text: messageLongText.text,
-        url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithReplyAudio: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'left',
-      reply: {
-        messageId: '324324',
-        type: 'message.audio',
-        filename: 'video.mp4',
-        text: messageLongText.text,
-        url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithReplyAudio: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'right',
-      reply: {
-        messageId: '324324',
-        type: 'message.audio',
-        text: messageLongText.text,
-        url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithReplyCall: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'left',
-      reply: {
-        messageId: '324324',
-        type: 'message.call',
-        callDuration: '18 минут',
-        isMissedCall: true, 
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithReplyCall: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'right',
-      reply: {
-        messageId: '324324',
-        type: 'message.call',
-        callDuration: '18 минут',
-        isMissedCall: false, 
-        header: 'Мария',
-      },
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithPreviewLink: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'left',
-      linkPreview: {
-        title: 'Яндекс',
-        imageUrl: 'https://yastatic.net/s3/home-static/_/37/37a02b5dc7a51abac55d8a5b6c865f0e.png',
-        url: 'https://yandex.ru',
-        description: 'Найдётся всё',
-      }
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithPreviewLink: Story = {
-  args: {
-    message: {
-      ...messageLink,
-      position: 'right',
-      linkPreview: {
-        title: 'Яндекс',
-        imageUrl: 'https://yastatic.net/s3/home-static/_/37/37a02b5dc7a51abac55d8a5b6c865f0e.png',
-        url: 'https://yandex.ru',
-        description: 'Найдётся всё',
-      }
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftMessageWithEmbed: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'left',
-      embed
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightMessageWithEmbed: Story = {
-  args: {
-    message: {
-      ...message,
-      position: 'right',
-      embed
-    },
-  },
+    template: `
+      <div class="message-feed" style="display: flex; flex-direction: column; gap: 16px;">
+        <TextMessage v-for="msg in messages" :key="msg.messageId" :message="msg" />
+      </div>
+    `,
+  }),
   decorators: commonDecorator,
 };
