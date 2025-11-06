@@ -104,6 +104,13 @@
   pointer-events: var(--chotto-messagereactions-add-has-chip-pointer-events, auto);
 }
 
+// Если компонент отключен, кнопка "+" не должна показываться даже при hover
+.message-reactions.is-disabled .message-reactions__add {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  display: none !important;
+}
+
 .message-reactions__quick-panel {
   position: var(--chotto-messagereactions-quick-panel-position, absolute);
   top: var(--chotto-messagereactions-quick-panel-top, 100%);

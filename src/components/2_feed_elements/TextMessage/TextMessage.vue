@@ -56,6 +56,7 @@
       <MessageReactions
         :reactions="message.reactions"
         :message-id="message.messageId"
+        :enabled="reactionsEnabled"
         @toggle-reaction="onToggleReaction"
         @add-reaction="onAddReaction"
         @remove-reaction="onRemoveReaction"
@@ -142,6 +143,10 @@ const props = defineProps({
     default: () => {return null}
   },
   isFirstInSeries: {
+    type: Boolean,
+    default: true
+  },
+  reactionsEnabled: {
     type: Boolean,
     default: true
   }

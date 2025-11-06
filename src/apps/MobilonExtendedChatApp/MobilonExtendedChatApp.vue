@@ -169,6 +169,7 @@
                   :apply-style="setMessageClass"
                   :feed-keyboards="feedKeyboards"
                   feed-keyboard-align="left"
+                  :reactions-enabled="true"
                   @message-action="messageAction"
                   @load-more="loadMore"
                   @load-more-down="loadMoreDown"

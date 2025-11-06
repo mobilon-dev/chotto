@@ -30,6 +30,7 @@
         :message="object"
         :apply-style="applyStyle"
         :is-first-in-series="object.isFirstInSeries"
+        :reactions-enabled="reactionsEnabled"
         @action="messageAction"
         @reply="handleClickReplied"
       />
@@ -167,6 +168,10 @@ const props = defineProps({
   isLoadingMore: {
     type: Boolean,
     default: false
+  },
+  reactionsEnabled: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -185,6 +190,9 @@ const {
 
 // Инициализация маппинга компонентов
 const { componentsMap } = useFeedComponents()
+
+// Получаем значение reactionsEnabled из props
+const reactionsEnabled = computed(() => props.reactionsEnabled)
 
 // Инициализация логики группировки
 const { groupedObjects } = useFeedGrouping({

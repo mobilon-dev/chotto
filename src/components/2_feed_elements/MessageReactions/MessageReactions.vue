@@ -2,7 +2,7 @@
   <div
     ref="reactionsContainerRef"
     class="message-reactions"
-    :class="{ 'has-reactions': hasReactions, 'is-right-message': isRight }"
+    :class="{ 'has-reactions': hasReactions, 'is-right-message': isRight, 'is-disabled': !enabled }"
   >
     <button
       v-for="item in displayedReactions"
@@ -17,7 +17,7 @@
     </button>
 
     <button
-      v-if="!readonly"
+      v-if="!readonly && enabled"
       ref="addButtonRef"
       class="message-reactions__add"
       aria-label="Add reaction"
@@ -30,7 +30,7 @@
     <!-- Панель быстрых реакций -->
     <transition name="message-reactions-popover">
       <div
-        v-show="isQuickReactionsOpen && !readonly && !isFullPickerOpen"
+        v-show="isQuickReactionsOpen && !readonly && enabled && !isFullPickerOpen"
         ref="quickReactionsRef"
         class="message-reactions__quick-panel"
         :style="quickPanelStyle"
@@ -60,7 +60,7 @@
     <Teleport to="body">
       <transition name="message-reactions-popover">
         <div
-          v-show="isFullPickerOpen && !readonly"
+          v-show="isFullPickerOpen && !readonly && enabled"
           ref="pickerRef"
           class="message-reactions__picker"
           :style="pickerStyle"
@@ -100,6 +100,10 @@ const props = defineProps({
   readonly: {
     type: Boolean,
     default: false,
+  },
+  enabled: {
+    type: Boolean,
+    default: true,
   },
 })
 
@@ -152,13 +156,13 @@ const changeThemeDialogEmoji = (): 'light' | 'dark' => {
 }
 
 function onToggle(key: string) {
-  if (props.readonly) return
+  if (props.readonly || !props.enabled) return
   toggleReaction(key)
   emit('toggle-reaction', { messageId: props.messageId, key })
 }
 
 function onAddClick() {
-  if (props.readonly) return
+  if (props.readonly || !props.enabled) return
   if (isQuickReactionsOpen.value) {
     closeQuickPanel()
   } else {
@@ -167,7 +171,7 @@ function onAddClick() {
 }
 
 function onQuickEmojiClick(key: string) {
-  if (props.readonly) return
+  if (props.readonly || !props.enabled) return
   // Проверяем, есть ли уже эта реакция у пользователя
   const existingReaction = reactionsState.localReactions.value?.items?.find(item => item.key === key && item.reactedByMe)
   
@@ -186,14 +190,14 @@ function onQuickEmojiClick(key: string) {
 }
 
 async function onExpandClick() {
-  if (props.readonly) return
+  if (props.readonly || !props.enabled) return
   emojiTheme.value = changeThemeDialogEmoji()
   await openFullPicker()
 }
 
 function onSelectEmoji(emojiObj: { i: string }) {
   closeFullPicker()
-  if (props.readonly) return
+  if (props.readonly || !props.enabled) return
   addReaction(emojiObj.i)
   emit('add-reaction', { messageId: props.messageId, key: emojiObj.i })
 }
