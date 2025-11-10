@@ -122,9 +122,14 @@
 </template>
 
 <script setup>
-import { ref, unref, watch, nextTick } from 'vue';
+import { ref, computed } from 'vue';
 import { ChatItem, ChatFilter, ChatTabs } from "@/components";
-// import { t } from '../../../locale/useLocale';
+import {
+  useChatListScroll,
+  useChatListSelection,
+  useChatListFilter,
+  useChatListActions,
+} from './composables';
 
 // Define props
 const props = defineProps({
@@ -178,186 +183,32 @@ const props = defineProps({
 // Define emits
 const emit = defineEmits(['select', 'action', 'loadMoreChats', 'expand', 'tab-click', 'search', 'clear-search']);
 
-const filter = ref('');
-const refChatList = ref()
+const refChatList = ref();
+const chatsRef = computed(() => props.chats);
 
-const allowLoadMore = ref(false)
-const isShowButton = ref(false)
-const isScrollByMouseButton = ref(false)
+// Используем composables
+const {
+  isShowButton,
+  scrollToTopForce,
+  scrollCheck,
+  startScrollWatch,
+  stopScrollWatch,
+} = useChatListScroll({ refChatList, chats: chatsRef, emit });
 
+const {
+  selectChat,
+} = useChatListSelection({ chats: chatsRef, emit });
 
-function scrollToTopForce() {
-  nextTick(function () {
-    const element = unref(refChatList);
-    element.scrollTop = 0;
-  })
-}
+const {
+  getSortedAndFilteredChats,
+  getFilter,
+} = useChatListFilter({ props, emit });
 
-const scrollCheck = () => {
-  const element = unref(refChatList);
-  const scrollBottom = element.scrollHeight - element.scrollTop - element.clientHeight;
-  if (element.scrollTop > 500){
-    isShowButton.value = true
-  }
-  if (element.scrollTop <= 500){
-    isShowButton.value = false
-  }
-
-  if (isScrollByMouseButton.value){
-    if (scrollBottom < 300){    
-      allowLoadMore.value = true  
-    }
-  }
-  else{
-    if (scrollBottom < 300){
-      allowLoadMore.value = true
-    }
-    if (scrollBottom >= 300){
-      allowLoadMore.value = false
-    }
-  }
-};
-
-watch(
-  () => allowLoadMore.value,
-  () => {
-    if (allowLoadMore.value)
-      emit('loadMoreChats')
-  }
-)
-
-watch(
-  () => props.chats,
-  () => {
-    allowLoadMore.value = false
-    if (isScrollByMouseButton.value){
-      const element = unref(refChatList);
-      element.scrollTop = element.scrollHeight
-    }
-  }
-)
-
-const startScrollWatch = (event) => {
-  const element = unref(refChatList);
-  const isScrollbar = event.offsetX > element.clientWidth || event.offsetY > element.clientHeight;
-  if (isScrollbar) {
-    isScrollByMouseButton.value = true
-  }
-}
-
-const stopScrollWatch = () => {
-  isScrollByMouseButton.value = false
-}
-
-const expandChat = (args) => {
-  emit('expand', args)
-}
-
-// Define method
-const selectChat = (args) => {
-  if (!props.chats || !Array.isArray(props.chats)) {
-    return;
-  }
-  
-  props.chats.forEach(c => {
-    c.isSelected = false
-    if (c.dialogs && Array.isArray(c.dialogs)) 
-      c.dialogs.forEach(d => {
-        d.isSelected = false
-      })
-  });
-  if (args.dialog) {
-    selectDialog(args.dialog)
-  }
-  const c = props.chats.find(c => c.chatId === args.chat.chatId);
-  if (c) {
-    c.isSelected = true;
-  }
-  emit('select', args);
-};
-
-const selectDialog = (dialog) => {
-  if (!props.chats || !Array.isArray(props.chats)) {
-    return;
-  }
-  
-  props.chats.forEach(c => {
-    c.isSelected = false
-    if (c.dialogs && Array.isArray(c.dialogs)) 
-      c.dialogs.forEach(d => {
-        d.isSelected = false
-        if (d.dialogId == dialog.dialogId)
-        d.isSelected = true
-      })
-  });
-}
-
-const getSortedAndFilteredChats = () => {
-  // Проверяем, есть ли чаты в props
-  if (!props.chats || props.chats.length === 0) {
-    return [];
-  }
-  
-  const result = props.chats
-    .toSorted((a, b) => {
-      if (Number(a['lastActivity.timestamp']) > Number(b['lastActivity.timestamp'])) return -1;
-      if (Number(a['lastActivity.timestamp']) < Number(b['lastActivity.timestamp'])) return 1;
-      if (Number(a['lastActivity.timestamp']) == Number(b['lastActivity.timestamp'])) return 0;
-    })
-    .sort((a, b) => {   // immutable sort
-      if (a.countUnread > b.countUnread) return -1;
-      if (a.countUnread < b.countUnread) return 1;
-      if (a.countUnread == b.countUnread) return 0;
-    })
-    .filter(c => {
-      // Универсальная фильтрация по табам
-      if (props.activeTabId === 'all') {
-        // Показываем все чаты
-      } else if (props.activeTabId === 'countUnread') {
-        // Показываем только чаты с непрочитанными сообщениями
-        if (c.countUnread <= 0) return false;
-      } else if (props.activeTabId.startsWith('tag_')) {
-        // Показываем чаты с определенным тегом
-        if (!c.contact?.tags || !c.contact.tags.some(tag => tag.tagId === props.activeTabId)) {
-          return false;
-        }
-      }
-      
-      // Фильтрация по тексту (только если не в режиме поиска)
-      if (props.searchQuery && props.searchQuery.trim() !== '') {
-        // В режиме поиска показываем все чаты из store (они уже отфильтрованы API)
-        return true;
-      } else {
-        // Обычная локальная фильтрация
-        if (!props.filterQuery)
-          return c.name.includes(filter.value) ||
-            c.metadata.includes(filter.value);
-        else 
-          return c.name.includes(props.filterQuery) ||
-            c.metadata.includes(props.filterQuery);
-      }
-    });
-  
-  return result;
-}
-
-const getFilter = (value) => {
-  filter.value = value;
-  // Если есть поисковый запрос, эмитим событие поиска
-  if (value.trim() !== '') {
-    emit('search', value);
-  } else {
-    // Если поле поиска очищено, эмитим событие очистки поиска
-    emit('clear-search');
-  }
-}
-
-const action = (data) => emit('action', data);
-
-
-const handleTabClick = (tabId) => {
-  emit('tab-click', tabId);
-};
+const {
+  expandChat,
+  action,
+  handleTabClick,
+} = useChatListActions({ emit });
 </script>
 
 <style scoped lang="scss">
