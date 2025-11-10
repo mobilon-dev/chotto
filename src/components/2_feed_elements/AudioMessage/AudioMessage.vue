@@ -143,30 +143,13 @@
         </div>
 
         <span class="audio-message__time">{{ message.time }}</span>
-        <Tooltip
-          v-if="getClass(message) === 'audio-message__right' && statuses.includes(message.status)"
-          :text="statusTitle"
-          position="bottom-left"
-        >
-          <div
-            class="audio-message__status"
-            :class="status"
-          >
-            <template v-if="message.status === 'pending'">
-              <span class="pi pi-clock" />
-            </template>
-            <template v-else-if="message.status === 'error'">
-              <span class="pi pi-times-circle" />
-            </template>
-            <template v-else>
-              <span
-                v-if="message.status !== 'sent'"
-                class="pi pi-check"
-              />
-              <span class="pi pi-check" />
-            </template>
-          </div>
-        </Tooltip>
+        <MessageStatusIndicator
+          base-class="audio-message"
+          :message-class="getClass(message)"
+          :message-status="message.status"
+          :status-class="status"
+          :status-title="statusTitle"
+        />
       </div>
 
       <button
@@ -223,9 +206,9 @@
 >
 import { ref, onMounted, computed, watch, inject } from 'vue'
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, Tooltip, MessageReactions } from '@/components';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator } from '@/components';
 import { useMessageActions, useMessageLinks } from '@/hooks/messages';
-import { getStatus, statuses, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
+import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
 import { useTheme } from '@/hooks';
 import { IAudioMessage } from '@/types';
 

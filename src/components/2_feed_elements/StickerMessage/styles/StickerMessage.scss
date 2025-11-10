@@ -67,7 +67,7 @@
     font-size: var(--chotto-stickermessage-time-font-size, 12px);
   }
 
-  &__status {
+  :deep(.sticker-message__status) {
     display: var(--chotto-stickermessage-status-display, flex);
 
     span {
@@ -75,7 +75,7 @@
     }
   }
 
-  .status--received {
+  :deep(.status--received) {
     span {
 
       &:first-child {
@@ -84,7 +84,7 @@
     }
   }
 
-  .status--read {
+  :deep(.status--read) {
     span {
       color: var(--chotto-stickermessage-status-read-color, #5F5F5F);
 
@@ -94,13 +94,13 @@
     }
   }
 
-  .status--pending {
+  :deep(.status--pending) {
     span {
       color: var(--chotto-stickermessage-status-pending-color, #9ca3af);
     }
   }
 
-  .status--error {
+  :deep(.status--error) {
     span {
       color: var(--chotto-stickermessage-status-error-color, #ef4444);
     }

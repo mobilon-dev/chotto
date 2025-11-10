@@ -61,7 +61,7 @@
     color: var(--chotto-textmessage-time-color, #5F5F5F);
   }
 
-  &__status {
+  :deep(.text-message__status) {
     display: var(--chotto-textmessage-status-display, flex);
 
     span {
@@ -70,7 +70,7 @@
     }
   }
 
-  .status--received {
+  :deep(.status--received) {
     span {
       color: var(--chotto-textmessage-status-received-color, #5F5F5F);
 
@@ -80,7 +80,7 @@
     }
   }
 
-  .status--read {
+  :deep(.status--read) {
     span {
       color: var(--chotto-textmessage-status-read-color, #5F5F5F);
 
@@ -90,13 +90,13 @@
     }
   }
 
-  .status--pending {
+  :deep(.status--pending) {
     span {
       color: var(--chotto-textmessage-status-pending-color, #9ca3af);
     }
   }
 
-  .status--error {
+  :deep(.status--error) {
     span {
       color: var(--chotto-textmessage-status-error-color, #ef4444);
     }

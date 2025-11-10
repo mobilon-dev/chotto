@@ -74,30 +74,13 @@
 
             <span class="sticker-message__time">{{ message.time }}</span>
 
-            <Tooltip
-              v-if="getClass(message) === 'sticker-message__right' && statuses.includes(message.status)"
-              :text="statusTitle"
-              position="bottom-left"
-            >
-              <div
-                class="sticker-message__status"
-                :class="status"
-              >
-                <template v-if="message.status === 'pending'">
-                  <span class="pi pi-clock" />
-                </template>
-                <template v-else-if="message.status === 'error'">
-                  <span class="pi pi-times-circle" />
-                </template>
-                <template v-else>
-                  <span
-                    v-if="message.status !== 'sent'"
-                    class="pi pi-check"
-                  />
-                  <span class="pi pi-check" />
-                </template>
-              </div>
-            </Tooltip>
+            <MessageStatusIndicator
+              base-class="sticker-message"
+              :message-class="getClass(message)"
+              :message-status="message.status"
+              :status-class="status"
+              :status-title="statusTitle"
+            />
           </div>
         </transition>
 
@@ -203,9 +186,9 @@
 >
 import { ref, computed, inject } from 'vue';
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, Tooltip, MessageReactions } from '@/components';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, MessageReactions, MessageStatusIndicator } from '@/components';
 import { useMessageLinks, useMessageActions } from '@/hooks/messages';
-import { getStatus, statuses, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
+import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IStickerMessage } from '@/types';
 

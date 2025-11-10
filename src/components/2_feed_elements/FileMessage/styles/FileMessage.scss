@@ -99,7 +99,7 @@
     }
   }
 
-  &__status {
+  :deep(.file-message__status) {
     display: var(--chotto-filemessage-status-display, flex);
 
     span {
@@ -109,7 +109,7 @@
     }
   }
 
-  .status--received {
+  :deep(.status--received) {
     span {
       color: var(--chotto-filemessage-status-received-color, #5F5F5F);
 
@@ -119,7 +119,7 @@
     }
   }
 
-  .status--read {
+  :deep(.status--read) {
     span {
       color: var(--chotto-filemessage-status-read-color, #5F5F5F);
 
@@ -129,13 +129,13 @@
     }
   }
 
-  .status--pending {
+  :deep(.status--pending) {
     span {
       color: var(--chotto-filemessage-status-pending-color, #9ca3af);
     }
   }
 
-  .status--error {
+  :deep(.status--error) {
     span {
       color: var(--chotto-filemessage-status-error-color, #ef4444);
     }

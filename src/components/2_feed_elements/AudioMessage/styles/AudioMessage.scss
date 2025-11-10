@@ -172,7 +172,7 @@
     }
   }
 
-  &__status {
+  :deep(.audio-message__status) {
     display: var(--chotto-audiomessage-status-display, flex);
 
     span {
@@ -181,7 +181,7 @@
     }
   }
 
-  .status--received {
+  :deep(.status--received) {
     span {
       color: var(--chotto-audiomessage-status-color-received, #5F5F5F);
 
@@ -191,7 +191,7 @@
     }
   }
 
-  .status--read {
+  :deep(.status--read) {
     span {
       color: var(--chotto-audiomessage-status-color-read, #5F5F5F);
 
@@ -201,13 +201,13 @@
     }
   }
 
-  .status--pending {
+  :deep(.status--pending) {
     span {
       color: var(--chotto-audiomessage-status-color-pending, #9ca3af);
     }
   }
 
-  .status--error {
+  :deep(.status--error) {
     span {
       color: var(--chotto-audiomessage-status-color-error, #ef4444);
     }
