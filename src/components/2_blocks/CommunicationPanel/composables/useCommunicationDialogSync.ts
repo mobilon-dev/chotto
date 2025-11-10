@@ -1,5 +1,5 @@
 import { watch, type Ref, unref, type MaybeRef } from 'vue';
-import { CHANNEL_TYPES } from './useCommunicationChannels';
+import { CHANNEL_TYPES, type ChannelType } from './useCommunicationChannels';
 
 interface Dialog {
   channelId?: string;
@@ -41,7 +41,7 @@ export function useCommunicationDialogSync({
     const channelType = dialog.channelId ? dialog.channelId.split('.')[0] : null;
     const normalizedType = channelType ? normalizeChannelType(channelType) : null;
 
-    if (normalizedType && CHANNEL_TYPES.includes(normalizedType)) {
+    if (normalizedType) {
       selectedChannelType.value = normalizedType;
       const channel = channels.value.find((ch) => ch.channelId === dialog.channelId);
       selectedChannel.value = channel ?? {};
@@ -61,8 +61,11 @@ export function useCommunicationDialogSync({
   };
 }
 
-function normalizeChannelType(type: string): string | null {
+function normalizeChannelType(type: string): ChannelType | null {
   if (type.includes('waba')) return 'whatsapp';
   if (type.includes('telegrambot')) return 'telegram';
-  return type;
+  if (CHANNEL_TYPES.includes(type as ChannelType)) {
+    return type as ChannelType;
+  }
+  return null;
 }
