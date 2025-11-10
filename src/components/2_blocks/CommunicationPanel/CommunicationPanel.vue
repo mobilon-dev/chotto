@@ -68,10 +68,10 @@
           :class="['recent-attribute', { 
             'frozen-hover': isRecentAttributeHovered 
           }]"
-          @mouseenter="handleRecentAttributeMouseEnter($event)"
+          @mouseenter="onRecentAttributeMouseEnter($event)"
           @mouseleave="handleRecentAttributeMouseLeave"
           @mouseover="resetRegularAttributeHover"
-          @click="handleRecentAttributeClick()"
+          @click="handleRecentAttributeClick(recentAttribute)"
         >
           <div class="attribute-info">
             <span class="attribute-value">{{ recentAttribute?.value }}</span>
@@ -89,10 +89,10 @@
         :class="['recent-attribute', { 
           'frozen-hover': isRecentAttributeHovered 
         }]"
-        @mouseenter="handleRecentAttributeMouseEnter($event)"
+        @mouseenter="onRecentAttributeMouseEnter($event)"
         @mouseleave="handleRecentAttributeMouseLeave"
         @mouseover="resetRegularAttributeHover"
-        @click="handleRecentAttributeClick()"
+        @click="handleRecentAttributeClick(recentAttribute)"
       >
         <div class="attribute-info">
           <span class="attribute-value">{{ recentAttribute?.value }}</span>
@@ -117,7 +117,7 @@
         :class="['attribute-item', { 
           'frozen-hover': isAttributeFrozen(attribute) 
         }]"
-        @mouseenter="handleAttributeMouseEnter(attribute, $event)"
+        @mouseenter="onAttributeMouseEnter(attribute, $event)"
         @mouseleave="handleAttributeMouseLeave"
         @click="handleAttributeClick(attribute)"
       >
@@ -173,19 +173,13 @@
 <script setup>
 import { ref, watch, onMounted, onUnmounted, computed } from 'vue';
 import { Tooltip } from '@/components';
+import { useCommunicationChannels } from './composables/useCommunicationChannels';
+import { useCommunicationMenu } from './composables/useCommunicationMenu';
+import { useCommunicationAttributes } from './composables/useCommunicationAttributes';
+import { useCommunicationActions } from './composables/useCommunicationActions';
+import { useCommunicationSubMenu } from './composables/useCommunicationSubMenu';
+import { useCommunicationDialogSync } from './composables/useCommunicationDialogSync';
 
-import { 
-  CommunicationPanelPhoneIcon,
-  CommunicationPanelWhatsAppIcon,
-  CommunicationPanelTelegramIcon,
-  CommunicationPanelMaxIcon,
-  CommunicationPanelSMSIcon,
-  CommunicationPanelSubmenuPhoneIcon,
-  CommunicationPanelSubmenuWhatsAppIcon,
-  CommunicationPanelSubmenuTelegramIcon,
-  CommunicationPanelSubmenuMaxIcon,
-  CommunicationPanelSubmenuSMSIcon
-} from './icons/index.ts'
 
 const props = defineProps({
   contactAttributes: {
@@ -220,61 +214,117 @@ const emit = defineEmits(['select-attribute-channel', 'phone-call']);
 // Refs
 const panelRef = ref(null);
 const channelsPanelRef = ref(null);
-const activeChannelType = ref(null);
-const hoveredChannel = ref(null);
-const showMenu = ref(false);
-const showSubMenu = ref(false);
+/** @type {import('vue').Ref<import('./composables/useCommunicationAttributes').ContactAttribute | null>} */
 const hoveredAttribute = ref(null);
-const menuWidth = ref('0px');
+/** @type {import('vue').Ref<import('./composables/useCommunicationAttributes').ContactAttribute | null>} */
 const frozenAttribute = ref(null);
 const isRecentAttributeHovered = ref(false);
 const selectedChannelType = ref(null);
 const selectedChannel = ref({});
-const subMenuTop = ref(0);
 
-// Constants
-const CHANNEL_TYPES = ['phone', 'whatsapp', 'telegram', 'max', 'sms'];
+const channelsRef = computed(() => props.channels ?? []);
+const channelTooltipsRef = computed(() => props.channelTooltips ?? {});
 
-const channelIconsMap = {
-  phone: CommunicationPanelPhoneIcon,
-  whatsapp: CommunicationPanelWhatsAppIcon,
-  telegram: CommunicationPanelTelegramIcon,
-  max: CommunicationPanelMaxIcon,
-  sms: CommunicationPanelSMSIcon,
-};
+const {
+  channelsTypes,
+  getTooltipText,
+  getChannelTypeFromId,
+  hasMultipleChannels,
+  isChannelActive,
+  getSingleChannelForType,
+  getMenuChannelIconComponent,
+  getMenuChannelIconComponentForChannelId,
+  getSingleMenuChannelIconComponent,
+  getAvailableChannels,
+} = useCommunicationChannels({
+  channels: channelsRef,
+  channelTooltips: channelTooltipsRef,
+  selectedChannelType,
+});
 
-const menuChannelIconsMap = {
-  phone: CommunicationPanelSubmenuPhoneIcon,
-  whatsapp: CommunicationPanelSubmenuWhatsAppIcon,
-  telegram: CommunicationPanelSubmenuTelegramIcon,
-  max: CommunicationPanelSubmenuMaxIcon,
-  sms: CommunicationPanelSubmenuSMSIcon,
-};
+const {
+  activeChannelType,
+  hoveredChannel,
+  showMenu,
+  showSubMenu,
+  menuWidth,
+  updateMenuWidth,
+  handleChannelClick,
+  closeMenu,
+  handleClickOutside,
+} = useCommunicationMenu({
+  panelRef,
+  channelsPanelRef,
+  selectedChannelType,
+  frozenAttribute,
+  isRecentAttributeHovered,
+});
 
-const channelsTypes = computed(() => 
-  CHANNEL_TYPES.map(type => ({
-    type,
-    component: channelIconsMap[type]
-  }))
-);
+const contactAttributesRef = computed(() => props.contactAttributes ?? []);
+const recentAttributeChannelsRef = computed(() => props.recentAttributeChannels ?? {});
+
+const {
+  organizedContactAttributes,
+  organizeContactAttributes,
+  recentAttribute,
+  showRecentAttribute,
+  isAttributeFrozen,
+} = useCommunicationAttributes({
+  contactAttributes: contactAttributesRef,
+  recentAttributeChannels: recentAttributeChannelsRef,
+  activeChannelType,
+  frozenAttribute,
+});
+
+const {
+  handleRecentAttributeClick,
+  handleAttributeClick,
+  selectChannel,
+  availableChannels: resolveAvailableChannels,
+} = useCommunicationActions({
+  activeChannelType,
+  channels: channelsRef,
+  recentAttributeChannels: recentAttributeChannelsRef,
+  selectedChannel,
+  selectedChannelType,
+  isRecentAttributeHovered,
+  hoveredAttribute,
+  closeMenu,
+  hasMultipleChannels,
+  getSingleChannelForType,
+  getAvailableChannels,
+  emit,
+});
+
+const {
+  subMenuTop,
+  resetRegularAttributeHover,
+  handleRecentAttributeMouseEnter: baseHandleRecentAttributeMouseEnter,
+  handleRecentAttributeMouseLeave,
+  handleAttributeMouseEnter: baseHandleAttributeMouseEnter,
+  handleAttributeMouseLeave,
+  keepSubMenuOpen,
+  closeSubMenu,
+  alignSubMenuWithTarget,
+} = useCommunicationSubMenu({
+  activeChannelType,
+  showSubMenu,
+  frozenAttribute,
+  hoveredAttribute,
+  isRecentAttributeHovered,
+  hasMultipleChannels,
+});
+
+useCommunicationDialogSync({
+  selectedChannelType,
+  selectedChannel,
+  channels: channelsRef,
+  selectedDialog: computed(() => props.selectedDialog ?? null),
+});
 
 // Computed properties
-const organizedContactAttributes = ref(
-  Object.fromEntries(CHANNEL_TYPES.map(type => [type, []]))
-);
-
-const recentAttribute = computed(() => 
-  activeChannelType.value ? getRecentAttributeByType(activeChannelType.value) : null
-);
-
-const showRecentAttribute = computed(() =>
-  activeChannelType.value !== 'phone' &&
-  recentAttribute.value &&
-  props.recentAttributeChannels[activeChannelType.value]?.channelId
-);
-
 const availableChannels = computed(() =>
-  activeChannelType.value ? getAvailableChannels(activeChannelType.value) : []
+  resolveAvailableChannels()
 );
 
 const shouldShowSubMenu = computed(() =>
@@ -286,307 +336,24 @@ const shouldShowSubMenu = computed(() =>
 );
 
 // Methods
-const defaultTooltips = {
-  phone: 'Позвонить',
-  whatsapp: 'Выберите контакт и канал для отправки сообщения',
-  telegram: 'Выберите контакт и канал для отправки сообщения',
-  max: 'Выберите контакт и канал для отправки сообщения',
-  sms: 'Выберите контакт и канал для отправки сообщения',
-};
-
-const getTooltipText = (channelType) => {
-  return props.channelTooltips?.[channelType] ?? defaultTooltips[channelType] ?? '';
-};
-
-const getChannelTypeFromId = (channelId) => {
-  if (!channelId) return null;
-  
-  const [type] = channelId.split('.');
-  
-  if (type.includes('waba')) return 'whatsapp';
-  if (type.includes('telegrambot')) return 'telegram';
-  
-  return type;
-};
-
-const hasMultipleChannels = (channelType) => {
-  return props.channels.filter(channel => 
-    getChannelTypeFromId(channel.channelId) === channelType
-  ).length > 1;
-};
-
-const isChannelActive = (channelType) => {
-  return selectedChannelType.value === channelType;
-};
-
-const getSingleChannelForType = (channelType) => {
-  const channelsForType = props.channels.filter(channel => 
-    getChannelTypeFromId(channel.channelId) === channelType
-  );
-  return channelsForType.length === 1 ? channelsForType[0] : null;
-};
-
-const getMenuChannelIconComponent = (channelType) => {
-  return menuChannelIconsMap[channelType] || null;
-};
-
-const getMenuChannelIconComponentForChannelId = (channelId) => {
-  const channelType = getChannelTypeFromId(channelId);
-  return getMenuChannelIconComponent(channelType);
-};
-
-const getSingleMenuChannelIconComponent = (channelType) => {
-  const singleChannel = getSingleChannelForType(channelType);
-  return singleChannel ? getMenuChannelIconComponentForChannelId(singleChannel.channelId) : getMenuChannelIconComponent(channelType);
-};
-
-const organizeContactAttributes = () => {
-  const organized = Object.fromEntries(CHANNEL_TYPES.map(type => [type, []]));
-  
-  props.contactAttributes.forEach(attr => {
-    if (attr.type === 'telegram') {
-      organized.telegram.push(attr);
-    } else if (attr.type === 'phone') {
-      ['whatsapp', 'max', 'sms', 'phone'].forEach(type => {
-        organized[type].push(attr);
-      });
-    }
-  });
-  
-  organizedContactAttributes.value = organized;
-};
-
-const getAvailableChannels = (channelType) => {
-  return props.channels.filter(channel => 
-    getChannelTypeFromId(channel.channelId) === channelType
-  );
-};
-
-const getRecentAttributeByType = (channelType) => {
-  const recentAttributeId = props.recentAttributeChannels[channelType]?.attributeId;
-  return props.contactAttributes.find(attr => attr.id === recentAttributeId);
-};
-
-const isAttributeFrozen = (attribute) => {
-  return frozenAttribute.value?.id === attribute.id;
-};
-
-// Обработчик клика по каналу
-const handleChannelClick = (channelType) => {
-  // Если канал уже выбран, просто открываем/закрываем меню
-  if (selectedChannelType.value === channelType) {
-    if (activeChannelType.value === channelType) {
-      closeMenu();
-    } else {
-      activeChannelType.value = channelType;
-      showMenu.value = true;
-      showSubMenu.value = false;
-      frozenAttribute.value = null;
-      isRecentAttributeHovered.value = false;
-      updateMenuWidth();
-    }
-  } else {
-    // Если кликаем на другой канал, просто открываем меню без установки активного состояния
-    activeChannelType.value = channelType;
-    showMenu.value = true;
-    showSubMenu.value = false;
-    frozenAttribute.value = null;
-    isRecentAttributeHovered.value = false;
-    updateMenuWidth();
+// Обработчики действий и подменю реализованы в соответствующих composables
+const onRecentAttributeMouseEnter = (event) => {
+  const target = baseHandleRecentAttributeMouseEnter(event.currentTarget);
+  if (target instanceof HTMLElement) {
+    alignSubMenuWithTarget(panelRef, target);
   }
 };
 
-const closeMenu = () => {
-  showMenu.value = false;
-  activeChannelType.value = null;
-  frozenAttribute.value = null;
-  isRecentAttributeHovered.value = false;
-  showSubMenu.value = false;
-};
-
-const handleRecentAttributeClick = () => {
-  if (activeChannelType.value === 'phone') {
-    handlePhoneCall(recentAttribute.value);
-  } else if (!hasMultipleChannels(activeChannelType.value)) {
-    const singleChannel = getSingleChannelForType(activeChannelType.value);
-    if (recentAttribute.value && singleChannel) {
-      selectSingleChannel(recentAttribute.value, singleChannel.channelId);
-    }
-  } else {
-    const recentChannelId = props.recentAttributeChannels[activeChannelType.value]?.channelId;
-    if (recentAttribute.value && recentChannelId) {
-      selectChannelForRecentAttribute(recentChannelId);
-    }
-  }
-};
-
-const handleAttributeClick = (attribute) => {
-  if (activeChannelType.value === 'phone') {
-    handlePhoneCall(attribute);
-  } else if (!hasMultipleChannels(activeChannelType.value)) {
-    const singleChannel = getSingleChannelForType(activeChannelType.value);
-    if (singleChannel) {
-      selectSingleChannel(attribute, singleChannel.channelId);
-    }
-  }
-};
-
-const handlePhoneCall = (attribute) => {
-  if (!attribute) return;
-  emit('phone-call', {
-    attributeId: attribute.id,
-    phoneNumber: attribute.data
-  });
-  closeMenu();
-};
-
-const selectSingleChannel = (attribute, channelId) => {
-  emit('select-attribute-channel', {
-    attributeId: attribute.id,
-    channelId: channelId,
-  });
-  selectedChannelType.value = activeChannelType.value;
-  selectedChannel.value = props.channels.find(ch => ch.channelId === channelId);
-  console.log('TEST selectedChannel.value', selectedChannel.value)
-  closeMenu();
-};
-
-const selectChannelForRecentAttribute = (channelId) => {
-  if (recentAttribute.value) {
-    emit('select-attribute-channel', {
-      attributeId: recentAttribute.value.id,
-      channelId: channelId,
-    });
-  }
-  selectedChannelType.value = activeChannelType.value;
-  selectedChannel.value = props.channels.find(ch => ch.channelId === channelId);
-  console.log('TEST selectedChannel.value', selectedChannel.value)
-  closeMenu();
-};
-
-const handleRecentAttributeMouseEnter = (event) => {
-  if (hasMultipleChannels(activeChannelType.value)) {
-    resetRegularAttributeHover();
-    isRecentAttributeHovered.value = true;
-    showSubMenu.value = true;
-    alignSubMenuWithTarget(event.currentTarget);
-  }
-};
-
-const handleRecentAttributeMouseLeave = () => {
-  if (!showSubMenu.value) {
-    isRecentAttributeHovered.value = false;
-  }
-};
-
-const handleAttributeMouseEnter = (attribute, event) => {
-  if (hasMultipleChannels(activeChannelType.value)) {
-    isRecentAttributeHovered.value = false;
-    hoveredAttribute.value = attribute;
-    showSubMenu.value = true;
-    frozenAttribute.value = attribute;
-    alignSubMenuWithTarget(event.currentTarget);
-  }
-};
-
-const handleAttributeMouseLeave = () => {
-  if (!showSubMenu.value) {
-    frozenAttribute.value = null;
-  }
-};
-
-const resetRegularAttributeHover = () => {
-  showSubMenu.value = false;
-  frozenAttribute.value = null;
-  hoveredAttribute.value = null;
-};
-
-const keepSubMenuOpen = () => {
-  showSubMenu.value = true;
-};
-
-const closeSubMenu = () => {
-  showSubMenu.value = false;
-  frozenAttribute.value = null;
-  isRecentAttributeHovered.value = false;
-};
-
-const selectChannel = (channelId) => {
-  if (isRecentAttributeHovered.value) {
-    selectChannelForRecentAttribute(channelId);
-  } else if (hoveredAttribute.value) {
-    emit('select-attribute-channel', {
-      attributeId: hoveredAttribute.value.id,
-      channelId: channelId,
-    });
-    selectedChannelType.value = activeChannelType.value;
-    selectedChannel.value = props.channels.find(ch => ch.channelId === channelId);
-    console.log('TEST selectedChannel.value', selectedChannel.value)
-  }
-  closeMenu();
-};
-
-const updateMenuWidth = () => {
-  if (channelsPanelRef.value) {
-    menuWidth.value = `${channelsPanelRef.value.offsetWidth}px`;
-  }
-};
-
-const alignSubMenuWithTarget = (targetEl) => {
-  try {
-    requestAnimationFrame(() => {
-      const menuEl = panelRef.value?.querySelector('.attributes-menu');
-      const headerEl = panelRef.value?.querySelector('.sub-menu-header');
-      const subMenuEl = panelRef.value?.querySelector('.sub-menu');
-      if (!menuEl || !targetEl) {
-        subMenuTop.value = 0;
-        return;
-      }
-      const menuRect = menuEl.getBoundingClientRect();
-      const itemRect = targetEl.getBoundingClientRect();
-      let headerBlock = 0;
-      if (headerEl) {
-        const headerRect = headerEl.getBoundingClientRect();
-        const cs = getComputedStyle(headerEl);
-        const mb = parseFloat(cs.marginBottom || '0');
-        headerBlock = headerRect.height + (isNaN(mb) ? 0 : mb);
-      }
-      let subMenuPadTop = 0;
-      if (subMenuEl) {
-        const smcs = getComputedStyle(subMenuEl);
-        subMenuPadTop = parseFloat(smcs.paddingTop || '0') || 0;
-      }
-      subMenuTop.value = itemRect.top - menuRect.top - headerBlock - subMenuPadTop - 2;
-    });
-  } catch {
-    subMenuTop.value = 0;
-  }
-};
-
-const handleClickOutside = (event) => {
-  if (panelRef.value && !panelRef.value.contains(event.target)) {
-    closeMenu();
+const onAttributeMouseEnter = (attribute, event) => {
+  const target = baseHandleAttributeMouseEnter(attribute, event.currentTarget);
+  if (target instanceof HTMLElement) {
+    alignSubMenuWithTarget(panelRef, target);
   }
 };
 
 // Watchers
-watch(() => props.contactAttributes, organizeContactAttributes, { deep: true });
-watch(() => props.selectedDialog, (newDialog) => {
-  updateSelectedChannelFromDialog(newDialog);
+watch(() => props.selectedDialog, () => {
 }, { deep: true });
-const updateSelectedChannelFromDialog = (dialog) => {
-  if (!dialog) {
-    selectedChannelType.value = null;
-    selectedChannel.value = {};
-    return;
-  }
-  
-  const channelType = getChannelTypeFromId(dialog.channelId);
-  if (channelType && CHANNEL_TYPES.includes(channelType)) {
-    selectedChannelType.value = channelType;
-    selectedChannel.value = props.channels.find(ch => ch.channelId === dialog.channelId);
-  }
-};
 
 // Lifecycle
 onMounted(() => {
@@ -594,7 +361,6 @@ onMounted(() => {
   window.addEventListener('resize', updateMenuWidth);
   document.addEventListener('click', handleClickOutside);
   organizeContactAttributes();
-  updateSelectedChannelFromDialog(props.selectedDialog);
 });
 
 onUnmounted(() => {
