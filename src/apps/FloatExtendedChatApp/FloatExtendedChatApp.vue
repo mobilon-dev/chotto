@@ -31,12 +31,16 @@
 
           <template #second-col>
             <UserProfile :user="userProfile" />
-            <ChatList
-              :chats="chatsStore.chats"
-              filter-enabled
-              @select="selectChat"
-              @action="chatAction"
-            />
+          <ChatList
+            :chats="chatsStore.chats"
+            filter-enabled
+            @select="selectChat"
+            @action="chatAction"
+          >
+            <template #header>
+              <ChatListHeader title="Чаты" />
+            </template>
+          </ChatList>
           </template>
 
           <template #third-col>
@@ -105,6 +109,7 @@ import {
   ChatInfo,
   ChatInput,
   ChatList,
+  ChatListHeader,
   Feed,
   UserProfile,
   ThemeMode,

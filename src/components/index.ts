@@ -87,6 +87,7 @@ export { default as SelectUser } from './2_modals/SelectUser/SelectUser.vue';
 
 // 3_compounds
 export { default as ChatInput } from './3_compounds/ChatInput/ChatInput.vue';
+export { default as ChatListHeader } from './3_compounds/ChatList/ChatListHeader.vue';
 export { default as ChatList } from './3_compounds/ChatList/ChatList.vue';
 export { default as Feed } from './3_compounds/Feed/Feed.vue';
 export { default as SideBar } from './3_compounds/SideBar/SideBar.vue';

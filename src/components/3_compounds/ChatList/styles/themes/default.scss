@@ -10,7 +10,7 @@
   // Filter
   --chotto-chatlist-filter-margin: 0 15px 10px 15px;
   
-  // Items container
+  // Items container  
   --chotto-chatlist-items-display: block;
   --chotto-chatlist-items-scroll-behavior: smooth;
   --chotto-chatlist-items-height: 100%;
@@ -39,7 +39,7 @@
   --chotto-chatlist-title-container-justify: space-between;
   --chotto-chatlist-title-container-align: center;
   --chotto-chatlist-title-column-gap: 50px;
-  --chotto-chatlist-title-container-padding: 16px 0 16px 15px;
+  --chotto-chatlist-title-container-padding: 16px 15px 16px 15px;
   
   // Title
   --chotto-chatlist-title-font-family: var(--chotto-theme-header-font, var(--chotto-theme-font-family));

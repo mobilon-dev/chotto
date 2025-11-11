@@ -32,6 +32,9 @@
             @action="chatAction"
             @load-more-chats="loadMoreChats"
           >
+            <template #header>
+              <ChatListHeader title="Чаты" />
+            </template>
             <template #sidebar>
               <SideBar
                 v-if="!sidebarFirstCol"
@@ -192,9 +195,10 @@ import { onMounted, ref, computed, unref } from "vue";
 import moment from 'moment';
 
 import {
-  ChatInfo,
+  ChatInfo, 
   ChatInput,
   ChatList,
+  ChatListHeader, 
   Feed,
   UserProfile,
   ThemeMode,

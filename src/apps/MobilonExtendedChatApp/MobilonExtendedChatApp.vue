@@ -26,8 +26,6 @@
             ref="refChatList"
             :chats="chatsStore.chats"
             filter-enabled
-            :title-enabled="true"
-            :title="'Mobilon One'"
             :dialog-tabs="dialogTabs"
             :active-tab-id="activeTabId"
             @select="selectChat"
@@ -36,16 +34,21 @@
             @load-more-chats="loadMoreChats"
             @tab-click="handleTabClick"
           >
-            <template #actions>
-              <!-- <h2>Чаты</h2> -->
-              <div class="actions">
-                <button
-                  title="Добавить чат с контактом"
-                  @click="createChat"
-                >
-                  <i class="pi pi-plus" />
-                </button>
-              </div>
+            <template #header>
+              <ChatListHeader
+                title="Mobilon One"
+              >
+                <template #actions>
+                  <div class="actions">
+                    <button
+                      title="Добавить чат с контактом"
+                      @click="createChat"
+                    >
+                      <i class="pi pi-plus" />
+                    </button>
+                  </div>
+                </template>
+              </ChatListHeader>
             </template>
           </ChatList>
           <FeedSearch 
@@ -301,6 +304,7 @@ import {
   MenuIcon,
   ChatInfo,
   ChatInput,
+  ChatListHeader,
   ChatList,
   Feed,
   // UserProfile,

@@ -12,7 +12,11 @@
             filter-enabled
             @select="selectChat"
             @action="chatAction"
-          />
+          >
+            <template #header>
+              <ChatListHeader title="Чаты" />
+            </template>
+          </ChatList>
           <ThemeMode
             :themes="themes"
             :show="true"
@@ -94,6 +98,7 @@ import {
   ChatInfo,
   ChatInput,
   ChatList,
+  ChatListHeader,
   Feed,
   UserProfile,
   FileUploader,

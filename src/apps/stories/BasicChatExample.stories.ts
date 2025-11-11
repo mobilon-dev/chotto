@@ -7,6 +7,7 @@ import ChatWrapper from '../../components/4_layouts/ChatWrapper/ChatWrapper.vue'
 import Feed from '../../components/3_compounds/Feed/Feed.vue';
 import ChatInput from '../../components/3_compounds/ChatInput/ChatInput.vue';
 import ChatList from '../../components/3_compounds/ChatList/ChatList.vue';
+import ChatListHeader from '../../components/3_compounds/ChatList/ChatListHeader.vue';
 import ChatInfo from '../../components/2_elements/ChatInfo/ChatInfo.vue';
 import ThemeMode from '../../components/2_elements/ThemeMode/ThemeMode.vue';
 import ButtonEmojiPicker from '../../components/2_chatinput_elements/ButtonEmojiPicker/ButtonEmojiPicker.vue';
@@ -185,6 +186,7 @@ export const BasicExample: Story = {
       Feed, 
       ChatInput, 
       ChatList,
+      ChatListHeader,
       ChatInfo,
       ThemeMode,
       ButtonEmojiPicker,
@@ -325,11 +327,13 @@ export const BasicExample: Story = {
             <ChatList 
               :chats="chats"
               filter-enabled
-              title-enabled
-              title="Чаты"
               @select="handleSelectChat"
               @action="handleChatAction"
-            />
+            >
+              <template #header>
+                <ChatListHeader title="Чаты" />
+              </template>
+            </ChatList>
             <ThemeMode 
               :themes="themes" 
               :show="true" 

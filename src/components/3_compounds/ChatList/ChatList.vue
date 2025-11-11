@@ -1,17 +1,6 @@
 <template>
   <div class="chat-list">
-    <div
-      class="chat-list__title-container"
-    >
-      <h2
-        v-if="titleEnabled"
-        class="chat-list__title"
-      >
-        {{ props.title }}
-      </h2>
-
-      <slot name="actions" />
-    </div>
+    <slot name="header" />
 
 
     <!--  ???? не понятно зачем этот слот  -->
@@ -140,14 +129,6 @@ const props = defineProps({
   filterEnabled: {
     type: Boolean,
     required: true,
-  },
-  titleEnabled: {
-    type: Boolean,
-    default: true,
-  },
-  title: {
-    type: String,
-    default: 'Чаты',
   },
   filterQuery: {
     type: String,

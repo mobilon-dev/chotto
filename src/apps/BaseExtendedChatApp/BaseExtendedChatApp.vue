@@ -24,7 +24,11 @@
             filter-enabled
             @select="selectChat"
             @action="chatAction"
-          />
+          >
+            <template #header>
+              <ChatListHeader title="Чаты" />
+            </template>
+          </ChatList>
           <FeedSearch
             v-if="isOpenSearchPanel"
             @search="searchMessages"
@@ -155,6 +159,7 @@ import {
   ChatInfo,
   ChatInput,
   ChatList,
+  ChatListHeader,
   Feed,
   UserProfile,
   ThemeMode,

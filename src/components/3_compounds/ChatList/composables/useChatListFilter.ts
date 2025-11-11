@@ -27,8 +27,6 @@ type ChatItem = {
 type ChatListFilterProps = {
   chats: ChatItem[];
   filterEnabled: boolean;
-  titleEnabled?: boolean;
-  title?: string;
   filterQuery?: string | null;
   dialogTabs?: unknown[];
   activeTabId?: string;
