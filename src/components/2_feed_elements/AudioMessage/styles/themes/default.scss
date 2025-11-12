@@ -1,17 +1,22 @@
 [data-theme="light"] {
-  --chotto-audiomessage-pbc-background-color: #E5E5E5;
-  --chotto-audiomessage-pb-background-color: #007CFF;
-  --chotto-audiomessage-transcript-delimiter-color: #CCCCCC;
+  --chotto-audiomessage-pbc-background-color: #DBDDDC;
+  --chotto-audiomessage-pb-background-color: #5F5F5F;
+  --chotto-audiomessage-transcript-delimiter-color: #d4d4d4;
 
   // AudioMessage content variables
   --chotto-audiomessage-content-position: relative;
   --chotto-audiomessage-content-display: grid;
   --chotto-audiomessage-content-grid-template-columns: min-content 1fr;
   --chotto-audiomessage-content-column-gap: 12px;
-  --chotto-audiomessage-content-width: 50%;
-  --chotto-audiomessage-content-max-width: 25rem;
-  --chotto-audiomessage-content-min-width: 25rem;
-  --chotto-audiomessage-content-padding: 10px 10px 4px 16px;
+  --chotto-audiomessage-content-width: 415px;
+  --chotto-audiomessage-content-max-width: 415px;
+  --chotto-audiomessage-content-min-width: 415px;
+  --chotto-audiomessage-content-min-height: 78px;
+  --chotto-audiomessage-content-height: auto;
+  --chotto-audiomessage-content-padding-top: 14px;
+  --chotto-audiomessage-content-padding-right: 0;
+  --chotto-audiomessage-content-padding-bottom: 8px;
+  --chotto-audiomessage-content-padding-left: 14px;
   --chotto-audiomessage-content-border-radius: var(--chotto-theme-message-border-radius, 14px);
 
   // Left arrow variables
@@ -42,25 +47,33 @@
   --chotto-audiomessage-audio-container-position: relative;
   --chotto-audiomessage-audio-container-display: grid;
   --chotto-audiomessage-audio-container-grid-template-columns: min-content 1fr;
-  --chotto-audiomessage-audio-container-column-gap: 12px;
-  --chotto-audiomessage-audio-container-max-width: 25rem;
+  --chotto-audiomessage-audio-container-column-gap: 15px;
   --chotto-audiomessage-audio-container-border-radius: 14px;
-  --chotto-audiomessage-audio-container-padding: 10px 30px 10px 0px;
+  --chotto-audiomessage-audio-container-padding: 0 30px 0 0;
   --chotto-audiomessage-audio-container-grid-column: 1/3;
+  --chotto-audiomessage-audio-container-align-items: center;
 
   // Play/Pause button variables
-  --chotto-audiomessage-play-pause-border: none;
+  --chotto-audiomessage-play-pause-border: 1px solid #DBDDDC;
   --chotto-audiomessage-play-pause-cursor: pointer;
   --chotto-audiomessage-play-pause-position: relative;
   --chotto-audiomessage-play-pause-grid-row: 1 / 3;
-  --chotto-audiomessage-play-pause-width: 38px;
-  --chotto-audiomessage-play-pause-height: 38px;
+  --chotto-audiomessage-play-pause-width: 50px;
+  --chotto-audiomessage-play-pause-height: 50px;
   --chotto-audiomessage-play-pause-border-radius: 50%;
-  --chotto-audiomessage-type-icon-background-color: var(--chotto-theme-message-type-icon-bg-color);
+  --chotto-audiomessage-type-icon-background-color: var(--chotto-theme-primary-color);
   --chotto-audiomessage-type-icon-font-size: var(--chotto-theme-button-icon-size);
   --chotto-audiomessage-type-icon-color: var(--chotto-theme-message-type-icon-color);
+  --chotto-audiomessage-play-pause-display: flex;
+  --chotto-audiomessage-play-pause-align-items: center;
+  --chotto-audiomessage-play-pause-justify-content: center;
 
-  // Play/Pause button span variables
+  // Play/Pause icon variables
+  --chotto-audiomessage-play-pause-icon-display: flex;
+  --chotto-audiomessage-play-pause-icon-align-items: center;
+  --chotto-audiomessage-play-pause-icon-justify-content: center;
+
+  // Play/Pause button span variables (legacy, kept for compatibility)
   --chotto-audiomessage-play-pause-span-display: flex;
   --chotto-audiomessage-play-pause-span-position: absolute;
   --chotto-audiomessage-play-pause-span-top: 50%;
@@ -71,23 +84,40 @@
   --chotto-audiomessage-progress-bar-webkit-appearance: none;
   --chotto-audiomessage-progress-bar-appearance: none;
   --chotto-audiomessage-progress-bar-cursor: pointer;
-  --chotto-audiomessage-progress-bar-height: 10px;
-  --chotto-audiomessage-progress-bar-overflow: hidden;
+  --chotto-audiomessage-progress-bar-height: 1px;
+  --chotto-audiomessage-progress-bar-overflow: visible;
   --chotto-audiomessage-progress-bar-border-radius: 3px;
-  --chotto-audiomessage-progress-bar-margin-top: 5px;
+  --chotto-audiomessage-progress-bar-margin-top: 0;
   --chotto-audiomessage-progress-bar-margin-left: -1px;
+  --chotto-audiomessage-progress-bar-track-height: 1px;
+  --chotto-audiomessage-progress-bar-progress-background: #DBDDDC;
+  --chotto-audiomessage-progress-bar-flex: 0 0 auto;
+  --chotto-audiomessage-progress-bar-width: 250px;
+
+  // Progress wrapper variables
+  --chotto-audiomessage-progress-wrapper-grid-column: 2;
+  --chotto-audiomessage-progress-wrapper-grid-row: 1 / 3;
+  --chotto-audiomessage-progress-wrapper-display: flex;
+  --chotto-audiomessage-progress-wrapper-align-items: center;
+  --chotto-audiomessage-progress-wrapper-column-gap: 15px;
+  --chotto-audiomessage-progress-wrapper-align-self: center;
 
   // Progress bar thumb variables
   --chotto-audiomessage-progress-bar-thumb-width: 10px;
   --chotto-audiomessage-progress-bar-thumb-height: 10px;
   --chotto-audiomessage-progress-bar-thumb-appearance: none;
-  --chotto-audiomessage-progress-bar-thumb-border: 0;
-  --chotto-audiomessage-progress-bar-thumb-border-radius: 0;
-  --chotto-audiomessage-progress-bar-thumb-box-shadow: -10000px 0 0 10000px #007CFF;
+  --chotto-audiomessage-progress-bar-thumb-border: none;
+  --chotto-audiomessage-progress-bar-thumb-border-radius: 50%;
+  --chotto-audiomessage-progress-bar-thumb-box-shadow: none;
+  --chotto-audiomessage-progress-bar-thumb-margin-top: -4.5px;
 
   // Player controls variables
+  --chotto-audiomessage-player-controls-grid-column: 2;
+  --chotto-audiomessage-player-controls-grid-row: 2;
   --chotto-audiomessage-player-controls-display: flex;
   --chotto-audiomessage-player-controls-justify-content: space-between;
+  --chotto-audiomessage-player-controls-margin-top: 6px;
+  --chotto-audiomessage-player-controls-extra-offset: 5px;
 
   // Speed button container variables
   --chotto-audiomessage-speed-btn-container-display: flex;
@@ -98,31 +128,36 @@
   --chotto-audiomessage-speed-btn-background-color: transparent;
   --chotto-audiomessage-speed-btn-border: 0;
   --chotto-audiomessage-speed-btn-width: 25px;
-  --chotto-audiomessage-speed-btn-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-audiomessage-speed-btn-font-size: 16px;
   --chotto-audiomessage-speed-btn-font-weight: 400;
+  --chotto-audiomessage-speed-btn-text-color: #007CFFCC;
   --chotto-audiomessage-speed-btn-hover-cursor: pointer;
   --chotto-audiomessage-speed-btn-hover-font-weight: 600;
   --chotto-audiomessage-speed-btn-selected-font-weight: 600;
 
   // Remaining time variables
-  --chotto-audiomessage-remaining-time-grid-column: 2;
-  --chotto-audiomessage-remaining-time-margin-bottom: -10px;
-  --chotto-audiomessage-remaining-time-height: fit-content;
-  --chotto-audiomessage-remaining-time-font-size: var(--chotto-theme-small-text-font-size);
+  --chotto-audiomessage-time-margin: 0;
+  --chotto-audiomessage-time-font-size: 14px;
+  --chotto-audiomessage-time-font-weight: 400;
+  --chotto-audiomessage-time-color: #5F5F5F;
+  --chotto-audiomessage-duration-margin-left: auto;
+  --chotto-audiomessage-duration-text-align: right;
 
   // Avatar variables
-  --chotto-audiomessage-avatar-align-self: center;
+  --chotto-audiomessage-avatar-align-self: top;
   --chotto-audiomessage-avatar-object-fit: cover;
   --chotto-audiomessage-avatar-min-width: var(--chotto-theme-avatar-small-size);
   --chotto-audiomessage-avatar-min-height: var(--chotto-theme-avatar-small-size);
   --chotto-audiomessage-avatar-border-radius: 50%;
 
   // Info container variables
-  --chotto-audiomessage-info-container-grid-column: 1 / 3;
-  --chotto-audiomessage-info-container-margin-left: auto;
+  --chotto-audiomessage-info-container-position: absolute;
+  --chotto-audiomessage-info-container-right: 5px;
+  --chotto-audiomessage-info-container-bottom: 0;
   --chotto-audiomessage-info-container-display: flex;
   --chotto-audiomessage-info-container-align-items: center;
   --chotto-audiomessage-info-container-column-gap: 4px;
+  --chotto-audiomessage-info-container-pointer-events: auto;
 
   // Subtext variables
   --chotto-audiomessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
@@ -167,12 +202,13 @@
   --chotto-audiomessage-menu-button-position: absolute;
   --chotto-audiomessage-menu-button-background-color: transparent;
   --chotto-audiomessage-menu-button-border: none;
-  --chotto-audiomessage-menu-button-transform: translateY(-50%);
+  --chotto-audiomessage-menu-button-transform: none;
   --chotto-audiomessage-menu-button-cursor: pointer;
   --chotto-audiomessage-menu-button-transition: 0.2s;
   --chotto-audiomessage-menu-button-icon-color: var(--chotto-theme-button-color-active);
   --chotto-audiomessage-menu-button-icon-size: var(--chotto-theme-button-icon-size);
   --chotto-audiomessage-menu-button-icon-color-hover: var(--chotto-theme-button-color-hover);
+  --chotto-audiomessage-menu-button-z-index: 1;
 
   // Context menu variables
   --chotto-audiomessage-context-menu-position: absolute;
@@ -218,11 +254,17 @@
   --chotto-audiomessage-left-subtext-margin: 0 0 2px 10px;
   --chotto-audiomessage-left-content-grid-column: 2;
   --chotto-audiomessage-left-content-avatar-indent-margin-left: calc(40px + 12px);
-  --chotto-audiomessage-left-menu-button-top: 50%;
-  --chotto-audiomessage-left-menu-button-right: -40px;
-  --chotto-audiomessage-left-context-menu-top: 50%;
-  --chotto-audiomessage-left-context-menu-left: 100%;
-  --chotto-audiomessage-left-context-menu-margin-top: 20px;
+  --chotto-audiomessage-left-menu-button-top: 1px;
+  --chotto-audiomessage-left-menu-button-right: -20px;
+  --chotto-audiomessage-left-menu-button-bottom: auto;
+  --chotto-audiomessage-left-menu-button-left: auto;
+  --chotto-audiomessage-left-context-menu-top: 30%;
+  --chotto-audiomessage-left-context-menu-left: 70%;
+  --chotto-audiomessage-left-context-menu-margin-top: 0;
+  --chotto-audiomessage-left-context-menu-width: 214px;
+  --chotto-audiomessage-left-context-menu-height: 80px;
+  --chotto-audiomessage-left-context-menu-row-gap: 0;
+  --chotto-audiomessage-left-context-menu-padding: 8px 0 8px 0;
 
   // Right layout variables
   --chotto-audiomessage-right-grid-template-columns: 1fr min-content;
@@ -235,11 +277,17 @@
   --chotto-audiomessage-right-content-grid-column: 1;
   --chotto-audiomessage-right-content-margin-left: auto;
   --chotto-audiomessage-right-content-avatar-indent-margin-right: calc(40px + 12px);
-  --chotto-audiomessage-right-menu-button-top: 50%;
-  --chotto-audiomessage-right-menu-button-left: -40px;
-  --chotto-audiomessage-right-context-menu-top: 50%;
-  --chotto-audiomessage-right-context-menu-right: 100%;
-  --chotto-audiomessage-right-context-menu-margin-top: 20px;
+  --chotto-audiomessage-right-menu-button-top: 1px;
+  --chotto-audiomessage-right-menu-button-left: auto;
+  --chotto-audiomessage-right-menu-button-right: -20px;
+  --chotto-audiomessage-right-menu-button-bottom: auto;
+  --chotto-audiomessage-right-context-menu-top: 30%;
+  --chotto-audiomessage-right-context-menu-right: -7%;
+  --chotto-audiomessage-right-context-menu-margin-top: 0;
+  --chotto-audiomessage-right-context-menu-width: 214px;
+  --chotto-audiomessage-right-context-menu-height: 80px;
+  --chotto-audiomessage-right-context-menu-row-gap: 0;
+  --chotto-audiomessage-right-context-menu-padding: 8px 0 8px 0;
 
   // Modal variables
   --chotto-audiomessage-modal-position: absolute;
@@ -276,6 +324,15 @@
   --chotto-audiomessage-modal-close-button-cursor: pointer;
   --chotto-audiomessage-modal-close-button-icon-color: var(--chotto-theme-secondary-text-color);
   --chotto-audiomessage-modal-close-button-icon-size: var(--chotto-theme-button-icon-size);
+
+  // MessageReactions variables
+  --chotto-audiomessage-reactions-grid-column: 1 / 3;
+  --chotto-audiomessage-reactions-margin-top: 8px;
+  --chotto-audiomessage-reactions-margin-bottom: 0;
+  --chotto-audiomessage-reactions-flex-wrap: wrap;
+  --chotto-audiomessage-reactions-max-width: 100%;
+  --chotto-audiomessage-reactions-padding-right: 5px;
+  --chotto-audiomessage-reactions-padding-bottom: 10px;
 
   // Animation variables
   --chotto-audiomessage-v-enter-active-transition: all 0.1s ease-out;

@@ -4,11 +4,16 @@
     display: var(--chotto-audiomessage-content-display, grid);
     grid-template-columns: var(--chotto-audiomessage-content-grid-template-columns, min-content 1fr);
     column-gap: var(--chotto-audiomessage-content-column-gap, 12px);
-    width: var(--chotto-audiomessage-content-width, 50%);
-    max-width: var(--chotto-audiomessage-content-max-width, 25rem);
-    min-width: var(--chotto-audiomessage-content-min-width, 25rem);
+    width: var(--chotto-audiomessage-content-width, 415px);
+    max-width: var(--chotto-audiomessage-content-max-width, 415px);
+    min-width: var(--chotto-audiomessage-content-min-width, 415px);
+    min-height: var(--chotto-audiomessage-content-min-height, 78px);
+    height: var(--chotto-audiomessage-content-height, auto);
     border-radius: var(--chotto-audiomessage-content-border-radius, 14px);
-    padding: var(--chotto-audiomessage-content-padding, 10px 10px 4px 16px);
+    padding-top: var(--chotto-audiomessage-content-padding-top, 14px);
+    padding-right: var(--chotto-audiomessage-content-padding-right, 0);
+    padding-bottom: var(--chotto-audiomessage-content-padding-bottom, 0);
+    padding-left: var(--chotto-audiomessage-content-padding-left, 14px);
   }
 
     &__left .audio-message__content.is-first::before {
@@ -39,67 +44,118 @@
     position: var(--chotto-audiomessage-audio-container-position, relative);
     display: var(--chotto-audiomessage-audio-container-display, grid);
     grid-template-columns: var(--chotto-audiomessage-audio-container-grid-template-columns, min-content 1fr);
-    column-gap: var(--chotto-audiomessage-audio-container-column-gap, 12px);
-    max-width: var(--chotto-audiomessage-audio-container-max-width, 25rem);
+    column-gap: var(--chotto-audiomessage-audio-container-column-gap, 15px);
+    width: var(--chotto-audiomessage-audio-container-width, 100%);
+    max-width: var(--chotto-audiomessage-audio-container-max-width, 415px);
     border-radius: var(--chotto-audiomessage-audio-container-border-radius, 14px);
-    padding: var(--chotto-audiomessage-audio-container-padding, 10px 30px 10px 0px);
+    padding: var(--chotto-audiomessage-audio-container-padding, 0 30px 0 0);
+    margin: var(--chotto-audiomessage-audio-container-margin, 0);
     grid-column: var(--chotto-audiomessage-audio-container-grid-column, 1/3);
+    align-items: var(--chotto-audiomessage-audio-container-align-items, center);
+    height: fit-content;
   }
 
   &__play,
   &__pause {
-    border: var(--chotto-audiomessage-play-pause-border, none);
+    border: var(--chotto-audiomessage-play-pause-border, 1px solid #DBDDDC);
     cursor: var(--chotto-audiomessage-play-pause-cursor, pointer);
     position: var(--chotto-audiomessage-play-pause-position, relative);
     grid-row: var(--chotto-audiomessage-play-pause-grid-row, 1 / 3);
-    width: var(--chotto-audiomessage-play-pause-width, 38px);
-    height: var(--chotto-audiomessage-play-pause-height, 38px);
+    width: var(--chotto-audiomessage-play-pause-width, 50px);
+    height: var(--chotto-audiomessage-play-pause-height, 50px);
     border-radius: var(--chotto-audiomessage-play-pause-border-radius, 50%);
-    background-color: var(--chotto-audiomessage-type-icon-background-color, #a3a3a3);
+    background-color: var(--chotto-audiomessage-type-icon-background-color, #FFFFFF);
+    display: var(--chotto-audiomessage-play-pause-display, flex);
+    align-items: var(--chotto-audiomessage-play-pause-align-items, center);
+    justify-content: var(--chotto-audiomessage-play-pause-justify-content, center);
+    padding: 0;
+  }
 
-    span {
-      display: var(--chotto-audiomessage-play-pause-span-display, flex);
-      position: var(--chotto-audiomessage-play-pause-span-position, absolute);
-      top: var(--chotto-audiomessage-play-pause-span-top, 50%);
-      left: var(--chotto-audiomessage-play-pause-span-left, 50%);
-      transform: var(--chotto-audiomessage-play-pause-span-transform, translate(-50%, -50%));
-      font-size: var(--chotto-audiomessage-type-icon-font-size, 23px);
-      color: var(--chotto-audiomessage-type-icon-color, #f5f5f5);
+  &__play-icon,
+  &__pause-icon {
+    display: var(--chotto-audiomessage-play-pause-icon-display, flex);
+    align-items: var(--chotto-audiomessage-play-pause-icon-align-items, center);
+    justify-content: var(--chotto-audiomessage-play-pause-icon-justify-content, center);
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+
+    svg {
+      display: block;
     }
+  }
+
+  &__play-icon {
+    margin-left: var(--chotto-audiomessage-play-icon-margin-left, 3px);
+  }
+
+  &__progress-wrapper {
+    grid-column: var(--chotto-audiomessage-progress-wrapper-grid-column, 2);
+    grid-row: var(--chotto-audiomessage-progress-wrapper-grid-row, 1 / 3);
+    display: var(--chotto-audiomessage-progress-wrapper-display, flex);
+    align-items: var(--chotto-audiomessage-progress-wrapper-align-items, center);
+    column-gap: var(--chotto-audiomessage-progress-wrapper-column-gap, 15px);
+    align-self: var(--chotto-audiomessage-progress-wrapper-align-self, center);
   }
 
   &__progress-bar-container {
     -webkit-appearance: var(--chotto-audiomessage-progress-bar-webkit-appearance, none);
     appearance: var(--chotto-audiomessage-progress-bar-appearance, none);
-    background: var(--chotto-audiomessage-pbc-background-color, #e5e5e5);
+    background: var(--chotto-audiomessage-pbc-background-color, #DBDDDC);
     cursor: var(--chotto-audiomessage-progress-bar-cursor, pointer);
-    height: var(--chotto-audiomessage-progress-bar-height, 10px);
-    overflow: var(--chotto-audiomessage-progress-bar-overflow, hidden);
+    height: var(--chotto-audiomessage-progress-bar-height, 1px);
+    overflow: var(--chotto-audiomessage-progress-bar-overflow, visible);
     border-radius: var(--chotto-audiomessage-progress-bar-border-radius, 3px);
-    margin-top: var(--chotto-audiomessage-progress-bar-margin-top, 5px);
+    margin-top: var(--chotto-audiomessage-progress-bar-margin-top, 0);
     margin-left: var(--chotto-audiomessage-progress-bar-margin-left, -1px);
+    flex: var(--chotto-audiomessage-progress-bar-flex, 0 0 auto);
+    width: var(--chotto-audiomessage-progress-bar-width, 250px);
   }
+
+  &__progress-bar-container::-webkit-slider-runnable-track {
+    height: var(--chotto-audiomessage-progress-bar-track-height, 1px);
+    background: var(--chotto-audiomessage-pbc-background-color, #DBDDDC);
+  }
+
   &__progress-bar-container::-webkit-slider-thumb {
     width: var(--chotto-audiomessage-progress-bar-thumb-width, 10px);
     height: var(--chotto-audiomessage-progress-bar-thumb-height, 10px);
-    background-color: var(--chotto-audiomessage-pb-background-color, #007CFF);
+    background-color: var(--chotto-audiomessage-pb-background-color, #5F5F5F);
     appearance: var(--chotto-audiomessage-progress-bar-thumb-appearance, none);
-    box-shadow: var(--chotto-audiomessage-progress-bar-thumb-box-shadow, -10000px 0 0 10000px var(--chotto-audiomessage-pb-background-color, #007CFF));
+    border: var(--chotto-audiomessage-progress-bar-thumb-border, none);
+    border-radius: var(--chotto-audiomessage-progress-bar-thumb-border-radius, 50%);
+    box-shadow: var(--chotto-audiomessage-progress-bar-thumb-box-shadow, none);
+    margin-top: var(--chotto-audiomessage-progress-bar-thumb-margin-top, -4.5px);
+  }
+
+  &__progress-bar-container::-moz-range-track {
+    height: var(--chotto-audiomessage-progress-bar-track-height, 1px);
+    background: var(--chotto-audiomessage-pbc-background-color, #DBDDDC);
+  }
+
+  &__progress-bar-container::-moz-range-progress {
+    height: var(--chotto-audiomessage-progress-bar-track-height, 1px);
+    background: var(--chotto-audiomessage-progress-bar-progress-background, #DBDDDC);
   }
 
   &__progress-bar-container::-moz-range-thumb {
     width: var(--chotto-audiomessage-progress-bar-thumb-width, 10px);
     height: var(--chotto-audiomessage-progress-bar-thumb-height, 10px);
-    background-color: var(--chotto-audiomessage-pb-background-color, #007CFF);
+    background-color: var(--chotto-audiomessage-pb-background-color, #5F5F5F);
     appearance: var(--chotto-audiomessage-progress-bar-thumb-appearance, none);
-    border: var(--chotto-audiomessage-progress-bar-thumb-border, 0);
-    border-radius: var(--chotto-audiomessage-progress-bar-thumb-border-radius, 0);
-    box-shadow: var(--chotto-audiomessage-progress-bar-thumb-box-shadow, -10000px 0 0 10000px var(--chotto-audiomessage-pb-background-color, #007CFF));
+    border: var(--chotto-audiomessage-progress-bar-thumb-border, none);
+    border-radius: var(--chotto-audiomessage-progress-bar-thumb-border-radius, 50%);
+    box-shadow: var(--chotto-audiomessage-progress-bar-thumb-box-shadow, none);
   }
 
   &__player-controls{
+    grid-column: var(--chotto-audiomessage-player-controls-grid-column, 2);
+    grid-row: var(--chotto-audiomessage-player-controls-grid-row, 2);
     display: var(--chotto-audiomessage-player-controls-display, flex); 
     justify-content: var(--chotto-audiomessage-player-controls-justify-content, space-between);
+    width: var(--chotto-audiomessage-player-controls-width, 250px);
+    margin-top: var(--chotto-audiomessage-player-controls-margin-top, 6px);
   }
 
   &__speed-btn-container{
@@ -111,9 +167,12 @@
   &__speed-btn{
     background-color: var(--chotto-audiomessage-speed-btn-background-color, transparent);
     border: var(--chotto-audiomessage-speed-btn-border, 0);
-    width: var(--chotto-audiomessage-speed-btn-width, 25px);
-    font-size: var(--chotto-audiomessage-speed-btn-font-size, 14px);
+    // width: var(--chotto-audiomessage-speed-btn-width, 25px);
+    font-size: var(--chotto-audiomessage-speed-btn-font-size, 16px);
     font-weight: var(--chotto-audiomessage-speed-btn-font-weight, 400);
+    color: var(--chotto-audiomessage-speed-btn-text-color, #007CFFCC);
+    padding: 0;
+    margin: 0;
   }
 
   &__speed-btn:hover{
@@ -125,15 +184,21 @@
     font-weight: var(--chotto-audiomessage-speed-btn-selected-font-weight, 600);
   }
 
-  &__remaining-time {
-    grid-column: var(--chotto-audiomessage-remaining-time-grid-column, 2);
-    margin-bottom: var(--chotto-audiomessage-remaining-time-margin-bottom, -10px);
-    font-size: var(--chotto-audiomessage-remaining-time-font-size, 12px);
-    height: var(--chotto-audiomessage-remaining-time-height, fit-content);
+  &__current-time,
+  &__duration {
+    margin: var(--chotto-audiomessage-time-margin, 0);
+    font-size: var(--chotto-audiomessage-time-font-size, 14px);
+    font-weight: var(--chotto-audiomessage-time-font-weight, 400);
+    color: var(--chotto-audiomessage-time-color, #5F5F5F);
+  }
+
+  &__duration {
+    margin-left: var(--chotto-audiomessage-duration-margin-left, auto);
+    text-align: var(--chotto-audiomessage-duration-text-align, right);
   }
 
   &__avatar {
-    align-self: var(--chotto-audiomessage-avatar-align-self, center);
+    align-self: var(--chotto-audiomessage-avatar-align-self, top);
     object-fit: var(--chotto-audiomessage-avatar-object-fit, cover);
     min-width: var(--chotto-audiomessage-avatar-min-width, 40px);
     min-height: var(--chotto-audiomessage-avatar-min-height, 40px);
@@ -146,11 +211,13 @@
   }
 
   &__info-container {
-    grid-column: var(--chotto-audiomessage-info-container-grid-column, 1 / 3);
-    margin-left: var(--chotto-audiomessage-info-container-margin-left, auto);
+    position: var(--chotto-audiomessage-info-container-position, absolute);
+    right: var(--chotto-audiomessage-info-container-right, 16px);
+    bottom: var(--chotto-audiomessage-info-container-bottom, 8px);
     display: var(--chotto-audiomessage-info-container-display, flex);
     align-items: var(--chotto-audiomessage-info-container-align-items, center);
     column-gap: var(--chotto-audiomessage-info-container-column-gap, 4px);
+    pointer-events: var(--chotto-audiomessage-info-container-pointer-events, auto);
   }
 
   &__download-button {
@@ -241,6 +308,7 @@
     transform: var(--chotto-audiomessage-menu-button-transform, translateY(-50%));
     cursor: var(--chotto-audiomessage-menu-button-cursor, pointer);
     transition: var(--chotto-audiomessage-menu-button-transition, 0.2s);
+    z-index: var(--chotto-audiomessage-menu-button-z-index, 1);
 
     span {
       color: var(--chotto-audiomessage-menu-button-icon-color, #525252);
@@ -346,13 +414,22 @@
 
     .audio-message__menu-button {
       top: var(--chotto-audiomessage-left-menu-button-top, 50%);
-      right: var(--chotto-audiomessage-left-menu-button-right, -40px);
+      right: var(--chotto-audiomessage-left-menu-button-right, -20px);
+      bottom: var(--chotto-audiomessage-left-menu-button-bottom, auto);
+      left: var(--chotto-audiomessage-left-menu-button-left, auto);
     }
 
     .audio-message__context-menu {
-      top: var(--chotto-audiomessage-left-context-menu-top, 50%);
-      left: var(--chotto-audiomessage-left-context-menu-left, 100%);
-      margin-top: var(--chotto-audiomessage-left-context-menu-margin-top, 20px);
+      width: var(--chotto-audiomessage-left-context-menu-width, 214px);
+      height: var(--chotto-audiomessage-left-context-menu-height, 80px);
+      top: var(--chotto-audiomessage-left-context-menu-top, 30%);
+      left: var(--chotto-audiomessage-left-context-menu-left, 70%);
+      margin-top: var(--chotto-audiomessage-left-context-menu-margin-top, 0);
+
+      :deep(.context-menu__list) {
+        row-gap: var(--chotto-audiomessage-left-context-menu-row-gap, 0);
+        padding: var(--chotto-audiomessage-left-context-menu-padding, 8px 0 8px 0);
+      }
     }
   }
 
@@ -383,13 +460,31 @@
 
     .audio-message__menu-button {
       top: var(--chotto-audiomessage-right-menu-button-top, 50%);
-      left: var(--chotto-audiomessage-right-menu-button-left, -40px);
+      left: var(--chotto-audiomessage-right-menu-button-left, -20px);
+      bottom: var(--chotto-audiomessage-right-menu-button-bottom, auto);
+      right: var(--chotto-audiomessage-right-menu-button-right, auto);
     }
 
     .audio-message__context-menu {
-      top: var(--chotto-audiomessage-right-context-menu-top, 50%);
-      right: var(--chotto-audiomessage-right-context-menu-right, 100%);
-      margin-top: var(--chotto-audiomessage-right-context-menu-margin-top, 20px);
+      width: var(--chotto-audiomessage-right-context-menu-width, 214px);
+      height: var(--chotto-audiomessage-right-context-menu-height, 80px);
+      top: var(--chotto-audiomessage-right-context-menu-top, 30%);
+      right: var(--chotto-audiomessage-right-context-menu-right, -7%);
+      margin-top: var(--chotto-audiomessage-right-context-menu-margin-top, 0);
+
+      :deep(.context-menu__list) {
+        row-gap: var(--chotto-audiomessage-right-context-menu-row-gap, 0);
+        padding: var(--chotto-audiomessage-right-context-menu-padding, 8px 0 8px 0);
+      }
+    }
+
+    :deep(.message-reactions) {
+      padding-right: 0;
+      padding-left: var(--chotto-audiomessage-reactions-padding-right, 5px);
+    }
+
+    :deep(.message-reactions.is-right-message:not(.has-reactions) .message-reactions__add) {
+      left: -15px;
     }
   }
 
@@ -468,6 +563,16 @@
 .modal-fade-leave-from {
   opacity: 1;
 }
+
+  :deep(.message-reactions) {
+    grid-column: var(--chotto-audiomessage-reactions-grid-column, 1 / 3);
+    margin-top: var(--chotto-audiomessage-reactions-margin-top, 8px);
+    margin-bottom: var(--chotto-audiomessage-reactions-margin-bottom, 0);
+    flex-wrap: var(--chotto-audiomessage-reactions-flex-wrap, wrap);
+    max-width: var(--chotto-audiomessage-reactions-max-width, 100%);
+    padding-right: var(--chotto-audiomessage-reactions-padding-right, 5px);
+    padding-bottom: var(--chotto-audiomessage-reactions-padding-bottom, 10px);
+  }
 
 .audio-message:hover :deep(.message-reactions__add) {
   opacity: 1 !important;

@@ -919,20 +919,79 @@ export const messages = [
     messageId: '630',
     type: "message.audio", 
     url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
-    text: "Привет!", 
     direction: 'outgoing', 
-    status: 'received', 
+    status: 'read', 
     subText: '89829445678', 
     timestamp: '1757497513',
     header: 'Анна',
     avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
+    actions: [
+      {
+        title: 'Скачать',
+        action: 'download'
+      },
+      {
+        title: 'Перевести в текст',
+        disabled: true,
+        action: 'transcribe'
+      }
+    ]
+  },
+  {
+    chatId: 6, 
+    dialogId: 'dlg_6_new',
+    messageId: '631',
+    type: "message.audio", 
+    url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    direction: 'outgoing', 
+    status: 'read', 
+    subText: '89829445678', 
+    timestamp: '1757497514',
+    header: 'Анна',
+    avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
     reactions: {
       items: [
-        { key: '👍', count: 1 },
-        { key: '❤️', count: 2 },
-        { key: '🔥', count: 3 },
-      ]
+        { key: '🔥', count: 1, reactedByMe: true }
+      ],
+      meta: {
+        mode: 'multi'
+      }
     },
+    actions: [
+      {
+        title: 'Скачать',
+        action: 'download'
+      },
+      {
+        title: 'Перевести в текст',
+        disabled: true,
+        action: 'transcribe'
+      }
+    ]
+  },
+  {
+    chatId: 6, 
+    dialogId: 'dlg_6_new',
+    messageId: '632',
+    type: "message.audio", 
+    url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    direction: 'incoming', 
+    status: 'read', 
+    subText: 'Ярослав', 
+    timestamp: '1757497515',
+    header: 'Ярослав',
+    avatar:'https://placehold.jp/30/1b97e4/ffffff/64x64.png?text=Jar',
+    actions: [
+      {
+        title: 'Скачать',
+        action: 'download'
+      },
+      {
+        title: 'Перевести в текст',
+        disabled: true,
+        action: 'transcribe'
+      }
+    ]
   },
 
   /**============================================================================================================ */

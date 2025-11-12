@@ -23,8 +23,18 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-content-max-width': string;
   /** Минимальная ширина контейнера */
   '--chotto-audiomessage-content-min-width': string;
-  /** Внутренние отступы контейнера */
-  '--chotto-audiomessage-content-padding': string;
+  /** Минимальная высота контейнера */
+  '--chotto-audiomessage-content-min-height': string;
+  /** Высота контейнера */
+  '--chotto-audiomessage-content-height': string;
+  /** Внутренний отступ сверху контейнера */
+  '--chotto-audiomessage-content-padding-top': string;
+  /** Внутренний отступ справа контейнера */
+  '--chotto-audiomessage-content-padding-right': string;
+  /** Внутренний отступ снизу контейнера */
+  '--chotto-audiomessage-content-padding-bottom': string;
+  /** Внутренний отступ слева контейнера */
+  '--chotto-audiomessage-content-padding-left': string;
 
   /** Контент псевдоэлемента "хвостик" слева */
   '--chotto-audiomessage-left-arrow-content': string;
@@ -72,14 +82,14 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-audio-container-grid-template-columns': string;
   /** Промежуток между колонками плеера */
   '--chotto-audiomessage-audio-container-column-gap': string;
-  /** Максимальная ширина контейнера плеера */
-  '--chotto-audiomessage-audio-container-max-width': string;
   /** Скругление контейнера плеера */
   '--chotto-audiomessage-audio-container-border-radius': string;
   /** Внутренние отступы контейнера плеера */
   '--chotto-audiomessage-audio-container-padding': string;
   /** Захват двух колонок в сетке */
   '--chotto-audiomessage-audio-container-grid-column': string;
+  /** Выравнивание элементов контейнера аудио-плеера */
+  '--chotto-audiomessage-audio-container-align-items': string;
 
   /** Граница кнопки play/pause */
   '--chotto-audiomessage-play-pause-border': string;
@@ -95,8 +105,21 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-play-pause-height': string;
   /** Скругление кнопки play/pause */
   '--chotto-audiomessage-play-pause-border-radius': string;
+  /** Отображение кнопки play/pause */
+  '--chotto-audiomessage-play-pause-display': string;
+  /** Выравнивание элементов кнопки play/pause */
+  '--chotto-audiomessage-play-pause-align-items': string;
+  /** Выравнивание содержимого кнопки play/pause */
+  '--chotto-audiomessage-play-pause-justify-content': string;
 
   /** Отображение иконки play/pause */
+  '--chotto-audiomessage-play-pause-icon-display': string;
+  /** Выравнивание элементов иконки play/pause */
+  '--chotto-audiomessage-play-pause-icon-align-items': string;
+  /** Выравнивание содержимого иконки play/pause */
+  '--chotto-audiomessage-play-pause-icon-justify-content': string;
+
+  /** Отображение иконки play/pause (legacy) */
   '--chotto-audiomessage-play-pause-span-display': string;
   /** Позиционирование иконки play/pause */
   '--chotto-audiomessage-play-pause-span-position': string;
@@ -123,6 +146,27 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-progress-bar-margin-top': string;
   /** Отступ слева прогресс-бара */
   '--chotto-audiomessage-progress-bar-margin-left': string;
+  /** Высота трека прогресс-бара */
+  '--chotto-audiomessage-progress-bar-track-height': string;
+  /** Фон прогресса прогресс-бара */
+  '--chotto-audiomessage-progress-bar-progress-background': string;
+  /** Flex-свойство прогресс-бара */
+  '--chotto-audiomessage-progress-bar-flex': string;
+  /** Ширина прогресс-бара */
+  '--chotto-audiomessage-progress-bar-width': string;
+
+  /** Колонка грида обёртки прогресс-бара */
+  '--chotto-audiomessage-progress-wrapper-grid-column': string;
+  /** Ряд грида обёртки прогресс-бара */
+  '--chotto-audiomessage-progress-wrapper-grid-row': string;
+  /** Отображение обёртки прогресс-бара */
+  '--chotto-audiomessage-progress-wrapper-display': string;
+  /** Выравнивание элементов обёртки прогресс-бара */
+  '--chotto-audiomessage-progress-wrapper-align-items': string;
+  /** Промежуток между колонками обёртки прогресс-бара */
+  '--chotto-audiomessage-progress-wrapper-column-gap': string;
+  /** Выравнивание обёртки прогресс-бара */
+  '--chotto-audiomessage-progress-wrapper-align-self': string;
 
   /** Ширина бегунка прогресс-бара */
   '--chotto-audiomessage-progress-bar-thumb-width': string;
@@ -136,11 +180,21 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-progress-bar-thumb-border-radius': string;
   /** Тень бегунка (для заливки полосы) */
   '--chotto-audiomessage-progress-bar-thumb-box-shadow': string;
+  /** Отступ сверху бегунка прогресс-бара */
+  '--chotto-audiomessage-progress-bar-thumb-margin-top': string;
 
+  /** Колонка грида блока управления плеером */
+  '--chotto-audiomessage-player-controls-grid-column': string;
+  /** Ряд грида блока управления плеером */
+  '--chotto-audiomessage-player-controls-grid-row': string;
   /** Отображение блока управления плеером */
   '--chotto-audiomessage-player-controls-display': string;
   /** Выравнивание элементов управления плеером */
   '--chotto-audiomessage-player-controls-justify-content': string;
+  /** Отступ сверху блока управления плеером */
+  '--chotto-audiomessage-player-controls-margin-top': string;
+  /** Дополнительное смещение блока управления плеером */
+  '--chotto-audiomessage-player-controls-extra-offset': string;
 
   /** Отображение контейнера кнопок скорости */
   '--chotto-audiomessage-speed-btn-container-display': string;
@@ -163,13 +217,19 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-speed-btn-hover-font-weight': string;
   /** Толщина шрифта выбранной кнопки */
   '--chotto-audiomessage-speed-btn-selected-font-weight': string;
+  /** Цвет текста кнопки скорости */
+  '--chotto-audiomessage-speed-btn-text-color': string;
 
-  /** Колонка грида оставшегося времени */
-  '--chotto-audiomessage-remaining-time-grid-column': string;
-  /** Отступ снизу у оставшегося времени */
-  '--chotto-audiomessage-remaining-time-margin-bottom': string;
-  /** Высота контейнера оставшегося времени */
-  '--chotto-audiomessage-remaining-time-height': string;
+  /** Отступ времени */
+  '--chotto-audiomessage-time-margin': string;
+  /** Толщина шрифта времени */
+  '--chotto-audiomessage-time-font-weight': string;
+  /** Цвет времени */
+  '--chotto-audiomessage-time-color': string;
+  /** Отступ слева длительности */
+  '--chotto-audiomessage-duration-margin-left': string;
+  /** Выравнивание текста длительности */
+  '--chotto-audiomessage-duration-text-align': string;
 
   /** Выравнивание аватара */
   '--chotto-audiomessage-avatar-align-self': string;
@@ -182,16 +242,20 @@ export interface AudioMessageThemeCSSVariables {
   /** Скругление аватара */
   '--chotto-audiomessage-avatar-border-radius': string;
 
-  /** Колонка грида инфо-контейнера */
-  '--chotto-audiomessage-info-container-grid-column': string;
-  /** Отступ слева у инфо-контейнера */
-  '--chotto-audiomessage-info-container-margin-left': string;
+  /** Позиционирование инфо-контейнера */
+  '--chotto-audiomessage-info-container-position': string;
+  /** Отступ справа инфо-контейнера */
+  '--chotto-audiomessage-info-container-right': string;
+  /** Отступ снизу инфо-контейнера */
+  '--chotto-audiomessage-info-container-bottom': string;
   /** Отображение инфо-контейнера */
   '--chotto-audiomessage-info-container-display': string;
   /** Выравнивание элементов инфо-контейнера */
   '--chotto-audiomessage-info-container-align-items': string;
   /** Промежуток между элементами инфо-контейнера */
   '--chotto-audiomessage-info-container-column-gap': string;
+  /** События указателя инфо-контейнера */
+  '--chotto-audiomessage-info-container-pointer-events': string;
 
   /** Позиционирование кнопки скачивания */
   '--chotto-audiomessage-download-button-position': string;
@@ -238,6 +302,8 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-menu-button-cursor': string;
   /** Переход кнопки меню */
   '--chotto-audiomessage-menu-button-transition': string;
+  /** Z-index кнопки меню */
+  '--chotto-audiomessage-menu-button-z-index': string;
 
   /** Позиционирование контекстного меню */
   '--chotto-audiomessage-context-menu-position': string;
@@ -280,6 +346,21 @@ export interface AudioMessageThemeCSSVariables {
   /** Скругление разделителя */
   '--chotto-audiomessage-transcript-delimiter-border-radius': string;
 
+  /** Колонка грида реакций */
+  '--chotto-audiomessage-reactions-grid-column': string;
+  /** Отступ сверху реакций */
+  '--chotto-audiomessage-reactions-margin-top': string;
+  /** Отступ снизу реакций */
+  '--chotto-audiomessage-reactions-margin-bottom': string;
+  /** Перенос строк реакций */
+  '--chotto-audiomessage-reactions-flex-wrap': string;
+  /** Максимальная ширина реакций */
+  '--chotto-audiomessage-reactions-max-width': string;
+  /** Внутренний отступ справа реакций */
+  '--chotto-audiomessage-reactions-padding-right': string;
+  /** Внутренний отступ снизу реакций */
+  '--chotto-audiomessage-reactions-padding-bottom': string;
+
   /** Отображение общего контейнера лево/право */
   '--chotto-audiomessage-left-right-display': string;
 
@@ -305,12 +386,24 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-left-menu-button-top': string;
   /** Положение кнопки меню слева (right) */
   '--chotto-audiomessage-left-menu-button-right': string;
+  /** Положение кнопки меню слева (bottom) */
+  '--chotto-audiomessage-left-menu-button-bottom': string;
+  /** Положение кнопки меню слева (left) */
+  '--chotto-audiomessage-left-menu-button-left': string;
   /** Позиция контекстного меню слева (top) */
   '--chotto-audiomessage-left-context-menu-top': string;
   /** Позиция контекстного меню слева (left) */
   '--chotto-audiomessage-left-context-menu-left': string;
   /** Отступ контекстного меню слева сверху */
   '--chotto-audiomessage-left-context-menu-margin-top': string;
+  /** Ширина контекстного меню слева */
+  '--chotto-audiomessage-left-context-menu-width': string;
+  /** Высота контекстного меню слева */
+  '--chotto-audiomessage-left-context-menu-height': string;
+  /** Промежуток между строками контекстного меню слева */
+  '--chotto-audiomessage-left-context-menu-row-gap': string;
+  /** Внутренние отступы контекстного меню слева */
+  '--chotto-audiomessage-left-context-menu-padding': string;
 
   /** Шаблон колонок правой раскладки */
   '--chotto-audiomessage-right-grid-template-columns': string;
@@ -336,12 +429,24 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-right-menu-button-top': string;
   /** Положение кнопки меню справа (left) */
   '--chotto-audiomessage-right-menu-button-left': string;
+  /** Положение кнопки меню справа (bottom) */
+  '--chotto-audiomessage-right-menu-button-bottom': string;
+  /** Положение кнопки меню справа (right) */
+  '--chotto-audiomessage-right-menu-button-right': string;
   /** Позиция контекстного меню справа (top) */
   '--chotto-audiomessage-right-context-menu-top': string;
   /** Позиция контекстного меню справа (right) */
   '--chotto-audiomessage-right-context-menu-right': string;
   /** Отступ контекстного меню справа сверху */
   '--chotto-audiomessage-right-context-menu-margin-top': string;
+  /** Ширина контекстного меню справа */
+  '--chotto-audiomessage-right-context-menu-width': string;
+  /** Высота контекстного меню справа */
+  '--chotto-audiomessage-right-context-menu-height': string;
+  /** Промежуток между строками контекстного меню справа */
+  '--chotto-audiomessage-right-context-menu-row-gap': string;
+  /** Внутренние отступы контекстного меню справа */
+  '--chotto-audiomessage-right-context-menu-padding': string;
 
   /** Позиционирование модального окна */
   '--chotto-audiomessage-modal-position': string;
@@ -408,8 +513,6 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-type-icon-color': string;
   /** Размер шрифта кнопки скорости */
   '--chotto-audiomessage-speed-btn-font-size': string;
-  /** Размер шрифта оставшегося времени */
-  '--chotto-audiomessage-remaining-time-font-size': string;
   /** Размер шрифта подписи */
   '--chotto-audiomessage-subtext-font-size': string;
   /** Цвет текста подписи */

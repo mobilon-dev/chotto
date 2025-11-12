@@ -61,4 +61,10 @@ export interface ContextMenuThemeCSSVariables {
   '--chotto-contextmenu-item-hover-background-color': string;
   /** Граница снизу элемента контекстного меню (не последний) */
   '--chotto-contextmenu-item-not-last-child-border-bottom': string;
+
+  // Disabled Item
+  /** Непрозрачность отключенного элемента контекстного меню */
+  '--chotto-contextmenu-item-disabled-opacity': string;
+  /** Курсор отключенного элемента контекстного меню */
+  '--chotto-contextmenu-item-disabled-cursor': string;
 }

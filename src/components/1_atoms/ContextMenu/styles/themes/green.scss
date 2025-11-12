@@ -1,6 +1,6 @@
 [data-theme="green"] {
   // ContextMenu container variables
-  --chotto-contextmenu-container-display: none;
+  --chotto-contextmenu-container-display: block;
   --chotto-contextmenu-container-font-weight: var(--chotto-theme-default-font-weight);
   --chotto-contextmenu-container-color: var(--chotto-theme-primary-text-color);
   --chotto-contextmenu-container-font-family: var(--chotto-theme-font-family);
@@ -31,4 +31,8 @@
   --chotto-contextmenu-item-width: inherit;
   --chotto-contextmenu-item-hover-background-color: #EEF0F3;
   --chotto-contextmenu-item-not-last-child-border-bottom: 1px solid var(--chotto-theme-item-border-color);
+
+  // ContextMenu disabled item variables
+  --chotto-contextmenu-item-disabled-opacity: 0.5;
+  --chotto-contextmenu-item-disabled-cursor: not-allowed;
 }

@@ -7,10 +7,10 @@ import BaseContainer from '../../../5_containers/BaseContainer/BaseContainer.vue
 import ThemeMode from '../../../2_elements/ThemeMode/ThemeMode.vue';
 
 const themes = [
-  { code: 'light', name: 'Light', default: true },
+  { code: 'light', name: 'Light' },
   { code: 'dark', name: 'Dark' },
   { code: 'green', name: 'Green' },
-  { code: 'mobilon1', name: 'Mobilon1' },
+  { code: 'mobilon1', name: 'Mobilon1', default: true },
 ];
 
 const meta: Meta<typeof AudioMessage> = {

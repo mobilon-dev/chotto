@@ -5,7 +5,8 @@
         v-for="(action, index) in props.actions"
         :key="index"
         class="context-menu__item"
-        @click="click(index)"
+        :class="{ 'context-menu__item--disabled': action.disabled }"
+        @click="!action.disabled && click(index)"
       >
         <img
           v-if="action.icon"

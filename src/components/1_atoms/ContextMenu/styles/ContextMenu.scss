@@ -38,6 +38,11 @@
     background-color: var(--chotto-contextmenu-item-hover-background-color, #EEF0F3);
   }
 
+  &__item--disabled {
+    opacity: var(--chotto-contextmenu-item-disabled-opacity, 0.5);
+    cursor: var(--chotto-contextmenu-item-disabled-cursor, not-allowed);
+  }
+
   &__item:not(:last-child) {
     border-bottom: var(--chotto-contextmenu-item-not-last-child-border-bottom, none);
   }
