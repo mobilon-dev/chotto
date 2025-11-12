@@ -5,6 +5,7 @@ import AudioMessage from '../AudioMessage.vue';
 import { IAudioMessage } from '@/types';
 import BaseContainer from '../../../5_containers/BaseContainer/BaseContainer.vue';
 import ThemeMode from '../../../2_elements/ThemeMode/ThemeMode.vue';
+import audioFile from '../../../../apps/data/audio/file_example_MP3_700KB.mp3';
 
 const themes = [
   { code: 'light', name: 'Light' },
@@ -75,19 +76,41 @@ export const Default: Story = {
 
       // Примеры сообщений с разными статусами
       const leftMessage: IAudioMessage = {
-        url: 'https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3',
+        url: audioFile,
         position: 'left',
         messageId: 'left1',
         time: '12:00',
         status: 'read',
+        actions: [
+          {
+            title: 'Скачать',
+            action: 'download'
+          },
+          {
+            title: 'Перевести в текст',
+            disabled: true,
+            action: 'transcribe'
+          }
+        ],
       };
 
       const rightMessagePending: IAudioMessage = {
-        url: 'https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3',
+        url: audioFile,
         position: 'right',
         messageId: 'right1',
         time: '12:05',
         status: 'pending',
+        actions: [
+          {
+            title: 'Скачать',
+            action: 'download'
+          },
+          {
+            title: 'Перевести в текст',
+            disabled: true,
+            action: 'transcribe'
+          }
+        ],
       };
 
       const rightMessageSent: IAudioMessage = {
