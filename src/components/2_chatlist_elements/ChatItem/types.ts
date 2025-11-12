@@ -3,6 +3,7 @@ export interface IAction {
   title: string
   icon?: string
   prime?: string
+  disabled?: boolean
 }
 
 export interface IChatDialog {

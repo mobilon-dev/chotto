@@ -90,6 +90,10 @@
             :min="0" 
             :max="audioDuration" 
             step="0.1"
+            @mousedown="isSeeking = true"
+            @mouseup="handleSeekEnd"
+            @touchstart="isSeeking = true"
+            @touchend="handleSeekEnd"
           >
           <div class="audio-message__speed-btn-container">
             <button
@@ -310,7 +314,8 @@ const emit = defineEmits(['action','reply']);
 const player = ref<HTMLAudioElement | null>();
 const isPlaying = ref(false);
 const audioDuration = ref(0);
-const currentTime = ref(0)
+const currentTime = ref(0);
+const isSeeking = ref(false); // Флаг для предотвращения циклических обновлений
 
 const {
   isOpenMenu,
@@ -330,7 +335,7 @@ const downloadAudio = () => {
     const link = document.createElement('a')
     link.href = props.message.url
     // Используем messageId для имени файла или дефолтное имя
-    link.download = `audio-${props.message.messageId}.webm`
+    link.download = `audio-${props.message.messageId}`
     link.target = '_blank'
     document.body.appendChild(link)
     link.click()
@@ -390,7 +395,7 @@ const formatCurrentTime = computed(() => {
 watch(
   () => currentTime.value,
   () => {
-    if (player.value) {
+    if (player.value && isSeeking.value) {
       if (player.value.duration != Infinity && !Number.isNaN(player.value.duration))
         player.value.currentTime = currentTime.value;
 
@@ -399,6 +404,15 @@ watch(
     }
   }
 )
+
+const handleSeekEnd = () => {
+  if (player.value && isSeeking.value) {
+    // Устанавливаем финальное время при завершении перетаскивания
+    if (player.value.duration != Infinity && !Number.isNaN(player.value.duration))
+      player.value.currentTime = currentTime.value;
+  }
+  isSeeking.value = false;
+}
 
 const formatDuration = computed(() => {
   if (player.value) {
@@ -431,7 +445,10 @@ onMounted(() => {
       audioDuration.value = player.value != null ? player.value.duration : 0;
     });
     player.value.addEventListener('timeupdate', () => {
-      currentTime.value = player.value != null ? player.value.currentTime : 0;
+      // Обновляем currentTime только если пользователь не перетаскивает слайдер
+      if (!isSeeking.value && player.value != null) {
+        currentTime.value = player.value.currentTime;
+      }
     });
   }
 });

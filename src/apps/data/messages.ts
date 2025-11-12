@@ -1,5 +1,6 @@
 import stickerWebp from './images/sticker.webp';
 import animatedStickerTgs from './images/AnimatedSticker.tgs';
+import audioFile from './audio/file_example_MP3_700KB.mp3';
 
 export const messages = [
   {
@@ -974,7 +975,7 @@ export const messages = [
     dialogId: 'dlg_6_new',
     messageId: '632',
     type: "message.audio", 
-    url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    url: audioFile,
     direction: 'incoming', 
     status: 'read', 
     subText: 'Ярослав', 
