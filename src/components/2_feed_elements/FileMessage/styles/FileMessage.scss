@@ -18,6 +18,7 @@
     border: var(--chotto-filemessage-left-triangle-border, 20px solid transparent);
     border-top: var(--chotto-filemessage-left-triangle-border-top, 15px solid var(--chotto-filemessage-left-bg, #d4d4d4));
     z-index: var(--chotto-filemessage-left-triangle-z-index, 1);
+    pointer-events: none;
   }
 
   &__right .file-message__content.is-first::after {
@@ -30,6 +31,7 @@
     border: var(--chotto-filemessage-right-triangle-border, 20px solid transparent);
     border-top: var(--chotto-filemessage-right-triangle-border-top, 15px solid var(--chotto-filemessage-right-bg, #a7f3d0));
     z-index: var(--chotto-filemessage-right-triangle-z-index, 1);
+    pointer-events: none;
   }
 
   &__avatar {
