@@ -76,11 +76,12 @@
   --chotto-imagemessage-preview-image-cursor: zoom-in;
 
   // ImageMessage modal image variables
-  --chotto-imagemessage-modal-image-height: 100%;
+  --chotto-imagemessage-modal-image-width: 100%;
+  --chotto-imagemessage-modal-image-height: auto;
   --chotto-imagemessage-modal-image-object-fit: contain;
   --chotto-imagemessage-modal-image-border-radius: 5px;
-  --chotto-imagemessage-modal-image-max-height: 90vh;
-  --chotto-imagemessage-modal-image-max-width: 95vw;
+  --chotto-imagemessage-modal-image-max-height: calc(90vh - 80px);
+  --chotto-imagemessage-modal-image-max-width: calc(95vw - 64px);
 
   // ImageMessage menu button variables
   --chotto-imagemessage-menu-button-position: absolute;

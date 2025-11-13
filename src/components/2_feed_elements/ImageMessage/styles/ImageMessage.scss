@@ -126,12 +126,12 @@
   }
 
   &__modal-image {
-    /*width: 100%;*/
-    height: var(--chotto-imagemessage-modal-image-height, 100%);
+    width: var(--chotto-imagemessage-modal-image-width, 100%);
+    height: var(--chotto-imagemessage-modal-image-height, auto);
     object-fit: var(--chotto-imagemessage-modal-image-object-fit, contain);
     border-radius: var(--chotto-imagemessage-modal-image-border-radius, 5px);
-    max-height: var(--chotto-imagemessage-modal-image-max-height, 90vh);
-    max-width: var(--chotto-imagemessage-modal-image-max-width, 95vw);
+    max-height: var(--chotto-imagemessage-modal-image-max-height, calc(90vh - 80px));
+    max-width: var(--chotto-imagemessage-modal-image-max-width, calc(95vw - 64px));
   }
 
   &__menu-button {

@@ -242,6 +242,19 @@ export interface ImageMessageThemeCSSVariables {
   /** Отступ контекстного меню справа сверху */
   '--chotto-imagemessage-right-context-menu-margin-top': string;
 
+  /** Ширина изображения в модальном окне */
+  '--chotto-imagemessage-modal-image-width': string;
+  /** Высота изображения в модальном окне */
+  '--chotto-imagemessage-modal-image-height': string;
+  /** Вписывание изображения в модальном окне */
+  '--chotto-imagemessage-modal-image-object-fit': string;
+  /** Скругление изображения в модальном окне */
+  '--chotto-imagemessage-modal-image-border-radius': string;
+  /** Максимальная высота изображения в модальном окне */
+  '--chotto-imagemessage-modal-image-max-height': string;
+  /** Максимальная ширина изображения в модальном окне */
+  '--chotto-imagemessage-modal-image-max-width': string;
+
   /** Переход появления контекстного меню */
   '--chotto-imagemessage-context-menu-enter-active-transition': string;
   /** Переход скрытия контекстного меню */
