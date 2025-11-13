@@ -235,6 +235,8 @@ export interface VideoMessageThemeCSSVariables {
   /** Отступ контекстного меню справа сверху */
   '--chotto-videomessage-right-context-menu-margin-top': string;
 
+  /** Ширина видео в модальном окне */
+  '--chotto-videomessage-modal-video-width': string;
   /** Высота видео в модальном окне */
   '--chotto-videomessage-modal-video-height': string;
   /** Вписывание видео в модальном окне */

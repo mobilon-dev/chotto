@@ -142,11 +142,12 @@
   --chotto-videomessage-right-context-menu-margin-top: 20px;
 
   // VideoMessage modal-video variables
-  --chotto-videomessage-modal-video-height: 100%;
+  --chotto-videomessage-modal-video-width: 100%;
+  --chotto-videomessage-modal-video-height: auto;
   --chotto-videomessage-modal-video-object-fit: contain;
   --chotto-videomessage-modal-video-border-radius: 5px;
-  --chotto-videomessage-modal-video-max-height: 90vh;
-  --chotto-videomessage-modal-video-max-width: 95vw;
+  --chotto-videomessage-modal-video-max-height: calc(90vh - 80px);
+  --chotto-videomessage-modal-video-max-width: calc(95vw - 64px);
 
   // VideoMessage context-menu transition variables
   --chotto-videomessage-context-menu-enter-active-transition: all 0.1s ease-out;

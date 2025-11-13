@@ -249,12 +249,12 @@
   }
 
   &__modal-video {
-    /*width: 100%;*/
-    height: var(--chotto-videomessage-modal-video-height, 100%);
+    width: var(--chotto-videomessage-modal-video-width, 100%);
+    height: var(--chotto-videomessage-modal-video-height, auto);
     object-fit: var(--chotto-videomessage-modal-video-object-fit, contain);
     border-radius: var(--chotto-videomessage-modal-video-border-radius, 5px);
-    max-height: var(--chotto-videomessage-modal-video-max-height, 90vh);
-    max-width: var(--chotto-videomessage-modal-video-max-width, 95vw);
+    max-height: var(--chotto-videomessage-modal-video-max-height, calc(90vh - 80px));
+    max-width: var(--chotto-videomessage-modal-video-max-width, calc(95vw - 64px));
   }
 
 }
