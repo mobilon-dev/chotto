@@ -27,7 +27,7 @@ type Story = StoryObj<typeof VideoMessage>;
 const videoMessage: IVideoMessage = {
   messageId: 'testId',
   position: 'left',
-  url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+  url: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
   time: '12:12',
   status: 'read',
 };
@@ -80,7 +80,7 @@ export const Default: Story = {
       const leftMessage: IVideoMessage = {
         messageId: 'left1',
         position: 'left',
-        url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        url: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
         time: '12:00',
         status: 'read',
         avatar: 'https://placehold.jp/30/90ee90/ffffff/64x64.png?text=GG',
@@ -90,7 +90,7 @@ export const Default: Story = {
       const rightMessageError: IVideoMessage = {
         messageId: 'right1',
         position: 'right',
-        url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        url: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
         time: '12:09',
         status: 'error',
         statusMsg: 'Не удалось отправить сообщение',
