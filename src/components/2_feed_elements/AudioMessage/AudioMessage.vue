@@ -330,16 +330,63 @@ const {
 const isFullTranscript = ref(false)
 
 // Функция для скачивания аудио
-const downloadAudio = () => {
-  if (props.message.url) {
+const downloadAudio = async () => {
+  if (!props.message.url) return
+
+  try {
+    const response = await fetch(props.message.url, {
+      headers: {
+        Accept: 'audio/*'
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const contentType = response.headers.get('content-type') || ''
+    const blob = await response.blob()
+
+    const urlExtension = props.message.url.split('.').pop()?.split('?')[0]?.toLowerCase() || ''
+
+    const mimeToExt: Record<string, string> = {
+      'audio/mpeg': 'mp3',
+      'audio/mp3': 'mp3',
+      'audio/wav': 'wav',
+      'audio/x-wav': 'wav',
+      'audio/ogg': 'ogg',
+      'audio/webm': 'webm',
+      'audio/aac': 'aac',
+      'audio/flac': 'flac',
+      'audio/m4a': 'm4a',
+      'audio/x-m4a': 'm4a',
+      'application/octet-stream': urlExtension || 'mp3'
+    }
+
+    const knownExtensions = ['mp3', 'wav', 'ogg', 'webm', 'aac', 'flac', 'm4a']
+
+    const extension = urlExtension && knownExtensions.includes(urlExtension)
+      ? urlExtension
+      : (mimeToExt[contentType] || 'mp3')
+
+    const urlSegments = props.message.url.split('/')
+    const rawFilename = decodeURIComponent(urlSegments[urlSegments.length - 1]?.split('?')[0] || '')
+
+    const filename = rawFilename
+      ? (rawFilename.includes('.') ? rawFilename : `${rawFilename}.${extension}`)
+      : `audio-${props.message.messageId}.${extension}`
+
+    const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
-    link.href = props.message.url
-    // Используем messageId для имени файла или дефолтное имя
-    link.download = `audio-${props.message.messageId}`
-    link.target = '_blank'
+    link.href = url
+    link.download = filename
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Ошибка при скачивании аудио:', error)
+    window.open(props.message.url, '_blank')
   }
 }
 

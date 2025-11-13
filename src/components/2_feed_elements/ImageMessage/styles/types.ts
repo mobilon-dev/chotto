@@ -124,17 +124,6 @@ export interface ImageMessageThemeCSSVariables {
   /** Курсор при наведении на превью */
   '--chotto-imagemessage-preview-image-cursor': string;
 
-  /** Высота изображения в модальном окне */
-  '--chotto-imagemessage-modal-image-height': string;
-  /** Вписывание изображения в модальном окне */
-  '--chotto-imagemessage-modal-image-object-fit': string;
-  /** Скругление изображения в модальном окне */
-  '--chotto-imagemessage-modal-image-border-radius': string;
-  /** Максимальная высота изображения в модальном окне */
-  '--chotto-imagemessage-modal-image-max-height': string;
-  /** Максимальная ширина изображения в модальном окне */
-  '--chotto-imagemessage-modal-image-max-width': string;
-
   /** Позиционирование кнопки меню сообщения */
   '--chotto-imagemessage-menu-button-position': string;
   /** Прозрачный фон кнопки меню */

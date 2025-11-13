@@ -1,6 +1,7 @@
 import stickerWebp from './images/sticker.webp';
 import animatedStickerTgs from './images/AnimatedSticker.tgs';
 import audioFile from './audio/file_example_MP3_700KB.mp3';
+import pdfFile from './files/test.pdf';
 
 export const messages = [
   {
@@ -197,7 +198,7 @@ export const messages = [
     },
   },
   {
-    chatId: 1, dialogId: 'dlg_89789879',type: "message.audio", url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    chatId: 1, dialogId: 'dlg_89789879',type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     text: "Привет!", direction: 'incoming', status: 'received', subText: '89829445678', timestamp: '1727027959',
     transcript: {
       text: 'Привет, доехала хорошо, позвони мне завтра',
@@ -279,7 +280,7 @@ export const messages = [
       { action: 'delete', title: 'удалить' }]
   },
   {
-    chatId: 2, type: "message.video", url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    chatId: 2, type: "message.video", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     text: "Привет!", direction: 'outgoing', status: 'read', timestamp: '1727027959',
     header: 'Вы',
     actions: [
@@ -306,7 +307,7 @@ export const messages = [
   },
   { chatId: 2, header: 'Мария', type: "message.text", text: "Привет!", direction: 'incoming', status: 'read', timestamp: '1727027959' },
   {
-    chatId: 2, type: "message.audio", url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    chatId: 2, type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     text: "Привет!", direction: 'incoming', status: 'received', subText: '89829445678', timestamp: '1727027959',
     transcript: {
       text: 'Привет, доехала хорошо, позвони мне завтра',
@@ -315,7 +316,7 @@ export const messages = [
     actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
   },
   {
-    chatId: 2, type: "message.audio", url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    chatId: 2, type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     text: "Привет!", direction: 'outgoing', status: 'received', subText: '89829445678', timestamp: '1727027959',
     header: 'Вы',
     actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
@@ -327,7 +328,7 @@ export const messages = [
     direction: 'incoming', subText: '89829445678', timestamp: '1726743559',
   },
   {
-    chatId: 3, type: "message.audio", url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    chatId: 3, type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     text: "Привет!", direction: 'incoming', status: 'read', timestamp: '1727027959'
   },
   {
@@ -335,12 +336,12 @@ export const messages = [
     direction: 'outgoing', timestamp: '1726743559',
   },
   {
-    chatId: 4, type: "message.audio", url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    chatId: 4, type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     direction: 'incoming', status: 'read', timestamp: '1727027959',
     text: "Оченьдлинноесообщениебезпробеловзанимающеесразунесколькострокивызывающеестранноеповедениеокон!",
   },
   {
-    chatId: 4, type: "message.audio", url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    chatId: 4, type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     direction: 'outgoing', status: 'read', timestamp: '1727027959',
     text: "Оченьдлинноесообщениебезпробеловзанимающеесразунесколькострокивызывающеестранноеповедениеокон!",
     transcript: {
@@ -790,15 +791,14 @@ export const messages = [
     dialogId: 'dlg_6_new',
     messageId: '623',
     type: "message.file",
-    url: "https://axiomabio.com/pdf/test.pdf",
+    url: pdfFile,
     filename: "Документ.pdf",
-    text: "Документ долго отправляется",
     direction: 'outgoing',
     status: 'pending',
     timestamp: '1757497507',  
-    header: 'Анна',
-    subText: 'Анна',
-    avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
+    header: 'Дмитрий',
+    subText: 'Дитрий',
+    avatar:'https://placehold.jp/30/4682B4/ffffff/64x64.png?text=D',
   },
   {
     chatId: 6,
@@ -919,7 +919,7 @@ export const messages = [
     dialogId: 'dlg_6_new',
     messageId: '630',
     type: "message.audio", 
-    url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     direction: 'outgoing', 
     status: 'read', 
     subText: '89829445678', 
@@ -943,7 +943,7 @@ export const messages = [
     dialogId: 'dlg_6_new',
     messageId: '631',
     type: "message.audio", 
-    url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     direction: 'outgoing', 
     status: 'read', 
     subText: '89829445678', 

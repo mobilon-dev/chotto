@@ -75,16 +75,13 @@
         </transition>
 
         <transition name="modal-fade">
-          <a
+          <button
             v-if="buttonDownloadVisible"
             class="image-message__download-button"
-            :href="message.url"
-            download
-            target="_blank"
-            @click.stop="() => '//Предотвращаем всплытие события клика'"
+            @click.stop="downloadImage"
           >
             <span class="pi pi-download" />
-          </a>
+          </button>
         </transition>
       </div>
 
@@ -233,6 +230,57 @@ function getClass(message: IImageMessage) {
 }
 
 const closeModal = () => isOpenModal.value = false
+
+const downloadImage = async () => {
+  if (!props.message.url) return
+  
+  try {
+    const response = await fetch(props.message.url, {
+      headers: {
+        'Accept': 'image/*'
+      }
+    })
+    
+    // Получаем оригинальный Content-Type
+    const contentType = response.headers.get('content-type') || ''
+    
+    // Создаем blob с явным указанием типа из ответа сервера
+    const blob = await response.blob()
+    
+    // Получаем расширение из URL
+    const urlExtension = props.message.url.split('.').pop()?.split('?')[0]?.toLowerCase() || ''
+    
+    // Определяем расширение по Content-Type или URL
+    const mimeToExt: Record<string, string> = {
+      'image/jpeg': 'jpg',
+      'image/jpg': 'jpg',
+      'image/png': 'png',
+      'image/gif': 'gif',
+      'image/webp': 'webp',
+      'image/svg+xml': 'svg',
+      'image/bmp': 'bmp'
+    }
+    
+    let extension = urlExtension && ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp'].includes(urlExtension)
+      ? urlExtension
+      : (mimeToExt[contentType] || 'jpg')
+    
+    const filename = props.message.alt 
+      ? (props.message.alt.includes('.') ? props.message.alt : `${props.message.alt}.${extension}`)
+      : `image-${props.message.messageId}.${extension}`
+    
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = filename
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Ошибка при скачивании изображения:', error)
+  }
+}
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
 

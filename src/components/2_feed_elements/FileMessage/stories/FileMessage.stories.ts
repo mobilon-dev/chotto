@@ -6,6 +6,7 @@ import { IFileMessage } from '@/types';
 import BaseContainer from '../../../5_containers/BaseContainer/BaseContainer.vue';
 import ThemeMode from '../../../2_elements/ThemeMode/ThemeMode.vue';
 import chatBackgroundRaw from '../../../3_compounds/Feed/assets/chat-background.svg?raw';
+import pdfFile from '../../../../apps/data/files/test.pdf';
 
 const themes = [
   { code: 'light', name: 'Light', default: true },
@@ -25,7 +26,7 @@ type Story = StoryObj<typeof FileMessage>;
 
 const fileMessage: IFileMessage = {
   filename: "document.pdf",
-  url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg",
+  url: pdfFile,
   time: '20:55',
   status: 'read',
   position: 'left',
@@ -80,57 +81,72 @@ export const Default: Story = {
       // Примеры сообщений: левое и правое с разными статусами
       const leftMessage: IFileMessage = {
         filename: "document.pdf",
-        url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg",
+        url: pdfFile,
         time: '12:00',
         status: 'read',
         position: 'left',
         messageId: 'left1',
+        direction: 'incoming',
       };
 
       const rightMessagePending: IFileMessage = {
         filename: "document.pdf",
-        url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg",
+        url: pdfFile,
         time: '12:05',
         status: 'pending',
         position: 'right',
         messageId: 'right1',
+        header: 'Мария',
+        direction: 'outgoing',
+        subText: 'Мария',
       };
 
       const rightMessageSent: IFileMessage = {
         filename: "document.pdf",
-        url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg",
+        url: pdfFile,
         time: '12:06',
         status: 'sent',
         position: 'right',
         messageId: 'right2',
+        header: 'Мария',
+        direction: 'outgoing',
+        subText: 'Мария',
       };
 
       const rightMessageReceived: IFileMessage = {
         filename: "document.pdf",
-        url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg",
+        url: pdfFile,
         time: '12:07',
         status: 'received',
         position: 'right',
         messageId: 'right3',
+        header: 'Мария',
+        direction: 'outgoing',
+        subText: 'Мария',
       };
 
       const rightMessageRead: IFileMessage = {
         filename: "document.pdf",
-        url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg",
+        url: pdfFile,
         time: '12:08',
         status: 'read',
         position: 'right',
         messageId: 'right4',
+        header: 'Мария',
+        direction: 'outgoing',
+        subText: 'Мария',
       };
 
       const rightMessageError: IFileMessage = {
         filename: "document.pdf",
-        url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg",
+        url: pdfFile,
         time: '12:09',
         status: 'error',
         statusMsg: 'Не удалось отправить сообщение',
         position: 'right',
         messageId: 'right5',
+        header: 'Мария',
+        direction: 'outgoing',
       };
 
       const defaultBackgroundValue = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(chatBackgroundRaw)}`;
@@ -152,12 +168,12 @@ export const Default: Story = {
         </div>
         <div :style="containerStyle">
           <div style="display: flex; flex-direction: column; gap: 16px;">
-            <FileMessage :message="leftMessage" />
-            <FileMessage :message="rightMessagePending" />
-            <FileMessage :message="rightMessageSent" />
-            <FileMessage :message="rightMessageReceived" />
-            <FileMessage :message="rightMessageRead" />
-            <FileMessage :message="rightMessageError" />
+            <FileMessage :message="leftMessage" :is-first-in-series="true" />
+            <FileMessage :message="rightMessagePending" :is-first-in-series="true" />
+            <FileMessage :message="rightMessageSent" :is-first-in-series="false" />
+            <FileMessage :message="rightMessageReceived" :is-first-in-series="false" />
+            <FileMessage :message="rightMessageRead" :is-first-in-series="false" />
+            <FileMessage :message="rightMessageError" :is-first-in-series="false" />
           </div>
         </div>
       </BaseContainer>

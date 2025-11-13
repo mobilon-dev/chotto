@@ -39,8 +39,7 @@
       <a
         class="file-message__link"
         :href="message.url"
-        download
-        target="_blank"
+        @click.prevent="downloadFile"
       >
         <span class="pi pi-file" />
         <p class="file-message__filename-text">
@@ -177,6 +176,47 @@ function getClass(message: { position: string }) {
 }
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
+
+const downloadFile = async () => {
+  if (!props.message.url) return
+
+  try {
+    const targetUrl = new URL(props.message.url, window.location.href)
+    const isSameOrigin = targetUrl.origin === window.location.origin
+
+    if (isSameOrigin) {
+      // Доверяем браузеру — он быстрее покажет диалог "Сохранить" для своих файлов
+      const link = document.createElement('a')
+      link.href = targetUrl.toString()
+      link.download = props.message.filename || `file-${props.message.messageId}`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      return
+    }
+
+    // Для внешних доменов остаёмся на fetch + blob, иначе download может быть заблокирован
+    const response = await fetch(props.message.url)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const blob = await response.blob()
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = props.message.filename || `file-${props.message.messageId}`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Ошибка при скачивании файла:', error)
+    // В случае ошибки открываем файл в новом окне
+    window.open(props.message.url, '_blank')
+  }
+}
 
 </script>
 

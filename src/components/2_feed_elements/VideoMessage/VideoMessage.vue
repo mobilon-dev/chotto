@@ -78,16 +78,14 @@
 
 
         <transition name="modal-fade">
-          <a
+          <button
             v-if="buttonDownloadVisible"
             class="video-message__download-button"
-            :href="message.url"
-            download
-            target="_blank"
-            @click.stop="() => '//Предотвращаем всплытие события клика'"
+            type="button"
+            @click.stop="downloadVideo"
           >
             <span class="pi pi-download" />
-          </a>
+          </button>
         </transition>
       </div>
 
@@ -272,6 +270,58 @@ const videoBorderRadius = computed(() => {
 const closeModal = () => isOpenModal.value = false
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
+
+const downloadVideo = async () => {
+  if (!props.message.url) return
+
+  try {
+    const response = await fetch(props.message.url, {
+      headers: {
+        Accept: 'video/*'
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const contentType = response.headers.get('content-type') || ''
+    const blob = await response.blob()
+
+    const urlExtension = props.message.url.split('.').pop()?.split('?')[0]?.toLowerCase() || ''
+
+    const mimeToExt: Record<string, string> = {
+      'video/mp4': 'mp4',
+      'video/webm': 'webm',
+      'video/ogg': 'ogv',
+      'video/quicktime': 'mov',
+      'video/x-matroska': 'mkv',
+      'application/octet-stream': urlExtension || 'mp4'
+    }
+
+    const knownExtensions = ['mp4', 'mov', 'webm', 'ogv', 'mkv']
+
+    let extension = urlExtension && knownExtensions.includes(urlExtension)
+      ? urlExtension
+      : (mimeToExt[contentType] || 'mp4')
+
+    const filename = props.message.alt
+      ? (props.message.alt.includes('.') ? props.message.alt : `${props.message.alt}.${extension}`)
+      : `video-${props.message.messageId}.${extension}`
+
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = filename
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Ошибка при скачивании видео:', error)
+    window.open(props.message.url, '_blank')
+  }
+}
 
 </script>
 

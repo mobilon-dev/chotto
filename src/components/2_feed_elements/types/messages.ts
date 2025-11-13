@@ -129,6 +129,7 @@ export interface IFileMessage {
   embed?: object
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
+  direction?: string
 }
 
 export interface IImageMessage {
