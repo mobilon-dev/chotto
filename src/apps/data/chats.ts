@@ -373,13 +373,103 @@ export const chats = [
     },
   },
   {
-    chatId: 8, name: "Василий",
+    chatId: 8, name: "Георгий Звонарь",
+    avatar: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg',
     countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727021159',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },
     ],
     metadata: '',
+    dialogs: [
+      { 
+        branchId: 'bch_111',
+        dialogId: 'dlg_43543111',
+        attributeId: 'atr_111',
+        channelId: 'whatsapp.W2222',
+        name: 'диалог1 whatsapp',
+        fullname: 'диалог1 номер 79135292926 канал whatsapp 73910001100 (основной)',   // для tooltip'а
+        countUnread: 0,
+        'lastActivity.time': 'час назад',  
+        'lastActivity.timestamp': 1757318879000,   // для сортировки
+        isSelected: false,
+      },
+      { 
+        branchId: 'bch_222',
+        dialogId: 'dlg_89789222',
+        attributeId: 'atr_222',
+        channelId: 'telegram.T222',
+        name: 'диалог2 telegram',
+        fullname: 'диалог5 telegram',
+        countUnread: 0,
+        'lastActivity.time': 'час назад',
+        'lastActivity.timestamp': 1727641759111,   // для сортировки
+        isSelected: false,
+      },
+      { 
+        branchId: 'bch_333',
+        dialogId: 'dlg_00123333',
+        attributeId: 'atr_333',
+        channelId: 'max.M333',
+        name: 'диалог3 max',
+        fullname: 'диалог3 max',
+        countUnread: 0,
+        'lastActivity.time': 'час назад',
+        'lastActivity.timestamp': 1727641759111,   // для сортировки
+        isSelected: false,
+      },
+      { 
+        branchId: 'bch_444',
+        dialogId: 'dlg_00124444',
+        attributeId: 'atr_444',
+        channelId: 'sms.M444',
+        name: 'диалог4 sms',
+        fullname: 'диалог4 sms',
+        countUnread: 0,
+        'lastActivity.time': 'час назад',
+        'lastActivity.timestamp': 1727641759111,   // для сортировки
+        isSelected: false,
+      },
+      {
+        dialogId: 'all',
+        name: 'Просмотр всех диалогов',
+        'lastActivity.timestamp': 17270000000,   // для сортировки
+        countUnread: 0,
+        isSelected: false,
+      }
+    ],
+    contact: {
+      attributes: [
+        {
+          id: 'atr_111',
+          type: 'phone',
+          data: '79135292926',
+          value: '79135292926',
+        },
+        {
+          id: 'atr_222',
+          type: 'telegram',
+          data: {
+            id: '182940012993',
+            nickname: 'georgiy_zvonar',
+            phone: '79135292926'
+          },
+          value: '@georgiy_zvonar',
+        },
+        {
+          id: 'atr_333',
+          type: 'phone',
+          data: '79135292926',
+          value: '79135292926',
+        },
+        {
+          id: 'atr_444',
+          type: 'phone',
+          data: '79135292926',
+          value: '79135292926',
+        },
+      ],
+    },
   },
   {
     chatId: 9, name: "Василий",

@@ -50,5 +50,34 @@ export const channels = [
     title: "TG Bot №14",
     status: "active",
     autoAccess: false
+  },
+  // Каналы для чата "Георгий Звонарь" (chatId: 8)
+  {
+    branchId: "bch_111",
+    channelId: "whatsapp.W2222",
+    title: "whatsapp 73910001100 (основной)",
+    status: "active",
+    autoAccess: false
+  },
+  {
+    branchId: "bch_222",
+    channelId: "telegram.T222",
+    title: "telegram 79135292926",
+    status: "active",
+    autoAccess: false
+  },
+  {
+    branchId: "bch_333",
+    channelId: "max.M333",
+    title: "max 79135292926",
+    status: "active",
+    autoAccess: false
+  },
+  {
+    branchId: "bch_444",
+    channelId: "sms.M444",
+    title: "SMS 79135292926",
+    status: "active",
+    autoAccess: false
   }
 ];

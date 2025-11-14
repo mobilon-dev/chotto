@@ -37,6 +37,19 @@ export interface CallMessageThemeCSSVariables {
 
   /** Отступ снизу у заголовка */
   '--chotto-callmessage-title-margin-bottom': string;
+  /** Цвет участника звонка */
+  '--chotto-callmessage-call-participant-color': string;
+  /** Отображение пропущенного звонка в заголовке */
+  '--chotto-callmessage-title-missed-display': string;
+
+  /** Колонка грида обёртки заголовка */
+  '--chotto-callmessage-title-wrapper-grid-column': string;
+  /** Отображение обёртки заголовка */
+  '--chotto-callmessage-title-wrapper-display': string;
+  /** Выравнивание элементов обёртки заголовка */
+  '--chotto-callmessage-title-wrapper-align-items': string;
+  /** Промежуток между колонками обёртки заголовка */
+  '--chotto-callmessage-title-wrapper-column-gap': string;
 
   /** Колонка грида иконки */
   '--chotto-callmessage-icon-grid-column': string;
@@ -83,6 +96,21 @@ export interface CallMessageThemeCSSVariables {
   /** Отображение статуса */
   '--chotto-callmessage-status-display': string;
 
+  /** Колонка грида контейнера заголовка */
+  '--chotto-callmessage-header-container-grid-column': string;
+  /** Отображение контейнера заголовка */
+  '--chotto-callmessage-header-container-display': string;
+  /** Промежуток между рядами контейнера заголовка */
+  '--chotto-callmessage-header-container-row-gap': string;
+  /** Внутренние отступы контейнера заголовка */
+  '--chotto-callmessage-header-container-padding': string;
+  /** Граница контейнера заголовка */
+  '--chotto-callmessage-header-container-border': string;
+  /** Скругление контейнера заголовка */
+  '--chotto-callmessage-header-container-border-radius': string;
+  /** Цвет фона контейнера заголовка */
+  '--chotto-callmessage-header-container-background-color': string;
+
   /** Выравнивание аватара */
   '--chotto-callmessage-avatar-align-self': string;
   /** Вписывание изображения аватара */
@@ -93,6 +121,127 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-avatar-min-height': string;
   /** Скругление аватара */
   '--chotto-callmessage-avatar-border-radius': string;
+
+  /** Колонка грида обёртки аудио */
+  '--chotto-callmessage-audio-wrapper-grid-column': string;
+  /** Отображение обёртки аудио */
+  '--chotto-callmessage-audio-wrapper-display': string;
+  /** Шаблон колонок грида обёртки аудио */
+  '--chotto-callmessage-audio-wrapper-grid-template-columns': string;
+  /** Промежуток между колонками обёртки аудио */
+  '--chotto-callmessage-audio-wrapper-column-gap': string;
+  /** Выравнивание элементов обёртки аудио */
+  '--chotto-callmessage-audio-wrapper-align-items': string;
+  /** Внутренний отступ сверху обёртки аудио */
+  '--chotto-callmessage-audio-wrapper-padding-top': string;
+  /** Внутренний отступ снизу обёртки аудио */
+  '--chotto-callmessage-audio-wrapper-padding-bottom': string;
+  /** Граница кнопки аудио */
+  '--chotto-callmessage-audio-button-border': string;
+  /** Курсор кнопки аудио */
+  '--chotto-callmessage-audio-button-cursor': string;
+  /** Ширина кнопки аудио */
+  '--chotto-callmessage-audio-button-width': string;
+  /** Высота кнопки аудио */
+  '--chotto-callmessage-audio-button-height': string;
+  /** Скругление кнопки аудио */
+  '--chotto-callmessage-audio-button-border-radius': string;
+  /** Цвет фона кнопки аудио */
+  '--chotto-callmessage-audio-button-background-color': string;
+  /** Отображение кнопки аудио */
+  '--chotto-callmessage-audio-button-display': string;
+  /** Выравнивание элементов кнопки аудио */
+  '--chotto-callmessage-audio-button-align-items': string;
+  /** Выравнивание содержимого кнопки аудио по главной оси */
+  '--chotto-callmessage-audio-button-justify-content': string;
+  /** Ряд грида кнопки аудио */
+  '--chotto-callmessage-audio-button-grid-row': string;
+  /** Отображение иконки аудио */
+  '--chotto-callmessage-audio-icon-display': string;
+  /** Выравнивание элементов иконки аудио */
+  '--chotto-callmessage-audio-icon-align-items': string;
+  /** Выравнивание содержимого иконки аудио по главной оси */
+  '--chotto-callmessage-audio-icon-justify-content': string;
+  /** Колонка грида прогресса аудио */
+  '--chotto-callmessage-audio-progress-grid-column': string;
+  /** Ряд грида прогресса аудио */
+  '--chotto-callmessage-audio-progress-grid-row': string;
+  /** Отображение прогресса аудио */
+  '--chotto-callmessage-audio-progress-display': string;
+  /** Направление флекс-контейнера прогресса аудио */
+  '--chotto-callmessage-audio-progress-flex-direction': string;
+  /** Промежуток между рядами прогресса аудио */
+  '--chotto-callmessage-audio-progress-row-gap': string;
+  /** Выравнивание прогресса аудио относительно себя */
+  '--chotto-callmessage-audio-progress-align-self': string;
+  /** Выравнивание содержимого прогресса аудио по главной оси */
+  '--chotto-callmessage-audio-progress-justify-content': string;
+  /** Отображение полосы прогресса аудио */
+  '--chotto-callmessage-audio-progress-bar-display': string;
+  /** Выравнивание элементов полосы прогресса аудио */
+  '--chotto-callmessage-audio-progress-bar-align-items': string;
+  /** Промежуток между колонками полосы прогресса аудио */
+  '--chotto-callmessage-audio-progress-bar-column-gap': string;
+  /** Внешний отступ сверху полосы прогресса аудио */
+  '--chotto-callmessage-audio-progress-bar-margin-top': string;
+  /** Трансформация полосы прогресса аудио */
+  '--chotto-callmessage-audio-progress-bar-transform': string;
+  /** Внешний вид слайдера аудио для WebKit */
+  '--chotto-callmessage-audio-slider-webkit-appearance': string;
+  /** Внешний вид слайдера аудио */
+  '--chotto-callmessage-audio-slider-appearance': string;
+  /** Фон слайдера аудио */
+  '--chotto-callmessage-audio-slider-background': string;
+  /** Курсор слайдера аудио */
+  '--chotto-callmessage-audio-slider-cursor': string;
+  /** Высота слайдера аудио */
+  '--chotto-callmessage-audio-slider-height': string;
+  /** Максимальная ширина слайдера аудио */
+  '--chotto-callmessage-audio-slider-max-width': string;
+  /** Скругление слайдера аудио */
+  '--chotto-callmessage-audio-slider-border-radius': string;
+  /** Flex-свойство слайдера аудио */
+  '--chotto-callmessage-audio-slider-flex': string;
+  /** Внешние отступы слайдера аудио */
+  '--chotto-callmessage-audio-slider-margin': string;
+  /** Внешний отступ сверху слайдера аудио */
+  '--chotto-callmessage-audio-slider-margin-top': string;
+  /** Высота дорожки слайдера аудио */
+  '--chotto-callmessage-audio-slider-track-height': string;
+  /** Фон дорожки слайдера аудио */
+  '--chotto-callmessage-audio-slider-track-background': string;
+  /** Ширина ползунка слайдера аудио */
+  '--chotto-callmessage-audio-slider-thumb-width': string;
+  /** Высота ползунка слайдера аудио */
+  '--chotto-callmessage-audio-slider-thumb-height': string;
+  /** Цвет фона ползунка слайдера аудио */
+  '--chotto-callmessage-audio-slider-thumb-background-color': string;
+  /** Внешний отступ сверху ползунка слайдера аудио */
+  '--chotto-callmessage-audio-slider-thumb-margin-top': string;
+  /** Скругление ползунка слайдера аудио */
+  '--chotto-callmessage-audio-slider-thumb-border-radius': string;
+  /** Цвет фона кнопки скорости аудио */
+  '--chotto-callmessage-audio-speed-btn-background-color': string;
+  /** Граница кнопки скорости аудио */
+  '--chotto-callmessage-audio-speed-btn-border': string;
+  /** Размер шрифта кнопки скорости аудио */
+  '--chotto-callmessage-audio-speed-btn-font-size': string;
+  /** Жирность шрифта кнопки скорости аудио */
+  '--chotto-callmessage-audio-speed-btn-font-weight': string;
+  /** Цвет кнопки скорости аудио */
+  '--chotto-callmessage-audio-speed-btn-color': string;
+  /** Курсор кнопки скорости аудио */
+  '--chotto-callmessage-audio-speed-btn-cursor': string;
+  /** Жирность шрифта кнопки скорости аудио при наведении */
+  '--chotto-callmessage-audio-speed-btn-hover-font-weight': string;
+  /** Отображение времени аудио */
+  '--chotto-callmessage-audio-time-display': string;
+  /** Выравнивание содержимого времени аудио по главной оси */
+  '--chotto-callmessage-audio-time-justify-content': string;
+  /** Размер шрифта времени аудио */
+  '--chotto-callmessage-audio-time-font-size': string;
+  /** Цвет времени аудио */
+  '--chotto-callmessage-audio-time-color': string;
 
   /** Позиционирование кнопки меню */
   '--chotto-callmessage-menu-button-position': string;
@@ -106,6 +255,8 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-menu-button-cursor': string;
   /** Переход кнопки меню */
   '--chotto-callmessage-menu-button-transition': string;
+  /** Слой кнопки меню */
+  '--chotto-callmessage-menu-button-z-index': string;
 
   /** Позиционирование контекстного меню */
   '--chotto-callmessage-context-menu-position': string;
@@ -168,9 +319,33 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-left-subtext-margin': string;
   /** Колонка грида контента слева */
   '--chotto-callmessage-left-content-grid-column': string;
+  /** Отступ сверху кнопки меню слева */
+  '--chotto-callmessage-left-menu-button-top': string;
+  /** Отступ справа кнопки меню слева */
+  '--chotto-callmessage-left-menu-button-right': string;
+  /** Отступ снизу кнопки меню слева */
+  '--chotto-callmessage-left-menu-button-bottom': string;
+  /** Отступ слева кнопки меню слева */
+  '--chotto-callmessage-left-menu-button-left': string;
+  /** Ширина контекстного меню слева */
+  '--chotto-callmessage-left-context-menu-width': string;
+  /** Высота контекстного меню слева */
+  '--chotto-callmessage-left-context-menu-height': string;
+  /** Отступ сверху контекстного меню слева */
+  '--chotto-callmessage-left-context-menu-top': string;
+  /** Отступ слева контекстного меню слева */
+  '--chotto-callmessage-left-context-menu-left': string;
+  /** Внешний отступ сверху контекстного меню слева */
+  '--chotto-callmessage-left-context-menu-margin-top': string;
+  /** Промежуток между рядами контекстного меню слева */
+  '--chotto-callmessage-left-context-menu-row-gap': string;
+  /** Внутренние отступы контекстного меню слева */
+  '--chotto-callmessage-left-context-menu-padding': string;
 
   /** Шаблон колонок правой раскладки */
   '--chotto-callmessage-right-grid-template-columns': string;
+  /** Правый внутренний отступ справа */
+  '--chotto-callmessage-right-padding-right': string;
   /** Колонка грида аватара справа */
   '--chotto-callmessage-right-avatar-grid-column': string;
   /** Ряд грида аватара справа */
@@ -187,6 +362,30 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-right-content-grid-column': string;
   /** Выравнивание контента справа */
   '--chotto-callmessage-right-content-margin-left': string;
+  /** Отступ сверху кнопки меню справа */
+  '--chotto-callmessage-right-menu-button-top': string;
+  /** Отступ справа кнопки меню справа */
+  '--chotto-callmessage-right-menu-button-right': string;
+  /** Отступ снизу кнопки меню справа */
+  '--chotto-callmessage-right-menu-button-bottom': string;
+  /** Отступ слева кнопки меню справа */
+  '--chotto-callmessage-right-menu-button-left': string;
+  /** Ширина контекстного меню справа */
+  '--chotto-callmessage-right-context-menu-width': string;
+  /** Высота контекстного меню справа */
+  '--chotto-callmessage-right-context-menu-height': string;
+  /** Отступ сверху контекстного меню справа */
+  '--chotto-callmessage-right-context-menu-top': string;
+  /** Отступ справа контекстного меню справа */
+  '--chotto-callmessage-right-context-menu-right': string;
+  /** Отступ слева контекстного меню справа */
+  '--chotto-callmessage-right-context-menu-left': string;
+  /** Внешний отступ сверху контекстного меню справа */
+  '--chotto-callmessage-right-context-menu-margin-top': string;
+  /** Промежуток между рядами контекстного меню справа */
+  '--chotto-callmessage-right-context-menu-row-gap': string;
+  /** Внутренние отступы контекстного меню справа */
+  '--chotto-callmessage-right-context-menu-padding': string;
 
   /** Позиционирование модального окна */
   '--chotto-callmessage-modal-position': string;
@@ -266,10 +465,26 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-duration-text-color': string;
   /** Размер шрифта длительности */
   '--chotto-callmessage-duration-font-size': string;
+  /** Колонка грида информации о пропущенном звонке */
+  '--chotto-callmessage-missed-info-grid-column': string;
+  /** Размер шрифта информации о пропущенном звонке */
+  '--chotto-callmessage-missed-info-font-size': string;
+  /** Цвет текста информации о пропущенном звонке */
+  '--chotto-callmessage-missed-info-text-color': string;
+  /** Внешние отступы информации о пропущенном звонке */
+  '--chotto-callmessage-missed-info-margin': string;
   /** Цвет текста времени */
   '--chotto-callmessage-time-text-color': string;
   /** Размер шрифта времени */
   '--chotto-callmessage-time-font-size': string;
+  /** Отступ справа у времени */
+  '--chotto-callmessage-time-margin-right': string;
+  /** Цвет кнопки звонка */
+  '--chotto-callmessage-call-button-color': string;
+  /** Размер шрифта кнопки звонка */
+  '--chotto-callmessage-call-button-font-size': string;
+  /** Внешние отступы кнопки звонка */
+  '--chotto-callmessage-call-button-margin': string;
   /** Цвет иконки кнопки скачивания */
   '--chotto-callmessage-download-button-icon-color': string;
   /** Размер иконки кнопки скачивания */

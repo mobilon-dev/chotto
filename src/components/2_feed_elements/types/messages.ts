@@ -90,18 +90,24 @@ export interface ICallMessage {
   messageId: string
   position: string
   time: string
-  // status: string   //??? 
+  status?: string
+  statusMsg?: string
   url?: string
   isMissedCall?: boolean
   callDuration?: string
+  callAttemptDuration?: string
+  callParticipant?: string
+  direction?: 'incoming' | 'outgoing'
   avatar?: string
   header?: string
   subText?: string
+  text?: string
   actions?: IAction[]
   views?: number
   transcript?: {
-    dialog: IDialog[];
-  };
+    dialog?: IDialog[]
+    text?: string
+  }
   reactions?: MessageReactions
 }
 

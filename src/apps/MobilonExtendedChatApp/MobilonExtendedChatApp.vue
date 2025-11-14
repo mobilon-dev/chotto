@@ -298,7 +298,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed, unref, toRaw } from "vue";
+import { onMounted, ref, computed, unref, toRaw, provide } from "vue";
 
 import {
   MenuIcon,
@@ -430,6 +430,10 @@ const templates = ref([]);
 const wabaTemplates = ref([])
 const groupTemplates = ref([])
 const sidebarItems = ref([]);
+
+// Предоставляем channels и selectedChat для дочерних компонентов через provide
+provide('channels', channels);
+provide('selectedChat', selectedChat);
 
 // Реактивная валидация sidebar items
 const { 
