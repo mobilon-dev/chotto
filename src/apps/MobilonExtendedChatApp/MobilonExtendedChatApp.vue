@@ -201,6 +201,7 @@
                 </Feed>
                 <ChatInput 
                   :focus-on-input-area="inputFocus"
+                  :selected-channel="selectedDialog"
                 >
                   <template #inline-buttons>
                     <!-- <ButtonCommandsSelector

@@ -36,7 +36,7 @@
       @click="sendMessage"
     >
       <span class="">
-        <WhatsAppSendIcon />
+        <SendIcon :color="sendIconColor" />
       </span>
     </button>
 
@@ -51,7 +51,7 @@ import { unref, ref, watch, nextTick, inject, computed } from 'vue';
 import { useMessageDraft, useImmediateDebouncedRef } from '@/hooks';
 import { t } from '../../../locale/useLocale';
 import { IFilePreview, IInputMessage } from '@/types';
-import { WhatsAppSendIcon } from './icons';
+import { SendIcon } from './icons';
 
 const emit = defineEmits(['send','typing']);
 
@@ -76,7 +76,17 @@ const props = defineProps({
   disabledPlaceholder: {
     type: String,
     default: null,
-  }
+  },
+  selectedChannel: {
+    type: Object,
+    required: false,
+    default: null,
+  },
+  inputButtonColor: {
+    type: String,
+    required: false,
+    default: null,
+  },
 })
 
 const disabledSendButton = computed(() => {
@@ -84,6 +94,30 @@ const disabledSendButton = computed(() => {
   if (getMessage().text == '' && !getMessage().file) return true
   if (getMessage().isRecording) return true
   return false
+})
+
+const sendIconColor = computed(() => {
+  if (props.inputButtonColor) {
+    return props.inputButtonColor;
+  }
+
+  if (!props.selectedChannel?.channelId) {
+    return '#25D366';
+  }
+
+  const channelId = props.selectedChannel.channelId.toLowerCase();
+
+  if (channelId.includes('whatsapp') || channelId.includes('waba')) {
+    return '#25D366';
+  } else if (channelId.includes('telegram')) {
+    return '#37AFE2';
+  } else if (channelId.includes('sms')) {
+    return '#6C757D';
+  } else if (channelId.includes('max')) {
+    return '#4B0082';
+  }
+
+  return '#25D366';
 })
 
 watch(
