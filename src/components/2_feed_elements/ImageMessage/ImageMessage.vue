@@ -6,7 +6,7 @@
       applyStyle(message)
     ]"
     :messageId="message.messageId"
-    :style="message.position === 'right' && message.backgroundColor ? {'--chotto-imagemessage-right-bg': message.backgroundColor} : null"
+    :style="rightBubbleStyle"
     @mouseleave="hideMenu"
   >
     <img
@@ -165,7 +165,7 @@
 import { ref, computed, inject } from 'vue';
 
 import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, MessageReactions, MessageStatusIndicator } from '@/components';
-import { useMessageLinks, useMessageActions } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useChannelAccentColor } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IImageMessage } from '@/types';
@@ -225,6 +225,11 @@ const imageBorderRadius = computed(() => {
 
 const status = computed(() => getStatus(props.message.status))
 const statusTitle = computed(() => getStatusTitle(props.message.status, props.message.statusMsg))
+
+const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
+  computed(() => props.message),
+  { cssVariable: '--chotto-imagemessage-right-bg', position: 'right' }
+)
 
 function getClass(message: IImageMessage) {
   return getMessageClass(message.position, 'image-message')

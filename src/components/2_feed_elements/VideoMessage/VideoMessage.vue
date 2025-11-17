@@ -6,7 +6,7 @@
       applyStyle(message)
     ]"
     :messageId="message.messageId"
-    :style="message.position === 'right' && message.backgroundColor ? {'--chotto-videomessage-right-bg': message.backgroundColor} : null"
+    :style="rightBubbleStyle"
     @mouseleave="hideMenu"
   >
     <img
@@ -170,7 +170,7 @@
 import { ref, computed, watch, inject } from 'vue'
 
 import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, MessageReactions, MessageStatusIndicator } from '@/components';
-import { useMessageLinks, useMessageActions } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useChannelAccentColor } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IVideoMessage } from '@/types';
@@ -240,6 +240,11 @@ const showMenu = () => {
 
 const status = computed(() => getStatus(props.message.status))
 const statusTitle = computed(() => getStatusTitle(props.message.status, props.message.statusMsg))
+
+const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
+  computed(() => props.message),
+  { cssVariable: '--chotto-videomessage-right-bg', position: 'right' }
+)
 
 const playAgain = () => {
   if (previewPlayer.value) {

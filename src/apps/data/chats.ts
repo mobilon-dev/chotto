@@ -385,10 +385,10 @@ export const chats = [
       { 
         branchId: 'bch_111',
         dialogId: 'dlg_43543111',
-        attributeId: 'atr_111',
+        attributeId: 'atr_whatsapp',
         channelId: 'whatsapp.W2222',
         name: 'диалог1 whatsapp',
-        fullname: 'диалог1 номер 79135292926 канал whatsapp 73910001100 (основной)',   // для tooltip'а
+        fullname: 'диалог1 номер 73910001100 канал whatsapp 73910001100 (основной)',   // для tooltip'а
         countUnread: 0,
         'lastActivity.time': 'час назад',  
         'lastActivity.timestamp': 1757318879000,   // для сортировки
@@ -397,10 +397,10 @@ export const chats = [
       { 
         branchId: 'bch_222',
         dialogId: 'dlg_89789222',
-        attributeId: 'atr_222',
+        attributeId: 'atr_telegram',
         channelId: 'telegram.T222',
         name: 'диалог2 telegram',
-        fullname: 'диалог5 telegram',
+        fullname: 'диалог2 telegram',
         countUnread: 0,
         'lastActivity.time': 'час назад',
         'lastActivity.timestamp': 1727641759111,   // для сортировки
@@ -409,7 +409,7 @@ export const chats = [
       { 
         branchId: 'bch_333',
         dialogId: 'dlg_00123333',
-        attributeId: 'atr_333',
+        attributeId: 'atr_max',
         channelId: 'max.M333',
         name: 'диалог3 max',
         fullname: 'диалог3 max',
@@ -421,7 +421,7 @@ export const chats = [
       { 
         branchId: 'bch_444',
         dialogId: 'dlg_00124444',
-        attributeId: 'atr_444',
+        attributeId: 'atr_sms',
         channelId: 'sms.M444',
         name: 'диалог4 sms',
         fullname: 'диалог4 sms',
@@ -441,13 +441,13 @@ export const chats = [
     contact: {
       attributes: [
         {
-          id: 'atr_111',
-          type: 'phone',
-          data: '79135292926',
-          value: '79135292926',
+          id: 'atr_whatsapp',
+          type: 'whatsapp',
+          data: '73910001100',
+          value: '73910001100',
         },
         {
-          id: 'atr_222',
+          id: 'atr_telegram',
           type: 'telegram',
           data: {
             id: '182940012993',
@@ -457,14 +457,14 @@ export const chats = [
           value: '@georgiy_zvonar',
         },
         {
-          id: 'atr_333',
-          type: 'phone',
+          id: 'atr_max',
+          type: 'max',
           data: '79135292926',
           value: '79135292926',
         },
         {
-          id: 'atr_444',
-          type: 'phone',
+          id: 'atr_sms',
+          type: 'sms',
           data: '79135292926',
           value: '79135292926',
         },

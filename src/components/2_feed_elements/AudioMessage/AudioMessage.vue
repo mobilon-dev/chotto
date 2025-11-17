@@ -6,7 +6,7 @@
       applyStyle(message)
     ]"
     :messageId="message.messageId"
-    :style="message.position === 'right' && message.backgroundColor ? {'--chotto-audiomessage-right-background-color': message.backgroundColor} : null"
+    :style="rightBubbleStyle"
     @mouseleave="hideMenu"
   >
     <img
@@ -252,7 +252,7 @@
 import { ref, onMounted, computed, watch, inject } from 'vue'
 
 import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator } from '@/components';
-import { useMessageActions, useMessageLinks } from '@/hooks/messages';
+import { useMessageActions, useMessageLinks, useChannelAccentColor } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
 import { useTheme } from '@/hooks';
 import { IAudioMessage } from '@/types';
@@ -415,6 +415,11 @@ const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 
 const status = computed(() => getStatus(props.message.status))
 const statusTitle = computed(() => getStatusTitle(props.message.status, props.message.statusMsg))
+
+const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
+  computed(() => props.message),
+  { cssVariable: '--chotto-audiomessage-right-background-color', position: 'right' }
+)
 
 function togglePlayPause() {
   if (player.value) {

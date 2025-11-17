@@ -992,7 +992,7 @@ export const messages = [
     isMissedCall: false, 
     timestamp: '1763036585',
     header: 'Василий',
-    subText: 'Василий',
+    subText: 'whatsapp 73910001100 (основной)',
     callParticipant: 'Малафеева Любовь',
     actions: [
       { action: 'download', title: 'Скачать' },
@@ -1010,9 +1010,23 @@ export const messages = [
     isMissedCall: true, // признак пропущенного звонка
     timestamp: '1763036686',
     header: 'Василий', 
-    subText: 'Василий',
+    subText: 'whatsapp 73910001100 (основной)',
     callParticipant: 'Малафеева Любовь', // имя участника звонка
     callAttemptDuration: '50 сек' // время попытки звонка
+  },
+  {
+    chatId: 8, 
+    dialogId: 'dlg_43543111', 
+    type: "message.file", 
+    url: "https://axiomabio.com/pdf/test.pdf",
+    filename: "Предложение WhatsApp.pdf",
+    direction: 'outgoing',
+    status: 'read',
+    timestamp: '1763036687',
+    header: 'Вы',
+    subText: 'whatsapp 73910001100 (основной)',
+    messageId: '811-file',
+    text: 'Файл из WhatsApp'
   },
   {
     chatId: 8, 
@@ -1024,9 +1038,9 @@ export const messages = [
     messageId: '803',
     url: audioFile,
     isMissedCall: false, 
-    timestamp: '1763036687',
+    timestamp: '1763036688',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: '@georgiy_zvonar',
     callParticipant: 'Малафеева Любовь',
     actions: [
       { action: 'download', title: 'Скачать' },
@@ -1042,12 +1056,13 @@ export const messages = [
     time: '12:18',
     messageId: '804',
     isMissedCall: true, 
-    timestamp: '1763036688',
+    timestamp: '1763036689',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: 'whatsapp 73910001100 (основной)',
     callParticipant: 'Малафеева Любовь',
     callAttemptDuration: '1 мин 20 сек'
   },
+
   // Сообщения для Telegram диалога (dlg_89789222)
   {
     chatId: 8, 
@@ -1061,7 +1076,7 @@ export const messages = [
     isMissedCall: false, 
     timestamp: '1763036900',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: 'whatsapp 73910001100 (основной)',
     callParticipant: 'Малафеева Любовь',
     actions: [
       { action: 'download', title: 'Скачать' },
@@ -1077,7 +1092,7 @@ export const messages = [
     status: 'read',
     timestamp: '1763037000',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: '@georgiy_zvonar',
     messageId: '805',
   },
   {
@@ -1089,8 +1104,22 @@ export const messages = [
     status: 'read',
     timestamp: '1763037100',
     header: 'Вы',
-    subText: 'Вы',
+    subText: '@georgiy_zvonar',
     messageId: '806',
+  },
+  {
+    chatId: 8, 
+    dialogId: 'dlg_89789222', 
+    type: "message.file", 
+    url: "https://axiomabio.com/pdf/test.pdf",
+    filename: "Предложение Telegram.pdf",
+    direction: 'outgoing',
+    status: 'read',
+    timestamp: '1763037101',
+    header: 'Вы',
+    subText: '@georgiy_zvonar',
+    messageId: '811-file',
+    text: 'Файл из Telegram'
   },
   {
     chatId: 8, 
@@ -1101,7 +1130,7 @@ export const messages = [
     status: 'read',
     timestamp: '1763037200',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: '@georgiy_zvonar',
     messageId: '807',
   },
   // Сообщения для Max диалога (dlg_00123333)
@@ -1117,7 +1146,7 @@ export const messages = [
     isMissedCall: false, 
     timestamp: '1763037900',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: 'max 79135292926',
     callParticipant: 'Малафеева Любовь',
     callDuration: "08:15",
     actions: [
@@ -1134,21 +1163,21 @@ export const messages = [
     status: 'read',
     timestamp: '1763038000',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: 'max 79135292926',
     messageId: '809',
   },
   {
     chatId: 8, 
     dialogId: 'dlg_00123333', 
     type: "message.text", 
-    text: "Здравствуй! Как дела?",
+    text: "Здравствуй! Как дела? Это сообщение без переданного цвета!",
     direction: 'outgoing',
     status: 'read',
     timestamp: '1763038100',
     header: 'Вы',
-    subText: 'Вы',
+    subText: 'max 79135292926',
     messageId: '810',
-    backgroundColor: '#E6D9F2',
+    // backgroundColor: '#E6D9F2',
   },
   {
     chatId: 8, 
@@ -1158,9 +1187,9 @@ export const messages = [
     status: 'read',
     timestamp: '1763038101',
     header: 'Максим',
-    subText: 'Максим',
+    subText: 'max 79135292926',
     messageId: '811',
-    backgroundColor: '#E6D9F2',
+    // backgroundColor: '#E6D9F2',
   },
   {
     chatId: 8, 
@@ -1171,9 +1200,9 @@ export const messages = [
     status: 'read',
     timestamp: '1763038102',
     header: 'Максим',
-    subText: 'Максим',
+    subText: 'max 79135292926',
     messageId: '811-video',
-    backgroundColor: '#E6D9F2',
+    // backgroundColor: '#E6D9F2',
     text: 'Видео из Max'
   },
   {
@@ -1186,7 +1215,7 @@ export const messages = [
     status: 'read',
     timestamp: '1763038103',
     header: 'Максим',
-    subText: 'Максим',
+    subText: 'max 79135292926',
     messageId: '811-image',
     backgroundColor: '#E6D9F2',
     text: 'Изображение из Max'
@@ -1201,7 +1230,7 @@ export const messages = [
     status: 'read',
     timestamp: '1763038104',
     header: 'Максим',
-    subText: 'Максим',
+    subText: 'max 79135292926',
     messageId: '811-file',
     backgroundColor: '#E6D9F2',
     text: 'Файл из Max'
@@ -1215,7 +1244,7 @@ export const messages = [
     status: 'read',
     timestamp: '1763038200',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: 'max 79135292926',
     messageId: '811',
   },
   {
@@ -1228,7 +1257,7 @@ export const messages = [
     status: 'read',
     timestamp: '1763038300',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: 'max 79135292926',
     messageId: '812',
     text: 'Документ из Max',
   },
@@ -1242,7 +1271,7 @@ export const messages = [
     status: 'read',
     timestamp: '1763039000',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: 'SMS 79135292926',
     messageId: '813',
   },
   {
@@ -1254,7 +1283,7 @@ export const messages = [
     status: 'read',
     timestamp: '1763039100',
     header: 'Вы',
-    subText: 'Вы',
+    subText: 'SMS 79135292926',
     messageId: '814',
     backgroundColor: '#E6EBF0',
   },
@@ -1267,7 +1296,7 @@ export const messages = [
     status: 'read',
     timestamp: '1763039200',
     header: 'Георгий',
-    subText: 'Георгий',
+    subText: 'SMS 79135292926',
     messageId: '815',
   },
   {
@@ -1279,9 +1308,9 @@ export const messages = [
     status: 'read',
     timestamp: '1763039300',
     header: 'Вы',
-    subText: 'Вы',
+    subText: 'SMS 79135292926',
     messageId: '816',
-    backgroundColor: '#E6EBF0',
+    // backgroundColor: '#E6EBF0',
   },
 
   /**============================================================================================================ */

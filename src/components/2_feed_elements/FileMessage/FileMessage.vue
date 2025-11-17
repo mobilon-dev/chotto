@@ -6,7 +6,7 @@
       applyStyle(message)
     ]"
     :messageId="message.messageId"
-    :style="message.position === 'right' && message.backgroundColor ? {'--chotto-filemessage-right-bg': message.backgroundColor} : null"
+    :style="rightBubbleStyle"
     @mouseleave="hideMenu"
   >
     <img
@@ -130,7 +130,7 @@ import { computed } from 'vue'
 
 
 import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator } from '@/components';
-import { useMessageLinks, useMessageActions } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useChannelAccentColor } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { IFileMessage } from '@/types';
 
@@ -171,6 +171,11 @@ const {
 
 const status = computed(() => getStatus(props.message.status))
 const statusTitle = computed(() => getStatusTitle(props.message.status, props.message.statusMsg))
+
+const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
+  computed(() => props.message),
+  { cssVariable: '--chotto-filemessage-right-bg', position: 'right' }
+)
 
 function getClass(message: { position: string }) {
   return getMessageClass(message.position, 'file-message')
