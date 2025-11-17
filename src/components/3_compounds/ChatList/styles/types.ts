@@ -73,6 +73,8 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-title-column-gap': string;
   /** Отступы контейнера заголовка */
   '--chotto-chatlist-title-container-padding': string;
+  /** Максимальная высота контейнера заголовка */
+  '--chotto-chatlist-title-container-max-height': string;
 
   // Title
   /** Семейство шрифта заголовка */

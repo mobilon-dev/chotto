@@ -151,6 +151,7 @@
   align-items: var(--chotto-chatlist-title-container-align, center);
   column-gap: var(--chotto-chatlist-title-column-gap, 50px);
   padding: var(--chotto-chatlist-title-container-padding, 20px 15px 20px 15px);
+  max-height: var(--chotto-chatlist-title-container-max-height, 60px);
 }
 
 .menu-enter-active {

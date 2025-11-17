@@ -4,6 +4,7 @@
     padding: var(--chotto-chatinfo-container-padding, 10px 0 10px 15px);
     border-bottom: var(--chotto-chatinfo-container-border-bottom, none);
     background-color: var(--chotto-chatinfo-container-background-color, #ffffff);
+    max-height: var(--chotto-chatinfo-container-max-height, 60px);
   }
 
   &__base-line{
