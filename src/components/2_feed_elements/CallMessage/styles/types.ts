@@ -342,10 +342,24 @@ export interface CallMessageThemeCSSVariables {
   /** Внутренние отступы контекстного меню слева */
   '--chotto-callmessage-left-context-menu-padding': string;
 
+  /** Позиционирование контейнера правой раскладки */
+  '--chotto-callmessage-right-position': string;
   /** Шаблон колонок правой раскладки */
   '--chotto-callmessage-right-grid-template-columns': string;
   /** Правый внутренний отступ справа */
   '--chotto-callmessage-right-padding-right': string;
+  /** Контент псевдоэлемента справа */
+  '--chotto-callmessage-right-after-content': string;
+  /** Позиционирование псевдоэлемента справа */
+  '--chotto-callmessage-right-after-position': string;
+  /** Смещение сверху псевдоэлемента справа */
+  '--chotto-callmessage-right-after-top': string;
+  /** Смещение справа псевдоэлемента справа */
+  '--chotto-callmessage-right-after-right': string;
+  /** Смещение снизу псевдоэлемента справа */
+  '--chotto-callmessage-right-after-bottom': string;
+  /** Ширина псевдоэлемента справа */
+  '--chotto-callmessage-right-after-width': string;
   /** Колонка грида аватара справа */
   '--chotto-callmessage-right-avatar-grid-column': string;
   /** Ряд грида аватара справа */

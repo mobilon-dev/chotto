@@ -415,8 +415,17 @@
   }
 
   &__right {
+    position: var(--chotto-callmessage-right-position, relative);
     grid-template-columns: var(--chotto-callmessage-right-grid-template-columns, 1fr min-content);
-    padding-right: var(--chotto-callmessage-right-padding-right, 25px);
+    
+    &::after {
+      content: var(--chotto-callmessage-right-after-content, '');
+      position: var(--chotto-callmessage-right-after-position, absolute);
+      top: var(--chotto-callmessage-right-after-top, 0);
+      right: var(--chotto-callmessage-right-after-right, -24px);
+      bottom: var(--chotto-callmessage-right-after-bottom, 0);
+      width: var(--chotto-callmessage-right-after-width, 24px);
+    }
 
     .call-message__avatar {
       grid-column: var(--chotto-callmessage-right-avatar-grid-column, 2);
