@@ -29,7 +29,7 @@
     width: var(--chotto-textmessage-right-after-width, 0);
     height: var(--chotto-textmessage-right-after-height, 0);
     border: var(--chotto-textmessage-right-after-border, 20px solid transparent);
-    border-top: var(--chotto-textmessage-right-after-border-top, 15px solid var(--chotto-textmessage-right-bg, #a7f3d0));
+    border-top: 15px solid var(--chotto-textmessage-right-bg, #a7f3d0);
     z-index: var(--chotto-textmessage-right-after-z-index, 1);
   }
 

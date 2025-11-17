@@ -6,6 +6,7 @@
       applyStyle(message)
     ]"
     :messageId="message.messageId"
+    :style="message.position === 'right' && message.backgroundColor ? {'--chotto-audiomessage-right-background-color': message.backgroundColor} : null"
     @mouseleave="hideMenu"
   >
     <img

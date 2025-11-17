@@ -69,8 +69,6 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-right-arrow-height': string;
   /** Базовая рамка хвостика справа */
   '--chotto-audiomessage-right-arrow-border': string;
-  /** Верхняя часть рамки хвостика справа (цвет пузыря) */
-  '--chotto-audiomessage-right-arrow-border-top': string;
   /** Слой псевдоэлемента справа */
   '--chotto-audiomessage-right-arrow-z-index': string;
 

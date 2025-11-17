@@ -29,7 +29,7 @@
     width: var(--chotto-filemessage-right-triangle-width, 0);
     height: var(--chotto-filemessage-right-triangle-height, 0);
     border: var(--chotto-filemessage-right-triangle-border, 20px solid transparent);
-    border-top: var(--chotto-filemessage-right-triangle-border-top, 15px solid var(--chotto-filemessage-right-bg, #a7f3d0));
+    border-top: 15px solid var(--chotto-filemessage-right-bg, #a7f3d0);
     z-index: var(--chotto-filemessage-right-triangle-z-index, 1);
     pointer-events: none;
   }

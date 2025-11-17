@@ -84,6 +84,7 @@ export interface IAudioMessage {
   embed?: object
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
+  backgroundColor?: string
 }
 
 export interface ICallMessage {
@@ -109,6 +110,7 @@ export interface ICallMessage {
     text?: string
   }
   reactions?: MessageReactions
+  backgroundColor?: string
 }
 
 export interface IDateMessage {
@@ -136,6 +138,7 @@ export interface IFileMessage {
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
   direction?: string
+  backgroundColor?: string
 }
 
 export interface IImageMessage {
@@ -157,6 +160,7 @@ export interface IImageMessage {
   embed?: object
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
+  backgroundColor?: string
 }
 
 export interface ISystemMessage {
@@ -181,6 +185,7 @@ export interface ITextMessage {
   embed?: object
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
+  backgroundColor?: string
 }
 
 export interface ITypingMessage {
@@ -207,6 +212,7 @@ export interface IVideoMessage {
   embed?: object
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
+  backgroundColor?: string
 }
 
 export interface IStickerMessage {
@@ -229,4 +235,5 @@ export interface IStickerMessage {
   embed?: object
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
+  backgroundColor?: string
 }

@@ -36,7 +36,7 @@
     width: var(--chotto-audiomessage-right-arrow-width, 0);
     height: var(--chotto-audiomessage-right-arrow-height, 0);
     border: var(--chotto-audiomessage-right-arrow-border, 20px solid transparent);
-    border-top: var(--chotto-audiomessage-right-arrow-border-top, 15px solid var(--chotto-audiomessage-right-background-color, #a7f3d0));
+    border-top: 15px solid var(--chotto-audiomessage-right-background-color, #a7f3d0);
     z-index: var(--chotto-audiomessage-right-arrow-z-index, 1);
   }
 
