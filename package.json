@@ -1,6 +1,6 @@
 {
   "name": "@mobilon-dev/chotto",
-  "version": "0.3.26",
+  "version": "0.3.27",
   "type": "module",
   "main": "./dist/vuessages.umd.js",
   "module": "./dist/vuessages.es.js",
