@@ -81,8 +81,8 @@
 
 <script setup lang="ts">
 import { ref, computed, inject, onMounted, onUnmounted } from 'vue'
-import EmojiPicker from 'vue3-emoji-picker'
-import 'vue3-emoji-picker/css'
+import EmojiPicker from 'vue3-emoji-picker-ru'
+import 'vue3-emoji-picker-ru/css'
 import type { MessageReactions } from '@/types'
 import { QUICK_REACTION_EMOJIS } from './utils/quickReactions'
 import { isRightMessage, useReactionsState, useReactionsPanel } from './composables'

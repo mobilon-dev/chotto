@@ -32,8 +32,8 @@
 </template>
 
 <script setup>
-import EmojiPicker from 'vue3-emoji-picker';
-import 'vue3-emoji-picker/css';
+import EmojiPicker from 'vue3-emoji-picker-ru';
+import 'vue3-emoji-picker-ru/css';
 import { onMounted, onUnmounted, ref, inject } from 'vue';
 import { useMessageDraft } from '@/hooks';
 import { SmilesIcon } from './icons';
