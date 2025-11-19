@@ -39,5 +39,6 @@ export interface IChatItem {
   dialogsExpanded: boolean;
   dialogs?: IChatDialog[];
   isSelected: boolean;
+  showEmptyIndicator?: boolean;
 }
 

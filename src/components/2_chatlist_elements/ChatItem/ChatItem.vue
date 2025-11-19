@@ -56,13 +56,8 @@
         >
           {{ chat['lastActivity.time'] }}
         </div>
-        <div
-          v-if="chat.countUnread > 0"
-          class="chat-item__unread"
-        >
-          {{ chat.countUnread > 99 ? '99+' : chat.countUnread }}
-        </div>
 
+        <!-- Кнопка меню размещена выше статуса и индикатора -->
         <ButtonContextMenu
           v-if="buttonMenuVisible && chat.actions"
           mode="click"
@@ -75,10 +70,8 @@
           <span class="pi pi-ellipsis-h chat-item__actions-trigger" />
         </ButtonContextMenu>
 
-        <div
-          v-if="chat.countUnread < 1"
-          class="chat-item__status-chat-container"
-        >
+        <!-- Контейнер для статуса и непрочитанных -->
+        <div class="chat-item__status-unread-container">
           <div
             v-if="statuses.includes(chat['lastMessage.status'])"
             class="chat-item__status-message"
@@ -91,6 +84,18 @@
             <span class="pi pi-check" />
           </div>
 
+          <div
+            v-if="showChatUnread"
+            class="chat-item__unread"
+          >
+            {{ chatUnreadText }}
+          </div>
+        </div>
+
+        <div
+          v-if="chat.countUnread < 1"
+          class="chat-item__status-chat-container"
+        >
           <span
             v-if="(chat.isFixedTop || chat.isFixedBottom)"
             class="chat-item__fixed pi pi-thumbtack"
@@ -234,6 +239,17 @@ const getSortedDialogs = (): IChatDialog[] => {
 }
 
 const status = computed(() => getStatus(props.chat['lastMessage.status']))
+
+const showChatUnread = computed(() => {
+  return props.chat.showEmptyIndicator || props.chat.countUnread > 0;
+});
+
+const chatUnreadText = computed(() => {
+  if (props.chat.countUnread > 0) {
+    return props.chat.countUnread > 99 ? '99+' : props.chat.countUnread;
+  }
+  return props.chat.showEmptyIndicator ? '' : undefined;
+});
 
 let timer: ReturnType<typeof setInterval> | undefined;
 const typingIndex = ref(0)

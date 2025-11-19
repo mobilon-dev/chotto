@@ -120,12 +120,25 @@
   --chotto-chatitem-time-white-space: nowrap;
   --chotto-chatitem-time-font-size: var(--chotto-theme-additional-text-font-size);
   --chotto-chatitem-time-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-chatitem-time-position: absolute;
+  --chotto-chatitem-time-top: 0;
+  --chotto-chatitem-time-right: 0;
+  --chotto-chatitem-time-margin: 0;
   
   // Context menu
   --chotto-chatitem-context-menu-position: absolute;
   --chotto-chatitem-context-menu-top: 40%;
   --chotto-chatitem-context-menu-right: 0;
   
+  // Status unread container
+  --chotto-chatitem-status-unread-container-display: flex;
+  --chotto-chatitem-status-unread-container-align: center;
+  --chotto-chatitem-status-unread-container-gap: 4px;
+  --chotto-chatitem-status-unread-container-position: absolute;
+  --chotto-chatitem-status-unread-container-bottom: 0;
+  --chotto-chatitem-status-unread-container-right: 0;
+  --chotto-chatitem-status-unread-container-margin: 0;
+
   // Status chat container
   --chotto-chatitem-status-chat-container-display: flex;
   --chotto-chatitem-status-chat-container-align: center;

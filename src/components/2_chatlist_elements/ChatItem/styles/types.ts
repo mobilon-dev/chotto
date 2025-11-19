@@ -221,6 +221,14 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-time-font-size': string;
   /** Цвет текста времени */
   '--chotto-chatitem-time-text-color': string;
+  /** Позиционирование времени */
+  '--chotto-chatitem-time-position': string;
+  /** Позиция времени сверху */
+  '--chotto-chatitem-time-top': string;
+  /** Позиция времени справа */
+  '--chotto-chatitem-time-right': string;
+  /** Отступы времени */
+  '--chotto-chatitem-time-margin': string;
 
   // Context menu
   /** Позиционирование контекстного меню */
@@ -229,6 +237,22 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-context-menu-top': string;
   /** Позиция контекстного меню справа */
   '--chotto-chatitem-context-menu-right': string;
+
+  // Status unread container
+  /** Отображение контейнера статуса и непрочитанных */
+  '--chotto-chatitem-status-unread-container-display': string;
+  /** Выравнивание контейнера статуса и непрочитанных */
+  '--chotto-chatitem-status-unread-container-align': string;
+  /** Промежуток между элементами в контейнере статуса и непрочитанных */
+  '--chotto-chatitem-status-unread-container-gap': string;
+  /** Позиционирование контейнера статуса и непрочитанных */
+  '--chotto-chatitem-status-unread-container-position': string;
+  /** Позиция контейнера статуса и непрочитанных снизу */
+  '--chotto-chatitem-status-unread-container-bottom': string;
+  /** Позиция контейнера статуса и непрочитанных справа */
+  '--chotto-chatitem-status-unread-container-right': string;
+  /** Отступы контейнера статуса и непрочитанных */
+  '--chotto-chatitem-status-unread-container-margin': string;
 
   // Status chat container
   /** Отображение контейнера статуса чата */
