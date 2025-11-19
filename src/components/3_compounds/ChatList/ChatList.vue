@@ -83,6 +83,7 @@
             :key="chat.chatId"
             class="chat-list__item"
             :chat="chat"
+            :show-dialogs="showDialogs"
             @select="selectChat"
             @expand="expandChat"
             @action="action"
@@ -95,6 +96,7 @@
             :key="chat.chatId"
             class="chat-list__item"
             :chat="chat"
+            :show-dialogs="showDialogs"
             @select="selectChat"
             @expand="expandChat"
             @action="action"
@@ -107,6 +109,7 @@
             :key="chat.chatId"
             class="chat-list__item"
             :chat="chat"
+            :show-dialogs="showDialogs"
             @select="selectChat"
             @expand="expandChat"
             @action="action"
@@ -174,6 +177,10 @@ const props = defineProps({
   searchStats: {
     type: Object,
     default: () => ({ loaded: 0, total: '?' }),
+  },
+  showDialogs: {
+    type: Boolean,
+    default: true,
   },
 });
 

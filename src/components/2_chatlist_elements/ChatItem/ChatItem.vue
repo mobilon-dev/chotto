@@ -99,12 +99,12 @@
       </div>
 
       <div
-        v-if="chat.dialogs" 
+        v-if="props.showDialogs && chat.dialogs" 
         class="chat-item__dialog-buttons"
         @click="emit('expand', props.chat)"
       >
         <button
-          v-if="!chat.dialogsExpanded"
+          v-if="props.showDialogs && !chat.dialogsExpanded"
           id="noSelectButton"
           class="chat-item__menu-button"
         >
@@ -114,7 +114,7 @@
           />
         </button>
         <button
-          v-if="chat.dialogsExpanded"
+          v-if="props.showDialogs && chat.dialogsExpanded"
           id="noSelectButton"
           class="chat-item__menu-button"
         >
@@ -127,7 +127,7 @@
     </div>
 
     <div 
-      v-if="chat.dialogsExpanded"
+      v-if="props.showDialogs && chat.dialogsExpanded"
       class="dialog__container"
     >
       <div
@@ -176,9 +176,12 @@ import { t } from '../../../locale/useLocale'
 import { Tooltip, ButtonContextMenu, AvatarIcon } from '@/components';
 import { IAction, IChatItem, IChatDialog } from './types';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   chat: IChatItem;
-}>();
+  showDialogs?: boolean;
+}>(), {
+  showDialogs: true,
+});
 
 const emit = defineEmits<{
   select: [{ chat: IChatItem; dialog: IChatDialog | null }];
