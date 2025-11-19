@@ -22,7 +22,13 @@
       v-if="message.subText && isFirstInSeries"
       class="text-message__subtext"
     >
-      {{ message.subText }}
+      <Tooltip
+        :text="channelInfo"
+        :position="message.position === 'left' ? 'right' : 'left'"
+        :offset="8"
+      >
+        {{ message.subText }}
+      </Tooltip>
     </p>
 
     <div
@@ -111,8 +117,8 @@
 >
 import { computed } from 'vue'
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator } from '@/components';
-import { useMessageLinks, useMessageActions, useChannelAccentColor } from '@/hooks/messages';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator, Tooltip } from '@/components';
+import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { ITextMessage } from '@/types';
 
@@ -133,6 +139,11 @@ const props = defineProps({
   reactionsEnabled: {
     type: Boolean,
     default: true
+  },
+  subtextTooltipData: {
+    type: Object as () => Record<string, string>,
+    required: false,
+    default: () => ({})
   }
 });
 
@@ -164,6 +175,8 @@ function getClass(message: ITextMessage) {
 }
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
+
+const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
 </script>
 
 <style scoped lang="scss">

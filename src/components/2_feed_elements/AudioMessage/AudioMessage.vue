@@ -22,7 +22,13 @@
       v-if="message.subText && isFirstInSeries"
       class="audio-message__subtext"
     >
-      {{ message.subText }}
+      <Tooltip
+        :text="channelInfo"
+        :position="message.position === 'left' ? 'right' : 'left'"
+        :offset="8"
+      >
+        {{ message.subText }}
+      </Tooltip>
     </p>
 
     <div
@@ -251,8 +257,8 @@
 >
 import { ref, onMounted, computed, watch, inject } from 'vue'
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator } from '@/components';
-import { useMessageActions, useMessageLinks, useChannelAccentColor } from '@/hooks/messages';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator, Tooltip } from '@/components';
+import { useMessageActions, useMessageLinks, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
 import { useTheme } from '@/hooks';
 import { IAudioMessage } from '@/types';
@@ -277,6 +283,11 @@ const props = defineProps({
   reactionsEnabled: {
     type: Boolean,
     default: true
+  },
+  subtextTooltipData: {
+    type: Object as () => Record<string, string>,
+    required: false,
+    default: () => ({})
   }
 });
 
@@ -479,6 +490,8 @@ function getClass(message: IAudioMessage) {
 }
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
+
+const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
 
 onMounted(() => {
   if (player.value != null) {

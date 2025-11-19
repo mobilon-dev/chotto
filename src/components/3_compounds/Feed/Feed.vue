@@ -31,6 +31,7 @@
         :apply-style="applyStyle"
         :is-first-in-series="object.isFirstInSeries"
         :reactions-enabled="reactionsEnabled"
+        :subtext-tooltip-data="subtextTooltipData"
         @action="messageAction"
         @reply="handleClickReplied"
       />
@@ -172,7 +173,12 @@ const props = defineProps({
   reactionsEnabled: {
     type: Boolean,
     default: true
-  }
+  },
+  subtextTooltipData: {
+    type: Object,
+    required: false,
+    default: () => ({})
+  },
 });
 
 const trackingObjects = ref();

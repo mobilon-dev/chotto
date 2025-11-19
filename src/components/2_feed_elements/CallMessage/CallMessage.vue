@@ -16,12 +16,18 @@
       width="32"
     >
 
-    <!-- <p
+    <p
       v-if="message.subText"
       class="call-message__subtext"
     >
-      {{ message.subText }}
-    </p> -->
+      <Tooltip
+        :text="subtextTooltipText"
+        :position="message.position === 'left' ? 'right' : 'left'"
+        :offset="8"
+      >
+        {{ message.subText }}
+      </Tooltip>
+    </p>
 
     <div 
       class="call-message__content"
@@ -264,7 +270,7 @@
 import { ref, inject, computed, watch, toRefs, unref, type Ref } from 'vue'
 import { ICallMessage } from '@/types'
 import { useTheme } from '@/hooks';
-import { useMessageActions } from '@/hooks/messages';
+import { useMessageActions, useSubtextTooltip } from '@/hooks/messages';
 import { ContextMenu, Tooltip } from '@/components';
 import IncomingCallIcon from './icons/IncomingCallIcon.vue'
 import OutgoingCallIcon from './icons/OutgoingCallIcon.vue'
@@ -300,6 +306,11 @@ const props = defineProps({
   applyStyle: {
     type: Function,
     default: () => {return null}
+  },
+  subtextTooltipData: {
+    type: Object as () => Record<string, string>,
+    required: false,
+    default: () => ({})
   }
 });
 
@@ -522,6 +533,8 @@ const channelTitle = computed(() => {
   const channel = channelsValue.find((ch: { channelId: string; title?: string }) => ch.channelId === dialog.channelId)
   return channel?.title || null
 })
+
+const subtextTooltipText = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
 
 const elementType = {
   textDialog: 'textDialog',

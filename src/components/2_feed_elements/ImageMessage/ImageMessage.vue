@@ -21,7 +21,13 @@
       v-if="message.subText && isFirstInSeries"
       class="image-message__subtext"
     >
-      {{ message.subText }}
+      <Tooltip
+        :text="channelInfo"
+        :position="message.position === 'left' ? 'right' : 'left'"
+        :offset="8"
+      >
+        {{ message.subText }}
+      </Tooltip>
     </p>
 
     <div
@@ -164,8 +170,8 @@
 >
 import { ref, computed, inject } from 'vue';
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, MessageReactions, MessageStatusIndicator } from '@/components';
-import { useMessageLinks, useMessageActions, useChannelAccentColor } from '@/hooks/messages';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, ModalFullscreen, MessageReactions, MessageStatusIndicator, Tooltip } from '@/components';
+import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IImageMessage } from '@/types';
@@ -190,6 +196,11 @@ const props = defineProps({
   reactionsEnabled: {
     type: Boolean,
     default: true
+  },
+  subtextTooltipData: {
+    type: Object as () => Record<string, string>,
+    required: false,
+    default: () => ({})
   }
 });
 
@@ -289,6 +300,8 @@ const downloadImage = async () => {
 }
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
+
+const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
 
 </script>
 

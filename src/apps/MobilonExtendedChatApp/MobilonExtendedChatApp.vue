@@ -173,6 +173,7 @@
                   :feed-keyboards="feedKeyboards"
                   feed-keyboard-align="left"
                   :reactions-enabled="true"
+                  :subtext-tooltip-data="subtextTooltipData"
                   @message-action="messageAction"
                   @load-more="loadMore"
                   @load-more-down="loadMoreDown"
@@ -454,6 +455,13 @@ const inputFocus = ref(false)
 const filebumpUrl = ref('https://filebump2.services.mobilon.ru');
 const clickedReply = ref('')
 const foundMessages = ref([])
+
+const subtextTooltipData = ref({
+  '601': 'Канал: WhatsApp 7 930 666-66-66',
+  '602': 'Канал: WhatsApp 7 930 666-66-66',
+  '610': 'Канал: Telegram @mobilon.support',
+  '620': 'Канал: SMS 7 930 555-55-55'
+})
 
 // const dialogTabs = ref([]);
 const dialogTabs = ref([

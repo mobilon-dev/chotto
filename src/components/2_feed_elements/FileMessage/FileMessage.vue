@@ -22,7 +22,13 @@
       v-if="message.subText && isFirstInSeries"
       class="file-message__subtext"
     >
-      {{ message.subText }}
+      <Tooltip
+        :text="channelInfo"
+        :position="message.position === 'left' ? 'right' : 'left'"
+        :offset="8"
+      >
+        {{ message.subText }}
+      </Tooltip>
     </p>
 
     <div
@@ -128,9 +134,8 @@
 >
 import { computed } from 'vue'
 
-
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator } from '@/components';
-import { useMessageLinks, useMessageActions, useChannelAccentColor } from '@/hooks/messages';
+import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator, Tooltip } from '@/components';
+import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { IFileMessage } from '@/types';
 
@@ -151,6 +156,11 @@ const props = defineProps({
   reactionsEnabled: {
     type: Boolean,
     default: true
+  },
+  subtextTooltipData: {
+    type: Object as () => Record<string, string>,
+    required: false,
+    default: () => ({})
   }
 });
 
@@ -223,6 +233,8 @@ const downloadFile = async () => {
     window.open(props.message.url, '_blank')
   }
 }
+
+const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
 
 </script>
 
