@@ -104,6 +104,19 @@
   --chotto-chatlist-search-clear-transition: color 0.2s ease;
   --chotto-chatlist-search-clear-hover-color: #666666;
   --chotto-chatlist-search-clear-hover-bg: #f5f5f5;
+
+  // Empty state
+  --chotto-chatlist-no-data-display: flex;
+  --chotto-chatlist-no-data-align-items: center;
+  --chotto-chatlist-no-data-justify: center;
+  --chotto-chatlist-no-data-height: 100%;
+
+  --chotto-chatlist-placeholder-title-font-size: 20px;
+  --chotto-chatlist-placeholder-title-font-weight: 600;
+  --chotto-chatlist-placeholder-title-margin: 0 0 14px 0;
+  --chotto-chatlist-placeholder-title-color: #1E1E1E;
+  --chotto-chatlist-placeholder-hint-font-size: 16px;
+  --chotto-chatlist-placeholder-hint-margin: 0;
 }
 
 

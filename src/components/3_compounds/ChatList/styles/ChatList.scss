@@ -135,6 +135,29 @@
       background-color: var(--chotto-chatlist-search-clear-hover-bg, #f5f5f5);
     }
   }
+
+  &__no-data {
+    display: var(--chotto-chatlist-no-data-display, flex);
+    align-items: var(--chotto-chatlist-no-data-align-items, center);
+    justify-content: var(--chotto-chatlist-no-data-justify, center);
+    height: var(--chotto-chatlist-no-data-height, 100%);
+  }
+
+  &__placeholder {
+    text-align: center;
+  }
+
+  &__placeholder-title {
+    font-size: var(--chotto-chatlist-placeholder-title-font-size, 20px);
+    font-weight: var(--chotto-chatlist-placeholder-title-font-weight, 600);
+    margin: var(--chotto-chatlist-placeholder-title-margin, 0 0 14px 0);
+    color: var(--chotto-chatlist-placeholder-title-color, #1E1E1E);
+  }
+
+  &__placeholder-hint {
+    font-size: var(--chotto-chatlist-placeholder-hint-font-size, 16px);
+    margin: var(--chotto-chatlist-placeholder-hint-margin, 0);
+  }
 }
 
 :deep(.chat-list__title) {

@@ -191,4 +191,27 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-search-clear-hover-color': string;
   /** Цвет фона кнопки очистки поиска при наведении */
   '--chotto-chatlist-search-clear-hover-bg': string;
+
+  // Empty state
+  /** Отображение контейнера пустого состояния */
+  '--chotto-chatlist-no-data-display': string;
+  /** Выравнивание элементов по поперечной оси в пустом состоянии */
+  '--chotto-chatlist-no-data-align-items': string;
+  /** Выравнивание элементов по главной оси в пустом состоянии */
+  '--chotto-chatlist-no-data-justify': string;
+  /** Высота контейнера пустого состояния */
+  '--chotto-chatlist-no-data-height': string;
+ 
+  /** Размер шрифта заголовка плейсхолдера */
+  '--chotto-chatlist-placeholder-title-font-size': string;
+  /** Толщина шрифта заголовка плейсхолдера */
+  '--chotto-chatlist-placeholder-title-font-weight': string;
+  /** Отступы заголовка плейсхолдера */
+  '--chotto-chatlist-placeholder-title-margin': string;
+  /** Цвет текста заголовка плейсхолдера */
+  '--chotto-chatlist-placeholder-title-color': string;
+  /** Размер шрифта подсказки плейсхолдера */
+  '--chotto-chatlist-placeholder-hint-font-size': string;
+  /** Отступы подсказки плейсхолдера */
+  '--chotto-chatlist-placeholder-hint-margin': string;
 }

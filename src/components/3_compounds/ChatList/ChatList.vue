@@ -62,41 +62,57 @@
       @mousedown="startScrollWatch"
       @mouseup="stopScrollWatch"
     >
-      <div class="chat-list__fixed-items-top">
-        <ChatItem
-          v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedTop)"
-          :key="chat.chatId"
-          class="chat-list__item"
-          :chat="chat"
-          @select="selectChat"
-          @expand="expandChat"
-          @action="action"
-        />
+      <div
+        v-if="getSortedAndFilteredChats().length === 0"
+        class="chat-list__no-data"
+      >
+        <div class="chat-list__placeholder">
+          <p class="chat-list__placeholder-title">
+            Нет контактных данных, чтобы начать чат
+          </p>
+          <p class="chat-list__placeholder-hint">
+            Добавьте номер телефона или имя Telegram в карточку контакта
+          </p>
+        </div>
       </div>
 
-      <div class="chat-list__scrollable-items">
-        <ChatItem
-          v-for="chat in getSortedAndFilteredChats().filter(c => !c.isFixedBottom && !c.isFixedTop)"
-          :key="chat.chatId"
-          class="chat-list__item"
-          :chat="chat"
-          @select="selectChat"
-          @expand="expandChat"
-          @action="action"
-        />
-      </div>
+      <template v-else>
+        <div class="chat-list__fixed-items-top">
+          <ChatItem
+            v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedTop)"
+            :key="chat.chatId"
+            class="chat-list__item"
+            :chat="chat"
+            @select="selectChat"
+            @expand="expandChat"
+            @action="action"
+          />
+        </div>
 
-      <div class="chat-list__fixed-items-bottom">
-        <ChatItem
-          v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedBottom)"
-          :key="chat.chatId"
-          class="chat-list__item"
-          :chat="chat"
-          @select="selectChat"
-          @expand="expandChat"
-          @action="action"
-        />
-      </div>
+        <div class="chat-list__scrollable-items">
+          <ChatItem
+            v-for="chat in getSortedAndFilteredChats().filter(c => !c.isFixedBottom && !c.isFixedTop)"
+            :key="chat.chatId"
+            class="chat-list__item"
+            :chat="chat"
+            @select="selectChat"
+            @expand="expandChat"
+            @action="action"
+          />
+        </div>
+
+        <div class="chat-list__fixed-items-bottom">
+          <ChatItem
+            v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedBottom)"
+            :key="chat.chatId"
+            class="chat-list__item"
+            :chat="chat"
+            @select="selectChat"
+            @expand="expandChat"
+            @action="action"
+          />
+        </div>
+      </template>
     </div>
     <transition>
       <button
