@@ -10,4 +10,10 @@ export const en = {
     'component.FeedSearch.SearchLabel' : 'Search', 
     'component.FeedSearch.SearchPlaceholder' : 'Find a message...',
     'component.ChannelSelector.Placeholder' : 'Channel not selected',
+    'component.TextFormatToolbar.Bold': 'Bold',
+    'component.TextFormatToolbar.Italic': 'Italic',
+    'component.TextFormatToolbar.Underline': 'Underline',
+    'component.TextFormatToolbar.Strikethrough': 'Strikethrough',
+    'component.TextFormatToolbar.Code': 'Inline code',
+    'component.TextFormatToolbar.Quote': 'Quote',
 }

@@ -29,6 +29,10 @@
       @keydown.enter="keyEnter"
       @input="sendTyping"
     />
+    <TextFormatToolbar
+      :textarea="refInput"
+      @format-applied="handleFormatApplied"
+    />
     <button
       class="chat-input__button"
       :disabled="getMessage().isRecording"
@@ -52,6 +56,7 @@ import { useMessageDraft, useImmediateDebouncedRef } from '@/hooks';
 import { t } from '../../../locale/useLocale';
 import { IFilePreview, IInputMessage } from '@/types';
 import { SendIcon } from './icons';
+import TextFormatToolbar from '../../2_chatinput_elements/TextFormatToolbar/TextFormatToolbar.vue';
 
 const emit = defineEmits(['send','typing']);
 
@@ -215,6 +220,30 @@ const keyEnter = (event: KeyboardEvent) => {
 }
 
 // Define the method to send the message
+const handleFormatApplied = (data: { format: string; selectedText: string; start: number; end: number; newText: string }) => {
+  // Обновляем текст в textarea и draft после форматирования
+  if (refInput.value) {
+    const oldText = refInput.value.value;
+    refInput.value.value = data.newText;
+    
+    // Вычисляем новую позицию курсора
+    // Длина старого текста до выделения + длина нового отформатированного текста
+    const formattedLength = data.newText.length - (oldText.length - (data.end - data.start));
+    const newEnd = data.start + formattedLength;
+    
+    // Обновляем текст в draft
+    setMessageText(data.newText);
+    
+    // Устанавливаем курсор и фокус после обновления
+    nextTick(() => {
+      if (refInput.value) {
+        refInput.value.setSelectionRange(newEnd, newEnd);
+        refInput.value.focus();
+      }
+    });
+  }
+};
+
 const sendMessage = () => {
   const Message = ref(getMessage())
   if (Message.value.text != '' || Message.value.file) {

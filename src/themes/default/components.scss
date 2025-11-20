@@ -23,6 +23,7 @@
 @use '../../components/2_chatinput_elements/FilePreview/styles/themes/default.scss' as filepreview-default;
 @use '../../components/2_chatinput_elements/FileUploader/styles/themes/default.scss' as fileuploader-default;
 @use '../../components/2_chatinput_elements/TemplateSelector/styles/themes/default.scss' as templateselector-default;
+@use '../../components/2_chatinput_elements/TextFormatToolbar/styles/themes/default.scss' as textformattoolbar-default;
 @use '../../components/2_chatinput_elements/WABAAttachmentSection/styles/themes/default.scss' as wabaattachment-default;
 @use '../../components/2_chatinput_elements/WABAQuickReplyButtons/styles/themes/default.scss' as wabaquickreply-default;
 @use '../../components/2_chatinput_elements/WABASeparatedQuickButtons/styles/themes/default.scss' as wabaseparatedquick-default;

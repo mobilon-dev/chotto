@@ -10,4 +10,10 @@ export const ru = {
     'component.FeedSearch.SearchLabel' : 'Поиск', 
     'component.FeedSearch.SearchPlaceholder' : 'Поиск сообщения...',
     'component.ChannelSelector.Placeholder' : 'Канал не выбран',
+    'component.TextFormatToolbar.Bold': 'Жирный шрифт',
+    'component.TextFormatToolbar.Italic': 'Курсив',
+    'component.TextFormatToolbar.Underline': 'Подчёркнутый',
+    'component.TextFormatToolbar.Strikethrough': 'Зачёркнутый',
+    'component.TextFormatToolbar.Code': 'Встроенный код',
+    'component.TextFormatToolbar.Quote': 'Цитата',
 }
