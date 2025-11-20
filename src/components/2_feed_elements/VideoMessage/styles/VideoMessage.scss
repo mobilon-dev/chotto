@@ -154,6 +154,51 @@
     p {
       white-space: var(--chotto-videomessage-text-container-p-white-space, pre-wrap);
       font-size: var(--chotto-videomessage-text-container-p-font-size, 14px);
+
+      // Markdown форматирование
+      :deep(strong) {
+        font-weight: var(--chotto-videomessage-markdown-strong-font-weight, bold);
+      }
+
+      :deep(em) {
+        font-style: var(--chotto-videomessage-markdown-em-font-style, italic);
+      }
+
+      :deep(u) {
+        text-decoration: var(--chotto-videomessage-markdown-u-text-decoration, underline);
+      }
+
+      :deep(del),
+      :deep(s) {
+        text-decoration: var(--chotto-videomessage-markdown-del-text-decoration, line-through);
+      }
+
+      :deep(code) {
+        background-color: var(--chotto-videomessage-markdown-code-bg, rgba(0, 0, 0, 0.1));
+        padding: var(--chotto-videomessage-markdown-code-padding, 2px 4px);
+        border-radius: var(--chotto-videomessage-markdown-code-border-radius, 3px);
+        font-family: var(--chotto-videomessage-markdown-code-font-family, 'Courier New', monospace);
+        font-size: var(--chotto-videomessage-markdown-code-font-size, 0.9em);
+      }
+
+      :deep(blockquote) {
+        border-left: var(--chotto-videomessage-markdown-blockquote-border-left, 3px solid rgba(0, 0, 0, 0.2));
+        padding-left: var(--chotto-videomessage-markdown-blockquote-padding-left, 10px);
+        margin: var(--chotto-videomessage-markdown-blockquote-margin, 8px 0);
+        font-style: var(--chotto-videomessage-markdown-blockquote-font-style, italic);
+        color: var(--chotto-videomessage-markdown-blockquote-color, inherit);
+      }
+
+      // Убираем отступы у параграфов
+      :deep(p) {
+        margin: 0;
+        display: inline;
+      }
+
+      :deep(p:not(:last-child)) {
+        margin-bottom: var(--chotto-videomessage-markdown-p-margin-bottom, 4px);
+        display: block;
+      }
     }
   }
 

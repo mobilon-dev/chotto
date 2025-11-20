@@ -181,4 +181,21 @@
   --chotto-filemessage-v-leave-active-transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
   --chotto-filemessage-v-enter-from-transform: scale(0.9);
   --chotto-filemessage-v-enter-from-opacity: 0;
+
+  // FileMessage markdown formatting variables
+  --chotto-filemessage-markdown-strong-font-weight: bold;
+  --chotto-filemessage-markdown-em-font-style: italic;
+  --chotto-filemessage-markdown-u-text-decoration: underline;
+  --chotto-filemessage-markdown-del-text-decoration: line-through;
+  --chotto-filemessage-markdown-code-bg: rgba(0, 0, 0, 0.1);
+  --chotto-filemessage-markdown-code-padding: 2px 4px;
+  --chotto-filemessage-markdown-code-border-radius: 3px;
+  --chotto-filemessage-markdown-code-font-family: 'Courier New', monospace;
+  --chotto-filemessage-markdown-code-font-size: 0.9em;
+  --chotto-filemessage-markdown-blockquote-border-left: 3px solid rgba(0, 0, 0, 0.2);
+  --chotto-filemessage-markdown-blockquote-padding-left: 10px;
+  --chotto-filemessage-markdown-blockquote-margin: 8px 0;
+  --chotto-filemessage-markdown-blockquote-font-style: italic;
+  --chotto-filemessage-markdown-blockquote-color: inherit;
+  --chotto-filemessage-markdown-p-margin-bottom: 4px;
 }

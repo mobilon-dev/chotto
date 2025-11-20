@@ -104,6 +104,37 @@ export interface TextMessageThemeCSSVariables {
   /** Правила перевода строк текста */
   '--chotto-textmessage-text-white-space': string;
 
+  /** Жирность жирного текста (markdown **текст**) */
+  '--chotto-textmessage-markdown-strong-font-weight': string;
+  /** Стиль курсива (markdown *текст*) */
+  '--chotto-textmessage-markdown-em-font-style': string;
+  /** Подчёркивание (markdown <u>текст</u>) */
+  '--chotto-textmessage-markdown-u-text-decoration': string;
+  /** Зачёркивание (markdown ~~текст~~) */
+  '--chotto-textmessage-markdown-del-text-decoration': string;
+  /** Фон встроенного кода (markdown `код`) */
+  '--chotto-textmessage-markdown-code-bg': string;
+  /** Внутренние отступы встроенного кода */
+  '--chotto-textmessage-markdown-code-padding': string;
+  /** Скругление встроенного кода */
+  '--chotto-textmessage-markdown-code-border-radius': string;
+  /** Шрифт встроенного кода */
+  '--chotto-textmessage-markdown-code-font-family': string;
+  /** Размер шрифта встроенного кода */
+  '--chotto-textmessage-markdown-code-font-size': string;
+  /** Левая граница цитаты (markdown > текст) */
+  '--chotto-textmessage-markdown-blockquote-border-left': string;
+  /** Левый отступ цитаты */
+  '--chotto-textmessage-markdown-blockquote-padding-left': string;
+  /** Внешние отступы цитаты */
+  '--chotto-textmessage-markdown-blockquote-margin': string;
+  /** Стиль шрифта цитаты */
+  '--chotto-textmessage-markdown-blockquote-font-style': string;
+  /** Цвет текста цитаты */
+  '--chotto-textmessage-markdown-blockquote-color': string;
+  /** Нижний отступ параграфов markdown */
+  '--chotto-textmessage-markdown-p-margin-bottom': string;
+
   /** Размер шрифта подписи */
   '--chotto-textmessage-subtext-font-size': string;
   /** Цвет подписи */

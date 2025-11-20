@@ -67,6 +67,37 @@ export interface ReplyFileMessageThemeCSSVariables {
   '--chotto-replyfilemessage-filename-text-color': string;
   /** Подчёркивание имени файла */
   '--chotto-replyfilemessage-filename-text-text-decoration': string;
+
+  /** Жирность жирного текста (markdown **текст**) */
+  '--chotto-replyfilemessage-markdown-strong-font-weight': string;
+  /** Стиль курсива (markdown *текст*) */
+  '--chotto-replyfilemessage-markdown-em-font-style': string;
+  /** Подчёркивание (markdown <u>текст</u>) */
+  '--chotto-replyfilemessage-markdown-u-text-decoration': string;
+  /** Зачёркивание (markdown ~~текст~~) */
+  '--chotto-replyfilemessage-markdown-del-text-decoration': string;
+  /** Фон встроенного кода (markdown `код`) */
+  '--chotto-replyfilemessage-markdown-code-bg': string;
+  /** Внутренние отступы встроенного кода */
+  '--chotto-replyfilemessage-markdown-code-padding': string;
+  /** Скругление встроенного кода */
+  '--chotto-replyfilemessage-markdown-code-border-radius': string;
+  /** Шрифт встроенного кода */
+  '--chotto-replyfilemessage-markdown-code-font-family': string;
+  /** Размер шрифта встроенного кода */
+  '--chotto-replyfilemessage-markdown-code-font-size': string;
+  /** Левая граница цитаты (markdown > текст) */
+  '--chotto-replyfilemessage-markdown-blockquote-border-left': string;
+  /** Левый отступ цитаты */
+  '--chotto-replyfilemessage-markdown-blockquote-padding-left': string;
+  /** Внешние отступы цитаты */
+  '--chotto-replyfilemessage-markdown-blockquote-margin': string;
+  /** Стиль шрифта цитаты */
+  '--chotto-replyfilemessage-markdown-blockquote-font-style': string;
+  /** Цвет текста цитаты */
+  '--chotto-replyfilemessage-markdown-blockquote-color': string;
+  /** Нижний отступ параграфов markdown */
+  '--chotto-replyfilemessage-markdown-p-margin-bottom': string;
 }
 
 

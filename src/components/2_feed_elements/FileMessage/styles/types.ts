@@ -273,6 +273,37 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-v-enter-from-transform': string;
   /** Стартовая прозрачность при появлении */
   '--chotto-filemessage-v-enter-from-opacity': string;
+
+  /** Жирность жирного текста (markdown **текст**) */
+  '--chotto-filemessage-markdown-strong-font-weight': string;
+  /** Стиль курсива (markdown *текст*) */
+  '--chotto-filemessage-markdown-em-font-style': string;
+  /** Подчёркивание (markdown <u>текст</u>) */
+  '--chotto-filemessage-markdown-u-text-decoration': string;
+  /** Зачёркивание (markdown ~~текст~~) */
+  '--chotto-filemessage-markdown-del-text-decoration': string;
+  /** Фон встроенного кода (markdown `код`) */
+  '--chotto-filemessage-markdown-code-bg': string;
+  /** Внутренние отступы встроенного кода */
+  '--chotto-filemessage-markdown-code-padding': string;
+  /** Скругление встроенного кода */
+  '--chotto-filemessage-markdown-code-border-radius': string;
+  /** Шрифт встроенного кода */
+  '--chotto-filemessage-markdown-code-font-family': string;
+  /** Размер шрифта встроенного кода */
+  '--chotto-filemessage-markdown-code-font-size': string;
+  /** Левая граница цитаты (markdown > текст) */
+  '--chotto-filemessage-markdown-blockquote-border-left': string;
+  /** Левый отступ цитаты */
+  '--chotto-filemessage-markdown-blockquote-padding-left': string;
+  /** Внешние отступы цитаты */
+  '--chotto-filemessage-markdown-blockquote-margin': string;
+  /** Стиль шрифта цитаты */
+  '--chotto-filemessage-markdown-blockquote-font-style': string;
+  /** Цвет текста цитаты */
+  '--chotto-filemessage-markdown-blockquote-color': string;
+  /** Нижний отступ параграфов markdown */
+  '--chotto-filemessage-markdown-p-margin-bottom': string;
 }
 
 

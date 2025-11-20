@@ -575,6 +575,37 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-modal-close-button-icon-color': string;
   /** Размер иконки кнопки закрытия */
   '--chotto-audiomessage-modal-close-button-icon-size': string;
+
+  /** Жирность жирного текста (markdown **текст**) */
+  '--chotto-audiomessage-markdown-strong-font-weight': string;
+  /** Стиль курсива (markdown *текст*) */
+  '--chotto-audiomessage-markdown-em-font-style': string;
+  /** Подчёркивание (markdown <u>текст</u>) */
+  '--chotto-audiomessage-markdown-u-text-decoration': string;
+  /** Зачёркивание (markdown ~~текст~~) */
+  '--chotto-audiomessage-markdown-del-text-decoration': string;
+  /** Фон встроенного кода (markdown `код`) */
+  '--chotto-audiomessage-markdown-code-bg': string;
+  /** Внутренние отступы встроенного кода */
+  '--chotto-audiomessage-markdown-code-padding': string;
+  /** Скругление встроенного кода */
+  '--chotto-audiomessage-markdown-code-border-radius': string;
+  /** Шрифт встроенного кода */
+  '--chotto-audiomessage-markdown-code-font-family': string;
+  /** Размер шрифта встроенного кода */
+  '--chotto-audiomessage-markdown-code-font-size': string;
+  /** Левая граница цитаты (markdown > текст) */
+  '--chotto-audiomessage-markdown-blockquote-border-left': string;
+  /** Левый отступ цитаты */
+  '--chotto-audiomessage-markdown-blockquote-padding-left': string;
+  /** Внешние отступы цитаты */
+  '--chotto-audiomessage-markdown-blockquote-margin': string;
+  /** Стиль шрифта цитаты */
+  '--chotto-audiomessage-markdown-blockquote-font-style': string;
+  /** Цвет текста цитаты */
+  '--chotto-audiomessage-markdown-blockquote-color': string;
+  /** Нижний отступ параграфов markdown */
+  '--chotto-audiomessage-markdown-p-margin-bottom': string;
 }
 
 

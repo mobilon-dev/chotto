@@ -104,6 +104,24 @@
   --chotto-imagemessage-text-container-word-wrap: break-word;
   --chotto-imagemessage-text-container-p-font-size: var(--chotto-theme-text-font-size);
   --chotto-imagemessage-text-container-p-word-break: break-all;
+  --chotto-imagemessage-text-container-p-white-space: pre-wrap;
+
+  // ImageMessage markdown formatting variables
+  --chotto-imagemessage-markdown-strong-font-weight: bold;
+  --chotto-imagemessage-markdown-em-font-style: italic;
+  --chotto-imagemessage-markdown-u-text-decoration: underline;
+  --chotto-imagemessage-markdown-del-text-decoration: line-through;
+  --chotto-imagemessage-markdown-code-bg: rgba(255, 255, 255, 0.1);
+  --chotto-imagemessage-markdown-code-padding: 2px 4px;
+  --chotto-imagemessage-markdown-code-border-radius: 3px;
+  --chotto-imagemessage-markdown-code-font-family: 'Courier New', monospace;
+  --chotto-imagemessage-markdown-code-font-size: 0.9em;
+  --chotto-imagemessage-markdown-blockquote-border-left: 3px solid rgba(255, 255, 255, 0.3);
+  --chotto-imagemessage-markdown-blockquote-padding-left: 10px;
+  --chotto-imagemessage-markdown-blockquote-margin: 8px 0;
+  --chotto-imagemessage-markdown-blockquote-font-style: italic;
+  --chotto-imagemessage-markdown-blockquote-color: inherit;
+  --chotto-imagemessage-markdown-p-margin-bottom: 4px;
 
   // ImageMessage link preview variables
   --chotto-imagemessage-link-preview-margin: 8px;

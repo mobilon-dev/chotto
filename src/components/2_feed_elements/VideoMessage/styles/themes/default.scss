@@ -159,4 +159,21 @@
   --chotto-videomessage-modal-fade-enter-active-transition: opacity 0.2s ease;
   --chotto-videomessage-modal-fade-enter-from-opacity: 0;
   --chotto-videomessage-modal-fade-enter-to-opacity: 1;
+
+  // VideoMessage markdown formatting variables
+  --chotto-videomessage-markdown-strong-font-weight: bold;
+  --chotto-videomessage-markdown-em-font-style: italic;
+  --chotto-videomessage-markdown-u-text-decoration: underline;
+  --chotto-videomessage-markdown-del-text-decoration: line-through;
+  --chotto-videomessage-markdown-code-bg: rgba(0, 0, 0, 0.1);
+  --chotto-videomessage-markdown-code-padding: 2px 4px;
+  --chotto-videomessage-markdown-code-border-radius: 3px;
+  --chotto-videomessage-markdown-code-font-family: 'Courier New', monospace;
+  --chotto-videomessage-markdown-code-font-size: 0.9em;
+  --chotto-videomessage-markdown-blockquote-border-left: 3px solid rgba(0, 0, 0, 0.2);
+  --chotto-videomessage-markdown-blockquote-padding-left: 10px;
+  --chotto-videomessage-markdown-blockquote-margin: 8px 0;
+  --chotto-videomessage-markdown-blockquote-font-style: italic;
+  --chotto-videomessage-markdown-blockquote-color: inherit;
+  --chotto-videomessage-markdown-p-margin-bottom: 4px;
 }

@@ -54,4 +54,21 @@
   --chotto-replyimagemessage-modal-fade-enter-active-transition: opacity 0.2s ease;
   --chotto-replyimagemessage-modal-fade-enter-from-opacity: 0;
   --chotto-replyimagemessage-modal-fade-enter-to-opacity: 1;
+
+  // ReplyImageMessage markdown formatting variables
+  --chotto-replyimagemessage-markdown-strong-font-weight: bold;
+  --chotto-replyimagemessage-markdown-em-font-style: italic;
+  --chotto-replyimagemessage-markdown-u-text-decoration: underline;
+  --chotto-replyimagemessage-markdown-del-text-decoration: line-through;
+  --chotto-replyimagemessage-markdown-code-bg: rgba(0, 0, 0, 0.1);
+  --chotto-replyimagemessage-markdown-code-padding: 2px 4px;
+  --chotto-replyimagemessage-markdown-code-border-radius: 3px;
+  --chotto-replyimagemessage-markdown-code-font-family: 'Courier New', monospace;
+  --chotto-replyimagemessage-markdown-code-font-size: 0.9em;
+  --chotto-replyimagemessage-markdown-blockquote-border-left: 3px solid rgba(0, 0, 0, 0.2);
+  --chotto-replyimagemessage-markdown-blockquote-padding-left: 10px;
+  --chotto-replyimagemessage-markdown-blockquote-margin: 8px 0;
+  --chotto-replyimagemessage-markdown-blockquote-font-style: italic;
+  --chotto-replyimagemessage-markdown-blockquote-color: inherit;
+  --chotto-replyimagemessage-markdown-p-margin-bottom: 4px;
 }

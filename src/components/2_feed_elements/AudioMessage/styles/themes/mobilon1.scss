@@ -340,4 +340,21 @@
   --chotto-audiomessage-v-enter-leave-opacity: 0;
   --chotto-audiomessage-modal-fade-transition: opacity 0.2s ease;
   --chotto-audiomessage-modal-fade-opacity: 0;
+
+  // AudioMessage markdown formatting variables
+  --chotto-audiomessage-markdown-strong-font-weight: bold;
+  --chotto-audiomessage-markdown-em-font-style: italic;
+  --chotto-audiomessage-markdown-u-text-decoration: underline;
+  --chotto-audiomessage-markdown-del-text-decoration: line-through;
+  --chotto-audiomessage-markdown-code-bg: rgba(0, 0, 0, 0.1);
+  --chotto-audiomessage-markdown-code-padding: 2px 4px;
+  --chotto-audiomessage-markdown-code-border-radius: 3px;
+  --chotto-audiomessage-markdown-code-font-family: 'Courier New', monospace;
+  --chotto-audiomessage-markdown-code-font-size: 0.9em;
+  --chotto-audiomessage-markdown-blockquote-border-left: 3px solid rgba(0, 0, 0, 0.2);
+  --chotto-audiomessage-markdown-blockquote-padding-left: 10px;
+  --chotto-audiomessage-markdown-blockquote-margin: 8px 0;
+  --chotto-audiomessage-markdown-blockquote-font-style: italic;
+  --chotto-audiomessage-markdown-blockquote-color: inherit;
+  --chotto-audiomessage-markdown-p-margin-bottom: 4px;
 }

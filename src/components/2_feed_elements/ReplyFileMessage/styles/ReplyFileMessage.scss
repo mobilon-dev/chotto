@@ -19,6 +19,51 @@ p {
     margin-top: var(--chotto-replyfilemessage-text-margin-top, 8px);
     font-size: var(--chotto-replyfilemessage-text-font-size, 14px);
     color: var(--chotto-replyfilemessage-text-color, #1E1E1E);
+
+    // Markdown форматирование
+    :deep(strong) {
+      font-weight: var(--chotto-replyfilemessage-markdown-strong-font-weight, bold);
+    }
+
+    :deep(em) {
+      font-style: var(--chotto-replyfilemessage-markdown-em-font-style, italic);
+    }
+
+    :deep(u) {
+      text-decoration: var(--chotto-replyfilemessage-markdown-u-text-decoration, underline);
+    }
+
+    :deep(del),
+    :deep(s) {
+      text-decoration: var(--chotto-replyfilemessage-markdown-del-text-decoration, line-through);
+    }
+
+    :deep(code) {
+      background-color: var(--chotto-replyfilemessage-markdown-code-bg, rgba(0, 0, 0, 0.1));
+      padding: var(--chotto-replyfilemessage-markdown-code-padding, 2px 4px);
+      border-radius: var(--chotto-replyfilemessage-markdown-code-border-radius, 3px);
+      font-family: var(--chotto-replyfilemessage-markdown-code-font-family, 'Courier New', monospace);
+      font-size: var(--chotto-replyfilemessage-markdown-code-font-size, 0.9em);
+    }
+
+    :deep(blockquote) {
+      border-left: var(--chotto-replyfilemessage-markdown-blockquote-border-left, 3px solid rgba(0, 0, 0, 0.2));
+      padding-left: var(--chotto-replyfilemessage-markdown-blockquote-padding-left, 10px);
+      margin: var(--chotto-replyfilemessage-markdown-blockquote-margin, 8px 0);
+      font-style: var(--chotto-replyfilemessage-markdown-blockquote-font-style, italic);
+      color: var(--chotto-replyfilemessage-markdown-blockquote-color, inherit);
+    }
+
+    // Убираем отступы у параграфов
+    :deep(p) {
+      margin: 0;
+      display: inline;
+    }
+
+    :deep(p:not(:last-child)) {
+      margin-bottom: var(--chotto-replyfilemessage-markdown-p-margin-bottom, 4px);
+      display: block;
+    }
   }
 
   &__link {

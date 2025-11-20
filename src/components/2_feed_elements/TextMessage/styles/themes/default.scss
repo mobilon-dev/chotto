@@ -62,6 +62,23 @@
   --chotto-textmessage-text-font-size: var(--chotto-theme-text-font-size);
   --chotto-textmessage-text-white-space: pre-wrap;
 
+  // TextMessage markdown formatting variables
+  --chotto-textmessage-markdown-strong-font-weight: bold;
+  --chotto-textmessage-markdown-em-font-style: italic;
+  --chotto-textmessage-markdown-u-text-decoration: underline;
+  --chotto-textmessage-markdown-del-text-decoration: line-through;
+  --chotto-textmessage-markdown-code-bg: rgba(0, 0, 0, 0.1);
+  --chotto-textmessage-markdown-code-padding: 2px 4px;
+  --chotto-textmessage-markdown-code-border-radius: 3px;
+  --chotto-textmessage-markdown-code-font-family: 'Courier New', monospace;
+  --chotto-textmessage-markdown-code-font-size: 0.9em;
+  --chotto-textmessage-markdown-blockquote-border-left: 3px solid rgba(0, 0, 0, 0.2);
+  --chotto-textmessage-markdown-blockquote-padding-left: 10px;
+  --chotto-textmessage-markdown-blockquote-margin: 8px 0;
+  --chotto-textmessage-markdown-blockquote-font-style: italic;
+  --chotto-textmessage-markdown-blockquote-color: inherit;
+  --chotto-textmessage-markdown-p-margin-bottom: 4px;
+
   // TextMessage subtext variables
   --chotto-textmessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
   --chotto-textmessage-subtext-color: var(--chotto-theme-secondary-text-color);

@@ -263,6 +263,37 @@ export interface VideoMessageThemeCSSVariables {
   '--chotto-videomessage-modal-fade-enter-from-opacity': string;
   /** Прозрачность модального окна в конце */
   '--chotto-videomessage-modal-fade-enter-to-opacity': string;
+
+  /** Жирность жирного текста (markdown **текст**) */
+  '--chotto-videomessage-markdown-strong-font-weight': string;
+  /** Стиль курсива (markdown *текст*) */
+  '--chotto-videomessage-markdown-em-font-style': string;
+  /** Подчёркивание (markdown <u>текст</u>) */
+  '--chotto-videomessage-markdown-u-text-decoration': string;
+  /** Зачёркивание (markdown ~~текст~~) */
+  '--chotto-videomessage-markdown-del-text-decoration': string;
+  /** Фон встроенного кода (markdown `код`) */
+  '--chotto-videomessage-markdown-code-bg': string;
+  /** Внутренние отступы встроенного кода */
+  '--chotto-videomessage-markdown-code-padding': string;
+  /** Скругление встроенного кода */
+  '--chotto-videomessage-markdown-code-border-radius': string;
+  /** Шрифт встроенного кода */
+  '--chotto-videomessage-markdown-code-font-family': string;
+  /** Размер шрифта встроенного кода */
+  '--chotto-videomessage-markdown-code-font-size': string;
+  /** Левая граница цитаты (markdown > текст) */
+  '--chotto-videomessage-markdown-blockquote-border-left': string;
+  /** Левый отступ цитаты */
+  '--chotto-videomessage-markdown-blockquote-padding-left': string;
+  /** Внешние отступы цитаты */
+  '--chotto-videomessage-markdown-blockquote-margin': string;
+  /** Стиль шрифта цитаты */
+  '--chotto-videomessage-markdown-blockquote-font-style': string;
+  /** Цвет текста цитаты */
+  '--chotto-videomessage-markdown-blockquote-color': string;
+  /** Нижний отступ параграфов markdown */
+  '--chotto-videomessage-markdown-p-margin-bottom': string;
 }
 
 

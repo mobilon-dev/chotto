@@ -1062,6 +1062,46 @@ export const messages = [
     callParticipant: 'Малафеева Любовь',
     callAttemptDuration: '1 мин 20 сек'
   },
+  {
+    chatId: 8,
+    dialogId: 'dlg_43543111',
+    type: "message.text",
+    text: "Привет! Вот пример **markdown** форматирования:\n\n **Жирный текст**\n *Курсив*\n <u>Подчёркнутый</u>\n ~~Зачёркнутый~~\n `Встроенный код`\n\n> Это цитата с markdown форматированием",
+    direction: 'incoming',
+    status: 'read',
+    timestamp: '1763036690',
+    header: 'Георгий',
+    subText: 'whatsapp 73910001100 (основной)',
+    messageId: '805',
+  },
+  {
+    chatId: 8,
+    dialogId: 'dlg_43543111',
+    type: "message.file",
+    url: "https://axiomabio.com/pdf/test.pdf",
+    filename: "Документ.pdf",
+    direction: 'incoming',
+    status: 'read',
+    timestamp: '1763036691',
+    header: 'Георгий',
+    subText: 'whatsapp 73910001100 (основной)',
+    messageId: '806',
+    text: 'Вот файл с <u>подчёркнутым текстом</u> в описании'
+  },
+  {
+    chatId: 8,
+    dialogId: 'dlg_43543111',
+    type: "message.image",
+    url: "https://placehold.co/60x70/png",
+    alt: "Маленькое изображение",
+    direction: 'incoming',
+    status: 'read',
+    timestamp: '1763036692',
+    header: 'Георгий',
+    subText: 'whatsapp 73910001100 (основной)',
+    messageId: '807',
+    // text: 'Вот маленькое изображение\n\n> Это цитата из markdown с синтаксисом'
+  },
 
   // Сообщения для Telegram диалога (dlg_89789222)
   {

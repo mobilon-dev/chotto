@@ -158,6 +158,39 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-text-container-p-font-size': string;
   /** Перенос слов в абзаце текста */
   '--chotto-imagemessage-text-container-p-word-break': string;
+  /** Правила перевода строк текста */
+  '--chotto-imagemessage-text-container-p-white-space': string;
+
+  /** Жирность жирного текста (markdown **текст**) */
+  '--chotto-imagemessage-markdown-strong-font-weight': string;
+  /** Стиль курсива (markdown *текст*) */
+  '--chotto-imagemessage-markdown-em-font-style': string;
+  /** Подчёркивание (markdown <u>текст</u>) */
+  '--chotto-imagemessage-markdown-u-text-decoration': string;
+  /** Зачёркивание (markdown ~~текст~~) */
+  '--chotto-imagemessage-markdown-del-text-decoration': string;
+  /** Фон встроенного кода (markdown `код`) */
+  '--chotto-imagemessage-markdown-code-bg': string;
+  /** Внутренние отступы встроенного кода */
+  '--chotto-imagemessage-markdown-code-padding': string;
+  /** Скругление встроенного кода */
+  '--chotto-imagemessage-markdown-code-border-radius': string;
+  /** Шрифт встроенного кода */
+  '--chotto-imagemessage-markdown-code-font-family': string;
+  /** Размер шрифта встроенного кода */
+  '--chotto-imagemessage-markdown-code-font-size': string;
+  /** Левая граница цитаты (markdown > текст) */
+  '--chotto-imagemessage-markdown-blockquote-border-left': string;
+  /** Левый отступ цитаты */
+  '--chotto-imagemessage-markdown-blockquote-padding-left': string;
+  /** Внешние отступы цитаты */
+  '--chotto-imagemessage-markdown-blockquote-margin': string;
+  /** Стиль шрифта цитаты */
+  '--chotto-imagemessage-markdown-blockquote-font-style': string;
+  /** Цвет текста цитаты */
+  '--chotto-imagemessage-markdown-blockquote-color': string;
+  /** Нижний отступ параграфов markdown */
+  '--chotto-imagemessage-markdown-p-margin-bottom': string;
 
   /** Внешние отступы блока превью ссылки */
   '--chotto-imagemessage-link-preview-margin': string;

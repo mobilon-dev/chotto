@@ -41,4 +41,21 @@
   --chotto-replyaudiomessage-reply-description-column-gap: 6px;
   --chotto-replyaudiomessage-reply-description-margin-bottom: 4px;
   --chotto-replyaudiomessage-reply-description-span-color: var(--chotto-theme-secondary-text-color);
+
+  // ReplyAudioMessage markdown formatting variables
+  --chotto-replyaudiomessage-markdown-strong-font-weight: bold;
+  --chotto-replyaudiomessage-markdown-em-font-style: italic;
+  --chotto-replyaudiomessage-markdown-u-text-decoration: underline;
+  --chotto-replyaudiomessage-markdown-del-text-decoration: line-through;
+  --chotto-replyaudiomessage-markdown-code-bg: rgba(0, 0, 0, 0.1);
+  --chotto-replyaudiomessage-markdown-code-padding: 2px 4px;
+  --chotto-replyaudiomessage-markdown-code-border-radius: 3px;
+  --chotto-replyaudiomessage-markdown-code-font-family: 'Courier New', monospace;
+  --chotto-replyaudiomessage-markdown-code-font-size: 0.9em;
+  --chotto-replyaudiomessage-markdown-blockquote-border-left: 3px solid rgba(0, 0, 0, 0.2);
+  --chotto-replyaudiomessage-markdown-blockquote-padding-left: 10px;
+  --chotto-replyaudiomessage-markdown-blockquote-margin: 8px 0;
+  --chotto-replyaudiomessage-markdown-blockquote-font-style: italic;
+  --chotto-replyaudiomessage-markdown-blockquote-color: inherit;
+  --chotto-replyaudiomessage-markdown-p-margin-bottom: 4px;
 }

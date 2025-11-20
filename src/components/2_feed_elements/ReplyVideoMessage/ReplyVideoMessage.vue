@@ -22,7 +22,7 @@
       v-if="message.text"
       class="video-message__text"
       @click="inNewWindow"
-      v-html="linkedText"
+      v-html="linkedHtml"
     />
   </div>
   <Teleport to="body">
@@ -49,11 +49,11 @@
   setup
   lang="ts"
 >
-import { ref, watch, inject } from 'vue'
-import linkifyStr from "linkify-string";
+import { ref, inject } from 'vue'
 import { IVideoMessage } from '@/types';
 import { ModalFullscreen } from '@/components';
 import { useTheme } from "@/hooks";
+import { useMessageLinks } from '@/hooks/messages';
 
 const chatAppId = inject('chatAppId')
 
@@ -68,23 +68,8 @@ const props = defineProps({
 
 const player = ref<HTMLVideoElement | null>();
 const isOpenModal = ref(false);
-const linkedText = ref('')
 
-watch(
-  () => props.message.text,
-  () => {
-    if (props.message.text) {
-      linkedText.value = linkifyStr(props.message.text)
-    }
-  },
-  { immediate: true }
-)
-
-function inNewWindow(event: Event) {
-  event.preventDefault()
-  if ((event.target as HTMLAnchorElement).href)
-    window.open((event.target as HTMLAnchorElement).href, '_blank');
-}
+const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 
 const closeModal = () => isOpenModal.value = false
 

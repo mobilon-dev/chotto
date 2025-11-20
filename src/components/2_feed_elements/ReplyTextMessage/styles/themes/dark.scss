@@ -19,4 +19,21 @@
   --chotto-replytextmessage-p-webkit-line-clamp: 5;
   --chotto-replytextmessage-p-line-clamp: 5;
   --chotto-replytextmessage-p-webkit-box-orient: vertical;
+
+  // ReplyTextMessage markdown formatting variables
+  --chotto-replytextmessage-markdown-strong-font-weight: bold;
+  --chotto-replytextmessage-markdown-em-font-style: italic;
+  --chotto-replytextmessage-markdown-u-text-decoration: underline;
+  --chotto-replytextmessage-markdown-del-text-decoration: line-through;
+  --chotto-replytextmessage-markdown-code-bg: rgba(255, 255, 255, 0.1);
+  --chotto-replytextmessage-markdown-code-padding: 2px 4px;
+  --chotto-replytextmessage-markdown-code-border-radius: 3px;
+  --chotto-replytextmessage-markdown-code-font-family: 'Courier New', monospace;
+  --chotto-replytextmessage-markdown-code-font-size: 0.9em;
+  --chotto-replytextmessage-markdown-blockquote-border-left: 3px solid rgba(255, 255, 255, 0.3);
+  --chotto-replytextmessage-markdown-blockquote-padding-left: 10px;
+  --chotto-replytextmessage-markdown-blockquote-margin: 8px 0;
+  --chotto-replytextmessage-markdown-blockquote-font-style: italic;
+  --chotto-replytextmessage-markdown-blockquote-color: inherit;
+  --chotto-replytextmessage-markdown-p-margin-bottom: 4px;
 }

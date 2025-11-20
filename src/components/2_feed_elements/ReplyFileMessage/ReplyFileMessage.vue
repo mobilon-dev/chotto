@@ -27,7 +27,7 @@
       v-if="message.text"
       class="file-message__text"
       @click="inNewWindow"
-      v-html="linkedText"
+      v-html="linkedHtml"
     />
   </div>
 </template>
@@ -36,9 +36,7 @@
   setup
   lang="ts"
 >
-import { ref, watch } from 'vue'
-import linkifyStr from "linkify-string";
-
+import { useMessageLinks } from '@/hooks/messages';
 import { IFileMessage } from '@/types'
 
 // Define props
@@ -49,23 +47,7 @@ const props = defineProps({
   },
 });
 
-const linkedText = ref('')
-
-watch(
-  () => props.message.text,
-  () => {
-    if (props.message.text) {
-      linkedText.value = linkifyStr(props.message.text)
-    }
-  },
-  { immediate: true }
-)
-
-function inNewWindow(event: Event) {
-  event.preventDefault()
-  if ((event.target as HTMLAnchorElement)?.href)
-    window.open((event.target as HTMLAnchorElement).href, '_blank');
-}
+const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 
 
 </script>
