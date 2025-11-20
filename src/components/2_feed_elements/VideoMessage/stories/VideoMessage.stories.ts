@@ -191,23 +191,23 @@ export const RightMessageWithAvatarAndSubtext: Story = {
   decorators: commonDecorator,
 };
 
-export const LeftMessageWithText: Story = {
+export const LeftMessageWithMarkdownText: Story = {
   args: {
     message: {
       ...videoMessage,
       position: 'left',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      text: "Hello! Here's an example of **markdown** formatting:\n\n **Bold text**\n *Italic*\n <u>Underlined</u>\n ~~Strikethrough~~\n `Inline code`\n\n> This is a quote with markdown formatting",
     },
   },
   decorators: commonDecorator,
 };
 
-export const RightMessageWithText: Story = {
+export const RightMessageWithMarkdownText: Story = {
   args: {
     message: {
       ...videoMessage,
       position: 'right',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      text: "Hello! Here's an example of **markdown** formatting:\n\n **Bold text**\n *Italic*\n <u>Underlined</u>\n ~~Strikethrough~~\n `Inline code`\n\n> This is a quote with markdown formatting",
     },
   },
   decorators: commonDecorator,

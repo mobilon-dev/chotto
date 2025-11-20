@@ -121,7 +121,7 @@ export const Default: Story = {
       };
 
       const rightMessagePending: ITextMessage = {
-        text: 'Message with status: pending',
+        text: 'Message with status: **pending**',
         position: 'right',
         messageId: 'right1',
         time: '12:05',
@@ -129,7 +129,7 @@ export const Default: Story = {
       };
 
       const rightMessageSent: ITextMessage = {
-        text: 'Message with status: sent',
+        text: 'Message with status: *sent*',
         position: 'right',
         messageId: 'right2',
         time: '12:06',
@@ -137,7 +137,7 @@ export const Default: Story = {
       };
 
       const rightMessageReceived: ITextMessage = {
-        text: 'Message with status: received',
+        text: 'Message with status: <u>received</u>',
         position: 'right',
         messageId: 'right3',
         time: '12:07',
@@ -145,7 +145,7 @@ export const Default: Story = {
       };
 
       const rightMessageRead: ITextMessage = {
-        text: 'Message with status: read',
+        text: 'Message with status: `read`',
         position: 'right',
         messageId: 'right4',
         time: '12:08',
@@ -153,7 +153,7 @@ export const Default: Story = {
       };
 
       const rightMessageError: ITextMessage = {
-        text: 'Message with status: error',
+        text: 'Message with status: ~~error~~',
         position: 'right',
         messageId: 'right5',
         time: '12:09',
@@ -204,6 +204,14 @@ export const LeftMessages: Story = {
         { ...message, text: 'Message with actions', position: 'left' as const, actions, messageId: 'left6' },
         { ...message, text: 'Message with avatar', position: 'left' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'left7' },
         { ...message, text: 'Message with long time', position: 'left' as const, time: 'двенадцать дней назад', messageId: 'left8' },
+        { 
+          text: "Hello! Here's an example of **markdown** formatting:\n\n **Bold text**\n *Italic*\n <u>Underlined</u>\n ~~Strikethrough~~\n `Inline code`\n\n> This is a quote with markdown formatting", 
+          position: 'left' as const, 
+          messageId: '805', 
+          time: '12:00', 
+          status: 'read' as const, 
+          subText: 'whatsapp +1234567890 (main)' 
+        },
       ];
       return { messages };
     },
@@ -234,6 +242,14 @@ export const RightMessages: Story = {
         { ...message, text: 'Message with status: error', position: 'right' as const, status: 'error' as const, statusMsg: 'Не удалось отправить сообщение', messageId: 'right10' },
         { ...message, text: 'Message with avatar', position: 'right' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'right12' },
         { ...message, text: 'Message with long time', position: 'right' as const, time: 'двенадцать дней назад', messageId: 'right13' },
+        { 
+          text: "Hello! Here's an example of **markdown** formatting:\n\n **Bold text**\n *Italic*\n <u>Underlined</u>\n ~~Strikethrough~~\n `Inline code`\n\n> This is a quote with markdown formatting", 
+          position: 'right' as const, 
+          messageId: '805-right', 
+          time: '12:00', 
+          status: 'read' as const, 
+          subText: 'whatsapp +1234567890 (main)' 
+        },
       ];
       return { messages };
     },

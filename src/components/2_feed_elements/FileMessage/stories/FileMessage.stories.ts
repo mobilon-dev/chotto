@@ -402,6 +402,31 @@ export const LeftFileMessageWithActionsAndTextWithLink: Story = {
   },
   decorators: commonDecorator,
 };
+
+export const LeftFileMessageWithMarkdown: Story = {
+  args: {
+    message: {
+      ...fileMessage,
+      position: 'left',
+      text: "Hello! Here's an example of **markdown** formatting:\n\n **Bold text**\n *Italic*\n <u>Underlined</u>\n ~~Strikethrough~~\n `Inline code`\n\n> This is a quote with markdown formatting",
+      subText: 'whatsapp +1234567890 (main)',
+    },
+  },
+  decorators: commonDecorator,
+};
+
+export const RightFileMessageWithMarkdown: Story = {
+  args: {
+    message: {
+      ...fileMessage,
+      position: 'right',
+      text: "Hello! Here's an example of **markdown** formatting:\n\n **Bold text**\n *Italic*\n <u>Underlined</u>\n ~~Strikethrough~~\n `Inline code`\n\n> This is a quote with markdown formatting",
+      subText: 'whatsapp +1234567890 (main)',
+    },
+  },
+  decorators: commonDecorator,
+};
+
 export const LeftMessageWithReplyText: Story = {
   args: {
     message: {

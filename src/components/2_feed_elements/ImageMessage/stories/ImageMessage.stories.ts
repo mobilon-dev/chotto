@@ -158,237 +158,74 @@ export const Default: Story = {
   }),
 };
 
-export const LeftImageMessage: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'left',
-    } as IImageMessage,
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftImageMessageWithText: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'left',
-      text: 'Текст текст текст текст текст текст текст текст текст',
-    } as IImageMessage,
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftImageMessageWithTextAndLink: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'left',
-      text: 'Текст текст текст текст текст текст текст текст текст yandex.ru',
-    } as IImageMessage,
-  },
-  decorators: commonDecorator,
-};
-
-
-export const LeftImageMessageWithViews: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'left',
-      views: 121212,
+// Комбинированный пример для левых сообщений
+export const LeftImageMessages: Story = {
+  render: () => ({
+    components: { ImageMessage },
+    setup() {
+      const messages = [
+        { ...imageMessage, position: 'left' as const, messageId: 'left1' },
+        { ...imageMessage, position: 'left' as const, text: 'Basic text message', messageId: 'left2' },
+        { ...imageMessage, position: 'left' as const, text: 'Message with link: github.com', messageId: 'left3' },
+        { ...imageMessage, position: 'left' as const, views: 121212, messageId: 'left4' },
+        { ...imageMessage, position: 'left' as const, subText: 'sub text sub text', messageId: 'left5' },
+        { ...imageMessage, position: 'left' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'left6' },
+        { ...imageMessage, position: 'left' as const, subText: 'Это Коля', avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'left7' },
+        { ...imageMessage, position: 'left' as const, actions, messageId: 'left8' },
+        { 
+          ...imageMessage, 
+          position: 'left' as const, 
+          text: "Hello! Here's an example of **markdown** formatting:\n\n **Bold text**\n *Italic*\n <u>Underlined</u>\n ~~Strikethrough~~\n `Inline code`\n\n> This is a quote with markdown formatting",
+          subText: 'whatsapp +1234567890 (main)',
+          messageId: 'left9' 
+        },
+      ];
+      return { messages };
     },
-  },
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <ImageMessage v-for="msg in messages" :key="msg.messageId" :message="msg" />
+      </div>
+    `,
+  }),
   decorators: commonDecorator,
 };
-export const LeftImageMessageWithAvatar: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'left',
-      avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN',
+
+// Комбинированный пример для правых сообщений с разными статусами и вариантами
+export const RightImageMessages: Story = {
+  render: () => ({
+    components: { ImageMessage },
+    setup() {
+      const messages = [
+        { ...imageMessage, position: 'right' as const, messageId: 'right1' },
+        { ...imageMessage, position: 'right' as const, text: 'Basic text message', messageId: 'right2' },
+        { ...imageMessage, position: 'right' as const, text: 'Message with link: github.com', messageId: 'right3' },
+        { ...imageMessage, position: 'right' as const, views: 121212, messageId: 'right4' },
+        { ...imageMessage, position: 'right' as const, subText: 'sub text sub text', messageId: 'right5' },
+        { ...imageMessage, position: 'right' as const, status: 'pending' as const, messageId: 'right6' },
+        { ...imageMessage, position: 'right' as const, status: 'sent' as const, messageId: 'right7' },
+        { ...imageMessage, position: 'right' as const, status: 'received' as const, messageId: 'right8' },
+        { ...imageMessage, position: 'right' as const, status: 'read' as const, messageId: 'right9' },
+        { ...imageMessage, position: 'right' as const, status: 'error' as const, statusMsg: 'Не удалось отправить сообщение', messageId: 'right10' },
+        { ...imageMessage, position: 'right' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'right11' },
+        { ...imageMessage, position: 'right' as const, subText: 'Это Коля', avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'right12' },
+        { ...imageMessage, position: 'right' as const, actions, messageId: 'right13' },
+        { 
+          ...imageMessage, 
+          position: 'right' as const, 
+          text: "Hello! Here's an example of **markdown** formatting:\n\n **Bold text**\n *Italic*\n <u>Underlined</u>\n ~~Strikethrough~~\n `Inline code`\n\n> This is a quote with markdown formatting",
+          subText: 'whatsapp +1234567890 (main)',
+          messageId: 'right14' 
+        },
+      ];
+      return { messages };
     },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageWithAvatar: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftImageMessageWithAvatarAndSubtext: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'left',
-      subText: 'Это Коля',
-      avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageWithAvatarAndSubtext: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      subText: 'Это Коля',
-      avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftImageMessageWithSubtext: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'left',
-      subText: 'sub text sub text',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const LeftImageMessageWithActions: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'left',
-      actions,
-    },
-  },
-  decorators: commonDecorator,
-};
-
-
-export const RightImageMessage: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageWithText: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      text: 'Текст текст текст текст текст текст текст текст текст',
-    } as IImageMessage,
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageWithTextAndLink: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      text: 'Текст текст текст текст текст текст текст текст текст yandex.ru',
-    } as IImageMessage,
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageWithViews: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      views: 121212,
-    } as IImageMessage,
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageWithSubtext: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      subText: 'sub text sub text',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-
-export const RightImageMessageStatusSent: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      status: 'sent',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageStatusReceived: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      status: 'received',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageStatusRead: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      status: 'read',
-    },
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageStatusPending: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      status: 'pending',
-    } as IImageMessage,
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageStatusError: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      status: 'error',
-      statusMsg: 'Не удалось отправить сообщение',
-    } as IImageMessage,
-  },
-  decorators: commonDecorator,
-};
-
-export const RightImageMessageWithActions: Story = {
-  args: {
-    message: {
-      ...imageMessage,
-      position: 'right',
-      actions,
-    },
-  },
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <ImageMessage v-for="msg in messages" :key="msg.messageId" :message="msg" />
+      </div>
+    `,
+  }),
   decorators: commonDecorator,
 };
 
