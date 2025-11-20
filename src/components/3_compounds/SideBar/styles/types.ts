@@ -165,6 +165,14 @@ export interface SideBarThemeCSSVariables {
   '--chotto-sidebar-item-span-line-height': string;
   /** Z-index span элемента */
   '--chotto-sidebar-item-span-z-index': string;
+  
+  // Item fixed span
+  /** Позиция span закрепленного элемента слева */
+  '--chotto-sidebar-item-fixed-span-left': string;
+  /** Позиция span закрепленного элемента справа */
+  '--chotto-sidebar-item-fixed-span-right': string;
+  /** Трансформация span закрепленного элемента */
+  '--chotto-sidebar-item-fixed-span-transform': string;
 
   // Item paragraph
   /** Размер шрифта маленького текста */

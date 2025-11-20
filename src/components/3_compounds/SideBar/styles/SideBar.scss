@@ -118,6 +118,14 @@
     }
   }
 
+  &__item-fixed {
+    span {
+      left: var(--chotto-sidebar-item-fixed-span-left, auto);
+      right: var(--chotto-sidebar-item-fixed-span-right, calc(50% - 20px - 5px));
+      transform: var(--chotto-sidebar-item-fixed-span-transform, none);
+    }
+  }
+
   &__image {
     position: var(--chotto-sidebar-image-position, relative);
     z-index: var(--chotto-sidebar-image-z-index, 1);

@@ -87,6 +87,11 @@
   --chotto-sidebar-item-span-line-height: 16px;
   --chotto-sidebar-item-span-z-index: 2;
   
+  // Item fixed span
+  --chotto-sidebar-item-fixed-span-left: auto;
+  --chotto-sidebar-item-fixed-span-right: calc(50% - 20px - 5px);
+  --chotto-sidebar-item-fixed-span-transform: none;
+  
   // Item paragraph
   --chotto-sidebar-small-text-font-size: var(--chotto-theme-small-text-font-size);
   --chotto-sidebar-small-text-font-weight: var(--chotto-theme-small-text-font-weight, 400);

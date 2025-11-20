@@ -38,10 +38,11 @@
               }"
             >
             <p>Мои</p>
-            <span
-              v-if="item.notificationCount"
-            >{{ item.notificationCount > 99 ? '99+' : item.notificationCount }}</span>
           </Tooltip>
+          <span
+            v-if="item.notificationCount"
+            class="sidebar__notification-count"
+          >{{ item.notificationCount > 99 ? '99+' : item.notificationCount }}</span>
         </li>
       </ul>
 
