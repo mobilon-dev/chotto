@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { unref, ref, watch, nextTick, inject, computed } from 'vue';
+import { unref, ref, watch, nextTick, inject, computed, onMounted } from 'vue';
 import { useMessageDraft, useImmediateDebouncedRef } from '@/hooks';
 import { t } from '../../../locale/useLocale';
 import { IFilePreview, IInputMessage } from '@/types';
@@ -154,19 +154,48 @@ watch(
       const scrollTop = el.scrollTop;
       el.style.height = 'auto';
 
-      const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+      const computedStyle = getComputedStyle(el);
+      const fontSize = parseFloat(computedStyle.fontSize) || 16;
+      const lineHeight = parseFloat(computedStyle.lineHeight) || fontSize * 1.4;
+      const minHeight = 40; 
       const maxHeight = lineHeight * 11;
       const scrollHeight = el.scrollHeight;
 
-      if (!getMessage().text.trim() || scrollHeight <= 61) {
-        el.style.height = '40px';
+      const lineCount = getMessage().text.split('\n').length;
+      const hasExplicitLineBreaks = lineCount > 1;
+      
+      const tempEl = document.createElement('div');
+      tempEl.style.position = 'absolute';
+      tempEl.style.visibility = 'hidden';
+      tempEl.style.whiteSpace = 'nowrap';
+      tempEl.style.font = computedStyle.font;
+      tempEl.style.fontSize = computedStyle.fontSize;
+      tempEl.style.fontFamily = computedStyle.fontFamily;
+      tempEl.style.fontWeight = computedStyle.fontWeight;
+      tempEl.style.letterSpacing = computedStyle.letterSpacing;
+      tempEl.textContent = getMessage().text;
+      
+      document.body.appendChild(tempEl);
+      const textWidth = tempEl.offsetWidth;
+      document.body.removeChild(tempEl);
+      
+      const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
+      const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
+      const availableWidth = el.clientWidth - paddingLeft - paddingRight;
+      
+      const hasAutoWrap = textWidth > availableWidth;
+      const shouldGrow = hasExplicitLineBreaks || hasAutoWrap;    
+      
+      if (!getMessage().text.trim()) {
+        el.style.height = minHeight + 'px';
         el.style.overflowY = 'hidden';
-      }
-      else if (scrollHeight <= maxHeight) {
+      } else if (!shouldGrow) {
+        el.style.height = minHeight + 'px';
+        el.style.overflowY = 'hidden';
+      } else if (scrollHeight <= maxHeight) {
         el.style.height = scrollHeight + 'px';
         el.style.overflowY = 'hidden';
-      }
-      else {
+      } else {
         el.style.height = maxHeight + 'px';
         el.style.overflowY = 'auto';
         el.scrollTop = scrollTop;
@@ -191,6 +220,20 @@ const sendTyping = (event: Event) => {
   const target = event.target as HTMLTextAreaElement;
   emit('typing', target.value);
 }
+
+const initializeTextareaHeight = () => {
+  nextTick(() => {
+    const el = refInput.value;
+    if (!el) return;
+    
+    el.style.height = '40px';
+    el.style.overflowY = 'hidden';
+  });
+}
+
+onMounted(() => {
+  initializeTextareaHeight();
+});
 
 const keyEnter = (event: KeyboardEvent) => {
   if (event.shiftKey) {
