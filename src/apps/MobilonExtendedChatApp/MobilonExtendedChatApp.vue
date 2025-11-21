@@ -221,6 +221,7 @@
                     />
                     <ButtonEmojiPicker
                       :mode="'hover'"
+                      :native="true"
                     />
                   </template>
                   <!--template #buttons>

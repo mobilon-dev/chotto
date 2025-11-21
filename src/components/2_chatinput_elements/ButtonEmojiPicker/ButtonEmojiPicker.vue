@@ -22,7 +22,7 @@
       @mouseleave="handlePickerMouseLeave"
     >
       <EmojiPicker
-        :native="true"
+        :native="native"
         :theme="emojiTheme"
         picker-type=""
         @select="onSelectEmoji"
@@ -47,6 +47,10 @@ const props = defineProps({
     type: String,
     default: 'click', // или 'hover'
     validator: (value) => ['click', 'hover'].includes(value),
+  },
+  native: {
+    type: Boolean,
+    default: true,
   },
 });
 
