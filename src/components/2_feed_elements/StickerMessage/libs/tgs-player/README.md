@@ -40,7 +40,7 @@ MIT License © LottieFiles.com
 **Важно:** `lottie-player.esm.js` должен быть импортирован **перед** `tgs-player.esm.js`, так как `tgs-player` наследуется от `lottie-player`.
 
 ```typescript
-import '@/utils/suppress-lit-warning';
+import './utils/suppress-lit-warning';
 
 // Правильный порядок импорта:
 import './libs/tgs-player/lottie-player.esm.js';  // Сначала базовый компонент

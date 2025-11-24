@@ -10,10 +10,12 @@
   }
   
   // Проверяем, не был ли уже установлен перехватчик
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if ((window as any).__litWarningSuppressed) {
     return;
   }
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).__litWarningSuppressed = true;
   
   const originalWarn = console.warn;

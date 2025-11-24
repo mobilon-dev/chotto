@@ -5,7 +5,7 @@
   >
     <!-- TGS анимированные стикеры -->
     <tgs-player
-      v-if="isTgsFile"
+      v-if="isTgsFile && tgsLibsLoaded"
       class="sticker-message__preview-image-animated"
       :src="message.url"
       autoplay
@@ -46,7 +46,7 @@
       >
         <!-- TGS анимированные стикеры -->
         <tgs-player
-          v-if="isTgsFile"
+          v-if="isTgsFile && tgsLibsLoaded"
           class="sticker-message__modal-image-animated"
           :src="message.url"
           autoplay
@@ -69,19 +69,40 @@
   setup
   lang="ts"
 >
-import { ref, watch, inject, computed } from 'vue';
+import { ref, watch, inject, computed, onMounted } from 'vue';
 import linkifyStr from "linkify-string";
 import { IStickerMessage } from '@/types';
 import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscreen.vue';
 import { useTheme } from "@/hooks";
-
-import '@/utils/suppress-lit-warning';
-import '../StickerMessage/libs/tgs-player/lottie-player.esm.js';
-import '../StickerMessage/libs/tgs-player/tgs-player.esm.js';
+import { isAnimatedSticker } from '../StickerMessage/utils/stickerUtils';
+import '../StickerMessage/utils/suppress-lit-warning';
 
 const chatAppId = inject('chatAppId')
 
 const { getTheme } = useTheme(chatAppId as string)
+
+// Оптимизация: динамическая загрузка библиотек TGS только при необходимости
+// Библиотеки tgs-player и lottie-player весят ~700KB, поэтому загружаем их только
+// когда в сообщении действительно есть TGS стикер (isTgsFile === true)
+// Это позволяет значительно уменьшить размер основного бандла приложения
+const tgsLibsLoaded = ref(false);
+const tgsLibsLoading = ref(false);
+
+// Динамическая загрузка библиотек TGS только при необходимости
+async function loadTgsLibs() {
+  if (tgsLibsLoaded.value || tgsLibsLoading.value) return;
+  
+  tgsLibsLoading.value = true;
+  try {
+    await import('../StickerMessage/libs/tgs-player/lottie-player.esm.js');
+    await import('../StickerMessage/libs/tgs-player/tgs-player.esm.js');
+    tgsLibsLoaded.value = true;
+  } catch (error) {
+    console.error('Failed to load TGS libraries:', error);
+  } finally {
+    tgsLibsLoading.value = false;
+  }
+}
 
 const props = defineProps({
   message: {
@@ -105,20 +126,23 @@ watch(
   { immediate: true }
 )
 
-// Определяем, является ли файл TGS форматом (определяется только по URL)
+// Определяем, является ли файл TGS форматом
+// Используем утилиту для единообразной проверки во всех компонентах
 const isTgsFile = computed(() => {
-  const url = props.message.url;
-  if (!url) return false;
-  
-  const urlString = String(url);
-  const urlLower = urlString.toLowerCase();
-  
-  // Проверка по расширению в URL (работает даже после обработки Vite с хешами)
-  if (urlLower.includes('.tgs') || urlLower.includes('animatedsticker')) {
-    return true;
+  return isAnimatedSticker(props.message.url, props.message.isAnimated);
+});
+
+// Загружаем библиотеки TGS при необходимости
+watch(isTgsFile, (needsTgs) => {
+  if (needsTgs && !tgsLibsLoaded.value) {
+    loadTgsLibs();
   }
-  
-  return false;
+}, { immediate: true });
+
+onMounted(() => {
+  if (isTgsFile.value && !tgsLibsLoaded.value) {
+    loadTgsLibs();
+  }
 });
 
 function inNewWindow(event: Event) {

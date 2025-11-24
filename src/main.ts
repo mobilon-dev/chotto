@@ -1,4 +1,4 @@
-import './utils/suppress-lit-warning';
+import './components/2_feed_elements/StickerMessage/utils/suppress-lit-warning';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia'
