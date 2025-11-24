@@ -2,12 +2,12 @@
   "name": "@mobilon-dev/chotto",
   "version": "0.3.30",
   "type": "module",
-  "main": "./dist/vuessages.umd.js",
-  "module": "./dist/vuessages.es.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/vuessages.es.js",
-      "require": "./dist/vuessages.umd.js"
+      "import": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./style.css": "./dist/chotto.css",
     "./themes/default.css": "./dist/themes/default.css",

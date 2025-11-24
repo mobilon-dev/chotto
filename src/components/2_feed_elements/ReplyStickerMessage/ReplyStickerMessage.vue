@@ -72,7 +72,7 @@
 import { ref, watch, inject, computed } from 'vue';
 import linkifyStr from "linkify-string";
 import { IStickerMessage } from '@/types';
-import { ModalFullscreen } from '@/components';
+import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscreen.vue';
 import { useTheme } from "@/hooks";
 
 import '@/utils/suppress-lit-warning';

@@ -15,14 +15,24 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: "vuessages",
-      fileName: (format) => `vuessages.${format}.js`,
+      formats: ['es'],
     },
     rollupOptions: {
       external: ["vue"],
       output: {
+        format: 'es',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
         exports: "named",
-        globals: {
-          vue: "Vue",
+        entryFileNames: '[name].js',
+        // Сохраняем структуру директорий для модулей
+        chunkFileNames: '[name].js',
+        assetFileNames: (assetInfo) => {
+          // CSS файлы в корень dist
+          if (assetInfo.name?.endsWith('.css')) {
+            return 'chotto.css';
+          }
+          return '[name][extname]';
         },
       },
       // Игнорируем предупреждения об eval в библиотечных файлах tgs-player

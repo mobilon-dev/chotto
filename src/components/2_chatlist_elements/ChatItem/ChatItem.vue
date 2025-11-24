@@ -178,7 +178,9 @@ import { ref, computed, watch} from 'vue'
 
 import { getStatus, statuses } from '@/functions';
 import { t } from '../../../locale/useLocale'
-import { Tooltip, ButtonContextMenu, AvatarIcon } from '@/components';
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
+import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
+import AvatarIcon from '@/components/1_icons/AvatarIcon.vue';
 import { IAction, IChatItem, IChatDialog } from './types';
 
 const props = withDefaults(defineProps<{

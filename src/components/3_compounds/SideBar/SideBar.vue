@@ -112,7 +112,9 @@
 
 <script setup>
 import { toRef, computed, ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
-import { ButtonContextMenu, SettingsIcon, Tooltip } from '@/components';
+import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
+import SettingsIcon from '@/components/1_icons/SettingsIcon.vue';
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 
 const props = defineProps({
   sidebarItems: {

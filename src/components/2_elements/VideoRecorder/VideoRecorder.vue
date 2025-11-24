@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { watch, ref, inject } from 'vue';
 import { useMessageDraft, uploadFile, useModalVideoRecorder, useTheme } from '@/hooks';
-import { FilePreview } from '@/components';
+import FilePreview from '@/components/2_chatinput_elements/FilePreview/FilePreview.vue';
 import { IFilePreview } from '@/types';
 
 const chatAppId = inject('chatAppId')

@@ -172,7 +172,7 @@
 
 <script setup>
 import { ref, watch, onMounted, onUnmounted, computed } from 'vue';
-import { Tooltip } from '@/components';
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useCommunicationChannels } from './composables/useCommunicationChannels';
 import { useCommunicationMenu } from './composables/useCommunicationMenu';
 import { useCommunicationAttributes } from './composables/useCommunicationAttributes';

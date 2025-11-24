@@ -40,7 +40,7 @@
 
 <script setup lang="ts">
 import { unref, ref, watch, inject } from "vue";
-import { FilePreview } from '@/components';
+import FilePreview from '@/components/2_chatinput_elements/FilePreview/FilePreview.vue';
 import { uploadFile } from '@/hooks';
 import { IFilePreview } from "@/types";
 const props = defineProps({

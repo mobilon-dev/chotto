@@ -51,7 +51,7 @@
 >
 import { ref, inject } from 'vue'
 import { IVideoMessage } from '@/types';
-import { ModalFullscreen } from '@/components';
+import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscreen.vue';
 import { useTheme } from "@/hooks";
 import { useMessageLinks } from '@/hooks/messages';
 

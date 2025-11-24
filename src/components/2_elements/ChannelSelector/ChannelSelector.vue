@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref, inject } from 'vue'
-import { ButtonContextMenu } from '@/components';
+import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
 import { t } from '../../../locale/useLocale';
 import { useMessageDraft } from '@/hooks';
 

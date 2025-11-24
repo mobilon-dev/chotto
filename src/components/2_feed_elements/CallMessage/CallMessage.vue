@@ -271,7 +271,8 @@ import { ref, inject, computed, watch, toRefs, unref, type Ref } from 'vue'
 import { ICallMessage } from '@/types'
 import { useTheme } from '@/hooks';
 import { useMessageActions, useSubtextTooltip } from '@/hooks/messages';
-import { ContextMenu, Tooltip } from '@/components';
+import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import IncomingCallIcon from './icons/IncomingCallIcon.vue'
 import OutgoingCallIcon from './icons/OutgoingCallIcon.vue'
 

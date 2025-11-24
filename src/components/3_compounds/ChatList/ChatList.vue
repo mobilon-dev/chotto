@@ -131,7 +131,9 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { ChatItem, ChatFilter, ChatTabs } from "@/components";
+import ChatItem from '@/components/2_chatlist_elements/ChatItem/ChatItem.vue';
+import ChatFilter from '@/components/2_chatlist_elements/ChatFilter/ChatFilter.vue';
+import ChatTabs from '@/components/2_chatlist_elements/ChatTabs/ChatTabs.vue';
 import {
   useChatListScroll,
   useChatListSelection,

@@ -52,7 +52,7 @@
 import { watch, ref, inject, computed } from 'vue';
 import { useMessageDraft, uploadFile } from '@/hooks';
 import { IFilePreview } from '@/types';
-import {FilePreview} from '@/components';
+import FilePreview from '@/components/2_chatinput_elements/FilePreview/FilePreview.vue';
 // const emit = defineEmits(['send', 'typing']);
 
 const chatAppId = inject('chatAppId')

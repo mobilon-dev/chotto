@@ -1,15 +1,13 @@
-import {
-  AudioMessage,
-  CallMessage,
-  FileMessage,
-  ImageMessage,
-  TextMessage,
-  VideoMessage,
-  DateMessage,
-  SystemMessage,
-  TypingMessage,
-  StickerMessage,
-} from '@/components';
+import AudioMessage from '@/components/2_feed_elements/AudioMessage/AudioMessage.vue';
+import CallMessage from '@/components/2_feed_elements/CallMessage/CallMessage.vue';
+import FileMessage from '@/components/2_feed_elements/FileMessage/FileMessage.vue';
+import ImageMessage from '@/components/2_feed_elements/ImageMessage/ImageMessage.vue';
+import TextMessage from '@/components/2_feed_elements/TextMessage/TextMessage.vue';
+import VideoMessage from '@/components/2_feed_elements/VideoMessage/VideoMessage.vue';
+import DateMessage from '@/components/2_feed_elements/DateMessage/DateMessage.vue';
+import SystemMessage from '@/components/2_feed_elements/SystemMessage/SystemMessage.vue';
+import TypingMessage from '@/components/2_feed_elements/TypingMessage/TypingMessage.vue';
+import StickerMessage from '@/components/2_feed_elements/StickerMessage/StickerMessage.vue';
 
 /**
  * Композабл для маппинга типов сообщений на компоненты

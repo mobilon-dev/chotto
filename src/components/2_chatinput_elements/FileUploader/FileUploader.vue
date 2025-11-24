@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { ref, computed, inject, onMounted } from "vue";
 // import ButtonContextMenu from "./ButtonContextMenu.vue";
-import { FilePreview } from '@/components';
+import FilePreview from '@/components/2_chatinput_elements/FilePreview/FilePreview.vue';
 import { useMessageDraft, uploadFile } from '@/hooks';
 import { IFilePreview } from "@/types";
 import { FileUploaderIcon } from "./icons";

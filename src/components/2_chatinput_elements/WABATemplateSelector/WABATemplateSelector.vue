@@ -191,12 +191,10 @@ import { computed, ref, reactive, onMounted, inject, unref } from 'vue'
 // import { watch, nextTick } from 'vue'
 import chatBackgroundRaw from '../../3_compounds/Feed/assets/chat-background.svg?raw';
 
-import { 
-  PlaceholderComponent,
-  WABAAttachmentSection, 
-  WABAQuickReplyButtons, 
-  WABASeparatedQuickButtons 
-} from '@/components';
+import PlaceholderComponent from '@/components/2_chatinput_elements/PlaceholderComponent/PlaceholderComponent.vue';
+import WABAAttachmentSection from '@/components/2_chatinput_elements/WABAAttachmentSection/WABAAttachmentSection.vue';
+import WABAQuickReplyButtons from '@/components/2_chatinput_elements/WABAQuickReplyButtons/WABAQuickReplyButtons.vue';
+import WABASeparatedQuickButtons from '@/components/2_chatinput_elements/WABASeparatedQuickButtons/WABASeparatedQuickButtons.vue';
 const props = defineProps({
   wabaTemplates: {
     type: Array,

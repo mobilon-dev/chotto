@@ -37,7 +37,8 @@
 
 <script setup>
 import { ref, onMounted, inject } from 'vue';
-import { TemplateSelector, Tooltip } from '@/components';
+import TemplateSelector from '@/components/2_chatinput_elements/TemplateSelector/TemplateSelector.vue';
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageDraft } from '@/hooks';
 import { ChatTemplatesIcon } from './icons';
 

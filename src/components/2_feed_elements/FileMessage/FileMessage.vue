@@ -134,7 +134,13 @@
 >
 import { computed } from 'vue'
 
-import { ContextMenu, LinkPreview, EmbedPreview, BaseReplyMessage, MessageReactions, MessageStatusIndicator, Tooltip } from '@/components';
+import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
+import LinkPreview from '@/components/1_atoms/LinkPreview/LinkPreview.vue';
+import EmbedPreview from '@/components/1_atoms/EmbedPreview/EmbedPreview.vue';
+import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
+import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
+import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { IFileMessage } from '@/types';

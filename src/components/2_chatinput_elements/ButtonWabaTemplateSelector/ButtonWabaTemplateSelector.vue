@@ -29,7 +29,7 @@
 
 <script setup>
 import { ref, onMounted, provide, inject } from 'vue';
-import { WABATemplateSelector } from '@/components';
+import WABATemplateSelector from '@/components/2_chatinput_elements/WABATemplateSelector/WABATemplateSelector.vue';
 import { useMessageDraft } from '@/hooks';
 
 const props = defineProps({

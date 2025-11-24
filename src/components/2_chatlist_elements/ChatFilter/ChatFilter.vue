@@ -23,7 +23,8 @@
 <script setup>
 import { ref, unref } from 'vue';
 import { t } from '../../../locale/useLocale';
-import { SearchIcon, CloseButtonIcon } from '@/components';
+import SearchIcon from '@/components/1_icons/SearchIcon.vue';
+import CloseButtonIcon from '@/components/1_icons/CloseButtonIcon.vue';
 const refInput = ref('');
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

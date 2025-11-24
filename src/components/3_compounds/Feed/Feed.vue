@@ -102,13 +102,11 @@
   lang="ts"
 >
 import { ref, watch, nextTick, inject, computed, onMounted } from 'vue';
-import { 
-  DateMessageSticky,
-  BaseReplyMessage,
-  MessageKeyboard,
-  FeedKeyboard,
-  TypingMessage
-} from '@/components';
+import DateMessageSticky from '@/components/2_feed_elements/DateMessageSticky/DateMessageSticky.vue';
+import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
+import MessageKeyboard from '@/components/2_feed_elements/MessageKeyboard/MessageKeyboard.vue';
+import FeedKeyboard from '@/components/2_feed_elements/FeedKeyboard/FeedKeyboard.vue';
+import TypingMessage from '@/components/2_feed_elements/TypingMessage/TypingMessage.vue';
 
 import { IFeedObject, IFeedTyping, IFeedUnreadButton, IFeedKeyboard } from '@/types';
 import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo } from './composables';
