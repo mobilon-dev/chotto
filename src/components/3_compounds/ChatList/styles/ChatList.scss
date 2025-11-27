@@ -17,6 +17,7 @@
     overflow-y: var(--chotto-chatlist-items-overflow-y, auto);
     overflow-x: var(--chotto-chatlist-items-overflow-x, hidden);
     padding: var(--chotto-chatlist-items-padding, 0);
+    position: var(--chotto-chatlist-items-position, relative);
 
     &::-webkit-scrollbar {
       width: var(--chotto-chatlist-scrollbar-width, 6px);
@@ -31,6 +32,10 @@
     &::-webkit-scrollbar-track {
       border-radius: var(--chotto-chatlist-scrollbar-track-radius, 10px);
     }
+  }
+
+  &__loading-indicator {
+    pointer-events: none;
   }
 
   &__fixed-items-top,

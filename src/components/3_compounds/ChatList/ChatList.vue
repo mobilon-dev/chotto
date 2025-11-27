@@ -62,8 +62,12 @@
       @mousedown="startScrollWatch"
       @mouseup="stopScrollWatch"
     >
+      <LoadingIndicator
+        class="chat-list__loading-indicator"
+        :is-loading="props.isLoading"
+      />
       <div
-        v-if="getSortedAndFilteredChats().length === 0"
+        v-if="!props.isLoading && getSortedAndFilteredChats().length === 0"
         class="chat-list__no-data"
       >
         <div class="chat-list__placeholder">
@@ -134,6 +138,7 @@ import { ref, computed } from 'vue';
 import ChatItem from '@/components/2_chatlist_elements/ChatItem/ChatItem.vue';
 import ChatFilter from '@/components/2_chatlist_elements/ChatFilter/ChatFilter.vue';
 import ChatTabs from '@/components/2_chatlist_elements/ChatTabs/ChatTabs.vue';
+import LoadingIndicator from '@/components/1_atoms/LoadingIndicator/LoadingIndicator.vue';
 import {
   useChatListScroll,
   useChatListSelection,
@@ -183,6 +188,10 @@ const props = defineProps({
   showDialogs: {
     type: Boolean,
     default: true,
+  },
+  isLoading: {
+    type: Boolean,
+    default: false,
   },
 });
 
