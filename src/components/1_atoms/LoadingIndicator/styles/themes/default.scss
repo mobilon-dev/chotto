@@ -1,0 +1,32 @@
+[data-theme="light"] {
+  // LoadingIndicator container
+  --chotto-loadingindicator-position: absolute;
+  --chotto-loadingindicator-top: 0;
+  --chotto-loadingindicator-left: 0;
+  --chotto-loadingindicator-right: 0;
+  --chotto-loadingindicator-bottom: 0;
+  --chotto-loadingindicator-display: flex;
+  --chotto-loadingindicator-align-items: center;
+  --chotto-loadingindicator-justify-content: center;
+  --chotto-loadingindicator-z-index: 10;
+
+  // LoadingIndicator dots
+  --chotto-loadingindicator-dot-stroke: #C9333C;
+  --chotto-loadingindicator-dot-stroke-width: 13.36;
+  --chotto-loadingindicator-dot-fill: none;
+
+  // LoadingIndicator animation
+  --chotto-loadingindicator-animation-duration: 0.8s;
+  --chotto-loadingindicator-dot-1-delay: 0.0s;
+  --chotto-loadingindicator-dot-2-delay: 0.16s;
+  --chotto-loadingindicator-dot-3-delay: 0.32s;
+  --chotto-loadingindicator-dot-4-delay: 0.48s;
+  --chotto-loadingindicator-dot-5-delay: 0.64s;
+
+  // LoadingIndicator pulse animation
+  --chotto-loadingindicator-pulse-opacity-min: 0.4;
+  --chotto-loadingindicator-pulse-opacity-max: 1;
+  --chotto-loadingindicator-pulse-stroke-width-min: 8;
+  --chotto-loadingindicator-pulse-stroke-width-max: 16;
+}
+

@@ -1,0 +1,50 @@
+.messages-loading-indicator {
+  position: var(--chotto-loadingindicator-position, absolute);
+  top: var(--chotto-loadingindicator-top, 0);
+  left: var(--chotto-loadingindicator-left, 0);
+  right: var(--chotto-loadingindicator-right, 0);
+  bottom: var(--chotto-loadingindicator-bottom, 0);
+  display: var(--chotto-loadingindicator-display, flex);
+  align-items: var(--chotto-loadingindicator-align-items, center);
+  justify-content: var(--chotto-loadingindicator-justify-content, center);
+  z-index: var(--chotto-loadingindicator-z-index, 10);
+}
+
+.dot {
+  stroke: var(--chotto-loadingindicator-dot-stroke, #C9333C);
+  stroke-width: var(--chotto-loadingindicator-dot-stroke-width, 13.36);
+  fill: var(--chotto-loadingindicator-dot-fill, none);
+  animation: pulse var(--chotto-loadingindicator-animation-duration, 0.8s) infinite ease-in-out;
+}
+
+.dot-1 { 
+  animation-delay: var(--chotto-loadingindicator-dot-1-delay, 0.0s); 
+}
+
+.dot-2 { 
+  animation-delay: var(--chotto-loadingindicator-dot-2-delay, 0.16s); 
+}
+
+.dot-3 { 
+  animation-delay: var(--chotto-loadingindicator-dot-3-delay, 0.32s); 
+}
+
+.dot-4 { 
+  animation-delay: var(--chotto-loadingindicator-dot-4-delay, 0.48s); 
+}
+
+.dot-5 { 
+  animation-delay: var(--chotto-loadingindicator-dot-5-delay, 0.64s); 
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: var(--chotto-loadingindicator-pulse-opacity-min, 0.4); 
+    stroke-width: var(--chotto-loadingindicator-pulse-stroke-width-min, 8); 
+  }
+  50% { 
+    opacity: var(--chotto-loadingindicator-pulse-opacity-max, 1); 
+    stroke-width: var(--chotto-loadingindicator-pulse-stroke-width-max, 16); 
+  }
+}
+
