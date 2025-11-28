@@ -4,7 +4,7 @@
     border-radius: var(--chotto-systemmessage-container-border-radius, 10px);
     padding: var(--chotto-systemmessage-container-padding, 10px);
     margin: var(--chotto-systemmessage-container-margin, 0 auto 18px auto);
-    background-color: var(--chotto-systemmessage-container-background-color, #ffeecc);
+    background-color: var(--chotto-systemmessage-container-background-color, transparent);
   }
 
   &__text {
