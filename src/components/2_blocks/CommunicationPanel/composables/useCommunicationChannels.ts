@@ -15,7 +15,7 @@ import {
 /**
  * Список поддерживаемых типов каналов в панели коммуникаций.
  */
-export const CHANNEL_TYPES = ['phone', 'whatsapp', 'telegram', 'max', 'sms'] as const;
+export const CHANNEL_TYPES = ['whatsapp', 'telegram', 'max', 'sms', 'phone'] as const;
 
 export type ChannelType = (typeof CHANNEL_TYPES)[number];
 
