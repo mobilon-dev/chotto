@@ -13,11 +13,22 @@ import ThemeMode from '../../components/2_elements/ThemeMode/ThemeMode.vue';
 import ButtonEmojiPicker from '../../components/2_chatinput_elements/ButtonEmojiPicker/ButtonEmojiPicker.vue';
 import FileUploader from '../../components/2_chatinput_elements/FileUploader/FileUploader.vue';
 import ButtonTemplateSelector from '../../components/2_chatinput_elements/ButtonTemplateSelector/ButtonTemplateSelector.vue';
+import StickerPicker from '../../components/2_chatinput_elements/StickerPicker/StickerPicker.vue';
 
 import { themes } from '../data/themes';
 import { templates, groupTemplates } from '../data';
 import { transformToFeed } from '../transform/transformToFeed';
 import sticker from '../data/images/sticker.webp';
+import {
+  approveSticker,
+  callSticker,
+  dealSticker,
+  docsSticker,
+  goodDaySticker,
+  helpSticker,
+  soonSticker,
+  thxSticker,
+} from '../data/images/stickers';
 
 // Простые чаты для примера
 const simpleChats = [
@@ -71,11 +82,8 @@ const simpleMessages = [
     direction: 'outgoing',
     messageId: '2',
     url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
-    timestamp: '1762077599',
+    timestamp: '1762077999',
     status: 'read',
-    transcript: {
-      text: "Привет! Всё отлично, спасибо!",
-    },
   },
   {
     chatId: 1,
@@ -129,9 +137,6 @@ const simpleMessages = [
     url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
     timestamp: '1762077599',
     status: 'read',
-    transcript: {
-      text: "Привет! Всё отлично, спасибо!",
-    },
   },
   {
     chatId: 2,
@@ -191,7 +196,8 @@ export const BasicExample: Story = {
       ThemeMode,
       ButtonEmojiPicker,
       FileUploader,
-      ButtonTemplateSelector
+      ButtonTemplateSelector,
+      StickerPicker
     },
     setup() {
       const chatsRef = ref([...simpleChats]);
@@ -216,7 +222,14 @@ export const BasicExample: Story = {
         return transformToFeed(chatMessages);
       });
       
-      const handleSend = (message: { text: string; type?: string }) => {
+      const handleSend = (message: { 
+        text?: string; 
+        type?: string; 
+        url?: string; 
+        filename?: string; 
+        size?: string;
+        alt?: string;
+      }) => {
         if (!selectedChatRef.value) return;
         
         const now = Date.now();
@@ -229,44 +242,100 @@ export const BasicExample: Story = {
         // Если выбран чат с Иваном (2), то сообщение от Анны (1)
         const senderChatId = currentChatId === 1 ? 2 : 1;
         
+        // Определяем тип сообщения и текст для отображения
+        const messageType = message.type || "message.text";
+        const displayText = message.text || (messageType.includes('sticker') ? 'Стикер' : messageType.includes('file') ? message.filename || 'Файл' : '');
+        
         // Создаем сообщение для текущего чата (исходящее - справа)
-        const outgoingMessage = {
+        const outgoingMessage: {
+          chatId: number;
+          type: string;
+          direction: 'outgoing';
+          messageId: string;
+          text: string;
+          timestamp: string;
+          status: 'sent';
+          url?: string;
+          filename?: string;
+          alt?: string;
+          size?: string;
+        } = {
           chatId: currentChatId,
-          type: message.type || "message.text",
-          direction: 'outgoing' as const,
+          type: messageType,
+          direction: 'outgoing',
           messageId: `${now}-outgoing`,
-          text: message.text,
+          text: message.text || '',
           timestamp: nowString,
-          status: 'sent' as const,
+          status: 'sent',
         };
+        
+        // Добавляем поля для файлов и стикеров
+        if (message.url) {
+          outgoingMessage.url = message.url;
+        }
+        if (message.filename) {
+          outgoingMessage.filename = message.filename;
+        }
+        if (message.alt) {
+          outgoingMessage.alt = message.alt;
+        }
+        if (message.size) {
+          outgoingMessage.size = message.size;
+        }
         
         // Создаем сообщение для другого чата (входящее - слева)
-        const incomingMessage = {
+        const incomingMessage: {
+          chatId: number;
+          type: string;
+          direction: 'incoming';
+          messageId: string;
+          text: string;
+          timestamp: string;
+          status: 'read';
+          url?: string;
+          filename?: string;
+          alt?: string;
+          size?: string;
+        } = {
           chatId: senderChatId,
-          type: message.type || "message.text",
-          direction: 'incoming' as const,
+          type: messageType,
+          direction: 'incoming',
           messageId: `${now}-incoming`,
-          text: message.text,
+          text: message.text || '',
           timestamp: nowString,
-          status: 'read' as const,
+          status: 'read',
         };
         
+        // Добавляем поля для файлов и стикеров
+        if (message.url) {
+          incomingMessage.url = message.url;
+        }
+        if (message.filename) {
+          incomingMessage.filename = message.filename;
+        }
+        if (message.alt) {
+          incomingMessage.alt = message.alt;
+        }
+        if (message.size) {
+          incomingMessage.size = message.size;
+        }
+        
         // Добавляем оба сообщения в массив
-        messagesRef.value.push(outgoingMessage);
-        messagesRef.value.push(incomingMessage);
+        messagesRef.value.push(outgoingMessage as typeof simpleMessages[0]);
+        messagesRef.value.push(incomingMessage as typeof simpleMessages[0]);
         
         // Обновляем информацию о последнем сообщении в обоих чатах
         const currentChat = chatsRef.value.find(c => c.chatId === currentChatId);
         const otherChat = chatsRef.value.find(c => c.chatId === senderChatId);
         
         if (currentChat) {
-          currentChat.lastMessage = message.text;
+          currentChat.lastMessage = displayText;
           currentChat['lastActivity.time'] = 'только что';
           currentChat['lastActivity.timestamp'] = nowString;
         }
         
         if (otherChat) {
-          otherChat.lastMessage = message.text;
+          otherChat.lastMessage = displayText;
           otherChat['lastActivity.time'] = 'только что';
           otherChat['lastActivity.timestamp'] = nowString;
           otherChat.countUnread = (otherChat.countUnread || 0) + 1;
@@ -305,6 +374,18 @@ export const BasicExample: Story = {
         });
       };
       
+      // Массив стикеров для StickerPicker
+      const stickers = [
+        { url: approveSticker, alt: '✔' },
+        { url: callSticker, alt: '📱' },
+        { url: dealSticker, alt: '👍' },
+        { url: docsSticker, alt: '📄' },
+        { url: goodDaySticker, alt: '🙋‍♀️' },
+        { url: helpSticker, alt: '🆘' },
+        { url: soonSticker, alt: '🔜' },
+        { url: thxSticker, alt: '🙏' },
+      ];
+      
       return { 
         messages: feedMessagesRef, 
         chats: chatsRef,
@@ -317,7 +398,8 @@ export const BasicExample: Story = {
         themes,
         handleThemeChange,
         templates,
-        groupTemplates
+        groupTemplates,
+        stickers
       };
     },
     template: `
@@ -345,17 +427,19 @@ export const BasicExample: Story = {
             <div style="height: 100%; min-height: 0; display: flex; flex-direction: column; overflow: hidden;">
               <ChatWrapper :is-selected-chat="!!selectedChat" style="height: 100%; min-height: 0; display: flex; flex-direction: column; overflow: hidden;">
                 <ChatInfo :chat="selectedChat" />
-                <Feed 
-                  :objects="messages" 
-                  @message-action="handleMessageAction"
-                  @load-more="handleLoadMore"
-                  style="flex: 1 1 0; min-height: 0; overflow-y: auto;"
-                />
+                <div style="flex: 1 1 0; min-height: 0; overflow-y: auto;">
+                  <Feed 
+                    :objects="messages" 
+                    @message-action="handleMessageAction"
+                    @load-more="handleLoadMore"
+                  />
+                </div>
                 <ChatInput @send="handleSend">
                   <template #inline-buttons>
                     <FileUploader :state="'active'" />
-                    <ButtonEmojiPicker :mode="'click'" :state="'active'" />
                     <ButtonTemplateSelector :mode="'click'" :state="'active'" :templates="templates" :group-templates="groupTemplates" />
+                    <ButtonEmojiPicker :mode="'click'" :state="'active'" />
+                    <StickerPicker :mode="'click'" :state="'active'" :stickers="stickers" />          
                   </template>
                 </ChatInput>
               </ChatWrapper>
