@@ -29,6 +29,16 @@ import {
   soonSticker,
   thxSticker,
 } from '../data/images/stickers';
+import {
+  fireDevilSticker,
+  fireHiSticker,
+  fireLolSticker,
+  fireScreamingSticker,
+  fireSmokeSticker,
+  fireThumbsUpSticker,
+  fireTypingSticker,
+  fireYesSticker,
+} from '../data/images/stickers/animated';
 
 // Простые чаты для примера
 const simpleChats = [
@@ -374,16 +384,28 @@ export const BasicExample: Story = {
         });
       };
       
-      // Массив стикеров для StickerPicker
+      // Массив стикеров для StickerPicker (с вкладками: статические и анимированные)
       const stickers = [
-        { url: approveSticker, alt: '✔' },
-        { url: callSticker, alt: '📱' },
-        { url: dealSticker, alt: '👍' },
-        { url: docsSticker, alt: '📄' },
-        { url: goodDaySticker, alt: '🙋‍♀️' },
-        { url: helpSticker, alt: '🆘' },
-        { url: soonSticker, alt: '🔜' },
-        { url: thxSticker, alt: '🙏' },
+        [
+          { url: approveSticker, alt: '✔' },
+          { url: callSticker, alt: '📱' },
+          { url: dealSticker, alt: '👍' },
+          { url: docsSticker, alt: '📄' },
+          { url: goodDaySticker, alt: '🙋‍♀️' },
+          { url: helpSticker, alt: '🆘' },
+          { url: soonSticker, alt: '🔜' },
+          { url: thxSticker, alt: '🙏' },
+        ],
+        [
+          { url: fireDevilSticker, alt: '😈' },
+          { url: fireHiSticker, alt: '👋' },
+          { url: fireLolSticker, alt: '😂' },
+          { url: fireScreamingSticker, alt: '😱' },
+          { url: fireSmokeSticker, alt: '💨' },
+          { url: fireThumbsUpSticker, alt: '👍' },
+          { url: fireTypingSticker, alt: '⌨️' },
+          { url: fireYesSticker, alt: '✅' },
+        ],
       ];
       
       return { 

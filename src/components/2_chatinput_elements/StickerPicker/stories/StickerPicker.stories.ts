@@ -13,6 +13,16 @@ import {
   soonSticker,
   thxSticker,
 } from '../../../../apps/data/images/stickers';
+import {
+  fireDevilSticker,
+  fireHiSticker,
+  fireLolSticker,
+  fireScreamingSticker,
+  fireSmokeSticker,
+  fireThumbsUpSticker,
+  fireTypingSticker,
+  fireYesSticker,
+} from '../../../../apps/data/images/stickers/animated';
 
 const meta: Meta<typeof StickerPicker> = {
   title: 'Chat Input Elements/StickerPicker',
@@ -76,16 +86,28 @@ const themes = [
   { code: 'mobilon1', name: 'Mobilon1', default: true }
 ];
 
-// Реальные стикеры из приложения
+// Реальные стикеры из приложения (с вкладками: статические и анимированные)
 const sampleStickers = [
-  { url: approveSticker, alt: '✔' },
-  { url: callSticker, alt: '📱' },
-  { url: dealSticker, alt: '👍' },
-  { url: docsSticker, alt: '📄' },
-  { url: goodDaySticker, alt: '🙋‍♀️' },
-  { url: helpSticker, alt: '🆘' },
-  { url: soonSticker, alt: '🔜' },
-  { url: thxSticker, alt: '🙏' },
+  [
+    { url: approveSticker, alt: '✔' },
+    { url: callSticker, alt: '📱' },
+    { url: dealSticker, alt: '👍' },
+    { url: docsSticker, alt: '📄' },
+    { url: goodDaySticker, alt: '🙋‍♀️' },
+    { url: helpSticker, alt: '🆘' },
+    { url: soonSticker, alt: '🔜' },
+    { url: thxSticker, alt: '🙏' },
+  ],
+  [
+    { url: fireDevilSticker, alt: '😈' },
+    { url: fireHiSticker, alt: '👋' },
+    { url: fireLolSticker, alt: '😂' },
+    { url: fireScreamingSticker, alt: '😱' },
+    { url: fireSmokeSticker, alt: '💨' },
+    { url: fireThumbsUpSticker, alt: '👍' },
+    { url: fireTypingSticker, alt: '⌨️' },
+    { url: fireYesSticker, alt: '✅' },
+  ],
 ];
 
 // Пример с несколькими наборами стикеров (вкладки)
@@ -101,11 +123,14 @@ const stickersWithTabs = [
     { url: thxSticker, alt: '🙏' },
   ],
   [
-    { url: approveSticker, alt: '✔' },
-    { url: callSticker, alt: '📱' },
-    { url: dealSticker, alt: '👍' },
-    { url: docsSticker, alt: '📄' },
-    { url: goodDaySticker, alt: '🙋‍♀️' },
+    { url: fireDevilSticker, alt: '😈' },
+    { url: fireHiSticker, alt: '👋' },
+    { url: fireLolSticker, alt: '😂' },
+    { url: fireScreamingSticker, alt: '😱' },
+    { url: fireSmokeSticker, alt: '💨' },
+    { url: fireThumbsUpSticker, alt: '👍' },
+    { url: fireTypingSticker, alt: '⌨️' },
+    { url: fireYesSticker, alt: '✅' },
   ],
   [
     { url: helpSticker, alt: '🆘' },
