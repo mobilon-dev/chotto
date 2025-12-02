@@ -30,6 +30,7 @@ export { default as ButtonWabaTemplateSelector } from './2_chatinput_elements/Bu
 export { default as FilePreview } from './2_chatinput_elements/FilePreview/FilePreview.vue';
 export { default as FileUploader } from './2_chatinput_elements/FileUploader/FileUploader.vue';
 export { default as PlaceholderComponent } from './2_chatinput_elements/PlaceholderComponent/PlaceholderComponent.vue';
+export { default as StickerPicker } from './2_chatinput_elements/StickerPicker/StickerPicker.vue';
 export { default as TemplateSelector } from './2_chatinput_elements/TemplateSelector/TemplateSelector.vue';
 export { default as TextFormatToolbar } from './2_chatinput_elements/TextFormatToolbar/TextFormatToolbar.vue';
 export { default as WABAAttachmentSection } from './2_chatinput_elements/WABAAttachmentSection/WABAAttachmentSection.vue';

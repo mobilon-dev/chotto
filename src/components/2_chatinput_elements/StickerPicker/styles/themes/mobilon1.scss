@@ -1,0 +1,167 @@
+[data-theme="mobilon1"] {
+  // StickerPicker button variables
+  --chotto-stickerpicker-button-background-color: transparent;
+  --chotto-stickerpicker-button-border: none;
+  --chotto-stickerpicker-button-height: fit-content;
+  --chotto-stickerpicker-button-span-display: block;
+  --chotto-stickerpicker-button-span-cursor: pointer;
+  --chotto-stickerpicker-button-span-padding: 0;
+  --chotto-stickerpicker-button-span-font-size: 23px;
+  --chotto-stickerpicker-button-span-color: var(--chotto-theme-button-color-active);
+  --chotto-stickerpicker-button-span-hover-color: var(--chotto-theme-button-color-hover);
+
+  // StickerPicker button-disabled variables
+  --chotto-stickerpicker-button-disabled-pointer-events: none;
+  --chotto-stickerpicker-button-disabled-span-cursor: auto;
+  --chotto-stickerpicker-button-disabled-span-color: var(--chotto-theme-button-color-disabled);
+
+  // StickerPicker picker variables
+  --chotto-stickerpicker-picker-position: absolute;
+  --chotto-stickerpicker-picker-bottom: 50px;
+  --chotto-stickerpicker-picker-z-index: 2000;
+  --chotto-stickerpicker-picker-background-color: #ffffff;
+  --chotto-stickerpicker-picker-border-radius: 8px;
+  --chotto-stickerpicker-picker-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --chotto-stickerpicker-picker-padding: 12px;
+  --chotto-stickerpicker-picker-width: 320px;
+  --chotto-stickerpicker-picker-height: 217px;
+  --chotto-stickerpicker-picker-display: flex;
+  --chotto-stickerpicker-picker-flex-direction: column;
+  --chotto-stickerpicker-picker-overflow: hidden;
+
+  // StickerPicker container variables
+  --chotto-stickerpicker-container-display: flex;
+  --chotto-stickerpicker-container-flex-direction: column;
+  --chotto-stickerpicker-container-overflow: hidden;
+
+  // StickerPicker content variables
+  --chotto-stickerpicker-content-flex: 1;
+  --chotto-stickerpicker-content-overflow-y: auto;
+  --chotto-stickerpicker-content-overflow-x: hidden;
+  --chotto-stickerpicker-content-scrollbar-width: thin;
+  --chotto-stickerpicker-content-scrollbar-color: #c1c1c1 transparent;
+  --chotto-stickerpicker-content-min-height: 0;
+  --chotto-stickerpicker-content-scrollbar-width-webkit: 6px;
+  --chotto-stickerpicker-content-scrollbar-track-background: transparent;
+  --chotto-stickerpicker-content-scrollbar-thumb-background-color: #c1c1c1;
+  --chotto-stickerpicker-content-scrollbar-thumb-border-radius: 3px;
+
+  // StickerPicker empty state variables
+  --chotto-stickerpicker-empty-padding: 20px;
+  --chotto-stickerpicker-empty-text-align: center;
+  --chotto-stickerpicker-empty-color: #999;
+  --chotto-stickerpicker-empty-font-size: 14px;
+
+  // StickerPicker grid variables
+  --chotto-stickerpicker-grid-display: grid;
+  --chotto-stickerpicker-grid-template-columns: repeat(4, 1fr);
+  --chotto-stickerpicker-grid-gap: 8px;
+
+  // StickerPicker item variables
+  --chotto-stickerpicker-item-background: transparent;
+  --chotto-stickerpicker-item-border: none;
+  --chotto-stickerpicker-item-border-radius: 4px;
+  --chotto-stickerpicker-item-padding: 4px;
+  --chotto-stickerpicker-item-cursor: pointer;
+  --chotto-stickerpicker-item-transition: background-color 0.2s;
+  --chotto-stickerpicker-item-aspect-ratio: 1;
+  --chotto-stickerpicker-item-hover-background-color: #f5f5f5;
+
+  // StickerPicker image variables
+  --chotto-stickerpicker-image-width: 100%;
+  --chotto-stickerpicker-image-height: 100%;
+  --chotto-stickerpicker-image-object-fit: contain;
+  --chotto-stickerpicker-image-display: block;
+
+  // StickerPicker tabs variables
+  --chotto-stickerpicker-tabs-display: flex;
+  --chotto-stickerpicker-tabs-gap: 4px;
+  --chotto-stickerpicker-tabs-padding-bottom: 8px;
+  --chotto-stickerpicker-tabs-margin-bottom: 8px;
+  --chotto-stickerpicker-tabs-border-bottom: 1px solid #e5e5e5;
+  --chotto-stickerpicker-tabs-overflow-x: auto;
+  --chotto-stickerpicker-tabs-overflow-y: hidden;
+  --chotto-stickerpicker-tabs-scrollbar-width: none;
+  --chotto-stickerpicker-tabs-scrollbar-color: transparent transparent;
+  --chotto-stickerpicker-tabs-flex-shrink: 0;
+  --chotto-stickerpicker-tabs-scrollbar-display: none;
+  --chotto-stickerpicker-tabs-scrollbar-width-webkit: 0;
+  --chotto-stickerpicker-tabs-scrollbar-height: 0;
+
+  // StickerPicker tab variables
+  --chotto-stickerpicker-tab-background: transparent;
+  --chotto-stickerpicker-tab-border: none;
+  --chotto-stickerpicker-tab-border-radius: 4px;
+  --chotto-stickerpicker-tab-padding: 4px;
+  --chotto-stickerpicker-tab-cursor: pointer;
+  --chotto-stickerpicker-tab-transition: all 0.2s;
+  --chotto-stickerpicker-tab-flex-shrink: 0;
+  --chotto-stickerpicker-tab-width: 32px;
+  --chotto-stickerpicker-tab-height: 32px;
+  --chotto-stickerpicker-tab-display: flex;
+  --chotto-stickerpicker-tab-align-items: center;
+  --chotto-stickerpicker-tab-justify-content: center;
+  --chotto-stickerpicker-tab-position: relative;
+  --chotto-stickerpicker-tab-hover-background-color: #f5f5f5;
+  --chotto-stickerpicker-tab-active-background-color: #e5e5e5;
+
+  // StickerPicker tab active indicator variables
+  --chotto-stickerpicker-tab-active-indicator-width: 20px;
+  --chotto-stickerpicker-tab-active-indicator-height: 2px;
+  --chotto-stickerpicker-tab-active-indicator-color: #525252;
+  --chotto-stickerpicker-tab-active-indicator-border-radius: 1px;
+
+  // StickerPicker tab icon variables
+  --chotto-stickerpicker-tab-icon-width: 100%;
+  --chotto-stickerpicker-tab-icon-height: 100%;
+  --chotto-stickerpicker-tab-icon-object-fit: contain;
+  --chotto-stickerpicker-tab-icon-display: block;
+
+  // StickerPicker tab icon placeholder variables
+  --chotto-stickerpicker-tab-icon-placeholder-width: 20px;
+  --chotto-stickerpicker-tab-icon-placeholder-height: 20px;
+  --chotto-stickerpicker-tab-icon-placeholder-display: flex;
+  --chotto-stickerpicker-tab-icon-placeholder-align-items: center;
+  --chotto-stickerpicker-tab-icon-placeholder-justify-content: center;
+  --chotto-stickerpicker-tab-icon-placeholder-color: #999;
+
+  // StickerPicker preview variables
+  --chotto-stickerpicker-preview-position: fixed;
+  --chotto-stickerpicker-preview-z-index: 10000;
+  --chotto-stickerpicker-preview-pointer-events: auto;
+  --chotto-stickerpicker-preview-cursor: pointer;
+  --chotto-stickerpicker-preview-background-color: rgba(255, 255, 255, 0.95);
+  --chotto-stickerpicker-preview-border-radius: 12px;
+  --chotto-stickerpicker-preview-padding: 12px;
+  --chotto-stickerpicker-preview-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --chotto-stickerpicker-preview-display: flex;
+  --chotto-stickerpicker-preview-flex-direction: column;
+  --chotto-stickerpicker-preview-align-items: center;
+  --chotto-stickerpicker-preview-gap: 8px;
+  --chotto-stickerpicker-preview-min-width: 200px;
+  --chotto-stickerpicker-preview-max-width: 300px;
+  --chotto-stickerpicker-preview-left: 50%;
+  --chotto-stickerpicker-preview-top: 50%;
+  --chotto-stickerpicker-preview-transform: translate(-50%, -50%);
+
+  // StickerPicker preview image variables
+  --chotto-stickerpicker-preview-image-width: 200px;
+  --chotto-stickerpicker-preview-image-height: 200px;
+  --chotto-stickerpicker-preview-image-object-fit: contain;
+  --chotto-stickerpicker-preview-image-display: block;
+
+  // StickerPicker preview label variables
+  --chotto-stickerpicker-preview-label-color: #333333;
+  --chotto-stickerpicker-preview-label-font-size: 12px;
+  --chotto-stickerpicker-preview-label-text-align: center;
+  --chotto-stickerpicker-preview-label-word-wrap: break-word;
+  --chotto-stickerpicker-preview-label-max-width: 100%;
+
+  // StickerPicker preview animation variables
+  --chotto-stickerpicker-preview-transition: opacity 0.2s ease, transform 0.2s ease;
+  --chotto-stickerpicker-preview-enter-opacity: 0;
+  --chotto-stickerpicker-preview-enter-transform: translate(-50%, -50%) scale(0.9);
+  --chotto-stickerpicker-preview-enter-to-opacity: 1;
+  --chotto-stickerpicker-preview-enter-to-transform: translate(-50%, -50%) scale(1);
+}
+

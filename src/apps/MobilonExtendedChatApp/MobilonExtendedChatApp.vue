@@ -220,8 +220,12 @@
                       :elevated-window="false"
                     />
                     <ButtonEmojiPicker
-                      :mode="'hover'"
+                      :mode="'click'"
                       :native="true"
+                    />
+                    <StickerPicker
+                      :mode="'click'"
+                      :stickers="stickers"
                     />
                   </template>
                   <!--template #buttons>
@@ -322,6 +326,7 @@ import {
   ButtonTemplateSelector,
   // ButtonWabaTemplateSelector,
   ButtonEmojiPicker,
+  StickerPicker,
   FileUploader,
   FeedSearch,
   // ChannelSelector,
@@ -341,6 +346,16 @@ import { transformToFeed } from "../transform/transformToFeed";
 
 import { useModalCreateDialog, useModalSelectUser2, useModalCreateChat2 } from "@/hooks";
 import { themes as themesData } from '../data';
+import {
+  approveSticker,
+  callSticker,
+  dealSticker,
+  docsSticker,
+  goodDaySticker,
+  helpSticker,
+  soonSticker,
+  thxSticker,
+} from '../data/images/stickers';
 
 import { useChatValidator, 
   useMessageValidator, useSidebarValidator,
@@ -433,6 +448,64 @@ const templates = ref([]);
 const wabaTemplates = ref([])
 const groupTemplates = ref([])
 const sidebarItems = ref([]);
+const stickers = ref([
+  [
+    { url: approveSticker, alt: '✔' },
+    { url: callSticker, alt: '📱' },
+    { url: dealSticker, alt: '👍' },
+    { url: docsSticker, alt: '📄' },
+    { url: goodDaySticker, alt: '🙋‍♀️' },
+    { url: helpSticker, alt: '🆘' },
+    { url: soonSticker, alt: '🔜' },
+    { url: thxSticker, alt: '🙏' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/FF6B6B/FFFFFF?text=M', alt: '😊' },
+    { url: 'https://placehold.co/100x100/4ECDC4/FFFFFF?text=S', alt: '😄' },
+    { url: 'https://placehold.co/100x100/45B7D1/FFFFFF?text=H', alt: '❤️' },
+    { url: 'https://placehold.co/100x100/FFA07A/FFFFFF?text=T', alt: '👍' },
+    { url: 'https://placehold.co/100x100/98D8C8/FFFFFF?text=P', alt: '🎉' },
+    { url: 'https://placehold.co/100x100/9B59B6/FFFFFF?text=H', alt: '💜' },
+    { url: 'https://placehold.co/100x100/E74C3C/FFFFFF?text=T', alt: '🔥' },
+    { url: 'https://placehold.co/100x100/3498DB/FFFFFF?text=P', alt: '⭐' },
+    { url: 'https://placehold.co/100x100/2ECC71/FFFFFF?text=H', alt: '💚' },
+    { url: 'https://placehold.co/100x100/F39C12/FFFFFF?text=T', alt: '🌟' },
+    { url: 'https://placehold.co/100x100/1ABC9C/FFFFFF?text=P', alt: '🎈' },
+    { url: 'https://placehold.co/100x100/E67E22/FFFFFF?text=H', alt: '🎂' },
+    { url: 'https://placehold.co/100x100/34495E/FFFFFF?text=T', alt: '💙' },
+    { url: 'https://placehold.co/100x100/16A085/FFFFFF?text=P', alt: '🎁' },
+    { url: 'https://placehold.co/100x100/27AE60/FFFFFF?text=H', alt: '💛' },
+    { url: 'https://placehold.co/100x100/2980B9/FFFFFF?text=T', alt: '🚀' },
+    { url: 'https://placehold.co/100x100/8E44AD/FFFFFF?text=P', alt: '🎨' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/C0392B/FFFFFF?text=O', alt: '😍' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/D35400/FFFFFF?text=B', alt: '🤗' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/27AE60/FFFFFF?text=I', alt: '😎' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/2980B9/FFFFFF?text=L', alt: '🥳' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/8E44AD/FFFFFF?text=O', alt: '💖' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/16A085/FFFFFF?text=N', alt: '🎊' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/E67E22/FFFFFF?text=O', alt: '🎯' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/34495E/FFFFFF?text=O', alt: '💝' },
+  ],
+  [
+    { url: 'https://placehold.co/100x100/F39C12/FFFFFF?text=O', alt: '🌈' },
+  ],
+]);
 
 // Предоставляем channels и selectedChat для дочерних компонентов через provide
 provide('channels', channels);

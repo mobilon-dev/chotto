@@ -1,0 +1,1 @@
+export { default as StickerIcon } from './StickerIcon.vue';
