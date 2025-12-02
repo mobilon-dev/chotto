@@ -35,9 +35,21 @@
             class="sticker-picker__tab"
             :class="{ 'sticker-picker__tab--active': activeTabIndex === tabIndex }"
             @click="activeTabIndex = tabIndex"
+            @mouseenter="handleTabMouseEnter(tabIndex)"
+            @mouseleave="handleTabMouseLeave(tabIndex)"
           >
+            <!-- TGS анимированные стикеры для иконок вкладок -->
+            <tgs-player
+              v-if="tab.iconUrl && isAnimatedSticker(tab.iconUrl) && tgsLibsLoaded"
+              :ref="el => setTgsTabPlayerRef(tabIndex, el)"
+              :src="tab.iconUrl"
+              class="sticker-picker__tab-icon sticker-picker__tab-icon-animated"
+              loop
+              mode="normal"
+            />
+            <!-- WebP и другие статические стикеры для иконок вкладок -->
             <img
-              v-if="tab.iconUrl"
+              v-else-if="tab.iconUrl"
               :src="tab.iconUrl"
               :alt="tab.label || `Tab ${tabIndex + 1}`"
               class="sticker-picker__tab-icon"
@@ -70,12 +82,24 @@
               @click="handleStickerClick(sticker, $event)"
               @mousedown="handleStickerMouseDown(sticker, $event)"
               @mouseup="handleStickerMouseUp"
+              @mouseenter="handleStickerMouseEnter(sticker, index)"
               @mouseleave="handleStickerMouseLeave"
               @touchstart="handleStickerTouchStart(sticker, $event)"
               @touchend="handleStickerTouchEnd"
               @touchcancel="handleStickerTouchEnd"
             >
+              <!-- TGS анимированные стикеры -->
+              <tgs-player
+                v-if="isTgsSticker(sticker) && tgsLibsLoaded"
+                :ref="el => setTgsPlayerRef(index, el)"
+                :src="sticker.url"
+                class="sticker-picker__image sticker-picker__image-animated"
+                loop
+                mode="normal"
+              />
+              <!-- WebP и другие статические стикеры -->
               <img
+                v-else
                 :src="sticker.url"
                 :alt="sticker.alt || `Sticker ${index + 1}`"
                 class="sticker-picker__image"
@@ -96,7 +120,18 @@
       :style="previewStyle"
       @click="handlePreviewClick"
     >
+      <!-- TGS анимированные стикеры -->
+      <tgs-player
+        v-if="isTgsSticker(previewSticker) && tgsLibsLoaded"
+        :src="previewSticker.url"
+        class="sticker-picker__preview-image sticker-picker__preview-image-animated"
+        autoplay
+        loop
+        mode="normal"
+      />
+      <!-- WebP и другие статические стикеры -->
       <img
+        v-else
         :src="previewSticker.url"
         :alt="previewSticker.alt || 'Preview'"
         class="sticker-picker__preview-image"
@@ -115,6 +150,8 @@
 import { onMounted, onUnmounted, ref, inject, computed, watch } from 'vue';
 import { useMessageDraft } from '@/hooks';
 import { StickerIcon } from './icons';
+import { isAnimatedSticker } from '@/components/2_feed_elements/StickerMessage/utils/stickerUtils';
+import '@/components/2_feed_elements/StickerMessage/utils/suppress-lit-warning';
 
 const props = defineProps({
   state: {
@@ -156,9 +193,36 @@ const longPressDelay = 500; // 500ms для долгого нажатия
 const isLongPress = ref(false);
 const currentStickerElement = ref(null);
 
+// Хранилище ссылок на tgs-player элементы для управления анимацией
+const tgsPlayerRefs = ref(new Map());
+// Хранилище ссылок на tgs-player элементы вкладок для управления анимацией
+const tgsTabPlayerRefs = ref(new Map());
+
 // Вспомогательные флаги для hover-режима
 let isMouseOverButton = false;
 let isMouseOverPicker = false;
+
+// Оптимизация: динамическая загрузка библиотек TGS только при необходимости
+// Библиотеки tgs-player и lottie-player весят ~700KB, поэтому загружаем их только
+// когда в стикерах действительно есть TGS файлы
+const tgsLibsLoaded = ref(false);
+const tgsLibsLoading = ref(false);
+
+// Динамическая загрузка библиотек TGS только при необходимости
+async function loadTgsLibs() {
+  if (tgsLibsLoaded.value || tgsLibsLoading.value) return;
+  
+  tgsLibsLoading.value = true;
+  try {
+    await import('@/components/2_feed_elements/StickerMessage/libs/tgs-player/lottie-player.esm.js');
+    await import('@/components/2_feed_elements/StickerMessage/libs/tgs-player/tgs-player.esm.js');
+    tgsLibsLoaded.value = true;
+  } catch (error) {
+    console.error('Failed to load TGS libraries:', error);
+  } finally {
+    tgsLibsLoading.value = false;
+  }
+}
 
 // Нормализация данных стикеров
 const normalizeStickerData = () => {
@@ -213,6 +277,70 @@ const stickerTabs = computed(() => stickerData.value.tabs);
 const currentStickers = computed(() => {
   if (stickerTabs.value.length === 0) return [];
   return stickerTabs.value[activeTabIndex.value]?.stickers || [];
+});
+
+// Проверяем, есть ли TGS файлы в стикерах (включая иконки вкладок)
+const hasTgsStickers = computed(() => {
+  // Проверяем текущие стикеры
+  const hasTgsInCurrentStickers = currentStickers.value.some(sticker => isAnimatedSticker(sticker.url));
+  
+  // Проверяем иконки вкладок
+  const hasTgsInTabIcons = stickerTabs.value.some(tab => tab.iconUrl && isAnimatedSticker(tab.iconUrl));
+  
+  return hasTgsInCurrentStickers || hasTgsInTabIcons;
+});
+
+// Загружаем библиотеки TGS при необходимости
+watch(hasTgsStickers, (needsTgs) => {
+  if (needsTgs && !tgsLibsLoaded.value) {
+    loadTgsLibs();
+  }
+}, { immediate: true });
+
+// Функция для проверки, является ли стикер TGS файлом
+const isTgsSticker = (sticker) => {
+  return isAnimatedSticker(sticker.url);
+};
+
+// Установка ref для tgs-player элемента
+const setTgsPlayerRef = (index, el) => {
+  if (el) {
+    tgsPlayerRefs.value.set(index, el);
+  } else {
+    tgsPlayerRefs.value.delete(index);
+  }
+};
+
+// Установка ref для tgs-player элемента вкладки
+const setTgsTabPlayerRef = (tabIndex, el) => {
+  if (el) {
+    tgsTabPlayerRefs.value.set(tabIndex, el);
+  } else {
+    tgsTabPlayerRefs.value.delete(tabIndex);
+  }
+};
+
+// Обработка наведения на вкладку
+const handleTabMouseEnter = (tabIndex) => {
+  // Запускаем анимацию TGS иконки вкладки при наведении
+  const player = tgsTabPlayerRefs.value.get(tabIndex);
+  if (player && typeof player.play === 'function') {
+    player.play();
+  }
+};
+
+// Обработка ухода курсора с вкладки
+const handleTabMouseLeave = (tabIndex) => {
+  // Останавливаем анимацию TGS иконки вкладки при уходе курсора
+  const player = tgsTabPlayerRefs.value.get(tabIndex);
+  if (player && typeof player.pause === 'function') {
+    player.pause();
+  }
+};
+
+// Очистка refs при смене вкладки
+watch(activeTabIndex, () => {
+  tgsPlayerRefs.value.clear();
 });
 
 // Сброс активной вкладки при изменении данных
@@ -284,7 +412,24 @@ const handleStickerMouseUp = () => {
   }
 };
 
+const handleStickerMouseEnter = (sticker, index) => {
+  // Запускаем анимацию TGS стикера при наведении
+  if (isTgsSticker(sticker) && tgsLibsLoaded.value) {
+    const player = tgsPlayerRefs.value.get(index);
+    if (player && typeof player.play === 'function') {
+      player.play();
+    }
+  }
+};
+
 const handleStickerMouseLeave = () => {
+  // Останавливаем анимацию всех TGS стикеров при уходе курсора
+  tgsPlayerRefs.value.forEach((player) => {
+    if (player && typeof player.pause === 'function') {
+      player.pause();
+    }
+  });
+  
   // Если это долгое нажатие и предпросмотр показан, не скрываем его
   // (пользователь может двигать мышью, и курсор может быть над предпросмотром)
   if (isLongPress.value && previewSticker.value) {
@@ -354,6 +499,18 @@ const openPicker = () => {
 
 // Общая функция закрытия
 const closePicker = () => {
+  // Останавливаем все анимации TGS стикеров при закрытии пикера
+  tgsPlayerRefs.value.forEach((player) => {
+    if (player && typeof player.pause === 'function') {
+      player.pause();
+    }
+  });
+  // Останавливаем все анимации TGS иконок вкладок при закрытии пикера
+  tgsTabPlayerRefs.value.forEach((player) => {
+    if (player && typeof player.pause === 'function') {
+      player.pause();
+    }
+  });
   isStickerPickerVisible.value = false;
 };
 
@@ -451,6 +608,11 @@ const handleGlobalMouseUp = () => {
 onMounted(() => {
   document.addEventListener('click', handleClickOutside);
   document.addEventListener('mouseup', handleGlobalMouseUp);
+  
+  // Загружаем библиотеки TGS при монтировании, если есть TGS стикеры
+  if (hasTgsStickers.value && !tgsLibsLoaded.value) {
+    loadTgsLibs();
+  }
 });
 
 onUnmounted(() => {
@@ -458,6 +620,22 @@ onUnmounted(() => {
   document.removeEventListener('mouseup', handleGlobalMouseUp);
   clearLongPressTimer();
   hidePreview();
+  
+  // Останавливаем все анимации TGS стикеров при размонтировании
+  tgsPlayerRefs.value.forEach((player) => {
+    if (player && typeof player.pause === 'function') {
+      player.pause();
+    }
+  });
+  tgsPlayerRefs.value.clear();
+  
+  // Останавливаем все анимации TGS иконок вкладок при размонтировании
+  tgsTabPlayerRefs.value.forEach((player) => {
+    if (player && typeof player.pause === 'function') {
+      player.pause();
+    }
+  });
+  tgsTabPlayerRefs.value.clear();
 });
 </script>
 

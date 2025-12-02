@@ -73,6 +73,10 @@
   --chotto-stickerpicker-image-object-fit: contain;
   --chotto-stickerpicker-image-display: block;
 
+  // StickerPicker image animated (TGS) variables
+  --chotto-stickerpicker-image-animated-width: 100%;
+  --chotto-stickerpicker-image-animated-height: 100%;
+
   // StickerPicker tabs variables
   --chotto-stickerpicker-tabs-display: flex;
   --chotto-stickerpicker-tabs-gap: 4px;
@@ -117,6 +121,10 @@
   --chotto-stickerpicker-tab-icon-object-fit: contain;
   --chotto-stickerpicker-tab-icon-display: block;
 
+  // StickerPicker tab icon animated (TGS) variables
+  --chotto-stickerpicker-tab-icon-animated-width: 100%;
+  --chotto-stickerpicker-tab-icon-animated-height: 100%;
+
   // StickerPicker tab icon placeholder variables
   --chotto-stickerpicker-tab-icon-placeholder-width: 20px;
   --chotto-stickerpicker-tab-icon-placeholder-height: 20px;
@@ -149,6 +157,10 @@
   --chotto-stickerpicker-preview-image-height: 200px;
   --chotto-stickerpicker-preview-image-object-fit: contain;
   --chotto-stickerpicker-preview-image-display: block;
+
+  // StickerPicker preview image animated (TGS) variables
+  --chotto-stickerpicker-preview-image-animated-width: 200px;
+  --chotto-stickerpicker-preview-image-animated-height: 200px;
 
   // StickerPicker preview label variables
   --chotto-stickerpicker-preview-label-color: #333333;

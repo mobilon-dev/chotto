@@ -357,6 +357,17 @@ import {
   thxSticker,
 } from '../data/images/stickers';
 
+import {
+  fireDevilSticker,
+  fireHiSticker,
+  fireLolSticker,
+  fireScreamingSticker,
+  fireSmokeSticker,
+  fireThumbsUpSticker,
+  fireTypingSticker,
+  fireYesSticker,
+} from '../data/images/stickers/animated';
+
 import { useChatValidator, 
   useMessageValidator, useSidebarValidator,
 } from "@/hooks/validators";
@@ -460,6 +471,16 @@ const stickers = ref([
     { url: thxSticker, alt: '🙏' },
   ],
   [
+    { url: fireDevilSticker, alt: '😈' },
+    { url: fireHiSticker, alt: '👋' },
+    { url: fireLolSticker, alt: '😂' },
+    { url: fireScreamingSticker, alt: '😱' },
+    { url: fireSmokeSticker, alt: '💨' },
+    { url: fireThumbsUpSticker, alt: '👍' },
+    { url: fireTypingSticker, alt: '⌨️' },
+    { url: fireYesSticker, alt: '✅' },
+  ],
+  [
     { url: 'https://placehold.co/100x100/FF6B6B/FFFFFF?text=M', alt: '😊' },
     { url: 'https://placehold.co/100x100/4ECDC4/FFFFFF?text=S', alt: '😄' },
     { url: 'https://placehold.co/100x100/45B7D1/FFFFFF?text=H', alt: '❤️' },
@@ -495,15 +516,6 @@ const stickers = ref([
   ],
   [
     { url: 'https://placehold.co/100x100/16A085/FFFFFF?text=N', alt: '🎊' },
-  ],
-  [
-    { url: 'https://placehold.co/100x100/E67E22/FFFFFF?text=O', alt: '🎯' },
-  ],
-  [
-    { url: 'https://placehold.co/100x100/34495E/FFFFFF?text=O', alt: '💝' },
-  ],
-  [
-    { url: 'https://placehold.co/100x100/F39C12/FFFFFF?text=O', alt: '🌈' },
   ],
 ]);
 

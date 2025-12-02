@@ -132,6 +132,12 @@ export interface StickerPickerThemeCSSVariables {
   /** Отображение изображения */
   '--chotto-stickerpicker-image-display': string;
 
+  // Image animated (TGS)
+  /** Ширина анимированного изображения (TGS) */
+  '--chotto-stickerpicker-image-animated-width': string;
+  /** Высота анимированного изображения (TGS) */
+  '--chotto-stickerpicker-image-animated-height': string;
+
   // Tabs
   /** Отображение вкладок */
   '--chotto-stickerpicker-tabs-display': string;
@@ -212,6 +218,12 @@ export interface StickerPickerThemeCSSVariables {
   /** Отображение иконки вкладки */
   '--chotto-stickerpicker-tab-icon-display': string;
 
+  // Tab icon animated (TGS)
+  /** Ширина анимированной иконки вкладки (TGS) */
+  '--chotto-stickerpicker-tab-icon-animated-width': string;
+  /** Высота анимированной иконки вкладки (TGS) */
+  '--chotto-stickerpicker-tab-icon-animated-height': string;
+
   // Tab icon placeholder
   /** Ширина плейсхолдера иконки вкладки */
   '--chotto-stickerpicker-tab-icon-placeholder-width': string;
@@ -271,6 +283,12 @@ export interface StickerPickerThemeCSSVariables {
   '--chotto-stickerpicker-preview-image-object-fit': string;
   /** Отображение изображения предпросмотра */
   '--chotto-stickerpicker-preview-image-display': string;
+
+  // Preview image animated (TGS)
+  /** Ширина анимированного изображения предпросмотра (TGS) */
+  '--chotto-stickerpicker-preview-image-animated-width': string;
+  /** Высота анимированного изображения предпросмотра (TGS) */
+  '--chotto-stickerpicker-preview-image-animated-height': string;
 
   // Preview label
   /** Цвет текста метки предпросмотра */
