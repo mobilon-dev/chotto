@@ -1,0 +1,27 @@
+[data-theme="glass"] {
+  // VideoRecorder container variables
+  --chotto-videorecorder-container-position: relative;
+  --chotto-videorecorder-container-display: grid;
+  --chotto-videorecorder-container-align-items: center;
+  --chotto-videorecorder-container-background-color: transparent;
+  --chotto-videorecorder-container-height: fit-content;
+
+  // VideoRecorder button variables
+  --chotto-videorecorder-button-background-color: transparent;
+  --chotto-videorecorder-button-border: 0px;
+
+  // VideoRecorder button span variables
+  --chotto-videorecorder-button-span-display: block;
+  --chotto-videorecorder-button-span-cursor: pointer;
+  --chotto-videorecorder-button-span-padding: 1px 0 0 3px;
+  --chotto-videorecorder-button-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-videorecorder-button-span-color: var(--chotto-theme-button-color-active);
+
+  // VideoRecorder button hover variables
+  --chotto-videorecorder-button-hover-span-color: var(--chotto-theme-button-color-hover);
+
+  // VideoRecorder button disabled variables
+  --chotto-videorecorder-button-disabled-pointer-events: none;
+  --chotto-videorecorder-button-disabled-span-cursor: auto;
+  --chotto-videorecorder-button-disabled-span-color: var(--chotto-theme-button-color-disabled);
+}

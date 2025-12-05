@@ -1,0 +1,219 @@
+[data-theme="glass"] {
+  // Main container
+  --chotto-templateselector-position: absolute;
+  --chotto-templateselector-bottom: 100%;
+  --chotto-templateselector-left: 0;
+  --chotto-templateselector-right: 0;
+  --chotto-templateselector-z-index: 100;
+  --chotto-templateselector-container: templates / inline-size;
+  --chotto-templateselector-primary-color: var(--chotto-theme-primary-color);
+  --chotto-templateselector-item-border-color: var(--chotto-theme-item-border-color);
+
+  // Container inline
+  --chotto-templateselector-container-inline-max-height: 500px;
+  --chotto-templateselector-container-inline-padding: 16px 5px 5px 5px;
+  --chotto-templateselector-container-inline-border-top: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-templateselector-container-inline-border-bottom: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-templateselector-container-inline-box-sizing: border-box;
+  --chotto-templateselector-container-inline-min-width: 478px;
+
+  // Container elevated
+  --chotto-templateselector-container-elevated-position: absolute;
+  --chotto-templateselector-container-elevated-max-height: 500px;
+  --chotto-templateselector-container-elevated-padding: 16px 5px 5px 5px;
+  --chotto-templateselector-container-elevated-border: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-templateselector-container-elevated-min-width: 478px;
+  --chotto-templateselector-container-elevated-box-shadow: 5px 5px 29px -15px var(--chotto-theme-shadow-color);
+  --chotto-templateselector-container-elevated-bottom: 20px;
+  --chotto-templateselector-container-elevated-right: 20px;
+  --chotto-templateselector-shadow-color: var(--chotto-theme-shadow-color);
+
+  // Layout
+  --chotto-templateselector-layout-max-height: 400px;
+  --chotto-templateselector-layout-display: grid;
+  --chotto-templateselector-layout-box-sizing: border-box;
+  --chotto-templateselector-layout-grid-template-columns: 0.5fr 1.3fr 1fr;
+  --chotto-templateselector-layout-grid-template-rows: min-content min-content 1fr min-content;
+  --chotto-templateselector-layout-column-gap: 5px;
+
+  // First column
+  --chotto-templateselector-first-col-display: grid;
+  --chotto-templateselector-first-col-grid-column: 1;
+  --chotto-templateselector-first-col-grid-row: 2 / 5;
+  --chotto-templateselector-first-col-grid-template-rows: min-content auto;
+
+  // Second column
+  --chotto-templateselector-second-col-display: grid;
+  --chotto-templateselector-second-col-grid-column: 2;
+  --chotto-templateselector-second-col-grid-row: 2 / 5;
+  --chotto-templateselector-second-col-grid-template-rows: min-content min-content auto;
+
+  // Third column
+  --chotto-templateselector-third-col-display: grid;
+  --chotto-templateselector-third-col-grid-column: 3;
+  --chotto-templateselector-third-col-grid-row: 2 / 5;
+  --chotto-templateselector-third-col-grid-template-rows: min-content auto min-content;
+
+  // Button close
+  --chotto-templateselector-button-close-grid-row: 1;
+  --chotto-templateselector-button-close-align-self: flex-start;
+  --chotto-templateselector-button-close-display: block;
+  --chotto-templateselector-button-close-background-color: transparent;
+  --chotto-templateselector-button-close-border: none;
+  --chotto-templateselector-button-close-width: fit-content;
+  --chotto-templateselector-button-close-cursor: pointer;
+  --chotto-templateselector-button-close-margin: 0 16px 20px auto;
+  --chotto-templateselector-button-icon-size: var(--chotto-theme-button-icon-size);
+  --chotto-templateselector-button-color-active: var(--chotto-theme-button-color-active);
+
+  // List groups
+  --chotto-templateselector-list-groups-grid-row: 2;
+  --chotto-templateselector-list-groups-overflow-y: auto;
+  --chotto-templateselector-list-groups-border: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-templateselector-list-groups-padding: 0;
+  --chotto-templateselector-list-groups-margin: 0;
+  --chotto-templateselector-list-groups-webkit-scrollbar-width: 6px;
+  --chotto-templateselector-list-groups-webkit-scrollbar-thumb-border-radius: 10px;
+  --chotto-templateselector-list-groups-webkit-scrollbar-track-border-radius: 10px;
+  --chotto-templateselector-scrollbar-bg: var(--chotto-theme-scrollbar-bg);
+  --chotto-templateselector-scrollbar-thumb-bg: var(--chotto-theme-scrollbar-thumb-bg);
+
+  // List templates
+  --chotto-templateselector-list-templates-padding: 0;
+  --chotto-templateselector-list-templates-margin: 0;
+
+  // Templates
+  --chotto-templateselector-templates-grid-row: 3;
+  --chotto-templateselector-templates-border: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-templateselector-templates-overflow-y: auto;
+  --chotto-templateselector-templates-webkit-scrollbar-width: 6px;
+  --chotto-templateselector-templates-webkit-scrollbar-thumb-border-radius: 10px;
+  --chotto-templateselector-templates-webkit-scrollbar-track-border-radius: 10px;
+
+  // Items
+  --chotto-templateselector-item-transition: 0.2s;
+  --chotto-templateselector-item-border-bottom: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-templateselector-item-background-color-hover: var(--chotto-theme-item-background-color-hover);
+  --chotto-templateselector-item-background-color-focus: var(--chotto-theme-item-background-color-focus);
+
+  // Item group
+  --chotto-templateselector-item-group-display: flex;
+  --chotto-templateselector-item-group-align-items: center;
+
+  // Item template
+  --chotto-templateselector-item-template-cursor: pointer;
+  --chotto-templateselector-item-template-padding: 10px 12px;
+
+  // Label group
+  --chotto-templateselector-label-group-padding: 10px 12px;
+  --chotto-templateselector-label-group-display: flex;
+  --chotto-templateselector-label-group-align-items: center;
+  --chotto-templateselector-label-group-column-gap: 10px;
+  --chotto-templateselector-label-group-width: 100%;
+  --chotto-templateselector-label-group-height: 100%;
+  --chotto-templateselector-label-group-cursor: pointer;
+  --chotto-templateselector-label-group-img-width: 30px;
+  --chotto-templateselector-label-group-img-height: 30px;
+  --chotto-templateselector-label-group-input-display: none;
+  --chotto-templateselector-label-group-span-line-height: 1;
+
+  // Item title
+  --chotto-templateselector-item-title-margin-bottom: 8px;
+  --chotto-templateselector-title-font-weight: var(--chotto-theme-title-font-weight);
+  --chotto-templateselector-title-font-size: var(--chotto-theme-title-font-size);
+
+  // Item text
+  --chotto-templateselector-item-text-overflow: hidden;
+  --chotto-templateselector-item-text-text-overflow: ellipsis;
+  --chotto-templateselector-item-text-display: -webkit-box;
+  --chotto-templateselector-item-text-webkit-line-clamp: 3;
+  --chotto-templateselector-item-text-line-clamp: 3;
+  --chotto-templateselector-item-text-webkit-box-orient: vertical;
+  --chotto-templateselector-text-font-size: var(--chotto-theme-text-font-size);
+
+  // Searching container
+  --chotto-templateselector-searching-container-grid-row: 2;
+  --chotto-templateselector-searching-container-width: 100%;
+  --chotto-templateselector-searching-container-margin-bottom: 16px;
+  --chotto-templateselector-searching-container-margin-right: 10px;
+
+  // Searching input
+  --chotto-templateselector-searching-input-background-color: transparent;
+  --chotto-templateselector-searching-input-width: 100%;
+  --chotto-templateselector-searching-input-transition: border-color 0.2s;
+  --chotto-templateselector-searching-input-box-sizing: border-box;
+  --chotto-templateselector-searching-input-focus-outline: none;
+  --chotto-templateselector-primary-text-color: var(--chotto-theme-primary-text-color);
+  --chotto-templateselector-secondary-text-color: var(--chotto-theme-secondary-text-color);
+
+  // Preview container
+  --chotto-templateselector-preview-container-grid-row: 2;
+  --chotto-templateselector-preview-container-border: 1px solid var(--chotto-theme-item-border-color);
+  --chotto-templateselector-preview-container-max-height: 375px;
+  --chotto-templateselector-preview-container-overflow-y: auto;
+  --chotto-templateselector-preview-container-webkit-scrollbar-width: 6px;
+  --chotto-templateselector-preview-container-webkit-scrollbar-thumb-border-radius: 10px;
+  --chotto-templateselector-preview-container-webkit-scrollbar-track-border-radius: 10px;
+  --chotto-templateselector-secondary-color: var(--chotto-theme-secondary-color);
+
+  // Preview
+  --chotto-templateselector-preview-height: 100%;
+  --chotto-templateselector-preview-box-sizing: border-box;
+  --chotto-templateselector-preview-padding: 5px;
+
+  // Preview wrapper
+  --chotto-templateselector-preview-wrapper-padding: 10px 10px 4px 16px;
+  --chotto-templateselector-preview-wrapper-border-radius: 14px;
+  --chotto-templateselector-preview-wrapper-max-width: 90%;
+  --chotto-templateselector-preview-wrapper-margin-bottom: 15px;
+  --chotto-templateselector-message-left-bg: var(--chotto-theme-message-left-bg);
+
+  // Plug
+  --chotto-templateselector-plug-width: 100%;
+  --chotto-templateselector-plug-height: 100%;
+  --chotto-templateselector-plug-display: flex;
+  --chotto-templateselector-plug-justify-content: center;
+  --chotto-templateselector-plug-align-items: center;
+  --chotto-templateselector-plug-padding: 0;
+  --chotto-templateselector-plug-margin: 0;
+  --chotto-templateselector-plug-line-height: 20;
+
+  // Preview text
+  --chotto-templateselector-preview-text-word-break: break-word;
+  --chotto-templateselector-preview-text-white-space: pre-line;
+
+  // Preview time
+  --chotto-templateselector-preview-time-width: fit-content;
+  --chotto-templateselector-preview-time-margin-left: auto;
+  --chotto-templateselector-additional-text-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-templateselector-secondary-text-color: var(--chotto-theme-secondary-text-color);
+
+  // Button paste
+  --chotto-templateselector-button-paste-grid-row: 3;
+  --chotto-templateselector-button-paste-display: block;
+  --chotto-templateselector-button-paste-width: fit-content;
+  --chotto-templateselector-button-paste-justify-self: flex-end;
+  --chotto-templateselector-button-paste-margin: 16px 0 0 0;
+  --chotto-templateselector-button-paste-border: none;
+  --chotto-templateselector-button-paste-padding: 8px 16px;
+  --chotto-templateselector-button-paste-border-radius: 10px;
+  --chotto-templateselector-button-paste-cursor: pointer;
+  --chotto-templateselector-title-font-size: var(--chotto-theme-title-font-size);
+  --chotto-templateselector-action-button-color-active: var(--chotto-theme-action-button-color-active);
+  --chotto-templateselector-action-button-color-hover: var(--chotto-theme-action-button-color-hover);
+
+  // Input styling
+  --chotto-templateselector-input-font-size: var(--chotto-theme-text-font-size);
+  --chotto-templateselector-input-border-color-hover: var(--chotto-theme-quaternary-color);
+  --chotto-templateselector-input-border-color-focus: var(--chotto-theme-quinary-color);
+  --chotto-templateselector-input-padding: 0.5rem 0.75rem;
+  --chotto-templateselector-input-border-radius: 5px;
+  --chotto-templateselector-input-border-color: #d0d0d0;
+
+  // Responsive layout
+  --chotto-templateselector-layout-responsive-grid-template-columns: 1fr;
+  --chotto-templateselector-first-col-responsive-grid-column: 1;
+  --chotto-templateselector-second-col-responsive-grid-column: 1;
+  --chotto-templateselector-third-col-responsive-grid-column: 1;
+}
+

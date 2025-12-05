@@ -1,0 +1,26 @@
+[data-theme="glass"] {
+  // ChatWrapper main variables
+  --chotto-chatwrapper-display: flex;
+  --chotto-chatwrapper-height: 100%;
+  --chotto-chatwrapper-width: 100%;
+  --chotto-chatwrapper-align-items: stretch;
+
+  // ChatWrapper selected-chat variables
+  --chotto-chatwrapper-selected-chat-height: 100%;
+  --chotto-chatwrapper-selected-chat-width: 100%;
+  --chotto-chatwrapper-selected-chat-display: flex;
+  --chotto-chatwrapper-selected-chat-flex-direction: column;
+  --chotto-chatwrapper-selected-chat-align-items: stretch;
+
+  // ChatWrapper chat-panel variables
+  --chotto-chatwrapper-chat-panel-background-color: var(--chotto-theme-primary-color);
+  --chotto-chatwrapper-chat-panel-border-left: 1px solid #e5e5e5;
+  --chotto-chatwrapper-chat-panel-border-right: 1px solid #e5e5e5;
+  --chotto-chatwrapper-chat-panel-border-radius: 0px;
+  --chotto-chatwrapper-chat-panel-position: absolute;
+  --chotto-chatwrapper-chat-panel-height: 100%;
+  --chotto-chatwrapper-chat-panel-z-index: 100;
+  --chotto-chatwrapper-chat-panel-width: 400px;
+  --chotto-chatwrapper-chat-panel-left: 65.3%;
+  --chotto-chatwrapper-chat-panel-padding: 12px;
+}

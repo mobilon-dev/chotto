@@ -1,0 +1,26 @@
+[data-theme="glass"] {
+  // WABAQuickReplyButtons main variables
+  --chotto-wabaquickreplybuttons-padding-bottom: 15px;
+
+  // WABAQuickReplyButtons preview action variables
+  --chotto-wabaquickreplybuttons-preview-action-position: relative;
+  --chotto-wabaquickreplybuttons-preview-action-font-size: var(--chotto-theme-text-font-size);
+  --chotto-wabaquickreplybuttons-preview-action-display: flex;
+  --chotto-wabaquickreplybuttons-preview-action-flex-direction: column;
+  --chotto-wabaquickreplybuttons-preview-action-align-items: center;
+  --chotto-wabaquickreplybuttons-preview-action-color: #10b981;
+
+  // WABAQuickReplyButtons line variables
+  --chotto-wabaquickreplybuttons-line-display: flex;
+  --chotto-wabaquickreplybuttons-line-cursor: pointer;
+  --chotto-wabaquickreplybuttons-line-text-align: center;
+
+  // WABAQuickReplyButtons icon variables
+  --chotto-wabaquickreplybuttons-icon-margin-right: 5px;
+  --chotto-wabaquickreplybuttons-icon-line-height: 19px;
+
+  // WABAQuickReplyButtons separator variables
+  --chotto-wabaquickreplybuttons-separator-height: 1px;
+  --chotto-wabaquickreplybuttons-separator-width: 100%;
+  --chotto-wabaquickreplybuttons-separator-margin: 15px;
+}

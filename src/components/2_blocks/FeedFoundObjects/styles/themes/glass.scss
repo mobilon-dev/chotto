@@ -1,0 +1,24 @@
+[data-theme="glass"] {
+  // Items container
+  --chotto-feedfoundobjects-items-display: flex;
+  --chotto-feedfoundobjects-items-flex-direction: column;
+  --chotto-feedfoundobjects-items-scroll-behavior: smooth;
+  --chotto-feedfoundobjects-items-overflow-y: auto;
+  --chotto-feedfoundobjects-items-overflow-x: hidden;
+  --chotto-feedfoundobjects-items-height: 100%;
+  
+  // Placeholder
+  --chotto-feedfoundobjects-placeholder-height: 100%;
+  --chotto-feedfoundobjects-placeholder-display: flex;
+  --chotto-feedfoundobjects-placeholder-flex-direction: column;
+  --chotto-feedfoundobjects-placeholder-justify: center;
+  --chotto-feedfoundobjects-placeholder-p-text-align: center;
+  
+  // Scrollbar
+  --chotto-feedfoundobjects-scrollbar-width: 6px;
+  --chotto-feedfoundobjects-scrollbar-bg: var(--chotto-theme-scrollbar-bg);
+  --chotto-feedfoundobjects-scrollbar-thumb-radius: 10px;
+  --chotto-feedfoundobjects-scrollbar-thumb-bg: var(--chotto-theme-scrollbar-thumb-bg);
+  --chotto-feedfoundobjects-scrollbar-track-radius: 10px;
+}
+

@@ -1,0 +1,21 @@
+[data-theme="glass"] {
+  // DateMessageSticky container variables
+  --chotto-datemessagesticky-container-position: sticky;
+  --chotto-datemessagesticky-container-top: 10px;
+  --chotto-datemessagesticky-container-height: 0;
+  --chotto-datemessagesticky-container-overflow: visible;
+  --chotto-datemessagesticky-container-display: flex;
+  --chotto-datemessagesticky-container-align-items: center;
+  --chotto-datemessagesticky-container-justify-content: center;
+  --chotto-datemessagesticky-container-z-index: 200;
+  --chotto-datemessagesticky-container-pointer-events: none;
+
+  // DateMessageSticky text variables
+  --chotto-datemessagesticky-text-padding: 4px 11px;
+  --chotto-datemessagesticky-text-border-radius: 4px;
+  --chotto-datemessagesticky-text-box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  --chotto-datemessagesticky-text-font-size: var(--chotto-theme-additional-text-font-size, 14px);
+  --chotto-datemessagesticky-text-background-color: #ffffff;
+  --chotto-datemessagesticky-text-color: var(--chotto-theme-primary-text-color, #1E1E1E);
+
+}

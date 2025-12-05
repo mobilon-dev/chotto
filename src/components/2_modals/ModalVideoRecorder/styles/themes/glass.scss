@@ -1,0 +1,48 @@
+[data-theme="glass"] {
+  --chotto-modalvideorecorder-container-position: relative;
+  --chotto-modalvideorecorder-container-display: grid;
+  --chotto-modalvideorecorder-container-align-items: center;
+  
+  --chotto-modalvideorecorder-view-area-width: 640px;
+  --chotto-modalvideorecorder-view-area-height: 480px;
+  
+  --chotto-modalvideorecorder-controls-display: flex;
+  --chotto-modalvideorecorder-controls-justify-content: space-between;
+  
+  --chotto-modalvideorecorder-recording-container-display: flex;
+  --chotto-modalvideorecorder-recording-container-gap: 3px;
+  
+  --chotto-modalvideorecorder-recording-icon-font-size: 10px;
+  --chotto-modalvideorecorder-recording-icon-animation: blink 3s linear infinite;
+  
+  --chotto-modalvideorecorder-stop-width: 20px;
+  --chotto-modalvideorecorder-stop-height: 20px;
+  --chotto-modalvideorecorder-stop-background-color: #1a1a1a;
+  --chotto-modalvideorecorder-stop-cursor: pointer;
+  --chotto-modalvideorecorder-stop-border-radius: 2px;
+  
+  --chotto-modalvideorecorder-recording-time-margin: auto;
+  
+  --chotto-modalvideorecorder-blink-color-start: #ff6b35;
+  --chotto-modalvideorecorder-blink-color-middle: transparent;
+  --chotto-modalvideorecorder-blink-color-end: #ff6b35;
+  
+  --chotto-modalvideorecorder-button-background-color: transparent;
+  --chotto-modalvideorecorder-button-border: 0px;
+  --chotto-modalvideorecorder-button-span-cursor: pointer;
+  --chotto-modalvideorecorder-button-span-display: block;
+  --chotto-modalvideorecorder-button-icon-size: var(--chotto-theme-button-icon-size);
+  --chotto-modalvideorecorder-button-color-active: var(--chotto-theme-button-color-active);
+  
+  --chotto-modalvideorecorder-header-text-align: right;
+  --chotto-modalvideorecorder-header-width: 100%;
+  
+  --chotto-modalvideorecorder-button-close-span-padding-bottom: 5px;
+  
+  --chotto-modalvideorecorder-button-disabled-cursor: auto;
+  --chotto-modalvideorecorder-button-color-disabled: var(--chotto-theme-button-color-disabled);
+  
+  --chotto-modalvideorecorder-recording-button-cursor: auto;
+  --chotto-modalvideorecorder-recording-button-span-cursor: auto;
+}
+
