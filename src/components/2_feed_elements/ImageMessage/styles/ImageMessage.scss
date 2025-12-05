@@ -241,7 +241,10 @@
 
     .image-message__content {
       grid-column: var(--chotto-imagemessage-left-content-grid-column, 2);
-      background-color: var(--chotto-imagemessage-left-bg, #d4d4d4);
+      background: var(--chotto-imagemessage-left-bg, #d4d4d4);
+      backdrop-filter: var(--chotto-imagemessage-left-backdrop-filter, none);
+      border: var(--chotto-imagemessage-left-border, none);
+      box-shadow: var(--chotto-imagemessage-left-box-shadow, none);
     }
 
     .image-message__content.with-avatar-indent {
@@ -277,7 +280,10 @@
     .image-message__content {
       grid-column: var(--chotto-imagemessage-right-content-grid-column, 1);
       margin-left: var(--chotto-imagemessage-right-content-margin-left, auto);
-      background-color: var(--chotto-imagemessage-right-bg, #a7f3d0);
+      background: var(--chotto-imagemessage-right-bg, #a7f3d0);
+      backdrop-filter: var(--chotto-imagemessage-right-backdrop-filter, none);
+      border: var(--chotto-imagemessage-right-border, none);
+      box-shadow: var(--chotto-imagemessage-right-box-shadow, none);
     }
 
     .image-message__content.with-avatar-indent {

@@ -1,0 +1,27 @@
+[data-theme="glass"] {
+  // DateMessage container variables
+  --chotto-datemessage-container-display: flex;
+  --chotto-datemessage-container-align-items: center;
+  --chotto-datemessage-container-justify-content: center;
+  --chotto-datemessage-container-margin: 0 auto;
+  --chotto-datemessage-container-padding: 6px 18px;
+  --chotto-datemessage-container-margin-bottom: 18px;
+  --chotto-datemessage-container-width: fit-content;
+  --chotto-datemessage-container-background-color: transparent;
+
+  // DateMessage text variables
+  --chotto-datemessage-text-padding: 4px 11px;
+  --chotto-datemessage-text-border-radius: 4px;
+  --chotto-datemessage-text-background-color: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35),
+    rgba(248, 250, 252, 0.20)
+  );
+  --chotto-datemessage-text-backdrop-filter: blur(16px) saturate(180%);
+  --chotto-datemessage-text-border: none;
+  --chotto-datemessage-text-box-shadow: 
+    0 8px 32px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  --chotto-datemessage-text-font-size: 14px;
+  --chotto-datemessage-text-color: #1E1E1E;
+}

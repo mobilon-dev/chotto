@@ -17,6 +17,8 @@ export interface ExtendedLayoutThemeCSSVariables {
   '--chotto-extendedlayout-container-border-top': string;
   /** Левая граница контейнера расширенного макета */
   '--chotto-extendedlayout-container-border-left': string;
+  /** Фон контейнера расширенного макета */
+  '--chotto-extendedlayout-container-background': string;
 
   // First column
   /** Позиционирование первой колонки */
@@ -77,6 +79,8 @@ export interface ExtendedLayoutThemeCSSVariables {
   '--chotto-extendedlayout-third-col-border-bottom': string;
   /** Цвет фона третьей колонки */
   '--chotto-extendedlayout-third-col-background-color': string;
+  /** Эффект размытия фона третьей колонки */
+  '--chotto-extendedlayout-third-col-backdrop-filter': string;
 
   // Transition
   /** Переход для активного состояния Vue Transition */

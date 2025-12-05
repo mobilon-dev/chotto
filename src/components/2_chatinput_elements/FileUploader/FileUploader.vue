@@ -15,12 +15,15 @@
     @button-click="triggerFileUploadDefault"
   > -->
   <span 
+    ref="triggerElement"
     class="file-uploader__trigger"
     :class="{'file-uploader__disabled' : !canUploadFile || state == 'disabled'}"
     :disabled="!canUploadFile || state == 'disabled'"
     @click="triggerFileUploadDefault"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
   >
-    <FileUploaderIcon />
+    <FileUploaderIcon :fill="currentIconColor" />
   </span>
   <!-- </ButtonContextMenu> -->
   <input
@@ -42,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject, onMounted } from "vue";
+import { ref, computed, inject, onMounted, onUnmounted, watchEffect } from "vue";
 // import ButtonContextMenu from "./ButtonContextMenu.vue";
 import FilePreview from '@/components/2_chatinput_elements/FilePreview/FilePreview.vue';
 import { useMessageDraft, uploadFile } from '@/hooks';
@@ -64,9 +67,42 @@ const uploadStatus = ref("");
 
 const fileInput = ref<HTMLInputElement>();
 const fileInfo = ref<IFilePreview>()
+const triggerElement = ref<HTMLElement>()
 
 const chatAppId = inject('chatAppId')
 const { setMessageFile, resetMessageFile, getMessage, setRecordingMessage } = useMessageDraft(chatAppId as string)
+
+const iconFillColor = ref('#5F5F5F');
+const iconHoverColor = ref('#404040');
+const isHovered = ref(false);
+let themeObserver: MutationObserver | null = null;
+
+const updateIconColor = () => {
+  if (!chatAppId) {
+    iconFillColor.value = '#5F5F5F';
+    iconHoverColor.value = '#404040';
+    return;
+  }
+  const element = document.getElementById(chatAppId as string);
+  if (!element) {
+    iconFillColor.value = '#5F5F5F';
+    iconHoverColor.value = '#404040';
+    return;
+  }
+  const computedStyle = window.getComputedStyle(element);
+  const color = computedStyle.getPropertyValue('--chotto-fileuploader-trigger-color').trim();
+  const hoverColor = computedStyle.getPropertyValue('--chotto-fileuploader-trigger-hover-color').trim();
+  iconFillColor.value = color || '#5F5F5F';
+  iconHoverColor.value = hoverColor || '#404040';
+};
+
+const currentIconColor = computed(() => {
+  return isHovered.value ? iconHoverColor.value : iconFillColor.value;
+});
+
+watchEffect(() => {
+  updateIconColor();
+})
 
 // const actions = [
 //   {
@@ -177,6 +213,36 @@ const handleFileUpload = async (file: File) => {
 
 onMounted(() => {
   window.addEventListener('paste', pasteFromClipboard)
+  
+  // Принудительно обновляем цвет после монтирования
+  updateIconColor();
+  
+  // Настраиваем MutationObserver для отслеживания изменений темы
+  if (chatAppId) {
+    const element = document.getElementById(chatAppId as string);
+    if (element) {
+      themeObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+            updateIconColor();
+          }
+        });
+      });
+      
+      themeObserver.observe(element, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+    }
+  }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('paste', pasteFromClipboard);
+  if (themeObserver) {
+    themeObserver.disconnect();
+    themeObserver = null;
+  }
 })
 
 

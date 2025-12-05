@@ -7,6 +7,7 @@
     position: var(--chotto-extendedlayout-container-position, relative);
     border-top: var(--chotto-extendedlayout-container-border-top, none);
     border-left: var(--chotto-extendedlayout-container-border-left, none);
+    background: var(--chotto-extendedlayout-container-background, none);
   }
 
   &__first-col {
@@ -42,7 +43,8 @@
     height: var(--chotto-extendedlayout-third-col-height, inherit);
     border-right: var(--chotto-extendedlayout-third-col-border-right, none);
     border-bottom: var(--chotto-extendedlayout-third-col-border-bottom, none);
-    background-color: var(--chotto-extendedlayout-third-col-background-color, #FAF6F4);
+    background: var(--chotto-extendedlayout-third-col-background-color, #FAF6F4);
+    backdrop-filter: var(--chotto-extendedlayout-third-col-backdrop-filter, none);
   }
 }
 

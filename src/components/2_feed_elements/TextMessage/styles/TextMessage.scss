@@ -19,6 +19,7 @@
     border: var(--chotto-textmessage-left-before-border, 20px solid transparent);
     border-top: var(--chotto-textmessage-left-before-border-top, 15px solid var(--chotto-textmessage-left-bg, #d4d4d4));
     z-index: var(--chotto-textmessage-left-before-z-index, 1);
+    filter: var(--chotto-textmessage-left-before-filter, none);
   }
 
   &__right .text-message__content.is-first::after {
@@ -29,8 +30,9 @@
     width: var(--chotto-textmessage-right-after-width, 0);
     height: var(--chotto-textmessage-right-after-height, 0);
     border: var(--chotto-textmessage-right-after-border, 20px solid transparent);
-    border-top: 15px solid var(--chotto-textmessage-right-bg, #a7f3d0);
+    border-top: var(--chotto-textmessage-right-after-border-top, 15px solid var(--chotto-textmessage-right-bg, #a7f3d0));
     z-index: var(--chotto-textmessage-right-after-z-index, 1);
+    filter: var(--chotto-textmessage-right-after-filter, none);
   }
 
   &__info-container {
@@ -211,7 +213,9 @@
 
     .text-message__content {
       grid-column: var(--chotto-textmessage-left-content-grid-column, 2);
-      background-color: var(--chotto-textmessage-left-bg, #d4d4d4);
+      background: var(--chotto-textmessage-left-bg, #d4d4d4);
+      backdrop-filter: var(--chotto-textmessage-left-backdrop-filter, none);
+      box-shadow: var(--chotto-textmessage-left-box-shadow, none);
     }
 
     .text-message__content.with-avatar-indent {
@@ -247,7 +251,10 @@
     .text-message__content {
       grid-column: var(--chotto-textmessage-right-content-grid-column, 1);
       margin-left: var(--chotto-textmessage-right-content-margin-left, auto);
-      background-color: var(--chotto-textmessage-right-bg, #a7f3d0);
+      background: var(--chotto-textmessage-right-bg, #a7f3d0);
+      backdrop-filter: var(--chotto-textmessage-right-backdrop-filter, none);
+      border: var(--chotto-textmessage-right-border, none);
+      box-shadow: var(--chotto-textmessage-right-box-shadow, none);
     }
 
     .text-message__content.with-avatar-indent {

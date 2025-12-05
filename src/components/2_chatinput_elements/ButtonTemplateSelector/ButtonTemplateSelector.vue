@@ -11,9 +11,11 @@
       @click="toggle"
       @mouseover="hover"
       @mouseout="hoverout"
+      @mouseenter="isHovered = true"
+      @mouseleave="isHovered = false"
     >
       <span class="">
-        <ChatTemplatesIcon />
+        <ChatTemplatesIcon :fill="currentIconColor" />
       </span>
     </button>
   </Tooltip>
@@ -35,8 +37,8 @@
   </transition>
 </template>
 
-<script setup>
-import { ref, onMounted, inject } from 'vue';
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted, watchEffect, inject } from 'vue';
 import TemplateSelector from '@/components/2_chatinput_elements/TemplateSelector/TemplateSelector.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageDraft } from '@/hooks';
@@ -75,8 +77,40 @@ const props = defineProps({
 const chatAppId = inject('chatAppId')
 const { getMessage } = useMessageDraft(chatAppId)
 
-const templateButton = ref(null)
-const template = ref(null)
+const templateButton = ref<HTMLButtonElement | null>(null)
+const template = ref<HTMLElement | null>(null)
+
+const iconFillColor = ref('#5F5F5F');
+const iconHoverColor = ref('#404040');
+const isHovered = ref(false);
+let themeObserver: MutationObserver | null = null;
+
+const updateIconColor = () => {
+  if (!chatAppId) {
+    iconFillColor.value = '#5F5F5F';
+    iconHoverColor.value = '#404040';
+    return;
+  }
+  const element = document.getElementById(chatAppId as string);
+  if (!element) {
+    iconFillColor.value = '#5F5F5F';
+    iconHoverColor.value = '#404040';
+    return;
+  }
+  const computedStyle = window.getComputedStyle(element);
+  const color = computedStyle.getPropertyValue('--chotto-buttontemplateselector-button-span-color').trim();
+  const hoverColor = computedStyle.getPropertyValue('--chotto-buttontemplateselector-button-span-hover-color').trim();
+  iconFillColor.value = color || '#5F5F5F';
+  iconHoverColor.value = hoverColor || '#404040';
+};
+
+const currentIconColor = computed(() => {
+  return isHovered.value ? iconHoverColor.value : iconFillColor.value;
+});
+
+watchEffect(() => {
+  updateIconColor();
+})
 
 
 const toggle = () => {
@@ -107,7 +141,38 @@ const close = () => {
 }
 
 onMounted(() => {
-  template.value.style.display = 'none'
+  if (template.value) {
+    template.value.style.display = 'none'
+  }
+  
+  // Принудительно обновляем цвет после монтирования
+  updateIconColor();
+  
+  // Настраиваем MutationObserver для отслеживания изменений темы
+  if (chatAppId) {
+    const element = document.getElementById(chatAppId as string);
+    if (element) {
+      themeObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+            updateIconColor();
+          }
+        });
+      });
+      
+      themeObserver.observe(element, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+    }
+  }
+})
+
+onUnmounted(() => {
+  if (themeObserver) {
+    themeObserver.disconnect();
+    themeObserver = null;
+  }
 })
 
 

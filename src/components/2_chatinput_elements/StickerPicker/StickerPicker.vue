@@ -5,11 +5,11 @@
     class="button"
     :class="{ 'button-disabled': state === 'disabled' }"
     @click="handleClick"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
+    @mouseenter="handleMouseEnterWithHover"
+    @mouseleave="handleMouseLeaveWithHover"
   >
     <span>
-      <StickerIcon />
+      <StickerIcon :fill="currentIconColor" />
     </span>
   </button>
 
@@ -41,7 +41,7 @@
             <!-- TGS анимированные стикеры для иконок вкладок -->
             <tgs-player
               v-if="tab.iconUrl && isAnimatedSticker(tab.iconUrl) && tgsLibsLoaded"
-              :ref="el => setTgsTabPlayerRef(tabIndex, el)"
+              :ref="(el: unknown) => setTgsTabPlayerRef(tabIndex, el)"
               :src="tab.iconUrl"
               class="sticker-picker__tab-icon sticker-picker__tab-icon-animated"
               loop
@@ -91,7 +91,7 @@
               <!-- TGS анимированные стикеры -->
               <tgs-player
                 v-if="isTgsSticker(sticker) && tgsLibsLoaded"
-                :ref="el => setTgsPlayerRef(index, el)"
+                :ref="(el: unknown) => setTgsPlayerRef(index, el)"
                 :src="sticker.url"
                 class="sticker-picker__image sticker-picker__image-animated"
                 loop
@@ -146,57 +146,92 @@
   </Transition>
 </template>
 
-<script setup>
-import { onMounted, onUnmounted, ref, inject, computed, watch } from 'vue';
+<script setup lang="ts">
+import { onMounted, onUnmounted, ref, inject, computed, watch, watchEffect } from 'vue';
 import { useMessageDraft } from '@/hooks';
 import { StickerIcon } from './icons';
 import { isAnimatedSticker } from '@/components/2_feed_elements/StickerMessage/utils/stickerUtils';
 import '@/components/2_feed_elements/StickerMessage/utils/suppress-lit-warning';
 
-const props = defineProps({
-  state: {
-    type: String,
-    default: 'active',
-  },
-  mode: {
-    type: String,
-    default: 'click', // или 'hover'
-    validator: (value) => ['click', 'hover'].includes(value),
-  },
-  stickers: {
-    type: Array,
-    default: () => [],
-    // Поддерживаем два формата:
-    // 1. Массив стикеров: [{ url, alt? }, ...]
-    // 2. Массив наборов (вкладок): [[{ url, alt? }, ...], ...] или [{ stickers: [...], label?, iconUrl? }, ...]
-  },
-  emptyText: {
-    type: String,
-    default: 'Нет доступных стикеров',
-  },
+interface Sticker {
+  url: string;
+  alt?: string;
+}
+
+interface StickerTab {
+  id?: string;
+  label?: string;
+  stickers: Sticker[];
+  iconUrl?: string | null;
+}
+
+type StickerData = Sticker[] | Sticker[][] | StickerTab[];
+
+const props = withDefaults(defineProps<{
+  state?: string;
+  mode?: 'click' | 'hover';
+  stickers?: StickerData;
+  emptyText?: string;
+}>(), {
+  state: 'active',
+  mode: 'click',
+  stickers: () => [],
+  emptyText: 'Нет доступных стикеров',
 });
 
-const stickerPicker = ref(null);
-const stickerButton = ref(null);
-const tabsContainer = ref(null);
-const previewElement = ref(null);
+const stickerPicker = ref<HTMLElement | null>(null);
+const stickerButton = ref<HTMLButtonElement | null>(null);
+const tabsContainer = ref<HTMLElement | null>(null);
+const previewElement = ref<HTMLElement | null>(null);
 const isStickerPickerVisible = ref(false);
 const activeTabIndex = ref(0);
-const chatAppId = inject('chatAppId');
-const { getMessage, setMessageFile, setForceSendMessage } = useMessageDraft(chatAppId);
+const chatAppId = inject<string>('chatAppId');
+const { getMessage, setMessageFile, setForceSendMessage } = useMessageDraft(chatAppId as string);
+
+const iconFillColor = ref('#5F5F5F');
+const iconHoverColor = ref('#404040');
+const isHovered = ref(false);
+let themeObserver: MutationObserver | null = null;
+
+const updateIconColor = () => {
+  if (!chatAppId) {
+    iconFillColor.value = '#5F5F5F';
+    iconHoverColor.value = '#404040';
+    return;
+  }
+  const element = document.getElementById(chatAppId as string);
+  if (!element) {
+    iconFillColor.value = '#5F5F5F';
+    iconHoverColor.value = '#404040';
+    return;
+  }
+  const computedStyle = window.getComputedStyle(element);
+  const color = computedStyle.getPropertyValue('--chotto-stickerpicker-button-span-color').trim();
+  const hoverColor = computedStyle.getPropertyValue('--chotto-stickerpicker-button-span-hover-color').trim();
+  iconFillColor.value = color || '#5F5F5F';
+  iconHoverColor.value = hoverColor || '#404040';
+};
+
+const currentIconColor = computed(() => {
+  return isHovered.value ? iconHoverColor.value : iconFillColor.value;
+});
+
+watchEffect(() => {
+  updateIconColor();
+})
 
 // Состояние для предпросмотра
-const previewSticker = ref(null);
-const previewStyle = ref({});
-const longPressTimer = ref(null);
+const previewSticker = ref<Sticker | null>(null);
+const previewStyle = ref<Record<string, string>>({});
+const longPressTimer = ref<ReturnType<typeof setTimeout> | null>(null);
 const longPressDelay = 500; // 500ms для долгого нажатия
 const isLongPress = ref(false);
-const currentStickerElement = ref(null);
+const currentStickerElement = ref<HTMLElement | null>(null);
 
 // Хранилище ссылок на tgs-player элементы для управления анимацией
-const tgsPlayerRefs = ref(new Map());
+const tgsPlayerRefs = ref(new Map<number, { play?: () => void; pause?: () => void }>());
 // Хранилище ссылок на tgs-player элементы вкладок для управления анимацией
-const tgsTabPlayerRefs = ref(new Map());
+const tgsTabPlayerRefs = ref(new Map<number, { play?: () => void; pause?: () => void }>());
 
 // Вспомогательные флаги для hover-режима
 let isMouseOverButton = false;
@@ -225,32 +260,32 @@ async function loadTgsLibs() {
 }
 
 // Нормализация данных стикеров
-const normalizeStickerData = () => {
-  if (!props.stickers || props.stickers.length === 0) {
+const normalizeStickerData = (): { hasTabs: boolean; tabs: StickerTab[] } => {
+  if (!props.stickers || !Array.isArray(props.stickers) || props.stickers.length === 0) {
     return { hasTabs: false, tabs: [] };
   }
 
   // Проверяем, является ли первый элемент массивом или объектом с массивом
   const firstItem = props.stickers[0];
   const isArrayOfArrays = Array.isArray(firstItem);
-  const isArrayOfObjects = firstItem && typeof firstItem === 'object' && firstItem.stickers;
+  const isArrayOfObjects = firstItem && typeof firstItem === 'object' && 'stickers' in firstItem;
 
   if (isArrayOfArrays) {
     // Формат: [[{ url, alt? }, ...], ...]
     return {
       hasTabs: true,
-      tabs: props.stickers.map((stickerArray, index) => ({
+      tabs: (props.stickers as Sticker[][]).map((stickerArray, index) => ({
         id: `tab-${index}`,
         label: `Set ${index + 1}`,
         stickers: stickerArray,
         iconUrl: stickerArray && stickerArray.length > 0 ? stickerArray[0].url : null,
       })),
     };
-  } else if (isArrayOfObjects && firstItem.stickers) {
+  } else if (isArrayOfObjects && 'stickers' in firstItem) {
     // Формат: [{ stickers: [...], label?, iconUrl? }, ...]
     return {
       hasTabs: true,
-      tabs: props.stickers.map((tab, index) => ({
+      tabs: (props.stickers as StickerTab[]).map((tab, index) => ({
         id: tab.id || `tab-${index}`,
         label: tab.label || `Set ${index + 1}`,
         stickers: tab.stickers || [],
@@ -264,8 +299,8 @@ const normalizeStickerData = () => {
       tabs: [{
         id: 'default',
         label: 'Stickers',
-        stickers: props.stickers,
-        iconUrl: props.stickers.length > 0 ? props.stickers[0].url : null,
+        stickers: props.stickers as Sticker[],
+        iconUrl: (props.stickers as Sticker[]).length > 0 ? (props.stickers as Sticker[])[0].url : null,
       }],
     };
   }
@@ -298,30 +333,30 @@ watch(hasTgsStickers, (needsTgs) => {
 }, { immediate: true });
 
 // Функция для проверки, является ли стикер TGS файлом
-const isTgsSticker = (sticker) => {
+const isTgsSticker = (sticker: Sticker): boolean => {
   return isAnimatedSticker(sticker.url);
 };
 
 // Установка ref для tgs-player элемента
-const setTgsPlayerRef = (index, el) => {
+const setTgsPlayerRef = (index: number, el: unknown) => {
   if (el) {
-    tgsPlayerRefs.value.set(index, el);
+    tgsPlayerRefs.value.set(index, el as { play?: () => void; pause?: () => void });
   } else {
     tgsPlayerRefs.value.delete(index);
   }
 };
 
 // Установка ref для tgs-player элемента вкладки
-const setTgsTabPlayerRef = (tabIndex, el) => {
+const setTgsTabPlayerRef = (tabIndex: number, el: unknown) => {
   if (el) {
-    tgsTabPlayerRefs.value.set(tabIndex, el);
+    tgsTabPlayerRefs.value.set(tabIndex, el as { play?: () => void; pause?: () => void });
   } else {
     tgsTabPlayerRefs.value.delete(tabIndex);
   }
 };
 
 // Обработка наведения на вкладку
-const handleTabMouseEnter = (tabIndex) => {
+const handleTabMouseEnter = (tabIndex: number) => {
   // Запускаем анимацию TGS иконки вкладки при наведении
   const player = tgsTabPlayerRefs.value.get(tabIndex);
   if (player && typeof player.play === 'function') {
@@ -330,7 +365,7 @@ const handleTabMouseEnter = (tabIndex) => {
 };
 
 // Обработка ухода курсора с вкладки
-const handleTabMouseLeave = (tabIndex) => {
+const handleTabMouseLeave = (tabIndex: number) => {
   // Останавливаем анимацию TGS иконки вкладки при уходе курсора
   const player = tgsTabPlayerRefs.value.get(tabIndex);
   if (player && typeof player.pause === 'function') {
@@ -351,7 +386,7 @@ watch(() => props.stickers, () => {
 }, { deep: true });
 
 // Определение типа файла по расширению URL
-const getFileTypeFromUrl = (url) => {
+const getFileTypeFromUrl = (url: string): string => {
   if (!url) return 'image';
   const urlLower = url.toLowerCase();
   if (urlLower.endsWith('.tgs')) {
@@ -362,7 +397,7 @@ const getFileTypeFromUrl = (url) => {
   return 'image'; // По умолчанию считаем изображением
 };
 
-const onSelectSticker = (sticker) => {
+const onSelectSticker = (sticker: Sticker) => {
   if (props.state === 'disabled') return;
   
   // Определяем тип файла
@@ -385,8 +420,8 @@ const onSelectSticker = (sticker) => {
 };
 
 // Обработка долгого нажатия на стикер
-const handleStickerMouseDown = (sticker, event) => {
-  currentStickerElement.value = event.currentTarget;
+const handleStickerMouseDown = (sticker: Sticker, event: MouseEvent) => {
+  currentStickerElement.value = event.currentTarget as HTMLElement;
   isLongPress.value = false;
   
   // Очищаем предыдущий таймер
@@ -412,7 +447,7 @@ const handleStickerMouseUp = () => {
   }
 };
 
-const handleStickerMouseEnter = (sticker, index) => {
+const handleStickerMouseEnter = (sticker: Sticker, index: number) => {
   // Запускаем анимацию TGS стикера при наведении
   if (isTgsSticker(sticker) && tgsLibsLoaded.value) {
     const player = tgsPlayerRefs.value.get(index);
@@ -439,15 +474,22 @@ const handleStickerMouseLeave = () => {
   hidePreview();
 };
 
-const handleStickerTouchStart = (sticker, event) => {
-  handleStickerMouseDown(sticker, event);
+const handleStickerTouchStart = (sticker: Sticker, event: TouchEvent) => {
+  // Преобразуем TouchEvent в MouseEvent для обработки
+  const mouseEvent = new MouseEvent('mousedown', {
+    bubbles: true,
+    cancelable: true,
+    clientX: event.touches[0].clientX,
+    clientY: event.touches[0].clientY,
+  });
+  handleStickerMouseDown(sticker, mouseEvent);
 };
 
 const handleStickerTouchEnd = () => {
   handleStickerMouseUp();
 };
 
-const handleStickerClick = (sticker, event) => {
+const handleStickerClick = (sticker: Sticker, event: MouseEvent) => {
   // Если это было долгое нажатие, не отправляем стикер
   if (isLongPress.value) {
     event.preventDefault();
@@ -468,7 +510,7 @@ const clearLongPressTimer = () => {
   }
 };
 
-const showPreview = (sticker) => {
+const showPreview = (sticker: Sticker) => {
   previewSticker.value = sticker;
   
   // Позиционируем предпросмотр в центре экрана
@@ -543,6 +585,16 @@ const handleMouseLeave = () => {
   }
 };
 
+const handleMouseEnterWithHover = () => {
+  isHovered.value = true;
+  handleMouseEnter();
+};
+
+const handleMouseLeaveWithHover = () => {
+  isHovered.value = false;
+  handleMouseLeave();
+};
+
 const handlePickerMouseEnter = () => {
   if (props.mode === 'hover') {
     isMouseOverPicker = true;
@@ -561,7 +613,7 @@ const handlePickerMouseLeave = () => {
 };
 
 // Обработчик прокрутки колесиком мыши для вкладок
-const handleTabsWheel = (event) => {
+const handleTabsWheel = (event: WheelEvent) => {
   if (!tabsContainer.value) return;
   
   // Если есть горизонтальная прокрутка (shift + колесико), используем её
@@ -578,12 +630,13 @@ const handleTabsWheel = (event) => {
 };
 
 // Закрытие по клику вне (только для click-режима)
-const handleClickOutside = (event) => {
+const handleClickOutside = (event: MouseEvent) => {
   if (
     props.mode === 'click' &&
     isStickerPickerVisible.value &&
     stickerButton.value &&
     stickerPicker.value &&
+    event.target instanceof Node &&
     !stickerButton.value.contains(event.target) &&
     !stickerPicker.value.contains(event.target)
   ) {
@@ -591,7 +644,7 @@ const handleClickOutside = (event) => {
   }
   
   // Скрываем предпросмотр при клике вне стикера
-  if (previewSticker.value && previewElement.value && !previewElement.value.contains(event.target)) {
+  if (previewSticker.value && previewElement.value && event.target instanceof Node && !previewElement.value.contains(event.target)) {
     hidePreview();
   }
 };
@@ -609,6 +662,28 @@ onMounted(() => {
   document.addEventListener('click', handleClickOutside);
   document.addEventListener('mouseup', handleGlobalMouseUp);
   
+  // Принудительно обновляем цвет после монтирования
+  updateIconColor();
+  
+  // Настраиваем MutationObserver для отслеживания изменений темы
+  if (chatAppId) {
+    const element = document.getElementById(chatAppId as string);
+    if (element) {
+      themeObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+            updateIconColor();
+          }
+        });
+      });
+      
+      themeObserver.observe(element, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+    }
+  }
+  
   // Загружаем библиотеки TGS при монтировании, если есть TGS стикеры
   if (hasTgsStickers.value && !tgsLibsLoaded.value) {
     loadTgsLibs();
@@ -620,6 +695,11 @@ onUnmounted(() => {
   document.removeEventListener('mouseup', handleGlobalMouseUp);
   clearLongPressTimer();
   hidePreview();
+  
+  if (themeObserver) {
+    themeObserver.disconnect();
+    themeObserver = null;
+  }
   
   // Останавливаем все анимации TGS стикеров при размонтировании
   tgsPlayerRefs.value.forEach((player) => {

@@ -53,8 +53,20 @@ export interface FileMessageThemeCSSVariables {
 
   /** Цвет фона пузыря слева */
   '--chotto-filemessage-left-bg': string;
+  /** Эффект размытия фона пузыря слева */
+  '--chotto-filemessage-left-backdrop-filter': string;
+  /** Граница пузыря слева */
+  '--chotto-filemessage-left-border': string;
+  /** Тень пузыря слева */
+  '--chotto-filemessage-left-box-shadow': string;
   /** Цвет фона пузыря справа */
   '--chotto-filemessage-right-bg': string;
+  /** Эффект размытия фона пузыря справа */
+  '--chotto-filemessage-right-backdrop-filter': string;
+  /** Граница пузыря справа */
+  '--chotto-filemessage-right-border': string;
+  /** Тень пузыря справа */
+  '--chotto-filemessage-right-box-shadow': string;
 
   /** Выравнивание аватара относительно себя */
   '--chotto-filemessage-avatar-align-self': string;

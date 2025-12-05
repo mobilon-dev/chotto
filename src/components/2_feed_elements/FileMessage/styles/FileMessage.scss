@@ -254,7 +254,10 @@
 
     .file-message__content {
       grid-column: var(--chotto-filemessage-left-content-grid-column, 2);
-      background-color: var(--chotto-filemessage-left-bg, #d4d4d4);
+      background: var(--chotto-filemessage-left-bg, #d4d4d4);
+      backdrop-filter: var(--chotto-filemessage-left-backdrop-filter, none);
+      border: var(--chotto-filemessage-left-border, none);
+      box-shadow: var(--chotto-filemessage-left-box-shadow, none);
     }
 
     .file-message__content.with-avatar-indent {
@@ -291,7 +294,10 @@
     .file-message__content {
       grid-column: var(--chotto-filemessage-right-content-grid-column, 1);
       margin-left: var(--chotto-filemessage-right-content-margin-left, auto);
-      background-color: var(--chotto-filemessage-right-bg, #a7f3d0);
+      background: var(--chotto-filemessage-right-bg, #a7f3d0);
+      backdrop-filter: var(--chotto-filemessage-right-backdrop-filter, none);
+      border: var(--chotto-filemessage-right-border, none);
+      box-shadow: var(--chotto-filemessage-right-box-shadow, none);
     }
 
     .file-message__content.with-avatar-indent {

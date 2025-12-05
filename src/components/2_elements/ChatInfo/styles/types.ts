@@ -11,6 +11,8 @@ export interface ChatInfoThemeCSSVariables {
   '--chotto-chatinfo-container-border-bottom': string;
   /** Цвет фона контейнера информации о чате */
   '--chotto-chatinfo-container-background-color': string;
+  /** Эффект размытия фона контейнера информации о чате */
+  '--chotto-chatinfo-container-backdrop-filter': string;
   /** Максимальная высота контейнера информации о чате */
   '--chotto-chatinfo-container-max-height': string;
 

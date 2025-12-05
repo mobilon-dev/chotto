@@ -86,6 +86,7 @@
     display: var(--chotto-chatinput-button-display, flex);
     align-self: var(--chotto-chatinput-button-align-self, end);
     margin-bottom: var(--chotto-chatinput-button-margin-bottom, 4px);
+    opacity: var(--chotto-chatinput-button-opacity, 1);
 
     span {
       display: var(--chotto-chatinput-button-span-display, block);

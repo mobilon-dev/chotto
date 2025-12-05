@@ -28,6 +28,12 @@ export interface DateMessageThemeCSSVariables {
   '--chotto-datemessage-text-border-radius': string;
   /** Цвет фона текста даты */
   '--chotto-datemessage-text-background-color': string;
+  /** Эффект размытия фона текста даты */
+  '--chotto-datemessage-text-backdrop-filter': string;
+  /** Граница текста даты */
+  '--chotto-datemessage-text-border': string;
+  /** Тень текста даты */
+  '--chotto-datemessage-text-box-shadow': string;
   /** Размер шрифта текста даты */
   '--chotto-datemessage-text-font-size': string;
   /** Цвет текста даты */

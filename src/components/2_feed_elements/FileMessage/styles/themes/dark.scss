@@ -29,7 +29,13 @@
 
   // FileMessage background variables
   --chotto-filemessage-left-bg: var(--chotto-theme-message-left-bg);
+  --chotto-filemessage-left-backdrop-filter: none;
+  --chotto-filemessage-left-border: none;
+  --chotto-filemessage-left-box-shadow: none;
   --chotto-filemessage-right-bg: var(--chotto-theme-message-right-bg);
+  --chotto-filemessage-right-backdrop-filter: none;
+  --chotto-filemessage-right-border: none;
+  --chotto-filemessage-right-box-shadow: none;
 
   // FileMessage avatar variables
   --chotto-filemessage-avatar-min-width: var(--chotto-theme-avatar-small-size);

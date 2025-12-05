@@ -21,6 +21,10 @@ export const themes = [
   {
     code: "diamond",
     name: "Diamond",
+  },
+  {
+    code: "glass",
+    name: "Glass",
   }
 ];
 

@@ -33,6 +33,8 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-left-before-border-top': string;
   /** Слой псевдоэлемента слева */
   '--chotto-textmessage-left-before-z-index': string;
+  /** Фильтр псевдоэлемента слева */
+  '--chotto-textmessage-left-before-filter': string;
 
   /** Содержимое псевдоэлемента "хвостик" справа */
   '--chotto-textmessage-right-after-content': string;
@@ -48,8 +50,12 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-right-after-height': string;
   /** Базовая рамка хвостика справа */
   '--chotto-textmessage-right-after-border': string;
+  /** Верхняя часть рамки хвостика справа (цвет пузыря) */
+  '--chotto-textmessage-right-after-border-top': string;
   /** Слой псевдоэлемента справа */
   '--chotto-textmessage-right-after-z-index': string;
+  /** Фильтр псевдоэлемента справа */
+  '--chotto-textmessage-right-after-filter': string;
 
   /** Отображение контейнера информации */
   '--chotto-textmessage-info-container-display': string;
@@ -198,6 +204,12 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-left-content-grid-column': string;
   /** Фон пузыря слева */
   '--chotto-textmessage-left-bg': string;
+  /** Эффект размытия фона пузыря слева */
+  '--chotto-textmessage-left-backdrop-filter': string;
+  /** Граница пузыря слева */
+  '--chotto-textmessage-left-border': string;
+  /** Тень пузыря слева */
+  '--chotto-textmessage-left-box-shadow': string;
   /** Отступ контента слева с учётом аватара */
   '--chotto-textmessage-left-content-with-avatar-indent-margin-left': string;
   /** Положение кнопки меню слева (top) */
@@ -229,6 +241,12 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-right-content-margin-left': string;
   /** Фон пузыря справа */
   '--chotto-textmessage-right-bg': string;
+  /** Эффект размытия фона пузыря справа */
+  '--chotto-textmessage-right-backdrop-filter': string;
+  /** Граница пузыря справа */
+  '--chotto-textmessage-right-border': string;
+  /** Тень пузыря справа */
+  '--chotto-textmessage-right-box-shadow': string;
   /** Отступ контента справа с учётом аватара */
   '--chotto-textmessage-right-content-with-avatar-indent-margin-right': string;
   /** Положение кнопки меню справа (top) */

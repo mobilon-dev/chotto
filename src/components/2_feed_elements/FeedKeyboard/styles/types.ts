@@ -63,4 +63,6 @@ export interface FeedKeyboardThemeCSSVariables {
   '--chotto-feedkeyboard-button-text-margin': string;
   /** Жирность шрифта текста кнопки клавиатуры ленты */
   '--chotto-feedkeyboard-button-text-font-weight': string;
+  /** Цвет шрифта текста кнопки клавиатуры ленты */
+  '--chotto-feedkeyboard-button-text-font-color': string;
 }

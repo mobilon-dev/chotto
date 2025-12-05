@@ -1,0 +1,98 @@
+// Импорты компонентов для темы mobilon1
+
+// 1_atoms
+@use '../../components/1_atoms/ButtonContextMenu/styles/themes/mobilon1.scss' as buttoncontextmenu-mobilon1;
+@use '../../components/1_atoms/ContextMenu/styles/themes/mobilon1.scss' as contextmenu-mobilon1;
+@use '../../components/1_atoms/EmbedPreview/styles/themes/mobilon1.scss' as embedpreview-mobilon1;
+@use '../../components/1_atoms/LinkPreview/styles/themes/mobilon1.scss' as linkpreview-mobilon1;
+@use '../../components/1_atoms/LoadingIndicator/styles/themes/mobilon1.scss' as loadingindicator-mobilon1;
+@use '../../components/1_atoms/Tooltip/styles/themes/mobilon1.scss' as tooltip-mobilon1;
+
+// 2_blocks
+@use '../../components/2_blocks/CommunicationPanel/styles/themes/glass.scss' as communicationpanel-glass;
+@use '../../components/2_blocks/FeedFoundItem/styles/themes/mobilon1.scss' as feedfounditem-mobilon1;
+@use '../../components/2_blocks/FeedFoundObjects/styles/themes/mobilon1.scss' as feedfoundobjects-mobilon1;
+@use '../../components/2_blocks/FeedSearch/styles/themes/mobilon1.scss' as feedsearch-mobilon1;
+@use '../../components/2_modals/SelectUser/styles/themes/mobilon1.scss' as selectuser-mobilon1;
+@use '../../components/2_modals/SelectUser2/styles/themes/mobilon1.scss' as selectuser2-mobilon1;
+
+// 2_chatinput_elements
+@use '../../components/2_chatinput_elements/ButtonCommandsSelector/styles/themes/mobilon1.scss' as buttoncommandssel-mobilon1;
+@use '../../components/2_chatinput_elements/ButtonEmojiPicker/styles/themes/glass.scss' as buttonemojipicker-glass;
+@use '../../components/2_chatinput_elements/ButtonTemplateSelector/styles/themes/glass.scss' as buttontemplatesel-glass;
+@use '../../components/2_chatinput_elements/ButtonWabaTemplateSelector/styles/themes/mobilon1.scss' as buttonwabatemplatesel-mobilon1;
+@use '../../components/2_chatinput_elements/FilePreview/styles/themes/mobilon1.scss' as filepreview-mobilon1;
+@use '../../components/2_chatinput_elements/FileUploader/styles/themes/glass.scss' as fileuploader-glass;
+@use '../../components/2_chatinput_elements/StickerPicker/styles/themes/glass.scss' as stickerpicker-glass;
+@use '../../components/2_chatinput_elements/TemplateSelector/styles/themes/mobilon1.scss' as templateselector-mobilon1;
+@use '../../components/2_chatinput_elements/TextFormatToolbar/styles/themes/mobilon1.scss' as textformattoolbar-mobilon1;
+@use '../../components/2_chatinput_elements/WABAAttachmentSection/styles/themes/mobilon1.scss' as wabaattachment-mobilon1;
+@use '../../components/2_chatinput_elements/WABAQuickReplyButtons/styles/themes/mobilon1.scss' as wabaquickreply-mobilon1;
+@use '../../components/2_chatinput_elements/WABASeparatedQuickButtons/styles/themes/mobilon1.scss' as wabaseparatedquick-mobilon1;
+@use '../../components/2_chatinput_elements/WABATemplateSelector/styles/themes/mobilon1.scss' as wabatemplatesel-mobilon1;
+
+// 2_chatlist_elements
+@use '../../components/2_chatlist_elements/ChatFilter/styles/themes/mobilon1.scss' as chatfilter-mobilon1;
+@use '../../components/2_chatlist_elements/ChatItem/styles/themes/mobilon1.scss' as chatitem-mobilon1;
+@use '../../components/2_chatlist_elements/ChatTabs/styles/themes/mobilon1.scss' as chattabs-mobilon1;
+
+// 2_elements
+@use '../../components/2_elements/AudioRecorder/styles/themes/mobilon1.scss' as audiorecorder-mobilon1;
+@use '../../components/2_elements/ChannelSelector/styles/themes/mobilon1.scss' as channelselector-mobilon1;
+@use '../../components/2_elements/ChatInfo/styles/themes/glass.scss' as chatinfo-glass;
+@use '../../components/2_elements/ChatPanel/styles/themes/mobilon1.scss' as chatpanel-mobilon1;
+@use '../../components/2_elements/ContactInfo/styles/themes/mobilon1.scss' as contactinfo-mobilon1;
+@use '../../components/2_elements/ThemeMode/styles/themes/mobilon1.scss' as thememode-mobilon1;
+@use '../../components/2_elements/UserProfile/styles/themes/mobilon1.scss' as userprofile-mobilon1;
+@use '../../components/2_elements/VideoRecorder/styles/themes/mobilon1.scss' as videorecorder-mobilon1;
+
+// 2_feed_elements
+@use '../../components/2_feed_elements/AudioMessage/styles/themes/mobilon1.scss' as audiomessage-mobilon1;
+@use '../../components/2_feed_elements/BaseReplyMessage/styles/themes/glass.scss' as basereplymessage-glass;
+@use '../../components/2_feed_elements/CallMessage/styles/themes/mobilon1.scss' as callmessage-mobilon1;
+@use '../../components/2_feed_elements/DateMessage/styles/themes/glass.scss' as datemessage-glass;
+@use '../../components/2_feed_elements/DateMessageSticky/styles/themes/mobilon1.scss' as datemessagesticky-mobilon1;
+@use '../../components/2_feed_elements/FeedKeyboard/styles/themes/glass.scss' as feedkeyboard-glass;
+@use '../../components/2_feed_elements/FileMessage/styles/themes/glass.scss' as filemessage-glass;
+@use '../../components/2_feed_elements/ImageMessage/styles/themes/glass.scss' as imagemessage-glass;
+@use '../../components/2_feed_elements/MessageKeyboard/styles/themes/mobilon1.scss' as messagekeyboard-mobilon1;
+@use '../../components/2_feed_elements/MessageReactions/styles/themes/mobilon1.scss' as messagereactions-mobilon1;
+@use '../../components/2_feed_elements/ReplyAudioMessage/styles/themes/mobilon1.scss' as replyaudiomessage-mobilon1;
+@use '../../components/2_feed_elements/ReplyCallMessage/styles/themes/mobilon1.scss' as replycallmessage-mobilon1;
+@use '../../components/2_feed_elements/ReplyFileMessage/styles/themes/mobilon1.scss' as replyfilemessage-mobilon1;
+@use '../../components/2_feed_elements/ReplyImageMessage/styles/themes/mobilon1.scss' as replyimagemessage-mobilon1;
+@use '../../components/2_feed_elements/ReplyStickerMessage/styles/themes/mobilon1.scss' as replystickermessage-mobilon1;
+@use '../../components/2_feed_elements/ReplyTextMessage/styles/themes/mobilon1.scss' as replytextmessage-mobilon1;
+@use '../../components/2_feed_elements/SplashScreen/styles/themes/glass.scss' as splashscreen-glass;
+@use '../../components/2_feed_elements/ReplyVideoMessage/styles/themes/mobilon1.scss' as replyvideomessage-mobilon1;
+@use '../../components/2_feed_elements/StickerMessage/styles/themes/mobilon1.scss' as stickermessage-mobilon1;
+@use '../../components/2_feed_elements/SystemMessage/styles/themes/mobilon1.scss' as systemmessage-mobilon1;
+@use '../../components/2_feed_elements/TextMessage/styles/themes/glass.scss' as textmessage-glass;
+@use '../../components/2_feed_elements/TypingMessage/styles/themes/mobilon1.scss' as typingmessage-mobilon1;
+@use '../../components/2_feed_elements/VideoMessage/styles/themes/mobilon1.scss' as videomessage-mobilon1;
+
+// 2_modals
+@use '../../components/2_modals/CreateChat2/styles/themes/mobilon1.scss' as createchat2-mobilon1;
+@use '../../components/2_modals/CreateDialog/styles/themes/mobilon1.scss' as createdialog-mobilon1;
+@use '../../components/2_modals/Modal/styles/themes/mobilon1.scss' as modal-mobilon1;
+@use '../../components/2_modals/ModalFullscreen/styles/themes/mobilon1.scss' as modalfullscreen-mobilon1;
+@use '../../components/2_modals/ModalNoFooter/styles/themes/mobilon1.scss' as modalnofooter-mobilon1;
+@use '../../components/2_modals/ModalVideoRecorder/styles/themes/mobilon1.scss' as modalvideorecorder-mobilon1;
+
+// 3_compounds
+@use '../../components/3_compounds/ChatInput/styles/themes/glass.scss' as chatinput-glass;
+@use '../../components/3_compounds/ChatList/styles/themes/mobilon1.scss' as chatlist-mobilon1;
+@use '../../components/3_compounds/Feed/styles/themes/glass.scss' as feed-glass;
+@use '../../components/3_compounds/SideBar/styles/themes/mobilon1.scss' as sidebar-mobilon1;
+
+// 4_layouts
+@use '../../components/4_layouts/AdaptiveExtendedLayout/styles/themes/mobilon1.scss' as adaptiveextendedlayout-mobilon1;
+@use '../../components/4_layouts/BaseLayout/styles/themes/mobilon1.scss' as baselayout-mobilon1;
+@use '../../components/4_layouts/ChatWrapper/styles/themes/mobilon1.scss' as chatwrapper-mobilon1;
+@use '../../components/4_layouts/ExtendedLayout/styles/themes/glass.scss' as extendedlayout-glass;
+@use '../../components/4_layouts/FeedLayout/styles/themes/mobilon1.scss' as feedlayout-mobilon1;
+
+// 5_containers
+@use '../../components/5_containers/BaseContainer/styles/themes/glass.scss' as basecontainer-glass;
+@use '../../components/5_containers/FloatContainer/styles/themes/mobilon1.scss' as floatcontainer-mobilon1;
+@use '../../components/2_chatinput_elements/PlaceholderComponent/styles/themes/mobilon1.scss' as placeholdercomponent-mobilon1;

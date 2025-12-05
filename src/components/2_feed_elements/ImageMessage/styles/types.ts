@@ -218,6 +218,12 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-left-content-grid-column': string;
   /** Фон пузыря слева */
   '--chotto-imagemessage-left-bg': string;
+  /** Эффект размытия фона пузыря слева */
+  '--chotto-imagemessage-left-backdrop-filter': string;
+  /** Граница пузыря слева */
+  '--chotto-imagemessage-left-border': string;
+  /** Тень пузыря слева */
+  '--chotto-imagemessage-left-box-shadow': string;
   /** Отступ контента слева с учётом аватара */
   '--chotto-imagemessage-left-content-with-avatar-indent-margin-left': string;
   /** Положение кнопки меню слева (top) */
@@ -249,6 +255,12 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-right-content-margin-left': string;
   /** Фон пузыря справа */
   '--chotto-imagemessage-right-bg': string;
+  /** Эффект размытия фона пузыря справа */
+  '--chotto-imagemessage-right-backdrop-filter': string;
+  /** Граница пузыря справа */
+  '--chotto-imagemessage-right-border': string;
+  /** Тень пузыря справа */
+  '--chotto-imagemessage-right-box-shadow': string;
   /** Отступ контента справа с учётом аватара */
   '--chotto-imagemessage-right-content-with-avatar-indent-margin-right': string;
   /** Отступ текстового контейнера справа */

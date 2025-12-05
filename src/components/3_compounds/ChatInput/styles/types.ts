@@ -113,6 +113,8 @@ export interface ChatInputThemeCSSVariables {
   '--chotto-chatinput-button-align-self': string;
   /** Отступ снизу кнопки */
   '--chotto-chatinput-button-margin-bottom': string;
+  /** Прозрачность кнопки */
+  '--chotto-chatinput-button-opacity': string;
   /** Отображение span кнопки */
   '--chotto-chatinput-button-span-display': string;
   /** Курсор span кнопки */
