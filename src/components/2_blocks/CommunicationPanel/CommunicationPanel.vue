@@ -77,6 +77,7 @@
             <span class="attribute-value">{{ recentAttribute?.value }}</span>
           </div>
           <span
+            v-if="showChannelIcons"
             class="channel-icon-small"
             :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
           >
@@ -98,6 +99,7 @@
           <span class="attribute-value">{{ recentAttribute?.value }}</span>
         </div>
         <span
+          v-if="showChannelIcons"
           class="channel-icon-small"
           :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
         >
@@ -130,7 +132,7 @@
             class="menu-icon-arrow"
           />
           <span
-            v-else
+            v-else-if="showChannelIcons"
             class="channel-icon-small"
             :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
           >
@@ -159,6 +161,7 @@
         >
           <span class="sub-menu-title">{{ channel.title || channel.channelId }}</span>
           <span
+            v-if="showChannelIcons"
             class="sub-menu-icon"
             :class="{ 'menu-icon-grey': getChannelTypeFromId(channel.channelId) !== 'sms' }"
           >
@@ -206,6 +209,11 @@ const props = defineProps({
     type: Object,
     required: false,
     default: () => ({})
+  },
+  showChannelIcons: {
+    type: Boolean,
+    required: false,
+    default: false
   },
 });
 

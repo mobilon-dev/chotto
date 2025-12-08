@@ -105,6 +105,7 @@
                         :recent-attribute-channels="recentAttributeChannels"
                         :selected-dialog="selectedDialog"
                         :channel-tooltips="channelTooltips"
+                        :show-channel-icons="true"
                         @select-attribute-channel="handleAttributeChannelSelect"
                         @phone-call="handlePhoneCall"
                       />
