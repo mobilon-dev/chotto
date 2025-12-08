@@ -1,9 +1,13 @@
 [data-theme="mobilon1"] {
   // ImageMessage content variables
   --chotto-imagemessage-content-position: relative;
-  --chotto-imagemessage-content-max-width: 60%;
+  --chotto-imagemessage-content-max-width: 430px;
   --chotto-imagemessage-content-width: fit-content;
   --chotto-imagemessage-content-border-radius: 14px;
+  --chotto-imagemessage-content-align-items: stretch;
+  --chotto-imagemessage-content-display: flex;
+  --chotto-imagemessage-content-flex-direction: column;
+  --chotto-imagemessage-content-min-width: 0;
 
   // ImageMessage avatar variables
   --chotto-imagemessage-avatar-grid-row: 1 / -1;
@@ -25,6 +29,7 @@
   --chotto-imagemessage-info-container-padding: 6px 10px;
   --chotto-imagemessage-info-container-color: #262626;
   --chotto-imagemessage-info-container-background-color: #e5e5e5;
+  --chotto-imagemessage-info-container-z-index: 2;
 
   // ImageMessage download button variables
   --chotto-imagemessage-download-button-position: absolute;
@@ -38,6 +43,7 @@
   --chotto-imagemessage-download-button-padding: 6px 6px;
   --chotto-imagemessage-download-button-background-color: #e5e5e5;
   --chotto-imagemessage-download-button-cursor: pointer;
+  --chotto-imagemessage-download-button-z-index: 2;
   --chotto-imagemessage-download-button-span-color: #262626;
   --chotto-imagemessage-download-button-span-font-size: var(--chotto-theme-small-text-icon-size);
 
@@ -75,6 +81,13 @@
   --chotto-imagemessage-preview-button-width: fit-content;
   --chotto-imagemessage-preview-button-height: fit-content;
   --chotto-imagemessage-preview-button-overflow: hidden;
+  --chotto-imagemessage-preview-button-blur-edges-overflow: hidden;
+  --chotto-imagemessage-preview-button-blur-edges-width: 100%;
+  --chotto-imagemessage-preview-button-blur-edges-max-width: 100%;
+  --chotto-imagemessage-preview-button-blur-edges-justify-content: center;
+  --chotto-imagemessage-preview-button-blur-edges-align-items: center;
+  --chotto-imagemessage-preview-button-blur-edges-min-height: fit-content;
+  --chotto-imagemessage-preview-button-blur-edges-border-radius: 8px 8px 0 0;
 
   // ImageMessage preview image variables
   --chotto-imagemessage-preview-image-width: 100%;
@@ -83,6 +96,38 @@
   --chotto-imagemessage-preview-image-max-height: 430px;
   --chotto-imagemessage-preview-image-cursor: zoom-in;
   --chotto-imagemessage-preview-image-display: block;
+  --chotto-imagemessage-preview-image-position: relative;
+  --chotto-imagemessage-preview-image-z-index: 1;
+  --chotto-imagemessage-preview-image-blur-edges-width: auto;
+  --chotto-imagemessage-preview-image-blur-edges-max-width: 430px;
+  --chotto-imagemessage-preview-image-blur-edges-margin: 0 auto;
+  --chotto-imagemessage-preview-image-blur-edges-flex-shrink: 0;
+
+  // ImageMessage blur wrapper variables
+  --chotto-imagemessage-blur-wrapper-position: absolute;
+  --chotto-imagemessage-blur-wrapper-top: 0;
+  --chotto-imagemessage-blur-wrapper-left: 0;
+  --chotto-imagemessage-blur-wrapper-right: 0;
+  --chotto-imagemessage-blur-wrapper-bottom: 0;
+  --chotto-imagemessage-blur-wrapper-width: 100%;
+  --chotto-imagemessage-blur-wrapper-height: 100%;
+  --chotto-imagemessage-blur-wrapper-pointer-events: none;
+  --chotto-imagemessage-blur-wrapper-z-index: 0;
+  --chotto-imagemessage-blur-wrapper-display: flex;
+  --chotto-imagemessage-blur-wrapper-overflow: hidden;
+  --chotto-imagemessage-blur-wrapper-align-items: center;
+
+  // ImageMessage blur images variables
+  --chotto-imagemessage-blur-flex: 1;
+  --chotto-imagemessage-blur-min-width: 0;
+  --chotto-imagemessage-blur-height: 100%;
+  --chotto-imagemessage-blur-object-fit: cover;
+  --chotto-imagemessage-blur-filter: blur(30px);
+  --chotto-imagemessage-blur-opacity: 0.85;
+  --chotto-imagemessage-blur-z-index: 0;
+  --chotto-imagemessage-blur-transform: scale(1.2);
+  --chotto-imagemessage-blur-left-object-position: left center;
+  --chotto-imagemessage-blur-right-object-position: right center;
 
   // ImageMessage modal image variables
   --chotto-imagemessage-modal-image-width: 100%;
@@ -110,10 +155,17 @@
   // ImageMessage text container variables
   --chotto-imagemessage-text-container-padding: 6px 10px 6px 10px;
   --chotto-imagemessage-text-container-border-radius: 0 0 8px 8px;
+  --chotto-imagemessage-text-container-width: 100%;
+  --chotto-imagemessage-text-container-min-width: 0;
   --chotto-imagemessage-text-container-word-wrap: break-word;
+  --chotto-imagemessage-text-container-overflow-wrap: break-word;
+  --chotto-imagemessage-text-container-hyphens: auto;
   --chotto-imagemessage-text-container-p-font-size: var(--chotto-theme-text-font-size);
-  --chotto-imagemessage-text-container-p-word-break: break-all;
-  --chotto-imagemessage-text-container-p-white-space: pre-wrap;
+  --chotto-imagemessage-text-container-p-word-break: normal;
+  --chotto-imagemessage-text-container-p-overflow-wrap: break-word;
+  --chotto-imagemessage-text-container-p-white-space: normal;
+  --chotto-imagemessage-text-container-p-margin: 0;
+  --chotto-imagemessage-text-container-p-line-height: 1.4;
 
   // ImageMessage markdown formatting variables
   --chotto-imagemessage-markdown-strong-font-weight: bold;

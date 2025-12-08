@@ -10,6 +10,14 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-content-width': string;
   /** Скругление контейнера контента изображения */
   '--chotto-imagemessage-content-border-radius': string;
+  /** Выравнивание элементов контейнера контента */
+  '--chotto-imagemessage-content-align-items': string;
+  /** Отображение контейнера контента */
+  '--chotto-imagemessage-content-display': string;
+  /** Направление флекс-контейнера контента */
+  '--chotto-imagemessage-content-flex-direction': string;
+  /** Минимальная ширина контейнера контента */
+  '--chotto-imagemessage-content-min-width': string;
 
   /** Ряд грида аватара */
   '--chotto-imagemessage-avatar-grid-row': string;
@@ -46,6 +54,8 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-info-container-color': string;
   /** Цвет фона контейнера информации */
   '--chotto-imagemessage-info-container-background-color': string;
+  /** Z-index контейнера информации */
+  '--chotto-imagemessage-info-container-z-index': string;
 
   /** Позиционирование кнопки скачивания */
   '--chotto-imagemessage-download-button-position': string;
@@ -73,6 +83,8 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-download-button-span-color': string;
   /** Размер текста/иконки внутри кнопки */
   '--chotto-imagemessage-download-button-span-font-size': string;
+  /** Z-index кнопки скачивания */
+  '--chotto-imagemessage-download-button-z-index': string;
 
   /** Отображение блока просмотров */
   '--chotto-imagemessage-views-display': string;
@@ -128,6 +140,20 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-preview-button-height': string;
   /** Переполнение кнопки превью */
   '--chotto-imagemessage-preview-button-overflow': string;
+  /** Переполнение кнопки превью с blur-эффектом */
+  '--chotto-imagemessage-preview-button-blur-edges-overflow': string;
+  /** Ширина кнопки превью с blur-эффектом */
+  '--chotto-imagemessage-preview-button-blur-edges-width': string;
+  /** Максимальная ширина кнопки превью с blur-эффектом */
+  '--chotto-imagemessage-preview-button-blur-edges-max-width': string;
+  /** Выравнивание по главной оси кнопки превью с blur-эффектом */
+  '--chotto-imagemessage-preview-button-blur-edges-justify-content': string;
+  /** Выравнивание по поперечной оси кнопки превью с blur-эффектом */
+  '--chotto-imagemessage-preview-button-blur-edges-align-items': string;
+  /** Минимальная высота кнопки превью с blur-эффектом */
+  '--chotto-imagemessage-preview-button-blur-edges-min-height': string;
+  /** Скругление кнопки превью с blur-эффектом */
+  '--chotto-imagemessage-preview-button-blur-edges-border-radius': string;
 
   /** Ширина превью-изображения */
   '--chotto-imagemessage-preview-image-width': string;
@@ -141,6 +167,64 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-preview-image-cursor': string;
   /** Отображение превью-изображения */
   '--chotto-imagemessage-preview-image-display': string;
+  /** Позиционирование превью-изображения */
+  '--chotto-imagemessage-preview-image-position': string;
+  /** Z-index превью-изображения */
+  '--chotto-imagemessage-preview-image-z-index': string;
+  /** Ширина превью-изображения с blur-эффектом */
+  '--chotto-imagemessage-preview-image-blur-edges-width': string;
+  /** Максимальная ширина превью-изображения с blur-эффектом */
+  '--chotto-imagemessage-preview-image-blur-edges-max-width': string;
+  /** Отступ превью-изображения с blur-эффектом */
+  '--chotto-imagemessage-preview-image-blur-edges-margin': string;
+  /** Сжатие превью-изображения с blur-эффектом */
+  '--chotto-imagemessage-preview-image-blur-edges-flex-shrink': string;
+
+  /** Позиционирование обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-position': string;
+  /** Отступ сверху обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-top': string;
+  /** Отступ слева обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-left': string;
+  /** Отступ справа обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-right': string;
+  /** Отступ снизу обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-bottom': string;
+  /** Ширина обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-width': string;
+  /** Высота обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-height': string;
+  /** События указателя обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-pointer-events': string;
+  /** Z-index обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-z-index': string;
+  /** Отображение обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-display': string;
+  /** Переполнение обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-overflow': string;
+  /** Выравнивание элементов обёртки blur-эффекта */
+  '--chotto-imagemessage-blur-wrapper-align-items': string;
+
+  /** Растяжение blur-изображений */
+  '--chotto-imagemessage-blur-flex': string;
+  /** Минимальная ширина blur-изображений */
+  '--chotto-imagemessage-blur-min-width': string;
+  /** Высота blur-изображений */
+  '--chotto-imagemessage-blur-height': string;
+  /** Вписывание blur-изображений */
+  '--chotto-imagemessage-blur-object-fit': string;
+  /** Фильтр blur-изображений */
+  '--chotto-imagemessage-blur-filter': string;
+  /** Прозрачность blur-изображений */
+  '--chotto-imagemessage-blur-opacity': string;
+  /** Z-index blur-изображений */
+  '--chotto-imagemessage-blur-z-index': string;
+  /** Трансформация blur-изображений */
+  '--chotto-imagemessage-blur-transform': string;
+  /** Позиция объекта blur-изображения слева */
+  '--chotto-imagemessage-blur-left-object-position': string;
+  /** Позиция объекта blur-изображения справа */
+  '--chotto-imagemessage-blur-right-object-position': string;
 
   /** Позиционирование кнопки меню сообщения */
   '--chotto-imagemessage-menu-button-position': string;
@@ -170,14 +254,28 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-text-container-padding': string;
   /** Скругление контейнера текста */
   '--chotto-imagemessage-text-container-border-radius': string;
+  /** Ширина контейнера текста */
+  '--chotto-imagemessage-text-container-width': string;
+  /** Минимальная ширина контейнера текста */
+  '--chotto-imagemessage-text-container-min-width': string;
   /** Перенос слов в контейнере текста */
   '--chotto-imagemessage-text-container-word-wrap': string;
+  /** Перенос переполнения в контейнере текста */
+  '--chotto-imagemessage-text-container-overflow-wrap': string;
+  /** Переносы слов в контейнере текста */
+  '--chotto-imagemessage-text-container-hyphens': string;
   /** Размер шрифта абзаца текста */
   '--chotto-imagemessage-text-container-p-font-size': string;
   /** Перенос слов в абзаце текста */
   '--chotto-imagemessage-text-container-p-word-break': string;
+  /** Перенос переполнения в абзаце текста */
+  '--chotto-imagemessage-text-container-p-overflow-wrap': string;
   /** Правила перевода строк текста */
   '--chotto-imagemessage-text-container-p-white-space': string;
+  /** Отступы абзаца текста */
+  '--chotto-imagemessage-text-container-p-margin': string;
+  /** Высота строки абзаца текста */
+  '--chotto-imagemessage-text-container-p-line-height': string;
 
   /** Жирность жирного текста (markdown **текст**) */
   '--chotto-imagemessage-markdown-strong-font-weight': string;

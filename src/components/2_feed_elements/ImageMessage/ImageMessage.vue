@@ -44,11 +44,28 @@
 
       <div
         class="image-message__preview-button"
+        :class="{ 'image-message__preview-button--blur-edges': shouldApplyBlur }"
         @click="isOpenModal = true"
         @mouseenter="showMenu"
-        @mouseleave="buttonDownloadVisible = !buttonDownloadVisible"
+        @mouseleave="hideMenu"
       >
+        <div
+          v-if="shouldApplyBlur"
+          class="image-message__blur-wrapper"
+        >
+          <img
+            class="image-message__blur-left"
+            :src="message.url"
+            :alt="message.alt"
+          >
+          <img
+            class="image-message__blur-right"
+            :src="message.url"
+            :alt="message.alt"
+          >
+        </div>
         <img
+          ref="imageRef"
           class="image-message__preview-image"
           :style="{ borderRadius: imageBorderRadius }"
           :src="message.url"
@@ -114,6 +131,7 @@
 
       <div
         v-if="message.text"
+        ref="textRef"
         class="image-message__text-container"
       >
         <p
@@ -168,7 +186,7 @@
   setup
   lang="ts"
 >
-import { ref, computed, inject } from 'vue';
+import { ref, computed, inject, onMounted, onUnmounted, nextTick, watch } from 'vue';
 
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import LinkPreview from '@/components/1_atoms/LinkPreview/LinkPreview.vue';
@@ -229,6 +247,93 @@ const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 
 // обработчик открытия ссылок предоставлен useMessageLinks
 
+const imageRef = ref<HTMLImageElement | null>(null)
+const textRef = ref<HTMLDivElement | null>(null)
+const imageWidth = ref(0)
+const textWidth = ref(0)
+
+watch(
+  () => linkedHtml.value,
+  () => {
+    updateWidths()
+    // Переподключаем ResizeObserver после изменения текста
+    nextTick(() => {
+      if (resizeObserver && textRef.value) {
+        resizeObserver.observe(textRef.value)
+      }
+    })
+  }
+)
+
+const updateWidths = () => {
+  nextTick(() => {
+    if (imageRef.value) {
+      imageWidth.value = imageRef.value.offsetWidth
+    }
+    if (textRef.value) {
+      textWidth.value = textRef.value.offsetWidth
+    }
+  })
+}
+
+let resizeObserver: ResizeObserver | null = null
+let windowResizeHandler: (() => void) | null = null
+
+onMounted(() => {
+  updateWidths()
+  
+  // Обновляем размеры при изменении размера окна
+  windowResizeHandler = () => updateWidths()
+  window.addEventListener('resize', windowResizeHandler)
+  
+  // Используем ResizeObserver для отслеживания изменений размеров элементов
+  if (typeof ResizeObserver !== 'undefined') {
+    resizeObserver = new ResizeObserver(() => {
+      updateWidths()
+    })
+    
+    if (imageRef.value) {
+      resizeObserver.observe(imageRef.value)
+    }
+    if (textRef.value) {
+      resizeObserver.observe(textRef.value)
+    }
+  }
+})
+
+onUnmounted(() => {
+  if (windowResizeHandler) {
+    window.removeEventListener('resize', windowResizeHandler)
+  }
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+  }
+})
+
+watch(
+  () => [props.message.text, props.message.url],
+  () => {
+    updateWidths()
+    // Переподключаем ResizeObserver после изменения элементов
+    nextTick(() => {
+      if (resizeObserver) {
+        resizeObserver.disconnect()
+        if (imageRef.value) {
+          resizeObserver.observe(imageRef.value)
+        }
+        if (textRef.value) {
+          resizeObserver.observe(textRef.value)
+        }
+      }
+    })
+  },
+  { immediate: true }
+)
+
+const shouldApplyBlur = computed(() => {
+  return props.message.text && textWidth.value > imageWidth.value && imageWidth.value > 0
+})
+
 const showMenu = () => {
   baseShowMenu()
   buttonDownloadVisible.value = true
@@ -236,7 +341,13 @@ const showMenu = () => {
 
 const imageBorderRadius = computed(() => {
   if (props.message.reply && props.message.text) return '0'
-  if (props.message.text) return '8px 8px 0 0'
+  if (props.message.text) {
+    // Если текст шире изображения, возвращаем '0'
+    if (textWidth.value > imageWidth.value && imageWidth.value > 0) {
+      return '0'
+    }
+    return '8px 8px 0 0'
+  }
   if (props.message.reply) return '0 0 8px 8px'
   return '8px'
 })

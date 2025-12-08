@@ -2,9 +2,13 @@
 
   &__content {
     position: var(--chotto-imagemessage-content-position, relative);
-    max-width: var(--chotto-imagemessage-content-max-width, min(60%, 430px));
+    max-width: var(--chotto-imagemessage-content-max-width, 430px);
     width: var(--chotto-imagemessage-content-width, fit-content);
     border-radius: var(--chotto-imagemessage-content-border-radius, 14px);
+    align-items: var(--chotto-imagemessage-content-align-items, stretch);
+    display: var(--chotto-imagemessage-content-display, flex);
+    flex-direction: var(--chotto-imagemessage-content-flex-direction, column);
+    min-width: var(--chotto-imagemessage-content-min-width, 0);
   }
 
   &__avatar {
@@ -28,6 +32,7 @@
     padding: var(--chotto-imagemessage-info-container-padding, 6px 10px);
     color: var(--chotto-imagemessage-info-container-color, #262626);
     background-color: var(--chotto-imagemessage-info-container-background-color, #e5e5e5);
+    z-index: var(--chotto-imagemessage-info-container-z-index, 2);
   }
 
   &__download-button {
@@ -42,6 +47,7 @@
     padding: var(--chotto-imagemessage-download-button-padding, 6px 6px);
     background-color: var(--chotto-imagemessage-download-button-background-color, #e5e5e5);
     cursor: var(--chotto-imagemessage-download-button-cursor, pointer);
+    z-index: var(--chotto-imagemessage-download-button-z-index, 2);
 
     span {
       color: var(--chotto-imagemessage-download-button-span-color, #262626);
@@ -122,6 +128,51 @@
     width: var(--chotto-imagemessage-preview-button-width, fit-content);
     height: var(--chotto-imagemessage-preview-button-height, fit-content);
     overflow: var(--chotto-imagemessage-preview-button-overflow, hidden);
+
+    &--blur-edges {
+      overflow: var(--chotto-imagemessage-preview-button-blur-edges-overflow, hidden);
+      width: var(--chotto-imagemessage-preview-button-blur-edges-width, 100%);
+      max-width: var(--chotto-imagemessage-preview-button-blur-edges-max-width, 100%);
+      justify-content: var(--chotto-imagemessage-preview-button-blur-edges-justify-content, center);
+      align-items: var(--chotto-imagemessage-preview-button-blur-edges-align-items, center);
+      min-height: var(--chotto-imagemessage-preview-button-blur-edges-min-height, fit-content);
+      border-radius: var(--chotto-imagemessage-preview-button-blur-edges-border-radius, 8px 8px 0 0);
+    }
+  }
+
+  &__blur-wrapper {
+    position: var(--chotto-imagemessage-blur-wrapper-position, absolute);
+    top: var(--chotto-imagemessage-blur-wrapper-top, 0);
+    left: var(--chotto-imagemessage-blur-wrapper-left, 0);
+    right: var(--chotto-imagemessage-blur-wrapper-right, 0);
+    bottom: var(--chotto-imagemessage-blur-wrapper-bottom, 0);
+    width: var(--chotto-imagemessage-blur-wrapper-width, 100%);
+    height: var(--chotto-imagemessage-blur-wrapper-height, 100%);
+    pointer-events: var(--chotto-imagemessage-blur-wrapper-pointer-events, none);
+    z-index: var(--chotto-imagemessage-blur-wrapper-z-index, 0);
+    display: var(--chotto-imagemessage-blur-wrapper-display, flex);
+    overflow: var(--chotto-imagemessage-blur-wrapper-overflow, hidden);
+    align-items: var(--chotto-imagemessage-blur-wrapper-align-items, center);
+  }
+
+  &__blur-left,
+  &__blur-right {
+    flex: var(--chotto-imagemessage-blur-flex, 1);
+    min-width: var(--chotto-imagemessage-blur-min-width, 0);
+    height: var(--chotto-imagemessage-blur-height, 100%);
+    object-fit: var(--chotto-imagemessage-blur-object-fit, cover);
+    filter: var(--chotto-imagemessage-blur-filter, blur(30px));
+    opacity: var(--chotto-imagemessage-blur-opacity, 0.85);
+    z-index: var(--chotto-imagemessage-blur-z-index, 0);
+    transform: var(--chotto-imagemessage-blur-transform, scale(1.2));
+  }
+
+  &__blur-left {
+    object-position: var(--chotto-imagemessage-blur-left-object-position, left center);
+  }
+
+  &__blur-right {
+    object-position: var(--chotto-imagemessage-blur-right-object-position, right center);
   }
 
   &__preview-image {
@@ -132,6 +183,15 @@
     object-fit: var(--chotto-imagemessage-preview-image-object-fit, contain);
     cursor: var(--chotto-imagemessage-preview-image-cursor, zoom-in);
     display: var(--chotto-imagemessage-preview-image-display, block);
+    position: var(--chotto-imagemessage-preview-image-position, relative);
+    z-index: var(--chotto-imagemessage-preview-image-z-index, 1);
+
+    .image-message__preview-button--blur-edges & {
+      width: var(--chotto-imagemessage-preview-image-blur-edges-width, auto);
+      max-width: var(--chotto-imagemessage-preview-image-blur-edges-max-width, 430px);
+      margin: var(--chotto-imagemessage-preview-image-blur-edges-margin, 0 auto);
+      flex-shrink: var(--chotto-imagemessage-preview-image-blur-edges-flex-shrink, 0);
+    }
   }
 
   &__modal-image {
@@ -169,12 +229,19 @@
   &__text-container {
     padding: var(--chotto-imagemessage-text-container-padding, 6px 10px 6px 10px);
     border-radius: var(--chotto-imagemessage-text-container-border-radius, 0 0 8px 8px);
+    width: var(--chotto-imagemessage-text-container-width, 100%);
+    min-width: var(--chotto-imagemessage-text-container-min-width, 0);
     word-wrap: var(--chotto-imagemessage-text-container-word-wrap, break-word);
+    overflow-wrap: var(--chotto-imagemessage-text-container-overflow-wrap, break-word);
+    hyphens: var(--chotto-imagemessage-text-container-hyphens, auto);
 
     p {
       font-size: var(--chotto-imagemessage-text-container-p-font-size, 14px);
-      word-break: var(--chotto-imagemessage-text-container-p-word-break, break-all);
-      white-space: var(--chotto-imagemessage-text-container-p-white-space, pre-wrap);
+      word-break: var(--chotto-imagemessage-text-container-p-word-break, normal);
+      overflow-wrap: var(--chotto-imagemessage-text-container-p-overflow-wrap, break-word);
+      white-space: var(--chotto-imagemessage-text-container-p-white-space, normal);
+      margin: var(--chotto-imagemessage-text-container-p-margin, 0);
+      line-height: var(--chotto-imagemessage-text-container-p-line-height, 1.4);
 
       // Markdown форматирование
       :deep(strong) {
