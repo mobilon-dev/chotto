@@ -55,6 +55,24 @@
       </div>
     </div>
 
+    <!-- Закреплённые элементы сверху (вне скролла) -->
+    <div 
+      v-if="!props.isLoading && getSortedAndFilteredChats().filter(c => c.isFixedTop).length > 0"
+      class="chat-list__fixed-items-top"
+    >
+      <ChatItem
+        v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedTop)"
+        :key="chat.chatId"
+        class="chat-list__item"
+        :chat="chat"
+        :show-dialogs="showDialogs"
+        @select="selectChat"
+        @expand="expandChat"
+        @action="action"
+      />
+    </div>
+
+    <!-- Скроллируемая область с обычными чатами -->
     <div 
       ref="refChatList"
       class="chat-list__items"
@@ -81,45 +99,34 @@
       </div>
 
       <template v-else>
-        <div class="chat-list__fixed-items-top">
-          <ChatItem
-            v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedTop)"
-            :key="chat.chatId"
-            class="chat-list__item"
-            :chat="chat"
-            :show-dialogs="showDialogs"
-            @select="selectChat"
-            @expand="expandChat"
-            @action="action"
-          />
-        </div>
-
-        <div class="chat-list__scrollable-items">
-          <ChatItem
-            v-for="chat in getSortedAndFilteredChats().filter(c => !c.isFixedBottom && !c.isFixedTop)"
-            :key="chat.chatId"
-            class="chat-list__item"
-            :chat="chat"
-            :show-dialogs="showDialogs"
-            @select="selectChat"
-            @expand="expandChat"
-            @action="action"
-          />
-        </div>
-
-        <div class="chat-list__fixed-items-bottom">
-          <ChatItem
-            v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedBottom)"
-            :key="chat.chatId"
-            class="chat-list__item"
-            :chat="chat"
-            :show-dialogs="showDialogs"
-            @select="selectChat"
-            @expand="expandChat"
-            @action="action"
-          />
-        </div>
+        <ChatItem
+          v-for="chat in getSortedAndFilteredChats().filter(c => !c.isFixedBottom && !c.isFixedTop)"
+          :key="chat.chatId"
+          class="chat-list__item"
+          :chat="chat"
+          :show-dialogs="showDialogs"
+          @select="selectChat"
+          @expand="expandChat"
+          @action="action"
+        />
       </template>
+    </div>
+
+    <!-- Закреплённые элементы снизу (вне скролла) -->
+    <div 
+      v-if="!props.isLoading && getSortedAndFilteredChats().filter(c => c.isFixedBottom).length > 0"
+      class="chat-list__fixed-items-bottom"
+    >
+      <ChatItem
+        v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedBottom)"
+        :key="chat.chatId"
+        class="chat-list__item"
+        :chat="chat"
+        :show-dialogs="showDialogs"
+        @select="selectChat"
+        @expand="expandChat"
+        @action="action"
+      />
     </div>
     <transition>
       <button

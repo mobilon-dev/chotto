@@ -14,9 +14,12 @@
   &__text {
     font-size: var(--chotto-datemessagesticky-text-font-size, 14px);
     color: var(--chotto-datemessagesticky-text-color, #1E1E1E);
-    background-color: var(--chotto-datemessagesticky-text-background-color, #F0F0F0);
+    background: var(--chotto-datemessagesticky-text-background-color, #F0F0F0);
+    backdrop-filter: var(--chotto-datemessagesticky-text-backdrop-filter, none);
+    -webkit-backdrop-filter: var(--chotto-datemessagesticky-text-backdrop-filter, none);
+    border: var(--chotto-datemessagesticky-text-border, none);
+    box-shadow: var(--chotto-datemessagesticky-text-box-shadow, 0 2px 6px rgba(0,0,0,0.08));
     padding: var(--chotto-datemessagesticky-text-padding, 4px 11px);
     border-radius: var(--chotto-datemessagesticky-text-border-radius, 4px);
-    box-shadow: var(--chotto-datemessagesticky-text-box-shadow, 0 2px 6px rgba(0,0,0,0.08));
   }
 }

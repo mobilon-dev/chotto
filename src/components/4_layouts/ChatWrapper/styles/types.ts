@@ -27,12 +27,16 @@ export interface ChatWrapperThemeCSSVariables {
   // Chat panel
   /** Цвет фона панели чата */
   '--chotto-chatwrapper-chat-panel-background-color': string;
+  /** Эффект размытия фона панели чата (для glassmorphism) */
+  '--chotto-chatwrapper-chat-panel-backdrop-filter': string;
   /** Левая граница панели чата */
   '--chotto-chatwrapper-chat-panel-border-left': string;
   /** Правая граница панели чата */
   '--chotto-chatwrapper-chat-panel-border-right': string;
   /** Радиус границы панели чата */
   '--chotto-chatwrapper-chat-panel-border-radius': string;
+  /** Тень панели чата */
+  '--chotto-chatwrapper-chat-panel-box-shadow': string;
   /** Позиционирование панели чата */
   '--chotto-chatwrapper-chat-panel-position': string;
   /** Высота панели чата */

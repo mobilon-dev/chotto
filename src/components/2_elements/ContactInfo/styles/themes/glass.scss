@@ -67,7 +67,7 @@
   --chotto-contactinfo-select-trigger-padding: 8px 13px;
   --chotto-contactinfo-select-trigger-border: var(--chotto-input-border, 1px solid #d0d0d0);
   --chotto-contactinfo-select-trigger-border-radius: 1px;
-  --chotto-contactinfo-select-trigger-background: var(--chotto-theme-primary-color);
+  --chotto-contactinfo-select-trigger-background: rgba(255, 255, 255, 0.63);
   --chotto-contactinfo-select-trigger-cursor: pointer;
   --chotto-contactinfo-select-trigger-font-size: var(--chotto-theme-title-font-size, 16px);
   --chotto-contactinfo-select-trigger-color: var(--chotto-theme-primary-text-color);
@@ -94,7 +94,7 @@
   --chotto-contactinfo-select-options-top: 100%;
   --chotto-contactinfo-select-options-left: 3px;
   --chotto-contactinfo-select-options-right: 0;
-  --chotto-contactinfo-select-options-background: var(--chotto-theme-primary-color);
+  --chotto-contactinfo-select-options-background: rgba(255, 255, 255, 0.95);
   --chotto-contactinfo-select-options-border: var(--chotto-input-border, 1px solid #d0d0d0);
   --chotto-contactinfo-select-options-border-top: none;
   --chotto-contactinfo-select-options-border-radius: 0 0 4px 4px;

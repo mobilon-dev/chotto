@@ -31,6 +31,10 @@ export interface DateMessageStickyThemeCSSVariables {
   '--chotto-datemessagesticky-text-font-size': string;
   /** Цвет фона текста закреплённой даты */
   '--chotto-datemessagesticky-text-background-color': string;
+  /** Эффект размытия фона текста закреплённой даты */
+  '--chotto-datemessagesticky-text-backdrop-filter': string;
+  /** Граница текста закреплённой даты */
+  '--chotto-datemessagesticky-text-border': string;
   /** Цвет текста закреплённой даты */
   '--chotto-datemessagesticky-text-color': string;
 }

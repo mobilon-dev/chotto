@@ -41,6 +41,7 @@
                 <template #actions>
                   <div class="actions">
                     <button
+                      class="add-chat-button"
                       title="Добавить чат с контактом"
                       @click="createChat"
                     >
@@ -1195,6 +1196,17 @@ onMounted(() => {
   }
   50% {
     opacity: 0.6;
+  }
+}
+
+.add-chat-button {
+  background-color: transparent;
+  border: none;
+  color: gray;
+  cursor: pointer;
+
+  :hover {
+    color: black;
   }
 }
 </style>

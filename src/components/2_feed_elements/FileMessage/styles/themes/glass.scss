@@ -33,7 +33,7 @@
     rgba(255, 255, 255, 0.35),
     rgba(248, 250, 252, 0.20)
   );
-  --chotto-filemessage-left-backdrop-filter: blur(16px) saturate(180%);
+  --chotto-filemessage-left-backdrop-filter: none;
   --chotto-filemessage-left-border: none;
   --chotto-filemessage-left-box-shadow: 
     0 8px 32px rgba(15, 23, 42, 0.12),
@@ -44,7 +44,7 @@
     rgba(209, 250, 229, 0.40),
     rgba(167, 243, 208, 0.25)
   );
-  --chotto-filemessage-right-backdrop-filter: blur(16px) saturate(180%);
+  --chotto-filemessage-right-backdrop-filter: none;
   --chotto-filemessage-right-border: none;
   --chotto-filemessage-right-box-shadow: 
     0 8px 32px rgba(15, 23, 42, 0.12),

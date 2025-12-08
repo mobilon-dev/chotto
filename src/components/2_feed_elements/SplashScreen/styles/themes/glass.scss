@@ -1,8 +1,8 @@
 [data-theme="glass"] {
   // SplashScreen container variables
   --chotto-splashscreen-container-border-radius: 16px;
-  --chotto-splashscreen-container-background-color: transparent;
-  --chotto-splashscreen-container-backdrop-filter: blur(14px) saturate(150%);
+  --chotto-splashscreen-container-background-color: rgba(255, 255, 255, 0.2);
+  --chotto-splashscreen-container-backdrop-filter: blur(8px) saturate(150%);
   --chotto-splashscreen-container-padding: 20px;
 
   // SplashScreen container children variables

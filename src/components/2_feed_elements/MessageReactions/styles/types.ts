@@ -134,6 +134,15 @@ export interface MessageReactionsThemeCSSVariables {
   /** События указателя кнопки добавления реакции когда есть чипы */
   '--chotto-messagereactions-add-has-chip-pointer-events': string;
 
+  /** Высота строки span внутри кнопки добавления реакции */
+  '--chotto-messagereactions-add-span-line-height': string;
+  /** Отображение span внутри кнопки добавления реакции */
+  '--chotto-messagereactions-add-span-display': string;
+  /** Вертикальное выравнивание span внутри кнопки добавления реакции */
+  '--chotto-messagereactions-add-span-align-items': string;
+  /** Горизонтальное выравнивание span внутри кнопки добавления реакции */
+  '--chotto-messagereactions-add-span-justify-content': string;
+
   /** Позиционирование панели быстрых реакций */
   '--chotto-messagereactions-quick-panel-position': string;
   /** Отступ сверху панели быстрых реакций */

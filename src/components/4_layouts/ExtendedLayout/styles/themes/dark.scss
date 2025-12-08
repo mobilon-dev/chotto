@@ -19,6 +19,7 @@
   --chotto-extendedlayout-first-col-border-right: var(--chotto-theme-border, none);
   --chotto-extendedlayout-first-col-border-bottom: var(--chotto-theme-border, none);
   --chotto-extendedlayout-first-col-background-color: #262626;
+  --chotto-extendedlayout-first-col-backdrop-filter: none;
 
   // ExtendedLayout second-col variables
   --chotto-extendedlayout-second-col-position: relative;
@@ -31,6 +32,7 @@
   --chotto-extendedlayout-second-col-border-right: var(--chotto-theme-border, none);
   --chotto-extendedlayout-second-col-border-bottom: var(--chotto-theme-border, none);
   --chotto-extendedlayout-second-col-background-color: #171717;
+  --chotto-extendedlayout-second-col-backdrop-filter: none;
 
   // ExtendedLayout third-col variables
   --chotto-extendedlayout-third-col-position: relative;

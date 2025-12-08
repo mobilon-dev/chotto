@@ -1,5 +1,5 @@
 [data-theme="green"] {
-  --chotto-sidebar-padding-container: 10px 8px 22px 8px;
+  --chotto-sidebar-padding-container: 0 8px 7px 8px;
   --chotto-sidebar-row-gap-list: 14px;
   --chotto-sidebar-image-active-border: 3px solid #10b981;
   --chotto-sidebar-list-fixed-border-top: none;
@@ -23,9 +23,6 @@
   --chotto-sidebar-scroll-container-webkit-scrollbar-display: none;
   
   // List fixed
-  --chotto-sidebar-list-fixed-position: sticky;
-  --chotto-sidebar-list-fixed-top: 0;
-  --chotto-sidebar-list-fixed-z-index: 3;
   --chotto-sidebar-layout-extended-first-col-bg: #f5f5f5;
   --chotto-sidebar-list-fixed-padding: 12px 10px 22px;
   --chotto-sidebar-list-fixed-margin-bottom: 15px;
@@ -109,13 +106,10 @@
   --chotto-sidebar-image-active-opacity: 1;
   
   // Settings container
-  --chotto-sidebar-settings-container-position: absolute;
-  --chotto-sidebar-settings-container-bottom: 7px;
-  --chotto-sidebar-settings-container-left: 0;
-  --chotto-sidebar-settings-container-right: 0;
   --chotto-sidebar-settings-container-display: flex;
   --chotto-sidebar-settings-container-justify-content: center;
-  --chotto-sidebar-settings-container-z-index: 2;
+  --chotto-sidebar-settings-container-padding: 0;
+  --chotto-sidebar-settings-container-margin-top: 0;
   
   // Settings button
   --chotto-sidebar-settings-btn-background: none;
@@ -130,6 +124,7 @@
   --chotto-sidebar-settings-btn-border-radius: 50%;
   --chotto-sidebar-settings-btn-transition: background-color 0.2s;
   --chotto-sidebar-settings-btn-hover-background-color: var(--chotto-theme-item-background-color-hover, #E8F5E9);
+  --chotto-sidebar-settings-icon-color: var(--chotto-theme-secondary-text-color, #5F5F5F);
   
   // Selected bar
   --chotto-sidebar-selected-bar-position: absolute;

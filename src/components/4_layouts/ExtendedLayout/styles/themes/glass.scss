@@ -16,9 +16,10 @@
   --chotto-extendedlayout-first-col-flex-direction: column;
   --chotto-extendedlayout-first-col-height: inherit;
   --chotto-extendedlayout-first-col-width: 70px;
-  --chotto-extendedlayout-first-col-border-right: var(--chotto-theme-border, none);
+  --chotto-extendedlayout-first-col-border-right: 1px solid rgba(255, 255, 255, 0.2);
   --chotto-extendedlayout-first-col-border-bottom: var(--chotto-theme-border, none);
-  --chotto-extendedlayout-first-col-background-color: #FAF6F4;
+  --chotto-extendedlayout-first-col-background-color: rgba(0, 0, 0, 0.2);
+  --chotto-extendedlayout-first-col-backdrop-filter: blur(12px) saturate(140%);
 
   // ExtendedLayout second-col variables
   --chotto-extendedlayout-second-col-position: relative;
@@ -28,9 +29,10 @@
   --chotto-extendedlayout-second-col-height: inherit;
   --chotto-extendedlayout-second-col-width: 508px;
   --chotto-extendedlayout-second-col-overflow: hidden;
-  --chotto-extendedlayout-second-col-border-right: var(--chotto-theme-border, none);
+  --chotto-extendedlayout-second-col-border-right: 1px solid rgba(255, 255, 255, 0.2);
   --chotto-extendedlayout-second-col-border-bottom: var(--chotto-theme-border, none);
-  --chotto-extendedlayout-second-col-background-color: #ffffff;
+  --chotto-extendedlayout-second-col-background-color: rgba(0, 0, 0, 0.2);
+  --chotto-extendedlayout-second-col-backdrop-filter: blur(12px) saturate(140%);
 
   // ExtendedLayout third-col variables
   --chotto-extendedlayout-third-col-position: relative;

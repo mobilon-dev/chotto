@@ -165,6 +165,8 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-menu-right': string;
   /** Цвет фона меню атрибутов */
   '--chotto-communicationpanel-menu-background': string;
+  /** Backdrop filter меню атрибутов */
+  '--chotto-communicationpanel-menu-backdrop-filter': string;
   /** Граница меню атрибутов */
   '--chotto-communicationpanel-menu-border': string;
   /** Радиус границы меню атрибутов */
@@ -317,6 +319,8 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-submenu-left': string;
   /** Цвет фона подменю */
   '--chotto-communicationpanel-submenu-background': string;
+  /** Backdrop filter подменю */
+  '--chotto-communicationpanel-submenu-backdrop-filter': string;
   /** Граница подменю */
   '--chotto-communicationpanel-submenu-border': string;
   /** Радиус границы подменю */

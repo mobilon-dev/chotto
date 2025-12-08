@@ -28,10 +28,14 @@
   // Fixed items
   --chotto-chatlist-fixed-z-index: 100;
   --chotto-chatlist-fixed-display: block;
-  --chotto-chatlist-fixed-position: sticky;
+  --chotto-chatlist-fixed-position: static;
   --chotto-chatlist-fixed-background-color: #ffffff;
+  --chotto-chatlist-fixed-backdrop-filter: none;
   --chotto-chatlist-fixed-top: 0;
   --chotto-chatlist-fixed-bottom: 0;
+  --chotto-chatlist-fixed-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --chotto-chatlist-fixed-top-margin-bottom: 0;
+  --chotto-chatlist-fixed-bottom-margin-top: 0;
   
   // Title container
   --chotto-chatlist-title-container-position: relative;

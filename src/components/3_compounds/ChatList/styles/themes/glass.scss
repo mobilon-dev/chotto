@@ -28,10 +28,14 @@
   // Fixed items
   --chotto-chatlist-fixed-z-index: 100;
   --chotto-chatlist-fixed-display: block;
-  --chotto-chatlist-fixed-position: sticky;
-  --chotto-chatlist-fixed-background-color: #ffffff;
+  --chotto-chatlist-fixed-position: static;
+  --chotto-chatlist-fixed-background-color: transparent;
+  --chotto-chatlist-fixed-backdrop-filter: none;
   --chotto-chatlist-fixed-top: 0;
   --chotto-chatlist-fixed-bottom: 0;
+  --chotto-chatlist-fixed-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  --chotto-chatlist-fixed-top-margin-bottom: 0;
+  --chotto-chatlist-fixed-bottom-margin-top: 0;
   
   // Title container
   --chotto-chatlist-title-container-position: relative;
@@ -46,7 +50,7 @@
   --chotto-chatlist-title-font-family: var(--chotto-theme-header-font, var(--chotto-theme-font-family));
   --chotto-chatlist-title-font-size: var(--chotto-theme-header-font-size);
   --chotto-chatlist-title-font-weight: var(--chotto-theme-header-font-weight);
-  --chotto-chatlist-title-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-chatlist-title-text-color: #ffffffc6;
   
   // Context menu
   --chotto-chatlist-context-menu-position: absolute;

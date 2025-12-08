@@ -11,14 +11,14 @@
   // ChatFilter input variables
   --chotto-chatfilter-input-width: 100%;
   --chotto-chatfilter-input-background-color: transparent;
-  --chotto-chatfilter-input-color: var(--chotto-theme-primary-text-color);
+  --chotto-chatfilter-input-color: #ffffff;
   --chotto-chatfilter-input-padding: 0.5rem 0.75rem;
   --chotto-chatfilter-input-padding-left: 40px;
-  --chotto-chatfilter-input-border: 1px solid #d0d0d0;
+  --chotto-chatfilter-input-border: none;
   --chotto-chatfilter-input-border-radius: 5px;
   --chotto-chatfilter-input-font-size: 14px;
   --chotto-chatfilter-input-transition: border-color 0.2s;
-  --chotto-chatfilter-input-background: transparent;
+  --chotto-chatfilter-input-background: rgba(0, 0, 0, 0.2);
   --chotto-chatfilter-input-placeholder-color: var(--chotto-theme-secondary-text-color);
   --chotto-chatfilter-input-hover-border-color: #737373;
   --chotto-chatfilter-input-focus-border-color: #404040;

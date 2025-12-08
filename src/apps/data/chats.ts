@@ -2,7 +2,7 @@ import tatianaImg from '../data/images/image1.png'
 
 export const chats = [
   {
-    chatId: 1, name: "Василий ВасилийВасилийВасилий Василий",
+    chatId: 1, name: "Васильев Василий Васильевич",
     avatar: 'https://img.freepik.com/free-photo/smiley-man-relaxing-outdoors_23-2148739334.jpg',
     countUnread: 102,
     lastMessage: 'Длинное сообщение сомнительного характера в контексте размещения на малой строке',

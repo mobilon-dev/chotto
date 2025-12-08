@@ -79,6 +79,13 @@
   z-index: var(--chotto-messagereactions-add-z-index, 1);
 }
 
+.message-reactions__add span {
+  line-height: var(--chotto-messagereactions-add-span-line-height, 1);
+  display: var(--chotto-messagereactions-add-span-display, inline-flex);
+  align-items: var(--chotto-messagereactions-add-span-align-items, center);
+  justify-content: var(--chotto-messagereactions-add-span-justify-content, center);
+}
+
 // Для левых сообщений - кнопка справа от компонента
 .message-reactions:not(.is-right-message) .message-reactions__add {
   right: var(--chotto-messagereactions-add-left-right, 0);

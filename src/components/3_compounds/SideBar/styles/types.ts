@@ -49,12 +49,6 @@ export interface SideBarThemeCSSVariables {
   '--chotto-sidebar-scroll-container-webkit-scrollbar-display': string;
 
   // List fixed
-  /** Позиционирование фиксированного списка */
-  '--chotto-sidebar-list-fixed-position': string;
-  /** Позиция фиксированного списка сверху */
-  '--chotto-sidebar-list-fixed-top': string;
-  /** Z-index фиксированного списка */
-  '--chotto-sidebar-list-fixed-z-index': string;
   /** Фон расширенной первой колонки лэйаута */
   '--chotto-sidebar-layout-extended-first-col-bg': string;
   /** Отступы фиксированного списка */
@@ -203,20 +197,14 @@ export interface SideBarThemeCSSVariables {
   '--chotto-sidebar-image-active-opacity': string;
 
   // Settings container
-  /** Позиционирование контейнера настроек */
-  '--chotto-sidebar-settings-container-position': string;
-  /** Позиция контейнера настроек снизу */
-  '--chotto-sidebar-settings-container-bottom': string;
-  /** Позиция контейнера настроек слева */
-  '--chotto-sidebar-settings-container-left': string;
-  /** Позиция контейнера настроек справа */
-  '--chotto-sidebar-settings-container-right': string;
   /** Отображение контейнера настроек */
   '--chotto-sidebar-settings-container-display': string;
   /** Выравнивание по главной оси контейнера настроек */
   '--chotto-sidebar-settings-container-justify-content': string;
-  /** Z-index контейнера настроек */
-  '--chotto-sidebar-settings-container-z-index': string;
+  /** Отступы контейнера настроек */
+  '--chotto-sidebar-settings-container-padding': string;
+  /** Отступ сверху контейнера настроек */
+  '--chotto-sidebar-settings-container-margin-top': string;
 
   // Settings button
   /** Цвет фона кнопки настроек */
@@ -243,6 +231,8 @@ export interface SideBarThemeCSSVariables {
   '--chotto-sidebar-settings-btn-transition': string;
   /** Цвет фона hover кнопки настроек */
   '--chotto-sidebar-settings-btn-hover-background-color': string;
+  /** Цвет иконки настроек */
+  '--chotto-sidebar-settings-icon-color': string;
 
   // Selected bar
   /** Позиционирование выбранной полосы */

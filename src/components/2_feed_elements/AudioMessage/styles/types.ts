@@ -69,6 +69,8 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-right-arrow-height': string;
   /** Базовая рамка хвостика справа */
   '--chotto-audiomessage-right-arrow-border': string;
+  /** Верхняя часть рамки хвостика справа (цвет пузыря) */
+  '--chotto-audiomessage-right-arrow-border-top': string;
   /** Слой псевдоэлемента справа */
   '--chotto-audiomessage-right-arrow-z-index': string;
 
@@ -103,6 +105,10 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-play-pause-height': string;
   /** Скругление кнопки play/pause */
   '--chotto-audiomessage-play-pause-border-radius': string;
+  /** Эффект размытия фона кнопки play/pause */
+  '--chotto-audiomessage-play-pause-backdrop-filter': string;
+  /** Тень кнопки play/pause */
+  '--chotto-audiomessage-play-pause-box-shadow': string;
   /** Отображение кнопки play/pause */
   '--chotto-audiomessage-play-pause-display': string;
   /** Выравнивание элементов кнопки play/pause */
@@ -501,8 +507,20 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-content-border-radius': string;
   /** Цвет фона левого пузыря */
   '--chotto-audiomessage-left-background-color': string;
+  /** Эффект размытия фона левого пузыря */
+  '--chotto-audiomessage-left-backdrop-filter': string;
+  /** Граница левого пузыря */
+  '--chotto-audiomessage-left-border': string;
+  /** Тень левого пузыря */
+  '--chotto-audiomessage-left-box-shadow': string;
   /** Цвет фона правого пузыря */
   '--chotto-audiomessage-right-background-color': string;
+  /** Эффект размытия фона правого пузыря */
+  '--chotto-audiomessage-right-backdrop-filter': string;
+  /** Граница правого пузыря */
+  '--chotto-audiomessage-right-border': string;
+  /** Тень правого пузыря */
+  '--chotto-audiomessage-right-box-shadow': string;
   /** Цвет фона иконки типа сообщения (play/pause) */
   '--chotto-audiomessage-type-icon-background-color': string;
   /** Размер иконки типа сообщения (play/pause) */

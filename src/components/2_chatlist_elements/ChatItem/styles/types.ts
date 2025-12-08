@@ -119,6 +119,8 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-name-font-size': string;
   /** Толщина шрифта имени */
   '--chotto-chatitem-name-font-weight': string;
+  /** Цвет текста имени */
+  '--chotto-chatitem-name-text-color': string;
 
   // Last message
   /** Переполнение последнего сообщения */

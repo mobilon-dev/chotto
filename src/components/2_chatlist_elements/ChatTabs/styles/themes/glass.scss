@@ -14,15 +14,15 @@
   --chotto-chattabs-item-align-items: center;
   --chotto-chattabs-item-justify-content: center;
   --chotto-chattabs-item-font-size: var(--chotto-theme-text-font-size);
-  --chotto-chattabs-item-border: 1px solid var(--chotto-theme-item-border-color, #d0d0d0);
+  --chotto-chattabs-item-border: 1px solid rgba(255, 255, 255, 0.2);
   --chotto-chattabs-item-border-radius: 20px;
   --chotto-chattabs-item-height: 26px;
   --chotto-chattabs-item-min-width: 61px;
   --chotto-chattabs-item-color: var(--chotto-theme-secondary-text-color);
   --chotto-chattabs-item-active-color: var(--chotto-theme-primary-text-color);
   --chotto-chattabs-item-active-font-weight: 600;
-  --chotto-chattabs-item-active-background-color: var(--chotto-theme-item-background-color-focus);
-  --chotto-chattabs-item-active-border: 1px solid var(--chotto-theme-item-border-color, #d0d0d0);
+  --chotto-chattabs-item-active-background-color: rgba(255, 255, 255, 0.2);
+  --chotto-chattabs-item-active-border: 1px solid rgba(255, 255, 255, 0.2);
   --chotto-chattabs-item-hover-background-color: var(--chotto-theme-item-background-color-hover);
 
   // ChatTabs button variables

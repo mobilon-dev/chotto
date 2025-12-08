@@ -64,7 +64,9 @@
     width: var(--chotto-audiomessage-play-pause-width, 50px);
     height: var(--chotto-audiomessage-play-pause-height, 50px);
     border-radius: var(--chotto-audiomessage-play-pause-border-radius, 50%);
-    background-color: var(--chotto-audiomessage-type-icon-background-color, #FFFFFF);
+    background: var(--chotto-audiomessage-type-icon-background-color, #FFFFFF);
+    backdrop-filter: var(--chotto-audiomessage-play-pause-backdrop-filter, none);
+    box-shadow: var(--chotto-audiomessage-play-pause-box-shadow, none);
     display: var(--chotto-audiomessage-play-pause-display, flex);
     align-items: var(--chotto-audiomessage-play-pause-align-items, center);
     justify-content: var(--chotto-audiomessage-play-pause-justify-content, center);
@@ -450,7 +452,10 @@
 
     .audio-message__content {
       grid-column: var(--chotto-audiomessage-left-content-grid-column, 2);
-      background-color: var(--chotto-audiomessage-left-background-color, #d4d4d4);
+      background: var(--chotto-audiomessage-left-background-color, #d4d4d4);
+      backdrop-filter: var(--chotto-audiomessage-left-backdrop-filter, none);
+      border: var(--chotto-audiomessage-left-border, none);
+      box-shadow: var(--chotto-audiomessage-left-box-shadow, none);
     }
 
     .audio-message__content.with-avatar-indent {
@@ -496,7 +501,10 @@
     .audio-message__content {
       grid-column: var(--chotto-audiomessage-right-content-grid-column, 1);
       margin-left: var(--chotto-audiomessage-right-content-margin-left, auto);
-      background-color: var(--chotto-audiomessage-right-background-color, #a7f3d0);
+      background: var(--chotto-audiomessage-right-background-color, #a7f3d0);
+      backdrop-filter: var(--chotto-audiomessage-right-backdrop-filter, none);
+      border: var(--chotto-audiomessage-right-border, none);
+      box-shadow: var(--chotto-audiomessage-right-box-shadow, none);
     }
 
     .audio-message__content.with-avatar-indent {

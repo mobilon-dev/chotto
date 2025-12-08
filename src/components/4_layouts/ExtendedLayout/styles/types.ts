@@ -39,6 +39,8 @@ export interface ExtendedLayoutThemeCSSVariables {
   '--chotto-extendedlayout-first-col-border-bottom': string;
   /** Цвет фона первой колонки */
   '--chotto-extendedlayout-first-col-background-color': string;
+  /** Эффект размытия фона первой колонки */
+  '--chotto-extendedlayout-first-col-backdrop-filter': string;
 
   // Second column
   /** Позиционирование второй колонки */
@@ -61,6 +63,8 @@ export interface ExtendedLayoutThemeCSSVariables {
   '--chotto-extendedlayout-second-col-border-bottom': string;
   /** Цвет фона второй колонки */
   '--chotto-extendedlayout-second-col-background-color': string;
+  /** Эффект размытия фона второй колонки */
+  '--chotto-extendedlayout-second-col-backdrop-filter': string;
 
   // Third column
   /** Позиционирование третьей колонки */

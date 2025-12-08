@@ -12,13 +12,13 @@
   --chotto-chatitem-divider-translate-x: 15%;
   --chotto-chatitem-divider-width: 416px;
   --chotto-chatitem-divider-height: 1px;
-  --chotto-chatitem-divider-color: #F3F3F3;
+  --chotto-chatitem-divider-color: rgba(255, 255, 255, 0.2);
   --chotto-chatitem-divider-bottom: 0;
   
   // Selected state
   --chotto-chatitem-selected-cursor: pointer;
-  --chotto-chatitem-container-hover-bg: var(--chotto-theme-item-background-color-hover);
-  --chotto-chatitem-selected-bg: var(--chotto-theme-item-background-color-focus);
+  --chotto-chatitem-container-hover-bg: #2524242d;
+  --chotto-chatitem-selected-bg: #2524244f;
   
   // Avatar container
   --chotto-chatitem-avatar-container-position: relative;
@@ -63,6 +63,7 @@
   --chotto-chatitem-name-box-orient: vertical;
   --chotto-chatitem-name-font-size: var(--chotto-theme-title-font-size);
   --chotto-chatitem-name-font-weight: var(--chotto-theme-title-font-weight);
+  --chotto-chatitem-name-text-color: #ffffffc6;
   
   // Last message
   --chotto-chatitem-last-message-overflow: hidden;
@@ -71,7 +72,7 @@
   --chotto-chatitem-last-message-line-clamp: 1;
   --chotto-chatitem-last-message-box-orient: vertical;
   --chotto-chatitem-last-message-font-size: var(--chotto-theme-text-font-size);
-  --chotto-chatitem-last-message-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-chatitem-last-message-text-color: #ffffff73;
   
   // Details container
   --chotto-chatitem-details-container-position: relative;
@@ -119,7 +120,7 @@
   // Time
   --chotto-chatitem-time-white-space: nowrap;
   --chotto-chatitem-time-font-size: var(--chotto-theme-additional-text-font-size);
-  --chotto-chatitem-time-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-chatitem-time-text-color: #ffffff8e;
   --chotto-chatitem-time-position: absolute;
   --chotto-chatitem-time-top: 0;
   --chotto-chatitem-time-right: 0;
@@ -174,7 +175,7 @@
   
   // Dialog selected
   --chotto-chatitem-dialog-selected-cursor: pointer;
-  --chotto-chatitem-dialog-selected-bg: var(--chotto-theme-item-background-color-focus);
+  --chotto-chatitem-dialog-selected-bg: rgba(0, 0, 0, 0.2);
   
   // Dialog text container
   --chotto-chatitem-dialog-text-container-display: flex;
@@ -185,7 +186,7 @@
   --chotto-chatitem-dialog-text-container-margin: auto;
   --chotto-chatitem-text-container-padding: 0 5px;
   --chotto-chatitem-dialog-text-font-size: var(--chotto-theme-text-font-size);
-  --chotto-chatitem-dialog-text-color: var(--chotto-theme-primary-text-color);
+  --chotto-chatitem-dialog-text-color: #ffffff95;
   
   // Dialog name
   --chotto-chatitem-dialog-name-display: -webkit-box;
@@ -196,7 +197,7 @@
   --chotto-chatitem-dialog-time-display: -webkit-box;
   --chotto-chatitem-dialog-time-line-clamp: 1;
   --chotto-chatitem-dialog-time-box-orient: vertical;
-  --chotto-chatitem-dialog-time-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-chatitem-dialog-time-text-color: #ffffff67;
   --chotto-chatitem-dialog-time-font-size: var(--chotto-theme-additional-text-font-size);
   
   // Status first icon

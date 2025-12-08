@@ -63,6 +63,7 @@
   --chotto-chatitem-name-box-orient: vertical;
   --chotto-chatitem-name-font-size: var(--chotto-theme-title-font-size);
   --chotto-chatitem-name-font-weight: var(--chotto-theme-title-font-weight);
+  --chotto-chatitem-name-text-color: var(--chotto-theme-primary-text-color);
   
   // Last message
   --chotto-chatitem-last-message-overflow: hidden;
@@ -70,7 +71,7 @@
   --chotto-chatitem-last-message-display: -webkit-box;
   --chotto-chatitem-last-message-line-clamp: 1;
   --chotto-chatitem-last-message-box-orient: vertical;
-  --chotto-chatitem-last-message-font-size: var(--chotto-theme-text-font_size);
+  --chotto-chatitem-last-message-font-size: var(--chotto-theme-text-font-size);
   --chotto-chatitem-last-message-text-color: var(--chotto-theme-secondary-text-color);
   
   // Details container

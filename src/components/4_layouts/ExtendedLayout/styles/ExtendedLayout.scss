@@ -19,7 +19,9 @@
     width: var(--chotto-extendedlayout-first-col-width, 70px);
     border-right: var(--chotto-extendedlayout-first-col-border-right, none);
     border-bottom: var(--chotto-extendedlayout-first-col-border-bottom, none);
-    background-color: var(--chotto-extendedlayout-first-col-background-color, #FAF6F4);
+    background: var(--chotto-extendedlayout-first-col-background-color, #FAF6F4);
+    backdrop-filter: var(--chotto-extendedlayout-first-col-backdrop-filter, none);
+    -webkit-backdrop-filter: var(--chotto-extendedlayout-first-col-backdrop-filter, none);
   }
 
   &__second-col {
@@ -32,7 +34,9 @@
     overflow: var(--chotto-extendedlayout-second-col-overflow, hidden);
     border-right: var(--chotto-extendedlayout-second-col-border-right, none);
     border-bottom: var(--chotto-extendedlayout-second-col-border-bottom, none);
-    background-color: var(--chotto-extendedlayout-second-col-background-color, #ffffff);
+    background: var(--chotto-extendedlayout-second-col-background-color, #ffffff);
+    backdrop-filter: var(--chotto-extendedlayout-second-col-backdrop-filter, none);
+    -webkit-backdrop-filter: var(--chotto-extendedlayout-second-col-backdrop-filter, none);
   }
 
   &__third-col {
@@ -45,6 +49,7 @@
     border-bottom: var(--chotto-extendedlayout-third-col-border-bottom, none);
     background: var(--chotto-extendedlayout-third-col-background-color, #FAF6F4);
     backdrop-filter: var(--chotto-extendedlayout-third-col-backdrop-filter, none);
+    -webkit-backdrop-filter: var(--chotto-extendedlayout-third-col-backdrop-filter, none);
   }
 }
 

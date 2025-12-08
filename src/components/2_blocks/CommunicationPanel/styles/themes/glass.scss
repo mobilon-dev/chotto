@@ -22,7 +22,7 @@
   --chotto-communicationpanel-btn-position: relative;
   --chotto-communicationpanel-btn-background: transparent;
   --chotto-communicationpanel-btn-color: #404040;
-  --chotto-communicationpanel-btn-hover-background: #e5e5e5;
+  --chotto-communicationpanel-btn-hover-background: #e5e5e570;
   --chotto-communicationpanel-btn-hover-color: #262626;
   --chotto-communicationpanel-btn-active-color: #007CFF;
   --chotto-communicationpanel-btn-active-background: transparent;
@@ -81,15 +81,22 @@
 
   // Attributes menu
   --chotto-communicationpanel-menu-position: absolute;
-  --chotto-communicationpanel-menu-background: #ffffff;
-  --chotto-communicationpanel-menu-border: 1px solid #e5e5e5;
-  --chotto-communicationpanel-menu-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
+  --chotto-communicationpanel-menu-background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.75),
+    rgba(248, 250, 252, 0.95)
+  );
+  --chotto-communicationpanel-menu-backdrop-filter: blur(4px) saturate(150%);
+  --chotto-communicationpanel-menu-border: 1px solid rgba(255, 255, 255, 0.3);
+  --chotto-communicationpanel-menu-box-shadow: 
+    0 8px 32px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   --chotto-communicationpanel-menu-top: 108%;
   --chotto-communicationpanel-menu-left: 0;
   --chotto-communicationpanel-menu-right: auto;
   --chotto-communicationpanel-menu-border-radius: 4px;
   --chotto-communicationpanel-menu-padding: 8px 0;
-  --chotto-communicationpanel-menu-z-index: 1000;
+  --chotto-communicationpanel-menu-z-index: 10000;
   --chotto-communicationpanel-menu-max-height: 300px;
   --chotto-communicationpanel-menu-min-width: auto;
   --chotto-communicationpanel-menu-gap: 2px;
@@ -153,9 +160,16 @@
   --chotto-communicationpanel-submenu-position: absolute;
   --chotto-communicationpanel-submenu-display: flex;
   --chotto-communicationpanel-submenu-flex-direction: column;
-  --chotto-communicationpanel-submenu-background: #f5f5f5;
-  --chotto-communicationpanel-submenu-border: 1px solid #e5e5e5;
-  --chotto-communicationpanel-submenu-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
+  --chotto-communicationpanel-submenu-background: linear-gradient(
+    135deg,
+    rgba(245, 245, 245, 0.85),
+    rgba(250, 250, 250, 0.9)
+  );
+  --chotto-communicationpanel-submenu-backdrop-filter: blur(4px) saturate(150%);
+  --chotto-communicationpanel-submenu-border: 1px solid rgba(255, 255, 255, 0.3);
+  --chotto-communicationpanel-submenu-box-shadow: 
+    0 8px 32px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   --chotto-communicationpanel-submenu-header-color: #737373;
   --chotto-communicationpanel-submenu-item-display: flex;
   --chotto-communicationpanel-submenu-item-align-items: center;
@@ -174,7 +188,7 @@
   --chotto-communicationpanel-submenu-padding: 8px 0;
   --chotto-communicationpanel-submenu-min-width: 250px;
   --chotto-communicationpanel-submenu-max-width: none;
-  --chotto-communicationpanel-submenu-z-index: 1001;
+  --chotto-communicationpanel-submenu-z-index: 10001;
   --chotto-communicationpanel-submenu-gap: 0;
   --chotto-communicationpanel-submenu-opacity: 1;
   --chotto-communicationpanel-submenu-transform: none;

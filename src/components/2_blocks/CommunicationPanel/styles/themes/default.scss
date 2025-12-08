@@ -82,6 +82,7 @@
   // Attributes menu
   --chotto-communicationpanel-menu-position: absolute;
   --chotto-communicationpanel-menu-background: white;
+  --chotto-communicationpanel-menu-backdrop-filter: none;
   --chotto-communicationpanel-menu-border: 1px solid #e9e7e7;
   --chotto-communicationpanel-menu-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.08);
   --chotto-communicationpanel-menu-top: 108%;
@@ -154,6 +155,7 @@
   --chotto-communicationpanel-submenu-display: flex;
   --chotto-communicationpanel-submenu-flex-direction: column;
   --chotto-communicationpanel-submenu-background: white;
+  --chotto-communicationpanel-submenu-backdrop-filter: none;
   --chotto-communicationpanel-submenu-border: 1px solid #e0e0e0;
   --chotto-communicationpanel-submenu-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.08);
   --chotto-communicationpanel-submenu-header-color: var(--chotto-theme-secondary-text-color);

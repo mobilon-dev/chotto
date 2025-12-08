@@ -55,10 +55,18 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-fixed-position': string;
   /** Цвет фона зафиксированных элементов */
   '--chotto-chatlist-fixed-background-color': string;
+  /** Эффект размытия фона зафиксированных элементов */
+  '--chotto-chatlist-fixed-backdrop-filter': string;
   /** Позиция зафиксированных элементов сверху */
   '--chotto-chatlist-fixed-top': string;
   /** Позиция зафиксированных элементов снизу */
   '--chotto-chatlist-fixed-bottom': string;
+  /** Тень зафиксированных элементов */
+  '--chotto-chatlist-fixed-box-shadow': string;
+  /** Отступ снизу для зафиксированных элементов сверху */
+  '--chotto-chatlist-fixed-top-margin-bottom': string;
+  /** Отступ сверху для зафиксированных элементов снизу */
+  '--chotto-chatlist-fixed-bottom-margin-top': string;
 
   // Title container
   /** Позиционирование контейнера заголовка */

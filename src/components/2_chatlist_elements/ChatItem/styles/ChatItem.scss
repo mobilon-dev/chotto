@@ -30,7 +30,7 @@
     background: var(--chotto-chatitem-selected-bg, #F3F3F3);
 
     .chat-item__menu-button {
-      background: var(--chotto-chatitem-selected-bg, #F3F3F3);
+      background: var(--chotto-chatitem-menu-button-selected-bg, transparent);
     }
   }
 
@@ -93,6 +93,7 @@
     -webkit-line-clamp: var(--chotto-chatitem-name-line-clamp, 1);
     line-clamp: var(--chotto-chatitem-name-line-clamp, 1);
     -webkit-box-orient: var(--chotto-chatitem-name-box-orient, vertical);
+    color: var(--chotto-chatitem-name-text-color, #1E1E1E);
   }
 
   &__last-message {

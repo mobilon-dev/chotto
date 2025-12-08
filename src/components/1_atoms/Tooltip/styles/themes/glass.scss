@@ -1,8 +1,8 @@
 [data-theme="glass"] {
   // Tooltip text
   --chotto-tooltip-text-color: var(--chotto-theme-text-color, #1E1E1E);
-  --chotto-tooltip-bg-color: var(--chotto-theme-primary-color, #ffffff);
-  --chotto-tooltip-border: 1px solid var(--chotto-theme-border-color, #5F5F5F);
+  --chotto-tooltip-bg-color: rgba(255, 255, 255, 0.4);
+  --chotto-tooltip-border: 1px solid rgba(255, 255, 255, 0.2);
   --chotto-tooltip-border-radius: 5px;
   --chotto-tooltip-padding: 5px 9px 5px 12px;
   --chotto-tooltip-max-width: 372px;

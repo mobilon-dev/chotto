@@ -13,7 +13,8 @@
   &__items {
     display: var(--chotto-chatlist-items-display, block);
     scroll-behavior: var(--chotto-chatlist-items-scroll-behavior, smooth);
-    height: var(--chotto-chatlist-items-height, 100%);
+    flex: 1;
+    min-height: 0;
     overflow-y: var(--chotto-chatlist-items-overflow-y, auto);
     overflow-x: var(--chotto-chatlist-items-overflow-x, hidden);
     padding: var(--chotto-chatlist-items-padding, 0);
@@ -40,19 +41,19 @@
 
   &__fixed-items-top,
   &__fixed-items-bottom {
-    z-index: var(--chotto-chatlist-fixed-z-index, 100);
     display: var(--chotto-chatlist-fixed-display, block);
-    position: var(--chotto-chatlist-fixed-position, sticky);
     background-color: var(--chotto-chatlist-fixed-background-color, #ffffff);
+    backdrop-filter: var(--chotto-chatlist-fixed-backdrop-filter, none);
+    -webkit-backdrop-filter: var(--chotto-chatlist-fixed-backdrop-filter, none);
+    flex-shrink: 0;
   }
 
   &__fixed-items-top {
-    top: var(--chotto-chatlist-fixed-top, 0);
+    margin-bottom: var(--chotto-chatlist-fixed-top-margin-bottom, 0);
   }
 
-
   &__fixed-items-bottom {
-    bottom: var(--chotto-chatlist-fixed-bottom, 0);
+    margin-top: var(--chotto-chatlist-fixed-bottom-margin-top, 0);
   }
 
   &__context-menu {

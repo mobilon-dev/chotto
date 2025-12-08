@@ -10,42 +10,45 @@
       :class="{ 'is-animating': isAnimating }"
       :style="{ top: barTop + 'px', height: barHeight + 'px' }"
     />
-    <div class="sidebar__scroll-container">
-      <ul 
-        class="sidebar__list-fixed"
-        :class="{'sidebar-horizontal__list-fixed' : horizontal}"
+    <!-- Закреплённые элементы (вне скролла) -->
+    <ul 
+      v-if="fixedItems.length > 0"
+      class="sidebar__list-fixed"
+      :class="{'sidebar-horizontal__list-fixed' : horizontal}"
+    >
+      <li
+        v-for="(item, index) in fixedItems"
+        :key="index"
+        class="sidebar__item-fixed"
+        :class="{'sidebar-horizontal__item' : horizontal}"
+        @click="onItemClick($event, item.itemId)"
       >
-        <li
-          v-for="(item, index) in fixedItems"
-          :key="index"
-          class="sidebar__item-fixed"
-          :class="{'sidebar-horizontal__item' : horizontal}"
-          @click="onItemClick($event, item.itemId)"
+        <Tooltip 
+          v-if="item.name" 
+          :text="getName(item.name)" 
+          position="right" 
+          :offset="8"
         >
-          <Tooltip 
-            v-if="item.name" 
-            :text="getName(item.name)" 
-            position="right" 
-            :offset="8"
+          <img
+            :src="item.icon"
+            :alt="item.name"
+            class="sidebar__image"
+            :class="{ 
+              'sidebar__image--active': item.selected === true,
+              'sidebar-horizontal__image' : horizontal 
+            }"
           >
-            <img
-              :src="item.icon"
-              :alt="item.name"
-              class="sidebar__image"
-              :class="{ 
-                'sidebar__image--active': item.selected === true,
-                'sidebar-horizontal__image' : horizontal 
-              }"
-            >
-            <p>Мои</p>
-          </Tooltip>
-          <span
-            v-if="item.notificationCount"
-            class="sidebar__notification-count"
-          >{{ item.notificationCount > 99 ? '99+' : item.notificationCount }}</span>
-        </li>
-      </ul>
+          <p>Мои</p>
+        </Tooltip>
+        <span
+          v-if="item.notificationCount"
+          class="sidebar__notification-count"
+        >{{ item.notificationCount > 99 ? '99+' : item.notificationCount }}</span>
+      </li>
+    </ul>
 
+    <!-- Скроллируемая область с обычными элементами -->
+    <div class="sidebar__scroll-container">
       <ul 
         class="sidebar__list"
         :class="{'sidebar-horizontal__list' : horizontal}"
