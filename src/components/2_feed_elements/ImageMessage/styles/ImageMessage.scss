@@ -2,7 +2,8 @@
 
   &__content {
     position: var(--chotto-imagemessage-content-position, relative);
-    max-width: var(--chotto-imagemessage-content-max-width, 60%);
+    max-width: var(--chotto-imagemessage-content-max-width, min(60%, 430px));
+    width: var(--chotto-imagemessage-content-width, fit-content);
     border-radius: var(--chotto-imagemessage-content-border-radius, 14px);
   }
 
@@ -116,13 +117,21 @@
     display: var(--chotto-imagemessage-preview-button-display, flex);
     flex-direction: var(--chotto-imagemessage-preview-button-flex-direction, column);
     padding: var(--chotto-imagemessage-preview-button-padding, 0);
-
+    max-width: var(--chotto-imagemessage-preview-button-max-width, 430px);
+    max-height: var(--chotto-imagemessage-preview-button-max-height, 430px);
+    width: var(--chotto-imagemessage-preview-button-width, fit-content);
+    height: var(--chotto-imagemessage-preview-button-height, fit-content);
+    overflow: var(--chotto-imagemessage-preview-button-overflow, hidden);
   }
 
   &__preview-image {
     width: var(--chotto-imagemessage-preview-image-width, 100%);
-    max-height: var(--chotto-imagemessage-preview-image-max-height, 500px);
+    height: var(--chotto-imagemessage-preview-image-height, auto);
+    max-width: var(--chotto-imagemessage-preview-image-max-width, 430px);
+    max-height: var(--chotto-imagemessage-preview-image-max-height, 430px);
+    object-fit: var(--chotto-imagemessage-preview-image-object-fit, contain);
     cursor: var(--chotto-imagemessage-preview-image-cursor, zoom-in);
+    display: var(--chotto-imagemessage-preview-image-display, block);
   }
 
   &__modal-image {

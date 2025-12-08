@@ -2,6 +2,7 @@
   // ImageMessage content variables
   --chotto-imagemessage-content-position: relative;
   --chotto-imagemessage-content-max-width: 60%;
+  --chotto-imagemessage-content-width: fit-content;
   --chotto-imagemessage-content-border-radius: 14px;
 
   // ImageMessage avatar variables
@@ -69,11 +70,19 @@
   --chotto-imagemessage-preview-button-display: flex;
   --chotto-imagemessage-preview-button-flex-direction: column;
   --chotto-imagemessage-preview-button-padding: 0;
+  --chotto-imagemessage-preview-button-max-width: 430px;
+  --chotto-imagemessage-preview-button-max-height: 430px;
+  --chotto-imagemessage-preview-button-width: fit-content;
+  --chotto-imagemessage-preview-button-height: fit-content;
+  --chotto-imagemessage-preview-button-overflow: hidden;
 
   // ImageMessage preview image variables
   --chotto-imagemessage-preview-image-width: 100%;
-  --chotto-imagemessage-preview-image-max-height: 500px;
+  --chotto-imagemessage-preview-image-height: auto;
+  --chotto-imagemessage-preview-image-max-width: 430px;
+  --chotto-imagemessage-preview-image-max-height: 430px;
   --chotto-imagemessage-preview-image-cursor: zoom-in;
+  --chotto-imagemessage-preview-image-display: block;
 
   // ImageMessage modal image variables
   --chotto-imagemessage-modal-image-width: 100%;

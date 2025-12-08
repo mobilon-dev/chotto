@@ -6,6 +6,8 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-content-position': string;
   /** Максимальная ширина контейнера контента изображения */
   '--chotto-imagemessage-content-max-width': string;
+  /** Ширина контейнера контента изображения */
+  '--chotto-imagemessage-content-width': string;
   /** Скругление контейнера контента изображения */
   '--chotto-imagemessage-content-border-radius': string;
 
@@ -116,13 +118,29 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-preview-button-flex-direction': string;
   /** Внутренние отступы кнопки превью */
   '--chotto-imagemessage-preview-button-padding': string;
+  /** Максимальная ширина кнопки превью */
+  '--chotto-imagemessage-preview-button-max-width': string;
+  /** Максимальная высота кнопки превью */
+  '--chotto-imagemessage-preview-button-max-height': string;
+  /** Ширина кнопки превью */
+  '--chotto-imagemessage-preview-button-width': string;
+  /** Высота кнопки превью */
+  '--chotto-imagemessage-preview-button-height': string;
+  /** Переполнение кнопки превью */
+  '--chotto-imagemessage-preview-button-overflow': string;
 
   /** Ширина превью-изображения */
   '--chotto-imagemessage-preview-image-width': string;
+  /** Высота превью-изображения */
+  '--chotto-imagemessage-preview-image-height': string;
+  /** Максимальная ширина превью-изображения */
+  '--chotto-imagemessage-preview-image-max-width': string;
   /** Максимальная высота превью-изображения */
   '--chotto-imagemessage-preview-image-max-height': string;
   /** Курсор при наведении на превью */
   '--chotto-imagemessage-preview-image-cursor': string;
+  /** Отображение превью-изображения */
+  '--chotto-imagemessage-preview-image-display': string;
 
   /** Позиционирование кнопки меню сообщения */
   '--chotto-imagemessage-menu-button-position': string;
