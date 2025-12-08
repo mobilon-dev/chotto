@@ -28,6 +28,7 @@
             filter-enabled
             :dialog-tabs="dialogTabs"
             :active-tab-id="activeTabId"
+            :context-menu-trigger="'rightClick'"
             @select="selectChat"
             @expand="expandChat"
             @action="chatAction"
@@ -36,7 +37,7 @@
           >
             <template #header>
               <ChatListHeader
-                title="Mobilon One"
+                title="Mobilon One 0.3"
               >
                 <template #actions>
                   <div class="actions">

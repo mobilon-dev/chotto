@@ -1,11 +1,13 @@
 <template>
   <div>
     <div
+      ref="containerRef"
       class="chat-item__container"
       :class="getClass()"
-      @mouseenter="buttonMenuVisible = true"
+      @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
       @click="selectChat"
+      @contextmenu.prevent="onRightClick"
     >
       <div class="chat-item__avatar-container">
         <span
@@ -59,9 +61,9 @@
 
         <!-- Кнопка меню размещена выше статуса и индикатора -->
         <ButtonContextMenu
-          v-if="buttonMenuVisible && chat.actions"
+          v-if="buttonMenuVisible && chat.actions && contextMenuTrigger === 'hover'"
           mode="click"
-          menu-side="bottom"
+          menu-side="bottom-right"
           :actions="chat.actions"
           @click="clickAction"
           @button-click="BCMclick"
@@ -69,6 +71,19 @@
         >
           <span class="pi pi-ellipsis-h chat-item__actions-trigger" />
         </ButtonContextMenu>
+        
+        <!-- Контекстное меню для режима rightClick -->
+        <Teleport to="body">
+          <ContextMenu
+            v-if="contextMenuTrigger === 'rightClick' && chat.actions && contextMenuVisible"
+            :id="'context-menu-rightclick-' + contextMenuId"
+            :actions="chat.actions"
+            :data-theme="getTheme().theme ? getTheme().theme : 'light'"
+            @click="clickAction"
+            @mouseenter="onContextMenuMouseEnter"
+            @mouseleave="onContextMenuMouseLeave"
+          />
+        </Teleport>
 
         <!-- Контейнер для статуса и непрочитанных -->
         <div class="chat-item__status-unread-container">
@@ -174,20 +189,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch} from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, useId, inject, nextTick} from 'vue'
 
 import { getStatus, statuses } from '@/functions';
 import { t } from '../../../locale/useLocale'
+import { useTheme } from '@/hooks';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
+import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import AvatarIcon from '@/components/1_icons/AvatarIcon.vue';
 import { IAction, IChatItem, IChatDialog } from './types';
+
+const chatAppId = inject('chatAppId')
+const { getTheme } = useTheme(chatAppId as string)
 
 const props = withDefaults(defineProps<{
   chat: IChatItem;
   showDialogs?: boolean;
+  contextMenuTrigger?: 'hover' | 'rightClick';
 }>(), {
   showDialogs: true,
+  contextMenuTrigger: 'hover',
 });
 
 const emit = defineEmits<{
@@ -196,8 +218,11 @@ const emit = defineEmits<{
   expand: [IChatItem];
 }>();
 
+const contextMenuId = useId()
 const buttonMenuVisible = ref(false);
+const contextMenuVisible = ref(false);
 const preventEmit = ref(false)
+const containerRef = ref<HTMLElement | null>(null)
 
 const BCMclick = () => {
   preventEmit.value = true
@@ -225,7 +250,21 @@ const getDialogClass = (dialog: IChatDialog) => {
 
 const clickAction = (action: IAction) => {
   // console.log('action', props.chat.chatId, action);
+  if (props.contextMenuTrigger === 'rightClick') {
+    hideContextMenu()
+  }
   emit('action', { chat: props.chat, ...action });
+}
+
+const hideContextMenu = () => {
+  const contextMenu = document.getElementById('context-menu-rightclick-' + contextMenuId)
+  if (contextMenu) {
+    contextMenu.style.top = '0'
+    contextMenu.style.left = '0'
+    contextMenu.style.opacity = '0'
+    contextMenu.style.display = 'none'
+  }
+  contextMenuVisible.value = false
 }
 
 
@@ -289,12 +328,127 @@ watch(
   { immediate: true }
 )
 
-const onMouseLeave = (event: MouseEvent) => {
-  if (event.relatedTarget instanceof HTMLElement && event.relatedTarget.className == 'context-menu__list')
+const onMouseEnter = () => {
+  if (props.contextMenuTrigger === 'hover') {
     buttonMenuVisible.value = true
-  else 
-    buttonMenuVisible.value = false
+  }
 }
+
+const onMouseLeave = (event: MouseEvent) => {
+  if (props.contextMenuTrigger === 'hover') {
+    if (event.relatedTarget instanceof HTMLElement && event.relatedTarget.className == 'context-menu__list')
+      buttonMenuVisible.value = true
+    else 
+      buttonMenuVisible.value = false
+  }
+}
+
+const onRightClick = (event: MouseEvent) => {
+  if (props.contextMenuTrigger === 'rightClick' && props.chat.actions) {
+    if (contextMenuVisible.value) {
+      // Если меню уже открыто, закрываем его
+      hideContextMenu()
+    } else {
+      // Если меню закрыто, открываем его
+      showContextMenu(event)
+    }
+  }
+}
+
+const showContextMenu = (event: MouseEvent) => {
+  contextMenuVisible.value = true
+  nextTick(() => {
+    const contextMenu = document.getElementById('context-menu-rightclick-' + contextMenuId)
+    if (contextMenu) {
+      // Получаем координаты курсора
+      const mouseX = event.clientX
+      const mouseY = event.clientY
+      
+      // Получаем размеры меню для корректировки позиции
+      contextMenu.style.display = 'inherit'
+      const menuBounds = contextMenu.getBoundingClientRect()
+      contextMenu.style.display = 'none'
+      
+      nextTick(() => {
+        // Получаем размеры окна для проверки границ
+        const windowWidth = window.innerWidth
+        const windowHeight = window.innerHeight
+        const scrollX = window.scrollX || window.pageXOffset
+        const scrollY = window.scrollY || window.pageYOffset
+        
+        // Позиционируем меню относительно курсора
+        // По умолчанию меню открывается справа и снизу от курсора
+        let left = mouseX + scrollX
+        let top = mouseY + scrollY
+        
+        // Проверяем, не выходит ли меню за правую границу экрана
+        if (left + menuBounds.width > windowWidth + scrollX) {
+          left = mouseX + scrollX - menuBounds.width
+        }
+        
+        // Проверяем, не выходит ли меню за нижнюю границу экрана
+        if (top + menuBounds.height > windowHeight + scrollY) {
+          top = mouseY + scrollY - menuBounds.height
+        }
+        
+        // Проверяем, не выходит ли меню за левую границу экрана
+        if (left < scrollX) {
+          left = scrollX
+        }
+        
+        // Проверяем, не выходит ли меню за верхнюю границу экрана
+        if (top < scrollY) {
+          top = scrollY
+        }
+        
+        contextMenu.style.top = top + 'px'
+        contextMenu.style.left = left + 'px'
+        contextMenu.style.opacity = '1'
+        contextMenu.style.display = 'inherit'
+      })
+    }
+  })
+}
+
+const onContextMenuMouseEnter = () => {
+  // Меню остается открытым при наведении
+}
+
+const onContextMenuMouseLeave = () => {
+  // Можно закрыть меню при уходе мыши, или оставить открытым до клика
+}
+
+const handleClickOutside = (event: MouseEvent) => {
+  if (props.contextMenuTrigger === 'rightClick' && contextMenuVisible.value) {
+    const target = event.target as HTMLElement
+    const container = containerRef.value
+    const contextMenu = document.getElementById('context-menu-rightclick-' + contextMenuId)
+    
+    // Закрываем меню, если клик был вне контейнера и вне самого меню
+    if (container && !container.contains(target) && 
+        (!contextMenu || !contextMenu.contains(target))) {
+      hideContextMenu()
+    }
+  }
+}
+
+onMounted(() => {
+  if (props.contextMenuTrigger === 'rightClick') {
+    document.addEventListener('click', handleClickOutside)
+    // Инициализируем меню как скрытое
+    nextTick(() => {
+      const contextMenu = document.getElementById('context-menu-rightclick-' + contextMenuId)
+      if (contextMenu) {
+        contextMenu.style.display = 'none'
+        contextMenu.style.opacity = '0'
+      }
+    })
+  }
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 
 </script>
 

@@ -66,6 +66,7 @@
         class="chat-list__item"
         :chat="chat"
         :show-dialogs="showDialogs"
+        :context-menu-trigger="props.contextMenuTrigger"
         @select="selectChat"
         @expand="expandChat"
         @action="action"
@@ -105,6 +106,7 @@
           class="chat-list__item"
           :chat="chat"
           :show-dialogs="showDialogs"
+          :context-menu-trigger="props.contextMenuTrigger"
           @select="selectChat"
           @expand="expandChat"
           @action="action"
@@ -123,6 +125,7 @@
         class="chat-list__item"
         :chat="chat"
         :show-dialogs="showDialogs"
+        :context-menu-trigger="props.contextMenuTrigger"
         @select="selectChat"
         @expand="expandChat"
         @action="action"
@@ -199,6 +202,11 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false,
+  },
+  contextMenuTrigger: {
+    type: String,
+    default: 'hover',
+    validator: (value) => ['hover', 'rightClick'].includes(value),
   },
 });
 

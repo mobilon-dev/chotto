@@ -1,5 +1,11 @@
 <template>
-  <div class="context-menu__container">
+  <div 
+    :id="id"
+    class="context-menu__container"
+    :data-theme="dataTheme"
+    @mouseenter="emit('mouseenter')"
+    @mouseleave="emit('mouseleave')"
+  >
     <ul class="context-menu__list">
       <li
         v-for="(action, index) in props.actions"
@@ -36,9 +42,17 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  id: {
+    type: String,
+    default: '',
+  },
+  dataTheme: {
+    type: String,
+    default: 'light',
+  },
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(['click', 'mouseenter', 'mouseleave']);
 
 const click = (index) => {
   const action = props.actions[index];
