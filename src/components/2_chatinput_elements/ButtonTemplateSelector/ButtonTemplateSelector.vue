@@ -74,8 +74,8 @@ const props = defineProps({
   }
 })
 
-const chatAppId = inject('chatAppId')
-const { getMessage } = useMessageDraft(chatAppId)
+const chatAppId = inject('chatAppId') as string | undefined
+const { getMessage } = useMessageDraft(chatAppId || '')
 
 const templateButton = ref<HTMLButtonElement | null>(null)
 const template = ref<HTMLElement | null>(null)
@@ -114,7 +114,7 @@ watchEffect(() => {
 
 
 const toggle = () => {
-  if (props.mode == 'click' && props.state == 'active') {
+  if (props.mode == 'click' && props.state == 'active' && template.value) {
     if (template.value.style.display == 'none') {
       template.value.style.display = 'inherit'
     }
@@ -125,19 +125,21 @@ const toggle = () => {
 }
 
 const hover = () => {
-  if (props.mode == 'hover' && props.state == 'active') {
+  if (props.mode == 'hover' && props.state == 'active' && template.value) {
     template.value.style.display = 'inherit'
   }
 }
 
 const hoverout = () => {
-  if (props.mode == 'hover' && props.state == 'active') {
+  if (props.mode == 'hover' && props.state == 'active' && template.value) {
     template.value.style.display = 'none'
   }
 }
 
 const close = () => {
-  template.value.style.display = 'none'
+  if (template.value) {
+    template.value.style.display = 'none'
+  }
 }
 
 onMounted(() => {

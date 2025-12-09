@@ -83,7 +83,7 @@ export const messages = [
       { action: 'delete', title: 'удалить' }]
   },
   {
-    chatId: 1, dialogId: 'dlg_43543555', type: "message.image", url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg", timestamp: '1727027959',
+    chatId: 1, dialogId: 'dlg_43543555', type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", timestamp: '1727027959',
     alt: "Example Image", direction: 'outgoing',
     header: 'Вы',
     views: 1667, messageId: '4',
@@ -259,7 +259,7 @@ export const messages = [
   },
   {
     chatId: 2, type: "message.video", url: "https://filebump2.services.mobilon.ru/file/XgYPv3t1VT1RxoUVPpWvQuyOkpdSCayNgpv1",
-    text: "Привет!", direction: 'outgoing', status: 'read', timestamp: '1727027959',
+    text: "Привет! Это видеосообщение с длииииииииииинным текстом", direction: 'outgoing', status: 'read', timestamp: '1727027959',
     header: 'Вы',
     actions: [
       { action: 'edit', title: 'изменить', icon: 'fa-edit' },
@@ -308,7 +308,7 @@ export const messages = [
     actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
   },
   {
-    chatId: 2, type: "message.image", url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg", alt: "Example Image",
+    chatId: 2, type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", alt: "Example Image",
     header: 'Мария',
     text: 'Привет!',
     direction: 'incoming', subText: '89829445678', timestamp: '1726743559',
@@ -318,7 +318,7 @@ export const messages = [
     text: "Привет!", direction: 'incoming', status: 'read', timestamp: '1727027959'
   },
   {
-    chatId: 3, type: "message.image", url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg", alt: "Example Image",
+    chatId: 3, type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", alt: "Example Image",
     direction: 'outgoing', timestamp: '1726743559',
   },
   {
@@ -335,17 +335,17 @@ export const messages = [
     }
   },
   {
-    chatId: 4, type: "message.image", url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg", alt: "Example Image",
+    chatId: 4, type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", alt: "Example Image",
     direction: 'outgoing', timestamp: '1726743559',
   },
   { chatId: 4, type: "message.text", text: "Оченьдлинноесообщениебезпробеловзанимающеесразунесколькострокивызывающеестранноеповедениеокон!", direction: 'incoming', status: 'read', timestamp: '1727027959' },
   { chatId: 4, type: "message.text", text: "Оченьдлинноесообщениебезпробеловзанимающеесразунесколькострокивызывающеестранноеповедениеокон!", direction: 'outgoing', status: 'read', timestamp: '1727027958' },
   {
-    chatId: 4, type: "message.image", url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg", alt: "Example Image",
+    chatId: 4, type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", alt: "Example Image",
     direction: 'outgoing', timestamp: '1726743549', text: "Оченьдлинноесообщениебезпробеловзанимающеесразунесколькострокивызывающеестранноеповедениеокон!",
   },
   {
-    chatId: 4, type: "message.image", url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg", alt: "Example Image",
+    chatId: 4, type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", alt: "Example Image",
     direction: 'incoming', timestamp: '1726743539', text: "Очень длинное сообщение без пробелов занимающее сразу несколько строк и вызывающее странное поведение окон!",
   },
   {
@@ -809,7 +809,7 @@ export const messages = [
   {
     chatId: 6, 
     type: "message.image", 
-    url: "https://nationaltoday.com/wp-content/uploads/2022/05/Sun-Day--1200x834.jpg", 
+    url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", 
     alt: "Example Image",
     header: 'Анна',
     messageId: '625',
@@ -992,7 +992,7 @@ export const messages = [
     text: 'Горы являются одним из основных рельефообразующих элементов планеты и играют ключевую роль в формировании климата, являясь барьером для воздушных масс и источником пресной воды (в виде ледников и горных рек).',
     backgroundColor: '#E6EE9C',
     subText: 'Анна',
-    url:'https://img.freepik.com/free-photo/beautiful-vertical-landscape-shot-mountains-hills-surrounded-by-trees-clear-sky_181624-2540.jpg?semt=ais_se_enriched&w=740&q=80',
+    url:'https://sun9-15.userapi.com/s/v1/ig2/5ifa4RILacLTvbXHM0E0gmPbfhYCjoFo1s4J7IhNXL55aetwIIzUga_VLT9IX1yNswsXnPZ-6x3kHRRnYIIo98xE.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,740x1110&from=bu&cs=740x0',
     avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
   },
   {
@@ -1007,7 +1007,7 @@ export const messages = [
     text: 'Горы — это значительные возвышения земной поверхности, резко поднимающиеся над окружающей территорией, с выраженными склонами и вершиной.',
     backgroundColor: '#E6EE9C',
     subText: 'Анна',
-    url:'https://img.freepik.com/free-photo/beautiful-vertical-landscape-shot-mountains-hills-surrounded-by-trees-clear-sky_181624-2540.jpg?semt=ais_se_enriched&w=740&q=80',
+    url:'https://sun9-15.userapi.com/s/v1/ig2/5ifa4RILacLTvbXHM0E0gmPbfhYCjoFo1s4J7IhNXL55aetwIIzUga_VLT9IX1yNswsXnPZ-6x3kHRRnYIIo98xE.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,740x1110&from=bu&cs=740x0',
     avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
   },
   {
@@ -1131,6 +1131,35 @@ export const messages = [
     subText: 'whatsapp 73910001100 (основной)',
     messageId: '807',
     text: 'Вот маленькое изображение\n\n> Это цитата из markdown с синтаксисом'
+  },
+  {
+    chatId: 8,
+    dialogId: 'dlg_43543111',
+    type: "message.video",
+    url: "https://filebump2.services.mobilon.ru/file/XgYPv3t1VT1RxoUVPpWvQuyOkpdSCayNgpv1",
+    alt: "Маленькое видео",
+    direction: 'incoming',
+    status: 'read',
+    timestamp: '1763036693',
+    header: 'Георгий',
+    subText: 'whatsapp 73910001100 (основной)',
+    messageId: '807',
+    text: 'Вот маленькое видео',
+  },
+  {
+    chatId: 8,
+    dialogId: 'dlg_43543111',
+    type: "message.video",
+    url: "https://filebump2.services.mobilon.ru/file/XgYPv3t1VT1RxoUVPpWvQuyOkpdSCayNgpv1",
+    alt: "Маленькое видео",
+    direction: 'outgoing',
+    status: 'read',
+    timestamp: '1763036693',
+    header: 'Георгий',
+    subText: 'whatsapp 73910001100 (основной)',
+    messageId: '807',
+    text: 'Вот маленькое видео в ответ с кастомным фоном, который мы делаем прозрачным в теме glass',
+    backgroundColor: '#8fce00'
   },
 
   // Сообщения для Telegram диалога (dlg_89789222)

@@ -12,6 +12,7 @@
     "./style.css": "./dist/chotto.css",
     "./themes/default.css": "./dist/themes/default.css",
     "./themes/dark.css": "./dist/themes/dark.css",
+    "./themes/glass.css": "./dist/themes/glass.css",
     "./themes/green.css": "./dist/themes/green.css",
     "./themes/mobilon1.css": "./dist/themes/mobilon1.css"
   },

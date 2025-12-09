@@ -6,7 +6,7 @@
   --chotto-templateselector-right: 0;
   --chotto-templateselector-z-index: 100;
   --chotto-templateselector-container: templates / inline-size;
-  --chotto-templateselector-primary-color: var(--chotto-theme-primary-color);
+  --chotto-templateselector-primary-color: rgba(255, 255, 255, 0.85);
   --chotto-templateselector-item-border-color: var(--chotto-theme-item-border-color);
 
   // Container inline
@@ -154,7 +154,7 @@
   --chotto-templateselector-preview-container-webkit-scrollbar-width: 6px;
   --chotto-templateselector-preview-container-webkit-scrollbar-thumb-border-radius: 10px;
   --chotto-templateselector-preview-container-webkit-scrollbar-track-border-radius: 10px;
-  --chotto-templateselector-secondary-color: var(--chotto-theme-secondary-color);
+  --chotto-templateselector-secondary-color: transparent;
 
   // Preview
   --chotto-templateselector-preview-height: 100%;

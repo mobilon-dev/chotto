@@ -229,7 +229,7 @@
 
     .video-message__content {
       grid-column: var(--chotto-videomessage-left-content-grid-column, 2);
-      background-color: var(--chotto-videomessage-left-bg, #d4d4d4);
+      background: var(--chotto-videomessage-left-bg, #d4d4d4);
     }
 
     .video-message__content.with-avatar-indent {
@@ -278,7 +278,7 @@
 
     .video-message__text-container {
       grid-column: var(--chotto-videomessage-right-text-container-grid-column, 1);
-      margin-left: var(--chotto-videomessage-right-text-container-margin-left, auto);
+      margin-left: var(--chotto-videomessage-right-text-container-margin-left, 5px);
     }
 
     .video-message__menu-button {

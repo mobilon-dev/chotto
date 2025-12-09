@@ -27,7 +27,6 @@
   --chotto-textmessage-right-after-width: 0;
   --chotto-textmessage-right-after-height: 0;
   --chotto-textmessage-right-after-border: 20px solid transparent;
-  --chotto-textmessage-right-after-border-top: 15px solid var(--chotto-textmessage-right-bg, #a7f3d0);
   --chotto-textmessage-right-after-z-index: 1;
   --chotto-textmessage-right-after-filter: none;
 
@@ -142,6 +141,7 @@
   --chotto-textmessage-right-content-grid-column: 1;
   --chotto-textmessage-right-content-margin-left: auto;
   --chotto-textmessage-right-bg: var(--chotto-theme-message-right-bg);
+  
   --chotto-textmessage-right-backdrop-filter: none;
   --chotto-textmessage-right-border: none;
   --chotto-textmessage-right-box-shadow: none;

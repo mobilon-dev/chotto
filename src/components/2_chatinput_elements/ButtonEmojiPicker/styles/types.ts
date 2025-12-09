@@ -37,4 +37,10 @@ export interface ButtonEmojiPickerThemeCSSVariables {
   '--chotto-buttonemojipicker-emoji-bottom': string;
   /** З-индекс эмодзи-пикера */
   '--chotto-buttonemojipicker-emoji-z-index': string;
+  /** Цвет фона эмодзи-пикера */
+  '--chotto-buttonemojipicker-emoji-picker-bg': string;
+  /** Цвет текста эмодзи-пикера */
+  '--chotto-buttonemojipicker-emoji-picker-text-color': string;
+  /** Эффект размытия фона эмодзи-пикера */
+  '--chotto-buttonemojipicker-emoji-picker-backdrop-filter': string;
 }

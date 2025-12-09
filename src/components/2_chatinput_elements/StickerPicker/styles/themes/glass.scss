@@ -1,7 +1,7 @@
 [data-theme="glass"] {
   // StickerPicker button variables
   --chotto-stickerpicker-button-background-color: transparent;
-  --chotto-stickerpicker-button-border: none;
+  --chotto-stickerpicker-button-border: 1px solid transparent;
   --chotto-stickerpicker-button-height: fit-content;
   --chotto-stickerpicker-button-span-display: block;
   --chotto-stickerpicker-button-span-cursor: pointer;
@@ -19,7 +19,7 @@
   --chotto-stickerpicker-picker-position: absolute;
   --chotto-stickerpicker-picker-bottom: 50px;
   --chotto-stickerpicker-picker-z-index: 2000;
-  --chotto-stickerpicker-picker-background-color: #ffffff;
+  --chotto-stickerpicker-picker-background-color: rgba(255, 255, 255, 0.75);
   --chotto-stickerpicker-picker-border-radius: 8px;
   --chotto-stickerpicker-picker-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   --chotto-stickerpicker-picker-padding: 12px;

@@ -22,8 +22,27 @@
     color: var(--chotto-buttonemojipicker-button-disabled-span-color, #e5e5e5);
   }
 }
+
 .emoji {
   position: var(--chotto-buttonemojipicker-emoji-position, absolute);
   bottom: var(--chotto-buttonemojipicker-emoji-bottom, 50px);
   z-index: var(--chotto-buttonemojipicker-emoji-z-index, 2);
+}
+
+.v3-emoji-picker {
+  background: var(--chotto-buttonemojipicker-emoji-picker-bg, #ffffff);
+  color: var(--chotto-buttonemojipicker-emoji-picker-text-color, #000000);
+}
+
+:deep(.v3-sticky) {
+  background: var(--chotto-buttonemojipicker-emoji-picker-bg, #ffffff) !important;
+  backdrop-filter: var(--chotto-buttonemojipicker-emoji-picker-backdrop-filter, none);
+}
+
+:deep(.v3-search input) {
+  background: var(--chotto-buttonemojipicker-emoji-picker-bg, #ffffff) !important;
+}
+
+:deep(.v3-body) {
+  background: var(--chotto-buttonemojipicker-emoji-picker-bg, #ffffff) !important;
 }

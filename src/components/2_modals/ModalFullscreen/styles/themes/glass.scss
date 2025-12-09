@@ -8,8 +8,8 @@
   --chotto-modalfullscreen-container-transform: translate(-50%, -50%);
   --chotto-modalfullscreen-container-z-index: 101;
   --chotto-modalfullscreen-text-color: var(--chotto-theme-primary-text-color);
-  --chotto-modalfullscreen-background: var(--chotto-theme-primary-color, #ffffff);
-  --chotto-modalfullscreen-border: 1px solid var(--chotto-theme-border-color, #e0e0e0);
+  --chotto-modalfullscreen-background: rgba(0, 0, 0, 0.6);
+  --chotto-modalfullscreen-border: 1px solid rgba(255, 255, 255, 0.1);
   --chotto-modalfullscreen-border-radius: 10px;
   --chotto-modalfullscreen-padding: 18px;
   --chotto-modalfullscreen-margin: 0;

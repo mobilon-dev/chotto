@@ -286,8 +286,8 @@ watch([player, previewPlayer], ([playerVal, previewVal]) => {
 
 const videoBorderRadius = computed(() => {
   if (props.message.reply && props.message.text) return '0'
-  if (props.message.text) return '8px 8px 0 0'
-  if (props.message.reply) return '0 0 8px 8px'
+  if (props.message.text) return '5px 5px 0 0'
+  if (props.message.reply) return '0 0 5px 5px'
   return '8px'
 })
 

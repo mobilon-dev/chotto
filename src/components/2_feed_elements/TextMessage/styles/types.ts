@@ -50,8 +50,6 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-right-after-height': string;
   /** Базовая рамка хвостика справа */
   '--chotto-textmessage-right-after-border': string;
-  /** Верхняя часть рамки хвостика справа (цвет пузыря) */
-  '--chotto-textmessage-right-after-border-top': string;
   /** Слой псевдоэлемента справа */
   '--chotto-textmessage-right-after-z-index': string;
   /** Фильтр псевдоэлемента справа */

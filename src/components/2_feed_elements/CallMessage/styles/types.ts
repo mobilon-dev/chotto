@@ -110,6 +110,10 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-header-container-border-radius': string;
   /** Цвет фона контейнера заголовка */
   '--chotto-callmessage-header-container-background-color': string;
+  /** Эффект размытия фона контейнера заголовка */
+  '--chotto-callmessage-header-container-backdrop-filter': string;
+  /** Тень контейнера заголовка */
+  '--chotto-callmessage-header-container-box-shadow': string;
 
   /** Выравнивание аватара */
   '--chotto-callmessage-avatar-align-self': string;
@@ -148,6 +152,10 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-audio-button-border-radius': string;
   /** Цвет фона кнопки аудио */
   '--chotto-callmessage-audio-button-background-color': string;
+  /** Эффект размытия фона кнопки аудио */
+  '--chotto-callmessage-audio-button-backdrop-filter': string;
+  /** Тень кнопки аудио */
+  '--chotto-callmessage-audio-button-box-shadow': string;
   /** Отображение кнопки аудио */
   '--chotto-callmessage-audio-button-display': string;
   /** Выравнивание элементов кнопки аудио */
@@ -216,6 +224,10 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-audio-slider-thumb-height': string;
   /** Цвет фона ползунка слайдера аудио */
   '--chotto-callmessage-audio-slider-thumb-background-color': string;
+  /** Граница ползунка слайдера аудио */
+  '--chotto-callmessage-audio-slider-thumb-border': string;
+  /** Тень ползунка слайдера аудио */
+  '--chotto-callmessage-audio-slider-thumb-box-shadow': string;
   /** Внешний отступ сверху ползунка слайдера аудио */
   '--chotto-callmessage-audio-slider-thumb-margin-top': string;
   /** Скругление ползунка слайдера аудио */
@@ -319,6 +331,12 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-left-subtext-margin': string;
   /** Колонка грида контента слева */
   '--chotto-callmessage-left-content-grid-column': string;
+  /** Эффект размытия фона блока слева */
+  '--chotto-callmessage-left-backdrop-filter': string;
+  /** Граница блока слева */
+  '--chotto-callmessage-left-border': string;
+  /** Тень блока слева */
+  '--chotto-callmessage-left-box-shadow': string;
   /** Отступ сверху кнопки меню слева */
   '--chotto-callmessage-left-menu-button-top': string;
   /** Отступ справа кнопки меню слева */
@@ -376,6 +394,12 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-right-content-grid-column': string;
   /** Выравнивание контента справа */
   '--chotto-callmessage-right-content-margin-left': string;
+  /** Эффект размытия фона блока справа */
+  '--chotto-callmessage-right-backdrop-filter': string;
+  /** Граница блока справа */
+  '--chotto-callmessage-right-border': string;
+  /** Тень блока справа */
+  '--chotto-callmessage-right-box-shadow': string;
   /** Отступ сверху кнопки меню справа */
   '--chotto-callmessage-right-menu-button-top': string;
   /** Отступ справа кнопки меню справа */

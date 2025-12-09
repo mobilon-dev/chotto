@@ -237,7 +237,7 @@ const {
   isOpenMenu,
   buttonMenuVisible,
   showMenu: baseShowMenu,
-  hideMenu,
+  hideMenu: baseHideMenu,
   clickAction,
   viewsAction,
   handleClickReplied
@@ -337,6 +337,11 @@ const shouldApplyBlur = computed(() => {
 const showMenu = () => {
   baseShowMenu()
   buttonDownloadVisible.value = true
+}
+
+const hideMenu = () => {
+  baseHideMenu()
+  buttonDownloadVisible.value = false
 }
 
 const imageBorderRadius = computed(() => {
