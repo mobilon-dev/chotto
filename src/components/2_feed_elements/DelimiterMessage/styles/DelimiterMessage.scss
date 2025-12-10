@@ -1,0 +1,18 @@
+.delimiter-message {
+  &__container {
+    display: var(--chotto-delimitermessage-display, flex);
+    align-items: var(--chotto-delimitermessage-align-items, center);
+    justify-content: var(--chotto-delimitermessage-justify-content, center);
+    width: var(--chotto-delimitermessage-width, 54%);
+    height: var(--chotto-delimitermessage-height, 26px);
+    margin: var(--chotto-delimitermessage-margin, 21px auto 21px auto);
+    border-bottom: var(--chotto-delimitermessage-border-bottom, 1px solid #D9D9D9);
+  }
+
+  &__text {
+    font-size: var(--chotto-delimitermessage-text-font-size, 14px);
+    line-height: var(--chotto-delimitermessage-text-line-height, 1.5);
+    text-align: var(--chotto-delimitermessage-text-align, center);
+    color: var(--chotto-delimitermessage-text-color, #5F5F5F);
+  }
+}

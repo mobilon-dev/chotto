@@ -60,6 +60,7 @@ export { default as BaseReplyMessage } from './2_feed_elements/BaseReplyMessage/
 export { default as CallMessage } from './2_feed_elements/CallMessage/CallMessage.vue';
 export { default as DateMessage } from './2_feed_elements/DateMessage/DateMessage.vue';
 export { default as DateMessageSticky } from './2_feed_elements/DateMessageSticky/DateMessageSticky.vue';
+export { default as DelimiterMessage } from './2_feed_elements/DelimiterMessage/DelimiterMessage.vue';
 export { default as FeedKeyboard } from './2_feed_elements/FeedKeyboard/FeedKeyboard.vue';
 export { default as FileMessage } from './2_feed_elements/FileMessage/FileMessage.vue';
 export { default as ImageMessage } from './2_feed_elements/ImageMessage/ImageMessage.vue';

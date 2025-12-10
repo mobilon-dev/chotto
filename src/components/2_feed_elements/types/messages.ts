@@ -168,6 +168,11 @@ export interface ISystemMessage {
   text: string
 }
 
+export interface IDelimiterMessage {
+  messageId: string
+  text: string
+}
+
 export interface ITextMessage {
   messageId: string
   text: string

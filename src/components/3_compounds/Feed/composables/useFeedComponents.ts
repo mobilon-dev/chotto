@@ -8,6 +8,7 @@ import DateMessage from '@/components/2_feed_elements/DateMessage/DateMessage.vu
 import SystemMessage from '@/components/2_feed_elements/SystemMessage/SystemMessage.vue';
 import TypingMessage from '@/components/2_feed_elements/TypingMessage/TypingMessage.vue';
 import StickerMessage from '@/components/2_feed_elements/StickerMessage/StickerMessage.vue';
+import DelimiterMessage from '@/components/2_feed_elements/DelimiterMessage/DelimiterMessage.vue';
 
 /**
  * Композабл для маппинга типов сообщений на компоненты
@@ -25,6 +26,7 @@ export function useFeedComponents() {
       'message.system': SystemMessage,
       'system.date': DateMessage,
       'message.typing': TypingMessage,
+      'message.delimiter': DelimiterMessage
     };
     return r[type];
   };
