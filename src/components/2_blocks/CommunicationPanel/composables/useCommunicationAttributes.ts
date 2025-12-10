@@ -98,7 +98,7 @@ export function useCommunicationAttributes({
     if (!recentAttributeId) {
       return null;
     }
-    return contactAttributesList.value.find((attr) => attr.id === recentAttributeId) ?? null;
+    return contactAttributesList.value.find((attr) => attr.id?.includes(recentAttributeId)) ?? null;
   };
 
   /**

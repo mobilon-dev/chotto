@@ -22,9 +22,12 @@
       >
         <template v-if="isChannelActive(channel.type)">
           <Tooltip
-            :text="selectedChannel?.title"
-            position="bottom"
+            :ref="(el) => { if (el) channelTooltipRef = el }"
+            :text="showDefaultChannelTooltip ? 'Выбран канал по умолчанию, можно изменить в настройках профиля' : selectedChannel?.title"
+            position="bottom-left"
             :offset="8"
+            :trigger="showDefaultChannelTooltip ? 'auto' : 'hover'"
+            :auto-show-duration="showDefaultChannelTooltip ? 5000 : 0"
           >
             <span class="channel-icon">
               <component :is="channel.component" />
@@ -35,7 +38,7 @@
         <template v-else>
           <Tooltip
             :text="getTooltipText(channel.type)"
-            position="bottom"
+            position="bottom-left"
             :offset="8"
           >
             <span class="channel-icon">
@@ -53,8 +56,11 @@
       :style="{ width: menuWidth }"
     >
       <!-- Заголовок для списка контактов -->
-      <div class="menu-header">
-        {{ activeChannelType === 'phone' ? 'Телефон' : 'Недавний' }}
+      <div 
+        v-if="showRecentAttribute" 
+        class="menu-header"
+      >
+        Недавний
       </div>
 
       <!-- Недавний контакт -->
@@ -71,7 +77,7 @@
           @mouseenter="onRecentAttributeMouseEnter($event)"
           @mouseleave="handleRecentAttributeMouseLeave"
           @mouseover="resetRegularAttributeHover"
-          @click="handleRecentAttributeClick(recentAttribute)"
+          @click="handleRecentAttributeClick()"
         >
           <div class="attribute-info">
             <span class="attribute-value">{{ recentAttribute?.value }}</span>
@@ -174,7 +180,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onUnmounted, computed } from 'vue';
+import { ref, watch, onMounted, onUnmounted, computed, nextTick } from 'vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useCommunicationChannels } from './composables/useCommunicationChannels';
 import { useCommunicationMenu } from './composables/useCommunicationMenu';
@@ -210,6 +216,21 @@ const props = defineProps({
     required: false,
     default: () => ({})
   },
+  messages: {
+    type: Array,
+    required: false,
+    default: () => []
+  },
+  selectedChat: {
+    type: Object,
+    required: false,
+    default: null
+  },
+  isNewDialog: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
   showChannelIcons: {
     type: Boolean,
     required: false,
@@ -229,9 +250,15 @@ const frozenAttribute = ref(null);
 const isRecentAttributeHovered = ref(false);
 const selectedChannelType = ref(null);
 const selectedChannel = ref({});
+const showDefaultChannelTooltip = ref(false);
+const defaultChannelTooltipTimer = ref(null);
+const channelTooltipRef = ref(null);
 
 const channelsRef = computed(() => props.channels ?? []);
 const channelTooltipsRef = computed(() => props.channelTooltips ?? {});
+const messagesRef = computed(() => props.messages ?? []);
+const selectedChatRef = computed(() => props.selectedChat ?? null);
+const isNewDialogRef = computed(() => props.isNewDialog ?? false);
 
 const {
   channelsTypes,
@@ -271,6 +298,66 @@ const {
 const contactAttributesRef = computed(() => props.contactAttributes ?? []);
 const recentAttributeChannelsRef = computed(() => props.recentAttributeChannels ?? {});
 
+/**
+ * Проверяет, пуст ли канал (нет несистемных сообщений).
+ */
+const isChannelEmpty = (channelId) => {
+  if (!channelId || !messagesRef.value) return true;
+  
+  const chatId = selectedChatRef.value?.chatId;
+  if (!chatId) return true;
+  
+  const channelMessages = messagesRef.value.filter(msg => 
+    msg.chatId === chatId && 
+    msg.dialogId === props.selectedDialog?.dialogId
+  );
+  
+  const hasNonSystemMessages = channelMessages.some(msg => 
+    msg.type !== 'message.system' && 
+    msg.type !== 'message.delimiter' && 
+    msg.type !== 'system' && 
+    msg.type !== 'system_message' && 
+    msg.type !== 'notification'
+  );
+  
+  return !hasNonSystemMessages;
+};
+
+const showDefaultChannelTooltipWithTimer = () => {
+  clearDefaultChannelTooltip();
+  showDefaultChannelTooltip.value = true;
+  
+  nextTick(() => {
+    const tooltipRef = Array.isArray(channelTooltipRef.value) ? channelTooltipRef.value[0] : channelTooltipRef.value;
+    
+    if (tooltipRef && typeof tooltipRef.startAutoShow === 'function') {
+      tooltipRef.startAutoShow();
+    } else {
+      console.log('startAutoShow method not found on tooltipRef');
+    }
+  });
+  
+  defaultChannelTooltipTimer.value = setTimeout(() => {
+    showDefaultChannelTooltip.value = false;
+  }, 5000);
+};
+
+const clearDefaultChannelTooltip = () => {
+  if (defaultChannelTooltipTimer.value) {
+    clearTimeout(defaultChannelTooltipTimer.value);
+    defaultChannelTooltipTimer.value = null;
+  }
+  
+  if (channelTooltipRef.value) {
+    const tooltipRef = Array.isArray(channelTooltipRef.value) ? channelTooltipRef.value[0] : channelTooltipRef.value;
+    if (tooltipRef && typeof tooltipRef.clearAutoTimer === 'function') {
+      tooltipRef.clearAutoTimer();
+    }
+  }
+  
+  showDefaultChannelTooltip.value = false;
+};
+
 const {
   organizedContactAttributes,
   organizeContactAttributes,
@@ -285,7 +372,7 @@ const {
 });
 
 const {
-  handleRecentAttributeClick,
+  handleRecentAttributeClick: baseHandleRecentAttributeClick,
   handleAttributeClick,
   selectChannel,
   availableChannels: resolveAvailableChannels,
@@ -301,8 +388,16 @@ const {
   hasMultipleChannels,
   getSingleChannelForType,
   getAvailableChannels,
+  isChannelEmpty,
+  isNewDialog: isNewDialogRef,
+  showDefaultChannelTooltipWithTimer,
+  clearDefaultChannelTooltip,
   emit,
 });
+
+const handleRecentAttributeClick = () => {
+  baseHandleRecentAttributeClick(recentAttribute.value);
+};
 
 const {
   subMenuTop,
@@ -328,6 +423,10 @@ useCommunicationDialogSync({
   selectedChannel,
   channels: channelsRef,
   selectedDialog: computed(() => props.selectedDialog ?? null),
+  isChannelEmpty,
+  isNewDialog: isNewDialogRef,
+  showDefaultChannelTooltipWithTimer,
+  clearDefaultChannelTooltip,
 });
 
 // Computed properties
@@ -343,7 +442,6 @@ const shouldShowSubMenu = computed(() =>
   hasMultipleChannels(activeChannelType.value)
 );
 
-// Methods
 // Обработчики действий и подменю реализованы в соответствующих composables
 const onRecentAttributeMouseEnter = (event) => {
   const target = baseHandleRecentAttributeMouseEnter(event.currentTarget);
@@ -374,6 +472,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', updateMenuWidth);
   document.removeEventListener('click', handleClickOutside);
+  clearDefaultChannelTooltip();
 });
 </script>
 

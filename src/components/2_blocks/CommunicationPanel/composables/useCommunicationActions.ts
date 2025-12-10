@@ -35,6 +35,10 @@ interface UseCommunicationActionsOptions {
   hasMultipleChannels: (channelType: string) => boolean;
   getSingleChannelForType: (channelType: string) => Channel | null;
   getAvailableChannels: (channelType: string) => Channel[];
+  isChannelEmpty: (channelId: string) => boolean;
+  isNewDialog: ComputedRef<boolean>;
+  showDefaultChannelTooltipWithTimer: () => void;
+  clearDefaultChannelTooltip: () => void;
   emit: CommunicationActionsEmit;
 }
 
@@ -53,6 +57,10 @@ export function useCommunicationActions({
   hasMultipleChannels,
   getSingleChannelForType,
   getAvailableChannels,
+  isChannelEmpty,
+  isNewDialog,
+  showDefaultChannelTooltipWithTimer,
+  clearDefaultChannelTooltip,
   emit,
 }: UseCommunicationActionsOptions) {
   /**
@@ -78,6 +86,13 @@ export function useCommunicationActions({
     });
     selectedChannelType.value = activeChannelType.value;
     selectedChannel.value = channels.value.find((ch) => ch.channelId === channelId) ?? {};
+    
+    if (isChannelEmpty(channelId) && isNewDialog.value) {
+      showDefaultChannelTooltipWithTimer();
+    } else {
+      clearDefaultChannelTooltip();
+    }
+    
     closeMenu();
   };
 
@@ -93,34 +108,41 @@ export function useCommunicationActions({
     }
     selectedChannelType.value = activeChannelType.value;
     selectedChannel.value = channels.value.find((ch) => ch.channelId === channelId) ?? {};
+    
+    if (isChannelEmpty(channelId) && isNewDialog.value) {
+      showDefaultChannelTooltipWithTimer();
+    } else {
+      clearDefaultChannelTooltip();
+    }
+    
     closeMenu();
   };
 
   /**
    * Обрабатывает клик по недавнему атрибуту.
    */
-  const handleRecentAttributeClick = (recentAttribute: ContactAttribute | null) => {
+  const handleRecentAttributeClick = (recentAttributeValue: ContactAttribute | null) => {
     const channelType = activeChannelType.value;
     if (!channelType) {
       return;
     }
 
     if (channelType === 'phone') {
-      handlePhoneCall(recentAttribute);
+      handlePhoneCall(recentAttributeValue);
       return;
     }
 
     if (!hasMultipleChannels(channelType)) {
       const singleChannel = getSingleChannelForType(channelType);
-      if (recentAttribute && singleChannel) {
-        selectSingleChannel(recentAttribute, singleChannel.channelId);
+      if (recentAttributeValue && singleChannel) {
+        selectSingleChannel(recentAttributeValue, singleChannel.channelId);
       }
       return;
     }
 
     const recentChannelId = recentAttributeChannels.value[channelType]?.channelId;
-    if (recentAttribute && recentChannelId) {
-      selectChannelForRecentAttribute(recentChannelId, recentAttribute);
+    if (recentAttributeValue && recentChannelId) {
+      selectChannelForRecentAttribute(recentChannelId, recentAttributeValue);
     }
   };
 
@@ -162,6 +184,12 @@ export function useCommunicationActions({
       });
       selectedChannelType.value = activeChannelType.value;
       selectedChannel.value = channels.value.find((ch) => ch.channelId === channelId) ?? {};
+      
+      if (isChannelEmpty(channelId) && isNewDialog.value) {
+        showDefaultChannelTooltipWithTimer();
+      } else {
+        clearDefaultChannelTooltip();
+      }
     }
     closeMenu();
   };

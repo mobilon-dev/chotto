@@ -1,4 +1,4 @@
-import { watch, type Ref, unref, type MaybeRef } from 'vue';
+import { watch, type Ref, unref, type MaybeRef, type ComputedRef } from 'vue';
 import { CHANNEL_TYPES, type ChannelType } from './useCommunicationChannels';
 
 interface Dialog {
@@ -20,6 +20,14 @@ interface UseCommunicationDialogSyncOptions {
   channels: Ref<Channel[]>;
   /** Текущий выбранный диалог */
   selectedDialog: MaybeRef<Dialog | null | undefined>;
+  /** Функция проверки пустоты канала */
+  isChannelEmpty: (channelId: string) => boolean;
+  /** Флаг нового диалога */
+  isNewDialog: ComputedRef<boolean>;
+  /** Функция показа tooltip для нового диалога */
+  showDefaultChannelTooltipWithTimer: () => void;
+  /** Функция очистки tooltip */
+  clearDefaultChannelTooltip: () => void;
 }
 
 /**
@@ -30,11 +38,16 @@ export function useCommunicationDialogSync({
   selectedChannel,
   channels,
   selectedDialog,
+  isChannelEmpty,
+  isNewDialog,
+  showDefaultChannelTooltipWithTimer,
+  clearDefaultChannelTooltip,
 }: UseCommunicationDialogSyncOptions) {
   const updateSelectedChannelFromDialog = (dialog: Dialog | null | undefined) => {
     if (!dialog || !dialog.channelId) {
       selectedChannelType.value = null;
       selectedChannel.value = {};
+      clearDefaultChannelTooltip();
       return;
     }
 
@@ -45,6 +58,12 @@ export function useCommunicationDialogSync({
       selectedChannelType.value = normalizedType;
       const channel = channels.value.find((ch) => ch.channelId === dialog.channelId);
       selectedChannel.value = channel ?? {};
+      
+      if (isChannelEmpty(dialog.channelId) && isNewDialog.value) {
+        showDefaultChannelTooltipWithTimer();
+      } else {
+        clearDefaultChannelTooltip();
+      }
     }
   };
 

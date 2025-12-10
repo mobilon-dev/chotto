@@ -32,6 +32,7 @@ const { getTheme } = useTheme(chatAppId as string)
 const container = ref<HTMLElement>() 
 const tooltip = ref<HTMLElement>()
 const show = ref(false)
+const autoTimer = ref<ReturnType<typeof setTimeout> | null>(null)
 
 const props = defineProps({
   text: {
@@ -45,6 +46,14 @@ const props = defineProps({
   offset: {
     type: Number,
     default: 8,
+  },
+  trigger: {
+    type: String,
+    default: 'hover',
+  },
+  autoShowDuration: {
+    type: Number,
+    default: 0,
   }
 })
 
@@ -54,6 +63,9 @@ const tooltipClasses = computed(() => ({
 }))
 
 const updatePosition = () => {
+  if (props.trigger === 'auto') {
+    return;
+  }
   show.value = true
   nextTick(() => {
     if (container.value && tooltip.value){
@@ -76,6 +88,9 @@ const updatePosition = () => {
 }
 
 const hideTooltip = () => {
+  if (props.trigger === 'auto') {
+    return;
+  }
   show.value = false
   nextTick(() => {
     const t = unref(tooltip)
@@ -84,8 +99,48 @@ const hideTooltip = () => {
       t.style.left = '0'
     }
   })
-  
 }
+
+const startAutoShow = () => {
+  clearAutoTimer();
+  show.value = true;
+  nextTick(() => {
+    if (container.value && tooltip.value){
+      const t = tooltip.value
+      const bounds = container.value.getBoundingClientRect()
+      const tBounds = tooltip.value.getBoundingClientRect()
+      const correctLeft = tBounds.left < 0 ? tBounds.left : 0
+      const correctTop = tBounds.top < 0 ? tBounds.top : 0
+      const r: Record<string, {top: number, left: number}> = {
+        'left'  : {top: bounds.top - ((tBounds.height - bounds.height) / 2) - correctTop, left: bounds?.left - tBounds.width - correctLeft - props.offset},
+        'right' : {top: bounds.top - ((tBounds.height - bounds.height) / 2) - correctTop, left: bounds?.left + bounds.width - correctLeft + props.offset},
+        'bottom': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left - correctLeft},
+        'top'   : {top: bounds.top - tBounds.height - props.offset - correctTop, left: bounds?.left - correctLeft},
+        'bottom-left': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left + bounds.width - tBounds.width - correctLeft},
+      }
+      t.style.top = r[props.position].top + 'px'
+      t.style.left = r[props.position].left + 'px'
+    }
+  });
+  
+  if (props.autoShowDuration > 0) {
+    autoTimer.value = setTimeout(() => {
+      show.value = false;
+    }, props.autoShowDuration);
+  }
+};
+
+const clearAutoTimer = () => {
+  if (autoTimer.value) {
+    clearTimeout(autoTimer.value);
+    autoTimer.value = null;
+  }
+};
+
+defineExpose({
+  startAutoShow,
+  clearAutoTimer
+})
 
 </script>
 
