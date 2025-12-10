@@ -8,6 +8,7 @@
   --chotto-baselayout-container-position: relative;
   --chotto-baselayout-container-border-top: var(--chotto-theme-border, none);
   --chotto-baselayout-container-border-left: var(--chotto-theme-border, none);
+  --chotto-baselayout-container-background: url('https://sun9-25.userapi.com/s/v1/ig2/C5-W134iwdyMDmwBvgIx_PcRlSy81GloIRGiNJpM7y-rHTKJ9wtCEFxFbIP-fRJ0h7HLC1IUDYCzenoprJWzN7hl.jpg?quality=95&as=32x18,48x27,72x41,108x62,160x91,240x137,360x206,480x274,540x309,640x366,720x411,1080x617,1280x731,1440x823,2560x1463&from=bu&cs=2560x0') center / cover no-repeat;
 
   // BaseLayout first-col variables
   --chotto-baselayout-first-col-position: relative;
@@ -15,10 +16,11 @@
   --chotto-baselayout-first-col-display: flex;
   --chotto-baselayout-first-col-flex-direction: column;
   --chotto-baselayout-first-col-height: inherit;
-  --chotto-baselayout-first-col-background-color: #ffffff;
-  --chotto-baselayout-first-col-border-right: var(--chotto-theme-border, none);
+  --chotto-baselayout-first-col-background-color: rgba(255, 255, 255, 0.15);
+  --chotto-baselayout-first-col-border-right: 1px solid rgba(255, 255, 255, 0.2);
   --chotto-baselayout-first-col-border-bottom: var(--chotto-theme-border, none);
   --chotto-baselayout-first-col-width: 100%;
+  --chotto-baselayout-first-col-backdrop-filter: blur(12px) saturate(140%);
 
   // BaseLayout second-col variables
   --chotto-baselayout-second-col-position: relative;
@@ -27,9 +29,10 @@
   --chotto-baselayout-second-col-grid-column: 2;
   --chotto-baselayout-second-col-height: inherit;
   --chotto-baselayout-second-col-width: 100%;
-  --chotto-baselayout-second-col-background-color: #FAF6F4;
-  --chotto-baselayout-second-col-border-right: var(--chotto-theme-border, none);
+  --chotto-baselayout-second-col-background-color: rgba(255, 255, 255, 0.15);
+  --chotto-baselayout-second-col-border-right: 1px solid rgba(255, 255, 255, 0.2);
   --chotto-baselayout-second-col-border-bottom: var(--chotto-theme-border, none);
+  --chotto-baselayout-second-col-backdrop-filter: blur(12px) saturate(140%);
 
   // BaseLayout transition variables
   --chotto-baselayout-transition-enter-active-transition: opacity 0.5s ease;

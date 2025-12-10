@@ -19,6 +19,8 @@ export interface BaseLayoutThemeCSSVariables {
   '--chotto-baselayout-container-border-top': string;
   /** Левая граница контейнера базового макета */
   '--chotto-baselayout-container-border-left': string;
+  /** Фон контейнера базового макета */
+  '--chotto-baselayout-container-background': string;
 
   // First column
   /** Позиционирование первой колонки */
@@ -39,6 +41,8 @@ export interface BaseLayoutThemeCSSVariables {
   '--chotto-baselayout-first-col-border-bottom': string;
   /** Ширина первой колонки */
   '--chotto-baselayout-first-col-width': string;
+  /** Размытие/фильтр фона первой колонки */
+  '--chotto-baselayout-first-col-backdrop-filter': string;
 
   // Second column
   /** Позиционирование второй колонки */
@@ -59,6 +63,8 @@ export interface BaseLayoutThemeCSSVariables {
   '--chotto-baselayout-second-col-border-right': string;
   /** Нижняя граница второй колонки */
   '--chotto-baselayout-second-col-border-bottom': string;
+  /** Размытие/фильтр фона второй колонки */
+  '--chotto-baselayout-second-col-backdrop-filter': string;
 
   // Transition
   /** Переход для активного состояния Vue Transition */

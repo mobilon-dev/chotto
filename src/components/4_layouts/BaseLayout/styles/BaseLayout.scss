@@ -8,6 +8,7 @@
     position: var(--chotto-baselayout-container-position, relative);
     border-top: var(--chotto-baselayout-container-border-top, var(--chotto-theme-border, none));
     border-left: var(--chotto-baselayout-container-border-left, var(--chotto-theme-border, none));
+    background: var(--chotto-baselayout-container-background, none);
   }
 
   &__first-col {
@@ -20,6 +21,8 @@
     border-right: var(--chotto-baselayout-first-col-border-right, var(--chotto-theme-border, none));
     border-bottom: var(--chotto-baselayout-first-col-border-bottom, var(--chotto-theme-border, none));
     width: var(--chotto-baselayout-first-col-width, 100%);
+    backdrop-filter: var(--chotto-baselayout-first-col-backdrop-filter, none);
+    -webkit-backdrop-filter: var(--chotto-baselayout-first-col-backdrop-filter, none);
   }
 
   &__second-col {
@@ -32,6 +35,8 @@
     background-color: var(--chotto-baselayout-second-col-background-color, #FAF6F4);
     border-right: var(--chotto-baselayout-second-col-border-right, var(--chotto-theme-border, none));
     border-bottom: var(--chotto-baselayout-second-col-border-bottom, var(--chotto-theme-border, none));
+    backdrop-filter: var(--chotto-baselayout-second-col-backdrop-filter, none);
+    -webkit-backdrop-filter: var(--chotto-baselayout-second-col-backdrop-filter, none);
   }
 }
 
