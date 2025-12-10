@@ -57,6 +57,12 @@ export interface ContextMenuThemeCSSVariables {
   '--chotto-contextmenu-item-padding': string;
   /** Ширина элемента контекстного меню */
   '--chotto-contextmenu-item-width': string;
+  /** Промежуток между элементами внутри элемента контекстного меню */
+  '--chotto-contextmenu-item-gap': string;
+  /** Отступ справа иконки элемента контекстного меню */
+  '--chotto-contextmenu-item-icon-margin-right': string;
+  /** Коэффициент сжатия иконки элемента контекстного меню */
+  '--chotto-contextmenu-item-icon-flex-shrink': string;
   /** Цвет фона элемента контекстного меню при наведении */
   '--chotto-contextmenu-item-hover-background-color': string;
   /** Граница снизу элемента контекстного меню (не последний) */

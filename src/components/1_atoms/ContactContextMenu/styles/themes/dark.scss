@@ -1,0 +1,41 @@
+[data-theme="dark"] {
+  // ContactContextMenu wrapper variables
+  --chotto-contactcontextmenu-wrapper-display: flex;
+  --chotto-contactcontextmenu-wrapper-align-items: center;
+  --chotto-contactcontextmenu-wrapper-justify-content: center;
+  --chotto-contactcontextmenu-wrapper-margin-right: 15px;
+  --chotto-contactcontextmenu-wrapper-margin-left: 10px;
+
+  // ContactContextMenu button variables
+  --chotto-contactcontextmenu-button-bg: none;
+  --chotto-contactcontextmenu-button-border: none;
+  --chotto-contactcontextmenu-button-padding: 0;
+  --chotto-contactcontextmenu-button-font: inherit;
+  --chotto-contactcontextmenu-button-color: inherit;
+  --chotto-contactcontextmenu-button-cursor: pointer;
+  --chotto-contactcontextmenu-button-outline: none;
+  --chotto-contactcontextmenu-button-transition: all 0.2s;
+  --chotto-contactcontextmenu-button-border-radius: 50%;
+  --chotto-contactcontextmenu-button-width: 40px;
+  --chotto-contactcontextmenu-button-height: 40px;
+  --chotto-contactcontextmenu-button-display: flex;
+  --chotto-contactcontextmenu-button-align-items: center;
+  --chotto-contactcontextmenu-button-justify-content: center;
+  --chotto-contactcontextmenu-button-position: relative;
+  --chotto-contactcontextmenu-button-hover-bg: var(--neutral-90, #F6F6F6);
+  --chotto-contactcontextmenu-button-active-transform: scale(0.95);
+
+  // ContactContextMenu icon variables
+  --chotto-contactcontextmenu-icon-display: flex;
+  --chotto-contactcontextmenu-icon-align-items: center;
+  --chotto-contactcontextmenu-icon-justify-content: center;
+
+  // ContactContextMenu container variables
+  --chotto-contactcontextmenu-container-display: flex;
+  --chotto-contactcontextmenu-container-align-items: center;
+  --chotto-contactcontextmenu-container-justify-content: center;
+  --chotto-contactcontextmenu-container-border: 1px solid var(--neutral-75, #F3F3F3);
+  --chotto-contactcontextmenu-container-border-radius: 4px;
+  --chotto-contactcontextmenu-container-box-shadow: 0px 5px 5px 1px var(--neutral-400, #a3a3a3);
+}
+

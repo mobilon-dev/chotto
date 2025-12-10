@@ -15,11 +15,17 @@
         @click="!action.disabled && click(index)"
       >
         <img
-          v-if="action.icon"
+          v-if="action.icon && typeof action.icon === 'string'"
           :src="action.icon"
           width="18"
           height="18"
         >
+        <component
+          v-else-if="action.icon && typeof action.icon === 'object'"
+          :is="action.icon"
+          width="18"
+          height="18"
+        />
         <i 
           v-else-if="action.prime"
           :class="'pi pi-' + action.prime" 

@@ -32,6 +32,14 @@
     cursor: var(--chotto-contextmenu-item-cursor, pointer);
     padding: var(--chotto-contextmenu-item-padding, 6px 16px);
     width: var(--chotto-contextmenu-item-width, inherit);
+    gap: var(--chotto-contextmenu-item-gap, 8px);
+
+    img,
+    component,
+    i {
+      margin-right: var(--chotto-contextmenu-item-icon-margin-right, 0);
+      flex-shrink: var(--chotto-contextmenu-item-icon-flex-shrink, 0);
+    }
   }
 
   &__item:hover {

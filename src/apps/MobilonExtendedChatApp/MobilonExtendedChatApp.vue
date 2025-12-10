@@ -133,14 +133,21 @@
                       >
                         <span class="validation-icon validation-icon--sidebar">{{ isSidebarValid ? '☰' : '!' }}</span>
                       </button>
-                      <button
+                      <!-- <button
                         class="chat-info__button-panel"
                         @click="isOpenChatPanel = !isOpenChatPanel"
                       >
                         <span class="">
                           <MenuIcon />
                         </span>
-                      </button>
+                      </button> -->
+                      <ContactContextMenu
+                        :actions="contactActions"
+                        mode="click"
+                        menu-side="bottom-left"
+                        @click="handleContactMenuAction"
+                        @button-click="handleContactButtonClick"
+                      />
                       <!-- <button
                         class="chat-info__button-panel"
                         @click="handleOpenSearchPanel"
@@ -309,9 +316,9 @@
 
 <script setup>
 import { onMounted, ref, computed, unref, toRaw, provide } from "vue";
+import ContactCRMIcon from "@/components/1_icons/ContactCRMIcon.vue";
 
 import {
-  MenuIcon,
   ChatInfo,
   ChatInput,
   ChatListHeader,
@@ -339,6 +346,7 @@ import {
   ContactInfo, 
   BaseContainer, 
   SplashScreen,
+  ContactContextMenu
 } from "@/components";
 
 import { playNotificationAudio } from "@/functions";
@@ -426,6 +434,19 @@ const menuActions = [
       console.log('Открытие настроек...');
     }
   }
+];
+
+const contactActions = [
+  {
+    id: 'open_crm',
+    title: 'Открыть контакт в CRM',
+    disabled: false,
+    icon: ContactCRMIcon,
+    action: () => {
+      console.log('Открытие контакта...');
+      window.open('https://media1.tenor.com/m/RjINDshJG48AAAAd/cat-smile.gif');
+    }
+  },
 ];
 
 const chatsStore = useChatsStore();
@@ -660,6 +681,17 @@ const handleReturnToChats = () => {
   isSecondColVisible.value = true
   isThirdColVisible.value = false
 }
+
+const handleContactMenuAction = (action) => {
+  console.log('Выбрано действие:', action);
+  if (typeof action.action === 'function') {
+    action.action();
+  }
+};
+
+const handleContactButtonClick = () => {
+  console.log('Кнопка меню была нажата');
+};
 
 const handleTabClick = (tabId) => {
   dialogTabs.value.forEach(tab => {

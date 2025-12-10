@@ -1,0 +1,48 @@
+.contact-context-menu__wrapper {
+  display: var(--chotto-contactcontextmenu-wrapper-display, flex);
+  align-items: var(--chotto-contactcontextmenu-wrapper-align-items, center);
+  justify-content: var(--chotto-contactcontextmenu-wrapper-justify-content, center);
+  margin-right: var(--chotto-contactcontextmenu-wrapper-margin-right, 15px);
+  margin-left: var(--chotto-contactcontextmenu-wrapper-margin-left, 10px);
+
+  .contact-context-menu__button {
+    background: var(--chotto-contactcontextmenu-button-bg, none);
+    border: var(--chotto-contactcontextmenu-button-border, none);
+    padding: var(--chotto-contactcontextmenu-button-padding, 0);
+    font: var(--chotto-contactcontextmenu-button-font, inherit);
+    color: var(--chotto-contactcontextmenu-button-color, inherit);
+    cursor: var(--chotto-contactcontextmenu-button-cursor, pointer);
+    outline: var(--chotto-contactcontextmenu-button-outline, none);
+    transition: var(--chotto-contactcontextmenu-button-transition, all 0.2s);
+    border-radius: var(--chotto-contactcontextmenu-button-border-radius, 50%);
+    width: var(--chotto-contactcontextmenu-button-width, 40px);
+    height: var(--chotto-contactcontextmenu-button-height, 40px);
+    display: var(--chotto-contactcontextmenu-button-display, flex);
+    align-items: var(--chotto-contactcontextmenu-button-align-items, center);
+    justify-content: var(--chotto-contactcontextmenu-button-justify-content, center);
+    position: var(--chotto-contactcontextmenu-button-position, relative);
+    
+    &:hover {
+      background-color: var(--chotto-contactcontextmenu-button-hover-bg, var(--neutral-90, #F6F6F6));
+    }
+    
+    &:active {
+      transform: var(--chotto-contactcontextmenu-button-active-transform, scale(0.95));
+    }
+
+    .contact-context-menu__icon {
+      display: var(--chotto-contactcontextmenu-icon-display, flex);
+      align-items: var(--chotto-contactcontextmenu-icon-align-items, center);
+      justify-content: var(--chotto-contactcontextmenu-icon-justify-content, center);
+    }
+  }
+}
+
+.context-menu__container {
+  display: var(--chotto-contactcontextmenu-container-display, flex);
+  align-items: var(--chotto-contactcontextmenu-container-align-items, center);
+  justify-content: var(--chotto-contactcontextmenu-container-justify-content, center);
+  border: var(--chotto-contactcontextmenu-container-border, 1px solid var(--neutral-75, #F3F3F3));
+  border-radius: var(--chotto-contactcontextmenu-container-border-radius, 4px);
+  box-shadow: var(--chotto-contactcontextmenu-container-box-shadow, 0px 5px 5px 1px var(--neutral-400, #a3a3a3));
+}

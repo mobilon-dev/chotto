@@ -1,5 +1,6 @@
 // 1_atoms
 export { default as ButtonContextMenu } from './1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
+export { default as ContactContextMenu } from './1_atoms/ContactContextMenu/ContactContextMenu.vue';
 export { default as ContextMenu } from './1_atoms/ContextMenu/ContextMenu.vue';
 export { default as EmbedPreview } from './1_atoms/EmbedPreview/EmbedPreview.vue';
 export { default as LinkPreview } from './1_atoms/LinkPreview/LinkPreview.vue';
