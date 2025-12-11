@@ -43,7 +43,7 @@ interface ContextMenuAction {
 }
 
 const chatAppId = inject('chatAppId')
-const extChatAppId = inject('extChatAppId')
+const extChatAppId = inject('extChatAppId', '')
 
 const { getTheme } = useTheme(chatAppId as string)
 
