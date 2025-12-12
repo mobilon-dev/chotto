@@ -24,7 +24,7 @@
           <ChatList
             v-if="!isOpenSearchPanel || (isOpenSearchPanel && feedSearchFeedCol)"
             ref="refChatList"
-            :chats="chatsStore.chats"
+            :chats="sortedChats"
             filter-enabled
             :dialog-tabs="dialogTabs"
             :active-tab-id="activeTabId"
@@ -450,6 +450,31 @@ const contactActions = [
 ];
 
 const chatsStore = useChatsStore();
+
+// Сортировка чатов: сначала по количеству непрочитанных (больше сверху),
+// затем по времени последней активности (новые сверху)
+const sortedChats = computed(() => {
+  if (!chatsStore.chats || chatsStore.chats.length === 0) {
+    return [];
+  }
+
+  return [...chatsStore.chats]
+    .slice()
+    // Сортировка по времени последней активности (новые сверху)
+    .sort((a, b) => {
+      const aTimestamp = Number(a['lastActivity.timestamp'] || 0);
+      const bTimestamp = Number(b['lastActivity.timestamp'] || 0);
+      if (aTimestamp > bTimestamp) return -1;
+      if (aTimestamp < bTimestamp) return 1;
+      return 0;
+    })
+    // Сортировка по количеству непрочитанных (больше сверху)
+    .sort((a, b) => {
+      if (a.countUnread > b.countUnread) return -1;
+      if (a.countUnread < b.countUnread) return 1;
+      return 0;
+    });
+});
 
 // Реактивная валидация чатов
 const chatsData = computed(() => chatsStore.chats);

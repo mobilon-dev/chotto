@@ -1,9 +1,9 @@
 import { ref } from 'vue';
 
 /**
- * Композабл для фильтрации и сортировки списка чатов.
- * Инкапсулирует логику сортировки по времени активности и количеству
- * непрочитанных сообщений, фильтрации по табам, тегам и текстовому поиску.
+ * Композабл для фильтрации списка чатов.
+ * Инкапсулирует логику фильтрации по табам, тегам и текстовому поиску.
+ * Примечание: сортировка чатов выполняется в родительском компоненте.
  */
 
 /**
@@ -59,10 +59,9 @@ export function useChatListFilter({ props, emit }: UseChatListFilterOptions) {
   const filter = ref('');
 
   /**
-   * Возвращает отсортированный и отфильтрованный список чатов.
-   * Сортировка выполняется по времени последней активности (по убыванию),
-   * затем по количеству непрочитанных сообщений (по убыванию).
+   * Возвращает отфильтрованный список чатов.
    * Фильтрация применяется по активному табу, тегам и текстовому поиску.
+   * Примечание: сортировка чатов выполняется в родительском компоненте.
    */
   const getSortedAndFilteredChats = () => {
     // Проверяем, есть ли чаты в props
@@ -72,20 +71,6 @@ export function useChatListFilter({ props, emit }: UseChatListFilterOptions) {
 
     const result = props.chats
       .slice()
-      // Сортировка по времени последней активности (новые сверху)
-      .sort((a: ChatItem, b: ChatItem) => {
-        const aTimestamp = Number(a['lastActivity.timestamp'] || 0);
-        const bTimestamp = Number(b['lastActivity.timestamp'] || 0);
-        if (aTimestamp > bTimestamp) return -1;
-        if (aTimestamp < bTimestamp) return 1;
-        return 0;
-      })
-      // Сортировка по количеству непрочитанных (больше сверху)
-      .sort((a: ChatItem, b: ChatItem) => {
-        if (a.countUnread > b.countUnread) return -1;
-        if (a.countUnread < b.countUnread) return 1;
-        return 0;
-      })
       // Фильтрация по табам, тегам и текстовому поиску
       .filter((c: ChatItem) => {
         const activeTabId = props.activeTabId || 'all';
