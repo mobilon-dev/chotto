@@ -9,7 +9,7 @@
         <span class="pi pi-clock" />
       </template>
       <template v-else-if="messageStatus === 'error'">
-        <span class="pi pi-times-circle" />
+        <span class="pi pi-exclamation-circle" />
       </template>
       <template v-else>
         <span
