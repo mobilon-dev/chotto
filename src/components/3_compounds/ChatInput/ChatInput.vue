@@ -25,7 +25,7 @@
       v-model="getMessage().text"
       :disabled="state == 'disabled' || getMessage().isRecording"
       class="chat-input__input"
-      :placeholder="t('component.ChatInput.InputPlaceholder')"
+      :placeholder="inputPlaceholder"
       @keydown.enter="keyEnter"
       @input="sendTyping"
     />
@@ -123,6 +123,26 @@ const sendIconColor = computed(() => {
   }
 
   return '#25D366';
+})
+
+const inputPlaceholder = computed(() => {
+  if (!props.selectedChannel?.channelId) {
+    return t('component.ChatInput.InputPlaceholder');
+  }
+
+  const channelId = props.selectedChannel.channelId.toLowerCase();
+
+  if (channelId.includes('whatsapp') || channelId.includes('waba')) {
+    return t('component.ChatInput.WhatsappInputPlaceholder');
+  } else if (channelId.includes('telegram')) {
+    return t('component.ChatInput.TelegramInputPlaceholder');
+  } else if (channelId.includes('sms')) {
+    return t('component.ChatInput.SmsInputPlaceholder');
+  } else if (channelId.includes('max')) {
+    return t('component.ChatInput.MaxInputPlaceholder');
+  }
+
+  return t('component.ChatInput.InputPlaceholder');
 })
 
 watch(
