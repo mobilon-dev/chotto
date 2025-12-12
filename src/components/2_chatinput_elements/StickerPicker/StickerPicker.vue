@@ -79,14 +79,9 @@
               v-for="(sticker, index) in currentStickers"
               :key="index"
               class="sticker-picker__item"
-              @click="handleStickerClick(sticker, $event)"
-              @mousedown="handleStickerMouseDown(sticker, $event)"
-              @mouseup="handleStickerMouseUp"
+              @click="handleStickerClick(sticker)"
               @mouseenter="handleStickerMouseEnter(sticker, index)"
               @mouseleave="handleStickerMouseLeave"
-              @touchstart="handleStickerTouchStart(sticker, $event)"
-              @touchend="handleStickerTouchEnd"
-              @touchcancel="handleStickerTouchEnd"
             >
               <!-- TGS анимированные стикеры -->
               <tgs-player
@@ -223,10 +218,8 @@ watchEffect(() => {
 // Состояние для предпросмотра
 const previewSticker = ref<Sticker | null>(null);
 const previewStyle = ref<Record<string, string>>({});
-const longPressTimer = ref<ReturnType<typeof setTimeout> | null>(null);
-const longPressDelay = 500; // 500ms для долгого нажатия
-const isLongPress = ref(false);
-const currentStickerElement = ref<HTMLElement | null>(null);
+const previewTimer = ref<ReturnType<typeof setTimeout> | null>(null);
+const previewDelay = 700; // время для показа предпросмотра при наведении
 
 // Хранилище ссылок на tgs-player элементы для управления анимацией
 const tgsPlayerRefs = ref(new Map<number, { play?: () => void; pause?: () => void }>());
@@ -419,34 +412,6 @@ const onSelectSticker = (sticker: Sticker) => {
   }
 };
 
-// Обработка долгого нажатия на стикер
-const handleStickerMouseDown = (sticker: Sticker, event: MouseEvent) => {
-  currentStickerElement.value = event.currentTarget as HTMLElement;
-  isLongPress.value = false;
-  
-  // Очищаем предыдущий таймер
-  if (longPressTimer.value) {
-    clearTimeout(longPressTimer.value);
-  }
-  
-  // Устанавливаем таймер для долгого нажатия
-  longPressTimer.value = setTimeout(() => {
-    isLongPress.value = true;
-    showPreview(sticker);
-  }, longPressDelay);
-};
-
-const handleStickerMouseUp = () => {
-  clearLongPressTimer();
-  
-  // Если это было долгое нажатие, не отправляем стикер
-  if (isLongPress.value) {
-    isLongPress.value = false;
-    // Предпросмотр останется видимым, пока пользователь не кликнет на него или вне его
-    return;
-  }
-};
-
 const handleStickerMouseEnter = (sticker: Sticker, index: number) => {
   // Запускаем анимацию TGS стикера при наведении
   if (isTgsSticker(sticker) && tgsLibsLoaded.value) {
@@ -455,6 +420,14 @@ const handleStickerMouseEnter = (sticker: Sticker, index: number) => {
       player.play();
     }
   }
+  
+  // Очищаем предыдущий таймер, если он был установлен
+  clearPreviewTimer();
+  
+  // Устанавливаем таймер для показа предпросмотра через 1 секунду
+  previewTimer.value = setTimeout(() => {
+    showPreview(sticker);
+  }, previewDelay);
 };
 
 const handleStickerMouseLeave = () => {
@@ -465,48 +438,24 @@ const handleStickerMouseLeave = () => {
     }
   });
   
-  // Если это долгое нажатие и предпросмотр показан, не скрываем его
-  // (пользователь может двигать мышью, и курсор может быть над предпросмотром)
-  if (isLongPress.value && previewSticker.value) {
-    return;
-  }
-  clearLongPressTimer();
+  // Очищаем таймер и скрываем предпросмотр
+  clearPreviewTimer();
   hidePreview();
 };
 
-const handleStickerTouchStart = (sticker: Sticker, event: TouchEvent) => {
-  // Преобразуем TouchEvent в MouseEvent для обработки
-  const mouseEvent = new MouseEvent('mousedown', {
-    bubbles: true,
-    cancelable: true,
-    clientX: event.touches[0].clientX,
-    clientY: event.touches[0].clientY,
-  });
-  handleStickerMouseDown(sticker, mouseEvent);
-};
-
-const handleStickerTouchEnd = () => {
-  handleStickerMouseUp();
-};
-
-const handleStickerClick = (sticker: Sticker, event: MouseEvent) => {
-  // Если это было долгое нажатие, не отправляем стикер
-  if (isLongPress.value) {
-    event.preventDefault();
-    event.stopPropagation();
-    isLongPress.value = false;
-    hidePreview();
-    return;
-  }
+const handleStickerClick = (sticker: Sticker) => {
+  // Очищаем таймер предпросмотра при клике
+  clearPreviewTimer();
+  hidePreview();
   
-  // Обычный клик - отправляем стикер
+  // Отправляем стикер
   onSelectSticker(sticker);
 };
 
-const clearLongPressTimer = () => {
-  if (longPressTimer.value) {
-    clearTimeout(longPressTimer.value);
-    longPressTimer.value = null;
+const clearPreviewTimer = () => {
+  if (previewTimer.value) {
+    clearTimeout(previewTimer.value);
+    previewTimer.value = null;
   }
 };
 
@@ -649,18 +598,8 @@ const handleClickOutside = (event: MouseEvent) => {
   }
 };
 
-// Глобальный обработчик для отслеживания отпускания кнопки мыши
-const handleGlobalMouseUp = () => {
-  // Если это было долгое нажатие и предпросмотр показан, сбрасываем флаг
-  // Предпросмотр останется видимым до клика на него или вне его
-  if (isLongPress.value) {
-    isLongPress.value = false;
-  }
-};
-
 onMounted(() => {
   document.addEventListener('click', handleClickOutside);
-  document.addEventListener('mouseup', handleGlobalMouseUp);
   
   // Принудительно обновляем цвет после монтирования
   updateIconColor();
@@ -692,8 +631,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside);
-  document.removeEventListener('mouseup', handleGlobalMouseUp);
-  clearLongPressTimer();
+  clearPreviewTimer();
   hidePreview();
   
   if (themeObserver) {
