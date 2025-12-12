@@ -109,11 +109,15 @@
   --chotto-chatitem-unread-display: flex;
   --chotto-chatitem-unread-justify: center;
   --chotto-chatitem-unread-align: center;
+  --chotto-chatitem-unread-border-radius: 50%;
+  --chotto-chatitem-unread-min-width: 20px;
+  --chotto-chatitem-unread-min-height: 20px;
   --chotto-chatitem-unread-margin-left: auto;
   --chotto-chatitem-unread-margin-top: auto;
   --chotto-chatitem-unread-max-height: 20px;
   --chotto-chatitem-unread-padding: 0 6px;
   --chotto-chatitem-unread-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-chatitem-unread-font-weight: 400;
   --chotto-chatitem-unread-text-color: var(--chotto-theme-unread-text-color);
   --chotto-chatitem-unread-background-color: var(--chotto-theme-unread-background-color);
   

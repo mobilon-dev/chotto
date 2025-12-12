@@ -168,12 +168,12 @@
     display: var(--chotto-chatitem-unread-display, flex);
     justify-content: var(--chotto-chatitem-unread-justify, center);
     align-items: var(--chotto-chatitem-unread-align, center);
-    border-radius: var(--chotto-unread-border-radius, 50%);
-    min-width: var(--chotto-unread-min-width, 25px);
-    min-height: var(--chotto-unread-min-height, 25px);
+    border-radius: var(--chotto-chatitem-unread-border-radius, 50%);
+    min-width: var(--chotto-chatitem-unread-min-width, 20px);
+    min-height: var(--chotto-chatitem-unread-min-height, 20px);
     max-height: var(--chotto-chatitem-unread-max-height, 20px);
     font-size: var(--chotto-chatitem-unread-font-size, 14px);
-    font-weight: var(--chotto-unread-font-weight, 400);
+    font-weight: var(--chotto-chatitem-unread-font-weight, 400);
     color: var(--chotto-chatitem-unread-text-color, #fafafa);
     background-color: var(--chotto-chatitem-unread-background-color, #ef4444);
     padding: var(--chotto-chatitem-unread-padding, 0 6px);

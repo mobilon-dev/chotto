@@ -201,6 +201,12 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-unread-justify': string;
   /** Выравнивание по поперечной оси непрочитанных сообщений */
   '--chotto-chatitem-unread-align': string;
+  /** Радиус границы бейджа непрочитанного */
+  '--chotto-chatitem-unread-border-radius': string;
+  /** Минимальная ширина бейджа непрочитанного */
+  '--chotto-chatitem-unread-min-width': string;
+  /** Минимальная высота бейджа непрочитанного */
+  '--chotto-chatitem-unread-min-height': string;
   /** Отступ слева от непрочитанных сообщений */
   '--chotto-chatitem-unread-margin-left': string;
   /** Отступ сверху от непрочитанных сообщений */
@@ -211,6 +217,8 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-unread-padding': string;
   /** Размер шрифта бейджа непрочитанного */
   '--chotto-chatitem-unread-font-size': string;
+  /** Толщина шрифта бейджа непрочитанного */
+  '--chotto-chatitem-unread-font-weight': string;
   /** Цвет текста бейджа непрочитанного */
   '--chotto-chatitem-unread-text-color': string;
   /** Цвет фона бейджа непрочитанного */
