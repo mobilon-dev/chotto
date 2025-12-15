@@ -27,7 +27,7 @@
           v-if="hasTabs"
           ref="tabsContainer"
           class="sticker-picker__tabs"
-          @wheel="handleTabsWheel"
+          @wheel.passive="handleTabsWheel"
         >
           <button
             v-for="(tab, tabIndex) in stickerTabs"
@@ -573,9 +573,6 @@ const handleTabsWheel = (event: WheelEvent) => {
   
   // Прокручиваем контейнер вкладок
   tabsContainer.value.scrollLeft += scrollDelta;
-  
-  // Предотвращаем прокрутку родительского элемента
-  event.preventDefault();
 };
 
 // Закрытие по клику вне (только для click-режима)

@@ -164,8 +164,8 @@
                 step="0.1"
                 @mousedown="isSeeking = true"
                 @mouseup="handleSeekEnd"
-                @touchstart="isSeeking = true"
-                @touchend="handleSeekEnd"
+                @touchstart.passive="isSeeking = true"
+                @touchend.passive="handleSeekEnd"
               >
               <button
                 type="button"
