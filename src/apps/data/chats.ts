@@ -208,7 +208,7 @@ export const chats = [
     countUnread: 0, isFixedTop: true,
     'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727027359',
-    'lastMessage.status': 'received',
+    'lastMessage.status': 'error',
     // actions: [
     //   { action: 'edit', title: 'изменить' }, { action: 'unpin', title: 'открепить' },
     // ],

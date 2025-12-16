@@ -279,6 +279,14 @@
   color: var(--chotto-chatitem-status-color-read, #5F5F5F);
 }
 
+.status--pending span {
+  color: var(--chotto-chatitem-status-color-pending, #5F5F5F);
+}
+
+.status--error span {
+  color: var(--chotto-chatitem-status-color-error, #ff4444);
+}
+
 .status--received span:first-child,
 .status--read span:first-child {
   margin-right: var(--chotto-chatitem-status-first-icon-margin-right, -8px);

@@ -281,6 +281,10 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-status-color-received': string;
   /** Цвет статуса "прочитано" */
   '--chotto-chatitem-status-color-read': string;
+  /** Цвет статуса "ожидание" */
+  '--chotto-chatitem-status-color-pending': string;
+  /** Цвет статуса "ошибка" */
+  '--chotto-chatitem-status-color-error': string;
   /** Размер шрифта статуса */
   '--chotto-chatitem-status-font-size': string;
 
