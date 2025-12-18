@@ -21,12 +21,37 @@ export interface IChatDialog {
   colorUnread?: string;
 }
 
+export interface ILastMessageObject {
+  _id?: string;
+  branchId?: string;
+  contactId?: string;
+  dialogId?: string;
+  sessionId?: string;
+  messageId?: string;
+  channelId?: string;
+  senderId?: string;
+  type?: string;
+  data?: {
+    text?: string;
+    url?: string;
+    filename?: string;
+  };
+  timestampms?: number;
+  channel?: {
+    _id?: string;
+    branchId?: string;
+    channelId?: string;
+    title?: string;
+    status?: string;
+  };
+}
+
 export interface IChatItem {
   chatId: number;
   name: string;
   avatar?: string;
   countUnread: number;
-  lastMessage: string;
+  lastMessage: string | ILastMessageObject;
   'lastActivity.time': string;
   'lastActivity.timestamp': string;
   isFixedBottom: boolean;

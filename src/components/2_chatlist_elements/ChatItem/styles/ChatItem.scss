@@ -100,12 +100,26 @@
     font-size: var(--chotto-chatitem-last-message-font-size, 14px);
     color: var(--chotto-chatitem-last-message-text-color, #5F5F5F);
     overflow: var(--chotto-chatitem-last-message-overflow, hidden);
-    text-overflow: var(--chotto-chatitem-last-message-text-overflow, ellipsis);
-    display: var(--chotto-chatitem-last-message-display, -webkit-box);
-    -webkit-line-clamp: var(--chotto-chatitem-last-message-line-clamp, 1);
-    line-clamp: var(--chotto-chatitem-last-message-line-clamp, 1);
-    -webkit-box-orient: var(--chotto-chatitem-last-message-box-orient, vertical);
+    display: var(--chotto-chatitem-last-message-display, flex);
+    align-items: var(--chotto-chatitem-last-message-align-items, center);
+    gap: var(--chotto-chatitem-last-message-gap, 6px);
+  }
 
+  &__last-message-text {
+    overflow: var(--chotto-chatitem-last-message-text-overflow-hidden, hidden);
+    text-overflow: var(--chotto-chatitem-last-message-text-overflow, ellipsis);
+    display: var(--chotto-chatitem-last-message-text-display, block);
+    flex: var(--chotto-chatitem-last-message-text-flex, 1);
+    min-width: var(--chotto-chatitem-last-message-text-min-width, 0);
+    white-space: var(--chotto-chatitem-last-message-text-white-space, nowrap);
+    max-width: var(--chotto-chatitem-last-message-text-max-width, 350px);
+  }
+
+  &__message-icon {
+    flex-shrink: var(--chotto-chatitem-message-icon-flex-shrink, 0);
+    width: var(--chotto-chatitem-message-icon-size, 16px);
+    height: var(--chotto-chatitem-message-icon-size, 16px);
+    color: var(--chotto-chatitem-message-icon-color, currentColor);
   }
 
   &__details-container {

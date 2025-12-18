@@ -67,12 +67,25 @@
   
   // Last message
   --chotto-chatitem-last-message-overflow: hidden;
-  --chotto-chatitem-last-message-text-overflow: ellipsis;
-  --chotto-chatitem-last-message-display: -webkit-box;
-  --chotto-chatitem-last-message-line-clamp: 1;
-  --chotto-chatitem-last-message-box-orient: vertical;
+  --chotto-chatitem-last-message-display: flex;
+  --chotto-chatitem-last-message-align-items: center;
+  --chotto-chatitem-last-message-gap: 6px;
   --chotto-chatitem-last-message-font-size: var(--chotto-theme-text-font-size);
   --chotto-chatitem-last-message-text-color: var(--chotto-theme-secondary-text-color);
+  
+  // Last message text
+  --chotto-chatitem-last-message-text-overflow-hidden: hidden;
+  --chotto-chatitem-last-message-text-overflow: ellipsis;
+  --chotto-chatitem-last-message-text-display: block;
+  --chotto-chatitem-last-message-text-flex: 1;
+  --chotto-chatitem-last-message-text-min-width: 0;
+  --chotto-chatitem-last-message-text-white-space: nowrap;
+  --chotto-chatitem-last-message-text-max-width: 350px;
+  
+  // Message icon
+  --chotto-chatitem-message-icon-flex-shrink: 0;
+  --chotto-chatitem-message-icon-size: 16px;
+  --chotto-chatitem-message-icon-color: currentColor;
   
   // Details container
   --chotto-chatitem-details-container-position: relative;

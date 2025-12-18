@@ -273,7 +273,17 @@ export const chats = [
   },
   {
     chatId: 6, name: "Виктор",
-    countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
+    countUnread: 0, 
+    lastMessage: {
+      type: 'message.image',
+      data: {
+        text: 'Горы - это значительные возвышения земной поверхности',
+        url: 'https://example.com/mountains.jpg',
+        filename: 'mountains.jpg'
+      }
+    },
+    'lastMessage.status': 'read', 
+    'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1761901469',
     avatar: 'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=ВФ',
     actions: [
@@ -329,13 +339,21 @@ export const chats = [
   },
   {
     chatId: 7, name: "Пётр",
-    countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
+    countUnread: 0, 
+    lastMessage: {
+      type: 'message.video',
+      data: {
+        text: 'Посмотри, какое красивое видео с природой!',
+        url: 'https://example.com/nature-video.mp4',
+        filename: 'nature-video.mp4'
+      }
+    },
+    'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727021159',
     'lastMessage.status': 'received',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },
     ],
-    typing: true,
     metadata: '',
     contact: {
       attributes: [
@@ -375,7 +393,16 @@ export const chats = [
   {
     chatId: 8, name: "Георгий Звонарь",
     avatar: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg',
-    countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
+    countUnread: 0, 
+    lastMessage: {
+      type: 'message.file',
+      data: {
+        text: '',
+        url: 'https://example.com/document.pdf',
+        filename: 'important-document.pdf'
+      }
+    },
+    'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727021159',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },
@@ -473,7 +500,16 @@ export const chats = [
   },
   {
     chatId: 9, name: "Василий",
-    countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
+    countUnread: 0, 
+    lastMessage: {
+      type: 'message.sticker',
+      data: {
+        text: '',
+        url: 'https://filebump.services.mobilon.ru/file/DNv7cvYdhMcvny2R6NRxyG2nU2GtCJHJY3by/AnimatedSticker.tgs',
+        filename: 'AnimatedSticker.tgs'
+      }
+    },
+    'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727021159',
     'lastMessage.status': 'read',
     actions: [

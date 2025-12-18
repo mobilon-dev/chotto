@@ -125,18 +125,40 @@ export interface ChatItemThemeCSSVariables {
   // Last message
   /** Переполнение последнего сообщения */
   '--chotto-chatitem-last-message-overflow': string;
-  /** Обрезка текста последнего сообщения */
-  '--chotto-chatitem-last-message-text-overflow': string;
   /** Отображение последнего сообщения */
   '--chotto-chatitem-last-message-display': string;
-  /** Количество строк последнего сообщения */
-  '--chotto-chatitem-last-message-line-clamp': string;
-  /** Ориентация блока последнего сообщения */
-  '--chotto-chatitem-last-message-box-orient': string;
+  /** Выравнивание элементов последнего сообщения */
+  '--chotto-chatitem-last-message-align-items': string;
+  /** Промежуток между элементами последнего сообщения */
+  '--chotto-chatitem-last-message-gap': string;
   /** Размер шрифта последнего сообщения */
   '--chotto-chatitem-last-message-font-size': string;
   /** Цвет текста последнего сообщения */
   '--chotto-chatitem-last-message-text-color': string;
+  
+  // Last message text
+  /** Переполнение текста последнего сообщения (скрытие) */
+  '--chotto-chatitem-last-message-text-overflow-hidden': string;
+  /** Обрезка текста последнего сообщения */
+  '--chotto-chatitem-last-message-text-overflow': string;
+  /** Отображение текста последнего сообщения */
+  '--chotto-chatitem-last-message-text-display': string;
+  /** Flex-коэффициент текста последнего сообщения */
+  '--chotto-chatitem-last-message-text-flex': string;
+  /** Минимальная ширина текста последнего сообщения */
+  '--chotto-chatitem-last-message-text-min-width': string;
+  /** Перенос строк текста последнего сообщения */
+  '--chotto-chatitem-last-message-text-white-space': string;
+  /** Максимальная ширина текста последнего сообщения */
+  '--chotto-chatitem-last-message-text-max-width': string;
+  
+  // Message icon
+  /** Коэффициент сжатия иконки сообщения */
+  '--chotto-chatitem-message-icon-flex-shrink': string;
+  /** Размер иконки сообщения */
+  '--chotto-chatitem-message-icon-size': string;
+  /** Цвет иконки сообщения */
+  '--chotto-chatitem-message-icon-color': string;
 
   // Details container
   /** Позиционирование контейнера деталей */

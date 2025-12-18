@@ -39,14 +39,19 @@
         </Tooltip>
         
         <Tooltip
-          :text="chat.lastMessage"
+          :text="lastMessageText"
           position="bottom"
         >
           <div
             v-if="chat.lastMessage || chat.typing"
             class="chat-item__last-message"
           >
-            {{ showText }}
+            <component
+              :is="messageIcon"
+              v-if="messageIcon"
+              class="chat-item__message-icon"
+            />
+            <span class="chat-item__last-message-text">{{ showText }}</span>
           </div>
         </Tooltip>
       </div>
@@ -206,7 +211,11 @@ import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import AvatarIcon from '@/components/1_icons/AvatarIcon.vue';
-import { IAction, IChatItem, IChatDialog } from './types';
+import FileIcon from './icons/FileIcon.vue';
+import ImageIcon from './icons/ImageIcon.vue';
+import StickerIcon from './icons/StickerIcon.vue';
+import VideoIcon from './icons/VideoIcon.vue';
+import { IAction, IChatItem, IChatDialog, ILastMessageObject } from './types';
 
 const chatAppId = inject('chatAppId')
 const { getTheme } = useTheme(chatAppId as string)
@@ -319,11 +328,86 @@ let timer: ReturnType<typeof setInterval> | undefined;
 const typingIndex = ref(0)
 const typingText = [t('component.ChatItem.typing') + '.', t('component.ChatItem.typing') + '..', t('component.ChatItem.typing') + '...']
 
+// Функция для получения текста из lastMessage (может быть строкой или объектом)
+const getLastMessageText = (lastMessage: string | ILastMessageObject): string => {
+  if (typeof lastMessage === 'string') {
+    return lastMessage;
+  }
+  // Если это стикер, показываем "Стикер" вместо имени файла или подписи
+  if (lastMessage?.type === 'message.sticker') {
+    return 'Стикер';
+  }
+  // Если это объект, пытаемся получить текст из data.text
+  const text = lastMessage?.data?.text;
+  if (text) {
+    return text;
+  }
+  // Если текста нет, но есть имя файла, показываем его
+  const filename = lastMessage?.data?.filename;
+  if (filename) {
+    return filename;
+  }
+  return '';
+};
+
+// Функция для определения типа сообщения
+const getMessageType = (lastMessage: string | ILastMessageObject): string | null => {
+  if (typeof lastMessage === 'string') {
+    return null;
+  }
+  return lastMessage?.type || null;
+};
+
+// Определяем иконку на основе типа сообщения
+const messageIcon = computed(() => {
+  if (props.chat.typing) {
+    return null;
+  }
+  
+  const messageType = getMessageType(props.chat.lastMessage);
+  if (!messageType) {
+    return null;
+  }
+
+  // Проверяем тип сообщения
+  if (messageType === 'message.sticker') {
+    return StickerIcon;
+  }
+  
+  if (messageType === 'message.image') {
+    return ImageIcon;
+  }
+  
+  if (messageType === 'message.video') {
+    return VideoIcon;
+  }
+  
+  if (messageType === 'message.file') {
+    // Проверяем, не является ли это стикером (по расширению файла)
+    const lastMessageObj = props.chat.lastMessage as ILastMessageObject;
+    const filename = lastMessageObj?.data?.filename?.toLowerCase() || '';
+    if (filename.endsWith('.tgs') || filename.endsWith('.webp')) {
+      return StickerIcon;
+    }
+    return FileIcon;
+  }
+
+  return null;
+});
+
+// Получаем текст для отображения
+const lastMessageText = computed(() => {
+  if (props.chat.typing) {
+    return typingText[typingIndex.value];
+  }
+  return getLastMessageText(props.chat.lastMessage);
+});
+
 const showText = computed(() => {
   if (props.chat.typing) {
     return typingText[typingIndex.value];
   } else {
-    return props.chat.lastMessage;
+    return getLastMessageText(props.chat.lastMessage);
   }
 });
 
