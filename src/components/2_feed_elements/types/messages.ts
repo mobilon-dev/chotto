@@ -242,3 +242,14 @@ export interface IStickerMessage {
   reactions?: MessageReactions
   backgroundColor?: string
 }
+
+export interface IMissedCallMessage {
+  messageId: string
+  position: string
+  time: string
+  avatar?: string
+  header?: string
+  subText?: string
+  actions?: IAction[]
+  backgroundColor?: string
+}

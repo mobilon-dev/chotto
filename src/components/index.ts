@@ -59,6 +59,7 @@ export { default as AudioMessage } from './2_feed_elements/AudioMessage/AudioMes
 export { default as BaseReplyMessage } from './2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
 export { default as CallMessage } from './2_feed_elements/CallMessage/CallMessage.vue';
 export { default as DateMessage } from './2_feed_elements/DateMessage/DateMessage.vue';
+export { default as MissedCallMessage } from './2_feed_elements/MissedCallMessage/MissedCallMessage.vue';
 export { default as DateMessageSticky } from './2_feed_elements/DateMessageSticky/DateMessageSticky.vue';
 export { default as DelimiterMessage } from './2_feed_elements/DelimiterMessage/DelimiterMessage.vue';
 export { default as FeedKeyboard } from './2_feed_elements/FeedKeyboard/FeedKeyboard.vue';

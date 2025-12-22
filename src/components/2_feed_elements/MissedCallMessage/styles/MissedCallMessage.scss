@@ -1,0 +1,161 @@
+.missed-call-message {
+
+  &__content {
+    position: var(--chotto-missedcallmessage-content-position, relative);
+    word-wrap: var(--chotto-missedcallmessage-content-word-wrap, break-word);
+    width: var(--chotto-missedcallmessage-content-width, fit-content);
+    max-width: var(--chotto-missedcallmessage-content-max-width, 25rem);
+    border-radius: var(--chotto-missedcallmessage-content-border-radius, 5px);
+    padding: var(--chotto-missedcallmessage-content-padding, 14px 10px 14px 14px);
+    display: var(--chotto-missedcallmessage-content-display, flex);
+    flex-direction: var(--chotto-missedcallmessage-content-flex-direction, column);
+    min-width: var(--chotto-missedcallmessage-content-min-width, 420px);
+    max-height: var(--chotto-missedcallmessage-content-max-height, 78px);
+  }
+
+  &__main-content {
+    display: var(--chotto-missedcallmessage-main-content-display, flex);
+    align-items: var(--chotto-missedcallmessage-main-content-align-items, center);
+    column-gap: var(--chotto-missedcallmessage-main-content-column-gap, 15px);
+  }
+
+  &__left .missed-call-message__content.is-first::before {
+    content: var(--chotto-missedcallmessage-left-before-content, '');
+    position: var(--chotto-missedcallmessage-left-before-position, absolute);
+    top: var(--chotto-missedcallmessage-left-before-top, 0);
+    left: var(--chotto-missedcallmessage-left-before-left, -8px);
+    width: var(--chotto-missedcallmessage-left-before-width, 0);
+    height: var(--chotto-missedcallmessage-left-before-height, 0);
+    border: var(--chotto-missedcallmessage-left-before-border, 9px solid transparent);
+    border-top: var(--chotto-missedcallmessage-left-before-border-top, 15px solid var(--chotto-missedcallmessage-left-bg, #FFFFFF));
+    z-index: var(--chotto-missedcallmessage-left-before-z-index, 1);
+    filter: var(--chotto-missedcallmessage-left-before-filter, none);
+  }
+
+  &__icon-wrapper {
+    display: var(--chotto-missedcallmessage-icon-wrapper-display, flex);
+    align-items: var(--chotto-missedcallmessage-icon-wrapper-align-items, center);
+    justify-content: var(--chotto-missedcallmessage-icon-wrapper-justify-content, center);
+    flex-shrink: var(--chotto-missedcallmessage-icon-wrapper-flex-shrink, 0);
+    width: var(--chotto-missedcallmessage-icon-wrapper-width, 50px);
+    height: var(--chotto-missedcallmessage-icon-wrapper-height, 50px);
+    border: var(--chotto-missedcallmessage-icon-wrapper-border, 1px solid #DBDDDC);
+    border-radius: var(--chotto-missedcallmessage-icon-wrapper-border-radius, 50%);
+    background-color: var(--chotto-missedcallmessage-icon-wrapper-background-color, transparent);
+  }
+
+  &__icon {
+    width: var(--chotto-missedcallmessage-icon-width, 20px);
+    height: var(--chotto-missedcallmessage-icon-height, 20px);
+  }
+
+  &__text {
+    font-size: var(--chotto-missedcallmessage-text-font-size, 16px);
+    color: var(--chotto-missedcallmessage-text-color, #5F5F5F);
+    margin: var(--chotto-missedcallmessage-text-margin, 0);
+    flex: var(--chotto-missedcallmessage-text-flex, 1);
+  }
+
+  &__info-container {
+    position: var(--chotto-missedcallmessage-info-container-position, absolute);
+    right: var(--chotto-missedcallmessage-info-container-right, 10px);
+    bottom: var(--chotto-missedcallmessage-info-container-bottom, 2px);
+    display: var(--chotto-missedcallmessage-info-container-display, flex);
+    align-items: var(--chotto-missedcallmessage-info-container-align-items, center);
+    justify-content: var(--chotto-missedcallmessage-info-container-justify-content, flex-end);
+    column-gap: var(--chotto-missedcallmessage-info-container-column-gap, 4px);
+    pointer-events: var(--chotto-missedcallmessage-info-container-pointer-events, auto);
+  }
+
+  &__time {
+    font-size: var(--chotto-missedcallmessage-time-font-size, 14px);
+    color: var(--chotto-missedcallmessage-time-color, #5F5F5F);
+    white-space: var(--chotto-missedcallmessage-time-white-space, nowrap);
+  }
+
+  &__subtext {
+    font-size: var(--chotto-missedcallmessage-subtext-font-size, 14px);
+    color: var(--chotto-missedcallmessage-subtext-color, #5F5F5F);
+  }
+
+  &__avatar {
+    align-self: var(--chotto-missedcallmessage-avatar-align-self, auto);
+    object-fit: var(--chotto-missedcallmessage-avatar-object-fit, cover);
+    min-width: var(--chotto-missedcallmessage-avatar-min-width, 40px);
+    min-height: var(--chotto-missedcallmessage-avatar-min-height, 40px);
+    border-radius: var(--chotto-missedcallmessage-avatar-border-radius, 50%);
+  }
+
+  &__menu-button {
+    position: var(--chotto-missedcallmessage-menu-button-position, absolute);
+    background-color: var(--chotto-missedcallmessage-menu-button-background-color, transparent);
+    border: var(--chotto-missedcallmessage-menu-button-border, none);
+    transform: var(--chotto-missedcallmessage-menu-button-transform, translateY(-50%));
+    cursor: var(--chotto-missedcallmessage-menu-button-cursor, pointer);
+    transition: var(--chotto-missedcallmessage-menu-button-transition, 0.2s);
+
+    span {
+      color: var(--chotto-missedcallmessage-menu-button-span-color, #525252);
+      font-size: var(--chotto-missedcallmessage-menu-button-span-font-size, 23px);
+    }
+
+    &:hover span {
+      color: var(--chotto-missedcallmessage-menu-button-span-hover-color, #404040);
+      transition: var(--chotto-missedcallmessage-menu-button-span-hover-transition, 0.2s);
+    }
+  }
+
+  &__context-menu {
+    position: var(--chotto-missedcallmessage-context-menu-position, absolute);
+  }
+
+  &__left {
+    display: var(--chotto-missedcallmessage-left-display, grid);
+    margin: var(--chotto-missedcallmessage-left-margin, 0 0 10px 0);
+    grid-template-columns: var(--chotto-missedcallmessage-left-grid-template-columns, min-content 1fr);
+
+    .missed-call-message__avatar {
+      grid-column: var(--chotto-missedcallmessage-left-avatar-grid-column, 1);
+      grid-row: var(--chotto-missedcallmessage-left-avatar-grid-row, 2);
+      margin-right: var(--chotto-missedcallmessage-left-avatar-margin-right, 12px);
+    }
+
+    .missed-call-message__subtext {
+      grid-column: var(--chotto-missedcallmessage-left-subtext-grid-column, 2);
+      grid-row: var(--chotto-missedcallmessage-left-subtext-grid-row, 1);
+      margin: var(--chotto-missedcallmessage-left-subtext-margin, 0 0 2px 10px);
+    }
+
+    .missed-call-message__content {
+      grid-column: var(--chotto-missedcallmessage-left-content-grid-column, 2);
+      background: var(--chotto-missedcallmessage-left-bg, #FFFFFF);
+      backdrop-filter: var(--chotto-missedcallmessage-left-backdrop-filter, none);
+      box-shadow: var(--chotto-missedcallmessage-left-box-shadow, none);
+    }
+
+    .missed-call-message__menu-button {
+      top: var(--chotto-missedcallmessage-left-menu-button-top, 50%);
+      right: var(--chotto-missedcallmessage-left-menu-button-right, -40px);
+    }
+
+    .missed-call-message__context-menu {
+      top: var(--chotto-missedcallmessage-left-context-menu-top, 56%);
+      left: var(--chotto-missedcallmessage-left-context-menu-left, 100%);
+    }
+  }
+}
+
+.v-enter-active {
+  transition: var(--chotto-missedcallmessage-v-enter-active-transition, all 0.1s ease-out);
+}
+
+.v-leave-active {
+  transition: var(--chotto-missedcallmessage-v-leave-active-transition, all 0.1s cubic-bezier(1, 0.5, 0.8, 1));
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: var(--chotto-missedcallmessage-v-enter-from-transform, scale(0.9));
+  opacity: var(--chotto-missedcallmessage-v-enter-from-opacity, 0);
+}
+

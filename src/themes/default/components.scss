@@ -52,6 +52,7 @@
 @use '../../components/2_feed_elements/BaseReplyMessage/styles/themes/default.scss' as basereplymessage-default;
 @use '../../components/2_feed_elements/CallMessage/styles/themes/default.scss' as callmessage-default;
 @use '../../components/2_feed_elements/DateMessage/styles/themes/default.scss' as datemessage-default;
+@use '../../components/2_feed_elements/MissedCallMessage/styles/themes/default.scss' as missedcallmessage-default;
 @use '../../components/2_feed_elements/DateMessageSticky/styles/themes/default.scss' as datemessagesticky-default;
 @use '../../components/2_feed_elements/DelimiterMessage/styles/themes/default.scss' as delimitermessage-default;
 @use '../../components/2_feed_elements/FeedKeyboard/styles/themes/default.scss' as feedkeyboard-default;

@@ -1095,6 +1095,16 @@ export const messages = [
   {
     chatId: 8,
     dialogId: 'dlg_43543111',
+    type: "message.missedCall",
+    direction: 'incoming',
+    messageId: '805',
+    timestamp: '1763036690',
+    header: 'Василий',
+    subText: '+7 913 229-29-29',
+  },
+  {
+    chatId: 8,
+    dialogId: 'dlg_43543111',
     type: "message.text",
     text: "Привет! Вот пример **markdown** форматирования:\n\n **Жирный текст**\n *Курсив*\n <u>Подчёркнутый</u>\n ~~Зачёркнутый~~\n `Встроенный код`\n\n> Это цитата с markdown форматированием",
     direction: 'incoming',

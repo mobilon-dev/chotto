@@ -1,0 +1,118 @@
+[data-theme="green"] {
+  // MissedCallMessage content variables
+  --chotto-missedcallmessage-content-position: relative;
+  --chotto-missedcallmessage-content-word-wrap: break-word;
+  --chotto-missedcallmessage-content-width: fit-content;
+  --chotto-missedcallmessage-content-max-width: 25rem;
+  --chotto-missedcallmessage-content-border-radius: 5px;
+  --chotto-missedcallmessage-content-padding: 14px 10px 14px 14px;
+  --chotto-missedcallmessage-content-display: flex;
+  --chotto-missedcallmessage-content-flex-direction: column;
+  --chotto-missedcallmessage-content-min-width: 420px;
+  --chotto-missedcallmessage-content-max-height: 78px;
+
+  // MissedCallMessage main-content variables
+  --chotto-missedcallmessage-main-content-display: flex;
+  --chotto-missedcallmessage-main-content-align-items: center;
+  --chotto-missedcallmessage-main-content-column-gap: 15px;
+
+  // MissedCallMessage left before variables
+  --chotto-missedcallmessage-left-before-content: '';
+  --chotto-missedcallmessage-left-before-position: absolute;
+  --chotto-missedcallmessage-left-before-top: 0;
+  --chotto-missedcallmessage-left-before-left: -8px;
+  --chotto-missedcallmessage-left-before-width: 0;
+  --chotto-missedcallmessage-left-before-height: 0;
+  --chotto-missedcallmessage-left-before-border: 9px solid transparent;
+  --chotto-missedcallmessage-left-before-border-top: 15px solid var(--chotto-theme-message-left-bg);
+  --chotto-missedcallmessage-left-before-z-index: 1;
+  --chotto-missedcallmessage-left-before-filter: none;
+
+  // MissedCallMessage icon-wrapper variables
+  --chotto-missedcallmessage-icon-wrapper-display: flex;
+  --chotto-missedcallmessage-icon-wrapper-align-items: center;
+  --chotto-missedcallmessage-icon-wrapper-justify-content: center;
+  --chotto-missedcallmessage-icon-wrapper-flex-shrink: 0;
+  --chotto-missedcallmessage-icon-wrapper-width: 50px;
+  --chotto-missedcallmessage-icon-wrapper-height: 50px;
+  --chotto-missedcallmessage-icon-wrapper-border: 1px solid #DBDDDC;
+  --chotto-missedcallmessage-icon-wrapper-border-radius: 50%;
+  --chotto-missedcallmessage-icon-wrapper-background-color: transparent;
+
+  // MissedCallMessage icon variables
+  --chotto-missedcallmessage-icon-width: 20px;
+  --chotto-missedcallmessage-icon-height: 20px;
+
+  // MissedCallMessage text variables
+  --chotto-missedcallmessage-text-font-size: 16px;
+  --chotto-missedcallmessage-text-color: var(--chotto-theme-secondary-text-color);
+  --chotto-missedcallmessage-text-margin: 0;
+  --chotto-missedcallmessage-text-flex: 1;
+
+  // MissedCallMessage info-container variables
+  --chotto-missedcallmessage-info-container-position: absolute;
+  --chotto-missedcallmessage-info-container-right: 10px;
+  --chotto-missedcallmessage-info-container-bottom: 2px;
+  --chotto-missedcallmessage-info-container-display: flex;
+  --chotto-missedcallmessage-info-container-align-items: center;
+  --chotto-missedcallmessage-info-container-justify-content: flex-end;
+  --chotto-missedcallmessage-info-container-column-gap: 4px;
+  --chotto-missedcallmessage-info-container-pointer-events: auto;
+
+  // MissedCallMessage time variables
+  --chotto-missedcallmessage-time-font-size: 14px;
+  --chotto-missedcallmessage-time-color: var(--chotto-theme-secondary-text-color);
+  --chotto-missedcallmessage-time-white-space: nowrap;
+
+  // MissedCallMessage subtext variables
+  --chotto-missedcallmessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-missedcallmessage-subtext-color: var(--chotto-theme-secondary-text-color);
+
+  // MissedCallMessage avatar variables
+  --chotto-missedcallmessage-avatar-align-self: auto;
+  --chotto-missedcallmessage-avatar-object-fit: cover;
+  --chotto-missedcallmessage-avatar-min-width: var(--chotto-theme-avatar-small-size);
+  --chotto-missedcallmessage-avatar-min-height: var(--chotto-theme-avatar-small-size);
+  --chotto-missedcallmessage-avatar-border-radius: 50%;
+
+  // MissedCallMessage menu-button variables
+  --chotto-missedcallmessage-menu-button-position: absolute;
+  --chotto-missedcallmessage-menu-button-background-color: transparent;
+  --chotto-missedcallmessage-menu-button-border: none;
+  --chotto-missedcallmessage-menu-button-transform: translateY(-50%);
+  --chotto-missedcallmessage-menu-button-cursor: pointer;
+  --chotto-missedcallmessage-menu-button-transition: 0.2s;
+  --chotto-missedcallmessage-menu-button-span-color: var(--chotto-theme-button-color-active);
+  --chotto-missedcallmessage-menu-button-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-missedcallmessage-menu-button-span-hover-color: var(--chotto-theme-button-color-hover);
+  --chotto-missedcallmessage-menu-button-span-hover-transition: 0.2s;
+
+  // MissedCallMessage context-menu variables
+  --chotto-missedcallmessage-context-menu-position: absolute;
+
+  // MissedCallMessage left variables
+  --chotto-missedcallmessage-left-display: grid;
+  --chotto-missedcallmessage-left-margin: var(--chotto-theme-message-margin);
+  --chotto-missedcallmessage-left-grid-template-columns: min-content 1fr;
+  --chotto-missedcallmessage-left-avatar-grid-column: 1;
+  --chotto-missedcallmessage-left-avatar-grid-row: 2;
+  --chotto-missedcallmessage-left-avatar-margin-right: 12px;
+  --chotto-missedcallmessage-left-subtext-grid-column: 2;
+  --chotto-missedcallmessage-left-subtext-grid-row: 1;
+  --chotto-missedcallmessage-left-subtext-margin: 0 0 2px 10px;
+  --chotto-missedcallmessage-left-content-grid-column: 2;
+  --chotto-missedcallmessage-left-bg: var(--chotto-theme-message-left-bg);
+  --chotto-missedcallmessage-left-backdrop-filter: none;
+  --chotto-missedcallmessage-left-box-shadow: none;
+  --chotto-missedcallmessage-left-menu-button-top: 50%;
+  --chotto-missedcallmessage-left-menu-button-right: -40px;
+  --chotto-missedcallmessage-left-context-menu-top: 56%;
+  --chotto-missedcallmessage-left-context-menu-left: 100%;
+
+  // MissedCallMessage transition variables
+  --chotto-missedcallmessage-v-enter-active-transition: all 0.1s ease-out;
+  --chotto-missedcallmessage-v-leave-active-transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+  --chotto-missedcallmessage-v-enter-from-transform: scale(0.9);
+  --chotto-missedcallmessage-v-enter-from-opacity: 0;
+}
+

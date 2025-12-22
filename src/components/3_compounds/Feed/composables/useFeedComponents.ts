@@ -9,6 +9,7 @@ import SystemMessage from '@/components/2_feed_elements/SystemMessage/SystemMess
 import TypingMessage from '@/components/2_feed_elements/TypingMessage/TypingMessage.vue';
 import StickerMessage from '@/components/2_feed_elements/StickerMessage/StickerMessage.vue';
 import DelimiterMessage from '@/components/2_feed_elements/DelimiterMessage/DelimiterMessage.vue';
+import MissedCallMessage from '@/components/2_feed_elements/MissedCallMessage/MissedCallMessage.vue';
 
 /**
  * Композабл для маппинга типов сообщений на компоненты
@@ -22,6 +23,7 @@ export function useFeedComponents() {
       'message.audio': AudioMessage,
       'message.video': VideoMessage,
       'message.call': CallMessage,
+      'message.missedCall': MissedCallMessage,
       'message.sticker': StickerMessage,
       'message.system': SystemMessage,
       'system.date': DateMessage,
