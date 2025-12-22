@@ -80,6 +80,7 @@
     v-else
     ref="refFeed"
     class="message-feed"
+    :style="{ backgroundImage: `url(${defaultBackground})` }"
   >
     <div style="margin: auto;">
       <slot name="empty-feed" />
