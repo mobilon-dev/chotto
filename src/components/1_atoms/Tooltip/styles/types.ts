@@ -25,6 +25,8 @@ export interface TooltipThemeCSSVariables {
   '--chotto-tooltip-font-weight': string;
   /** Высота строки подсказки */
   '--chotto-tooltip-line-height': string;
+  /** Обработка пробелов и переносов строк в подсказке */
+  '--chotto-tooltip-white-space': string;
   /** Тень подсказки */
   '--chotto-tooltip-box-shadow': string;
   /** Z-index подсказки */
