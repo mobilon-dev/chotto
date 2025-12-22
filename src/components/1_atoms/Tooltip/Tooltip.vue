@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, unref, inject, nextTick } from 'vue';
+import { computed, ref, unref, inject, nextTick, onUnmounted } from 'vue';
 // import { onMounted } from 'vue';
 import { useTheme } from '@/hooks';
 
@@ -33,6 +33,7 @@ const container = ref<HTMLElement>()
 const tooltip = ref<HTMLElement>()
 const show = ref(false)
 const autoTimer = ref<ReturnType<typeof setTimeout> | null>(null)
+const showTimer = ref<ReturnType<typeof setTimeout> | null>(null)
 
 const props = defineProps({
   text: {
@@ -54,6 +55,10 @@ const props = defineProps({
   autoShowDuration: {
     type: Number,
     default: 0,
+  },
+  delay: {
+    type: Number,
+    default: 600,
   }
 })
 
@@ -66,31 +71,49 @@ const updatePosition = () => {
   if (props.trigger === 'auto') {
     return;
   }
-  show.value = true
-  nextTick(() => {
-    if (container.value && tooltip.value){
-      const t = tooltip.value
-      const bounds = container.value.getBoundingClientRect()
-      const tBounds = tooltip.value.getBoundingClientRect()
-      const correctLeft = tBounds.left < 0 ? tBounds.left : 0
-      const correctTop = tBounds.top < 0 ? tBounds.top : 0
-      const r: Record<string, {top: number, left: number}> = {
-        'left'  : {top: bounds.top - ((tBounds.height - bounds.height) / 2) - correctTop, left: bounds?.left - tBounds.width - correctLeft - props.offset},
-        'right' : {top: bounds.top - ((tBounds.height - bounds.height) / 2) - correctTop, left: bounds?.left + bounds.width - correctLeft + props.offset},
-        'bottom': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left - correctLeft},
-        'top'   : {top: bounds.top - tBounds.height - props.offset - correctTop, left: bounds?.left - correctLeft},
-        'bottom-left': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left + bounds.width - tBounds.width - correctLeft},
+  
+  // Очищаем предыдущий таймер, если он есть
+  if (showTimer.value) {
+    clearTimeout(showTimer.value);
+    showTimer.value = null;
+  }
+  
+  // Устанавливаем задержку перед показом
+  showTimer.value = setTimeout(() => {
+    show.value = true
+    nextTick(() => {
+      if (container.value && tooltip.value){
+        const t = tooltip.value
+        const bounds = container.value.getBoundingClientRect()
+        const tBounds = tooltip.value.getBoundingClientRect()
+        const correctLeft = tBounds.left < 0 ? tBounds.left : 0
+        const correctTop = tBounds.top < 0 ? tBounds.top : 0
+        const r: Record<string, {top: number, left: number}> = {
+          'left'  : {top: bounds.top - ((tBounds.height - bounds.height) / 2) - correctTop, left: bounds?.left - tBounds.width - correctLeft - props.offset},
+          'right' : {top: bounds.top - ((tBounds.height - bounds.height) / 2) - correctTop, left: bounds?.left + bounds.width - correctLeft + props.offset},
+          'bottom': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left - correctLeft},
+          'top'   : {top: bounds.top - tBounds.height - props.offset - correctTop, left: bounds?.left - correctLeft},
+          'bottom-left': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left + bounds.width - tBounds.width - correctLeft},
+        }
+        t.style.top = r[props.position].top + 'px'
+        t.style.left = r[props.position].left + 'px'
       }
-      t.style.top = r[props.position].top + 'px'
-      t.style.left = r[props.position].left + 'px'
-    }
-  })
+    })
+    showTimer.value = null;
+  }, props.delay)
 }
 
 const hideTooltip = () => {
   if (props.trigger === 'auto') {
     return;
   }
+  
+  // Очищаем таймер задержки показа, если он еще не сработал
+  if (showTimer.value) {
+    clearTimeout(showTimer.value);
+    showTimer.value = null;
+  }
+  
   show.value = false
   nextTick(() => {
     const t = unref(tooltip)
@@ -136,6 +159,14 @@ const clearAutoTimer = () => {
     autoTimer.value = null;
   }
 };
+
+// Очищаем таймеры при размонтировании компонента
+onUnmounted(() => {
+  if (showTimer.value) {
+    clearTimeout(showTimer.value);
+  }
+  clearAutoTimer();
+});
 
 defineExpose({
   startAutoShow,
