@@ -185,6 +185,12 @@
   &__title-block {
     display: var(--chotto-chatlist-title-block-display, flex);
     align-items: var(--chotto-chatlist-title-block-align, center);
+
+    :deep(.tooltip-wrapper) {
+      align-self: var(--chotto-chatlist-title-beta-badge-align-self, flex-start);
+      line-height: var(--chotto-chatlist-title-beta-badge-tooltip-wrapper-line-height, 1);
+      display: var(--chotto-chatlist-title-beta-badge-tooltip-wrapper-display, inline-flex);
+    }
   }
 
   &__title-logo {
@@ -200,7 +206,6 @@
     justify-content: var(--chotto-chatlist-title-beta-badge-justify-content, center);
     border-radius: var(--chotto-chatlist-title-beta-badge-border-radius, 10px);
     background-color: var(--chotto-chatlist-title-beta-badge-background-color, #CFCECE);
-    align-self: var(--chotto-chatlist-title-beta-badge-align-self, flex-start);
     color: var(--chotto-chatlist-title-beta-badge-color, #FFFFFF);
     width: var(--chotto-chatlist-title-beta-badge-width, 46px);
     min-height: var(--chotto-chatlist-title-beta-badge-min-height, 14px);
@@ -208,6 +213,7 @@
     font-weight: var(--chotto-chatlist-title-beta-badge-font-weight, 700);
     font-size: var(--chotto-chatlist-title-beta-badge-font-size, 11px);
     margin-left: var(--chotto-chatlist-title-beta-badge-margin-left, 6px);
+    line-height: var(--chotto-chatlist-title-beta-badge-line-height, 1);
   }
 }
 

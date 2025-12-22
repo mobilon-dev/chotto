@@ -137,6 +137,8 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-title-beta-badge-font-size': string;
   /** Отступ слева бейджа beta заголовка */
   '--chotto-chatlist-title-beta-badge-margin-left': string;
+  /** Высота строки бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-line-height': string;
 
   // Context menu
   /** Позиционирование контекстного меню */
@@ -266,4 +268,10 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-placeholder-hint-font-size': string;
   /** Отступы подсказки плейсхолдера */
   '--chotto-chatlist-placeholder-hint-margin': string;
+
+  // Title beta badge tooltip wrapper
+  /** Высота строки обёртки тултипа бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-tooltip-wrapper-line-height': string;
+  /** Отображение обёртки тултипа бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-tooltip-wrapper-display': string;
 }

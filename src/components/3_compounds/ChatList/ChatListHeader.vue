@@ -11,11 +11,15 @@
         v-if="props.logoEnabled"
         class="chat-list__title-logo"
       />
-      <div 
+      <Tooltip
         v-if="props.betaEnabled"
-        class="chat-list__title-beta-badge">
-        beta
-      </div>
+        :text="props.betaTooltipText"
+        position="bottom"
+      >
+        <div class="chat-list__title-beta-badge">
+          beta
+        </div>
+      </Tooltip>
     </div>
     <slot name="actions" />
   </div>
@@ -23,6 +27,7 @@
 
 <script setup>
 import LogoIcon from './icons/LogoIcon.vue'
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
 
 const props = defineProps({
   title: {
@@ -40,6 +45,10 @@ const props = defineProps({
   betaEnabled: {
     type: Boolean,
     default: true,
+  },
+  betaTooltipText: {
+    type: String,
+    default: 'Мы постоянно улучшаем платформу.\nНекоторые функции находятся в разработке.',
   },
 });
 </script>
