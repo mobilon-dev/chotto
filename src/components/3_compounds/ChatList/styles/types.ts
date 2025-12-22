@@ -94,6 +94,50 @@ export interface ChatListThemeCSSVariables {
   /** Цвет текста заголовка */
   '--chotto-chatlist-title-text-color': string;
 
+  // Title block
+  /** Отображение блока заголовка */
+  '--chotto-chatlist-title-block-display': string;
+  /** Выравнивание элементов блока заголовка */
+  '--chotto-chatlist-title-block-align': string;
+
+  // Title logo
+  /** Ширина логотипа заголовка */
+  '--chotto-chatlist-title-logo-width': string;
+  /** Высота логотипа заголовка */
+  '--chotto-chatlist-title-logo-height': string;
+  /** Отступ слева логотипа заголовка */
+  '--chotto-chatlist-title-logo-margin-left': string;
+  /** Коэффициент сжатия логотипа заголовка */
+  '--chotto-chatlist-title-logo-flex-shrink': string;
+
+  // Title beta badge
+  /** Отображение бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-display': string;
+  /** Выравнивание элементов бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-align-items': string;
+  /** Выравнивание по главной оси бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-justify-content': string;
+  /** Радиус границы бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-border-radius': string;
+  /** Цвет фона бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-background-color': string;
+  /** Выравнивание бейджа beta заголовка относительно контейнера */
+  '--chotto-chatlist-title-beta-badge-align-self': string;
+  /** Цвет текста бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-color': string;
+  /** Ширина бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-width': string;
+  /** Минимальная высота бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-min-height': string;
+  /** Семейство шрифта бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-font-family': string;
+  /** Толщина шрифта бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-font-weight': string;
+  /** Размер шрифта бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-font-size': string;
+  /** Отступ слева бейджа beta заголовка */
+  '--chotto-chatlist-title-beta-badge-margin-left': string;
+
   // Context menu
   /** Позиционирование контекстного меню */
   '--chotto-chatlist-context-menu-position': string;

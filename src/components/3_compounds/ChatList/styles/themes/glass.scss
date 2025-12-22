@@ -52,6 +52,31 @@
   --chotto-chatlist-title-font-weight: var(--chotto-theme-header-font-weight);
   --chotto-chatlist-title-text-color: #ffffffc6;
   
+  // Title block
+  --chotto-chatlist-title-block-display: flex;
+  --chotto-chatlist-title-block-align: center;
+  
+  // Title logo
+  --chotto-chatlist-title-logo-width: 27px;
+  --chotto-chatlist-title-logo-height: 26px;
+  --chotto-chatlist-title-logo-margin-left: 6px;
+  --chotto-chatlist-title-logo-flex-shrink: 0;
+  
+  // Title beta badge
+  --chotto-chatlist-title-beta-badge-display: inline-flex;
+  --chotto-chatlist-title-beta-badge-align-items: center;
+  --chotto-chatlist-title-beta-badge-justify-content: center;
+  --chotto-chatlist-title-beta-badge-border-radius: 10px;
+  --chotto-chatlist-title-beta-badge-background-color: #CFCECE;
+  --chotto-chatlist-title-beta-badge-align-self: flex-start;
+  --chotto-chatlist-title-beta-badge-color: #FFFFFF;
+  --chotto-chatlist-title-beta-badge-width: 46px;
+  --chotto-chatlist-title-beta-badge-min-height: 14px;
+  --chotto-chatlist-title-beta-badge-font-family: 'Inter', sans-serif;
+  --chotto-chatlist-title-beta-badge-font-weight: 700;
+  --chotto-chatlist-title-beta-badge-font-size: 11px;
+  --chotto-chatlist-title-beta-badge-margin-left: 6px;
+  
   // Context menu
   --chotto-chatlist-context-menu-position: absolute;
   --chotto-chatlist-context-menu-top: 46px;

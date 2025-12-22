@@ -164,23 +164,51 @@
     font-size: var(--chotto-chatlist-placeholder-hint-font-size, 16px);
     margin: var(--chotto-chatlist-placeholder-hint-margin, 0);
   }
-}
 
-:deep(.chat-list__title) {
-  font-family: var(--chotto-chatlist-title-font-family, "Open Sans", sans-serif);
-  font-size: var(--chotto-chatlist-title-font-size, 16px);
-  font-weight: var(--chotto-chatlist-title-font-weight, 400);
-  color: var(--chotto-chatlist-title-text-color, #5F5F5F);
-}
+  &__title-container {
+    position: var(--chotto-chatlist-title-container-position, relative);
+    display: var(--chotto-chatlist-title-container-display, flex);
+    justify-content: var(--chotto-chatlist-title-container-justify, space-between);
+    align-items: var(--chotto-chatlist-title-container-align, center);
+    column-gap: var(--chotto-chatlist-title-column-gap, 50px);
+    padding: var(--chotto-chatlist-title-container-padding, 20px 15px 20px 15px);
+    max-height: var(--chotto-chatlist-title-container-max-height, 60px);
+  }
 
-:deep(.chat-list__title-container) {
-  position: var(--chotto-chatlist-title-container-position, relative);
-  display: var(--chotto-chatlist-title-container-display, flex);
-  justify-content: var(--chotto-chatlist-title-container-justify, space-between);
-  align-items: var(--chotto-chatlist-title-container-align, center);
-  column-gap: var(--chotto-chatlist-title-column-gap, 50px);
-  padding: var(--chotto-chatlist-title-container-padding, 20px 15px 20px 15px);
-  max-height: var(--chotto-chatlist-title-container-max-height, 60px);
+  &__title {
+    font-family: var(--chotto-chatlist-title-font-family, "Open Sans", sans-serif);
+    font-size: var(--chotto-chatlist-title-font-size, 16px);
+    font-weight: var(--chotto-chatlist-title-font-weight, 400);
+    color: var(--chotto-chatlist-title-text-color, #5F5F5F);
+  }
+
+  &__title-block {
+    display: var(--chotto-chatlist-title-block-display, flex);
+    align-items: var(--chotto-chatlist-title-block-align, center);
+  }
+
+  &__title-logo {
+    width: var(--chotto-chatlist-title-logo-width, 27px);
+    height: var(--chotto-chatlist-title-logo-height, 26px);
+    margin-left: var(--chotto-chatlist-title-logo-margin-left, 6px);
+    flex-shrink: var(--chotto-chatlist-title-logo-flex-shrink, 0);
+  }
+
+  &__title-beta-badge {
+    display: var(--chotto-chatlist-title-beta-badge-display, inline-flex);
+    align-items: var(--chotto-chatlist-title-beta-badge-align-items, center);
+    justify-content: var(--chotto-chatlist-title-beta-badge-justify-content, center);
+    border-radius: var(--chotto-chatlist-title-beta-badge-border-radius, 10px);
+    background-color: var(--chotto-chatlist-title-beta-badge-background-color, #CFCECE);
+    align-self: var(--chotto-chatlist-title-beta-badge-align-self, flex-start);
+    color: var(--chotto-chatlist-title-beta-badge-color, #FFFFFF);
+    width: var(--chotto-chatlist-title-beta-badge-width, 46px);
+    min-height: var(--chotto-chatlist-title-beta-badge-min-height, 14px);
+    font-family: var(--chotto-chatlist-title-beta-badge-font-family, 'Inter', sans-serif);
+    font-weight: var(--chotto-chatlist-title-beta-badge-font-weight, 700);
+    font-size: var(--chotto-chatlist-title-beta-badge-font-size, 11px);
+    margin-left: var(--chotto-chatlist-title-beta-badge-margin-left, 6px);
+  }
 }
 
 .menu-enter-active {
