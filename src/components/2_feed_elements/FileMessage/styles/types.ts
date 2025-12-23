@@ -134,6 +134,8 @@ export interface FileMessageThemeCSSVariables {
 
   /** Отступ снизу кнопки скачивания */
   '--chotto-filemessage-download-button-margin-bottom': string;
+  /** Отступ слева кнопки скачивания */
+  '--chotto-filemessage-download-button-margin-left': string;
   /** Граница кнопки скачивания */
   '--chotto-filemessage-download-button-border': string;
   /** Скругление кнопки скачивания */

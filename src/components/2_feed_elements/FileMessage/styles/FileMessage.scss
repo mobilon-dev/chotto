@@ -4,7 +4,7 @@
     position: var(--chotto-filemessage-content-position, relative);
     width: var(--chotto-filemessage-content-width, fit-content);
     border-radius: var(--chotto-filemessage-content-border-radius, 14px);
-    padding: var(--chotto-filemessage-content-padding, 10px 10px 4px 16px);
+    padding: var(--chotto-filemessage-content-padding, 10px 10px 4px 18px);
     max-width: var(--chotto-filemessage-content-max-width, 25rem);
   }
 
@@ -139,6 +139,7 @@
     background-color: var(--chotto-filemessage-download-button-background-color, transparent);
     padding: var(--chotto-filemessage-download-button-padding, 0);
     cursor: var(--chotto-filemessage-download-button-cursor, pointer);
+    margin-left: var(--chotto-filemessage-download-button-margin-left, auto);
 
     span {
       color: var(--chotto-filemessage-download-button-span-color, #5F5F5F);

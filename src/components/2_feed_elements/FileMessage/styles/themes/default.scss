@@ -3,7 +3,7 @@
   --chotto-filemessage-content-position: relative;
   --chotto-filemessage-content-width: fit-content;
   --chotto-filemessage-content-border-radius: var(--chotto-theme-message-border-radius, 14px);
-  --chotto-filemessage-content-padding: 10px 10px 4px 16px;
+  --chotto-filemessage-content-padding: 10px 10px 4px 18px;
   --chotto-filemessage-content-max-width: 25rem;
 
   // FileMessage triangle variables
@@ -80,6 +80,7 @@
 
   // FileMessage download button variables
   --chotto-filemessage-download-button-margin-bottom: 5px;
+  --chotto-filemessage-download-button-margin-left: auto;
   --chotto-filemessage-download-button-border: none;
   --chotto-filemessage-download-button-border-radius: 12px;
   --chotto-filemessage-download-button-background-color: transparent;
