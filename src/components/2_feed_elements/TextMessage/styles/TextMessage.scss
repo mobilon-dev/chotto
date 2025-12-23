@@ -6,7 +6,7 @@
     width: var(--chotto-textmessage-content-width, fit-content);
     max-width: var(--chotto-textmessage-content-max-width, 25rem);
     border-radius: var(--chotto-textmessage-content-border-radius, 14px);
-    padding: var(--chotto-textmessage-content-padding, 10px 10px 4px 16px);
+    padding: var(--chotto-textmessage-content-padding, 10px 10px 4px 18px);
   }
 
   &__left .text-message__content.is-first::before {
@@ -107,6 +107,7 @@
   &__text {
     font-size: var(--chotto-textmessage-text-font-size, 14px);
     white-space: var(--chotto-textmessage-text-white-space, pre-wrap);
+    padding-bottom: var(--chotto-textmessage-text-padding-bottom, 10px);
 
     // Markdown форматирование
     :deep(strong) {
