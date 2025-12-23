@@ -20,4 +20,5 @@ export const ru = {
     'component.TextFormatToolbar.Strikethrough': 'Зачёркнутый',
     'component.TextFormatToolbar.Code': 'Встроенный код',
     'component.TextFormatToolbar.Quote': 'Цитата',
+    'component.TextMessage.sendSmsInvite': 'Отправить SMS приглашение',
 }

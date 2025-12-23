@@ -20,4 +20,5 @@ export const en = {
     'component.TextFormatToolbar.Strikethrough': 'Strikethrough',
     'component.TextFormatToolbar.Code': 'Inline code',
     'component.TextFormatToolbar.Quote': 'Quote',
+    'component.TextMessage.sendSmsInvite': 'Send SMS invitation',
 }

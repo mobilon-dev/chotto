@@ -85,6 +85,7 @@ export interface IAudioMessage {
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
   backgroundColor?: string
+  hasMessengerAccount?: boolean
 }
 
 export interface ICallMessage {
@@ -111,11 +112,13 @@ export interface ICallMessage {
   }
   reactions?: MessageReactions
   backgroundColor?: string
+  hasMessengerAccount?: boolean
 }
 
 export interface IDateMessage {
   messageId?: string
   text: string
+  hasMessengerAccount?: boolean
 }
 
 export interface IFileMessage {
@@ -139,6 +142,7 @@ export interface IFileMessage {
   reactions?: MessageReactions
   direction?: string
   backgroundColor?: string
+  hasMessengerAccount?: boolean
 }
 
 export interface IImageMessage {
@@ -161,16 +165,19 @@ export interface IImageMessage {
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
   backgroundColor?: string
+  hasMessengerAccount?: boolean
 }
 
 export interface ISystemMessage {
   messageId: string
   text: string
+  hasMessengerAccount?: boolean
 }
 
 export interface IDelimiterMessage {
   messageId: string
   text: string
+  hasMessengerAccount?: boolean
 }
 
 export interface ITextMessage {
@@ -191,11 +198,13 @@ export interface ITextMessage {
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
   backgroundColor?: string
+  hasMessengerAccount?: boolean
 }
 
 export interface ITypingMessage {
   avatar?: string
   subText?: string
+  hasMessengerAccount?: boolean
 }
 
 export interface IVideoMessage {
@@ -218,6 +227,7 @@ export interface IVideoMessage {
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
   backgroundColor?: string
+  hasMessengerAccount?: boolean
 }
 
 export interface IStickerMessage {
@@ -241,6 +251,7 @@ export interface IStickerMessage {
   keyboard?: IKeyBoard[]
   reactions?: MessageReactions
   backgroundColor?: string
+  hasMessengerAccount?: boolean
 }
 
 export interface IMissedCallMessage {
@@ -252,4 +263,5 @@ export interface IMissedCallMessage {
   subText?: string
   actions?: IAction[]
   backgroundColor?: string
+  hasMessengerAccount?: boolean
 }

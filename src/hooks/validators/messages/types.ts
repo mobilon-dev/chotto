@@ -70,6 +70,7 @@ export interface Message {
   keyboard?: MessageKeyboardButton[];
   callDuration?: string;
   isMissedCall?: boolean;
+  hasMessengerAccount?: boolean;
 }
 
 export type MessageList = Message[];

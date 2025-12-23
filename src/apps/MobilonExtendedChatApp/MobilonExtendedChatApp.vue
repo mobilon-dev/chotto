@@ -191,6 +191,7 @@
                   @click-replied-message="handleClickReplied"
                   @force-scroll-to-bottom="forceScrollToBottom"
                   @keyboard-action="keyboardAction"
+                  @sms-invite="handleSmsInvite"
                 >
                   <template #empty-feed>
                     <SplashScreen>
@@ -831,6 +832,19 @@ const messageVisible = (message) => {
   // console.log('visible message', message.type')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _message = message;
+}
+
+const handleSmsInvite = () => {
+  if (!selectedChat.value) return;
+
+  // Переключаем диалог на SMS-канал
+  const smsDialog = selectedChat.value.dialogs?.find(
+    (d) => d.channelId && d.channelId.toLowerCase().includes('sms')
+  );
+
+  if (smsDialog) {
+    selectChat({ chat: selectedChat.value, dialog: smsDialog });
+  }
 }
 
 const searchMessages = (string) => {

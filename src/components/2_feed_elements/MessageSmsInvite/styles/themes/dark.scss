@@ -1,0 +1,28 @@
+[data-theme="dark"] {
+  // MessageSmsInvite container variables
+  --chotto-messagesmsinvite-display: flex;
+  --chotto-messagesmsinvite-flex-direction: column;
+  --chotto-messagesmsinvite-align-items: center;
+  --chotto-messagesmsinvite-width: 100%;
+  --chotto-messagesmsinvite-cursor: pointer;
+  --chotto-messagesmsinvite-transition: opacity 0.2s ease;
+  --chotto-messagesmsinvite-hover-opacity: 0.7;
+
+  // MessageSmsInvite text variables
+  --chotto-messagesmsinvite-text-font-size: 14px;
+  --chotto-messagesmsinvite-text-font-weight: 500;
+  --chotto-messagesmsinvite-text-text-align: center;
+  --chotto-messagesmsinvite-text-color-telegram: #2C93FF;
+  --chotto-messagesmsinvite-text-color-whatsapp: #19A15F;
+  --chotto-messagesmsinvite-text-color-max: #7F3DD9;
+  --chotto-messagesmsinvite-text-border-top-width: 1px;
+  --chotto-messagesmsinvite-text-border-top-style: solid;
+  --chotto-messagesmsinvite-text-border-top-color-telegram: #B1DFFF;
+  --chotto-messagesmsinvite-text-border-top-color-whatsapp: #ADFF9F;
+  --chotto-messagesmsinvite-text-border-top-color-max: #DFBDFF;
+  --chotto-messagesmsinvite-text-width: calc(100% + 28px);
+  --chotto-messagesmsinvite-text-margin-left: -18px;
+  --chotto-messagesmsinvite-text-margin-right: -10px;
+  --chotto-messagesmsinvite-text-padding: 7px 25px 6px 20px;
+}
+

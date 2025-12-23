@@ -34,6 +34,7 @@
         :subtext-tooltip-data="subtextTooltipData"
         @action="messageAction"
         @reply="handleClickReplied"
+        @sms-invite="handleSmsInvite(object)"
       />
     </div>
     <typing-message
@@ -214,7 +215,8 @@ const emit = defineEmits([
   'clickRepliedMessage',
   'forceScrollToBottom',
   'keyboardAction',
-  'feedAction'
+  'feedAction',
+  'smsInvite',
 ]);
 
 // Инициализация логики подгрузки сообщений
@@ -240,6 +242,10 @@ const {
   enableDoubleClickReply: props.enableDoubleClickReply,
   emit
 })
+
+function handleSmsInvite(message: IFeedObject) {
+  emit('smsInvite', message)
+}
 
 // Инициализация логики клавиатур
 const {
