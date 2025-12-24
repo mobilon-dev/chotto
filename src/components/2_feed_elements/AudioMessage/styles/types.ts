@@ -246,18 +246,18 @@ export interface AudioMessageThemeCSSVariables {
   /** Скругление аватара */
   '--chotto-audiomessage-avatar-border-radius': string;
 
-  /** Позиционирование инфо-контейнера */
-  '--chotto-audiomessage-info-container-position': string;
-  /** Отступ справа инфо-контейнера */
-  '--chotto-audiomessage-info-container-right': string;
-  /** Отступ снизу инфо-контейнера */
-  '--chotto-audiomessage-info-container-bottom': string;
+  /** Колонки грида инфо-контейнера */
+  '--chotto-audiomessage-info-container-grid-column': string;
   /** Отображение инфо-контейнера */
   '--chotto-audiomessage-info-container-display': string;
   /** Выравнивание элементов инфо-контейнера */
   '--chotto-audiomessage-info-container-align-items': string;
+  /** Выравнивание содержимого инфо-контейнера */
+  '--chotto-audiomessage-info-container-justify-content': string;
   /** Промежуток между элементами инфо-контейнера */
   '--chotto-audiomessage-info-container-column-gap': string;
+  /** Отступ справа инфо-контейнера */
+  '--chotto-audiomessage-info-container-margin-right': string;
   /** События указателя инфо-контейнера */
   '--chotto-audiomessage-info-container-pointer-events': string;
 

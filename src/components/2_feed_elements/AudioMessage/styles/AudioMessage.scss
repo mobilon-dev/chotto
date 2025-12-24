@@ -12,7 +12,7 @@
     border-radius: var(--chotto-audiomessage-content-border-radius, 14px);
     padding-top: var(--chotto-audiomessage-content-padding-top, 14px);
     padding-right: var(--chotto-audiomessage-content-padding-right, 0);
-    padding-bottom: var(--chotto-audiomessage-content-padding-bottom, 0);
+    padding-bottom: var(--chotto-audiomessage-content-padding-bottom, 4);
     padding-left: var(--chotto-audiomessage-content-padding-left, 14px);
   }
 
@@ -213,12 +213,12 @@
   }
 
   &__info-container {
-    position: var(--chotto-audiomessage-info-container-position, absolute);
-    right: var(--chotto-audiomessage-info-container-right, 16px);
-    bottom: var(--chotto-audiomessage-info-container-bottom, 8px);
+    grid-column: var(--chotto-audiomessage-info-container-grid-column, 1 / -1);
     display: var(--chotto-audiomessage-info-container-display, flex);
     align-items: var(--chotto-audiomessage-info-container-align-items, center);
+    justify-content: var(--chotto-audiomessage-info-container-justify-content, flex-end);
     column-gap: var(--chotto-audiomessage-info-container-column-gap, 4px);
+    margin-right: var(--chotto-audiomessage-info-container-margin-right, 10px);
     pointer-events: var(--chotto-audiomessage-info-container-pointer-events, auto);
   }
 
@@ -630,4 +630,14 @@
 .audio-message:hover :deep(.message-reactions__add) {
   opacity: 1 !important;
   pointer-events: auto !important;
+}
+
+.audio-message__content :deep(.message-sms-invite) {
+  grid-column: 1 / -1;
+}
+
+.audio-message :deep(.message-sms-invite__text) {
+  width: calc(100% + var(--chotto-audiomessage-content-padding-left, 14px));
+  margin-left: calc(-1 * var(--chotto-audiomessage-content-padding-left, 14px));
+  margin-right: 0;
 }

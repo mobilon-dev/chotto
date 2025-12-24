@@ -15,7 +15,7 @@
   --chotto-audiomessage-content-height: auto;
   --chotto-audiomessage-content-padding-top: 14px;
   --chotto-audiomessage-content-padding-right: 0;
-  --chotto-audiomessage-content-padding-bottom: 8px;
+  --chotto-audiomessage-content-padding-bottom: 4px;
   --chotto-audiomessage-content-padding-left: 14px;
   --chotto-audiomessage-content-border-radius: var(--chotto-theme-message-border-radius, 14px);
 
@@ -183,12 +183,12 @@
   --chotto-audiomessage-avatar-border-radius: 50%;
 
   // Info container variables
-  --chotto-audiomessage-info-container-position: absolute;
-  --chotto-audiomessage-info-container-right: 5px;
-  --chotto-audiomessage-info-container-bottom: 0;
+  --chotto-audiomessage-info-container-grid-column: 1 / -1;
   --chotto-audiomessage-info-container-display: flex;
   --chotto-audiomessage-info-container-align-items: center;
+  --chotto-audiomessage-info-container-justify-content: flex-end;
   --chotto-audiomessage-info-container-column-gap: 4px;
+  --chotto-audiomessage-info-container-margin-right: 10px;
   --chotto-audiomessage-info-container-pointer-events: auto;
 
   // Subtext variables

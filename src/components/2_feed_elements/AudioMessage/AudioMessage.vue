@@ -192,6 +192,13 @@
         />
       </div>
 
+      <MessageSmsInvite
+        :status="message.status"
+        :has-messenger-account="message.hasMessengerAccount"
+        :channel="messageChannelId"
+        @sms-invite="handleSmsInvite"
+      />
+
       <button
         v-if="buttonMenuVisible && message.actions"
         class="audio-message__menu-button"
@@ -263,6 +270,7 @@ import EmbedPreview from '@/components/1_atoms/EmbedPreview/EmbedPreview.vue';
 import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
+import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageActions, useMessageLinks, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
@@ -327,7 +335,7 @@ const cycleSpeed = () => {
   }
 }
 
-const emit = defineEmits(['action','reply']);
+const emit = defineEmits(['action','reply','sms-invite']);
 
 const player = ref<HTMLAudioElement | null>();
 const isPlaying = ref(false);
@@ -433,7 +441,7 @@ const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 const status = computed(() => getStatus(props.message.status))
 const statusTitle = computed(() => getStatusTitle(props.message.status, props.message.statusMsg))
 
-const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
+const { bubbleStyle: rightBubbleStyle, messageChannelId } = useChannelAccentColor(
   computed(() => props.message),
   { cssVariable: '--chotto-audiomessage-right-background-color', position: 'right' }
 )
@@ -498,6 +506,10 @@ function getClass(message: IAudioMessage) {
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
 
 const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
+
+function handleSmsInvite() {
+  emit('sms-invite', props.message)
+}
 
 onMounted(() => {
   if (player.value != null) {

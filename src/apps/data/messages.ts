@@ -2,6 +2,7 @@ import stickerWebp from './images/sticker.webp';
 import animatedStickerTgs from './images/AnimatedSticker.tgs';
 import audioFile from './audio/file_example_MP3_700KB.mp3';
 import pdfFile from './files/test.pdf';
+import { text } from 'stream/consumers';
 
 export const messages = [
   {
@@ -1247,6 +1248,21 @@ export const messages = [
     status: 'error',
     statusMsg: 'Не удалось отправить сообщение',
     timestamp: '1763036698',
+    header: 'Жанна',
+    subText: 'Жанна',
+    avatar:'https://placehold.jp/30/607d8b/ffffff/64x64.png?text=Zh',
+    hasMessengerAccount: false,
+  },
+  {
+    chatId: 8,
+    dialogId: 'dlg_43543111',
+    messageId: '824',
+    type: "message.audio",
+    url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
+    direction: 'outgoing',
+    status: 'error',
+    statusMsg: 'Не удалось отправить сообщение',
+    timestamp: '1763036699',
     header: 'Жанна',
     subText: 'Жанна',
     avatar:'https://placehold.jp/30/607d8b/ffffff/64x64.png?text=Zh',
