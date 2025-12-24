@@ -140,6 +140,13 @@
         />
       </div>
 
+      <MessageSmsInvite
+        :status="message.status"
+        :has-messenger-account="message.hasMessengerAccount"
+        :channel="messageChannelId"
+        @sms-invite="handleSmsInvite"
+      />
+
       <LinkPreview
         v-if="message.linkPreview"
         class="image-message__link-preview"
@@ -195,6 +202,7 @@ import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/Base
 import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscreen.vue';
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
+import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
@@ -229,7 +237,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['action', 'reply']);
+const emit = defineEmits(['action', 'reply', 'sms-invite']);
 
 const isOpenModal = ref(false);
 
@@ -360,7 +368,7 @@ const imageBorderRadius = computed(() => {
 const status = computed(() => getStatus(props.message.status))
 const statusTitle = computed(() => getStatusTitle(props.message.status, props.message.statusMsg))
 
-const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
+const { bubbleStyle: rightBubbleStyle, messageChannelId } = useChannelAccentColor(
   computed(() => props.message),
   { cssVariable: '--chotto-imagemessage-right-bg', position: 'right' }
 )
@@ -425,6 +433,10 @@ const downloadImage = async () => {
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
 
 const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
+
+function handleSmsInvite() {
+  emit('sms-invite', props.message)
+}
 
 </script>
 

@@ -416,3 +416,9 @@
   opacity: 1 !important;
   pointer-events: auto !important;
 }
+
+.image-message :deep(.message-sms-invite__text) {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
