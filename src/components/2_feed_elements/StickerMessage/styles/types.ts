@@ -260,6 +260,23 @@ export interface StickerMessageThemeCSSVariables {
   '--chotto-stickermessage-modal-fade-enter-from-opacity': string;
   /** Прозрачность модального окна в конце */
   '--chotto-stickermessage-modal-fade-enter-to-opacity': string;
+
+  /** Размер шрифта текста SMS-приглашения в стикер-сообщениях */
+  '--chotto-stickermessage-sms-invite-font-size': string;
+  /** Ширина текста SMS-приглашения в стикер-сообщениях */
+  '--chotto-stickermessage-sms-invite-width': string;
+  /** Отступ слева текста SMS-приглашения в стикер-сообщениях */
+  '--chotto-stickermessage-sms-invite-margin-left': string;
+  /** Отступ справа текста SMS-приглашения в стикер-сообщениях */
+  '--chotto-stickermessage-sms-invite-margin-right': string;
+  /** Перенос текста SMS-приглашения в стикер-сообщениях */
+  '--chotto-stickermessage-sms-invite-white-space': string;
+  /** Минимальная ширина текста SMS-приглашения в стикер-сообщениях */
+  '--chotto-stickermessage-sms-invite-min-width': string;
+  /** Внутренний отступ слева текста SMS-приглашения в стикер-сообщениях */
+  '--chotto-stickermessage-sms-invite-padding-left': string;
+  /** Внутренний отступ справа текста SMS-приглашения в стикер-сообщениях */
+  '--chotto-stickermessage-sms-invite-padding-right': string;
 }
 
 

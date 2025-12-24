@@ -6,6 +6,7 @@
       applyStyle(message)
     ]"
     :messageId="message.messageId"
+    :style="rightBubbleStyle"
     @mouseleave="hideMenu"
   >
     <img
@@ -128,6 +129,13 @@
         />
       </div>
 
+      <MessageSmsInvite
+        :status="message.status"
+        :has-messenger-account="message.hasMessengerAccount"
+        :channel="messageChannelId"
+        @sms-invite="handleSmsInvite"
+      />
+
       <LinkPreview
         v-if="message.linkPreview"
         class="sticker-message__link-preview"
@@ -193,7 +201,8 @@ import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/Base
 import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscreen.vue';
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
-import { useMessageLinks, useMessageActions } from '@/hooks/messages';
+import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
+import { useMessageLinks, useMessageActions, useChannelAccentColor } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IStickerMessage } from '@/types';
@@ -246,7 +255,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['action', 'reply']);
+const emit = defineEmits(['action', 'reply', 'sms-invite']);
 
 const isOpenModal = ref(false);
 
@@ -269,6 +278,11 @@ const showMenu = () => {
 
 const status = computed(() => getStatus(props.message.status))
 const statusTitle = computed(() => getStatusTitle(props.message.status, props.message.statusMsg))
+
+const { bubbleStyle: rightBubbleStyle, messageChannelId } = useChannelAccentColor(
+  computed(() => props.message),
+  { cssVariable: '--chotto-stickermessage-right-bg', position: 'right' }
+)
 
 // Определяем, является ли файл TGS форматом
 // Используем утилиту для единообразной проверки во всех компонентах
@@ -296,6 +310,10 @@ function getClass(message: IStickerMessage) {
 const closeModal = () => isOpenModal.value = false
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
+
+function handleSmsInvite() {
+  emit('sms-invite', props.message)
+}
 </script>
 
 <style scoped lang="scss">

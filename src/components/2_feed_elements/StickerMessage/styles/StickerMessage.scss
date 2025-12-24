@@ -14,6 +14,7 @@
     min-width: var(--chotto-stickermessage-avatar-min-width, 40px);
     min-height: var(--chotto-stickermessage-avatar-min-height, 40px);
     border-radius: var(--chotto-stickermessage-avatar-border-radius, 50%);
+    z-index: 1;
   }
 
   &__info-container {
@@ -304,5 +305,17 @@
 .sticker-message:hover :deep(.message-reactions__add) {
   opacity: 1 !important;
   pointer-events: auto !important;
+}
+
+.sticker-message :deep(.message-sms-invite__text) {
+  width: var(--chotto-stickermessage-sms-invite-width, 100%);
+  margin-left: var(--chotto-stickermessage-sms-invite-margin-left, 0);
+  margin-right: var(--chotto-stickermessage-sms-invite-margin-right, 0);
+  background-color: var(--chotto-stickermessage-right-bg, #D9FDD3);
+  white-space: var(--chotto-stickermessage-sms-invite-white-space, nowrap);
+  min-width: var(--chotto-stickermessage-sms-invite-min-width, fit-content);
+  padding-left: var(--chotto-stickermessage-sms-invite-padding-left, 8px);
+  padding-right: var(--chotto-stickermessage-sms-invite-padding-right, 8px);
+  font-size: var(--chotto-stickermessage-sms-invite-font-size, 13px);
 }
 
