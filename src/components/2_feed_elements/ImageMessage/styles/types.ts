@@ -102,21 +102,6 @@ export interface ImageMessageThemeCSSVariables {
   /** Размер шрифта времени */
   '--chotto-imagemessage-time-font-size': string;
 
-  /** Отображение статуса доставки/прочтения */
-  '--chotto-imagemessage-status-display': string;
-  /** Размер иконок статуса */
-  '--chotto-imagemessage-status-span-font-size': string;
-  /** Отрицательный отступ для иконки "доставлено" */
-  '--chotto-imagemessage-status-received-first-child-margin-right': string;
-  /** Отрицательный отступ для иконки "прочитано" */
-  '--chotto-imagemessage-status-read-first-child-margin-right': string;
-  /** Цвет иконок статуса "прочитано" */
-  '--chotto-imagemessage-status-read-color': string;
-  /** Цвет иконок статуса "в ожидании" */
-  '--chotto-imagemessage-status-pending-color': string;
-  /** Цвет иконок статуса "ошибка" */
-  '--chotto-imagemessage-status-error-color': string;
-
   /** Размер шрифта подписи */
   '--chotto-imagemessage-subtext-font-size': string;
   /** Цвет подписи */

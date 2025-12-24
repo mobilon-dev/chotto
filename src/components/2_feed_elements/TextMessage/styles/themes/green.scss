@@ -49,17 +49,6 @@
   --chotto-textmessage-time-font-size: var(--chotto-theme-text-font-size);
   --chotto-textmessage-time-color: var(--chotto-theme-secondary-text-color);
 
-  // TextMessage status variables
-  --chotto-textmessage-status-display: flex;
-  --chotto-textmessage-status-span-color: var(--chotto-theme-status-color-received);
-  --chotto-textmessage-status-span-font-size: var(--chotto-theme-small-text-icon-size);
-  --chotto-textmessage-status-received-color: var(--chotto-theme-status-color-received);
-  --chotto-textmessage-status-received-first-child-margin-right: -8px;
-  --chotto-textmessage-status-read-color: var(--chotto-theme-status-color-read);
-  --chotto-textmessage-status-read-first-child-margin-right: -8px;
-  --chotto-textmessage-status-pending-color: var(--chotto-theme-status-color-pending);
-  --chotto-textmessage-status-error-color: var(--chotto-theme-status-color-error);
-
   // TextMessage text variables
   --chotto-textmessage-text-font-size: var(--chotto-theme-text-font-size);
   --chotto-textmessage-text-white-space: pre-wrap;

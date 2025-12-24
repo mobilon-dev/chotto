@@ -88,21 +88,6 @@ export interface StickerMessageThemeCSSVariables {
   /** Размер шрифта времени */
   '--chotto-stickermessage-time-font-size': string;
 
-  /** Отображение статуса доставки/прочтения */
-  '--chotto-stickermessage-status-display': string;
-  /** Размер иконок статуса */
-  '--chotto-stickermessage-status-span-font-size': string;
-  /** Отрицательный отступ для иконки "доставлено" */
-  '--chotto-stickermessage-status-received-first-child-margin-right': string;
-  /** Отрицательный отступ для иконки "прочитано" */
-  '--chotto-stickermessage-status-read-first-child-margin-right': string;
-  /** Цвет иконок статуса "прочитано" */
-  '--chotto-stickermessage-status-read-color': string;
-  /** Цвет иконок статуса "в ожидании" */
-  '--chotto-stickermessage-status-pending-color': string;
-  /** Цвет иконок статуса "ошибка" */
-  '--chotto-stickermessage-status-error-color': string;
-
   /** Размер шрифта подписи */
   '--chotto-stickermessage-subtext-font-size': string;
   /** Цвет подписи */

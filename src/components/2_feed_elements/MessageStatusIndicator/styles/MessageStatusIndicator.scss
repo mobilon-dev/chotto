@@ -1,0 +1,86 @@
+// MessageStatusIndicator styles
+// Стили для контейнера и компонентов иконок статуса
+
+.message-status-indicator {
+  display: var(--chotto-messagestatusindicator-display, flex);
+  align-items: var(--chotto-messagestatusindicator-align-items, center);
+  gap: var(--chotto-messagestatusindicator-gap, 0);
+}
+
+// Стили для компонентов иконок статуса (применяются через :deep() для работы с дочерними компонентами)
+.message-status-indicator :deep(.status-icon) {
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--chotto-messagestatusindicator-icon-size, 12px);
+  height: var(--chotto-messagestatusindicator-icon-size, 12px);
+  line-height: var(--chotto-messagestatusindicator-icon-line-height, 1);
+}
+
+// Стили для разных статусов
+.message-status-indicator.status--received :deep(.status-icon--received) {
+  color: var(--chotto-messagestatusindicator-color-received, #5F5F5F);
+  width: var(--chotto-messagestatusindicator-received-icon-size, 20px);
+  height: var(--chotto-messagestatusindicator-received-icon-size, 20px);
+}
+
+.message-status-indicator.status--read :deep(.status-icon--read) {
+  color: var(--chotto-messagestatusindicator-color-read, #5F5F5F);
+  width: var(--chotto-messagestatusindicator-read-icon-size, 20px);
+  height: var(--chotto-messagestatusindicator-read-icon-size, 20px);
+}
+
+.message-status-indicator.status--pending :deep(.status-icon--pending) {
+  color: var(--chotto-messagestatusindicator-color-pending, #9ca3af);
+}
+
+.message-status-indicator.status--error :deep(.status-icon--error) {
+  color: var(--chotto-messagestatusindicator-color-error, #ef4444);
+}
+
+.message-status-indicator.status--sent :deep(.status-icon--sent) {
+  color: var(--chotto-messagestatusindicator-icon-color, #5F5F5F);
+  width: var(--chotto-messagestatusindicator-sent-icon-size, 20px);
+  height: var(--chotto-messagestatusindicator-sent-icon-size, 20px);
+}
+
+// Глубокие стили для работы с динамическими классами от родительских компонентов
+// Например: audio-message__status, text-message__status и т.д.
+:deep([class*="__status"]) {
+  display: var(--chotto-messagestatusindicator-display, flex);
+  align-items: var(--chotto-messagestatusindicator-align-items, center);
+  gap: var(--chotto-messagestatusindicator-gap, 0);
+}
+
+:deep([class*="__status"]) :deep(.status-icon) {
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--chotto-messagestatusindicator-icon-size, 12px);
+  height: var(--chotto-messagestatusindicator-icon-size, 12px);
+  line-height: var(--chotto-messagestatusindicator-icon-line-height, 1);
+}
+
+:deep(.status--received) :deep(.status-icon--received) {
+  color: var(--chotto-messagestatusindicator-color-received, #5F5F5F);
+  width: var(--chotto-messagestatusindicator-received-icon-size, 20px);
+  height: var(--chotto-messagestatusindicator-received-icon-size, 20px);
+}
+
+:deep(.status--read) :deep(.status-icon--read) {
+  color: var(--chotto-messagestatusindicator-color-read, #5F5F5F);
+  width: var(--chotto-messagestatusindicator-read-icon-size, 20px);
+  height: var(--chotto-messagestatusindicator-read-icon-size, 20px);
+}
+
+:deep(.status--sent) :deep(.status-icon--sent) {
+  width: var(--chotto-messagestatusindicator-sent-icon-size, 20px);
+  height: var(--chotto-messagestatusindicator-sent-icon-size, 20px);
+}
+
+:deep(.status--pending) :deep(.status-icon--pending) {
+  color: var(--chotto-messagestatusindicator-color-pending, #9ca3af);
+}
+
+:deep(.status--error) :deep(.status-icon--error) {
+  color: var(--chotto-messagestatusindicator-color-error, #ef4444);
+}
+

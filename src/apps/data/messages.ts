@@ -2,7 +2,7 @@ import stickerWebp from './images/sticker.webp';
 import animatedStickerTgs from './images/AnimatedSticker.tgs';
 import audioFile from './audio/file_example_MP3_700KB.mp3';
 import pdfFile from './files/test.pdf';
-import { text } from 'stream/consumers';
+// import { text } from 'stream/consumers';
 
 export const messages = [
   {

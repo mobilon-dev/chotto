@@ -63,47 +63,6 @@
     color: var(--chotto-textmessage-time-color, #5F5F5F);
   }
 
-  :deep(.text-message__status) {
-    display: var(--chotto-textmessage-status-display, flex);
-
-    span {
-      color: var(--chotto-textmessage-status-span-color, #5F5F5F);
-      font-size: var(--chotto-textmessage-status-span-font-size, 12px);
-    }
-  }
-
-  :deep(.status--received) {
-    span {
-      color: var(--chotto-textmessage-status-received-color, #5F5F5F);
-
-      &:first-child {
-        margin-right: var(--chotto-textmessage-status-received-first-child-margin-right, -8px);
-      }
-    }
-  }
-
-  :deep(.status--read) {
-    span {
-      color: var(--chotto-textmessage-status-read-color, #5F5F5F);
-
-      &:first-child {
-        margin-right: var(--chotto-textmessage-status-read-first-child-margin-right, -8px);
-      }
-    }
-  }
-
-  :deep(.status--pending) {
-    span {
-      color: var(--chotto-textmessage-status-pending-color, #9ca3af);
-    }
-  }
-
-  :deep(.status--error) {
-    span {
-      color: var(--chotto-textmessage-status-error-color, #ef4444);
-    }
-  }
-
   &__text {
     font-size: var(--chotto-textmessage-text-font-size, 14px);
     white-space: var(--chotto-textmessage-text-white-space, pre-wrap);

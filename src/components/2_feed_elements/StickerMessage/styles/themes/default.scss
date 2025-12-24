@@ -51,15 +51,6 @@
   // StickerMessage time variables
   --chotto-stickermessage-time-font-size: var(--chotto-theme-small-text-font-size);
 
-  // StickerMessage status variables
-  --chotto-stickermessage-status-display: flex;
-  --chotto-stickermessage-status-span-font-size: var(--chotto-theme-small-text-icon-size);
-  --chotto-stickermessage-status-received-first-child-margin-right: -8px;
-  --chotto-stickermessage-status-read-first-child-margin-right: -8px;
-  --chotto-stickermessage-status-read-color: var(--chotto-theme-status-color-read);
-  --chotto-stickermessage-status-pending-color: var(--chotto-theme-status-color-pending);
-  --chotto-stickermessage-status-error-color: var(--chotto-theme-status-color-error);
-
   // StickerMessage subtext variables
   --chotto-stickermessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
   --chotto-stickermessage-subtext-color: var(--chotto-theme-secondary-text-color);

@@ -4,20 +4,22 @@
     :text="statusTitle"
     :position="tooltipPosition"
   >
-    <div :class="statusContainerClasses">
-      <template v-if="messageStatus === 'pending'">
-        <span class="pi pi-clock" />
-      </template>
-      <template v-else-if="messageStatus === 'error'">
-        <span class="pi pi-exclamation-circle" />
-      </template>
-      <template v-else>
-        <span
-          v-if="messageStatus !== 'sent'"
-          class="pi pi-check"
-        />
-        <span class="pi pi-check" />
-      </template>
+    <div :class="['message-status-indicator', ...statusContainerClasses]">
+      <PendingStatusIcon
+        v-if="messageStatus === 'pending'"
+      />
+      <ErrorStatusIcon
+        v-else-if="messageStatus === 'error'"
+      />
+      <ReadStatusIcon
+        v-else-if="messageStatus === 'read'"
+      />
+      <ReceivedStatusIcon
+        v-else-if="messageStatus === 'received'"
+      />
+      <SentStatusIcon
+        v-else
+      />
     </div>
   </Tooltip>
 </template>
@@ -30,6 +32,13 @@ import { computed } from 'vue';
 
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { statuses as defaultStatuses } from '@/functions';
+import {
+  ErrorStatusIcon,
+  PendingStatusIcon,
+  ReadStatusIcon,
+  ReceivedStatusIcon,
+  SentStatusIcon,
+} from './icons';
 
 defineOptions({
   name: 'MessageStatusIndicator',
@@ -79,3 +88,6 @@ const statusContainerClasses = computed(() => {
 });
 </script>
 
+<style scoped lang="scss">
+@use './styles/MessageStatusIndicator.scss';
+</style>

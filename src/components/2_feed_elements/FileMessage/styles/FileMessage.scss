@@ -129,7 +129,7 @@
     display: var(--chotto-filemessage-info-container-display, flex);
     align-items: var(--chotto-filemessage-info-container-align-items, center);
     justify-content: var(--chotto-filemessage-info-container-justify-content, flex-end);
-    column-gap: var(--chotto-filemessage-info-container-column-gap, 2px);
+    column-gap: var(--chotto-filemessage-info-container-column-gap, 4px);
   }
 
   &__download-button {
@@ -144,48 +144,6 @@
     span {
       color: var(--chotto-filemessage-download-button-span-color, #5F5F5F);
       font-size: var(--chotto-filemessage-download-button-span-font-size, 14px);
-    }
-  }
-
-  :deep(.file-message__status) {
-    display: var(--chotto-filemessage-status-display, flex);
-
-    span {
-      color: var(--chotto-filemessage-status-span-color, #5F5F5F);
-      font-size: var(--chotto-filemessage-status-span-font-size, 12px);
-      font-weight: var(--chotto-filemessage-status-span-font-weight, 400);
-    }
-  }
-
-  :deep(.status--received) {
-    span {
-      color: var(--chotto-filemessage-status-received-color, #5F5F5F);
-
-      &:first-child {
-        margin-right: var(--chotto-filemessage-status-received-first-child-margin-right, -8px);
-      }
-    }
-  }
-
-  :deep(.status--read) {
-    span {
-      color: var(--chotto-filemessage-status-read-color, #5F5F5F);
-
-      &:first-child {
-        margin-right: var(--chotto-filemessage-status-read-first-child-margin-right, -8px);
-      }
-    }
-  }
-
-  :deep(.status--pending) {
-    span {
-      color: var(--chotto-filemessage-status-pending-color, #9ca3af);
-    }
-  }
-
-  :deep(.status--error) {
-    span {
-      color: var(--chotto-filemessage-status-error-color, #ef4444);
     }
   }
 

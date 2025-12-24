@@ -41,15 +41,6 @@
   // VideoMessage time variables
   --chotto-videomessage-time-font-size: var(--chotto-theme-small-text-font-size);
 
-  // VideoMessage status variables
-  --chotto-videomessage-status-display: flex;
-  --chotto-videomessage-status-span-font-size: var(--chotto-theme-small-text-icon-size);
-  --chotto-videomessage-status-received-first-child-margin-right: -8px;
-  --chotto-videomessage-status-read-color: var(--chotto-theme-status-color-read);
-  --chotto-videomessage-status-read-first-child-margin-right: -8px;
-  --chotto-videomessage-status-pending-color: var(--chotto-theme-status-color-pending);
-  --chotto-videomessage-status-error-color: var(--chotto-theme-status-color-error);
-
   // VideoMessage avatar variables
   --chotto-videomessage-avatar-grid-row: 1 / -1;
   --chotto-videomessage-avatar-align-self: end;

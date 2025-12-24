@@ -74,14 +74,6 @@
   --chotto-filemessage-download-button-span-color: var(--chotto-theme-secondary-text-color);
   --chotto-filemessage-download-button-span-font-size: var(--chotto-theme-text-icon-size);
 
-  // FileMessage status variables
-  --chotto-filemessage-status-span-color: var(--chotto-theme-status-color-received);
-  --chotto-filemessage-status-span-font-size: var(--chotto-theme-small-text-icon-size);
-  --chotto-filemessage-status-received-color: var(--chotto-theme-status-color-received);
-  --chotto-filemessage-status-read-color: var(--chotto-theme-status-color-read);
-  --chotto-filemessage-status-pending-color: var(--chotto-theme-status-color-pending);
-  --chotto-filemessage-status-error-color: var(--chotto-theme-status-color-error);
-
   // FileMessage views variables
   --chotto-filemessage-views-span-font-size: var(--chotto-theme-small-text-icon-size);
   --chotto-filemessage-views-span-color: var(--chotto-theme-secondary-text-color);
@@ -127,7 +119,7 @@
   --chotto-filemessage-info-container-display: flex;
   --chotto-filemessage-info-container-align-items: center;
   --chotto-filemessage-info-container-justify-content: flex-end;
-  --chotto-filemessage-info-container-column-gap: 2px;
+  --chotto-filemessage-info-container-column-gap: 4px;
 
   // FileMessage download button variables
   --chotto-filemessage-download-button-margin-bottom: 5px;
@@ -137,12 +129,6 @@
   --chotto-filemessage-download-button-background-color: transparent;
   --chotto-filemessage-download-button-padding: 0;
   --chotto-filemessage-download-button-cursor: pointer;
-
-  // FileMessage status variables
-  --chotto-filemessage-status-display: flex;
-  --chotto-filemessage-status-span-font-weight: 400;
-  --chotto-filemessage-status-received-first-child-margin-right: -8px;
-  --chotto-filemessage-status-read-first-child-margin-right: -8px;
 
   // FileMessage views variables
   --chotto-filemessage-views-display: flex;

@@ -58,15 +58,6 @@
   // ImageMessage time variables
   --chotto-imagemessage-time-font-size: var(--chotto-theme-small-text-font-size);
 
-  // ImageMessage status variables
-  --chotto-imagemessage-status-display: flex;
-  --chotto-imagemessage-status-span-font-size: var(--chotto-theme-small-text-icon-size);
-  --chotto-imagemessage-status-received-first-child-margin-right: -8px;
-  --chotto-imagemessage-status-read-first-child-margin-right: -8px;
-  --chotto-imagemessage-status-read-color: var(--chotto-theme-status-color-read);
-  --chotto-imagemessage-status-pending-color: var(--chotto-theme-status-color-pending);
-  --chotto-imagemessage-status-error-color: var(--chotto-theme-status-color-error);
-
   // ImageMessage subtext variables
   --chotto-imagemessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
   --chotto-imagemessage-subtext-color: var(--chotto-theme-secondary-text-color);

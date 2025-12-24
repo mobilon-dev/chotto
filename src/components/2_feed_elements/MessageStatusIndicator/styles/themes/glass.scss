@@ -1,0 +1,23 @@
+[data-theme="glass"] {
+  // MessageStatusIndicator container variables
+  --chotto-messagestatusindicator-display: flex;
+  --chotto-messagestatusindicator-align-items: center;
+  --chotto-messagestatusindicator-gap: 0;
+
+  // MessageStatusIndicator icon variables
+  --chotto-messagestatusindicator-icon-color: var(--chotto-theme-status-color-received);
+  --chotto-messagestatusindicator-icon-size: var(--chotto-theme-small-text-icon-size);
+  --chotto-messagestatusindicator-icon-line-height: 1;
+
+  // MessageStatusIndicator status color variables
+  --chotto-messagestatusindicator-color-received: var(--chotto-theme-status-color-received);
+  --chotto-messagestatusindicator-color-read: var(--chotto-theme-status-color-read);
+  --chotto-messagestatusindicator-color-pending: var(--chotto-theme-status-color-pending);
+  --chotto-messagestatusindicator-color-error: var(--chotto-theme-status-color-error);
+
+  // MessageStatusIndicator status icon size variables
+  --chotto-messagestatusindicator-received-icon-size: 20px;
+  --chotto-messagestatusindicator-read-icon-size: 20px;
+  --chotto-messagestatusindicator-sent-icon-size: 20px;
+}
+

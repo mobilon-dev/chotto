@@ -262,34 +262,7 @@
     }
   }
 
-  &__status {
-    display: var(--chotto-callmessage-status-display, flex);
 
-    span {
-      color: var(--chotto-callmessage-status-color-received, #5F5F5F);
-      font-size: var(--chotto-callmessage-small-text-icon-size, 12px);
-    }
-  }
-
-  &__status--received {
-    span {
-      color: var(--chotto-callmessage-status-color-received, #5F5F5F);
-
-      &:first-child {
-        margin-right: -8px;
-      }
-    }
-  }
-
-  &__status--read {
-    span {
-      color: var(--chotto-callmessage-status-color-read, #5F5F5F);
-
-      &:first-child {
-        margin-right: -8px;
-      }
-    }
-  }
 
   &__subtext {
     font-size: var(--chotto-callmessage-subtext-font-size, 14px);

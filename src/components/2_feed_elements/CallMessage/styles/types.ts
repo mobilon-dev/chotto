@@ -93,9 +93,6 @@ export interface CallMessageThemeCSSVariables {
   /** Курсор кнопки скачивания */
   '--chotto-callmessage-download-button-cursor': string;
 
-  /** Отображение статуса */
-  '--chotto-callmessage-status-display': string;
-
   /** Колонка грида контейнера заголовка */
   '--chotto-callmessage-header-container-grid-column': string;
   /** Отображение контейнера заголовка */
@@ -527,10 +524,6 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-download-button-icon-color': string;
   /** Размер иконки кнопки скачивания */
   '--chotto-callmessage-download-button-icon-size': string;
-  /** Цвет статуса доставлено */
-  '--chotto-callmessage-status-color-received': string;
-  /** Цвет статуса прочитано */
-  '--chotto-callmessage-status-color-read': string;
   /** Малый размер иконки текста */
   '--chotto-callmessage-small-text-icon-size': string;
   /** Размер шрифта подзаголовка */

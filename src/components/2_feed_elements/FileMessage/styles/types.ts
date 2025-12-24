@@ -151,27 +151,6 @@ export interface FileMessageThemeCSSVariables {
   /** Размер иконки внутри кнопки */
   '--chotto-filemessage-download-button-span-font-size': string;
 
-  /** Отображение статуса доставки/прочтения */
-  '--chotto-filemessage-status-display': string;
-  /** Толщина шрифта статуса */
-  '--chotto-filemessage-status-span-font-weight': string;
-  /** Отрицательный отступ первой иконки "доставлено" */
-  '--chotto-filemessage-status-received-first-child-margin-right': string;
-  /** Отрицательный отступ первой иконки "прочитано" */
-  '--chotto-filemessage-status-read-first-child-margin-right': string;
-  /** Цвет иконок статуса */
-  '--chotto-filemessage-status-span-color': string;
-  /** Размер иконок статуса */
-  '--chotto-filemessage-status-span-font-size': string;
-  /** Цвет статуса "доставлено" */
-  '--chotto-filemessage-status-received-color': string;
-  /** Цвет статуса "прочитано" */
-  '--chotto-filemessage-status-read-color': string;
-  /** Цвет статуса "в ожидании" */
-  '--chotto-filemessage-status-pending-color': string;
-  /** Цвет статуса "ошибка" */
-  '--chotto-filemessage-status-error-color': string;
-
   /** Отображение блока просмотров */
   '--chotto-filemessage-views-display': string;
   /** Выравнивание элементов блока просмотров */

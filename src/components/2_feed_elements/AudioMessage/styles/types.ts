@@ -284,9 +284,6 @@ export interface AudioMessageThemeCSSVariables {
   /** Курсор кнопки скачивания */
   '--chotto-audiomessage-download-button-cursor': string;
 
-  /** Отображение статуса */
-  '--chotto-audiomessage-status-display': string;
-
   /** Отображение блока просмотров */
   '--chotto-audiomessage-views-display': string;
   /** Выравнивание элементов блока просмотров */
@@ -537,14 +534,6 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-download-button-icon-color': string;
   /** Размер иконки кнопки скачивания */
   '--chotto-audiomessage-download-button-icon-size': string;
-  /** Цвет статуса доставлено */
-  '--chotto-audiomessage-status-color-received': string;
-  /** Цвет статуса прочитано */
-  '--chotto-audiomessage-status-color-read': string;
-  /** Цвет статуса в ожидании */
-  '--chotto-audiomessage-status-color-pending': string;
-  /** Цвет статуса ошибка */
-  '--chotto-audiomessage-status-color-error': string;
   /** Размер малого текста-иконки */
   '--chotto-audiomessage-small-text-icon-size': string;
   /** Цвет иконки/текста (span) просмотров */

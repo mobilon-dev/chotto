@@ -74,45 +74,6 @@
     font-size: var(--chotto-imagemessage-time-font-size, 12px);
   }
 
-  :deep(.image-message__status) {
-    display: var(--chotto-imagemessage-status-display, flex);
-
-    span {
-      font-size: var(--chotto-imagemessage-status-span-font-size, 12px);
-    }
-  }
-
-  :deep(.status--received) {
-    span {
-
-      &:first-child {
-        margin-right: var(--chotto-imagemessage-status-received-first-child-margin-right, -8px);
-      }
-    }
-  }
-
-  :deep(.status--read) {
-    span {
-      color: var(--chotto-imagemessage-status-read-color, #5F5F5F);
-
-      &:first-child {
-        margin-right: var(--chotto-imagemessage-status-read-first-child-margin-right, -8px);
-      }
-    }
-  }
-
-  :deep(.status--pending) {
-    span {
-      color: var(--chotto-imagemessage-status-pending-color, #9ca3af);
-    }
-  }
-
-  :deep(.status--error) {
-    span {
-      color: var(--chotto-imagemessage-status-error-color, #ef4444);
-    }
-  }
-
   &__subtext {
     font-size: var(--chotto-imagemessage-subtext-font-size, 14px);
     color: var(--chotto-imagemessage-subtext-color, #5F5F5F);
