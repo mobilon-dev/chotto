@@ -219,7 +219,7 @@ export interface VideoMessageThemeCSSVariables {
   /** Фон пузыря справа */
   '--chotto-videomessage-right-bg': string;
   /** Отступ контента справа с учётом аватара */
-  '--chotto-videomessage-right-content-with-avatar-indent-margin-left': string;
+  '--chotto-videomessage-right-content-with-avatar-indent-margin-right': string;
   /** Колонка грида текстового контейнера справа */
   '--chotto-videomessage-right-text-container-grid-column': string;
   /** Отступ текстового контейнера справа */

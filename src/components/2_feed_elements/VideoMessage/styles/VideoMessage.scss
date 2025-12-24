@@ -273,7 +273,7 @@
     }
 
     .video-message__content.with-avatar-indent {
-      margin-left: var(--chotto-videomessage-right-content-with-avatar-indent-margin-left, calc(var(--chotto-videomessage-avatar-min-width, 40px) + 12px));
+      margin-right: var(--chotto-videomessage-right-content-with-avatar-indent-margin-right, calc(var(--chotto-videomessage-avatar-min-width, 40px) + 12px));
     }
 
     .video-message__text-container {
