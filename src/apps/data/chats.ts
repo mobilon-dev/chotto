@@ -255,14 +255,14 @@ export const chats = [
     metadata: '',
   },
   {
-    chatId: 4, name: "Василий", countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад', statusMessage: 'received', isFixed: false, status: "#00b972", actions: [
+    chatId: 4, name: "Василий", countUnread: 0, lastMessage: 'test_4', 'lastActivity.time': 'час назад', statusMessage: 'received', isFixed: false, status: "#00b972", actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },
     ],
     metadata: '',
   },
   {
     chatId: 5, name: "Много SMS",
-    countUnread: 0, lastMessage: 'test',
+    countUnread: 0, lastMessage: 'test_5',
     'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727027259',
     'lastMessage.status': 'sent',
@@ -518,8 +518,17 @@ export const chats = [
     metadata: 'Данияр',
   },
   {
-    chatId: 10, name: "Василий",
-    countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
+    chatId: 10, name: "Василий Десяткин",
+    countUnread: 0, 
+    lastMessage: {
+      type: 'message.audio',
+      data: {
+        url: 'https://filebump.services.mobilon.ru/file/DNv7cvYdhMcvny2R6NRxyG2nU2GtCJHJY3by/AnimatedSticker.tgs',
+        filename: 'audio.mp3'
+      }
+    },
+    'lastMessage.status': 'read', 
+    'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727021159',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },
@@ -528,7 +537,17 @@ export const chats = [
   },
   {
     chatId: 11, name: "Василий",
-    countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
+    countUnread: 0, 
+    lastMessage: {
+      type: 'message.audio',
+      data: {
+        url: 'https://filebump.services.mobilon.ru/file/DNv7cvYdhMcvny2R6NRxyG2nU2GtCJHJY3by/AnimatedSticker.tgs',
+        filename: 'audio.mp3',
+        isVoiceMessage: true
+      }
+    },
+    'lastMessage.status': 'read', 
+    'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727021159',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },
@@ -537,7 +556,7 @@ export const chats = [
   },
   {
     chatId: 12, name: "Василий",
-    countUnread: 0, lastMessage: 'test', 'lastActivity.time': 'час назад',
+    countUnread: 0, lastMessage: 'test_12', 'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1727021159',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },

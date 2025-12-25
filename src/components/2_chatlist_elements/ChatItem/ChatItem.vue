@@ -215,6 +215,8 @@ import FileIcon from './icons/FileIcon.vue';
 import ImageIcon from './icons/ImageIcon.vue';
 import StickerIcon from './icons/StickerIcon.vue';
 import VideoIcon from './icons/VideoIcon.vue';
+import VoiceIcon from './icons/VoiceIcon.vue';
+import AudioIcon from './icons/AudioIcon.vue';
 import { IAction, IChatItem, IChatDialog, ILastMessageObject } from './types';
 
 const chatAppId = inject('chatAppId')
@@ -337,6 +339,15 @@ const getLastMessageText = (lastMessage: string | ILastMessageObject): string =>
   if (lastMessage?.type === 'message.sticker') {
     return 'Стикер';
   }
+  // Если это аудио сообщение
+  if (lastMessage?.type === 'message.audio') {
+    // Проверяем флаг isVoiceMessage (может быть на верхнем уровне или в data)
+    const isVoiceMessage = lastMessage.isVoiceMessage || lastMessage?.data?.isVoiceMessage;
+    if (isVoiceMessage === true) {
+      return 'Голосовое сообщение';
+    }
+    return 'Аудиофайл';
+  }
   // Если это объект, пытаемся получить текст из data.text
   const text = lastMessage?.data?.text;
   if (text) {
@@ -380,6 +391,16 @@ const messageIcon = computed(() => {
   
   if (messageType === 'message.video') {
     return VideoIcon;
+  }
+  
+  if (messageType === 'message.audio') {
+    // Проверяем флаг isVoiceMessage (может быть на верхнем уровне или в data)
+    const lastMessageObj = props.chat.lastMessage as ILastMessageObject;
+    const isVoiceMessage = lastMessageObj.isVoiceMessage || lastMessageObj?.data?.isVoiceMessage;
+    if (isVoiceMessage === true) {
+      return VoiceIcon;
+    }
+    return AudioIcon;
   }
   
   if (messageType === 'message.file') {

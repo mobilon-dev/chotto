@@ -86,6 +86,7 @@ export interface IAudioMessage {
   reactions?: MessageReactions
   backgroundColor?: string
   hasMessengerAccount?: boolean
+  isVoiceMessage?: boolean
 }
 
 export interface ICallMessage {

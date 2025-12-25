@@ -31,10 +31,12 @@ export interface ILastMessageObject {
   channelId?: string;
   senderId?: string;
   type?: string;
+  isVoiceMessage?: boolean;
   data?: {
     text?: string;
     url?: string;
     filename?: string;
+    isVoiceMessage?: boolean;
   };
   timestampms?: number;
   channel?: {

@@ -1,0 +1,60 @@
+<template>
+  <svg
+    width="16px"
+    height="16px"
+    viewBox="4 2 16 20"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <title>Mic</title>
+    <g
+      id="Page-1"
+      stroke="none"
+      stroke-width="1"
+      fill="none"
+      fill-rule="evenodd"
+    >
+      <g id="Mic">
+        <rect
+          id="Rectangle"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          x="9"
+          y="3"
+          width="6"
+          height="11"
+          rx="3"
+        />
+        <line
+          id="Path"
+          x1="12"
+          y1="18"
+          x2="12"
+          y2="21"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <line
+          id="Path"
+          x1="8"
+          y1="21"
+          x2="16"
+          y2="21"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <path
+          id="Path"
+          d="M19,11 C19,14.866 15.866,18 12,18 C8.13401,18 5,14.866 5,11"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </g>
+    </g>
+  </svg>
+</template>
