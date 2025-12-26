@@ -211,12 +211,15 @@ import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import AvatarIcon from '@/components/1_icons/AvatarIcon.vue';
-import FileIcon from './icons/FileIcon.vue';
-import ImageIcon from './icons/ImageIcon.vue';
-import StickerIcon from './icons/StickerIcon.vue';
-import VideoIcon from './icons/VideoIcon.vue';
-import VoiceIcon from './icons/VoiceIcon.vue';
-import AudioIcon from './icons/AudioIcon.vue';
+import {
+  AudioIcon,
+  FileIcon,
+  ImageIcon,
+  MissedCallIcon,
+  StickerIcon,
+  VideoIcon,
+  VoiceIcon,
+} from './icons';
 import { IAction, IChatItem, IChatDialog, ILastMessageObject } from './types';
 
 const chatAppId = inject('chatAppId')
@@ -348,6 +351,10 @@ const getLastMessageText = (lastMessage: string | ILastMessageObject): string =>
     }
     return 'Аудиофайл';
   }
+  // Если это пропущенный звонок
+  if (lastMessage?.type === 'message.missedCall') {
+    return 'Пропущенный звонок';
+  }
   // Если это объект, пытаемся получить текст из data.text
   const text = lastMessage?.data?.text;
   if (text) {
@@ -401,6 +408,10 @@ const messageIcon = computed(() => {
       return VoiceIcon;
     }
     return AudioIcon;
+  }
+  
+  if (messageType === 'message.missedCall') {
+    return MissedCallIcon;
   }
   
   if (messageType === 'message.file') {

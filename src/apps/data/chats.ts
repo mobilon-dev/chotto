@@ -262,10 +262,13 @@ export const chats = [
   },
   {
     chatId: 5, name: "Много SMS",
-    countUnread: 0, lastMessage: 'test_5',
-    'lastActivity.time': 'час назад',
-    'lastActivity.timestamp': '1727027259',
-    'lastMessage.status': 'sent',
+    countUnread: 0,
+    lastMessage: {
+      type: 'message.missedCall',
+    },
+    'lastMessage.status': 'read', 
+    'lastActivity.time': '2 часа назад',
+    'lastActivity.timestamp': '1727026259',
     actions: [
       { action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' },
     ],
