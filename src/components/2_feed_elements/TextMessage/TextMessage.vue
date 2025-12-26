@@ -94,7 +94,7 @@
       <MessageSmsInvite
         :status="message.status"
         :has-messenger-account="message.hasMessengerAccount"
-        :channel="messageChannelId"
+        :channel="channel"
         @sms-invite="handleSmsInvite"
       />
 
@@ -158,6 +158,11 @@ const props = defineProps({
     type: Object as () => Record<string, string>,
     required: false,
     default: () => ({})
+  },
+  channel: {
+    type: String,
+    required: false,
+    default: undefined
   }
 });
 
@@ -179,7 +184,7 @@ const {
 const status = computed(() => getStatus(props.message.status))
 const statusTitle = computed(() => getStatusTitle(props.message.status, props.message.statusMsg))
 
-const { bubbleStyle: rightBubbleStyle, messageChannelId } = useChannelAccentColor(
+const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
   computed(() => props.message),
   { cssVariable: '--chotto-textmessage-right-bg', position: 'right' }
 )

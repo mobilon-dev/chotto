@@ -32,6 +32,7 @@
         :is-first-in-series="object.isFirstInSeries"
         :reactions-enabled="reactionsEnabled"
         :subtext-tooltip-data="subtextTooltipData"
+        :channel="getChannelForMessage(object)"
         @action="messageAction"
         @reply="handleClickReplied"
         @sms-invite="handleSmsInvite(object)"
@@ -103,7 +104,7 @@
   setup
   lang="ts"
 >
-import { ref, watch, nextTick, inject, computed, onMounted } from 'vue';
+import { ref, watch, nextTick, inject, computed, onMounted, unref, type Ref } from 'vue';
 import DateMessageSticky from '@/components/2_feed_elements/DateMessageSticky/DateMessageSticky.vue';
 import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
 import MessageKeyboard from '@/components/2_feed_elements/MessageKeyboard/MessageKeyboard.vue';
@@ -115,6 +116,9 @@ import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLo
 import { throttle } from './functions/throttle';
 
 import chatBackgroundRaw from './assets/chat-background.svg?raw';
+
+type DialogWithChannel = { dialogId: string; channelId?: string }
+type SelectedChat = { dialogs?: DialogWithChannel[] }
 
 const props = defineProps({
   objects: {
@@ -206,6 +210,25 @@ const { groupedObjects } = useFeedGrouping({
 })
 
 const chatAppId = inject('chatAppId')
+const selectedChatInjected = inject<Ref<SelectedChat> | SelectedChat | undefined>('selectedChat', undefined)
+
+const selectedChat = computed(() => {
+  if (!selectedChatInjected) return undefined
+  return unref(selectedChatInjected)
+})
+
+/**
+ * Получает channelId для сообщения на основе его dialogId
+ */
+function getChannelForMessage(message: IFeedObject): string | undefined {
+  const messageWithDialog = message as IFeedObject & { dialogId?: string }
+  if (!messageWithDialog.dialogId || !selectedChat.value?.dialogs) {
+    return undefined
+  }
+
+  const dialog = selectedChat.value.dialogs.find((dialog) => dialog.dialogId === messageWithDialog.dialogId)
+  return dialog?.channelId
+}
 
 const emit = defineEmits([
   'messageAction',
