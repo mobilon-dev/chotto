@@ -49,5 +49,5 @@ export const getStatusTitle = (status: string, statusMsg?: string): string => {
       return ''
   }
   const details = statusMsg?.trim()
-  return details ? `${baseTitle}: ${details}` : baseTitle
+  return details ? details : baseTitle
 }
