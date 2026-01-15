@@ -73,8 +73,13 @@ export function useCommunicationAttributes({
         return;
       }
 
+      if (attr.type === 'max') {
+        (organized.max as ContactAttribute[]).push(attr);
+        return;
+      }
+
       if (attr.type === 'phone') {
-        ['whatsapp', 'max', 'sms', 'phone'].forEach((type) => {
+        ['whatsapp', 'sms', 'phone'].forEach((type) => {
           (organized[type] as ContactAttribute[]).push(attr);
         });
         return;
