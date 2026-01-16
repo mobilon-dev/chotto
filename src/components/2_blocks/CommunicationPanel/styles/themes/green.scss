@@ -123,6 +123,18 @@
   --chotto-communicationpanel-attribute-value-font-weight: 500;
   --chotto-communicationpanel-attribute-value-font-size: inherit;
   --chotto-communicationpanel-attribute-value-line-height: normal;
+  
+  // Empty channels placeholder
+  --chotto-communicationpanel-empty-placeholder-padding: 6px 16px;
+  --chotto-communicationpanel-empty-placeholder-font-size: 14px;
+  --chotto-communicationpanel-empty-placeholder-color: #737373;
+  --chotto-communicationpanel-empty-placeholder-font-weight: 500;
+  --chotto-communicationpanel-empty-placeholder-text-align: left;
+  --chotto-communicationpanel-empty-placeholder-cursor: default;
+  --chotto-communicationpanel-empty-placeholder-user-select: none;
+  --chotto-communicationpanel-empty-placeholder-pointer-events: none;
+  --chotto-communicationpanel-empty-placeholder-line-height: normal;
+  
   --chotto-communicationpanel-attribute-info-display: flex;
   --chotto-communicationpanel-attribute-info-flex-direction: column;
   --chotto-communicationpanel-attribute-info-gap: 0;

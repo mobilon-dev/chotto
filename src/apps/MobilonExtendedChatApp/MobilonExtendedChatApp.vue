@@ -105,6 +105,7 @@
                         :recent-attribute-channels="recentAttributeChannels"
                         :selected-dialog="selectedDialog"
                         :channel-tooltips="channelTooltips"
+                        :empty-channels-placeholder="emptyChannelsPlaceholder"
                         :show-channel-icons="true"
                         @select-attribute-channel="handleAttributeChannelSelect"
                         @phone-call="handlePhoneCall"
@@ -641,6 +642,15 @@ const channelTooltips = ref({
   whatsapp: 'Выберите контакт и канал для отправки сообщения',
   telegram: 'Выберите контакт и канал для отправки сообщения',
   max: 'Выберите контакт и канал для отправки сообщения'
+})
+
+// Тексты placeholder для пустых каналов в панели CommunicationPanel
+const emptyChannelsPlaceholder = ref({
+  max: 'Каналы MAX не подключены',
+  telegram: 'Каналы Telegram не подключены',
+  whatsapp: 'Каналы WhatsApp не подключены',
+  sms: 'Каналы SMS не подключены',
+  phone: 'Телефонные каналы не подключены'
 })
 
 const refContainer = ref()

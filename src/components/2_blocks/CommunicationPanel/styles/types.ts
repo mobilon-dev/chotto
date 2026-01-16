@@ -258,6 +258,26 @@ export interface CommunicationPanelThemeCSSVariables {
   /** Высота строки значения атрибута */
   '--chotto-communicationpanel-attribute-value-line-height': string;
 
+  // Empty channels placeholder
+  /** Отступы placeholder пустых каналов */
+  '--chotto-communicationpanel-empty-placeholder-padding': string;
+  /** Размер шрифта placeholder пустых каналов */
+  '--chotto-communicationpanel-empty-placeholder-font-size': string;
+  /** Цвет placeholder пустых каналов */
+  '--chotto-communicationpanel-empty-placeholder-color': string;
+  /** Жирность шрифта placeholder пустых каналов */
+  '--chotto-communicationpanel-empty-placeholder-font-weight': string;
+  /** Выравнивание текста placeholder пустых каналов */
+  '--chotto-communicationpanel-empty-placeholder-text-align': string;
+  /** Курсор placeholder пустых каналов */
+  '--chotto-communicationpanel-empty-placeholder-cursor': string;
+  /** Выбор текста placeholder пустых каналов */
+  '--chotto-communicationpanel-empty-placeholder-user-select': string;
+  /** События указателя placeholder пустых каналов */
+  '--chotto-communicationpanel-empty-placeholder-pointer-events': string;
+  /** Высота строки placeholder пустых каналов */
+  '--chotto-communicationpanel-empty-placeholder-line-height': string;
+
   // Menu icon
   /** Цвет серой иконки меню */
   '--chotto-communicationpanel-menu-icon-grey-color': string;

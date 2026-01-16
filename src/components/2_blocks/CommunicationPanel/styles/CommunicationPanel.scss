@@ -123,6 +123,18 @@
   margin-bottom: var(--chotto-communicationpanel-menu-header-margin-bottom, 0);
 }
 
+.empty-channels-placeholder {
+  padding: var(--chotto-communicationpanel-empty-placeholder-padding, 6px 16px);
+  font-size: var(--chotto-communicationpanel-empty-placeholder-font-size, 14px);
+  color: var(--chotto-communicationpanel-empty-placeholder-color, #737373);
+  font-weight: var(--chotto-communicationpanel-empty-placeholder-font-weight, 500);
+  text-align: var(--chotto-communicationpanel-empty-placeholder-text-align, left);
+  cursor: var(--chotto-communicationpanel-empty-placeholder-cursor, default);
+  user-select: var(--chotto-communicationpanel-empty-placeholder-user-select, none);
+  pointer-events: var(--chotto-communicationpanel-empty-placeholder-pointer-events, none);
+  line-height: var(--chotto-communicationpanel-empty-placeholder-line-height, normal);
+}
+
 .recent-attribute,
 .attribute-item {
   display: var(--chotto-communicationpanel-attribute-display, flex);

@@ -57,15 +57,15 @@
     >
       <!-- Заголовок для списка контактов -->
       <div 
-        v-if="showRecentAttribute" 
+        v-if="showRecentAttribute && !shouldShowEmptyChannelsPlaceholder" 
         class="menu-header"
       >
         Недавний
       </div>
 
-      <!-- Недавний контакт -->
+      <!-- Недавний контакт (показываем только если не показываем placeholder) -->
       <Tooltip
-        v-if="showRecentAttribute && props.recentAttributeChannels[activeChannelType]?.tooltip"
+        v-if="showRecentAttribute && !shouldShowEmptyChannelsPlaceholder && props.recentAttributeChannels[activeChannelType]?.tooltip"
         :text="props.recentAttributeChannels[activeChannelType]?.tooltip"
         position="bottom"
         :offset="8"
@@ -92,7 +92,7 @@
         </div>
       </Tooltip>
       <div
-        v-else-if="showRecentAttribute"
+        v-else-if="showRecentAttribute && !shouldShowEmptyChannelsPlaceholder"
         :class="['recent-attribute', { 
           'frozen-hover': isRecentAttributeHovered 
         }]"
@@ -114,38 +114,48 @@
       </div>
 
       <div 
-        v-if="showRecentAttribute && organizedContactAttributes[activeChannelType]?.length && activeChannelType !== 'phone'" 
+        v-if="showRecentAttribute && !shouldShowEmptyChannelsPlaceholder && organizedContactAttributes[activeChannelType]?.length && activeChannelType !== 'phone'" 
         class="menu-divider"
       />
 
-      <!-- Все контакты -->
+      <!-- Placeholder когда нет каналов -->
       <div
-        v-for="attribute in organizedContactAttributes[activeChannelType]"
-        :key="attribute.attributeId"
-        :class="['attribute-item', { 
-          'frozen-hover': isAttributeFrozen(attribute) 
-        }]"
-        @mouseenter="onAttributeMouseEnter(attribute, $event)"
-        @mouseleave="handleAttributeMouseLeave"
-        @click="handleAttributeClick(attribute)"
+        v-if="shouldShowEmptyChannelsPlaceholder"
+        class="empty-channels-placeholder"
       >
-        <div class="attribute-info">
-          <span class="attribute-value">{{ attribute.value }}</span>
-        </div>
-        <span class="menu-icon">
-          <span
-            v-if="hasMultipleChannels(activeChannelType)"
-            class="menu-icon-arrow"
-          />
-          <span
-            v-else-if="showChannelIcons"
-            class="channel-icon-small"
-            :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
-          >
-            <component :is="getSingleMenuChannelIconComponent(activeChannelType)" />
-          </span>
-        </span>
+        {{ emptyChannelsPlaceholderText }}
       </div>
+
+      <!-- Все контакты (показываем только если есть каналы или атрибуты) -->
+      <template v-if="!shouldShowEmptyChannelsPlaceholder">
+        <div
+          v-for="attribute in organizedContactAttributes[activeChannelType]"
+          :key="attribute.attributeId"
+          :class="['attribute-item', { 
+            'frozen-hover': isAttributeFrozen(attribute) 
+          }]"
+          @mouseenter="onAttributeMouseEnter(attribute, $event)"
+          @mouseleave="handleAttributeMouseLeave"
+          @click="handleAttributeClick(attribute)"
+        >
+          <div class="attribute-info">
+            <span class="attribute-value">{{ attribute.value }}</span>
+          </div>
+          <span class="menu-icon">
+            <span
+              v-if="hasMultipleChannels(activeChannelType)"
+              class="menu-icon-arrow"
+            />
+            <span
+              v-else-if="showChannelIcons"
+              class="channel-icon-small"
+              :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
+            >
+              <component :is="getSingleMenuChannelIconComponent(activeChannelType)" />
+            </span>
+          </span>
+        </div>
+      </template>
 
       <!-- Второй уровень меню -->
       <div
@@ -188,6 +198,7 @@ import { useCommunicationAttributes } from './composables/useCommunicationAttrib
 import { useCommunicationActions } from './composables/useCommunicationActions';
 import { useCommunicationSubMenu } from './composables/useCommunicationSubMenu';
 import { useCommunicationDialogSync } from './composables/useCommunicationDialogSync';
+import { useCommunicationPlaceholder } from './composables/useCommunicationPlaceholder';
 
 
 const props = defineProps({
@@ -235,6 +246,11 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false
+  },
+  emptyChannelsPlaceholder: {
+    type: Object,
+    required: false,
+    default: () => ({})
   },
 });
 
@@ -427,6 +443,21 @@ useCommunicationDialogSync({
   isNewDialog: isNewDialogRef,
   showDefaultChannelTooltipWithTimer,
   clearDefaultChannelTooltip,
+});
+
+const {
+  emptyChannelsPlaceholderText,
+  shouldShowEmptyChannelsPlaceholder,
+} = useCommunicationPlaceholder({
+  showMenu,
+  activeChannelType,
+  emptyChannelsPlaceholder: computed(() => props.emptyChannelsPlaceholder ?? {}),
+  getAvailableChannels,
+  getChannelTypeFromId,
+  channels: channelsRef,
+  recentAttributeChannels: recentAttributeChannelsRef,
+  organizedContactAttributes,
+  showRecentAttribute,
 });
 
 // Computed properties

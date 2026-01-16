@@ -22,7 +22,7 @@ export type ChannelType = (typeof CHANNEL_TYPES)[number];
 /**
  * Базовое описание канала.
  */
-type Channel = {
+export type Channel = {
   channelId: string;
   title?: string;
   [key: string]: unknown;
