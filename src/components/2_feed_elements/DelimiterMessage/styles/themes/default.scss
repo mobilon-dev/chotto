@@ -3,15 +3,21 @@
   --chotto-delimitermessage-display: flex;
   --chotto-delimitermessage-align-items: center;
   --chotto-delimitermessage-justify-content: center;
-  --chotto-delimitermessage-width: 54%;
+  --chotto-delimitermessage-width: 100%;
   --chotto-delimitermessage-height: 26px;
   --chotto-delimitermessage-margin: 21px auto 21px auto;
-  --chotto-delimitermessage-border-bottom: 1px solid #D9D9D9;
+  --chotto-delimitermessage-line-height: 1px;
+  --chotto-delimitermessage-line-color: #D9D9D9;
+  --chotto-delimitermessage-transition-duration: 0.4s;
+  --chotto-delimitermessage-transition-timing: ease-out;
+  --chotto-delimitermessage-removing-transform-y: -10px;
 
   // DelimiterMessage text variables
   --chotto-delimitermessage-text-font-size: 14px;
   --chotto-delimitermessage-text-line-height: 1.5;
   --chotto-delimitermessage-text-align: center;
   --chotto-delimitermessage-text-color: #5F5F5F;
+  --chotto-delimitermessage-text-side-padding: 12px;
+  --chotto-delimitermessage-text-margin: 0;
 }
 

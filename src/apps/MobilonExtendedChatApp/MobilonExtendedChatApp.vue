@@ -193,6 +193,7 @@
                   @force-scroll-to-bottom="forceScrollToBottom"
                   @keyboard-action="keyboardAction"
                   @sms-invite="handleSmsInvite"
+                  @delimiter-read="handleDelimiterRead"
                 >
                   <template #empty-feed>
                     <SplashScreen>
@@ -855,6 +856,12 @@ const handleSmsInvite = () => {
   if (smsDialog) {
     selectChat({ chat: selectedChat.value, dialog: smsDialog });
   }
+}
+
+const handleDelimiterRead = (messageId) => {
+  // Здесь можно дернуть бэк (dataProvider/axios/eventor) и отметить delimiter прочитанным
+  // Удаляем delimiter сообщение из списка после прочтения
+  messages.value = messages.value.filter((msg) => msg.messageId !== messageId);
 }
 
 const searchMessages = (string) => {

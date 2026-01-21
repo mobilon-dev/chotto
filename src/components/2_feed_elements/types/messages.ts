@@ -178,7 +178,7 @@ export interface ISystemMessage {
 export interface IDelimiterMessage {
   messageId: string
   text: string
-  hasMessengerAccount?: boolean
+  autoRemove?: boolean
 }
 
 export interface ITextMessage {

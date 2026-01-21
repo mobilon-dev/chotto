@@ -14,8 +14,16 @@ export interface DelimiterMessageThemeCSSVariables {
   '--chotto-delimitermessage-height': string;
   /** Отступы контейнера разделителя */
   '--chotto-delimitermessage-margin': string;
-  /** Нижняя граница разделителя */
-  '--chotto-delimitermessage-border-bottom': string;
+  /** Толщина линий разделителя */
+  '--chotto-delimitermessage-line-height': string;
+  /** Цвет линий разделителя */
+  '--chotto-delimitermessage-line-color': string;
+  /** Длительность анимации перехода */
+  '--chotto-delimitermessage-transition-duration': string;
+  /** Функция плавности анимации перехода */
+  '--chotto-delimitermessage-transition-timing': string;
+  /** Смещение по Y при удалении */
+  '--chotto-delimitermessage-removing-transform-y': string;
 
   /** Размер шрифта текста разделителя */
   '--chotto-delimitermessage-text-font-size': string;
@@ -25,5 +33,9 @@ export interface DelimiterMessageThemeCSSVariables {
   '--chotto-delimitermessage-text-align': string;
   /** Цвет текста разделителя */
   '--chotto-delimitermessage-text-color': string;
+  /** Горизонтальный внутренний отступ текста */
+  '--chotto-delimitermessage-text-side-padding': string;
+  /** Внешний отступ текста */
+  '--chotto-delimitermessage-text-margin': string;
 }
 

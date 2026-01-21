@@ -36,6 +36,7 @@
         @action="messageAction"
         @reply="handleClickReplied"
         @sms-invite="handleSmsInvite(object)"
+        @read="handleDelimiterRead"
       />
     </div>
     <typing-message
@@ -240,6 +241,7 @@ const emit = defineEmits([
   'keyboardAction',
   'feedAction',
   'smsInvite',
+  'delimiterRead',
 ]);
 
 // Инициализация логики подгрузки сообщений
@@ -268,6 +270,10 @@ const {
 
 function handleSmsInvite(message: IFeedObject) {
   emit('smsInvite', message)
+}
+
+function handleDelimiterRead(messageId: string) {
+  emit('delimiterRead', messageId)
 }
 
 // Инициализация логики клавиатур

@@ -6,7 +6,35 @@
     width: var(--chotto-delimitermessage-width, 54%);
     height: var(--chotto-delimitermessage-height, 26px);
     margin: var(--chotto-delimitermessage-margin, 21px auto 21px auto);
-    border-bottom: var(--chotto-delimitermessage-border-bottom, 1px solid #D9D9D9);
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out), 
+                transform var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out), 
+                height var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out), 
+                margin var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out);
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1 1 auto;
+      height: var(--chotto-delimitermessage-line-height, 1px);
+      background-color: var(--chotto-delimitermessage-line-color, #D9D9D9);
+      transition: opacity var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out);
+    }
+
+    &--removing {
+      opacity: 0;
+      transform: translateY(var(--chotto-delimitermessage-removing-transform-y, -10px));
+      height: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      overflow: hidden;
+
+      &::before,
+      &::after {
+        opacity: 0;
+      }
+    }
   }
 
   &__text {
@@ -14,5 +42,7 @@
     line-height: var(--chotto-delimitermessage-text-line-height, 1.5);
     text-align: var(--chotto-delimitermessage-text-align, center);
     color: var(--chotto-delimitermessage-text-color, #5F5F5F);
+    padding: 0 var(--chotto-delimitermessage-text-side-padding, 12px);
+    margin: var(--chotto-delimitermessage-text-margin, 0);
   }
 }
