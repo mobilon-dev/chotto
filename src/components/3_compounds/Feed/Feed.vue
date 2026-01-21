@@ -9,6 +9,9 @@
     @mousedown="startScrollWatch"
     @mouseup="stopScrollWatch"
   >
+    <!-- Контент перед сообщениями -->
+    <slot name="prepend" />
+    
     <transition>
       <DateMessageSticky
         v-if="showStickyDate"
