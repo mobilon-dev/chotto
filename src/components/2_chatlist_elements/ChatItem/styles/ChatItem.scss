@@ -182,7 +182,7 @@
     display: var(--chotto-chatitem-unread-display, flex);
     justify-content: var(--chotto-chatitem-unread-justify, center);
     align-items: var(--chotto-chatitem-unread-align, center);
-    border-radius: var(--chotto-chatitem-unread-border-radius, 50%);
+    border-radius: var(--chotto-chatitem-unread-border-radius, 10px);
     min-width: var(--chotto-chatitem-unread-min-width, 20px);
     min-height: var(--chotto-chatitem-unread-min-height, 20px);
     max-height: var(--chotto-chatitem-unread-max-height, 20px);
