@@ -11,10 +11,19 @@
   >
     <!-- Контент перед сообщениями -->
     <slot name="prepend" />
-    
+    <div
+      v-show="isLoadingMore"
+      class="message-feed__loading"
+    >
+      <LoadingIndicator
+        :is-loading="isLoadingMore"
+        size="small"
+        position="top"
+      />
+    </div>
     <transition>
       <DateMessageSticky
-        v-if="showStickyDate"
+        v-if="showStickyDate && !isLoadingMore"
         class="message-feed__sticky-date"
         :text="stickyDateText"
       />
@@ -114,6 +123,7 @@ import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/Base
 import MessageKeyboard from '@/components/2_feed_elements/MessageKeyboard/MessageKeyboard.vue';
 import FeedKeyboard from '@/components/2_feed_elements/FeedKeyboard/FeedKeyboard.vue';
 import TypingMessage from '@/components/2_feed_elements/TypingMessage/TypingMessage.vue';
+import LoadingIndicator from '@/components/1_atoms/LoadingIndicator/LoadingIndicator.vue';
 
 import { IFeedObject, IFeedTyping, IFeedUnreadButton, IFeedKeyboard } from '@/types';
 import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo } from './composables';

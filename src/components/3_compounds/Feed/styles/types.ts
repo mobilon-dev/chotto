@@ -22,6 +22,9 @@ export interface FeedThemeCSSVariables {
   /** Позиционирование ленты сообщений */
   '--chotto-feed-position': string;
 
+  // Loading
+  '--chotto-feed-loading-margin': string;
+
   // Message
   /** Позиционирование сообщения */
   '--chotto-feed-message-position': string;
