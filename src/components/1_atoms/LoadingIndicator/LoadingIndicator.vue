@@ -1,11 +1,14 @@
 <template>
   <div 
     v-if="isLoading" 
-    class="messages-loading-indicator"
+    :class="[
+      'loading-indicator',
+      { 'loading-indicator--small': size === 'small' }
+    ]"
   >
     <svg
-      width="120px"
-      height="116px"
+      :width="svgWidth"
+      :height="svgHeight"
       viewBox="-8 -8 120 116"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -49,12 +52,27 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false
+  },
+  size: {
+    type: String,
+    default: 'normal',
+    validator: (value) => ['normal', 'small'].includes(value)
+  },
+  position: {
+    type: String,
+    default: 'center',
+    validator: (value) => ['center', 'top'].includes(value)
   }
 });
+
+const svgWidth = computed(() => props.size === 'small' ? '36px' : '120px');
+const svgHeight = computed(() => props.size === 'small' ? '35px' : '116px');
 </script>
 
 <style scoped lang="scss">

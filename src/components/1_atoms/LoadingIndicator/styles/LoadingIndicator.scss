@@ -1,4 +1,4 @@
-.messages-loading-indicator {
+.loading-indicator {
   position: var(--chotto-loadingindicator-position, absolute);
   top: var(--chotto-loadingindicator-top, 0);
   left: var(--chotto-loadingindicator-left, 0);
@@ -8,6 +8,13 @@
   align-items: var(--chotto-loadingindicator-align-items, center);
   justify-content: var(--chotto-loadingindicator-justify-content, center);
   z-index: var(--chotto-loadingindicator-z-index, 10);
+}
+
+.loading-indicator--small {
+  align-items: var(--chotto-loadingindicator-small-align-items, flex-start);
+  bottom: var(--chotto-loadingindicator-small-bottom, auto);
+  height: var(--chotto-loadingindicator-small-height, 36px);
+  margin: 10px 0;
 }
 
 .dot {
@@ -47,8 +54,3 @@
     stroke-width: var(--chotto-loadingindicator-pulse-stroke-width-max, 16); 
   }
 }
-
-
-
-
-

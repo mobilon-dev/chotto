@@ -10,6 +10,11 @@
   --chotto-loadingindicator-justify-content: center;
   --chotto-loadingindicator-z-index: 10;
 
+  // LoadingIndicator container small
+  --chotto-loadingindicator-small-align-items: flex-start;
+  --chotto-loadingindicator-small-bottom: auto;
+  --chotto-loadingindicator-small-height: 36px;
+
   // LoadingIndicator dots
   --chotto-loadingindicator-dot-stroke: #C9333C;
   --chotto-loadingindicator-dot-stroke-width: 13.36;
@@ -29,4 +34,3 @@
   --chotto-loadingindicator-pulse-stroke-width-min: 8;
   --chotto-loadingindicator-pulse-stroke-width-max: 16;
 }
-

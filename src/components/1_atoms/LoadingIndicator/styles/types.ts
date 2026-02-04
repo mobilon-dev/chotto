@@ -22,6 +22,14 @@ export interface LoadingIndicatorThemeCSSVariables {
   /** Z-index индикатора */
   '--chotto-loadingindicator-z-index': string;
 
+  // LoadingIndicator container small
+  /** Выравнивание элементов по вертикали */
+  '--chotto-loadingindicator-small-align-items': string;
+  /** Позиция индикатора снизу */
+  '--chotto-loadingindicator-small-bottom': string;
+  /** Высота индикатора */
+  '--chotto-loadingindicator-small-height': string;
+
   // LoadingIndicator dots
   /** Цвет обводки точек */
   '--chotto-loadingindicator-dot-stroke': string;
