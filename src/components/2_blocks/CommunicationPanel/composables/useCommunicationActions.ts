@@ -11,11 +11,6 @@ type Channel = {
 };
 
 /**
- * Тип информации о недавно использованном атрибуте для канала.
- */
-type RecentAttributeMap = Record<string, { channelId?: string } | undefined>;
-
-/**
  * Сигнатуры событий, которые эмитит панель.
  */
 interface CommunicationActionsEmit {
@@ -26,10 +21,8 @@ interface CommunicationActionsEmit {
 interface UseCommunicationActionsOptions {
   activeChannelType: Ref<string | null>;
   channels: ComputedRef<Channel[]>;
-  recentAttributeChannels: ComputedRef<RecentAttributeMap>;
   selectedChannel: Ref<Channel | Record<string, unknown>>;
   selectedChannelType: Ref<string | null>;
-  isRecentAttributeHovered: Ref<boolean>;
   hoveredAttribute: Ref<ContactAttribute | null>;
   closeMenu: () => void;
   hasMultipleChannels: (channelType: string) => boolean;
@@ -43,15 +36,13 @@ interface UseCommunicationActionsOptions {
 }
 
 /**
- * Инкапсулирует действия панели: звонок, выбор каналов, выбор атрибутов и работу с недавними атрибутами.
+ * Инкапсулирует действия панели: звонок, выбор каналов, выбор атрибутов.
  */
 export function useCommunicationActions({
   activeChannelType,
   channels,
-  recentAttributeChannels,
   selectedChannel,
   selectedChannelType,
-  isRecentAttributeHovered,
   hoveredAttribute,
   closeMenu,
   hasMultipleChannels,
@@ -97,56 +88,6 @@ export function useCommunicationActions({
   };
 
   /**
-   * Выбирает канал для недавнего атрибута, используя последний канал типа.
-   */
-  const selectChannelForRecentAttribute = (channelId: string, recentAttribute: ContactAttribute | null) => {
-    if (recentAttribute) {
-      emit('select-attribute-channel', {
-        attributeId: recentAttribute.id,
-        channelId,
-      });
-    }
-    selectedChannelType.value = activeChannelType.value;
-    selectedChannel.value = channels.value.find((ch) => ch.channelId === channelId) ?? {};
-    
-    if (isChannelEmpty(channelId) && isNewDialog.value) {
-      showDefaultChannelTooltipWithTimer();
-    } else {
-      clearDefaultChannelTooltip();
-    }
-    
-    closeMenu();
-  };
-
-  /**
-   * Обрабатывает клик по недавнему атрибуту.
-   */
-  const handleRecentAttributeClick = (recentAttributeValue: ContactAttribute | null) => {
-    const channelType = activeChannelType.value;
-    if (!channelType) {
-      return;
-    }
-
-    if (channelType === 'phone') {
-      handlePhoneCall(recentAttributeValue);
-      return;
-    }
-
-    if (!hasMultipleChannels(channelType)) {
-      const singleChannel = getSingleChannelForType(channelType);
-      if (recentAttributeValue && singleChannel) {
-        selectSingleChannel(recentAttributeValue, singleChannel.channelId);
-      }
-      return;
-    }
-
-    const recentChannelId = recentAttributeChannels.value[channelType]?.channelId;
-    if (recentAttributeValue && recentChannelId) {
-      selectChannelForRecentAttribute(recentChannelId, recentAttributeValue);
-    }
-  };
-
-  /**
    * Обрабатывает клик по атрибуту.
    */
   const handleAttributeClick = (attribute: ContactAttribute) => {
@@ -172,11 +113,6 @@ export function useCommunicationActions({
    * Выбор канала из подменю.
    */
   const selectChannel = (channelId: string) => {
-    if (isRecentAttributeHovered.value) {
-      selectChannelForRecentAttribute(channelId, hoveredAttribute.value ?? null);
-      return;
-    }
-
     if (hoveredAttribute.value) {
       emit('select-attribute-channel', {
         attributeId: hoveredAttribute.value.id,
@@ -207,10 +143,8 @@ export function useCommunicationActions({
 
   return {
     handlePhoneCall,
-    handleRecentAttributeClick,
     handleAttributeClick,
     selectSingleChannel,
-    selectChannelForRecentAttribute,
     selectChannel,
     availableChannels,
   };

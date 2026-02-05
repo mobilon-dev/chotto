@@ -102,11 +102,10 @@
                       <CommunicationPanel
                         :contact-attributes="selectedChat?.contact?.attributes"
                         :channels="toRaw(channels)"
-                        :recent-attribute-channels="recentAttributeChannels"
                         :selected-dialog="selectedDialog"
                         :channel-tooltips="channelTooltips"
                         :empty-channels-placeholder="emptyChannelsPlaceholder"
-                        :show-channel-icons="true"
+                        :show-channel-icons="false"
                         @select-attribute-channel="handleAttributeChannelSelect"
                         @phone-call="handlePhoneCall"
                       />

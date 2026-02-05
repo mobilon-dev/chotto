@@ -1,3 +1,5 @@
+export { default as CommunicationPanelCheckIcon } from './CommunicationPanelCheckIcon.vue';
+
 export { default as CommunicationPanelPhoneIcon } from './CommunicationPanelPhoneIcon.vue';
 export { default as CommunicationPanelWhatsAppIcon } from './CommunicationPanelWhatsAppIcon.vue';
 export { default as CommunicationPanelTelegramIcon } from './CommunicationPanelTelegramIcon.vue';

@@ -123,6 +123,10 @@
   --chotto-communicationpanel-attribute-value-font-weight: 500;
   --chotto-communicationpanel-attribute-value-font-size: inherit;
   --chotto-communicationpanel-attribute-value-line-height: normal;
+
+  --chotto-communicationpanel-attribute-selected-background: #f6f6f6;
+  --chotto-communicationpanel-attribute-selected-color: #1976d2;
+  --chotto-communicationpanel-attribute-selected-font-weight: 500;
   
   // Empty channels placeholder
   --chotto-communicationpanel-empty-placeholder-padding: 6px 16px;
@@ -136,8 +140,8 @@
   --chotto-communicationpanel-empty-placeholder-line-height: normal;
   
   --chotto-communicationpanel-attribute-info-display: flex;
-  --chotto-communicationpanel-attribute-info-flex-direction: column;
-  --chotto-communicationpanel-attribute-info-gap: 0;
+  --chotto-communicationpanel-attribute-info-flex-direction: row;
+  --chotto-communicationpanel-attribute-info-gap: 8px;
   --chotto-communicationpanel-attribute-info-flex: 1;
   --chotto-communicationpanel-menu-icon-display: flex;
   --chotto-communicationpanel-menu-icon-align-items: center;
@@ -176,6 +180,21 @@
   --chotto-communicationpanel-submenu-item-justify-content: space-between;
   --chotto-communicationpanel-submenu-item-color: #f5f5f5;
   --chotto-communicationpanel-submenu-item-hover-background: #737373;
+
+  --chotto-communicationpanel-selected-background: #f6f6f6;
+  --chotto-communicationpanel-selected-color: #1976d2;
+  --chotto-communicationpanel-selected-font-weight: 500;
+  --chotto-communicationpanel-selected-padding: 6px 12px;
+
+  --chotto-communicationpanel-selected-indicator-display: flex;
+  --chotto-communicationpanel-selected-indicator-align-items: center;
+  --chotto-communicationpanel-selected-indicator-justify-content: center;
+  --chotto-communicationpanel-selected-indicator-width: 18px;
+  --chotto-communicationpanel-selected-indicator-height: 18px;
+  --chotto-communicationpanel-selected-indicator-color: #1976d2;
+  --chotto-communicationpanel-selected-indicator-font-size: 16px;
+  --chotto-communicationpanel-selected-indicator-flex-shrink: 0;
+
   --chotto-communicationpanel-submenu-icon-display: flex;
   --chotto-communicationpanel-submenu-icon-align-items: center;
   --chotto-communicationpanel-submenu-icon-justify-content: center;

@@ -20,12 +20,8 @@ interface UseCommunicationPlaceholderOptions {
   getChannelTypeFromId: (channelId: string | null | undefined) => string | null;
   /** Реактивный список всех каналов */
   channels: MaybeRef<Channel[]>;
-  /** Реактивная карта недавних атрибутов по типам */
-  recentAttributeChannels: MaybeRef<Record<string, { channelId?: string }>>;
   /** Организованные атрибуты контакта по типам каналов */
   organizedContactAttributes: Ref<Record<string, ContactAttribute[]>>;
-  /** Флаг отображения недавнего атрибута */
-  showRecentAttribute: ComputedRef<boolean>;
 }
 
 /**
@@ -36,22 +32,10 @@ export function useCommunicationPlaceholder({
   activeChannelType,
   emptyChannelsPlaceholder,
   getAvailableChannels,
-  getChannelTypeFromId,
-  channels,
-  recentAttributeChannels,
   organizedContactAttributes,
-  showRecentAttribute,
 }: UseCommunicationPlaceholderOptions) {
   const emptyChannelsPlaceholderMap = computed(() => {
     return unref(emptyChannelsPlaceholder) ?? {};
-  });
-
-  const channelsList = computed(() => {
-    return unref(channels) ?? [];
-  });
-
-  const recentAttributeChannelsMap = computed(() => {
-    return unref(recentAttributeChannels) ?? {};
   });
 
   /**
@@ -87,33 +71,17 @@ export function useCommunicationPlaceholder({
     const attributesForType = organizedContactAttributes.value[activeChannelType.value];
     const hasNoAttributes = !attributesForType || attributesForType.length === 0;
     
-    // Проверяем наличие недавнего атрибута
-    const hasNoRecentAttribute = !showRecentAttribute.value;
-    
     // Показываем placeholder если:
     // 1. Нет каналов в системе для этого типа ИЛИ
     // 2. Есть каналы в системе, но у контакта нет атрибутов для этого типа
-    // (если нет атрибутов, то каналы бесполезны для этого контакта)
     if (hasNoChannelsInSystem) {
-      // Если нет каналов в системе, проверяем недавний атрибут с каналом
-      const recentChannelId = recentAttributeChannelsMap.value[activeChannelType.value]?.channelId;
-      if (recentChannelId) {
-        const recentChannel = channelsList.value.find(ch => ch.channelId === recentChannelId);
-        if (recentChannel) {
-          const recentChannelType = getChannelTypeFromId(recentChannelId);
-          // Если тип канала совпадает с активным типом, значит каналы есть
-          if (recentChannelType === activeChannelType.value) {
-            return false;
-          }
-        }
-      }
-      // Нет каналов в системе и нет валидного недавнего канала
+      // Нет каналов в системе
       return true;
     }
     
     // Если есть каналы в системе, но у контакта нет атрибутов для этого типа
     // показываем placeholder (каналы есть, но для этого контакта они недоступны)
-    if (hasNoAttributes && hasNoRecentAttribute) {
+    if (hasNoAttributes) {
       return true;
     }
     

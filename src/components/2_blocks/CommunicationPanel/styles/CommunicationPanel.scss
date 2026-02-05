@@ -140,7 +140,7 @@
   display: var(--chotto-communicationpanel-attribute-display, flex);
   justify-content: var(--chotto-communicationpanel-attribute-justify-content, space-between);
   align-items: var(--chotto-communicationpanel-attribute-align-items, center);
-  padding: var(--chotto-communicationpanel-attribute-padding, 6px 16px);
+  padding: var(--chotto-communicationpanel-attribute-padding, 6px 12px);
   cursor: var(--chotto-communicationpanel-attribute-cursor, pointer);
   transition: var(--chotto-communicationpanel-attribute-transition, background 0.2s ease);
   border-radius: var(--chotto-communicationpanel-attribute-border-radius, 0);
@@ -159,8 +159,8 @@
 
 .attribute-info {
   display: var(--chotto-communicationpanel-attribute-info-display, flex);
-  flex-direction: var(--chotto-communicationpanel-attribute-info-flex-direction, column);
-  gap: var(--chotto-communicationpanel-attribute-info-gap, 0);
+  flex-direction: var(--chotto-communicationpanel-attribute-info-flex-direction, row);
+  gap: var(--chotto-communicationpanel-attribute-info-gap, 8px);
   flex: var(--chotto-communicationpanel-attribute-info-flex, 1);
 }
 
@@ -169,6 +169,12 @@
   font-size: var(--chotto-communicationpanel-attribute-value-font-size, 14px);
   color: var(--chotto-communicationpanel-attribute-value-color, #262626);
   line-height: var(--chotto-communicationpanel-attribute-value-line-height, normal);
+}
+
+.attribute-item.selected {
+  background: var(--chotto-communicationpanel-attribute-selected-background, #f6f6f6);
+  color: var(--chotto-communicationpanel-attribute-selected-color, #1976d2);
+  font-weight: var(--chotto-communicationpanel-attribute-selected-font-weight, 500);
 }
 
 .channel-icon-small {
@@ -264,7 +270,7 @@
   cursor: var(--chotto-communicationpanel-submenu-item-cursor, pointer);
   transition: var(--chotto-communicationpanel-submenu-item-transition, background 0.2s ease);
   border-radius: var(--chotto-communicationpanel-submenu-item-border-radius, 4px);
-  gap: var(--chotto-communicationpanel-submenu-item-gap, 12px);
+  gap: var(--chotto-communicationpanel-submenu-item-gap, 8px);
   background: var(--chotto-communicationpanel-submenu-item-background, transparent);
   color: var(--chotto-communicationpanel-submenu-item-color, inherit);
   font-size: var(--chotto-communicationpanel-submenu-item-font-size, inherit);
@@ -275,6 +281,24 @@
   background: var(--chotto-communicationpanel-submenu-item-hover-background, #e5e5e5);
   color: var(--chotto-communicationpanel-submenu-item-hover-color, inherit);
   transform: var(--chotto-communicationpanel-submenu-item-hover-transform, none);
+}
+
+.sub-menu-item.selected {
+  background: var(--chotto-communicationpanel-selected-background, #f6f6f6);
+  color: var(--chotto-communicationpanel-selected-color, #1976d2);
+  font-weight: var(--chotto-communicationpanel-selected-font-weight, 500);
+  padding: var(--chotto-communicationpanel-selected-padding, 6px 12px);
+}
+
+.selected-indicator {
+  display: var(--chotto-communicationpanel-selected-indicator-display, flex);
+  align-items: var(--chotto-communicationpanel-selected-indicator-align-items, center);
+  justify-content: var(--chotto-communicationpanel-selected-indicator-justify-content, center);
+  width: var(--chotto-communicationpanel-selected-indicator-width, 18px);
+  height: var(--chotto-communicationpanel-selected-indicator-height, 18px);
+  color: var(--chotto-communicationpanel-selected-indicator-color, #1976d2);
+  font-size: var(--chotto-communicationpanel-selected-indicator-font-size, 16px);
+  flex-shrink: var(--chotto-communicationpanel-selected-indicator-flex-shrink, 0);
 }
 
 .sub-menu-icon {

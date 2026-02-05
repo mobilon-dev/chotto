@@ -55,69 +55,6 @@
       class="attributes-menu"
       :style="{ width: menuWidth }"
     >
-      <!-- Заголовок для списка контактов -->
-      <div 
-        v-if="showRecentAttribute && !shouldShowEmptyChannelsPlaceholder" 
-        class="menu-header"
-      >
-        Недавний
-      </div>
-
-      <!-- Недавний контакт (показываем только если не показываем placeholder) -->
-      <Tooltip
-        v-if="showRecentAttribute && !shouldShowEmptyChannelsPlaceholder && props.recentAttributeChannels[activeChannelType]?.tooltip"
-        :text="props.recentAttributeChannels[activeChannelType]?.tooltip"
-        position="bottom"
-        :offset="8"
-      >
-        <div
-          :class="['recent-attribute', { 
-            'frozen-hover': isRecentAttributeHovered 
-          }]"
-          @mouseenter="onRecentAttributeMouseEnter($event)"
-          @mouseleave="handleRecentAttributeMouseLeave"
-          @mouseover="resetRegularAttributeHover"
-          @click="handleRecentAttributeClick()"
-        >
-          <div class="attribute-info">
-            <span class="attribute-value">{{ recentAttribute?.value }}</span>
-          </div>
-          <span
-            v-if="showChannelIcons"
-            class="channel-icon-small"
-            :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
-          >
-            <component :is="getMenuChannelIconComponent(activeChannelType)" />
-          </span>
-        </div>
-      </Tooltip>
-      <div
-        v-else-if="showRecentAttribute && !shouldShowEmptyChannelsPlaceholder"
-        :class="['recent-attribute', { 
-          'frozen-hover': isRecentAttributeHovered 
-        }]"
-        @mouseenter="onRecentAttributeMouseEnter($event)"
-        @mouseleave="handleRecentAttributeMouseLeave"
-        @mouseover="resetRegularAttributeHover"
-        @click="handleRecentAttributeClick(recentAttribute)"
-      >
-        <div class="attribute-info">
-          <span class="attribute-value">{{ recentAttribute?.value }}</span>
-        </div>
-        <span
-          v-if="showChannelIcons"
-          class="channel-icon-small"
-          :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
-        >
-          <component :is="getMenuChannelIconComponent(activeChannelType)" />
-        </span>
-      </div>
-
-      <div 
-        v-if="showRecentAttribute && !shouldShowEmptyChannelsPlaceholder && organizedContactAttributes[activeChannelType]?.length && activeChannelType !== 'phone'" 
-        class="menu-divider"
-      />
-
       <!-- Placeholder когда нет каналов -->
       <div
         v-if="shouldShowEmptyChannelsPlaceholder"
@@ -132,13 +69,21 @@
           v-for="attribute in organizedContactAttributes[activeChannelType]"
           :key="attribute.attributeId"
           :class="['attribute-item', { 
-            'frozen-hover': isAttributeFrozen(attribute) 
+            'frozen-hover': isAttributeFrozen(attribute),
+            'selected': isAttributeSelected(attribute)
           }]"
           @mouseenter="onAttributeMouseEnter(attribute, $event)"
           @mouseleave="handleAttributeMouseLeave"
           @click="handleAttributeClick(attribute)"
         >
           <div class="attribute-info">
+            <!-- Галочка для выбранного атрибута -->
+            <span
+              v-if="isAttributeSelected(attribute)"
+              class="selected-indicator"
+            >
+              <CommunicationPanelCheckIcon />
+            </span>
             <span class="attribute-value">{{ attribute.value }}</span>
           </div>
           <span class="menu-icon">
@@ -173,8 +118,15 @@
           v-for="channel in availableChannels"
           :key="channel.channelId"
           class="sub-menu-item"
+          :class="{ 'selected': isChannelSelected(channel.channelId) }"
           @click="selectChannel(channel.channelId)"
         >
+          <span
+            v-if="isChannelSelected(channel.channelId)"
+            class="selected-indicator"
+          >
+            <CommunicationPanelCheckIcon />
+          </span>
           <span class="sub-menu-title">{{ channel.title || channel.channelId }}</span>
           <span
             v-if="showChannelIcons"
@@ -199,7 +151,7 @@ import { useCommunicationActions } from './composables/useCommunicationActions';
 import { useCommunicationSubMenu } from './composables/useCommunicationSubMenu';
 import { useCommunicationDialogSync } from './composables/useCommunicationDialogSync';
 import { useCommunicationPlaceholder } from './composables/useCommunicationPlaceholder';
-
+import { CommunicationPanelCheckIcon } from './icons';
 
 const props = defineProps({
   contactAttributes: {
@@ -211,11 +163,6 @@ const props = defineProps({
     type: Array,
     required: true,
     default: () => [],
-  },
-  recentAttributeChannels: {
-    type: Object,
-    required: true,
-    default: () => ({}),
   },
   selectedDialog: {
     type: Object,
@@ -259,11 +206,8 @@ const emit = defineEmits(['select-attribute-channel', 'phone-call']);
 // Refs
 const panelRef = ref(null);
 const channelsPanelRef = ref(null);
-/** @type {import('vue').Ref<import('./composables/useCommunicationAttributes').ContactAttribute | null>} */
 const hoveredAttribute = ref(null);
-/** @type {import('vue').Ref<import('./composables/useCommunicationAttributes').ContactAttribute | null>} */
 const frozenAttribute = ref(null);
-const isRecentAttributeHovered = ref(false);
 const selectedChannelType = ref(null);
 const selectedChannel = ref({});
 const showDefaultChannelTooltip = ref(false);
@@ -276,6 +220,22 @@ const messagesRef = computed(() => props.messages ?? []);
 const selectedChatRef = computed(() => props.selectedChat ?? null);
 const isNewDialogRef = computed(() => props.isNewDialog ?? false);
 
+// вычисляем currentChannelId из selectedDialog
+const currentChannelId = computed(() => props.selectedDialog?.channelId ?? null);
+
+// Обновляем функцию проверки выбранного канала
+const isChannelSelected = (channelId) => {
+  return currentChannelId.value === channelId;
+};
+
+// Получаем выбранный атрибут из selectedDialog
+const selectedAttributeId = computed(() => props.selectedDialog?.attributeId ?? null);
+
+// Проверяем, выбран ли атрибут
+const isAttributeSelected = (attribute) => {
+  return selectedAttributeId.value === attribute.id;
+};
+
 const {
   channelsTypes,
   getTooltipText,
@@ -283,7 +243,6 @@ const {
   hasMultipleChannels,
   isChannelActive,
   getSingleChannelForType,
-  getMenuChannelIconComponent,
   getMenuChannelIconComponentForChannelId,
   getSingleMenuChannelIconComponent,
   getAvailableChannels,
@@ -308,11 +267,9 @@ const {
   channelsPanelRef,
   selectedChannelType,
   frozenAttribute,
-  isRecentAttributeHovered,
 });
 
 const contactAttributesRef = computed(() => props.contactAttributes ?? []);
-const recentAttributeChannelsRef = computed(() => props.recentAttributeChannels ?? {});
 
 /**
  * Проверяет, пуст ли канал (нет несистемных сообщений).
@@ -377,28 +334,21 @@ const clearDefaultChannelTooltip = () => {
 const {
   organizedContactAttributes,
   organizeContactAttributes,
-  recentAttribute,
-  showRecentAttribute,
   isAttributeFrozen,
 } = useCommunicationAttributes({
   contactAttributes: contactAttributesRef,
-  recentAttributeChannels: recentAttributeChannelsRef,
-  activeChannelType,
   frozenAttribute,
 });
 
 const {
-  handleRecentAttributeClick: baseHandleRecentAttributeClick,
   handleAttributeClick,
   selectChannel,
   availableChannels: resolveAvailableChannels,
 } = useCommunicationActions({
   activeChannelType,
   channels: channelsRef,
-  recentAttributeChannels: recentAttributeChannelsRef,
   selectedChannel,
   selectedChannelType,
-  isRecentAttributeHovered,
   hoveredAttribute,
   closeMenu,
   hasMultipleChannels,
@@ -411,15 +361,8 @@ const {
   emit,
 });
 
-const handleRecentAttributeClick = () => {
-  baseHandleRecentAttributeClick(recentAttribute.value);
-};
-
 const {
   subMenuTop,
-  resetRegularAttributeHover,
-  handleRecentAttributeMouseEnter: baseHandleRecentAttributeMouseEnter,
-  handleRecentAttributeMouseLeave,
   handleAttributeMouseEnter: baseHandleAttributeMouseEnter,
   handleAttributeMouseLeave,
   keepSubMenuOpen,
@@ -430,7 +373,6 @@ const {
   showSubMenu,
   frozenAttribute,
   hoveredAttribute,
-  isRecentAttributeHovered,
   hasMultipleChannels,
 });
 
@@ -455,9 +397,7 @@ const {
   getAvailableChannels,
   getChannelTypeFromId,
   channels: channelsRef,
-  recentAttributeChannels: recentAttributeChannelsRef,
   organizedContactAttributes,
-  showRecentAttribute,
 });
 
 // Computed properties
@@ -473,16 +413,10 @@ const shouldShowSubMenu = computed(() =>
   hasMultipleChannels(activeChannelType.value)
 );
 
-// Обработчики действий и подменю реализованы в соответствующих composables
-const onRecentAttributeMouseEnter = (event) => {
-  const target = baseHandleRecentAttributeMouseEnter(event.currentTarget);
-  if (target instanceof HTMLElement) {
-    alignSubMenuWithTarget(panelRef, target);
-  }
-};
-
-const onAttributeMouseEnter = (attribute, event) => {
+const onAttributeMouseEnter = async (attribute, event) => {
   const target = baseHandleAttributeMouseEnter(attribute, event.currentTarget);
+  // Ждем обновления DOM
+  await nextTick();
   if (target instanceof HTMLElement) {
     alignSubMenuWithTarget(panelRef, target);
   }
@@ -490,6 +424,8 @@ const onAttributeMouseEnter = (attribute, event) => {
 
 // Watchers
 watch(() => props.selectedDialog, () => {
+  // Логика при изменении selectedDialog
+  // currentChannelId автоматически обновится через computed
 }, { deep: true });
 
 // Lifecycle

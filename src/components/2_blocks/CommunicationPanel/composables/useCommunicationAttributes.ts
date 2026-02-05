@@ -12,16 +12,6 @@ export type ContactAttribute = {
   [key: string]: unknown;
 };
 
-/**
- * Тип описания недавнего атрибута в пропсах.
- */
-export type RecentAttributeChannel = {
-  attributeId?: string;
-  channelId?: string;
-  tooltip?: string;
-  [key: string]: unknown;
-};
-
 type MaybeRef<T> = T | Ref<T> | ComputedRef<T>;
 
 /**
@@ -30,8 +20,6 @@ type MaybeRef<T> = T | Ref<T> | ComputedRef<T>;
 interface UseCommunicationAttributesOptions {
   /** Реактивный список контактных атрибутов */
   contactAttributes: MaybeRef<ContactAttribute[]>;
-  /** Реактивная карта недавних атрибутов по типам */
-  recentAttributeChannels: MaybeRef<Record<string, RecentAttributeChannel>>;
   /** Текущий активный тип канала */
   activeChannelType: Ref<string | null>;
   /** Текущий замороженный атрибут (подсвеченный) */
@@ -39,17 +27,13 @@ interface UseCommunicationAttributesOptions {
 }
 
 /**
- * Формирует структуру организованных атрибутов, вычисляет "последний" атрибут
- * для активного канала и предоставляет вспомогательные методы для панели коммуникаций.
+ * Формирует структуру организованных атрибутов.
  */
 export function useCommunicationAttributes({
   contactAttributes,
-  recentAttributeChannels,
-  activeChannelType,
   frozenAttribute,
 }: UseCommunicationAttributesOptions) {
   const contactAttributesList = computed(() => unref(contactAttributes) ?? []);
-  const recentAttributeChannelsMap = computed(() => unref(recentAttributeChannels) ?? {});
 
   const organizedContactAttributes = ref<Record<string, ContactAttribute[]>>(
     Object.fromEntries(CHANNEL_TYPES.map((type) => [type, []]))
@@ -96,41 +80,6 @@ export function useCommunicationAttributes({
   watch(contactAttributesList, organizeContactAttributes, { deep: true, immediate: true });
 
   /**
-   * Возвращает недавний атрибут для указанного типа канала.
-   */
-  const getRecentAttributeByType = (channelType: string) => {
-    const recentAttributeId = recentAttributeChannelsMap.value[channelType]?.attributeId;
-    if (!recentAttributeId) {
-      return null;
-    }
-    return contactAttributesList.value.find((attr) => attr.id?.includes(recentAttributeId)) ?? null;
-  };
-
-  /**
-   * Недавний атрибут для активного канала.
-   */
-  const recentAttribute = computed(() => {
-    const channelType = activeChannelType.value;
-    if (!channelType) {
-      return null;
-    }
-    return getRecentAttributeByType(channelType);
-  });
-
-  /**
-   * Флаг отображения блока "Недавний" для активного канала.
-   */
-  const showRecentAttribute = computed(() => {
-    const channelType = activeChannelType.value;
-    if (!channelType || channelType === 'phone') {
-      return false;
-    }
-    const recentAttr = recentAttribute.value;
-    const channelInfo = recentAttributeChannelsMap.value[channelType];
-    return Boolean(recentAttr && channelInfo?.channelId);
-  });
-
-  /**
    * Проверяет, совпадает ли атрибут с замороженным (подсвеченным).
    */
   const isAttributeFrozen = (attribute: ContactAttribute | null | undefined) => {
@@ -144,9 +93,6 @@ export function useCommunicationAttributes({
   return {
     organizedContactAttributes,
     organizeContactAttributes,
-    recentAttribute,
-    getRecentAttributeByType,
-    showRecentAttribute,
     isAttributeFrozen,
   };
 }

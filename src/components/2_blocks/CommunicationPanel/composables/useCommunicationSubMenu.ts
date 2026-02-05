@@ -6,7 +6,6 @@ interface UseCommunicationSubMenuOptions {
   showSubMenu: Ref<boolean>;
   frozenAttribute: Ref<ContactAttribute | null>;
   hoveredAttribute: Ref<ContactAttribute | null>;
-  isRecentAttributeHovered: Ref<boolean>;
   hasMultipleChannels: (channelType: string) => boolean;
 }
 
@@ -18,43 +17,9 @@ export function useCommunicationSubMenu({
   showSubMenu,
   frozenAttribute,
   hoveredAttribute,
-  isRecentAttributeHovered,
   hasMultipleChannels,
 }: UseCommunicationSubMenuOptions) {
   const subMenuTop = ref(0);
-
-  /**
-   * Сбрасывает состояния hover обычных атрибутов.
-   */
-  const resetRegularAttributeHover = () => {
-    showSubMenu.value = false;
-    frozenAttribute.value = null;
-    hoveredAttribute.value = null;
-  };
-
-  /**
-   * Обрабатывает наведение на недавний атрибут.
-   */
-  const handleRecentAttributeMouseEnter = (eventTarget: EventTarget | null) => {
-    const channelType = activeChannelType.value;
-    if (!channelType || !hasMultipleChannels(channelType)) {
-      return;
-    }
-
-    resetRegularAttributeHover();
-    isRecentAttributeHovered.value = true;
-    showSubMenu.value = true;
-    return eventTarget;
-  };
-
-  /**
-   * Обрабатывает уход курсора с недавнего атрибута.
-   */
-  const handleRecentAttributeMouseLeave = () => {
-    if (!showSubMenu.value) {
-      isRecentAttributeHovered.value = false;
-    }
-  };
 
   /**
    * Обрабатывает наведение на атрибут в списке.
@@ -65,7 +30,6 @@ export function useCommunicationSubMenu({
       return null;
     }
 
-    isRecentAttributeHovered.value = false;
     hoveredAttribute.value = attribute;
     showSubMenu.value = true;
     frozenAttribute.value = attribute;
@@ -94,7 +58,6 @@ export function useCommunicationSubMenu({
   const closeSubMenu = () => {
     showSubMenu.value = false;
     frozenAttribute.value = null;
-    isRecentAttributeHovered.value = false;
   };
 
   /**
@@ -141,9 +104,6 @@ export function useCommunicationSubMenu({
 
   return {
     subMenuTop,
-    resetRegularAttributeHover,
-    handleRecentAttributeMouseEnter,
-    handleRecentAttributeMouseLeave,
     handleAttributeMouseEnter,
     handleAttributeMouseLeave,
     keepSubMenuOpen,

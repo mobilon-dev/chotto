@@ -12,8 +12,6 @@ interface UseCommunicationMenuOptions {
   selectedChannelType: Ref<string | null>;
   /** Замороженный атрибут (для подсветки при наведении) */
   frozenAttribute: Ref<unknown>;
-  /** Флаг наведения на недавний атрибут */
-  isRecentAttributeHovered: Ref<boolean>;
 }
 
 /**
@@ -25,7 +23,6 @@ export function useCommunicationMenu({
   channelsPanelRef,
   selectedChannelType,
   frozenAttribute,
-  isRecentAttributeHovered,
 }: UseCommunicationMenuOptions) {
   /** Текущий активный тип канала */
   const activeChannelType = ref<string | null>(null);
@@ -54,7 +51,6 @@ export function useCommunicationMenu({
     showMenu.value = false;
     activeChannelType.value = null;
     frozenAttribute.value = null;
-    isRecentAttributeHovered.value = false;
     showSubMenu.value = false;
   };
 
@@ -73,7 +69,6 @@ export function useCommunicationMenu({
     showMenu.value = true;
     showSubMenu.value = false;
     frozenAttribute.value = null;
-    isRecentAttributeHovered.value = false;
     updateMenuWidth();
   };
 
