@@ -27,17 +27,27 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
   const isInitialized = ref(false);
 
   /**
-   * Мгновенно прокручивает контейнер в самый низ (без анимации).
-   * scrollBehavior = 'auto', чтобы при загрузке чата не было плавного «съезда» вниз.
+   * Мгновенно прокручивает контейнер в самый низ (без анимации),
+   * затем возвращает плавность прокрутки. Подходит для начальной
+   * установки позиции внизу при добавлении контента.
    */
   function performScrollToBottom(): void {
     nextTick(() => {
       const element = feedRef.value;
       if (!element) return;
-      const prevBehavior = (element.style as HTMLElement['style']).scrollBehavior;
+
       element.style.scrollBehavior = 'auto';
       element.scrollTop = element.scrollHeight;
-      element.style.scrollBehavior = prevBehavior || 'auto';
+
+      nextTick(() => {
+        if (element.scrollHeight - element.scrollTop - element.clientHeight > 10) {
+          element.scrollTop = element.scrollHeight;
+        }
+      });
+
+      setTimeout(() => {
+        element.style.scrollBehavior = 'smooth';
+      }, 1000);
     });
   }
 
@@ -68,20 +78,19 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
   }
 
   /**
-   * Первичная инициализация: сразу вниз, затем повтор после обновления DOM (nextTick + rAF),
-   * чтобы скролл оставался внизу, когда контент дорисуется.
+   * Выполняет первичную инициализацию скролла: если есть элементы,
+   * прокручивает вниз и делает дополнительные проверки. Запоминает
+   * факт инициализации в `isInitialized`.
    */
   function initializeScroll(): void {
     if (!isInitialized.value && objectsRef.value.length > 0) {
       performScrollToBottom();
-      nextTick().then(() => {
-        requestAnimationFrame(performScrollToBottom);
-      });
-      nextTick().then(() => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(performScrollToBottom);
-        });
-      });
+      setTimeout(() => {
+        ensureScrollToBottom();
+      }, 300);
+      setTimeout(() => {
+        ensureScrollToBottom();
+      }, 800);
       isInitialized.value = true;
     }
   }
@@ -99,15 +108,31 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
     });
   }
 
-  // При открытии чата (scrollToBottom = true) — сразу вниз, затем после отрисовки (nextTick + rAF).
+  // Реакция на внешний флаг «прокрутить вниз».
+  // При включении — выполняем серию прокруток и проверок,
+  // чтобы учесть асинхронные изменения DOM/высоты контейнера.
   watch(
     () => scrollToBottomRef.value,
     (val) => {
       if (val) {
         performScrollToBottom();
-        nextTick().then(() => {
-          requestAnimationFrame(performScrollToBottom);
-        });
+        setTimeout(() => {
+          ensureScrollToBottom();
+        }, 500);
+        setTimeout(() => {
+          ensureScrollToBottom();
+        }, 1200);
+      }
+    },
+    { immediate: true }
+  );
+
+  // Автоинициализация скролла при появлении объектов
+  watch(
+    () => objectsRef.value.length,
+    () => {
+      if (!isInitialized.value && objectsRef.value.length > 0) {
+        initializeScroll();
       }
     },
     { immediate: true }
@@ -121,4 +146,3 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
     smoothScrollToBottom,
   };
 }
-
