@@ -166,8 +166,19 @@
 .attribute-info {
   display: var(--chotto-communicationpanel-attribute-info-display, flex);
   flex-direction: var(--chotto-communicationpanel-attribute-info-flex-direction, row);
+  align-items: var(--chotto-communicationpanel-attribute-info-align-items, center);
   gap: var(--chotto-communicationpanel-attribute-info-gap, 8px);
   flex: var(--chotto-communicationpanel-attribute-info-flex, 1);
+}
+
+.attribute-indicator-slot {
+  display: var(--chotto-communicationpanel-attribute-indicator-slot-display, flex);
+  align-items: var(--chotto-communicationpanel-attribute-indicator-slot-align-items, center);
+  justify-content: var(--chotto-communicationpanel-attribute-indicator-slot-justify-content, center);
+  width: var(--chotto-communicationpanel-selected-indicator-width, 18px);
+  min-width: var(--chotto-communicationpanel-selected-indicator-width, 18px);
+  height: var(--chotto-communicationpanel-selected-indicator-height, 18px);
+  flex-shrink: var(--chotto-communicationpanel-attribute-indicator-slot-flex-shrink, 0);
 }
 
 .attribute-value {

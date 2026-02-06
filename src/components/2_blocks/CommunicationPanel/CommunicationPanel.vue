@@ -78,12 +78,13 @@
           @click="handleAttributeClick(attribute)"
         >
           <div class="attribute-info">
-            <!-- Галочка для выбранного атрибута -->
-            <span
-              v-if="isAttributeSelected(attribute)"
-              class="selected-indicator"
-            >
-              <CommunicationPanelCheckIcon />
+            <span class="attribute-indicator-slot">
+              <span
+                v-if="isAttributeSelected(attribute)"
+                class="selected-indicator"
+              >
+                <CommunicationPanelCheckIcon />
+              </span>
             </span>
             <span class="attribute-value">{{ attribute.value }}</span>
           </div>

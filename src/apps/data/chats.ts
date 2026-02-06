@@ -487,6 +487,12 @@ export const chats = [
           value: '@georgiy_zvonar',
         },
         {
+          id: 'atr_telegram_phone',
+          type: 'telegram',
+          data: { phone: '79135292926' },
+          value: '+79135292926',
+        },
+        {
           id: 'atr_max',
           type: 'max',
           data: '79135292926',

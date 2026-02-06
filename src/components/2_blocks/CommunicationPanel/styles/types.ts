@@ -255,6 +255,18 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-attribute-info-gap': string;
   /** Коэффициент роста информации атрибута */
   '--chotto-communicationpanel-attribute-info-flex': string;
+  /** Выравнивание по поперечной оси информации атрибута */
+  '--chotto-communicationpanel-attribute-info-align-items': string;
+
+  // Attribute indicator slot (слот под галку в пункте атрибута)
+  /** Отображение слота индикатора атрибута */
+  '--chotto-communicationpanel-attribute-indicator-slot-display': string;
+  /** Выравнивание по поперечной оси слота индикатора атрибута */
+  '--chotto-communicationpanel-attribute-indicator-slot-align-items': string;
+  /** Выравнивание по главной оси слота индикатора атрибута */
+  '--chotto-communicationpanel-attribute-indicator-slot-justify-content': string;
+  /** Сжатие слота индикатора атрибута */
+  '--chotto-communicationpanel-attribute-indicator-slot-flex-shrink': string;
 
   // Attribute value
   /** Жирность шрифта значения атрибута */
