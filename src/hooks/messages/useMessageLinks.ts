@@ -1,10 +1,9 @@
 /**
  * Composable для подготовки HTML с автоссылками, markdown-форматированием и обработчика открытия ссылок в новой вкладке
- * 
- * Предназначен для компонентов сообщений, где нужно безопасно и единообразно
- * преобразовывать обычный текст в кликабельные ссылки и обрабатывать клики по ним.
- * Использует markdown-it для парсинга markdown-форматирования и linkify-string для преобразования текста в HTML.
- * 
+ *
+ * Для простого текста без markdown используется быстрый путь (linkify-string), как в старой версии —
+ * без parseMarkdown и DOM walker, чтобы не замораживать UI при загрузке многих сообщений.
+ *
  * @example
  * import { useMessageLinks } from '@/hooks/messages'
  * const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
@@ -12,23 +11,38 @@
  */
 import { computed } from 'vue'
 import * as linkify from 'linkifyjs'
+import linkifyStr from 'linkify-string'
 import { parseMarkdown } from '@/functions/parseMarkdown'
 
+/** Признаки markdown/разметки — при отсутствии используем быстрый путь (только linkify) */
+function hasMarkdownOrFormatting(text: string): boolean {
+  return (
+    text.includes('**') ||
+    text.includes('`') ||
+    text.includes('~~') ||
+    text.includes('\n\n') ||
+    (text.includes('>') && text.trimStart().startsWith('>')) ||
+    /<\/(u|s|b|i)>|<(u|s|b|i)[\s>]/.test(text)
+  )
+}
+
 /**
- * Создает вычисляемое HTML-представление текста с markdown-форматированием, автоссылками и обработчик
- * открытия ссылок в новой вкладке
- * 
- * @param {() => string | undefined} getText - функция, возвращающая исходный текст
- * @returns {{ linkedHtml: import('vue').ComputedRef<string>, inNewWindow: (event: Event) => void }}
- *  - linkedHtml: вычисляемый HTML с markdown-форматированием и проставленными ссылками
- *  - inNewWindow: обработчик клика, открывающий ссылки в новой вкладке
+ * Создает вычисляемое HTML-представление текста с автоссылками и опционально markdown.
+ *
+ * @param getText - функция, возвращающая исходный текст
+ * @returns linkedHtml, inNewWindow
  */
 export const useMessageLinks = (getText: () => string | undefined) => {
   const linkedHtml = computed(() => {
     const text = getText()
     if (!text) return ''
-    
-    // Сначала парсим markdown в HTML
+
+    // Быстрый путь для простого текста без markdown (как в старой версии Feed) — без MarkdownIt и DOM
+    if (!hasMarkdownOrFormatting(text)) {
+      return linkifyStr(text)
+    }
+
+    // Полный путь: markdown + linkify по узлам
     const html = parseMarkdown(text)
     
     // Затем обрабатываем ссылки в HTML через DOM API linkifyjs

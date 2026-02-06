@@ -61,6 +61,7 @@
       />
 
       <MessageReactions
+        v-if="reactionsEnabled"
         :reactions="message.reactions"
         :message-id="message.messageId"
         :enabled="reactionsEnabled"
@@ -92,6 +93,7 @@
       </div>
 
       <MessageSmsInvite
+        v-if="showSmsInvite"
         :status="message.status"
         :has-messenger-account="message.hasMessengerAccount"
         :channel="channel"
@@ -196,6 +198,12 @@ function getClass(message: ITextMessage) {
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
 
 const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
+
+const showSmsInvite = computed(
+  () =>
+    props.message.status === 'error' &&
+    props.message.hasMessengerAccount === false
+)
 
 function handleSmsInvite() {
   emit('sms-invite', props.message)
