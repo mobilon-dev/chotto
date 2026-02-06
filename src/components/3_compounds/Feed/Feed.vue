@@ -320,7 +320,6 @@ const {
 const {
   isInitialized,
   performScrollToBottom,
-  ensureScrollToBottom,
   initializeScroll,
   smoothScrollToBottom,
 } = useFeedScroll({
@@ -375,13 +374,15 @@ const { restartObserving } = useFeedMessageVisibility<IFeedObject>({
   onMessageVisible: (message) => emit('messageVisible', message)
 })
 
-// Логика инициализации скролла при появлении объектов перенесена в useFeedScroll
-
-// Откладываем реакцию на смену списка в следующий кадр, чтобы не блокировать UI после тяжёлого ре-рендера
+// Один watch на смену списка: init scroll, сброс флагов, scrollTopCheck, observer.
+// Откладываем тяжёлую часть в rAF, чтобы не блокировать UI после ре-рендера.
 watch(
   () => props.objects,
   () => {
     nextTick(() => {
+      if (!isInitialized.value && props.objects.length > 0) {
+        initializeScroll()
+      }
       requestAnimationFrame(() => {
         resetAllowFlags()
         scrollTopCheck(false)
@@ -406,18 +407,18 @@ onMounted(() => {
       initializeScroll();
     }
     
-    // Наблюдатель за изменениями размера контента
+    // Наблюдатель за изменениями размера контента — скролл вниз через nextTick и rAF, без setTimeout
     const resizeObserver = new ResizeObserver(() => {
       if (props.scrollToBottom) {
-        // При изменении размера окна принудительно скроллим вниз
         performScrollToBottom();
-        setTimeout(() => {
-          ensureScrollToBottom();
-        }, 200);
-        // Дополнительная проверка для медленных чатов
-        setTimeout(() => {
-          ensureScrollToBottom();
-        }, 800);
+        nextTick().then(() => {
+          requestAnimationFrame(performScrollToBottom);
+        });
+        nextTick().then(() => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(performScrollToBottom);
+          });
+        });
       }
     });
     
