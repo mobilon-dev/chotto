@@ -656,40 +656,6 @@ const emptyChannelsPlaceholder = ref({
 const refContainer = ref()
 const refChatWrapper = ref()
 
-const recentAttributeChannels = computed(() => {
-  const dialogs = selectedChat.value?.dialogs || [];
-
-  // IMPORTANT: 'whatsapp' includes both of whatsapp and waba types
-  // 'telegram' includes both of telegram and telegrambot types
-  const recentAttributeChannels = {};
-
-  const whatsappDialogs = dialogs?.filter(
-    d => d.channelId?.includes('whatsapp') || d.channelId?.includes('waba')
-  ).toSorted((d1, d2) => d2['lastActivity.timestamp'] - d1['lastActivity.timestamp']);
-
-  const telegramDialogs = dialogs?.filter(
-    d => d.channelId?.includes('telegram') || d.channelId?.includes('telegrambot')
-  ).toSorted((d1, d2) => d2['lastActivity.timestamp'] - d1['lastActivity.timestamp']);
-
-  if (whatsappDialogs?.length) {
-    recentAttributeChannels['whatsapp'] = {
-      attributeId: whatsappDialogs[0]?.attributeId, 
-      channelId: whatsappDialogs[0]?.channelId,
-      tooltip: channels.value.find(ch => ch.channelId === whatsappDialogs[0]?.channelId)?.title,
-    };
-  }
-
-  if (telegramDialogs?.length) {
-    recentAttributeChannels['telegram'] = {
-      attributeId: telegramDialogs[0]?.attributeId, 
-      channelId: telegramDialogs[0]?.channelId,
-      tooltip: channels.value.find(ch => ch.channelId === telegramDialogs[0]?.channelId)?.title,
-    };
-  }
-
-  return recentAttributeChannels; 
-});
-
 // const commands = computed(() => {
 //   if (selectedChat.value && selectedChat.value.commands) return selectedChat.value.commands
 //   else return null
