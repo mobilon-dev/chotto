@@ -237,6 +237,12 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-attribute-hover-color': string;
   /** Трансформация элемента атрибута при наведении */
   '--chotto-communicationpanel-attribute-hover-transform': string;
+  /** Цвет фона выбранного элемента атрибута */
+  '--chotto-communicationpanel-attribute-selected-background': string;
+  /** Цвет выбранного элемента атрибута */
+  '--chotto-communicationpanel-attribute-selected-color': string;
+  /** Жирность шрифта выбранного элемента атрибута */
+  '--chotto-communicationpanel-attribute-selected-font-weight': string;
 
   // Attribute info
   /** Отображение информации атрибута */
@@ -417,6 +423,30 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-submenu-item-hover-color': string;
   /** Трансформация элемента подменю при наведении */
   '--chotto-communicationpanel-submenu-item-hover-transform': string;
+  /** Цвет фона выбранного элемента подменю */
+  '--chotto-communicationpanel-selected-background': string;
+  /** Цвет выбранного элемента подменю */
+  '--chotto-communicationpanel-selected-color': string;
+  /** Жирность шрифта выбранного элемента подменю */
+  '--chotto-communicationpanel-selected-font-weight': string;
+  /** Отступы выбранного элемента подменю */
+  '--chotto-communicationpanel-selected-padding': string;
+  /** Отображение индикатора выбранного элемента */
+  '--chotto-communicationpanel-selected-indicator-display': string;
+  /** Выравнивание по поперечной оси индикатора выбранного элемента */
+  '--chotto-communicationpanel-selected-indicator-align-items': string;
+  /** Выравнивание по главной оси индикатора выбранного элемента */
+  '--chotto-communicationpanel-selected-indicator-justify-content': string;
+  /** Ширина индикатора выбранного элемента */
+  '--chotto-communicationpanel-selected-indicator-width': string;
+  /** Высота индикатора выбранного элемента */
+  '--chotto-communicationpanel-selected-indicator-height': string;
+  /** Цвет индикатора выбранного элемента */
+  '--chotto-communicationpanel-selected-indicator-color': string;
+  /** Размер шрифта индикатора выбранного элемента */
+  '--chotto-communicationpanel-selected-indicator-font-size': string;
+  /** Сжатие индикатора выбранного элемента */
+  '--chotto-communicationpanel-selected-indicator-flex-shrink': string;
 
   // Sub menu icon
   /** Отображение иконки подменю */
