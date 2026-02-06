@@ -67,6 +67,8 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-btn-hover-color': string;
   /** Трансформация кнопки канала при наведении */
   '--chotto-communicationpanel-btn-hover-transform': string;
+  /** Радиус границы кнопки канала при наведении и при открытом меню */
+  '--chotto-communicationpanel-btn-hover-border-radius': string;
   /** Цвет активной кнопки канала */
   '--chotto-communicationpanel-btn-active-color': string;
   /** Цвет фона активной кнопки канала */

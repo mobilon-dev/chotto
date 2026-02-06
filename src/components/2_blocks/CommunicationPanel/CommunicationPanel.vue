@@ -14,7 +14,8 @@
         :class="['channel-btn', { 
           active: isChannelActive(channel.type),
           hover: hoveredChannel === channel.type && !isChannelActive(channel.type) || 
-            hoveredChannel === channel.type && isChannelActive(channel.type)
+            hoveredChannel === channel.type && isChannelActive(channel.type),
+          menuOpen: showMenu && activeChannelType === channel.type
         }]"
         @click="handleChannelClick(channel.type)"
         @mouseenter="hoveredChannel = channel.type"

@@ -59,12 +59,18 @@
   background: var(--chotto-communicationpanel-btn-hover-background, #F6F6F6);
   color: var(--chotto-communicationpanel-btn-hover-color, inherit);
   transform: var(--chotto-communicationpanel-btn-hover-transform, none);
+  border-radius: var(--chotto-communicationpanel-btn-hover-border-radius, 5px);
 }
 
 .channel-btn.active {
   color: var(--chotto-communicationpanel-btn-active-color, #007CFF);
   background: var(--chotto-communicationpanel-btn-active-background, transparent);
   font-weight: var(--chotto-communicationpanel-btn-active-font-weight, inherit);
+}
+
+.channel-btn.menuOpen {
+  background: var(--chotto-communicationpanel-btn-hover-background, #F6F6F6);
+  border-radius: var(--chotto-communicationpanel-btn-hover-border-radius, 5px);
 }
 
 .active-indicator {
@@ -226,6 +232,11 @@
 .attribute-item.frozen-hover,
 .recent-attribute.frozen-hover {
   background: var(--chotto-communicationpanel-attribute-hover-background, #e5e5e5);
+}
+
+.attribute-item.frozen-hover.selected,
+.recent-attribute.frozen-hover.selected {
+  background: var(--chotto-communicationpanel-attribute-selected-background, #F6F6F6);
 }
 
 .sub-menu {
