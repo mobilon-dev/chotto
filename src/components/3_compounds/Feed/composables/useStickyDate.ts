@@ -49,19 +49,12 @@ export function useStickyDate(options: UseStickyDateOptions) {
       return;
     }
 
-    try {
-      const obj = JSON.parse(topMost.id);
-      if (!obj || !obj.timestamp) {
-        onUpdate?.();
-        return;
-      }
-      const d = new Date(Number(obj.timestamp) * 1000);
-      stickyDateText.value = d.toLocaleDateString();
-      onUpdate?.();
-    } catch {
-      // ignore
-      onUpdate?.();
+    const ts = (topMost as HTMLElement).dataset?.timestamp ?? (topMost as HTMLElement).getAttribute?.('data-timestamp')
+    if (ts != null && ts !== '') {
+      const d = new Date(Number(ts) * 1000)
+      stickyDateText.value = d.toLocaleDateString()
     }
+    onUpdate?.()
   };
 
   const show = () => {

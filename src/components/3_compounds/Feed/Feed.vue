@@ -30,8 +30,9 @@
     </transition>
     <div
       v-for="(object, index) in groupedObjects"
-      :id="JSON.stringify(object)"
+      :id="'msg-' + (object.messageId ?? 'mid-' + index)"
       :key="object.messageId ?? 'mid-' + index"
+      :data-timestamp="getMessageTimestamp(object)"
       class="tracking-message"
       @dblclick="feedObjectDoubleClick($event,object)"
     >
@@ -231,6 +232,11 @@ const selectedChat = computed(() => {
   return unref(selectedChatInjected)
 })
 
+/** timestamp для sticky date (data-атрибут), т.к. в IFeedObject поле может быть не объявлено */
+function getMessageTimestamp(obj: IFeedObject & { timestamp?: number | string }): number | string | undefined {
+  return obj.timestamp
+}
+
 /**
  * Получает channelId для сообщения на основе его dialogId
  */
@@ -352,26 +358,36 @@ function scrollToBottomForce() {
 // наблюдение за props.scrollToBottom перенесено в useFeedScroll
 // Логика ответов перенесена в useFeedReply
 
+function getMessageById(id: string): IFeedObject | undefined {
+  const list = props.objects
+  if (id.startsWith('mid-')) {
+    const idx = parseInt(id.slice(4), 10)
+    return list[idx]
+  }
+  return list.find((m) => m.messageId === id)
+}
+
 const { restartObserving } = useFeedMessageVisibility<IFeedObject>({
   feedRef: refFeed,
   trackingObjects,
   chatAppId: chatAppId as string,
+  getMessageById,
   onMessageVisible: (message) => emit('messageVisible', message)
 })
 
 // Логика инициализации скролла при появлении объектов перенесена в useFeedScroll
 
+// Откладываем реакцию на смену списка в следующий кадр, чтобы не блокировать UI после тяжёлого ре-рендера
 watch(
   () => props.objects,
   () => {
     nextTick(() => {
-      // Сбрасываем флаги подгрузки
-      resetAllowFlags()
-      // Проверяем позицию без авто-триггера подгрузки, чтобы избежать цепной загрузки
-      scrollTopCheck(false)
-      // Обновляем наблюдаемые элементы и перезапускаем наблюдение
-      trackingObjects.value = document.querySelectorAll('.tracking-message')
-      restartObserving()
+      requestAnimationFrame(() => {
+        resetAllowFlags()
+        scrollTopCheck(false)
+        trackingObjects.value = document.querySelectorAll('.tracking-message')
+        restartObserving()
+      })
     })
   },
   { immediate: true }

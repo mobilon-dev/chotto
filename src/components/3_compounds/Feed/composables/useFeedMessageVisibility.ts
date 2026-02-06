@@ -4,6 +4,8 @@ interface UseFeedMessageVisibilityOptions<T = unknown> {
   feedRef: Ref<HTMLElement | null>;
   trackingObjects: Ref<NodeListOf<Element> | undefined>;
   chatAppId: string;
+  /** По id элемента (msg-{messageId} или msg-mid-{index}) возвращает сообщение — без JSON в DOM */
+  getMessageById: (id: string) => T | undefined;
   onMessageVisible: (message: T) => void;
 }
 
@@ -13,19 +15,18 @@ interface UseFeedMessageVisibilityOptions<T = unknown> {
 export function useFeedMessageVisibility<T = unknown>({
   trackingObjects,
   chatAppId,
+  getMessageById,
   onMessageVisible,
 }: UseFeedMessageVisibilityOptions<T>) {
   const callback = (entries: Array<IntersectionObserverEntry>) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        try {
-          const message = JSON.parse(entry.target.id) as unknown as T;
-          onMessageVisible(message);
-        } catch (error) {
-          console.error('Failed to parse message from IntersectionObserver:', error);
-        }
+        const rawId = entry.target.id
+        const id = rawId.startsWith('msg-') ? rawId.slice(4) : rawId
+        const message = getMessageById(id)
+        if (message) onMessageVisible(message)
       }
-    });
+    })
   };
 
   const options = {

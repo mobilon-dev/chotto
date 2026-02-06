@@ -56,32 +56,40 @@ export function useFeedLoadMore({ feedRef, emit, isLoadingMoreRef }: UseFeedLoad
   };
 
   /**
-   * Восстанавливает позицию скролла после подгрузки сообщений сверху
+   * Восстанавливает позицию скролла после подгрузки сообщений сверху.
+   * nextTick — ждём обновления DOM, requestAnimationFrame — скролл в следующем кадре (не блокируем UI).
    */
   const restoreScrollPosition = (delay: number = 0) => {
-    nextTick(() => {
-      setTimeout(() => {
-        try {
-          const feedEl = unref(feedRef);
-          if (!feedEl || !pendingTopRestore.value) return;
+    const doRestore = () => {
+      nextTick(() => {
+        requestAnimationFrame(() => {
+          try {
+            const feedEl = unref(feedRef);
+            if (!feedEl || !pendingTopRestore.value) return;
 
-          const prevBehavior = (feedEl.style as HTMLElement['style']).scrollBehavior;
-          feedEl.style.scrollBehavior = 'auto';
-          const delta = feedEl.scrollHeight - prevScrollHeight.value;
-          feedEl.scrollTop = prevScrollTop.value + delta;
+            const prevBehavior = (feedEl.style as HTMLElement['style']).scrollBehavior;
+            feedEl.style.scrollBehavior = 'auto';
+            const delta = feedEl.scrollHeight - prevScrollHeight.value;
+            feedEl.scrollTop = prevScrollTop.value + delta;
 
-          setTimeout(() => {
-            feedEl.style.scrollBehavior = prevBehavior || 'auto';
-          }, 50);
-        } finally {
-          pendingTopRestore.value = false;
-          topLoadJustHappened.value = true;
-          setTimeout(() => {
-            topLoadJustHappened.value = false;
-          }, 500);
-        }
-      }, delay);
-    });
+            setTimeout(() => {
+              feedEl.style.scrollBehavior = prevBehavior || 'auto';
+            }, 50);
+          } finally {
+            pendingTopRestore.value = false;
+            topLoadJustHappened.value = true;
+            setTimeout(() => {
+              topLoadJustHappened.value = false;
+            }, 500);
+          }
+        });
+      });
+    };
+    if (delay > 0) {
+      setTimeout(doRestore, delay);
+    } else {
+      doRestore();
+    }
   };
 
   // Авто-эмит событий загрузки при достижении краёв
