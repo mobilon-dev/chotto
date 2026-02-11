@@ -91,7 +91,7 @@
       >
         <div class="chat-list__placeholder">
           <p class="chat-list__placeholder-title">
-            Нет контактных данных, чтобы начать чат
+            {{ placeholderTitle }}
           </p>
           <p class="chat-list__placeholder-hint">
             {{ placeholderHint }}
@@ -207,6 +207,10 @@ const props = defineProps({
     type: String,
     default: 'hover',
     validator: (value) => ['hover', 'rightClick'].includes(value),
+  },
+  placeholderTitle: {
+    type: String,
+    default: 'Нет контактных данных, чтобы начать чат',
   },
   placeholderHint: {
     type: String,
