@@ -94,7 +94,7 @@
             Нет контактных данных, чтобы начать чат
           </p>
           <p class="chat-list__placeholder-hint">
-            Добавьте номер телефона или имя Telegram в карточку контакта
+            {{ placeholderHint }}
           </p>
         </div>
       </div>
@@ -207,6 +207,10 @@ const props = defineProps({
     type: String,
     default: 'hover',
     validator: (value) => ['hover', 'rightClick'].includes(value),
+  },
+  placeholderHint: {
+    type: String,
+    default: 'Добавьте номер телефона и Имя в карточку контакта',
   },
 });
 
