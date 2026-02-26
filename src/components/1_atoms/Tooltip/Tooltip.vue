@@ -94,6 +94,7 @@ const updatePosition = () => {
           'bottom': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left - correctLeft},
           'bottom-center': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left + (bounds.width / 2) - (tBounds.width / 2) - correctLeft},
           'top'   : {top: bounds.top - tBounds.height - props.offset - correctTop, left: bounds?.left - correctLeft},
+          'top-center': {top: bounds.top - tBounds.height - props.offset - correctTop, left: bounds?.left + (bounds.width / 2) - (tBounds.width / 2) - correctLeft},
           'bottom-left': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left + bounds.width - tBounds.width - correctLeft},
         }
         t.style.top = r[props.position].top + 'px'
@@ -141,6 +142,7 @@ const startAutoShow = () => {
         'bottom': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left - correctLeft},
         'bottom-center': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left + (bounds.width / 2) - (tBounds.width / 2) - correctLeft},
         'top'   : {top: bounds.top - tBounds.height - props.offset - correctTop, left: bounds?.left - correctLeft},
+        'top-center': {top: bounds.top - tBounds.height - props.offset - correctTop, left: bounds?.left + (bounds.width / 2) - (tBounds.width / 2) - correctLeft},
         'bottom-left': {top: bounds?.bottom - correctTop + props.offset, left: bounds?.left + bounds.width - tBounds.width - correctLeft},
       }
       t.style.top = r[props.position].top + 'px'

@@ -45,10 +45,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  /** Позиция тултипа: top | right | bottom | left | bottom-left | bottom-center */
+  /** Позиция тултипа: top | right | bottom | left | bottom-left | top-center */
   tooltipPosition: {
     type: String,
-    default: 'bottom-center',
+    default: 'top-center',
   },
   /** Отступ тултипа от элемента (px) */
   tooltipOffset: {
