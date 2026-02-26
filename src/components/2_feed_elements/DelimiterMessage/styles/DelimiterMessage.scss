@@ -1,4 +1,13 @@
 .delimiter-message {
+  /** Обёртка для Tooltip: заставляет wrapper занимать всю ширину, чтобы разделитель (54%) не съезжал */
+  &__tooltip-root {
+    width: 100%;
+
+    :deep(.tooltip-wrapper) {
+      width: 100%;
+    }
+  }
+
   &__container {
     display: var(--chotto-delimitermessage-display, flex);
     align-items: var(--chotto-delimitermessage-align-items, center);
@@ -12,15 +21,6 @@
                 transform var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out), 
                 height var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out), 
                 margin var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out);
-
-    &::before,
-    &::after {
-      content: '';
-      flex: 1 1 auto;
-      height: var(--chotto-delimitermessage-line-height, 1px);
-      background-color: var(--chotto-delimitermessage-line-color, #D9D9D9);
-      transition: opacity var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out);
-    }
 
     &--removing {
       opacity: 0;

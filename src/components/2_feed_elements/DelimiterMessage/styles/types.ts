@@ -14,10 +14,6 @@ export interface DelimiterMessageThemeCSSVariables {
   '--chotto-delimitermessage-height': string;
   /** Отступы контейнера разделителя */
   '--chotto-delimitermessage-margin': string;
-  /** Толщина линий разделителя */
-  '--chotto-delimitermessage-line-height': string;
-  /** Цвет линий разделителя */
-  '--chotto-delimitermessage-line-color': string;
   /** Длительность анимации перехода */
   '--chotto-delimitermessage-transition-duration': string;
   /** Функция плавности анимации перехода */

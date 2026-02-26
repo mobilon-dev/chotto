@@ -1,5 +1,24 @@
 <template>
-  <div 
+  <div v-if="effectiveTooltipText" class="delimiter-message__tooltip-root">
+    <Tooltip
+      :text="effectiveTooltipText"
+      :position="tooltipPosition"
+      :offset="tooltipOffset"
+      :delay="tooltipDelay"
+    >
+      <div
+        ref="containerRef"
+        class="delimiter-message__container"
+        :class="{ 'delimiter-message__container--removing': isRemoving }"
+      >
+        <p class="delimiter-message__text">
+          {{ message.text }}
+        </p>
+      </div>
+    </Tooltip>
+  </div>
+  <div
+    v-else
     ref="containerRef"
     class="delimiter-message__container"
     :class="{ 'delimiter-message__container--removing': isRemoving }"
@@ -12,15 +31,41 @@
 
 <script setup lang="ts">
 
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import { IDelimiterMessage } from '@types';
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 
 const props = defineProps({
   message: {
     type: Object as () => IDelimiterMessage,
     required: true,
   },
+  /** Текст подсказки при наведении. Если не передан — берётся из message.tooltipText */
+  tooltipText: {
+    type: String,
+    default: '',
+  },
+  /** Позиция тултипа: top | right | bottom | left | bottom-left | bottom-center */
+  tooltipPosition: {
+    type: String,
+    default: 'bottom-center',
+  },
+  /** Отступ тултипа от элемента (px) */
+  tooltipOffset: {
+    type: Number,
+    default: 8,
+  },
+  /** Задержка показа тултипа (ms) */
+  tooltipDelay: {
+    type: Number,
+    default: 100,
+  },
 });
+
+/** Текст тултипа: приоритет у пропа, иначе из message */
+const effectiveTooltipText = computed(() =>
+  props.tooltipText || props.message.tooltipText || ''
+);
 
 const emit = defineEmits<{
   read: [messageId: string]

@@ -24,6 +24,15 @@ const meta: Meta<typeof DelimiterMessage> = {
       control: 'object',
       description: 'Объект сообщения-разделителя',
     },
+    tooltipText: {
+      control: 'text',
+      description: 'Текст подсказки при наведении (если задан — разделитель оборачивается в Tooltip)',
+    },
+    tooltipPosition: {
+      control: 'select',
+      options: ['top', 'right', 'bottom', 'left', 'bottom-left'],
+      description: 'Позиция тултипа',
+    },
   },
   render: (args) => ({
     components: { BaseContainer, ThemeMode, DelimiterMessage },
@@ -39,7 +48,13 @@ const meta: Meta<typeof DelimiterMessage> = {
           <ThemeMode :themes="themesList" :show="true" />
         </div>
         <div style="min-width: 360px; max-width: 640px; padding: 40px 20px; background-color: var(--chotto-theme-secondary-color, #f5f5f5); border-radius: 8px;">
-          <DelimiterMessage :message="args.message" />
+          <DelimiterMessage
+            :message="args.message"
+            :tooltip-text="args.tooltipText"
+            :tooltip-position="args.tooltipPosition"
+            :tooltip-offset="args.tooltipOffset"
+            :tooltip-delay="args.tooltipDelay"
+          />
         </div>
       </BaseContainer>
     `,
@@ -55,6 +70,17 @@ export const Standard: Story = {
       messageId: 'delimiter-1',
       text: 'диалог WhatsApp - 10:08',
     },
+  },
+};
+
+export const WithTooltip: Story = {
+  args: {
+    message: {
+      messageId: 'delimiter-2',
+      text: 'диалог WhatsApp - 10:08',
+    },
+    tooltipText: 'Нажмите, чтобы скопировать время',
+    tooltipPosition: 'top',
   },
 };
 

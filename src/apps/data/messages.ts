@@ -1296,6 +1296,7 @@ export const messages = [
     type: "message.delimiter",
     text: "Канал связи изменен на Telegram с номером +7 (923) 123-00-97",
     timestamp: '1763036702',
+    tooltipText: "Подсказка при наведении на разделитель",
   },
   {
     chatId: 8,

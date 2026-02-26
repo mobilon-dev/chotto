@@ -179,6 +179,8 @@ export interface IDelimiterMessage {
   messageId: string
   text: string
   autoRemove?: boolean
+  /** Текст подсказки при наведении (передаётся в Tooltip) */
+  tooltipText?: string
 }
 
 export interface ITextMessage {
