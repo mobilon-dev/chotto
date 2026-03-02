@@ -1,9 +1,10 @@
 <template>
-  <div v-if="uploadStatus === 'uploading'">
-    <p>Загрузка файла...</p>
+  <div v-if="uploadStatus === 'uploading'" class="file-uploader__status file-uploader__status--uploading">
+    <span>Загрузка</span>
+    <span>файла...</span>
   </div>
-  <div v-else-if="uploadStatus === 'error'">
-    <p>Ошибка при загрузке файла.</p>
+  <div v-else-if="uploadStatus === 'error'" class="file-uploader__status file-uploader__status--error">
+    <span>Ошибка при загрузке файла.</span>
   </div>
   <!-- <ButtonContextMenu
     v-else-if="!getMessage().isRecording"
