@@ -1,4 +1,22 @@
 .audio-recorder {
+  &__status {
+    max-width: 140px;
+    font-size: 14px;
+    line-height: 1.3;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: left;
+
+    span {
+      display: inline;
+    }
+  }
+
   &__container {
     position: var(--chotto-audiorecorder-container-position, relative);
     display: var(--chotto-audiorecorder-container-display, grid);

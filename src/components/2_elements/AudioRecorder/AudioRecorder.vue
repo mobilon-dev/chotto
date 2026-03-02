@@ -3,8 +3,8 @@
     
     class="audio-recorder__container"
   >
-    <div v-if="uploadStatus === 'uploading'">
-      <p>Загрузка файла...</p>
+    <div v-if="uploadStatus === 'uploading'" class="audio-recorder__status">
+      <span>Загрузка файла...</span>
     </div>
     <div 
       v-if="audioRecording && uploadStatus != 'uploading'" 
