@@ -1,7 +1,7 @@
 .audio-recorder {
   &__status {
     max-width: 140px;
-    font-size: 14px;
+    font-size: var(--chotto-audiorecorder-status-font-size, 14px);
     line-height: 1.3;
     padding: 0;
     margin: 0;
