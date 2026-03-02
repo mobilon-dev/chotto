@@ -6,14 +6,23 @@
     @keyup.esc="emit('close')"
   >
     <div class="modal__container">
-      <button
-        class="modal__close-button"
-        @click="emit('close')"
-      >
-        <span>
-          <i class="pi pi-times" />
-        </span>
-      </button>
+      <div class="modal__header">
+        <div
+          v-if="title"
+          class="modal__caption"
+          :title="title"
+        >
+          {{ title }}
+        </div>
+        <button
+          class="modal__close-button"
+          @click="emit('close')"
+        >
+          <span>
+            <i class="pi pi-times" />
+          </span>
+        </button>
+      </div>
       <slot />
     </div>
   </div>
@@ -27,6 +36,11 @@ const props = defineProps({
     type: String,
     required: false,
     default: 'light'
+  },
+  title: {
+    type: String,
+    required: false,
+    default: undefined
   }
 })
 

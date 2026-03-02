@@ -94,6 +94,7 @@
         <ModalFullscreen
           v-if="isOpenModal"
           :theme="getTheme().theme ? getTheme().theme : ''"
+          :title="fileInfo.fileName"
           @close="closeModal"
         >
           <video

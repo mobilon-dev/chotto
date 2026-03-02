@@ -1,4 +1,33 @@
 .file-uploader {
+  &__status {
+    min-width: 60px;
+    max-width: 100%;
+    font-size: var(--chotto-fileuploader-status-font-size, 14px);
+    line-height: 1.3;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: left;
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    span {
+      display: block;
+    }
+
+    &--uploading {
+      width: var(--chotto-fileuploader-status-uploading-width, 75px);
+    }
+
+    &--error {
+      width: var(--chotto-fileuploader-status-error-width, 110px);
+    }
+  }
+
   &__trigger {
     padding: var(--chotto-fileuploader-trigger-padding, 1px 0 0 3px);
     display: var(--chotto-fileuploader-trigger-display, block);

@@ -176,6 +176,7 @@
         <ModalFullscreen
           v-if="isOpenModal"
           :data-theme="getTheme().theme ? getTheme().theme : 'light'"
+          :title="message.alt"
           @close="closeModal"
         >
           <img

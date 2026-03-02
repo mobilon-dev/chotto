@@ -41,14 +41,35 @@
     transition: var(--chotto-modalfullscreen-overlay-transition, opacity 0.3s ease);
   }
 
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    min-width: 0;
+  }
+
+  &__caption {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--chotto-theme-font-family, sans-serif);
+    font-size: var(--chotto-theme-additional-text-font-size, 13px);
+    font-weight: var(--chotto-theme-default-font-weight, 400);
+    color: var(--chotto-modalfullscreen-text-color, #1E1E1E);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   &__close-button {
+    flex-shrink: 0;
     display: var(--chotto-modalfullscreen-close-button-display, block);
     position: var(--chotto-modalfullscreen-close-button-position, relative);
     background-color: var(--chotto-modalfullscreen-close-button-bg, transparent);
     border: var(--chotto-modalfullscreen-close-button-border, none);
     border-radius: var(--chotto-modalfullscreen-close-button-border-radius, 4px);
     padding: var(--chotto-modalfullscreen-close-button-padding, 4px);
-    margin: var(--chotto-modalfullscreen-close-button-margin, 0 0 14px auto);
+    margin: var(--chotto-modalfullscreen-close-button-margin, 0 0 0 auto);
     cursor: var(--chotto-modalfullscreen-close-button-cursor, pointer);
     width: var(--chotto-modalfullscreen-close-button-width, auto);
     height: var(--chotto-modalfullscreen-close-button-height, auto);

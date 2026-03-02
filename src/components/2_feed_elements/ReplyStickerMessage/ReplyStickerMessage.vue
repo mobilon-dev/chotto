@@ -42,6 +42,7 @@
       <ModalFullscreen
         v-if="isOpenModal"
         :data-theme="getTheme().theme ? getTheme().theme : 'light'"
+        :title="message.alt"
         @close="closeModal"
       >
         <!-- TGS анимированные стикеры -->

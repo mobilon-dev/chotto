@@ -16,7 +16,9 @@
     v-if="uploadStatus === 'uploading'"
     class="video-recorder__container"
   >
-    <p>Загрузка файла...</p>
+    <div class="video-recorder__status">
+      <span>Загрузка файла...</span>
+    </div>
   </div>
   <teleport
     v-if="getMessage().file"
