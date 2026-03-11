@@ -69,6 +69,7 @@ const uploadStatus = ref("");
 const fileInput = ref<HTMLInputElement>();
 const fileInfo = ref<IFilePreview>()
 const triggerElement = ref<HTMLElement>()
+void triggerElement.value
 
 const chatAppId = inject('chatAppId')
 const { setMessageFile, resetMessageFile, getMessage, setRecordingMessage } = useMessageDraft(chatAppId as string)
@@ -135,6 +136,11 @@ const canUploadFile = computed(() => {
   return !getMessage().file;
 })
 
+const resetNativeFileInput = () => {
+  // Без сброса value браузер не всегда триггерит change при повторном выборе того же файла
+  if (fileInput.value) fileInput.value.value = '';
+};
+
 const resetSelectedFile = () => {
   const previewContainer = document.getElementById('chat-input-file-line-'+chatAppId)
   if (previewContainer){
@@ -143,13 +149,17 @@ const resetSelectedFile = () => {
   resetMessageFile()
   fileInfo.value = undefined
   uploadStatus.value = ""
+  resetNativeFileInput()
 };
 
 const onFileSelected = async () => {
+  const file = fileInput.value?.files?.[0]
+  // Сбрасываем предыдущее состояние (превью/драфт), но выбранный файл берём ДО сброса value инпута
   resetSelectedFile()
-  if (fileInput.value?.files) {
-    handleFileUpload(fileInput.value?.files[0])
+  if (file) {
+    await handleFileUpload(file)
   }
+  resetNativeFileInput()
 };
 
 // const triggerFileUpload = (action: Record<string, unknown>) => {
@@ -160,7 +170,8 @@ const onFileSelected = async () => {
 // };
 
 const triggerFileUploadDefault = () => {
-  if (fileInput.value && canUploadFile  && props.state == 'active') {
+  if (fileInput.value && canUploadFile.value && props.state == 'active') {
+    resetNativeFileInput()
     fileInput.value.click();
   }
 };
