@@ -66,42 +66,87 @@
 
       <!-- Все контакты (показываем только если есть каналы или атрибуты) -->
       <template v-if="!shouldShowEmptyChannelsPlaceholder">
-        <div
+        <template
           v-for="attribute in organizedContactAttributes[activeChannelType]"
           :key="attribute.attributeId"
-          :class="['attribute-item', { 
-            'frozen-hover': isAttributeFrozen(attribute),
-            'selected': isAttributeSelected(attribute)
-          }]"
-          @mouseenter="onAttributeMouseEnter(attribute, $event)"
-          @mouseleave="handleAttributeMouseLeave"
-          @click="handleAttributeClick(attribute)"
         >
-          <div class="attribute-info">
-            <span class="attribute-indicator-slot">
+          <Tooltip
+            v-if="hasAttributeTooltip(attribute)"
+            :text="getAttributeTooltipText(attribute)"
+            position="bottom-left"
+            :offset="8"
+          >
+            <div
+              :class="['attribute-item', {
+                'frozen-hover': isAttributeFrozen(attribute),
+                'selected': isAttributeSelected(attribute)
+              }]"
+              @mouseenter="onAttributeMouseEnter(attribute, $event)"
+              @mouseleave="handleAttributeMouseLeave"
+              @click="handleAttributeClick(attribute)"
+            >
+              <div class="attribute-info">
+                <span class="attribute-indicator-slot">
+                  <span
+                    v-if="isAttributeSelected(attribute)"
+                    class="selected-indicator"
+                  >
+                    <CommunicationPanelCheckIcon />
+                  </span>
+                </span>
+                <span class="attribute-value">{{ attribute.value }}</span>
+              </div>
+              <span class="menu-icon">
+                <span
+                  v-if="hasMultipleChannels(activeChannelType)"
+                  class="menu-icon-arrow"
+                />
+                <span
+                  v-else-if="showChannelIcons"
+                  class="channel-icon-small"
+                  :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
+                >
+                  <component :is="getSingleMenuChannelIconComponent(activeChannelType)" />
+                </span>
+              </span>
+            </div>
+          </Tooltip>
+          <div
+            v-else
+            :class="['attribute-item', {
+              'frozen-hover': isAttributeFrozen(attribute),
+              'selected': isAttributeSelected(attribute)
+            }]"
+            @mouseenter="onAttributeMouseEnter(attribute, $event)"
+            @mouseleave="handleAttributeMouseLeave"
+            @click="handleAttributeClick(attribute)"
+          >
+            <div class="attribute-info">
+              <span class="attribute-indicator-slot">
+                <span
+                  v-if="isAttributeSelected(attribute)"
+                  class="selected-indicator"
+                >
+                  <CommunicationPanelCheckIcon />
+                </span>
+              </span>
+              <span class="attribute-value">{{ attribute.value }}</span>
+            </div>
+            <span class="menu-icon">
               <span
-                v-if="isAttributeSelected(attribute)"
-                class="selected-indicator"
+                v-if="hasMultipleChannels(activeChannelType)"
+                class="menu-icon-arrow"
+              />
+              <span
+                v-else-if="showChannelIcons"
+                class="channel-icon-small"
+                :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
               >
-                <CommunicationPanelCheckIcon />
+                <component :is="getSingleMenuChannelIconComponent(activeChannelType)" />
               </span>
             </span>
-            <span class="attribute-value">{{ attribute.value }}</span>
           </div>
-          <span class="menu-icon">
-            <span
-              v-if="hasMultipleChannels(activeChannelType)"
-              class="menu-icon-arrow"
-            />
-            <span
-              v-else-if="showChannelIcons"
-              class="channel-icon-small"
-              :class="{ 'menu-icon-grey': activeChannelType !== 'sms' }"
-            >
-              <component :is="getSingleMenuChannelIconComponent(activeChannelType)" />
-            </span>
-          </span>
-        </div>
+        </template>
       </template>
 
       <!-- Второй уровень меню -->
@@ -176,6 +221,11 @@ const props = defineProps({
     required: false,
     default: () => ({})
   },
+  attributeTooltips: {
+    type: Object,
+    required: false,
+    default: () => ({})
+  },
   messages: {
     type: Array,
     required: false,
@@ -218,6 +268,7 @@ const channelTooltipRef = ref(null);
 
 const channelsRef = computed(() => props.channels ?? []);
 const channelTooltipsRef = computed(() => props.channelTooltips ?? {});
+const attributeTooltipsRef = computed(() => props.attributeTooltips ?? {});
 const messagesRef = computed(() => props.messages ?? []);
 const selectedChatRef = computed(() => props.selectedChat ?? null);
 const isNewDialogRef = computed(() => props.isNewDialog ?? false);
@@ -236,6 +287,28 @@ const selectedAttributeId = computed(() => props.selectedDialog?.attributeId ?? 
 // Проверяем, выбран ли атрибут
 const isAttributeSelected = (attribute) => {
   return selectedAttributeId.value === attribute.id;
+};
+
+const getAttributeTooltipText = (attribute) => {
+  const attributeTooltips = attributeTooltipsRef.value;
+  const attributeId = attribute?.attributeId ?? attribute?.id;
+
+  if (attributeId !== undefined && attributeId !== null) {
+    const tooltipById = attributeTooltips[String(attributeId)];
+    if (tooltipById) {
+      return tooltipById;
+    }
+  }
+
+  if (attribute?.value) {
+    return attributeTooltips[String(attribute.value)] ?? '';
+  }
+
+  return '';
+};
+
+const hasAttributeTooltip = (attribute) => {
+  return Boolean(getAttributeTooltipText(attribute));
 };
 
 const {

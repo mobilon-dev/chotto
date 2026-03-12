@@ -104,6 +104,7 @@
                         :channels="toRaw(channels)"
                         :selected-dialog="selectedDialog"
                         :channel-tooltips="channelTooltips"
+                        :attribute-tooltips="attributeTooltips"
                         :empty-channels-placeholder="emptyChannelsPlaceholder"
                         :show-channel-icons="false"
                         @select-attribute-channel="handleAttributeChannelSelect"
@@ -642,6 +643,15 @@ const channelTooltips = ref({
   whatsapp: 'Выберите контакт и канал для отправки сообщения',
   telegram: 'Выберите контакт и канал для отправки сообщения',
   max: 'Выберите контакт и канал для отправки сообщения'
+})
+
+// Пример текстов тултипов для атрибутов в CommunicationPanel
+// Ключи: attributeId / id (приоритетно), fallback - значение attribute.value
+const attributeTooltips = ref({
+  '170': 'Основной номер клиента',
+  '171': 'Дополнительный номер для связи',
+  '79135292926': 'Проверенный номер контакта',
+  '73910001100': 'Проверенный номер контакта'
 })
 
 // Тексты placeholder для пустых каналов в панели CommunicationPanel
