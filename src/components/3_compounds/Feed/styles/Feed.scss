@@ -41,7 +41,7 @@
     width: 46px;
     height: 46px;
 
-    border-radius: 50%;
+    border-radius: var(--chotto-feed-button-down-border-radius, 50%);
     display: flex;
     justify-content: center;
     align-items: center;
