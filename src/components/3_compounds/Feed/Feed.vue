@@ -1,75 +1,94 @@
 <template>
-  <div
-    v-if="objects.length > 0 || typing"
-    :id="'feed-container-' + chatAppId"
-    ref="refFeed"
-    class="message-feed"
-    :style="{ backgroundImage: `url(${defaultBackground})` }"
-    @scroll="throttledScrollTopCheck()"
-    @mousedown="startScrollWatch"
-    @mouseup="stopScrollWatch"
-  >
-    <!-- Контент перед сообщениями -->
-    <slot name="prepend" />
+  <div class="message-feed-wrapper">
     <div
-      v-show="isLoadingMore"
-      class="message-feed__loading"
+      v-if="objects.length > 0 || typing"
+      :id="'feed-container-' + chatAppId"
+      ref="refFeed"
+      class="message-feed"
+      :style="{ backgroundImage: `url(${defaultBackground})` }"
+      @scroll="throttledScrollTopCheck()"
+      @mousedown="startScrollWatch"
+      @mouseup="stopScrollWatch"
     >
-      <LoadingIndicator
-        :is-loading="isLoadingMore"
-        size="small"
-        position="top"
-      />
-    </div>
-    <transition>
-      <DateMessageSticky
-        v-if="showStickyDate && !isLoadingMore"
-        class="message-feed__sticky-date"
-        :text="stickyDateText"
-      />
-    </transition>
-    <div
-      v-for="(object, index) in groupedObjects"
-      :id="'msg-' + (object.messageId ?? 'mid-' + index)"
-      :key="object.messageId ?? 'mid-' + index"
-      :data-timestamp="getMessageTimestamp(object)"
-      class="tracking-message"
-      @dblclick="feedObjectDoubleClick($event,object)"
-    >
-      <component
-        :is="componentsMap(object.type)"
+      <!-- Контент перед сообщениями -->
+      <slot name="prepend" />
+      <div
+        v-show="isLoadingMore"
+        class="message-feed__loading"
+      >
+        <LoadingIndicator
+          :is-loading="isLoadingMore"
+          size="small"
+          position="top"
+        />
+      </div>
+      <transition>
+        <DateMessageSticky
+          v-if="showStickyDate && !isLoadingMore"
+          class="message-feed__sticky-date"
+          :text="stickyDateText"
+        />
+      </transition>
+      <div
+        v-for="(object, index) in groupedObjects"
+        :id="'msg-' + (object.messageId ?? 'mid-' + index)"
         :key="object.messageId ?? 'mid-' + index"
-        class="message-feed__message"
-        :message="object"
-        :apply-style="applyStyle"
-        :is-first-in-series="object.isFirstInSeries"
-        :reactions-enabled="reactionsEnabled"
-        :subtext-tooltip-data="subtextTooltipData"
-        :channel="getChannelForMessage(object)"
-        @action="messageAction"
-        @reply="handleClickReplied"
-        @sms-invite="handleSmsInvite(object)"
-        @read="handleDelimiterRead"
+        :data-timestamp="getMessageTimestamp(object)"
+        class="tracking-message"
+        @dblclick="feedObjectDoubleClick($event,object)"
+      >
+        <component
+          :is="componentsMap(object.type)"
+          :key="object.messageId ?? 'mid-' + index"
+          class="message-feed__message"
+          :message="object"
+          :apply-style="applyStyle"
+          :is-first-in-series="object.isFirstInSeries"
+          :reactions-enabled="reactionsEnabled"
+          :subtext-tooltip-data="subtextTooltipData"
+          :channel="getChannelForMessage(object)"
+          @action="messageAction"
+          @reply="handleClickReplied"
+          @sms-invite="handleSmsInvite(object)"
+          @read="handleDelimiterRead"
+        />
+      </div>
+      <typing-message
+        v-if="typing"
+        :message="{
+          subText: (typing as IFeedTyping).title,
+          avatar: (typing as IFeedTyping).avatar,
+        }"
+      />
+      <Transition>
+        <MessageKeyboard
+          v-if="showKeyboard"
+          ref="keyboardRef"
+          class="message-feed__keyboard"
+          :keyboard="objects[objects.length - 1].keyboard!"
+          :align="keyboardAlign"
+          @action="keyboardAction"
+        />
+      </Transition>
+      
+      <FeedKeyboard
+        v-if="feedKeyboards && feedKeyboards.length > 0"
+        :buttons="feedKeyboards"
+        :align="feedKeyboardAlign"
+        @action="feedKeyboardAction"
       />
     </div>
-    <typing-message
-      v-if="typing"
-      :message="{
-        subText: (typing as IFeedTyping).title,
-        avatar: (typing as IFeedTyping).avatar,
-      }"
-    />
-    <Transition>
-      <MessageKeyboard
-        v-if="showKeyboard"
-        ref="keyboardRef"
-        class="message-feed__keyboard"
-        :keyboard="objects[objects.length - 1].keyboard!"
-        :align="keyboardAlign"
-        @action="keyboardAction"
-      />
-    </Transition>
-    
+    <div 
+      v-else
+      ref="refFeed"
+      class="message-feed"
+      :style="{ backgroundImage: `url(${defaultBackground})` }"
+    >
+      <div style="margin: auto;">
+        <slot name="empty-feed" />
+      </div>
+    </div>
+
     <transition>
       <button
         v-if="isShowButton"
@@ -85,33 +104,18 @@
         <span class="pi pi-angle-down message-feed__icon-down" />
       </button>
     </transition>
-    <FeedKeyboard
-      v-if="feedKeyboards && feedKeyboards.length > 0"
-      :buttons="feedKeyboards"
-      :align="feedKeyboardAlign"
-      @action="feedKeyboardAction"
-    />
+
+    <teleport
+      v-if="getMessage().reply"
+      :to="'#chat-input-reply-line-'+chatAppId"
+    >
+      <BaseReplyMessage
+        class="chat-input-reply"
+        :message="getMessage().reply"
+        @reset="handleResetReply"
+      />
+    </teleport>
   </div>
-  <div 
-    v-else
-    ref="refFeed"
-    class="message-feed"
-    :style="{ backgroundImage: `url(${defaultBackground})` }"
-  >
-    <div style="margin: auto;">
-      <slot name="empty-feed" />
-    </div>
-  </div>
-  <teleport
-    v-if="getMessage().reply"
-    :to="'#chat-input-reply-line-'+chatAppId"
-  >
-    <BaseReplyMessage
-      class="chat-input-reply"
-      :message="getMessage().reply"
-      @reset="handleResetReply"
-    />
-  </teleport>
 </template>
 
 <script
