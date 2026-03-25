@@ -99,16 +99,29 @@
       class="sidebar__settings-container"
     >
       <ButtonContextMenu
+        v-if="settingsButtonMode === 'menu'"
         :actions="menuActions"
         mode="click"
         menu-side="top-right"
         @click="handleMenuAction"
         @button-click="handleButtonClick"
       >
-        <button class="sidebar__settings-btn">
+        <button
+          class="sidebar__settings-btn"
+          type="button"
+        >
           <SettingsIcon />
         </button>
       </ButtonContextMenu>
+
+      <button
+        v-else
+        class="sidebar__settings-btn"
+        type="button"
+        @click="handleSettingsImmediateClick"
+      >
+        <SettingsIcon />
+      </button>
     </div>
   </div>
 </template>
@@ -139,13 +152,18 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: true,
+  },
+  settingsButtonMode: {
+    type: String,
+    required: false,
+    default: 'menu', // 'menu' | 'action'
   }
 });
 
 const items = toRef(props, 'sidebarItems');
 const menuActions = toRef(props, 'menuActions');
 
-const emit = defineEmits(["selectItem"]);
+const emit = defineEmits(["selectItem", "settingsClick"]);
 
 const fixedItems = computed(() => 
   items.value
@@ -183,6 +201,14 @@ const handleMenuAction = (action) => {
 
 const handleButtonClick = () => {
   console.log('Кнопка меню была нажата');
+};
+
+const handleSettingsImmediateClick = () => {
+  emit('settingsClick');
+  const first = menuActions.value?.[0];
+  if (first && typeof first.action === 'function' && !first.disabled) {
+    first.action();
+  }
 };
 
 const containerRef = ref(null);

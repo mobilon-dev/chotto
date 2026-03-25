@@ -11,6 +11,7 @@
             :show-settings="true"
             :sidebar-items="sidebarItems"
             :menu-actions="menuActions"
+            :settings-button-mode="'action'"
             @select-item="selectItem"
           />
           <ThemeMode
@@ -720,6 +721,13 @@ const handlePhoneCall = (data) => {
 const selectItem = (item) => {
   console.log("selected sidebar item", item);
 };
+
+// когда выбран режим :settings-button-mode="'action'", то вызывается эта функция (либо первый пункт из menuActions) при нажатии на кнопку settings в Sidebar
+// @settings-click="onSettingsClick"
+
+// const onSettingsClick = () => {
+//   console.log('settings button clicked (SideBar action mode)');
+// };
 
 const loadMoreChats = () => {
   console.log('load more chats')
