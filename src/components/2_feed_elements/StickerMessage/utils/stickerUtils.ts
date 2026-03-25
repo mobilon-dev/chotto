@@ -43,3 +43,14 @@ export function isAnimatedSticker(url?: string, isAnimated?: boolean): boolean {
   return false;
 }
 
+/**
+ * Определяет, является ли стикер webm-видео.
+ * Используем проверку по расширению в URL, так как url может содержать query/hashes.
+ */
+export function isWebmSticker(url?: string): boolean {
+  if (!url) return false;
+  const urlString = String(url);
+  const urlLower = urlString.toLowerCase();
+  return urlLower.includes('.webm');
+}
+

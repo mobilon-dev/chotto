@@ -51,6 +51,18 @@
           loop
           mode="normal"
         />
+        <!-- Нестатические стикеры (webm и прочее) -->
+        <video
+          v-else-if="shouldTryVideo && !videoFailed"
+          class="sticker-message__preview-image"
+          :src="message.url"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          @error="videoFailed = true"
+        />
         <!-- WebP и другие статические стикеры -->
         <img
           v-else
@@ -123,10 +135,12 @@
         v-if="message.text"
         class="sticker-message__text-container"
       >
+        <!-- eslint-disable vue/no-v-html -->
         <p
           @click="inNewWindow"
           v-html="linkedHtml"
         />
+        <!-- eslint-enable vue/no-v-html -->
       </div>
 
       <MessageSmsInvite
@@ -175,6 +189,18 @@
             autoplay
             loop
             mode="normal"
+          />
+          <!-- Нестатические стикеры (webm и прочее) -->
+          <video
+            v-else-if="shouldTryVideo && !videoFailed"
+            class="sticker-message__modal-image"
+            :src="message.url"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="metadata"
+            @error="videoFailed = true"
           />
           <!-- WebP и другие статические стикеры -->
           <img
@@ -295,6 +321,27 @@ const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
 const isTgsFile = computed(() => {
   return isAnimatedSticker(props.message.url, props.message.isAnimated);
 });
+
+const videoFailed = ref(false);
+
+// Пытаемся рендерить как видео, если это не TGS и URL не выглядит как статическая картинка.
+// Если браузер не сможет распарсить (например, это webp/jpg без extension), ловим `error` и откатываемся на <img>.
+const shouldTryVideo = computed(() => {
+  if (isTgsFile.value) return false;
+  const urlLower = String(props.message.url || '').toLowerCase();
+
+  // Явные "картинки" - не трогаем, сразу показываем <img>
+  const looksLikeImage = /\.(webp|png|jpe?g|gif|bmp|svg)(\?|#|$)/.test(urlLower);
+  return !looksLikeImage;
+});
+
+watch(
+  () => props.message.url,
+  () => {
+    videoFailed.value = false;
+  },
+  { immediate: true },
+);
 
 // Загружаем библиотеки TGS при необходимости
 watch(isTgsFile, (needsTgs) => {
