@@ -488,7 +488,7 @@ const callDirectionPreposition = computed(() => {
     case 'incoming':
       return 'к'
     case 'outgoing':
-      return 'от'
+      return 'на'
     default:
       return 'к'
   }
