@@ -68,6 +68,8 @@ export interface IAudioMessage {
   position: string
   time: string
   url: string
+  /** Длительность: секунды (число) или строка MM:SS / H:MM:SS */
+  duration?: string | number
   status: string
   statusMsg?: string
   avatar?: string

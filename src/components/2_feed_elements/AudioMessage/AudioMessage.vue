@@ -46,8 +46,12 @@
       <div class="audio-message__audio-container">
         <audio
           ref="player"
-          :src="message.url"
+          :src="lazyAudioSrc"
           type="audio/webm"
+          @loadedmetadata="handleLoadedMetadata"
+          @timeupdate="handleTimeUpdate"
+          @ended="handleEnded"
+          @error="handleAudioError"
         />
         <button
           v-show="!isPlaying"
@@ -262,7 +266,7 @@
   setup
   lang="ts"
 >
-import { ref, onMounted, computed, watch, inject } from 'vue'
+import { ref, computed, watch, inject, nextTick } from 'vue'
 
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import LinkPreview from '@/components/1_atoms/LinkPreview/LinkPreview.vue';
@@ -342,11 +346,70 @@ const cycleSpeed = () => {
 
 const emit = defineEmits(['action','reply','sms-invite']);
 
-const player = ref<HTMLAudioElement | null>();
-const isPlaying = ref(false);
-const audioDuration = ref(0);
-const currentTime = ref(0);
-const isSeeking = ref(false); // Флаг для предотвращения циклических обновлений
+const player = ref<HTMLAudioElement | null>(null)
+const lazyAudioSrc = ref<string | undefined>(undefined)
+const isPlaying = ref(false)
+const audioDuration = ref(0)
+const currentTime = ref(0)
+const isSeeking = ref(false)
+
+const parseMessageDurationToSeconds = (value?: string | number): number | undefined => {
+  if (value === undefined || value === null) return undefined
+  if (typeof value === 'number') {
+    if (!Number.isFinite(value) || value < 0) return undefined
+    return Math.floor(value)
+  }
+  const trimmed = String(value).trim()
+  if (!trimmed) return undefined
+  if (/^\d+$/.test(trimmed)) {
+    const n = Number(trimmed)
+    return Number.isFinite(n) && n >= 0 ? Math.floor(n) : undefined
+  }
+  const hms = trimmed.match(/^(\d+):([0-5]\d):([0-5]\d)$/)
+  if (hms) {
+    const h = Number(hms[1])
+    const m = Number(hms[2])
+    const s = Number(hms[3])
+    return h * 3600 + m * 60 + s
+  }
+  const ms = trimmed.match(/^(\d+):([0-5]\d)$/)
+  if (ms) return Number(ms[1]) * 60 + Number(ms[2])
+  return undefined
+}
+
+const resetAudioState = () => {
+  isPlaying.value = false
+  currentTime.value = 0
+  audioDuration.value = parseMessageDurationToSeconds(props.message.duration) ?? 0
+  isSeeking.value = false
+}
+
+resetAudioState()
+
+watch(
+  () => props.message.url,
+  (newUrl, oldUrl) => {
+    if (newUrl !== oldUrl) {
+      resetAudioState()
+      lazyAudioSrc.value = undefined
+      if (player.value) {
+        player.value.pause()
+        player.value.currentTime = 0
+        player.value.removeAttribute('src')
+        player.value.load()
+      }
+    }
+  }
+)
+
+watch(
+  () => props.message.duration,
+  () => {
+    if (lazyAudioSrc.value === undefined) {
+      audioDuration.value = parseMessageDurationToSeconds(props.message.duration) ?? 0
+    }
+  }
+)
 
 const {
   isOpenMenu,
@@ -451,14 +514,25 @@ const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
   { cssVariable: '--chotto-audiomessage-right-background-color', position: 'right' }
 )
 
-function togglePlayPause() {
-  if (player.value) {
-    if (isPlaying.value) {
-      player.value.pause();
-    } else {
-      player.value.play();
+const togglePlayPause = async () => {
+  if (!player.value || !props.message.url) return
+
+  if (isPlaying.value) {
+    player.value.pause()
+    isPlaying.value = false
+  } else {
+    try {
+      if (!lazyAudioSrc.value) {
+        lazyAudioSrc.value = props.message.url
+        await nextTick()
+        player.value.load()
+      }
+      await player.value.play()
+      isPlaying.value = true
+    } catch (error) {
+      console.error('Не удалось воспроизвести аудио', error)
+      isPlaying.value = false
     }
-    isPlaying.value = !isPlaying.value;
   }
 }
 
@@ -468,12 +542,7 @@ const formatTime = (time: number) => {
   return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-const formatCurrentTime = computed(() => {
-  if (player.value) {
-    return formatTime(currentTime.value)
-  }
-  return '0:00';
-});
+const formatCurrentTime = computed(() => formatTime(currentTime.value))
 
 watch(
   () => currentTime.value,
@@ -482,7 +551,7 @@ watch(
       if (player.value.duration != Infinity && !Number.isNaN(player.value.duration))
         player.value.currentTime = currentTime.value;
 
-      if (currentTime.value == audioDuration.value)
+      if (Math.abs(currentTime.value - audioDuration.value) < 0.1)
         isPlaying.value = false
     }
   }
@@ -497,12 +566,56 @@ const handleSeekEnd = () => {
   isSeeking.value = false;
 }
 
-const formatDuration = computed(() => {
-  if (player.value) {
-    return formatTime(audioDuration.value)
+const formatDuration = computed(() => formatTime(audioDuration.value))
+
+const handleLoadedMetadata = () => {
+  if (!player.value) return
+
+  const el = player.value
+  currentTime.value = el.currentTime || 0
+
+  if (el.duration === Infinity || Number.isNaN(el.duration)) {
+    el.currentTime = 1e101
+    const fixDuration = () => {
+      if (!player.value) return
+      audioDuration.value = player.value.duration || 0
+      currentTime.value = 0
+      player.value.currentTime = 0
+    }
+    el.addEventListener('timeupdate', fixDuration, { once: true })
+  } else {
+    audioDuration.value = el.duration || 0
   }
-  return '0:00';
-});
+
+  el.playbackRate = currentSpeed.value.speed
+}
+
+const handleTimeUpdate = () => {
+  if (!player.value) return
+  if (!isSeeking.value) {
+    currentTime.value = player.value.currentTime
+  }
+  if (player.value.ended && isPlaying.value) {
+    isPlaying.value = false
+  }
+}
+
+const handleEnded = () => {
+  isPlaying.value = false
+}
+
+const handleAudioError = () => {
+  console.error('Не удалось загрузить аудио')
+  isPlaying.value = false
+  lazyAudioSrc.value = undefined
+  if (player.value) {
+    player.value.pause()
+    player.value.currentTime = 0
+    player.value.removeAttribute('src')
+    player.value.load()
+  }
+  audioDuration.value = parseMessageDurationToSeconds(props.message.duration) ?? 0
+}
 
 function getClass(message: IAudioMessage) {
   return getMessageClass(message.position, 'audio-message')
@@ -515,32 +628,6 @@ const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTo
 function handleSmsInvite() {
   emit('sms-invite', props.message)
 }
-
-onMounted(() => {
-  if (player.value != null) {
-    player.value.playbackRate = currentSpeed.value.speed;
-    player.value.addEventListener('loadedmetadata', () => {
-      if (player.value != null) {
-        if (player.value.duration == Infinity || Number.isNaN(player.value.duration)){
-          player.value.currentTime = 1e101;
-          player.value.addEventListener("timeupdate", () => {
-            if (player.value){
-              player.value.currentTime = 0;
-              audioDuration.value = player.value.duration
-            }
-          }, { once: true });
-        }
-      }
-      audioDuration.value = player.value != null ? player.value.duration : 0;
-    });
-    player.value.addEventListener('timeupdate', () => {
-      // Обновляем currentTime только если пользователь не перетаскивает слайдер
-      if (!isSeeking.value && player.value != null) {
-        currentTime.value = player.value.currentTime;
-      }
-    });
-  }
-});
 </script>
 
 <style scoped lang="scss">
