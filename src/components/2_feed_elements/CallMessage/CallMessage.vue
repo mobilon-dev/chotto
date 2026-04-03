@@ -104,11 +104,12 @@
         >
           <audio
             ref="player"
-            :src="message.url"
+            :src="lazyAudioSrc"
             type="audio/webm"
             @loadedmetadata="handleLoadedMetadata"
             @timeupdate="handleTimeUpdate"
             @ended="handleEnded"
+            @error="handleAudioError"
           />
           <button
             v-show="!isPlaying"
@@ -267,7 +268,7 @@
   setup
   lang="ts"
 >
-import { ref, inject, computed, watch, toRefs, unref, type Ref } from 'vue'
+import { ref, inject, computed, watch, toRefs, unref, nextTick, type Ref } from 'vue'
 import { ICallMessage } from '@/types'
 import { useTheme } from '@/hooks';
 import { useMessageActions, useSubtextTooltip } from '@/hooks/messages';
@@ -328,6 +329,8 @@ const {
 const isFullTranscript = ref(false)
 
 const player = ref<HTMLAudioElement | null>(null)
+/** Подставляем src только при первом воспроизведении, чтобы не дергать URL до готовности файла на сервере */
+const lazyAudioSrc = ref<string | undefined>(undefined)
 const isPlaying = ref(false)
 const audioDuration = ref(0)
 const currentTime = ref(0)
@@ -355,22 +358,38 @@ const speedOptions = [
 
 const currentSpeed = computed(() => speedOptions[speedIndex.value] ?? speedOptions[0])
 
+const parseCallDurationToSeconds = (value?: string): number | undefined => {
+  if (!value) return undefined
+  const trimmed = value.trim()
+  const match = trimmed.match(/^(\d+):([0-5]\d)$/)
+  if (!match) return undefined
+  const minutes = Number(match[1])
+  const seconds = Number(match[2])
+  if (Number.isNaN(minutes) || Number.isNaN(seconds)) return undefined
+  return minutes * 60 + seconds
+}
+
 const resetAudioState = () => {
   isPlaying.value = false
   currentTime.value = 0
-  audioDuration.value = 0
+  audioDuration.value = parseCallDurationToSeconds(message.value?.callDuration) ?? 0
   isSeeking.value = false
   speedIndex.value = 0
 }
+
+// Инициализируем duration сразу из message.callDuration (без загрузки аудио)
+resetAudioState()
 
 watch(
   () => message.value?.url,
   (newUrl, oldUrl) => {
     if (newUrl !== oldUrl) {
       resetAudioState()
+      lazyAudioSrc.value = undefined
       if (player.value) {
         player.value.pause()
         player.value.currentTime = 0
+        player.value.removeAttribute('src')
         player.value.load()
       }
     }
@@ -387,13 +406,18 @@ const formatCurrentTime = computed(() => formatTime(currentTime.value))
 const formatDuration = computed(() => formatTime(audioDuration.value))
 
 const togglePlayPause = async () => {
-  if (!player.value) return
+  if (!player.value || !message.value?.url) return
 
   if (isPlaying.value) {
     player.value.pause()
     isPlaying.value = false
   } else {
     try {
+      if (!lazyAudioSrc.value) {
+        lazyAudioSrc.value = message.value.url
+        await nextTick()
+        player.value.load()
+      }
       await player.value.play()
       isPlaying.value = true
     } catch (error) {
@@ -470,6 +494,18 @@ const handleTimeUpdate = () => {
 
 const handleEnded = () => {
   isPlaying.value = false
+}
+
+const handleAudioError = () => {
+  console.error('Не удалось загрузить запись звонка')
+  isPlaying.value = false
+  lazyAudioSrc.value = undefined
+  if (player.value) {
+    player.value.pause()
+    player.value.currentTime = 0
+    player.value.removeAttribute('src')
+    player.value.load()
+  }
 }
 
 const callDirectionTitle = computed(() => {
