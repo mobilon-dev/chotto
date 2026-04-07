@@ -187,6 +187,7 @@
       <div class="call-message__info-container">
         <div class="call-message__actions">
           <button
+            v-if="!message.isMissedCall"
             :class="[
               'call-message__call-button',
               { 'call-message__call-button--active': expandedPanel === 'text' }
@@ -197,6 +198,7 @@
             Текст
           </button>
           <button
+            v-if="!message.isMissedCall"
             :class="[
               'call-message__call-button',
               { 'call-message__call-button--active': expandedPanel === 'summary' }
