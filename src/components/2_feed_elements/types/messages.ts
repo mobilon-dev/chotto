@@ -78,9 +78,16 @@ export interface IAudioMessage {
   actions?: IAction[]
   views?: number,
   text?: string,
-  transcript?: {
-    text: string;
-  };
+  /** Транскрипт: мок {text}, JSON-строка {"replies":[...]}, либо объект {replies} */
+  transcript?: { text: string } | string | ICallTranscriptPayload;
+  /** Резюме: JSON-строка {"summary":"..."}, либо объект {summary} */
+  summary?: string | ICallSummaryPayload;
+  /** Сырые поля API для audio (пример: meta.transcript/meta.summary/meta.url) */
+  meta?: Record<string, unknown> & {
+    transcript?: string | ICallTranscriptPayload
+    summary?: string | ICallSummaryPayload
+    url?: string
+  }
   reply?: Reply,
   linkPreview?: ILinkPreview,
   embed?: object

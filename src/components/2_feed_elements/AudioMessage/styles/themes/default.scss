@@ -159,7 +159,41 @@
   --chotto-audiomessage-info-container-justify-content: flex-end;
   --chotto-audiomessage-info-container-column-gap: 4px;
   --chotto-audiomessage-info-container-margin-right: 10px;
+  --chotto-audiomessage-info-container-margin-top: 15px;
   --chotto-audiomessage-info-container-pointer-events: auto;
+
+  // Actions (Текст / Резюме)
+  --chotto-audiomessage-actions-display: flex;
+  --chotto-audiomessage-actions-align-items: center;
+  --chotto-audiomessage-actions-column-gap: 20px;
+  --chotto-audiomessage-actions-margin-right: auto;
+  --chotto-audiomessage-actions-flex-wrap: wrap;
+  --chotto-audiomessage-action-button-border: none;
+  --chotto-audiomessage-action-button-background-color: transparent;
+  --chotto-audiomessage-action-button-padding: 0;
+  --chotto-audiomessage-action-button-margin: 0;
+  --chotto-audiomessage-action-button-color: var(--chotto-theme-secondary-text-color);
+  --chotto-audiomessage-action-button-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-audiomessage-action-button-font-weight: 400;
+  --chotto-audiomessage-action-button-cursor: pointer;
+  --chotto-audiomessage-action-button-active-border-bottom: 1px solid #5F5F5F;
+  --chotto-audiomessage-expand-panel-grid-column: 1 / -1;
+  --chotto-audiomessage-expand-inner-max-height: min(50vh, 340px);
+  --chotto-audiomessage-expand-inner-overflow-y: auto;
+  --chotto-audiomessage-expand-inner-padding: 8px 14px 10px;
+  --chotto-audiomessage-expand-inner-margin-top: 2px;
+  --chotto-audiomessage-expand-inner-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-audiomessage-expand-inner-color: var(--chotto-theme-primary-text-color);
+  --chotto-audiomessage-expand-inner-line-height: 1.45;
+  --chotto-audiomessage-expand-inner-scrollbar-width: 6px;
+  --chotto-audiomessage-expand-inner-scrollbar-bg: #fafafa;
+  --chotto-audiomessage-expand-inner-scrollbar-thumb-radius: 10px;
+  --chotto-audiomessage-expand-inner-scrollbar-thumb-min-height: 200px;
+  --chotto-audiomessage-expand-inner-scrollbar-thumb-bg: #d4d4d4;
+  --chotto-audiomessage-expand-inner-scrollbar-track-radius: 10px;
+  --chotto-audiomessage-expand-transition-max-height: min(80vh, 720px);
+  --chotto-audiomessage-expand-close-font-size: 13px;
+  --chotto-audiomessage-expand-close-color: #5F5F5F;
 
   // Subtext variables
   --chotto-audiomessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);

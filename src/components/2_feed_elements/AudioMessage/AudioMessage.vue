@@ -136,14 +136,7 @@
         </a> -->
       </div>
 
-      <div
-        v-if="message.transcript?.text"
-        class="audio-message__transcript-container"
-      >
-        <p @click="isFullTranscript = !isFullTranscript">
-          {{ message.transcript.text }}
-        </p>
-      </div>
+      <!-- transcript/summary shown via expandable panel (buttons below) -->
       <div
         v-if="message.text"
         class="audio-message__text-container"
@@ -177,6 +170,29 @@
       />
 
       <div class="audio-message__info-container">
+        <div class="audio-message__actions">
+          <button
+            :class="[
+              'audio-message__action-button',
+              { 'audio-message__action-button--active': expandedPanel === 'text' }
+            ]"
+            type="button"
+            @click="handleText"
+          >
+            Текст
+          </button>
+          <button
+            :class="[
+              'audio-message__action-button',
+              { 'audio-message__action-button--active': expandedPanel === 'summary' }
+            ]"
+            type="button"
+            @click="handleSummary"
+          >
+            Резюме
+          </button>
+        </div>
+
         <div
           v-if="message.views"
           class="audio-message__views"
@@ -195,6 +211,57 @@
           :status-title="statusTitle"
         />
       </div>
+
+      <transition name="audio-message-expand">
+        <div
+          v-if="expandedPanel"
+          class="audio-message__expand-panel"
+        >
+          <div class="audio-message__expand-inner">
+            <template v-if="expandedPanel === 'text'">
+              <p
+                v-if="!isTranscriptReady"
+                class="audio-message__expand-placeholder"
+              >
+                {{ recognitionPlaceholderText }}
+              </p>
+
+              <p
+                v-for="(line, idx) in transcriptLines"
+                :key="`au-tr-${idx}`"
+                class="audio-message__expand-line"
+              >
+                {{ line }}
+              </p>
+            </template>
+
+            <p
+              v-else
+              class="audio-message__expand-plain"
+            >
+              <span
+                v-if="!isSummaryReady"
+                class="audio-message__expand-placeholder"
+              >
+                {{ recognitionPlaceholderText }}
+              </span>
+              <template v-else>
+                {{ summaryText }}
+              </template>
+            </p>
+          </div>
+
+          <div class="audio-message__expand-close-wrap">
+            <button
+              type="button"
+              class="audio-message__expand-close"
+              @click="expandedPanel = null"
+            >
+              Закрыть
+            </button>
+          </div>
+        </div>
+      </transition>
 
       <MessageSmsInvite
         :status="message.status"
@@ -230,34 +297,6 @@
           @click="handleActionClick"
         />
       </transition>
-
-      <Teleport to="body">
-        <transition name="modal-fade">
-          <div
-            v-if="isFullTranscript"
-            class="audio-message__modal-overlay"
-            :data-theme="getTheme().theme ? getTheme().theme : null"
-          >
-            <div class="audio-message__modal">
-              <button
-                class="audio-message__modal-close-button"
-                @click="isFullTranscript = false"
-              >
-                <span>
-                  <i class="pi pi-times" />
-                </span>
-              </button>
-              <p
-                style="
-                word-wrap: break-word;
-                max-width: 25rem;"
-              >
-                {{ message.transcript?.text }}
-              </p>
-            </div>
-          </div>
-        </transition>
-      </Teleport>
     </div>
   </div>
 </template>
@@ -266,7 +305,7 @@
   setup
   lang="ts"
 >
-import { ref, computed, watch, inject, nextTick } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import LinkPreview from '@/components/1_atoms/LinkPreview/LinkPreview.vue';
@@ -278,11 +317,39 @@ import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/Mess
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageActions, useMessageLinks, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
-import { useTheme } from '@/hooks';
-import { IAudioMessage } from '@/types';
+import type { IAudioMessage, ICallSummaryPayload, ICallTranscriptPayload } from '@/types';
 
-const chatAppId = inject('chatAppId')
-const { getTheme } = useTheme(chatAppId as string)
+function parseLooseJson<T>(value: unknown): T | null {
+  if (value === null || value === undefined) return null
+  if (typeof value === 'object') return value as T
+  if (typeof value !== 'string') return null
+  const trimmed = value.trim()
+  if (!trimmed) return null
+  try {
+    return JSON.parse(trimmed) as T
+  } catch {
+    return null
+  }
+}
+
+function resolveSummaryString(raw: unknown): string | null {
+  if (raw === null || raw === undefined) return null
+  if (typeof raw === 'object' && raw !== null && 'summary' in raw) {
+    const s = String((raw as ICallSummaryPayload).summary ?? '').trim()
+    return s || null
+  }
+  if (typeof raw === 'string') {
+    const t = raw.trim()
+    if (!t) return null
+    if (t.startsWith('{')) {
+      const parsed = parseLooseJson<ICallSummaryPayload>(t)
+      const s = parsed?.summary?.trim()
+      return s || null
+    }
+    return t
+  }
+  return null
+}
 
 // Define props
 const props = defineProps({
@@ -353,6 +420,11 @@ const audioDuration = ref(0)
 const currentTime = ref(0)
 const isSeeking = ref(false)
 
+const audioSrc = computed(() => {
+  const m = props.message as unknown as IAudioMessage & { data?: { url?: string } }
+  return m.url || (typeof m.meta?.url === 'string' ? m.meta.url : undefined) || m.data?.url
+})
+
 const parseMessageDurationToSeconds = (value?: string | number): number | undefined => {
   if (value === undefined || value === null) return undefined
   if (typeof value === 'number') {
@@ -387,7 +459,7 @@ const resetAudioState = () => {
 resetAudioState()
 
 watch(
-  () => props.message.url,
+  () => audioSrc.value,
   (newUrl, oldUrl) => {
     if (newUrl !== oldUrl) {
       resetAudioState()
@@ -421,14 +493,52 @@ const {
   handleClickReplied
 } = useMessageActions(props.message, emit)
 
-const isFullTranscript = ref(false)
+const expandedPanel = ref<null | 'text' | 'summary'>(null)
+const recognitionPlaceholderText = 'Распознаем звонок, пожалуйста подождите...'
+const requestedOnDemand = ref<{ text: boolean; summary: boolean }>({ text: false, summary: false })
+
+const transcriptPayload = computed(() => {
+  const m = props.message as IAudioMessage
+  const tx = m.transcript ?? m.meta?.transcript
+  if (!tx) return null
+  if (typeof tx === 'object' && tx !== null && 'replies' in tx) return tx as ICallTranscriptPayload
+  if (typeof tx === 'string' && tx.trim()) return parseLooseJson<ICallTranscriptPayload>(tx)
+  return null
+})
+
+const transcriptLines = computed(() => {
+  const payload = transcriptPayload.value
+  if (payload?.replies?.length) {
+    return payload.replies.map((r) => String(r.text ?? '').trim()).filter(Boolean)
+  }
+  const m = props.message as IAudioMessage
+  const txt = typeof m.transcript === 'object' && m.transcript && 'text' in m.transcript ? (m.transcript.text ?? '') : ''
+  return String(txt)
+    .split(/\r?\n+/g)
+    .map((s) => s.trim())
+    .filter(Boolean)
+})
+
+const isTranscriptReady = computed(() => transcriptLines.value.length > 0)
+
+const summaryText = computed(() => {
+  const m = props.message as IAudioMessage
+  return (
+    resolveSummaryString(m.summary) ??
+    resolveSummaryString(m.meta?.summary) ??
+    'Резюме недоступно'
+  )
+})
+
+const isSummaryReady = computed(() => summaryText.value !== 'Резюме недоступно')
 
 // Функция для скачивания аудио
 const downloadAudio = async () => {
-  if (!props.message.url) return
+  const src = audioSrc.value
+  if (!src) return
 
   try {
-    const response = await fetch(props.message.url, {
+    const response = await fetch(src, {
       headers: {
         Accept: 'audio/*'
       }
@@ -441,7 +551,7 @@ const downloadAudio = async () => {
     const contentType = response.headers.get('content-type') || ''
     const blob = await response.blob()
 
-    const urlExtension = props.message.url.split('.').pop()?.split('?')[0]?.toLowerCase() || ''
+    const urlExtension = src.split('.').pop()?.split('?')[0]?.toLowerCase() || ''
 
     const mimeToExt: Record<string, string> = {
       'audio/mpeg': 'mp3',
@@ -463,7 +573,7 @@ const downloadAudio = async () => {
       ? urlExtension
       : (mimeToExt[contentType] || 'mp3')
 
-    const urlSegments = props.message.url.split('/')
+    const urlSegments = src.split('/')
     const rawFilename = decodeURIComponent(urlSegments[urlSegments.length - 1]?.split('?')[0] || '')
 
     const filename = rawFilename
@@ -480,7 +590,7 @@ const downloadAudio = async () => {
     window.URL.revokeObjectURL(url)
   } catch (error) {
     console.error('Ошибка при скачивании аудио:', error)
-    window.open(props.message.url, '_blank')
+    if (src) window.open(src, '_blank')
   }
 }
 
@@ -515,7 +625,8 @@ const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
 )
 
 const togglePlayPause = async () => {
-  if (!player.value || !props.message.url) return
+  const src = audioSrc.value
+  if (!player.value || !src) return
 
   if (isPlaying.value) {
     player.value.pause()
@@ -523,7 +634,7 @@ const togglePlayPause = async () => {
   } else {
     try {
       if (!lazyAudioSrc.value) {
-        lazyAudioSrc.value = props.message.url
+        lazyAudioSrc.value = src
         await nextTick()
         player.value.load()
       }
@@ -627,6 +738,24 @@ const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTo
 
 function handleSmsInvite() {
   emit('sms-invite', props.message)
+}
+
+const handleText = () => {
+  const next = expandedPanel.value === 'text' ? null : 'text'
+  expandedPanel.value = next
+  if (next === 'text' && !isTranscriptReady.value && !requestedOnDemand.value.text) {
+    requestedOnDemand.value.text = true
+    emit('action', { action: 'fetchTranscript', messageId: props.message.messageId })
+  }
+}
+
+const handleSummary = () => {
+  const next = expandedPanel.value === 'summary' ? null : 'summary'
+  expandedPanel.value = next
+  if (next === 'summary' && !isSummaryReady.value && !requestedOnDemand.value.summary) {
+    requestedOnDemand.value.summary = true
+    emit('action', { action: 'fetchSummary', messageId: props.message.messageId })
+  }
 }
 </script>
 

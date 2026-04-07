@@ -186,7 +186,7 @@ export const messages = [
   },
   {
     chatId: 1, dialogId: 'dlg_89789879',type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
-    text: "Привет!", direction: 'incoming', status: 'received', subText: '89829445678', timestamp: '1727027959',
+    direction: 'incoming', status: 'received', subText: '89829445678', timestamp: '1727027959',
     transcript: {
       text: 'Привет, доехала хорошо, позвони мне завтра',
     },
@@ -262,6 +262,7 @@ export const messages = [
     chatId: 2, type: "message.video", url: "https://filebump2.services.mobilon.ru/file/XgYPv3t1VT1RxoUVPpWvQuyOkpdSCayNgpv1",
     text: "Привет! Это видеосообщение с длииииииииииинным текстом", direction: 'outgoing', status: 'read', timestamp: '1727027959',
     header: 'Вы',
+    messageId: '41',
     actions: [
       { action: 'edit', title: 'изменить', icon: 'fa-edit' },
       { action: 'delete', title: 'удалить' }]
@@ -270,6 +271,7 @@ export const messages = [
     chatId: 2, type: "message.video", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     text: "Привет!", direction: 'outgoing', status: 'read', timestamp: '1727027959',
     header: 'Вы',
+    messageId: '42',
     actions: [
       { action: 'edit', title: 'изменить', icon: 'fa-edit' },
       { action: 'delete', title: 'удалить' }]
@@ -278,6 +280,7 @@ export const messages = [
     chatId: 2, type: "message.video", url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
     direction: 'outgoing', status: 'read', timestamp: '1727027959',
     header: 'Вы',
+    messageId: '43',
   },
   {
     chatId: 2,
@@ -288,23 +291,23 @@ export const messages = [
 
   {
     chatId: 2, type: "message.file", url: "https://axiomabio.com/pdf/test.pdf", filename: "Документ.pdf", direction: 'incoming',
-    status: 'received', timestamp: '1727027959', actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
+    status: 'received', messageId: '44', timestamp: '1727027959', actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
     ,header: 'Мария',
     text: 'Привет!',
   },
-  { chatId: 2, header: 'Мария', type: "message.text", text: "Привет!", direction: 'incoming', status: 'read', timestamp: '1727027959' },
+  { chatId: 2, header: 'Мария', messageId: '45', type: "message.text", text: "Привет!", direction: 'incoming', status: 'read', timestamp: '1727027959' },
   {
     chatId: 2, type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
-    text: "Привет!", direction: 'incoming', status: 'received', subText: '89829445678', timestamp: '1727027959',
+    direction: 'incoming', messageId: '46', status: 'received', subText: '89829445678', timestamp: '1727027959',
     transcript: {
-      text: 'Привет, доехала хорошо, позвони мне завтра',
+      text: 'Привет, доехала хорошо, позвони мне завтра. Ну или если очень хочешь можем созвониться через часик.',
     },
     header: 'Мария',
     actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
   },
   {
     chatId: 2, type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
-    text: "Привет!", direction: 'outgoing', status: 'received', subText: '89829445678', timestamp: '1727027959',
+    direction: 'outgoing', messageId: '47', status: 'received', subText: '89829445678', timestamp: '1727027959',
     header: 'Вы',
     actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
   },
@@ -312,6 +315,7 @@ export const messages = [
     chatId: 2, type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", alt: "Example Image",
     header: 'Мария',
     text: 'Привет!',
+    messageId: '201',
     direction: 'incoming', subText: '89829445678', timestamp: '1726743559',
   },
   {
@@ -1353,7 +1357,7 @@ export const messages = [
   {
     chatId: 8,
     dialogId: 'dlg_43543111',
-    messageId: '825',
+    messageId: '826',
     type: "message.delimiter",
     text: "Канал связи изменен на Telegram с номером +7 (923) 123-00-97",
     timestamp: '1763036702',
@@ -1362,7 +1366,7 @@ export const messages = [
   {
     chatId: 8,
     dialogId: 'dlg_43543111',
-    messageId: '825',
+    messageId: '827',
     type: "message.text",
     text: "Переходим в телеграм! 😎",
     timestamp: '1763036702',
@@ -1381,7 +1385,7 @@ export const messages = [
     timestamp: '1763036703',
     header: 'Георгий',
     subText: 'Георгий Звонарь',
-    messageId: '825',
+    messageId: '828',
   },
 
 

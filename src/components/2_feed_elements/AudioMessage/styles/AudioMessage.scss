@@ -120,6 +120,109 @@
     background: var(--chotto-audiomessage-pbc-background-color, #DBDDDC);
   }
 
+  &__actions {
+    display: var(--chotto-audiomessage-actions-display, flex);
+    align-items: var(--chotto-audiomessage-actions-align-items, center);
+    column-gap: var(--chotto-audiomessage-actions-column-gap, 20px);
+    margin-right: var(--chotto-audiomessage-actions-margin-right, auto);
+    flex-wrap: var(--chotto-audiomessage-actions-flex-wrap, wrap);
+  }
+
+  &__action-button {
+    border: var(--chotto-audiomessage-action-button-border, none);
+    background-color: var(--chotto-audiomessage-action-button-background-color, transparent);
+    padding: var(--chotto-audiomessage-action-button-padding, 0);
+    margin: var(--chotto-audiomessage-action-button-margin, 0);
+    color: var(--chotto-audiomessage-action-button-color, #5F5F5F);
+    font-size: var(--chotto-audiomessage-action-button-font-size, 14px);
+    font-weight: var(--chotto-audiomessage-action-button-font-weight, 400);
+    cursor: var(--chotto-audiomessage-action-button-cursor, pointer);
+  }
+
+  &__action-button--active {
+    border-bottom: var(--chotto-audiomessage-action-button-active-border-bottom, 1px solid #5F5F5F);
+  }
+
+  &__expand-panel {
+    grid-column: var(--chotto-audiomessage-expand-panel-grid-column, 1 / -1);
+    overflow: hidden;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    contain: inline-size;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__expand-inner {
+    max-height: var(--chotto-audiomessage-expand-inner-max-height, min(50vh, 340px));
+    overflow-y: var(--chotto-audiomessage-expand-inner-overflow-y, auto);
+    padding: var(--chotto-audiomessage-expand-inner-padding, 8px 14px 10px);
+    margin-top: var(--chotto-audiomessage-expand-inner-margin-top, 2px);
+    font-size: var(--chotto-audiomessage-expand-inner-font-size, 14px);
+    color: var(--chotto-audiomessage-expand-inner-color, #5F5F5F);
+    line-height: var(--chotto-audiomessage-expand-inner-line-height, 1.45);
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    contain: inline-size;
+
+    &::-webkit-scrollbar {
+      width: var(--chotto-audiomessage-expand-inner-scrollbar-width, 6px);
+      background-color: var(--chotto-audiomessage-expand-inner-scrollbar-bg, #fafafa);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: var(--chotto-audiomessage-expand-inner-scrollbar-thumb-min-height, 200px);
+      min-height: var(--chotto-audiomessage-expand-inner-scrollbar-thumb-min-height, 200px);
+      max-height: var(--chotto-audiomessage-expand-inner-scrollbar-thumb-min-height, 200px);
+      border-radius: var(--chotto-audiomessage-expand-inner-scrollbar-thumb-radius, 10px);
+      background-color: var(--chotto-audiomessage-expand-inner-scrollbar-thumb-bg, #d4d4d4);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: var(--chotto-audiomessage-expand-inner-scrollbar-track-radius, 10px);
+    }
+  }
+
+  &__expand-placeholder {
+    font-style: italic;
+    margin: 0 0 6px;
+  }
+
+  &__expand-line,
+  &__expand-plain {
+    margin: 0 0 6px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+
+  &__expand-line::first-letter {
+    text-transform: uppercase;
+  }
+
+  &__expand-close-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    flex: 0 0 auto;
+  }
+
+  &__expand-close {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    font-size: var(--chotto-audiomessage-expand-close-font-size, 13px);
+    color: var(--chotto-audiomessage-expand-close-color, #5F5F5F);
+  }
+
   &__progress-bar-container::-webkit-slider-thumb {
     width: var(--chotto-audiomessage-progress-bar-thumb-width, 10px);
     height: var(--chotto-audiomessage-progress-bar-thumb-height, 10px);
@@ -220,6 +323,7 @@
     column-gap: var(--chotto-audiomessage-info-container-column-gap, 4px);
     margin-right: var(--chotto-audiomessage-info-container-margin-right, 10px);
     pointer-events: var(--chotto-audiomessage-info-container-pointer-events, auto);
+    margin-top: var(--chotto-audiomessage-info-container-margin-top, 15px);
   }
 
   &__download-button {
@@ -575,6 +679,23 @@
 
 .modal-fade-enter-to,
 .modal-fade-leave-from {
+  opacity: 1;
+}
+
+.audio-message-expand-enter-active,
+.audio-message-expand-leave-active {
+  transition: max-height 0.28s ease-out, opacity 0.22s ease;
+}
+
+.audio-message-expand-enter-from,
+.audio-message-expand-leave-to {
+  max-height: 0;
+  opacity: 0;
+}
+
+.audio-message-expand-enter-to,
+.audio-message-expand-leave-from {
+  max-height: var(--chotto-audiomessage-expand-transition-max-height, min(80vh, 720px));
   opacity: 1;
 }
 

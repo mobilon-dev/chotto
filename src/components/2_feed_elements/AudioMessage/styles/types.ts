@@ -258,8 +258,75 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-info-container-column-gap': string;
   /** Отступ справа инфо-контейнера */
   '--chotto-audiomessage-info-container-margin-right': string;
+  /** Отступ сверху инфо-контейнера */
+  '--chotto-audiomessage-info-container-margin-top': string;
   /** События указателя инфо-контейнера */
   '--chotto-audiomessage-info-container-pointer-events': string;
+
+  /** Отображение контейнера кнопок "Текст / Резюме" */
+  '--chotto-audiomessage-actions-display': string;
+  /** Выравнивание элементов контейнера кнопок */
+  '--chotto-audiomessage-actions-align-items': string;
+  /** Промежуток между кнопками */
+  '--chotto-audiomessage-actions-column-gap': string;
+  /** Внешний отступ справа у контейнера кнопок */
+  '--chotto-audiomessage-actions-margin-right': string;
+  /** Перенос кнопок */
+  '--chotto-audiomessage-actions-flex-wrap': string;
+
+  /** Граница кнопки "Текст/Резюме" */
+  '--chotto-audiomessage-action-button-border': string;
+  /** Фон кнопки "Текст/Резюме" */
+  '--chotto-audiomessage-action-button-background-color': string;
+  /** Отступы кнопки "Текст/Резюме" */
+  '--chotto-audiomessage-action-button-padding': string;
+  /** Внешние отступы кнопки "Текст/Резюме" */
+  '--chotto-audiomessage-action-button-margin': string;
+  /** Цвет текста кнопки "Текст/Резюме" */
+  '--chotto-audiomessage-action-button-color': string;
+  /** Размер шрифта кнопки "Текст/Резюме" */
+  '--chotto-audiomessage-action-button-font-size': string;
+  /** Жирность шрифта кнопки "Текст/Резюме" */
+  '--chotto-audiomessage-action-button-font-weight': string;
+  /** Курсор кнопки "Текст/Резюме" */
+  '--chotto-audiomessage-action-button-cursor': string;
+  /** Нижняя граница активной кнопки */
+  '--chotto-audiomessage-action-button-active-border-bottom': string;
+
+  /** Колонка грида панели раскрытия */
+  '--chotto-audiomessage-expand-panel-grid-column': string;
+  /** Максимальная высота панели */
+  '--chotto-audiomessage-expand-inner-max-height': string;
+  /** Вертикальная прокрутка панели */
+  '--chotto-audiomessage-expand-inner-overflow-y': string;
+  /** Отступы панели */
+  '--chotto-audiomessage-expand-inner-padding': string;
+  /** Отступ сверху панели */
+  '--chotto-audiomessage-expand-inner-margin-top': string;
+  /** Размер шрифта в панели */
+  '--chotto-audiomessage-expand-inner-font-size': string;
+  /** Цвет текста в панели */
+  '--chotto-audiomessage-expand-inner-color': string;
+  /** Межстрочный интервал в панели */
+  '--chotto-audiomessage-expand-inner-line-height': string;
+  /** Ширина скроллбара в панели */
+  '--chotto-audiomessage-expand-inner-scrollbar-width': string;
+  /** Цвет фона скроллбара */
+  '--chotto-audiomessage-expand-inner-scrollbar-bg': string;
+  /** Скругление thumb скроллбара */
+  '--chotto-audiomessage-expand-inner-scrollbar-thumb-radius': string;
+  /** Минимальная высота thumb скроллбара */
+  '--chotto-audiomessage-expand-inner-scrollbar-thumb-min-height': string;
+  /** Цвет thumb скроллбара */
+  '--chotto-audiomessage-expand-inner-scrollbar-thumb-bg': string;
+  /** Скругление track скроллбара */
+  '--chotto-audiomessage-expand-inner-scrollbar-track-radius': string;
+  /** max-height при анимации раскрытия */
+  '--chotto-audiomessage-expand-transition-max-height': string;
+  /** Размер шрифта кнопки "Закрыть" */
+  '--chotto-audiomessage-expand-close-font-size': string;
+  /** Цвет текста кнопки "Закрыть" */
+  '--chotto-audiomessage-expand-close-color': string;
 
   /** Позиционирование кнопки скачивания */
   '--chotto-audiomessage-download-button-position': string;
