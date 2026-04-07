@@ -91,6 +91,23 @@ export interface IAudioMessage {
   isVoiceMessage?: boolean
 }
 
+/** Реплика в JSON из meta.transcript (ответ API) */
+export interface ICallTranscriptReply {
+  timecode: number
+  user: string
+  text: string
+}
+
+/** Распарсенное тело строки meta.transcript */
+export interface ICallTranscriptPayload {
+  replies?: ICallTranscriptReply[]
+}
+
+/** Распарсенное тело строки meta.callSummary */
+export interface ICallSummaryPayload {
+  summary?: string
+}
+
 export interface ICallMessage {
   messageId: string
   position: string
@@ -98,6 +115,8 @@ export interface ICallMessage {
   status?: string
   statusMsg?: string
   url?: string
+  /** URL записи звонка, если нет в url */
+  recordUrl?: string
   isMissedCall?: boolean
   callDuration?: string
   callAttemptDuration?: string
@@ -109,10 +128,18 @@ export interface ICallMessage {
   text?: string
   actions?: IAction[]
   views?: number
-  transcript?: {
-    dialog?: IDialog[]
-    text?: string
-  }
+  /**
+   * Транскрипт: JSON-строка {"replies":[...]}, объект с replies, либо мок { dialog, text }
+   */
+  transcript?:
+    | string
+    | ICallTranscriptPayload
+    | {
+        dialog?: IDialog[]
+        text?: string
+      }
+  /** Резюме: строка, JSON-строка {"summary":"..."} или объект { summary } */
+  callSummary?: string | ICallSummaryPayload
   reactions?: MessageReactions
   backgroundColor?: string
   hasMessengerAccount?: boolean

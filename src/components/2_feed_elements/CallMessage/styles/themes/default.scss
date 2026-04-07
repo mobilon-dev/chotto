@@ -20,6 +20,12 @@
   --chotto-callmessage-info-container-align-items: center;
   --chotto-callmessage-info-container-column-gap: 4px;
 
+  // Actions (Текст / Резюме / Перезвонить)
+  --chotto-callmessage-actions-display: flex;
+  --chotto-callmessage-actions-align-items: center;
+  --chotto-callmessage-actions-column-gap: 20px;
+  --chotto-callmessage-actions-flex-wrap: wrap;
+
   // Title variables
   --chotto-callmessage-title-margin-bottom: 2px;
   --chotto-callmessage-title-font-size: var(--chotto-theme-title-font-size);
@@ -79,6 +85,24 @@
   --chotto-callmessage-call-button-color: var(--chotto-theme-secondary-text-color);
   --chotto-callmessage-call-button-font-size: var(--chotto-theme-additional-text-font-size);
   --chotto-callmessage-call-button-margin: 5px 0 0 5px;
+  --chotto-callmessage-call-button-active-border-bottom: 1px solid #5F5F5F;
+  --chotto-callmessage-expand-panel-grid-column: 1 / 3;
+  --chotto-callmessage-expand-inner-max-height: min(50vh, 340px);
+  --chotto-callmessage-expand-inner-overflow-y: auto;
+  --chotto-callmessage-expand-inner-padding: 8px 10px 10px;
+  --chotto-callmessage-expand-inner-margin-top: 2px;
+  --chotto-callmessage-expand-inner-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-callmessage-expand-inner-color: var(--chotto-theme-primary-text-color);
+  --chotto-callmessage-expand-inner-line-height: 1.45;
+  --chotto-callmessage-expand-inner-scrollbar-width: 6px;
+  --chotto-callmessage-expand-inner-scrollbar-bg: #fafafa;
+  --chotto-callmessage-expand-inner-scrollbar-thumb-radius: 10px;
+  --chotto-callmessage-expand-inner-scrollbar-thumb-min-height: 200px;
+  --chotto-callmessage-expand-inner-scrollbar-thumb-bg: #d4d4d4;
+  --chotto-callmessage-expand-inner-scrollbar-track-radius: 10px;
+  --chotto-callmessage-expand-close-font-size: 13px;
+  --chotto-callmessage-expand-close-color: #5F5F5F;
+  --chotto-callmessage-expand-transition-max-height: min(80vh, 720px);
 
   // Header container
   --chotto-callmessage-header-container-grid-column: 1 / 3;
@@ -178,34 +202,6 @@
 
   // Context menu variables
   --chotto-callmessage-context-menu-position: absolute;
-
-  // Text dialog variables
-  --chotto-callmessage-text-dialog-position: relative;
-  --chotto-callmessage-text-dialog-width: fit-content;
-  --chotto-callmessage-text-dialog-max-width: 46%;
-  --chotto-callmessage-text-dialog-left-padding-left: 24px;
-  --chotto-callmessage-text-dialog-before-background-color: var(--chotto-theme-secondary-text-color);
-  --chotto-callmessage-text-dialog-title-font-size: var(--chotto-theme-title-font-size);
-  --chotto-callmessage-text-dialog-subtext-text-color: var(--chotto-theme-secondary-text-color);
-  --chotto-callmessage-text-dialog-subtext-font-size: var(--chotto-theme-additional-text-font-size);
-
-  // Text dialog before pseudo-element variables
-  --chotto-callmessage-text-dialog-before-content: "";
-  --chotto-callmessage-text-dialog-before-position: absolute;
-  --chotto-callmessage-text-dialog-before-top: 12px;
-  --chotto-callmessage-text-dialog-before-left: 0;
-  --chotto-callmessage-text-dialog-before-width: 16px;
-  --chotto-callmessage-text-dialog-before-height: 2px;
-
-  // Text dialog right variables
-  --chotto-callmessage-text-dialog-right-padding-left: 0;
-  --chotto-callmessage-text-dialog-right-padding-right: 24px;
-  --chotto-callmessage-text-dialog-right-margin-left: auto;
-  --chotto-callmessage-text-dialog-right-before-right: 0;
-  --chotto-callmessage-text-dialog-right-before-left: auto;
-  --chotto-callmessage-text-dialog-right-span-width: fit-content;
-  --chotto-callmessage-text-dialog-right-span-display: block;
-  --chotto-callmessage-text-dialog-right-span-margin-left: auto;
 
   // Left/Right layout variables
   --chotto-callmessage-left-right-display: grid;

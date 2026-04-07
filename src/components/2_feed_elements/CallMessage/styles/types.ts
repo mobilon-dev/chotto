@@ -35,6 +35,15 @@ export interface CallMessageThemeCSSVariables {
   /** Промежуток между элементами инфо-контейнера */
   '--chotto-callmessage-info-container-column-gap': string;
 
+  /** Отображение контейнера кнопок (Текст / Резюме / Перезвонить) */
+  '--chotto-callmessage-actions-display': string;
+  /** Выравнивание элементов контейнера кнопок */
+  '--chotto-callmessage-actions-align-items': string;
+  /** Промежуток между кнопками в контейнере действий */
+  '--chotto-callmessage-actions-column-gap': string;
+  /** Перенос кнопок в контейнере действий */
+  '--chotto-callmessage-actions-flex-wrap': string;
+
   /** Отступ снизу у заголовка */
   '--chotto-callmessage-title-margin-bottom': string;
   /** Цвет участника звонка */
@@ -270,45 +279,6 @@ export interface CallMessageThemeCSSVariables {
   /** Позиционирование контекстного меню */
   '--chotto-callmessage-context-menu-position': string;
 
-  /** Позиционирование текстового диалога */
-  '--chotto-callmessage-text-dialog-position': string;
-  /** Ширина текстового диалога */
-  '--chotto-callmessage-text-dialog-width': string;
-  /** Максимальная ширина текстового диалога */
-  '--chotto-callmessage-text-dialog-max-width': string;
-  /** Левый внутренний отступ для левой стороны */
-  '--chotto-callmessage-text-dialog-left-padding-left': string;
-
-  /** Контент псевдоэлемента до текстового диалога */
-  '--chotto-callmessage-text-dialog-before-content': string;
-  /** Позиционирование псевдоэлемента до */
-  '--chotto-callmessage-text-dialog-before-position': string;
-  /** Смещение сверху псевдоэлемента до */
-  '--chotto-callmessage-text-dialog-before-top': string;
-  /** Смещение слева псевдоэлемента до */
-  '--chotto-callmessage-text-dialog-before-left': string;
-  /** Ширина псевдоэлемента до */
-  '--chotto-callmessage-text-dialog-before-width': string;
-  /** Высота псевдоэлемента до */
-  '--chotto-callmessage-text-dialog-before-height': string;
-
-  /** Левый внутренний отступ правой стороны */
-  '--chotto-callmessage-text-dialog-right-padding-left': string;
-  /** Правый внутренний отступ правой стороны */
-  '--chotto-callmessage-text-dialog-right-padding-right': string;
-  /** Отступ слева для правой стороны */
-  '--chotto-callmessage-text-dialog-right-margin-left': string;
-  /** Смещение справа псевдоэлемента до */
-  '--chotto-callmessage-text-dialog-right-before-right': string;
-  /** Смещение слева псевдоэлемента до */
-  '--chotto-callmessage-text-dialog-right-before-left': string;
-  /** Ширина span справа */
-  '--chotto-callmessage-text-dialog-right-span-width': string;
-  /** Отображение span справа */
-  '--chotto-callmessage-text-dialog-right-span-display': string;
-  /** Отступ слева у span справа */
-  '--chotto-callmessage-text-dialog-right-span-margin-left': string;
-
   /** Отображение общего контейнера лево/право */
   '--chotto-callmessage-left-right-display': string;
 
@@ -520,6 +490,42 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-call-button-font-size': string;
   /** Внешние отступы кнопки звонка */
   '--chotto-callmessage-call-button-margin': string;
+  /** Нижняя граница активной кнопки (Текст / Резюме) */
+  '--chotto-callmessage-call-button-active-border-bottom': string;
+  /** Колонка грида панели раскрытия транскрипта */
+  '--chotto-callmessage-expand-panel-grid-column': string;
+  /** Максимальная высота внутренней области панели раскрытия */
+  '--chotto-callmessage-expand-inner-max-height': string;
+  /** Вертикальная прокрутка внутренней области панели */
+  '--chotto-callmessage-expand-inner-overflow-y': string;
+  /** Внутренние отступы панели раскрытия */
+  '--chotto-callmessage-expand-inner-padding': string;
+  /** Внешний отступ сверху панели раскрытия */
+  '--chotto-callmessage-expand-inner-margin-top': string;
+  /** Размер шрифта текста в панели раскрытия */
+  '--chotto-callmessage-expand-inner-font-size': string;
+  /** Цвет текста в панели раскрытия */
+  '--chotto-callmessage-expand-inner-color': string;
+  /** Межстрочный интервал текста в панели раскрытия */
+  '--chotto-callmessage-expand-inner-line-height': string;
+  /** Ширина скроллбара в панели раскрытия */
+  '--chotto-callmessage-expand-inner-scrollbar-width': string;
+  /** Цвет фона скроллбара в панели раскрытия */
+  '--chotto-callmessage-expand-inner-scrollbar-bg': string;
+  /** Скругление ползунка скроллбара в панели раскрытия */
+  '--chotto-callmessage-expand-inner-scrollbar-thumb-radius': string;
+  /** Минимальная высота ползунка скроллбара в панели раскрытия */
+  '--chotto-callmessage-expand-inner-scrollbar-thumb-min-height': string;
+  /** Цвет ползунка скроллбара в панели раскрытия */
+  '--chotto-callmessage-expand-inner-scrollbar-thumb-bg': string;
+  /** Скругление трека скроллбара в панели раскрытия */
+  '--chotto-callmessage-expand-inner-scrollbar-track-radius': string;
+  /** Размер шрифта кнопки "Закрыть" в панели раскрытия */
+  '--chotto-callmessage-expand-close-font-size': string;
+  /** Цвет текста кнопки "Закрыть" в панели раскрытия */
+  '--chotto-callmessage-expand-close-color': string;
+  /** max-height при анимации раскрытия панели */
+  '--chotto-callmessage-expand-transition-max-height': string;
   /** Цвет иконки кнопки скачивания */
   '--chotto-callmessage-download-button-icon-color': string;
   /** Размер иконки кнопки скачивания */
@@ -530,14 +536,6 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-subtext-font-size': string;
   /** Цвет текста подзаголовка */
   '--chotto-callmessage-subtext-text-color': string;
-  /** Цвет before-полоски в текстовом диалоге */
-  '--chotto-callmessage-text-dialog-before-background-color': string;
-  /** Размер шрифта заголовка в текстовом диалоге */
-  '--chotto-callmessage-text-dialog-title-font-size': string;
-  /** Цвет текста подписи в текстовом диалоге */
-  '--chotto-callmessage-text-dialog-subtext-text-color': string;
-  /** Размер шрифта подписи в текстовом диалоге */
-  '--chotto-callmessage-text-dialog-subtext-font-size': string;
   /** Внешний отступ сообщения (контейнер left/right) */
   '--chotto-callmessage-message-margin': string;
   /** Цвет фона блока слева */

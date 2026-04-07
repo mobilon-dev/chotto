@@ -1052,7 +1052,7 @@ export const messages = [
     isMissedCall: false, 
     timestamp: '1763036585',
     header: 'Василий',
-    subText: 'whatsapp 73910001100 (основной)',
+    subText: 'whatsapp 73910001666 (основной)',
     callParticipant: 'Малафеева Любовь',
     actions: [
       { action: 'download', title: 'Скачать' },
@@ -1121,6 +1121,53 @@ export const messages = [
     subText: 'whatsapp 73910001100 (основной)',
     callParticipant: 'Малафеева Любовь',
     callAttemptDuration: '1 мин 20 сек'
+  },
+  {
+    chatId: 8,
+    dialogId: 'dlg_43543111',
+    type: "message.call",
+    direction: 'outgoing',
+    position: 'right',
+    status: 'read',
+    time: '12:20',
+    messageId: '804-transcript-demo',
+    url: audioFile,
+    callDuration: '02:15',
+    isMissedCall: false,
+    timestamp: '1763036691',
+    header: 'Георгий',
+    subText: 'whatsapp 73910001100 (основной)',
+    callParticipant: 'Малафеева Любовь',
+    recordUrl: 'https://records.services.mobilon.ru/record/wOq6ct:873fff89-1ebf-49f8-c955-8acaf129446d',
+    callSummary:
+      '{"summary":"Кратко: обсудили заказ, договорились уточнить детали и связаться завтра до 15:00."}',
+    transcript:
+      '{"replies":[{"timecode":5,"user":"2","text":"Алло, здравствуйте."},{"timecode":12,"user":"1","text":"Добрый день, перезвонил по заказу."}]}',
+    actions: [
+      { action: 'download', title: 'Скачать' },
+    ],
+  },
+  {
+    chatId: 8,
+    dialogId: 'dlg_43543111',
+    type: "message.call",
+    direction: 'outgoing',
+    position: 'right',
+    status: 'read',
+    time: '12:22',
+    messageId: '804-backend-shape',
+    url: audioFile,
+    callDuration: '00:29',
+    isMissedCall: false,
+    timestamp: '1775466618739',
+    header: 'Гергий',
+    subText: 'Гергий',
+    callParticipant: '89135292926',
+    recordUrl: 'https://records.services.mobilon.ru/record/wOq6ct:873fff89-1ebf-49f8-c955-8acaf129446d',
+    callSummary:
+      '{"summary":"Клиент выразил желание купить телефон, менеджер подтвердил возможность покупки. Дальнейший диалог оборвался преждевременно."}',
+    transcript:
+      '{"replies":[{"timecode":3.699,"user":"2","text":"раз два три"},{"timecode":5.94,"user":"1","text":"четыре пять шесть"},{"timecode":7.34,"user":"1","text":"четыре пять шесть"},{"timecode":9.2,"user":"1","text":"хочу купить телефон окей"},{"timecode":11.86,"user":"2","text":"окей"},{"timecode":12.49,"user":"1","text":"покупаете"},{"timecode":12.65,"user":"2","text":"покупай"},{"timecode":16.73,"user":"2","text":"стоп"}]}',
   },
   {
     chatId: 8,

@@ -54,7 +54,7 @@
               v-if="!message.isMissedCall"
               class="call-message__title"
             >
-              {{ callDirectionTitle }} звонок <span class="call-message__call-participant">{{ callDirectionPreposition }} {{ message.callParticipant }}</span>
+              {{ callDirectionTitle }} звонок
             </span>
             <span
               v-else
@@ -62,7 +62,7 @@
             >
               {{ callDirectionTitle }}
               <template v-if="message.direction !== 'incoming'">
-                звонок <span class="call-message__call-participant">{{ callDirectionPreposition }} {{ message.callParticipant }}</span>
+                звонок
               </template>
               <template v-else>
                 звонок
@@ -74,7 +74,7 @@
               v-if="!message.isMissedCall"
               class="call-message__title"
             >
-              {{ callDirectionTitle }} звонок <span class="call-message__call-participant">{{ callDirectionPreposition }} {{ message.callParticipant }}</span>
+              {{ callDirectionTitle }} звонок
             </span>
             <span
               v-else
@@ -82,7 +82,7 @@
             >
               {{ callDirectionTitle }}
               <template v-if="message.direction !== 'incoming'">
-                звонок <span class="call-message__call-participant">{{ callDirectionPreposition }} {{ message.callParticipant }}</span>
+                звонок
               </template>
               <template v-else>
                 звонок
@@ -99,7 +99,7 @@
         </p>
 
         <div
-          v-if="message.url && !message.isMissedCall"
+          v-if="callRecordUrl && !message.isMissedCall"
           class="call-message__audio-wrapper"
         >
           <audio
@@ -185,23 +185,101 @@
       </div>
 
       <div class="call-message__info-container">
-        <button
-          class="call-message__call-button"
-          type="button"
-          @click="handleCall"
-        >
-          Нажмите, чтобы перезвонить
-        </button>
+        <div class="call-message__actions">
+          <button
+            :class="[
+              'call-message__call-button',
+              { 'call-message__call-button--active': expandedPanel === 'text' }
+            ]"
+            type="button"
+            @click="handleText"
+          >
+            Текст
+          </button>
+          <button
+            :class="[
+              'call-message__call-button',
+              { 'call-message__call-button--active': expandedPanel === 'summary' }
+            ]"
+            type="button"
+            @click="handleResume"
+          >
+            Резюме
+          </button>
+          <button
+            class="call-message__call-button"
+            type="button"
+            @click="handleCall"
+          >
+            Перезвонить
+          </button>
+        </div>
         <span class="call-message__time">{{ message.time }}</span>
       </div>
 
-      <button
-        v-if="message.transcript?.dialog"
-        class="call-message__download-button"
-        @click="isFullTranscript = !isFullTranscript"
-      >
-        <span class="pi pi-arrow-up-right" />
-      </button>
+      <transition name="call-message-expand">
+        <div
+          v-if="expandedPanel"
+          class="call-message__expand-panel"
+        >
+          <div class="call-message__expand-inner">
+            <template v-if="expandedPanel === 'text'">
+              <p
+                v-if="!isTranscriptReady"
+                class="call-message__expand-placeholder"
+              >
+                {{ recognitionPlaceholderText }}
+              </p>
+              <p
+                v-for="(item, idx) in transcriptDialogItems"
+                :key="`tr-${idx}`"
+                class="call-message__expand-line"
+              >
+                {{ item.text }}
+              </p>
+              <template v-if="!transcriptDialogItems.length">
+                <p
+                  v-for="(line, idx) in transcriptFallbackLines"
+                  :key="`tr-fallback-${idx}`"
+                  class="call-message__expand-line"
+                >
+                  {{ line }}
+                </p>
+                <p
+                  v-if="!transcriptFallbackLines.length"
+                  class="call-message__expand-plain"
+                >
+                  {{ transcriptFallbackPlainText }}
+                </p>
+              </template>
+            </template>
+            <p
+              v-else
+              class="call-message__expand-plain"
+            >
+              <span
+                v-if="!isCallSummaryReady"
+                class="call-message__expand-placeholder"
+              >
+                {{ recognitionPlaceholderText }}
+              </span>
+              <template v-else>
+                {{ callSummaryText }}
+              </template>
+            </p>
+          </div>
+
+          <div class="call-message__expand-close-wrap">
+            <button
+              type="button"
+              class="call-message__expand-close"
+              @click="expandedPanel = null"
+            >
+              Закрыть
+            </button>
+          </div>
+        </div>
+      </transition>
 
       <button
         v-if="buttonMenuVisible && message.actions"
@@ -230,36 +308,6 @@
           @click="handleActionClick"
         />
       </transition>
-
-      <Teleport to="body">
-        <transition name="modal-fade">
-          <div
-            v-if="isFullTranscript"
-            class="call-message__modal-overlay"
-            :data-theme="getTheme().theme ? getTheme().theme : 'light'"
-          >
-            <div class="call-message__modal">
-              <button
-                class="call-message__modal-close-button"
-                @click="isFullTranscript = false"
-              >
-                <span>
-                  <i class="pi pi-times" />
-                </span>
-              </button>
-
-              <div
-                v-for="item in message.transcript?.dialog"
-                :key="item.time"
-                :class="getClass(item, elementType.textDialog)"
-              >
-                <p>{{ item.text }}</p>
-                <span>{{ item.time }}</span>
-              </div>
-            </div>
-          </div>
-        </transition>
-      </Teleport>
     </div>
   </div>
 </template>
@@ -269,16 +317,85 @@
   lang="ts"
 >
 import { ref, inject, computed, watch, toRefs, unref, nextTick, type Ref } from 'vue'
-import { ICallMessage } from '@/types'
-import { useTheme } from '@/hooks';
-import { useMessageActions, useSubtextTooltip } from '@/hooks/messages';
-import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
-import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
+import type { ICallMessage, ICallSummaryPayload, ICallTranscriptPayload } from '@/types'
+import { useMessageActions, useSubtextTooltip } from '@/hooks/messages'
+import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue'
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
 import IncomingCallIcon from './icons/IncomingCallIcon.vue'
 import OutgoingCallIcon from './icons/OutgoingCallIcon.vue'
 
-const chatAppId = inject('chatAppId')
-const { getTheme } = useTheme(chatAppId as string)
+function parseLooseJson<T>(value: unknown): T | null {
+  if (value === null || value === undefined) return null
+  if (typeof value === 'object') return value as T
+  if (typeof value !== 'string') return null
+  const trimmed = value.trim()
+  if (!trimmed) return null
+  try {
+    return JSON.parse(trimmed) as T
+  } catch {
+    return null
+  }
+}
+
+function formatTranscriptTimecode(tc: number): string {
+  if (!Number.isFinite(tc) || tc < 0) return '0:00'
+  const total = Math.floor(tc)
+  const m = Math.floor(total / 60)
+  const s = total % 60
+  return `${m}:${s.toString().padStart(2, '0')}`
+}
+
+function transcriptUserToPosition(user: string): string {
+  return user === '2' ? 'right' : 'left'
+}
+
+function getTranscriptPayload(m: ICallMessage): ICallTranscriptPayload | null {
+  const tx = m.transcript
+  if (tx && typeof tx === 'object' && 'replies' in tx) {
+    return tx as ICallTranscriptPayload
+  }
+  if (typeof tx === 'string' && tx.trim()) {
+    return parseLooseJson<ICallTranscriptPayload>(tx)
+  }
+  return null
+}
+
+function mapTranscriptRepliesToDialog(replies: ICallTranscriptPayload['replies']): Array<{ time: string; text: string; position: string }> {
+  if (!replies?.length) return []
+  return replies.map((r) => {
+    const tc = typeof r.timecode === 'number' ? r.timecode : Number(r.timecode)
+    return {
+      time: formatTranscriptTimecode(tc),
+      text: r.text ?? '',
+      position: transcriptUserToPosition(String(r.user ?? '')),
+    }
+  })
+}
+
+function resolveCallSummaryString(raw: string | undefined): string | null {
+  if (raw === undefined || raw === null) return null
+  const t = String(raw).trim()
+  if (!t) return null
+  if (t.startsWith('{')) {
+    const parsed = parseLooseJson<ICallSummaryPayload>(t)
+    const s = parsed?.summary?.trim()
+    return s || null
+  }
+  return t
+}
+
+function resolveCallSummaryFromMessage(m: ICallMessage): string | null {
+  const raw = m.callSummary
+  if (raw === undefined || raw === null) return null
+  if (typeof raw === 'object' && raw !== null && 'summary' in raw) {
+    const s = String((raw as ICallSummaryPayload).summary ?? '').trim()
+    return s || null
+  }
+  if (typeof raw === 'string') {
+    return resolveCallSummaryString(raw)
+  }
+  return null
+}
 
 // Получаем channels и selectedChat через inject (если доступны)
 // inject может вернуть ref, поэтому используем computed для реактивности
@@ -318,6 +435,13 @@ const props = defineProps({
 
 const { message, applyStyle } = toRefs(props)
 
+/** Запись звонка: url или recordUrl */
+const callRecordUrl = computed(() => {
+  const m = message.value
+  if (m.url) return m.url
+  return typeof m.recordUrl === 'string' ? m.recordUrl : undefined
+})
+
 const {
   isOpenMenu,
   buttonMenuVisible,
@@ -326,7 +450,76 @@ const {
   clickAction,
 } = useMessageActions(props.message, emit)
 
-const isFullTranscript = ref(false)
+const expandedPanel = ref<null | 'text' | 'summary'>(null)
+
+const transcriptDialogItems = computed(() => {
+  const m = message.value
+  const tx = m.transcript
+  if (tx && typeof tx === 'object' && 'dialog' in tx && tx.dialog?.length) {
+    return tx.dialog
+  }
+
+  const payload = getTranscriptPayload(m)
+  return mapTranscriptRepliesToDialog(payload?.replies)
+})
+
+const transcriptFallbackPlainText = computed(() => {
+  if (transcriptDialogItems.value.length) return ''
+
+  const m = message.value
+  const tx = m.transcript
+  if (tx && typeof tx === 'object' && 'text' in tx && tx.text) {
+    return tx.text
+  }
+
+  const payload = getTranscriptPayload(m)
+  if (payload?.replies?.length) {
+    return payload.replies.map((r) => r.text).filter(Boolean).join('\n')
+  }
+
+  return 'Текст недоступен'
+})
+
+const transcriptFallbackLines = computed(() => {
+  if (transcriptDialogItems.value.length) return []
+  return transcriptFallbackPlainText.value
+    .split(/\r?\n+/g)
+    .map((s) => s.trim())
+    .filter(Boolean)
+})
+
+const isTranscriptReady = computed(() => {
+  const tx = message.value?.transcript
+  if (!tx) return false
+  if (typeof tx === 'string') return tx.trim().length > 0
+  if (typeof tx === 'object') {
+    if ('dialog' in tx && Array.isArray(tx.dialog) && tx.dialog.length) return true
+    if ('text' in tx && typeof tx.text === 'string' && tx.text.trim()) return true
+    if ('replies' in tx && Array.isArray((tx as ICallTranscriptPayload).replies) && (tx as ICallTranscriptPayload).replies?.length) return true
+  }
+  return false
+})
+
+const isCallSummaryReady = computed(() => {
+  const raw = message.value?.callSummary
+  if (!raw) return false
+  if (typeof raw === 'string') return raw.trim().length > 0
+  if (typeof raw === 'object' && raw !== null && 'summary' in raw) {
+    return String((raw as ICallSummaryPayload).summary ?? '').trim().length > 0
+  }
+  return false
+})
+
+const recognitionPlaceholderText = 'Распознаем звонок, пожалуйста подождите...'
+
+const requestedOnDemand = ref<{ text: boolean; summary: boolean }>({
+  text: false,
+  summary: false,
+})
+
+const callSummaryText = computed(() => {
+  return resolveCallSummaryFromMessage(message.value) ?? 'Резюме недоступно'
+})
 
 const player = ref<HTMLAudioElement | null>(null)
 /** Подставляем src только при первом воспроизведении, чтобы не дергать URL до готовности файла на сервере */
@@ -381,7 +574,7 @@ const resetAudioState = () => {
 resetAudioState()
 
 watch(
-  () => message.value?.url,
+  callRecordUrl,
   (newUrl, oldUrl) => {
     if (newUrl !== oldUrl) {
       resetAudioState()
@@ -406,7 +599,8 @@ const formatCurrentTime = computed(() => formatTime(currentTime.value))
 const formatDuration = computed(() => formatTime(audioDuration.value))
 
 const togglePlayPause = async () => {
-  if (!player.value || !message.value?.url) return
+  const src = callRecordUrl.value
+  if (!player.value || !src) return
 
   if (isPlaying.value) {
     player.value.pause()
@@ -414,7 +608,7 @@ const togglePlayPause = async () => {
   } else {
     try {
       if (!lazyAudioSrc.value) {
-        lazyAudioSrc.value = message.value.url
+        lazyAudioSrc.value = src
         await nextTick()
         player.value.load()
       }
@@ -519,17 +713,6 @@ const callDirectionTitle = computed(() => {
   }
 })
 
-const callDirectionPreposition = computed(() => {
-  switch (message.value?.direction) {
-    case 'incoming':
-      return 'к'
-    case 'outgoing':
-      return 'на'
-    default:
-      return 'к'
-  }
-})
-
 const callIconColor = computed(() => {
   const isMissed = message.value?.isMissedCall
   switch (message.value?.direction) {
@@ -574,15 +757,12 @@ const channelTitle = computed(() => {
 const subtextTooltipText = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
 
 const elementType = {
-  textDialog: 'textDialog',
   message: 'message'
 }
 
 function getClass(element: { position: string }, type: string) {
   const position = element.position;
   switch (type) {
-    case 'textDialog':
-      return position === 'left' ? 'call-message__text-dialog-left' : 'call-message__text-dialog-right';
     case 'message':
       return position === 'left' ? 'call-message__left' : 'call-message__right';
     default:
@@ -594,12 +774,31 @@ const handleCall = () => {
   alert('Перезвонить')
 }
 
+const handleText = () => {
+  const next = expandedPanel.value === 'text' ? null : 'text'
+  expandedPanel.value = next
+  if (next === 'text' && !isTranscriptReady.value && !requestedOnDemand.value.text) {
+    requestedOnDemand.value.text = true
+    emit('action', { action: 'fetchTranscript', messageId: message.value.messageId })
+  }
+}
+
+const handleResume = () => {
+  const next = expandedPanel.value === 'summary' ? null : 'summary'
+  expandedPanel.value = next
+  if (next === 'summary' && !isCallSummaryReady.value && !requestedOnDemand.value.summary) {
+    requestedOnDemand.value.summary = true
+    emit('action', { action: 'fetchCallSummary', messageId: message.value.messageId })
+  }
+}
+
 // Функция для скачивания аудио
 const downloadAudio = async () => {
-  if (!message.value?.url) return
+  const src = callRecordUrl.value
+  if (!src) return
 
   try {
-    const response = await fetch(message.value.url, {
+    const response = await fetch(src, {
       headers: {
         Accept: 'audio/*'
       }
@@ -612,7 +811,7 @@ const downloadAudio = async () => {
     const contentType = response.headers.get('content-type') || ''
     const blob = await response.blob()
 
-    const urlExtension = message.value.url.split('.').pop()?.split('?')[0]?.toLowerCase() || ''
+    const urlExtension = src.split('.').pop()?.split('?')[0]?.toLowerCase() || ''
 
     const mimeToExt: Record<string, string> = {
       'audio/mpeg': 'mp3',
@@ -634,7 +833,7 @@ const downloadAudio = async () => {
       ? urlExtension
       : (mimeToExt[contentType] || 'mp3')
 
-    const urlSegments = message.value.url.split('/')
+    const urlSegments = src.split('/')
     const rawFilename = decodeURIComponent(urlSegments[urlSegments.length - 1]?.split('?')[0] || '')
 
     const filename = rawFilename
@@ -651,8 +850,8 @@ const downloadAudio = async () => {
     window.URL.revokeObjectURL(url)
   } catch (error) {
     console.error('Ошибка при скачивании аудио звонка:', error)
-    if (message.value?.url) {
-      window.open(message.value.url, '_blank')
+    if (src) {
+      window.open(src, '_blank')
     }
   }
 }

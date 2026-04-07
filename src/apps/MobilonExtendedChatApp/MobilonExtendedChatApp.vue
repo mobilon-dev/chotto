@@ -599,7 +599,8 @@ const subtextTooltipData = ref({
   '601': 'Канал: WhatsApp 7 930 666-66-66',
   '602': 'Канал: WhatsApp 7 930 666-66-66',
   '610': 'Канал: Telegram @mobilon.support',
-  '620': 'Канал: SMS 7 930 555-55-55'
+  '620': 'Канал: SMS 7 930 555-55-55',
+  '804-backend-shape': 'Звонок на номер 8 913 529-29-26'
 })
 
 // const dialogTabs = ref([]);
