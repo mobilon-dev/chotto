@@ -163,10 +163,29 @@
     border-radius: var(--chotto-sidebar-settings-btn-border-radius, 50%);
     transition: var(--chotto-sidebar-settings-btn-transition, background-color 0.2s);
     color: var(--chotto-sidebar-settings-icon-color, #5F5F5F);
+    position: var(--chotto-sidebar-settings-btn-position, relative);
     
     &:hover {
       background-color: var(--chotto-sidebar-settings-btn-hover-background-color, #EAE8E7);
     }
+  }
+
+  &__settings-indicator {
+    display: var(--chotto-sidebar-settings-indicator-display, block);
+    width: var(--chotto-sidebar-settings-indicator-width, 12px);
+    height: var(--chotto-sidebar-settings-indicator-height, 12px);
+    border-radius: var(--chotto-sidebar-settings-indicator-border-radius, 50%);
+    background-color: var(--chotto-sidebar-settings-indicator-background-color, #DC3545);
+    z-index: var(--chotto-sidebar-settings-indicator-z-index, 2);
+  }
+
+  &__settings-indicator-anchor {
+    position: var(--chotto-sidebar-settings-indicator-position, absolute);
+    top: var(--chotto-sidebar-settings-indicator-top, 10px);
+    right: var(--chotto-sidebar-settings-indicator-right, 10px);
+    transform: var(--chotto-sidebar-settings-indicator-transform, translate(35%, -35%));
+    line-height: var(--chotto-sidebar-settings-indicator-tooltip-line-height, 0);
+    z-index: var(--chotto-sidebar-settings-indicator-z-index, 2);
   }
 }
 

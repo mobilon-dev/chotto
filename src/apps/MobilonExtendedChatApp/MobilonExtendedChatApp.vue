@@ -12,6 +12,8 @@
             :sidebar-items="sidebarItems"
             :menu-actions="menuActions"
             :settings-button-mode="'action'"
+            :show-settings-indicator="true"
+            :settings-indicator-tooltip="'Потеряно соединение с каналом MAX Тестовый 79831693504. \n Для восстановления, отсканируйте QR-код в настройках'"
             @select-item="selectItem"
           />
           <ThemeMode

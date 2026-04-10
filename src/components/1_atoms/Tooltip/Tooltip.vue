@@ -13,7 +13,8 @@
         v-if="show"
         ref="tooltip"
         :data-theme="getTheme().theme ? getTheme().theme : 'light'"
-        :class="tooltipClasses" 
+        :class="tooltipClasses"
+        :style="tooltipStyle"
       >
         {{ text }}
       </span>
@@ -59,12 +60,20 @@ const props = defineProps({
   delay: {
     type: Number,
     default: 600,
+  },
+  maxWidth: {
+    type: String,
+    default: '',
   }
 })
 
 const tooltipClasses = computed(() => ({
   'tooltip__text': true,
   [`tooltip--${props.position}`]: true
+}))
+
+const tooltipStyle = computed(() => ({
+  maxWidth: props.maxWidth || undefined,
 }))
 
 const updatePosition = () => {

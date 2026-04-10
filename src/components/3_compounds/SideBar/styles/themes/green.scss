@@ -125,6 +125,20 @@
   --chotto-sidebar-settings-btn-transition: background-color 0.2s;
   --chotto-sidebar-settings-btn-hover-background-color: var(--chotto-theme-item-background-color-hover, #E8F5E9);
   --chotto-sidebar-settings-icon-color: var(--chotto-theme-secondary-text-color, #5F5F5F);
+  --chotto-sidebar-settings-btn-position: relative;
+
+  // Settings indicator
+  --chotto-sidebar-settings-indicator-display: block;
+  --chotto-sidebar-settings-indicator-width: 12px;
+  --chotto-sidebar-settings-indicator-height: 12px;
+  --chotto-sidebar-settings-indicator-border-radius: 50%;
+  --chotto-sidebar-settings-indicator-background-color: #DC3545;
+  --chotto-sidebar-settings-indicator-z-index: 2;
+  --chotto-sidebar-settings-indicator-position: absolute;
+  --chotto-sidebar-settings-indicator-top: 10px;
+  --chotto-sidebar-settings-indicator-right: 10px;
+  --chotto-sidebar-settings-indicator-transform: translate(35%, -35%);
+  --chotto-sidebar-settings-indicator-tooltip-line-height: 0;
   
   // Selected bar
   --chotto-sidebar-selected-bar-position: absolute;

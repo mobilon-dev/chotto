@@ -233,6 +233,32 @@ export interface SideBarThemeCSSVariables {
   '--chotto-sidebar-settings-btn-hover-background-color': string;
   /** Цвет иконки настроек */
   '--chotto-sidebar-settings-icon-color': string;
+  /** Позиционирование кнопки настроек */
+  '--chotto-sidebar-settings-btn-position': string;
+
+  // Settings indicator
+  /** Отображение индикатора настроек */
+  '--chotto-sidebar-settings-indicator-display': string;
+  /** Ширина индикатора настроек */
+  '--chotto-sidebar-settings-indicator-width': string;
+  /** Высота индикатора настроек */
+  '--chotto-sidebar-settings-indicator-height': string;
+  /** Радиус границы индикатора настроек */
+  '--chotto-sidebar-settings-indicator-border-radius': string;
+  /** Цвет фона индикатора настроек */
+  '--chotto-sidebar-settings-indicator-background-color': string;
+  /** Z-index индикатора настроек */
+  '--chotto-sidebar-settings-indicator-z-index': string;
+  /** Позиционирование якоря индикатора настроек */
+  '--chotto-sidebar-settings-indicator-position': string;
+  /** Позиция якоря индикатора настроек сверху */
+  '--chotto-sidebar-settings-indicator-top': string;
+  /** Позиция якоря индикатора настроек справа */
+  '--chotto-sidebar-settings-indicator-right': string;
+  /** Трансформация якоря индикатора настроек */
+  '--chotto-sidebar-settings-indicator-transform': string;
+  /** Высота строки якоря индикатора настроек */
+  '--chotto-sidebar-settings-indicator-tooltip-line-height': string;
 
   // Selected bar
   /** Позиционирование выбранной полосы */

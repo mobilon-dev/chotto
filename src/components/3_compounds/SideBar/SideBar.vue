@@ -111,6 +111,24 @@
           type="button"
         >
           <SettingsIcon />
+          <span
+            v-if="showSettingsIndicator"
+            class="sidebar__settings-indicator-anchor"
+          >
+            <Tooltip
+              v-if="settingsIndicatorTooltip"
+              :text="settingsIndicatorTooltip"
+              position="top"
+              :offset="8"
+              max-width="460px"
+            >
+              <span class="sidebar__settings-indicator" />
+            </Tooltip>
+            <span
+              v-else
+              class="sidebar__settings-indicator"
+            />
+          </span>
         </button>
       </ButtonContextMenu>
 
@@ -121,6 +139,24 @@
         @click="handleSettingsImmediateClick"
       >
         <SettingsIcon />
+        <span
+          v-if="showSettingsIndicator"
+          class="sidebar__settings-indicator-anchor"
+        >
+          <Tooltip
+            v-if="settingsIndicatorTooltip"
+            :text="settingsIndicatorTooltip"
+            position="top"
+            :offset="8"
+            max-width="460px"
+          >
+            <span class="sidebar__settings-indicator" />
+          </Tooltip>
+          <span
+            v-else
+            class="sidebar__settings-indicator"
+          />
+        </span>
       </button>
     </div>
   </div>
@@ -157,6 +193,16 @@ const props = defineProps({
     type: String,
     required: false,
     default: 'menu', // 'menu' | 'action'
+  },
+  showSettingsIndicator: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  settingsIndicatorTooltip: {
+    type: String,
+    required: false,
+    default: '',
   }
 });
 
