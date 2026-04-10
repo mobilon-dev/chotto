@@ -117,10 +117,12 @@
           >
             <Tooltip
               v-if="settingsIndicatorTooltip"
+              ref="settingsIndicatorTooltipRef"
               :text="settingsIndicatorTooltip"
               position="top"
               :offset="8"
               max-width="460px"
+              :auto-show-duration="settingsIndicatorTooltipAutoShowMs"
             >
               <span class="sidebar__settings-indicator" />
             </Tooltip>
@@ -145,10 +147,12 @@
         >
           <Tooltip
             v-if="settingsIndicatorTooltip"
+            ref="settingsIndicatorTooltipRef"
             :text="settingsIndicatorTooltip"
             position="top"
             :offset="8"
             max-width="460px"
+            :auto-show-duration="settingsIndicatorTooltipAutoShowMs"
           >
             <span class="sidebar__settings-indicator" />
           </Tooltip>
@@ -203,7 +207,13 @@ const props = defineProps({
     type: String,
     required: false,
     default: '',
-  }
+  },
+  /** Длительность автопоказа тултипа индикатора при появлении кружка, мс */
+  settingsIndicatorTooltipAutoShowMs: {
+    type: Number,
+    required: false,
+    default: 8000,
+  },
 });
 
 const items = toRef(props, 'sidebarItems');
@@ -258,6 +268,7 @@ const handleSettingsImmediateClick = () => {
 };
 
 const containerRef = ref(null);
+const settingsIndicatorTooltipRef = ref(null);
 const barVisible = ref(false);
 const barTop = ref(0);
 const barHeight = ref(40);
@@ -327,6 +338,22 @@ onUnmounted(() => {
 });
 
 watch(() => items.value.map(i => i.selected), () => nextTick(syncBarWithSelected));
+
+watch(
+  () =>
+    props.showSettings &&
+    props.showSettingsIndicator &&
+    !!props.settingsIndicatorTooltip,
+  (active, wasActive) => {
+    if (!active || wasActive === true) return;
+    nextTick(() => {
+      nextTick(() => {
+        settingsIndicatorTooltipRef.value?.startAutoShow?.();
+      });
+    });
+  },
+  { flush: 'post', immediate: true },
+);
 </script>
 
 <style scoped lang="scss">
