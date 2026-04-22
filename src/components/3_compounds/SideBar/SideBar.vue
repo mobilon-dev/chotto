@@ -116,9 +116,10 @@
             class="sidebar__settings-indicator-anchor"
           >
             <Tooltip
-              v-if="settingsIndicatorTooltip"
+              v-if="hasSettingsIndicatorTooltipContent"
               ref="settingsIndicatorTooltipRef"
               :text="settingsIndicatorTooltip"
+              :texts="normalizedSettingsIndicatorTooltipItems"
               position="top"
               :offset="8"
               max-width="460px"
@@ -146,9 +147,10 @@
           class="sidebar__settings-indicator-anchor"
         >
           <Tooltip
-            v-if="settingsIndicatorTooltip"
+            v-if="hasSettingsIndicatorTooltipContent"
             ref="settingsIndicatorTooltipRef"
             :text="settingsIndicatorTooltip"
+            :texts="normalizedSettingsIndicatorTooltipItems"
             position="top"
             :offset="8"
             max-width="460px"
@@ -208,6 +210,12 @@ const props = defineProps({
     required: false,
     default: '',
   },
+  /** Список строк для тултипа индикатора (будут показаны друг под другом) */
+  settingsIndicatorTooltipItems: {
+    type: Array,
+    required: false,
+    default: () => [],
+  },
   /** Длительность автопоказа тултипа индикатора при появлении кружка, мс */
   settingsIndicatorTooltipAutoShowMs: {
     type: Number,
@@ -220,6 +228,19 @@ const items = toRef(props, 'sidebarItems');
 const menuActions = toRef(props, 'menuActions');
 
 const emit = defineEmits(["selectItem", "settingsClick"]);
+
+const normalizedSettingsIndicatorTooltipItems = computed(() =>
+  Array.isArray(props.settingsIndicatorTooltipItems)
+    ? props.settingsIndicatorTooltipItems
+      .map(item => String(item ?? '').trim())
+      .filter(Boolean)
+    : [],
+);
+
+const hasSettingsIndicatorTooltipContent = computed(() =>
+  normalizedSettingsIndicatorTooltipItems.value.length > 0 ||
+  !!props.settingsIndicatorTooltip.trim(),
+);
 
 const fixedItems = computed(() => 
   items.value
@@ -343,7 +364,7 @@ watch(
   () =>
     props.showSettings &&
     props.showSettingsIndicator &&
-    !!props.settingsIndicatorTooltip,
+    hasSettingsIndicatorTooltipContent.value,
   (active, wasActive) => {
     if (!active || wasActive === true) return;
     nextTick(() => {
