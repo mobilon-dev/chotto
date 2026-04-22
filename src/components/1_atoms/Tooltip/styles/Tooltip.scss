@@ -19,6 +19,11 @@
   transform: var(--chotto-tooltip-transform, none);
   transition: var(--chotto-tooltip-transition, opacity 0.5s ease);
   white-space: var(--chotto-tooltip-white-space, pre-line);
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-height: min(50vh, 320px);
+  overflow-y: auto;
 }
 
 .tooltip-wrapper {

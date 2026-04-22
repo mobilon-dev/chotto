@@ -2,8 +2,8 @@
   <div 
     ref="container" 
     class="tooltip-wrapper" 
-    @mouseover="updatePosition"
-    @mouseout="hideTooltip"
+    @mouseenter="handleTriggerEnter"
+    @mouseleave="handleTriggerLeave"
   >
     <slot />
   </div>
@@ -19,6 +19,8 @@
           :data-theme="getTheme().theme ? getTheme().theme : 'light'"
           :class="tooltipClasses"
           :style="tooltipStyle"
+          @mouseenter="handleTooltipEnter"
+          @mouseleave="handleTooltipLeave"
         >
           {{ tooltipText }}
         </span>
@@ -32,7 +34,7 @@ import { computed, ref, unref, inject, nextTick, onUnmounted } from 'vue';
 // import { onMounted } from 'vue';
 import { useTheme } from '@/hooks';
 
-const chatAppId = inject('chatAppId')
+const chatAppId = inject<string | undefined>('chatAppId')
 const { getTheme } = useTheme(chatAppId as string)
 
 const container = ref<HTMLElement>() 
@@ -40,7 +42,11 @@ const tooltipItems = ref<HTMLElement[]>([])
 const show = ref(false)
 const autoTimer = ref<ReturnType<typeof setTimeout> | null>(null)
 const showTimer = ref<ReturnType<typeof setTimeout> | null>(null)
+const hideTimer = ref<ReturnType<typeof setTimeout> | null>(null)
 const STACK_GAP_PX = 6
+const HIDE_DELAY_MS = 120
+const isOverTrigger = ref(false)
+const isOverTooltip = ref(false)
 
 const props = defineProps({
   text: {
@@ -140,14 +146,28 @@ const positionTooltips = () => {
   if (!container.value || tooltipItems.value.length === 0) return;
   const bounds = container.value.getBoundingClientRect();
   const isTopPosition = props.position.startsWith('top');
+  const viewportPadding = 8;
+  const appContainer = chatAppId ? document.getElementById(chatAppId) : null;
+  const appBounds = appContainer?.getBoundingClientRect();
+  const boundaryTop = appBounds?.top ?? 0;
+  const boundaryLeft = appBounds?.left ?? 0;
+  const boundaryRight = appBounds?.right ?? window.innerWidth;
+  const boundaryBottom = appBounds?.bottom ?? window.innerHeight;
 
   tooltipItems.value.forEach((tooltipEl, index) => {
     const tBounds = tooltipEl.getBoundingClientRect();
     const coords = getTooltipPosition(bounds, tBounds);
     const shift = index * (tBounds.height + STACK_GAP_PX);
-    const top = isTopPosition ? coords.top - shift : coords.top + shift;
-    tooltipEl.style.top = `${top}px`;
-    tooltipEl.style.left = `${coords.left}px`;
+    const rawTop = isTopPosition ? coords.top - shift : coords.top + shift;
+    const minTop = boundaryTop + viewportPadding;
+    const maxTop = boundaryBottom - tBounds.height - viewportPadding;
+    const minLeft = boundaryLeft + viewportPadding;
+    const maxLeft = boundaryRight - tBounds.width - viewportPadding;
+    const clampedTop = Math.min(Math.max(rawTop, minTop), Math.max(minTop, maxTop));
+    const clampedLeft = Math.min(Math.max(coords.left, minLeft), Math.max(minLeft, maxLeft));
+
+    tooltipEl.style.top = `${clampedTop}px`;
+    tooltipEl.style.left = `${clampedLeft}px`;
   });
 };
 
@@ -160,6 +180,10 @@ const updatePosition = () => {
   if (showTimer.value) {
     clearTimeout(showTimer.value);
     showTimer.value = null;
+  }
+  if (hideTimer.value) {
+    clearTimeout(hideTimer.value);
+    hideTimer.value = null;
   }
   
   // Устанавливаем задержку перед показом
@@ -182,6 +206,10 @@ const hideTooltip = () => {
     clearTimeout(showTimer.value);
     showTimer.value = null;
   }
+  if (hideTimer.value) {
+    clearTimeout(hideTimer.value);
+    hideTimer.value = null;
+  }
   
   show.value = false
   nextTick(() => {
@@ -192,6 +220,43 @@ const hideTooltip = () => {
     });
   })
 }
+
+const scheduleHide = () => {
+  if (props.trigger === 'auto') {
+    return;
+  }
+  if (hideTimer.value) {
+    clearTimeout(hideTimer.value);
+  }
+  hideTimer.value = setTimeout(() => {
+    if (!isOverTrigger.value && !isOverTooltip.value) {
+      hideTooltip();
+    }
+  }, HIDE_DELAY_MS);
+};
+
+const handleTriggerEnter = () => {
+  isOverTrigger.value = true;
+  updatePosition();
+};
+
+const handleTriggerLeave = () => {
+  isOverTrigger.value = false;
+  scheduleHide();
+};
+
+const handleTooltipEnter = () => {
+  isOverTooltip.value = true;
+  if (hideTimer.value) {
+    clearTimeout(hideTimer.value);
+    hideTimer.value = null;
+  }
+};
+
+const handleTooltipLeave = () => {
+  isOverTooltip.value = false;
+  scheduleHide();
+};
 
 const startAutoShow = () => {
   clearAutoTimer();
@@ -218,6 +283,9 @@ const clearAutoTimer = () => {
 onUnmounted(() => {
   if (showTimer.value) {
     clearTimeout(showTimer.value);
+  }
+  if (hideTimer.value) {
+    clearTimeout(hideTimer.value);
   }
   clearAutoTimer();
 });

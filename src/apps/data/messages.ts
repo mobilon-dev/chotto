@@ -1523,6 +1523,20 @@ export const messages = [
     avatar:'https://placehold.jp/30/607d8b/ffffff/64x64.png?text=Zh',
     hasMessengerAccount: false,
   },
+  {
+    chatId: 8,
+    dialogId: 'dlg_89789222',
+    messageId: '888',
+    type: "message.text",
+    text: "Сообщение со статусом ошибки!",
+    direction: 'outgoing',
+    status: 'error',
+    statusMsg: 'Собеседник скрыл номер или не зарегистрирован в Telegram. \n\nОтправьте смс сообщение, чтобы собеседник сохранил ваш номер и вы смогли ему написать.',
+    timestamp: '1763037205',
+    header: 'Анна',
+    subText: 'Анна',
+    avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
+  },
   // Сообщения для Max диалога (dlg_00123333)
   {
     chatId: 8, 
