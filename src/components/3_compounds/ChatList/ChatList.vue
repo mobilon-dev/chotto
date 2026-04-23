@@ -88,13 +88,17 @@
       <div
         v-if="!props.isLoading && getSortedAndFilteredChats().length === 0"
         class="chat-list__no-data"
+        :style="noDataStyle"
       >
         <div class="chat-list__placeholder">
           <p class="chat-list__placeholder-title">
-            {{ placeholderTitle }}
+            {{ emptyStateTitle }}
           </p>
-          <p class="chat-list__placeholder-hint">
-            {{ placeholderHint }}
+          <p
+            v-if="emptyStateHint"
+            class="chat-list__placeholder-hint"
+          >
+            {{ emptyStateHint }}
           </p>
         </div>
       </div>
@@ -144,7 +148,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import {
+  ref,
+  computed,
+  nextTick,
+  onMounted,
+  onBeforeUnmount,
+  onUpdated,
+} from 'vue';
 import ChatItem from '@/components/2_chatlist_elements/ChatItem/ChatItem.vue';
 import ChatFilter from '@/components/2_chatlist_elements/ChatFilter/ChatFilter.vue';
 import ChatTabs from '@/components/2_chatlist_elements/ChatTabs/ChatTabs.vue';
@@ -222,7 +233,41 @@ const props = defineProps({
 const emit = defineEmits(['select', 'action', 'loadMoreChats', 'expand', 'tab-click', 'search', 'clear-search']);
 
 const refChatList = ref();
+const noDataOffset = ref(0);
 const chatsRef = computed(() => props.chats);
+const updateNoDataOffset = () => {
+  noDataOffset.value = refChatList.value?.offsetTop ?? 0;
+};
+const noDataStyle = computed(() => ({
+  transform: `translateY(${-(noDataOffset.value / 2)}px)`,
+}));
+const currentSearchQuery = computed(() => {
+  // Поиск может идти через внешний searchQuery (API поиск),
+  // либо через локальный ChatFilter (filter / filterQuery).
+  return (
+    props.searchQuery?.trim() ||
+    props.filterQuery?.trim() ||
+    filter.value?.trim() ||
+    ''
+  );
+});
+const isSearchEmptyState = computed(() =>
+  currentSearchQuery.value.length > 0 && !props.isSearching
+);
+const emptyStateTitle = computed(() => {
+  if (isSearchEmptyState.value) {
+    return `Не нашли чат по запросу "${currentSearchQuery.value}"`;
+  }
+
+  return props.placeholderTitle;
+});
+const emptyStateHint = computed(() => {
+  if (isSearchEmptyState.value) {
+    return '';
+  }
+
+  return props.placeholderHint;
+});
 
 // Используем composables
 const {
@@ -238,6 +283,7 @@ const {
 } = useChatListSelection({ chats: chatsRef, emit });
 
 const {
+  filter,
   getSortedAndFilteredChats,
   getFilter,
 } = useChatListFilter({ props, emit });
@@ -247,6 +293,20 @@ const {
   action,
   handleTabClick,
 } = useChatListActions({ emit });
+
+onMounted(async () => {
+  await nextTick();
+  updateNoDataOffset();
+  window.addEventListener('resize', updateNoDataOffset);
+});
+
+onUpdated(() => {
+  updateNoDataOffset();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateNoDataOffset);
+});
 </script>
 
 <style scoped lang="scss">
