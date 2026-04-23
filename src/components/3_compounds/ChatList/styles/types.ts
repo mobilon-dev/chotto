@@ -268,6 +268,8 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-placeholder-hint-font-size': string;
   /** Отступы подсказки плейсхолдера */
   '--chotto-chatlist-placeholder-hint-margin': string;
+  /** Отступы контейнера плейсхолдера */
+  '--chotto-chatlist-placeholder-padding': string;
 
   // Title beta badge tooltip wrapper
   /** Высота строки обёртки тултипа бейджа beta заголовка */

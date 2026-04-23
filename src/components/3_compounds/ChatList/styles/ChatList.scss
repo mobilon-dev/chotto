@@ -151,6 +151,9 @@
 
   &__placeholder {
     text-align: center;
+    padding: var(--chotto-chatlist-placeholder-padding, 0 20px);
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   &__placeholder-title {
