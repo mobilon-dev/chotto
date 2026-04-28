@@ -82,10 +82,11 @@ const contextMenuId = useId()
 
 const emit = defineEmits(['click', 'buttonClick', 'menuMouseEnter', 'menuMouseLeave']);
 
-const contextMenu = ref()
+const contextMenu = ref<HTMLElement | null>(null)
 const actionScope = ref()
 const isOpened = ref(false)
 const hasActions = computed(() => Array.isArray(props.actions) && props.actions.length > 0)
+let isOutsideClickListenerAttached = false
 
 const click = (action: ContextMenuAction) => {
   hideMenu()
@@ -189,29 +190,38 @@ const handleClickOutside = (event: MouseEvent) => {
   }
 }
 
-onMounted(() => {
+const syncContextMenuEl = () => {
   nextTick(() => {
-    contextMenu.value = document.getElementById('context-menu-' + contextMenuId + extChatAppId)
+    contextMenu.value = document.getElementById('context-menu-' + contextMenuId + extChatAppId) as HTMLElement | null
     if (contextMenu.value) {
-      // Скрываем меню сразу при монтировании
-      const t = contextMenu.value
-      t.style.display = 'none'
-      t.style.visibility = 'hidden'
-      t.style.opacity = '0'
       hideMenu()
-      document.addEventListener("click", handleClickOutside)
+      if (!isOutsideClickListenerAttached) {
+        document.addEventListener("click", handleClickOutside)
+        isOutsideClickListenerAttached = true
+      }
     }
   })
+}
+
+onMounted(() => {
+  syncContextMenuEl()
 })
 
 watch(hasActions, (value) => {
-  if (!value) {
-    hideMenu()
+  if (value) {
+    // Меню может смонтироваться позже (v-if + async actions)
+    syncContextMenuEl()
+    return
   }
+
+  hideMenu()
 })
 
 onUnmounted(() => {
-  document.removeEventListener("click", handleClickOutside)
+  if (isOutsideClickListenerAttached) {
+    document.removeEventListener("click", handleClickOutside)
+    isOutsideClickListenerAttached = false
+  }
   // Гарантируем скрытие меню при размонтировании
   if (contextMenu.value) {
     hideMenu()
