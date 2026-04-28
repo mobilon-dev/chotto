@@ -3,16 +3,25 @@
     <button
       :id="'container-' + contextMenuId + extChatAppId"
       ref="actionScope"
-      class="contact-context-menu__button"
+      :class="[
+        'contact-context-menu__button',
+        { 'contact-context-menu__button--no-actions': !hasActions },
+      ]"
       @mouseenter="hover"
       @mouseleave="hoverOut"
       @click="toggle"
     >
-      <span class="contact-context-menu__icon">
+      <span
+        :class="[
+          'contact-context-menu__icon',
+          { 'contact-context-menu__icon--no-actions': !hasActions },
+        ]"
+      >
         <MenuIcon />
       </span>
       <Teleport to="body">
         <ContextMenu
+          v-if="hasActions"
           :id="'context-menu-' + contextMenuId + extChatAppId"
           :actions="actions"
           :data-theme="getTheme().theme ? getTheme().theme : 'light'"
@@ -26,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, useId, inject, nextTick, type Component} from 'vue';
+import { ref, onMounted, onUnmounted, useId, inject, nextTick, computed, watch, type Component} from 'vue';
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import { useTheme } from '@/hooks';
 import MenuIcon from '../../1_icons/MenuIcon.vue';
@@ -76,6 +85,7 @@ const emit = defineEmits(['click', 'buttonClick', 'menuMouseEnter', 'menuMouseLe
 const contextMenu = ref()
 const actionScope = ref()
 const isOpened = ref(false)
+const hasActions = computed(() => Array.isArray(props.actions) && props.actions.length > 0)
 
 const click = (action: ContextMenuAction) => {
   hideMenu()
@@ -83,7 +93,7 @@ const click = (action: ContextMenuAction) => {
 }
 
 const toggle = () => {
-  if (!props.disabled) {
+  if (!props.disabled && hasActions.value) {
     if (props.mode == 'click' && !isOpened.value) {
       updatePosition()
     }
@@ -95,7 +105,7 @@ const toggle = () => {
 }
 
 const hover = () => {
-  if (!props.disabled) {
+  if (!props.disabled && hasActions.value) {
     if (props.mode == 'hover') {
       updatePosition()
     }
@@ -103,7 +113,7 @@ const hover = () => {
 }
 
 const hoverOut = () => {
-  if (!props.disabled) {
+  if (!props.disabled && hasActions.value) {
     if (props.mode == 'hover') {
       hideMenu()
     }
@@ -112,7 +122,7 @@ const hoverOut = () => {
 
 const hoverCM = () => {
   emit('menuMouseEnter')
-  if (!props.disabled) {
+  if (!props.disabled && hasActions.value) {
     if (props.mode == 'hover') {
       updatePosition()
     }
@@ -121,7 +131,7 @@ const hoverCM = () => {
 
 const hoverOutCM = () => {
   emit('menuMouseLeave')
-  if (!props.disabled) {
+  if (!props.disabled && hasActions.value) {
     if (props.mode == 'hover') {
       hideMenu()
     }
@@ -129,6 +139,10 @@ const hoverOutCM = () => {
 }
 
 const updatePosition = () => {
+  if (!hasActions.value) {
+    return
+  }
+
   if (actionScope.value && contextMenu.value){
     const t = contextMenu.value
     const bounds = actionScope.value.getBoundingClientRect()
@@ -188,6 +202,12 @@ onMounted(() => {
       document.addEventListener("click", handleClickOutside)
     }
   })
+})
+
+watch(hasActions, (value) => {
+  if (!value) {
+    hideMenu()
+  }
 })
 
 onUnmounted(() => {

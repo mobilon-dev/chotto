@@ -443,7 +443,9 @@ const menuActions = [
   }
 ];
 
-const contactActions = [
+const TEST_CHAT_ID_WITHOUT_CONTACT_MENU = 5;
+
+const defaultContactActions = [
   {
     id: 'open_crm',
     title: 'Открыть контакт в CRM',
@@ -496,6 +498,14 @@ const {
 
 const selectedChat = ref(null);
 const selectedDialog = ref(null)
+
+const contactActions = computed(() => {
+  if (selectedChat.value?.chatId === TEST_CHAT_ID_WITHOUT_CONTACT_MENU) {
+    return []; // или null / undefined
+  }
+
+  return defaultContactActions;
+});
 
 const messages = ref([]);
 

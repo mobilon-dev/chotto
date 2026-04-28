@@ -30,10 +30,22 @@
       transform: var(--chotto-contactcontextmenu-button-active-transform, scale(0.95));
     }
 
+    &.contact-context-menu__button--no-actions {
+      cursor: default;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
     .contact-context-menu__icon {
       display: var(--chotto-contactcontextmenu-icon-display, flex);
       align-items: var(--chotto-contactcontextmenu-icon-align-items, center);
       justify-content: var(--chotto-contactcontextmenu-icon-justify-content, center);
+
+      &.contact-context-menu__icon--no-actions {
+        opacity: 0.6;
+      }
     }
   }
 }
