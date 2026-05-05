@@ -170,8 +170,12 @@
       />
 
       <div class="audio-message__info-container">
-        <div class="audio-message__actions">
+        <div
+          v-if="hasTextOption || hasSummaryOption"
+          class="audio-message__actions"
+        >
           <button
+            v-if="hasTextOption"
             :class="[
               'audio-message__action-button',
               { 'audio-message__action-button--active': expandedPanel === 'text' }
@@ -182,6 +186,7 @@
             Текст
           </button>
           <button
+            v-if="hasSummaryOption"
             :class="[
               'audio-message__action-button',
               { 'audio-message__action-button--active': expandedPanel === 'summary' }
@@ -214,7 +219,7 @@
 
       <transition name="audio-message-expand">
         <div
-          v-if="expandedPanel"
+          v-if="isExpandedPanelVisible"
           class="audio-message__expand-panel"
         >
           <div class="audio-message__expand-inner">
@@ -223,16 +228,14 @@
                 v-if="!isTranscriptReady"
                 class="audio-message__expand-placeholder"
               >
-                {{ recognitionPlaceholderText }}
+                {{ transcriptPlaceholderText }}
               </p>
 
               <p
-                v-for="(line, idx) in transcriptLines"
-                :key="`au-tr-${idx}`"
-                class="audio-message__expand-line"
-              >
-                {{ line }}
-              </p>
+                v-else
+                class="audio-message__expand-plain"
+                v-html="transcriptHtml"
+              />
             </template>
 
             <p
@@ -243,10 +246,10 @@
                 v-if="!isSummaryReady"
                 class="audio-message__expand-placeholder"
               >
-                {{ recognitionPlaceholderText }}
+                {{ summaryPlaceholderText }}
               </span>
               <template v-else>
-                {{ summaryText }}
+                <span v-html="summaryHtml" />
               </template>
             </p>
           </div>
@@ -317,39 +320,7 @@ import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/Mess
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageActions, useMessageLinks, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
-import type { IAudioMessage, ICallSummaryPayload, ICallTranscriptPayload } from '@/types';
-
-function parseLooseJson<T>(value: unknown): T | null {
-  if (value === null || value === undefined) return null
-  if (typeof value === 'object') return value as T
-  if (typeof value !== 'string') return null
-  const trimmed = value.trim()
-  if (!trimmed) return null
-  try {
-    return JSON.parse(trimmed) as T
-  } catch {
-    return null
-  }
-}
-
-function resolveSummaryString(raw: unknown): string | null {
-  if (raw === null || raw === undefined) return null
-  if (typeof raw === 'object' && raw !== null && 'summary' in raw) {
-    const s = String((raw as ICallSummaryPayload).summary ?? '').trim()
-    return s || null
-  }
-  if (typeof raw === 'string') {
-    const t = raw.trim()
-    if (!t) return null
-    if (t.startsWith('{')) {
-      const parsed = parseLooseJson<ICallSummaryPayload>(t)
-      const s = parsed?.summary?.trim()
-      return s || null
-    }
-    return t
-  }
-  return null
-}
+import type { IAudioMessage, IAudioRecognitionPayload, IAudioSummaryPayload } from '@/types';
 
 // Define props
 const props = defineProps({
@@ -494,43 +465,83 @@ const {
 } = useMessageActions(props.message, emit)
 
 const expandedPanel = ref<null | 'text' | 'summary'>(null)
-const recognitionPlaceholderText = 'Распознаем звонок, пожалуйста подождите...'
 const requestedOnDemand = ref<{ text: boolean; summary: boolean }>({ text: false, summary: false })
+const recognitionReadyStatus = 'RECOGNITION_READY'
+const summaryReadyStatus = 'SUMMARY_READY'
 
-const transcriptPayload = computed(() => {
+const transcriptData = computed<IAudioRecognitionPayload | null>(() => {
   const m = props.message as IAudioMessage
-  const tx = m.transcript ?? m.meta?.transcript
-  if (!tx) return null
-  if (typeof tx === 'object' && tx !== null && 'replies' in tx) return tx as ICallTranscriptPayload
-  if (typeof tx === 'string' && tx.trim()) return parseLooseJson<ICallTranscriptPayload>(tx)
-  return null
+  const raw = m.transcript ?? (m.meta?.transcript as IAudioRecognitionPayload | undefined)
+  if (!raw || typeof raw !== 'object') return null
+  return raw
 })
 
-const transcriptLines = computed(() => {
-  const payload = transcriptPayload.value
-  if (payload?.replies?.length) {
-    return payload.replies.map((r) => String(r.text ?? '').trim()).filter(Boolean)
+const summaryData = computed<IAudioSummaryPayload | null>(() => {
+  const m = props.message as IAudioMessage
+  const raw = m.summary ?? (m.meta?.summary as IAudioSummaryPayload | undefined)
+  if (!raw || typeof raw !== 'object') return null
+  return raw
+})
+
+const transcriptHtml = computed(() => {
+  const html = transcriptData.value?.html
+  if (typeof html !== 'string') return ''
+  return html.trim()
+})
+
+const isTranscriptReady = computed(() => {
+  return transcriptData.value?.status === recognitionReadyStatus && transcriptHtml.value.length > 0
+})
+
+const summaryHtml = computed(() => {
+  const html = summaryData.value?.html
+  if (typeof html !== 'string') return ''
+  return html.trim()
+})
+
+const isSummaryReady = computed(() => {
+  return summaryData.value?.status === summaryReadyStatus && summaryHtml.value.length > 0
+})
+
+const hasTextOption = computed(() => {
+  return Boolean(transcriptData.value?.status)
+})
+
+const hasSummaryOption = computed(() => {
+  return Boolean(summaryData.value?.status)
+})
+
+const isExpandedPanelVisible = computed(() => {
+  if (expandedPanel.value === 'text') return hasTextOption.value
+  if (expandedPanel.value === 'summary') return hasSummaryOption.value
+  return false
+})
+
+const transcriptPlaceholderText = computed(() => {
+  switch (transcriptData.value?.status) {
+    case 'RECOGNITION_PLANNED':
+      return 'Распознаем сообщение, пожалуйста подождите...'
+    case 'RECOGNITION_ERROR':
+      return 'Не удалось распознать сообщение'
+    case 'RECOGNITION_NOT_CONFIGURED':
+      return 'Опция распознавания не включена'
+    default:
+      return 'Текст сообщения недоступен'
   }
-  const m = props.message as IAudioMessage
-  const txt = typeof m.transcript === 'object' && m.transcript && 'text' in m.transcript ? (m.transcript.text ?? '') : ''
-  return String(txt)
-    .split(/\r?\n+/g)
-    .map((s) => s.trim())
-    .filter(Boolean)
 })
 
-const isTranscriptReady = computed(() => transcriptLines.value.length > 0)
-
-const summaryText = computed(() => {
-  const m = props.message as IAudioMessage
-  return (
-    resolveSummaryString(m.summary) ??
-    resolveSummaryString(m.meta?.summary) ??
-    'Резюме недоступно'
-  )
+const summaryPlaceholderText = computed(() => {
+  switch (summaryData.value?.status) {
+    case 'SUMMARY_PLANNED':
+      return 'Формируем резюме, пожалуйста подождите...'
+    case 'SUMMARY_ERROR':
+      return 'Не удалось сформировать резюме'
+    case 'SUMMARY_NOT_CONFIGURED':
+      return 'Опция формирования резюме не включена'
+    default:
+      return 'Резюме недоступно'
+  }
 })
-
-const isSummaryReady = computed(() => summaryText.value !== 'Резюме недоступно')
 
 // Функция для скачивания аудио
 const downloadAudio = async () => {
@@ -741,6 +752,7 @@ function handleSmsInvite() {
 }
 
 const handleText = () => {
+  if (!hasTextOption.value) return
   const next = expandedPanel.value === 'text' ? null : 'text'
   expandedPanel.value = next
   if (next === 'text' && !isTranscriptReady.value && !requestedOnDemand.value.text) {
@@ -750,6 +762,7 @@ const handleText = () => {
 }
 
 const handleSummary = () => {
+  if (!hasSummaryOption.value) return
   const next = expandedPanel.value === 'summary' ? null : 'summary'
   expandedPanel.value = next
   if (next === 'summary' && !isSummaryReady.value && !requestedOnDemand.value.summary) {

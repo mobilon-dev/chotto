@@ -78,14 +78,14 @@ export interface IAudioMessage {
   actions?: IAction[]
   views?: number,
   text?: string,
-  /** Транскрипт: мок {text}, JSON-строка {"replies":[...]}, либо объект {replies} */
-  transcript?: { text: string } | string | ICallTranscriptPayload;
-  /** Резюме: JSON-строка {"summary":"..."}, либо объект {summary} */
-  summary?: string | ICallSummaryPayload;
+  /** Транскрипт со статусом и HTML */
+  transcript?: IAudioRecognitionPayload
+  /** Резюме со статусом и HTML */
+  summary?: IAudioSummaryPayload
   /** Сырые поля API для audio (пример: meta.transcript/meta.summary/meta.url) */
   meta?: Record<string, unknown> & {
-    transcript?: string | ICallTranscriptPayload
-    summary?: string | ICallSummaryPayload
+    transcript?: IAudioRecognitionPayload
+    summary?: IAudioSummaryPayload
     url?: string
   }
   reply?: Reply,
@@ -113,6 +113,28 @@ export interface ICallTranscriptPayload {
 /** Распарсенное тело строки meta.callSummary */
 export interface ICallSummaryPayload {
   summary?: string
+}
+
+export type AudioRecognitionStatus =
+  | 'RECOGNITION_PLANNED'
+  | 'RECOGNITION_READY'
+  | 'RECOGNITION_NOT_CONFIGURED'
+  | 'RECOGNITION_ERROR'
+
+export type AudioSummaryStatus =
+  | 'SUMMARY_PLANNED'
+  | 'SUMMARY_READY'
+  | 'SUMMARY_NOT_CONFIGURED'
+  | 'SUMMARY_ERROR'
+
+export interface IAudioRecognitionPayload {
+  status?: AudioRecognitionStatus
+  html?: string
+}
+
+export interface IAudioSummaryPayload {
+  status?: AudioSummaryStatus
+  html?: string
 }
 
 export interface ICallMessage {
