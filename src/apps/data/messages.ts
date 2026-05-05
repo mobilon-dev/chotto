@@ -1143,8 +1143,10 @@ export const messages = [
     subText: 'whatsapp 73910001100 (основной)',
     callParticipant: 'Малафеева Любовь',
     recordUrl: 'https://records.services.mobilon.ru/record/wOq6ct:873fff89-1ebf-49f8-c955-8acaf129446d',
-    callSummary:
-      '{"summary":"Кратко: обсудили заказ, договорились уточнить детали и связаться завтра до 15:00."}',
+    summary: {
+      status: 'SUMMARY_READY',
+      html: '<p><strong>Кратко:</strong> обсудили заказ, договорились уточнить детали и связаться завтра до 15:00.</p>'
+    },
     transcript:
       '{"replies":[{"timecode":5,"user":"2","text":"Алло, здравствуйте."},{"timecode":12,"user":"1","text":"Добрый день, перезвонил по заказу."}]}',
     actions: [
@@ -1168,10 +1170,14 @@ export const messages = [
     subText: 'Гергий',
     callParticipant: '89135292926',
     recordUrl: 'https://records.services.mobilon.ru/record/wOq6ct:873fff89-1ebf-49f8-c955-8acaf129446d',
-    callSummary:
-      '{"summary":"Клиент выразил желание купить телефон, менеджер подтвердил возможность покупки. Дальнейший диалог оборвался преждевременно."}',
-    transcript:
-      '{"replies":[{"timecode":3.699,"user":"2","text":"раз два три"},{"timecode":5.94,"user":"1","text":"четыре пять шесть"},{"timecode":7.34,"user":"1","text":"четыре пять шесть"},{"timecode":9.2,"user":"1","text":"хочу купить телефон окей"},{"timecode":11.86,"user":"2","text":"окей"},{"timecode":12.49,"user":"1","text":"покупаете"},{"timecode":12.65,"user":"2","text":"покупай"},{"timecode":16.73,"user":"2","text":"стоп"}]}',
+    transcript: {
+      status: 'RECOGNITION_READY',
+      html: '<p><strong>Оператор:</strong> Раз, два, три. Четыре, пять, шесть.</p><p><strong>Клиент:</strong> Хочу купить телефон.</p><p><strong>Оператор:</strong> Окей, оформляем покупку.</p>'
+    },
+    summary: {
+      status: 'SUMMARY_READY',
+      html: '<p><strong>Итог:</strong> клиент хочет купить телефон, оператор подтвердил возможность покупки.</p>'
+    },
   },
   {
     chatId: 8,
@@ -1190,6 +1196,12 @@ export const messages = [
     subText: 'Гергий',
     callParticipant: '89135292926',
     recordUrl: 'https://records.services.mobilon.ru/record/wOq6ct:873fff89-1ebf-49f8-c955-8acaf129446d',
+    // transcript: {
+    //   status: 'RECOGNITION_ERROR',
+    // },
+    // summary: {
+    //   status: 'SUMMARY_NOT_CONFIGURED',
+    // },
   },
   {
     chatId: 8,

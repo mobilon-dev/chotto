@@ -186,28 +186,30 @@
 
       <div class="call-message__info-container">
         <div class="call-message__actions">
-          <button
-            v-if="!message.isMissedCall"
-            :class="[
-              'call-message__call-button',
-              { 'call-message__call-button--active': expandedPanel === 'text' }
-            ]"
-            type="button"
-            @click="handleText"
-          >
-            Текст
-          </button>
-          <button
-            v-if="!message.isMissedCall"
-            :class="[
-              'call-message__call-button',
-              { 'call-message__call-button--active': expandedPanel === 'summary' }
-            ]"
-            type="button"
-            @click="handleResume"
-          >
-            Резюме
-          </button>
+          <template v-if="!message.isMissedCall && (hasTextOption || hasSummaryOption)">
+            <button
+              v-if="hasTextOption"
+              :class="[
+                'call-message__call-button',
+                { 'call-message__call-button--active': expandedPanel === 'text' }
+              ]"
+              type="button"
+              @click="handleText"
+            >
+              Текст
+            </button>
+            <button
+              v-if="hasSummaryOption"
+              :class="[
+                'call-message__call-button',
+                { 'call-message__call-button--active': expandedPanel === 'summary' }
+              ]"
+              type="button"
+              @click="handleResume"
+            >
+              Резюме
+            </button>
+          </template>
           <button
             class="call-message__call-button"
             type="button"
@@ -221,7 +223,7 @@
 
       <transition name="call-message-expand">
         <div
-          v-if="expandedPanel"
+          v-if="isExpandedPanelVisible"
           class="call-message__expand-panel"
         >
           <div class="call-message__expand-inner">
@@ -230,30 +232,13 @@
                 v-if="!isTranscriptReady"
                 class="call-message__expand-placeholder"
               >
-                {{ recognitionPlaceholderText }}
+                {{ transcriptPlaceholderText }}
               </p>
               <p
-                v-for="(item, idx) in transcriptDialogItems"
-                :key="`tr-${idx}`"
-                class="call-message__expand-line"
-              >
-                {{ item.text }}
-              </p>
-              <template v-if="!transcriptDialogItems.length">
-                <p
-                  v-for="(line, idx) in transcriptFallbackLines"
-                  :key="`tr-fallback-${idx}`"
-                  class="call-message__expand-line"
-                >
-                  {{ line }}
-                </p>
-                <p
-                  v-if="!transcriptFallbackLines.length"
-                  class="call-message__expand-plain"
-                >
-                  {{ transcriptFallbackPlainText }}
-                </p>
-              </template>
+                v-else
+                class="call-message__expand-plain"
+                v-html="transcriptHtml"
+              />
             </template>
             <p
               v-else
@@ -263,10 +248,10 @@
                 v-if="!isCallSummaryReady"
                 class="call-message__expand-placeholder"
               >
-                {{ recognitionPlaceholderText }}
+                {{ summaryPlaceholderText }}
               </span>
               <template v-else>
-                {{ callSummaryText }}
+                <span v-html="summaryHtml" />
               </template>
             </p>
           </div>
@@ -319,85 +304,13 @@
   lang="ts"
 >
 import { ref, inject, computed, watch, toRefs, unref, nextTick, type Ref } from 'vue'
-import type { ICallMessage, ICallSummaryPayload, ICallTranscriptPayload } from '@/types'
+import type { IAudioRecognitionPayload, IAudioSummaryPayload, ICallMessage } from '@/types'
 import { useMessageActions, useSubtextTooltip } from '@/hooks/messages'
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue'
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
 import IncomingCallIcon from './icons/IncomingCallIcon.vue'
 import OutgoingCallIcon from './icons/OutgoingCallIcon.vue'
 
-function parseLooseJson<T>(value: unknown): T | null {
-  if (value === null || value === undefined) return null
-  if (typeof value === 'object') return value as T
-  if (typeof value !== 'string') return null
-  const trimmed = value.trim()
-  if (!trimmed) return null
-  try {
-    return JSON.parse(trimmed) as T
-  } catch {
-    return null
-  }
-}
-
-function formatTranscriptTimecode(tc: number): string {
-  if (!Number.isFinite(tc) || tc < 0) return '0:00'
-  const total = Math.floor(tc)
-  const m = Math.floor(total / 60)
-  const s = total % 60
-  return `${m}:${s.toString().padStart(2, '0')}`
-}
-
-function transcriptUserToPosition(user: string): string {
-  return user === '2' ? 'right' : 'left'
-}
-
-function getTranscriptPayload(m: ICallMessage): ICallTranscriptPayload | null {
-  const tx = m.transcript
-  if (tx && typeof tx === 'object' && 'replies' in tx) {
-    return tx as ICallTranscriptPayload
-  }
-  if (typeof tx === 'string' && tx.trim()) {
-    return parseLooseJson<ICallTranscriptPayload>(tx)
-  }
-  return null
-}
-
-function mapTranscriptRepliesToDialog(replies: ICallTranscriptPayload['replies']): Array<{ time: string; text: string; position: string }> {
-  if (!replies?.length) return []
-  return replies.map((r) => {
-    const tc = typeof r.timecode === 'number' ? r.timecode : Number(r.timecode)
-    return {
-      time: formatTranscriptTimecode(tc),
-      text: r.text ?? '',
-      position: transcriptUserToPosition(String(r.user ?? '')),
-    }
-  })
-}
-
-function resolveCallSummaryString(raw: string | undefined): string | null {
-  if (raw === undefined || raw === null) return null
-  const t = String(raw).trim()
-  if (!t) return null
-  if (t.startsWith('{')) {
-    const parsed = parseLooseJson<ICallSummaryPayload>(t)
-    const s = parsed?.summary?.trim()
-    return s || null
-  }
-  return t
-}
-
-function resolveCallSummaryFromMessage(m: ICallMessage): string | null {
-  const raw = m.callSummary
-  if (raw === undefined || raw === null) return null
-  if (typeof raw === 'object' && raw !== null && 'summary' in raw) {
-    const s = String((raw as ICallSummaryPayload).summary ?? '').trim()
-    return s || null
-  }
-  if (typeof raw === 'string') {
-    return resolveCallSummaryString(raw)
-  }
-  return null
-}
 
 // Получаем channels и selectedChat через inject (если доступны)
 // inject может вернуть ref, поэтому используем computed для реактивности
@@ -453,74 +366,84 @@ const {
 } = useMessageActions(props.message, emit)
 
 const expandedPanel = ref<null | 'text' | 'summary'>(null)
+const recognitionReadyStatus = 'RECOGNITION_READY'
+const summaryReadyStatus = 'SUMMARY_READY'
 
-const transcriptDialogItems = computed(() => {
-  const m = message.value
-  const tx = m.transcript
-  if (tx && typeof tx === 'object' && 'dialog' in tx && tx.dialog?.length) {
-    return tx.dialog
-  }
-
-  const payload = getTranscriptPayload(m)
-  return mapTranscriptRepliesToDialog(payload?.replies)
+const transcriptData = computed<IAudioRecognitionPayload | null>(() => {
+  const tx = message.value?.transcript
+  if (!tx || typeof tx !== 'object') return null
+  return tx as IAudioRecognitionPayload
 })
 
-const transcriptFallbackPlainText = computed(() => {
-  if (transcriptDialogItems.value.length) return ''
-
-  const m = message.value
-  const tx = m.transcript
-  if (tx && typeof tx === 'object' && 'text' in tx && tx.text) {
-    return tx.text
-  }
-
-  const payload = getTranscriptPayload(m)
-  if (payload?.replies?.length) {
-    return payload.replies.map((r) => r.text).filter(Boolean).join('\n')
-  }
-
-  return 'Текст недоступен'
+const summaryData = computed<IAudioSummaryPayload | null>(() => {
+  const raw = message.value?.summary
+  if (!raw || typeof raw !== 'object') return null
+  return raw as IAudioSummaryPayload
 })
 
-const transcriptFallbackLines = computed(() => {
-  if (transcriptDialogItems.value.length) return []
-  return transcriptFallbackPlainText.value
-    .split(/\r?\n+/g)
-    .map((s) => s.trim())
-    .filter(Boolean)
+const transcriptHtml = computed(() => {
+  const html = transcriptData.value?.html
+  if (typeof html !== 'string') return ''
+  return html.trim()
+})
+
+const summaryHtml = computed(() => {
+  const html = summaryData.value?.html
+  if (typeof html !== 'string') return ''
+  return html.trim()
 })
 
 const isTranscriptReady = computed(() => {
-  const tx = message.value?.transcript
-  if (!tx) return false
-  if (typeof tx === 'string') return tx.trim().length > 0
-  if (typeof tx === 'object') {
-    if ('dialog' in tx && Array.isArray(tx.dialog) && tx.dialog.length) return true
-    if ('text' in tx && typeof tx.text === 'string' && tx.text.trim()) return true
-    if ('replies' in tx && Array.isArray((tx as ICallTranscriptPayload).replies) && (tx as ICallTranscriptPayload).replies?.length) return true
-  }
-  return false
+  return transcriptData.value?.status === recognitionReadyStatus && transcriptHtml.value.length > 0
 })
 
 const isCallSummaryReady = computed(() => {
-  const raw = message.value?.callSummary
-  if (!raw) return false
-  if (typeof raw === 'string') return raw.trim().length > 0
-  if (typeof raw === 'object' && raw !== null && 'summary' in raw) {
-    return String((raw as ICallSummaryPayload).summary ?? '').trim().length > 0
-  }
-  return false
+  return summaryData.value?.status === summaryReadyStatus && summaryHtml.value.length > 0
 })
-
-const recognitionPlaceholderText = 'Распознаем звонок, пожалуйста подождите...'
 
 const requestedOnDemand = ref<{ text: boolean; summary: boolean }>({
   text: false,
   summary: false,
 })
 
-const callSummaryText = computed(() => {
-  return resolveCallSummaryFromMessage(message.value) ?? 'Резюме недоступно'
+const hasTextOption = computed(() => {
+  return Boolean(transcriptData.value?.status) && !message.value?.isMissedCall
+})
+
+const hasSummaryOption = computed(() => {
+  return Boolean(summaryData.value?.status) && !message.value?.isMissedCall
+})
+
+const isExpandedPanelVisible = computed(() => {
+  if (expandedPanel.value === 'text') return hasTextOption.value
+  if (expandedPanel.value === 'summary') return hasSummaryOption.value
+  return false
+})
+
+const transcriptPlaceholderText = computed(() => {
+  switch (transcriptData.value?.status) {
+    case 'RECOGNITION_PLANNED':
+      return 'Распознаем звонок, пожалуйста подождите...'
+    case 'RECOGNITION_ERROR':
+      return 'Не удалось распознать звонок'
+    case 'RECOGNITION_NOT_CONFIGURED':
+      return 'Опция распознавания не включена'
+    default:
+      return 'Текст звонка недоступен'
+  }
+})
+
+const summaryPlaceholderText = computed(() => {
+  switch (summaryData.value?.status) {
+    case 'SUMMARY_PLANNED':
+      return 'Формируем резюме, пожалуйста подождите...'
+    case 'SUMMARY_ERROR':
+      return 'Не удалось сформировать резюме'
+    case 'SUMMARY_NOT_CONFIGURED':
+      return 'Опция формирования резюме не включена'
+    default:
+      return 'Резюме недоступно'
+  }
 })
 
 const player = ref<HTMLAudioElement | null>(null)
@@ -777,6 +700,7 @@ const handleCall = () => {
 }
 
 const handleText = () => {
+  if (!hasTextOption.value) return
   const next = expandedPanel.value === 'text' ? null : 'text'
   expandedPanel.value = next
   if (next === 'text' && !isTranscriptReady.value && !requestedOnDemand.value.text) {
@@ -786,6 +710,7 @@ const handleText = () => {
 }
 
 const handleResume = () => {
+  if (!hasSummaryOption.value) return
   const next = expandedPanel.value === 'summary' ? null : 'summary'
   expandedPanel.value = next
   if (next === 'summary' && !isCallSummaryReady.value && !requestedOnDemand.value.summary) {

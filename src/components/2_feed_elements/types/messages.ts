@@ -1,4 +1,4 @@
-import { IAction, IDialog } from '@types'
+import { IAction } from '@types'
 
 export interface Reply {
   messageId: string
@@ -110,11 +110,6 @@ export interface ICallTranscriptPayload {
   replies?: ICallTranscriptReply[]
 }
 
-/** Распарсенное тело строки meta.callSummary */
-export interface ICallSummaryPayload {
-  summary?: string
-}
-
 export type AudioRecognitionStatus =
   | 'RECOGNITION_PLANNED'
   | 'RECOGNITION_READY'
@@ -157,18 +152,10 @@ export interface ICallMessage {
   text?: string
   actions?: IAction[]
   views?: number
-  /**
-   * Транскрипт: JSON-строка {"replies":[...]}, объект с replies, либо мок { dialog, text }
-   */
-  transcript?:
-    | string
-    | ICallTranscriptPayload
-    | {
-        dialog?: IDialog[]
-        text?: string
-      }
-  /** Резюме: строка, JSON-строка {"summary":"..."} или объект { summary } */
-  callSummary?: string | ICallSummaryPayload
+  /** Транскрипт со статусом и HTML */
+  transcript?: IAudioRecognitionPayload
+  /** Резюме со статусом и HTML */
+  summary?: IAudioSummaryPayload
   reactions?: MessageReactions
   backgroundColor?: string
   hasMessengerAccount?: boolean
