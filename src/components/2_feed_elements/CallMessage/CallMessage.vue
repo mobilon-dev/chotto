@@ -329,13 +329,22 @@ const selectedChat = computed(() => {
   return unref(selectedChatInjected)
 })
 
-const emit = defineEmits(['action', 'reply'])
+const emit = defineEmits(['action', 'reply', 'call'])
 
 // Define props
 const props = defineProps({
   message: {
     type: Object as () => ICallMessage,
     required: true,
+  },
+  /**
+   * Позволяет переопределить действие кнопки "Перезвонить" снаружи (например, из feed).
+   * Если не задано, компонент эмитит событие `call`.
+   */
+  onCall: {
+    type: Function as unknown as () => ((message: ICallMessage) => void) | undefined,
+    required: false,
+    default: undefined,
   },
   applyStyle: {
     type: Function,
@@ -696,7 +705,12 @@ function getClass(element: { position: string }, type: string) {
 }
 
 const handleCall = () => {
-  alert('Перезвонить')
+  if (typeof props.onCall === 'function') {
+    props.onCall(message.value)
+    return
+  }
+
+  emit('call', { message: message.value })
 }
 
 const handleText = () => {

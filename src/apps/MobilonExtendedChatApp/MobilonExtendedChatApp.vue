@@ -189,6 +189,7 @@
                   feed-keyboard-align="left"
                   :reactions-enabled="true"
                   :subtext-tooltip-data="subtextTooltipData"
+                  :call-message-on-callback="handleCallMessageCallback"
                   @message-action="messageAction"
                   @load-more="loadMore"
                   @load-more-down="loadMoreDown"
@@ -782,6 +783,12 @@ const chatAction = async (data) => {
 const messageAction = (data) => {
   console.log("message action", data);
 };
+
+const handleCallMessageCallback = (message) => {
+  // Пример интеграции: сюда подключается реальный "перезвон" в проекте-потребителе.
+  console.log('call callback (from Feed -> CallMessage)', message)
+  alert('Перезвонить!')
+}
 
 const getUsers = () => {
   return props.dataProvider.getUsers();

@@ -47,6 +47,7 @@
           :reactions-enabled="reactionsEnabled"
           :subtext-tooltip-data="subtextTooltipData"
           :channel="getChannelForMessage(object)"
+          v-bind="getExtraMessageProps(object)"
           @action="messageAction"
           @reply="handleClickReplied"
           @sms-invite="handleSmsInvite(object)"
@@ -202,6 +203,15 @@ const props = defineProps({
     required: false,
     default: () => ({})
   },
+  /**
+   * Позволяет переопределить действие "Перезвонить" для `message.call`.
+   * Будет передано внутрь `CallMessage` как проп `onCall`.
+   */
+  callMessageOnCallback: {
+    type: Function as unknown as () => ((message: IFeedObject) => void) | undefined,
+    required: false,
+    default: undefined,
+  },
 });
 
 const trackingObjects = ref();
@@ -252,6 +262,13 @@ function getChannelForMessage(message: IFeedObject): string | undefined {
 
   const dialog = selectedChat.value.dialogs.find((dialog) => dialog.dialogId === messageWithDialog.dialogId)
   return dialog?.channelId
+}
+
+function getExtraMessageProps(object: IFeedObject): Record<string, unknown> {
+  if (object.type === 'message.call' && typeof props.callMessageOnCallback === 'function') {
+    return { onCall: props.callMessageOnCallback }
+  }
+  return {}
 }
 
 const emit = defineEmits([
