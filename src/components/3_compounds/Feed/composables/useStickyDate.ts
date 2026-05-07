@@ -14,6 +14,11 @@ export function useStickyDate(options: UseStickyDateOptions) {
   const stickyDateText = ref('');
   let stickyHideTimer: number | null = null;
 
+  const isSameLocalDay = (a: Date, b: Date) =>
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate();
+
   const updateStickyDate = () => {
     if (!feedRef.value || !trackingObjects.value) {
       onUpdate?.();
@@ -51,8 +56,13 @@ export function useStickyDate(options: UseStickyDateOptions) {
 
     const ts = (topMost as HTMLElement).dataset?.timestamp ?? (topMost as HTMLElement).getAttribute?.('data-timestamp')
     if (ts != null && ts !== '') {
-      const d = new Date(Number(ts) * 1000)
-      stickyDateText.value = d.toLocaleDateString()
+      const seconds = Number(ts);
+      if (Number.isFinite(seconds)) {
+        const d = new Date(seconds * 1000);
+        stickyDateText.value = isSameLocalDay(d, new Date())
+          ? 'Сегодня'
+          : d.toLocaleDateString('ru-RU');
+      }
     }
     onUpdate?.()
   };
