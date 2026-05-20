@@ -483,6 +483,8 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-blocked-indicator-display': string;
   /** Радиус маркера blocked */
   '--chotto-communicationpanel-blocked-indicator-border-radius': string;
+  /** Фон маркера blocked (прозрачный — только зона для тултипа) */
+  '--chotto-communicationpanel-blocked-indicator-mark-background': string;
   /** Прозрачность маркера blocked */
   '--chotto-communicationpanel-blocked-indicator-opacity': string;
   /** Цвет спиннера подтверждения атрибута */

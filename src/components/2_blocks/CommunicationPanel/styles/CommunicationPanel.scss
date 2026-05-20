@@ -414,8 +414,8 @@
   width: var(--chotto-communicationpanel-blocked-indicator-mark-size, 8px);
   height: var(--chotto-communicationpanel-blocked-indicator-mark-size, 8px);
   border-radius: var(--chotto-communicationpanel-blocked-indicator-border-radius, 50%);
-  background: var(--chotto-communicationpanel-attribute-blocked-color, #ACACAC);
-  opacity: var(--chotto-communicationpanel-blocked-indicator-opacity, 0.85);
+  background: var(--chotto-communicationpanel-blocked-indicator-mark-background, transparent);
+  opacity: var(--chotto-communicationpanel-blocked-indicator-opacity, 0);
 }
 
 :deep(.confirming-indicator) {
