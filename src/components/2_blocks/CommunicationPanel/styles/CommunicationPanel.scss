@@ -100,8 +100,8 @@
 .attributes-menu {
   position: var(--chotto-communicationpanel-menu-position, absolute);
   top: var(--chotto-communicationpanel-menu-top, 108%);
-  left: var(--chotto-communicationpanel-menu-left, 0);
-  right: var(--chotto-communicationpanel-menu-right, auto);
+  left: var(--chotto-communicationpanel-menu-left, auto);
+  right: var(--chotto-communicationpanel-menu-right, 0);
   background: var(--chotto-communicationpanel-menu-background, white);
   backdrop-filter: var(--chotto-communicationpanel-menu-backdrop-filter, none);
   -webkit-backdrop-filter: var(--chotto-communicationpanel-menu-backdrop-filter, none);

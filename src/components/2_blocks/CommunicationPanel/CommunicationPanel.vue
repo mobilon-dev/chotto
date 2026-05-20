@@ -95,10 +95,7 @@
                   :blocked-attribute-ids="blockedAttributeIdsRef"
                   :indicator-tooltips="attributeIndicatorTooltipsRef"
                 />
-                <span
-                  class="attribute-value"
-                  :title="attribute.value"
-                >{{ attribute.value }}</span>
+                <span class="attribute-value">{{ attribute.value }}</span>
               </div>
               <span class="menu-icon">
                 <span
@@ -136,10 +133,7 @@
                 :blocked-attribute-ids="blockedAttributeIdsRef"
                 :indicator-tooltips="attributeIndicatorTooltipsRef"
               />
-              <span
-                class="attribute-value"
-                :title="attribute.value"
-              >{{ attribute.value }}</span>
+              <span class="attribute-value">{{ attribute.value }}</span>
             </div>
             <span class="menu-icon">
               <span
