@@ -207,6 +207,7 @@ import { useCommunicationSubMenu } from './composables/useCommunicationSubMenu';
 import { useCommunicationDialogSync } from './composables/useCommunicationDialogSync';
 import { useCommunicationPlaceholder } from './composables/useCommunicationPlaceholder';
 import CommunicationPanelAttributeIndicator from './CommunicationPanelAttributeIndicator.vue';
+import { CommunicationPanelCheckIcon } from './icons';
 
 const props = defineProps({
   contactAttributes: {
