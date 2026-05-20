@@ -17,7 +17,7 @@
             hoveredChannel === channel.type && isChannelActive(channel.type),
           menuOpen: showMenu && activeChannelType === channel.type
         }]"
-        @click="handleChannelClick(channel.type)"
+        @click="onChannelButtonClick(channel.type)"
         @mouseenter="hoveredChannel = channel.type"
         @mouseleave="hoveredChannel = null"
       >
@@ -54,7 +54,6 @@
     <div
       v-if="showMenu && activeChannelType"
       class="attributes-menu"
-      :style="{ width: menuWidth }"
     >
       <!-- Placeholder когда нет каналов -->
       <div
@@ -77,24 +76,29 @@
             :offset="8"
           >
             <div
-              :class="['attribute-item', {
+              :class="['attribute-item', getAttributeStatusClass(attribute), {
                 'frozen-hover': isAttributeFrozen(attribute),
-                'selected': isAttributeSelected(attribute)
+                'selected': isAttributeSelected(attribute),
+                'confirming': isAttributeConfirming(attribute, effectiveConfirmingAttributeId),
+                'blocked': isAttributeBlocked(attribute),
               }]"
+              :data-attribute-status="attribute.status"
               @mouseenter="onAttributeMouseEnter(attribute, $event)"
               @mouseleave="handleAttributeMouseLeave"
-              @click="handleAttributeClick(attribute)"
+              @click="onAttributeClick(attribute)"
             >
               <div class="attribute-info">
-                <span class="attribute-indicator-slot">
-                  <span
-                    v-if="isAttributeSelected(attribute)"
-                    class="selected-indicator"
-                  >
-                    <CommunicationPanelCheckIcon />
-                  </span>
-                </span>
-                <span class="attribute-value">{{ attribute.value }}</span>
+                <CommunicationPanelAttributeIndicator
+                  :attribute="attribute"
+                  :is-selected="isAttributeSelected(attribute)"
+                  :confirming-attribute-id="effectiveConfirmingAttributeId"
+                  :blocked-attribute-ids="blockedAttributeIdsRef"
+                  :indicator-tooltips="attributeIndicatorTooltipsRef"
+                />
+                <span
+                  class="attribute-value"
+                  :title="attribute.value"
+                >{{ attribute.value }}</span>
               </div>
               <span class="menu-icon">
                 <span
@@ -113,24 +117,29 @@
           </Tooltip>
           <div
             v-else
-            :class="['attribute-item', {
+            :class="['attribute-item', getAttributeStatusClass(attribute), {
               'frozen-hover': isAttributeFrozen(attribute),
-              'selected': isAttributeSelected(attribute)
+              'selected': isAttributeSelected(attribute),
+              'confirming': isAttributeConfirming(attribute, effectiveConfirmingAttributeId),
+              'blocked': isAttributeBlocked(attribute),
             }]"
+            :data-attribute-status="attribute.status"
             @mouseenter="onAttributeMouseEnter(attribute, $event)"
             @mouseleave="handleAttributeMouseLeave"
-            @click="handleAttributeClick(attribute)"
+            @click="onAttributeClick(attribute)"
           >
             <div class="attribute-info">
-              <span class="attribute-indicator-slot">
-                <span
-                  v-if="isAttributeSelected(attribute)"
-                  class="selected-indicator"
-                >
-                  <CommunicationPanelCheckIcon />
-                </span>
-              </span>
-              <span class="attribute-value">{{ attribute.value }}</span>
+              <CommunicationPanelAttributeIndicator
+                :attribute="attribute"
+                :is-selected="isAttributeSelected(attribute)"
+                :confirming-attribute-id="effectiveConfirmingAttributeId"
+                :blocked-attribute-ids="blockedAttributeIdsRef"
+                :indicator-tooltips="attributeIndicatorTooltipsRef"
+              />
+              <span
+                class="attribute-value"
+                :title="attribute.value"
+              >{{ attribute.value }}</span>
             </div>
             <span class="menu-icon">
               <span
@@ -193,12 +202,17 @@ import { ref, watch, onMounted, onUnmounted, computed, nextTick } from 'vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useCommunicationChannels } from './composables/useCommunicationChannels';
 import { useCommunicationMenu } from './composables/useCommunicationMenu';
-import { useCommunicationAttributes } from './composables/useCommunicationAttributes';
+import {
+  useCommunicationAttributes,
+  getAttributeStatusClass,
+  isAttributeConfirming,
+  isAttributeBlocked as checkAttributeBlocked,
+} from './composables/useCommunicationAttributes';
 import { useCommunicationActions } from './composables/useCommunicationActions';
 import { useCommunicationSubMenu } from './composables/useCommunicationSubMenu';
 import { useCommunicationDialogSync } from './composables/useCommunicationDialogSync';
 import { useCommunicationPlaceholder } from './composables/useCommunicationPlaceholder';
-import { CommunicationPanelCheckIcon } from './icons';
+import CommunicationPanelAttributeIndicator from './CommunicationPanelAttributeIndicator.vue';
 
 const props = defineProps({
   contactAttributes: {
@@ -226,6 +240,12 @@ const props = defineProps({
     required: false,
     default: () => ({})
   },
+  /** Подсказки для галочки / спиннера: selected, confirmed, confirming, blocked */
+  attributeIndicatorTooltips: {
+    type: Object,
+    required: false,
+    default: () => ({}),
+  },
   messages: {
     type: Array,
     required: false,
@@ -251,9 +271,26 @@ const props = defineProps({
     required: false,
     default: () => ({})
   },
+  /** Id атрибута в процессе подтверждения (спиннер вместо галочки). Задаёт родитель на время запроса. */
+  confirmingAttributeId: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  /** Id атрибутов, заблокированных после неудачного подтверждения */
+  blockedAttributeIds: {
+    type: Array,
+    required: false,
+    default: () => [],
+  },
 });
 
-const emit = defineEmits(['select-attribute-channel', 'phone-call']);
+const emit = defineEmits([
+  'select-attribute-channel',
+  'confirm-attribute',
+  'phone-call',
+  'reset-blocked-attributes',
+]);
 
 // Refs
 const panelRef = ref(null);
@@ -265,10 +302,21 @@ const selectedChannel = ref({});
 const showDefaultChannelTooltip = ref(false);
 const defaultChannelTooltipTimer = ref(null);
 const channelTooltipRef = ref(null);
+const internalConfirmingAttributeId = ref(null);
+
+const effectiveConfirmingAttributeId = computed(
+  () => props.confirmingAttributeId ?? internalConfirmingAttributeId.value
+);
+
+const blockedAttributeIdsRef = computed(() => props.blockedAttributeIds ?? []);
+
+const isAttributeBlocked = (attribute) =>
+  checkAttributeBlocked(attribute, blockedAttributeIdsRef.value);
 
 const channelsRef = computed(() => props.channels ?? []);
 const channelTooltipsRef = computed(() => props.channelTooltips ?? {});
 const attributeTooltipsRef = computed(() => props.attributeTooltips ?? {});
+const attributeIndicatorTooltipsRef = computed(() => props.attributeIndicatorTooltips ?? {});
 const messagesRef = computed(() => props.messages ?? []);
 const selectedChatRef = computed(() => props.selectedChat ?? null);
 const isNewDialogRef = computed(() => props.isNewDialog ?? false);
@@ -284,9 +332,14 @@ const isChannelSelected = (channelId) => {
 // Получаем выбранный атрибут из selectedDialog
 const selectedAttributeId = computed(() => props.selectedDialog?.attributeId ?? null);
 
-// Проверяем, выбран ли атрибут
+// Проверяем, выбран ли атрибут (текущий диалог)
 const isAttributeSelected = (attribute) => {
-  return selectedAttributeId.value === attribute.id;
+  const selectedId = selectedAttributeId.value;
+  if (!selectedId || !attribute) {
+    return false;
+  }
+  const attributeId = attribute.id ?? attribute.attributeId;
+  return selectedId === attributeId;
 };
 
 const getAttributeTooltipText = (attribute) => {
@@ -332,14 +385,11 @@ const {
   hoveredChannel,
   showMenu,
   showSubMenu,
-  menuWidth,
-  updateMenuWidth,
   handleChannelClick,
   closeMenu,
   handleClickOutside,
 } = useCommunicationMenu({
   panelRef,
-  channelsPanelRef,
   selectedChannelType,
   frozenAttribute,
 });
@@ -425,6 +475,8 @@ const {
   selectedChannel,
   selectedChannelType,
   hoveredAttribute,
+  confirmingAttributeId: internalConfirmingAttributeId,
+  isAttributeBlocked,
   closeMenu,
   hasMultipleChannels,
   getSingleChannelForType,
@@ -449,7 +501,26 @@ const {
   frozenAttribute,
   hoveredAttribute,
   hasMultipleChannels,
+  isAttributeBlocked,
 });
+
+const onChannelButtonClick = (channelType) => {
+  const isClosingSameChannel =
+    showMenu.value && activeChannelType.value === channelType;
+
+  if (!isClosingSameChannel) {
+    emit('reset-blocked-attributes');
+  }
+
+  handleChannelClick(channelType);
+};
+
+const onAttributeClick = (attribute) => {
+  if (isAttributeBlocked(attribute)) {
+    return;
+  }
+  handleAttributeClick(attribute);
+};
 
 useCommunicationDialogSync({
   selectedChannelType,
@@ -497,6 +568,24 @@ const onAttributeMouseEnter = async (attribute, event) => {
   }
 };
 
+watch(() => props.confirmingAttributeId, (id) => {
+  if (!id) {
+    internalConfirmingAttributeId.value = null;
+  }
+});
+
+watch(contactAttributesRef, () => {
+  const confirmingId = effectiveConfirmingAttributeId.value;
+  if (!confirmingId) {
+    return;
+  }
+  const attr = contactAttributesRef.value.find((a) => a.id === confirmingId);
+  if (attr?.status === 'confirmed') {
+    internalConfirmingAttributeId.value = null;
+    closeMenu();
+  }
+}, { deep: true });
+
 // Watchers
 watch(() => props.selectedDialog, () => {
   // Логика при изменении selectedDialog
@@ -505,14 +594,11 @@ watch(() => props.selectedDialog, () => {
 
 // Lifecycle
 onMounted(() => {
-  updateMenuWidth();
-  window.addEventListener('resize', updateMenuWidth);
   document.addEventListener('click', handleClickOutside);
   organizeContactAttributes();
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', updateMenuWidth);
   document.removeEventListener('click', handleClickOutside);
   clearDefaultChannelTooltip();
 });

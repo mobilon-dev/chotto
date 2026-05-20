@@ -181,8 +181,12 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-menu-z-index': string;
   /** Максимальная высота меню атрибутов */
   '--chotto-communicationpanel-menu-max-height': string;
+  /** Ширина меню атрибутов (обычно max-content — по содержимому в пределах min/max) */
+  '--chotto-communicationpanel-menu-width': string;
   /** Минимальная ширина меню атрибутов */
   '--chotto-communicationpanel-menu-min-width': string;
+  /** Максимальная ширина меню атрибутов */
+  '--chotto-communicationpanel-menu-max-width': string;
   /** Промежуток между элементами меню атрибутов */
   '--chotto-communicationpanel-menu-gap': string;
   /** Прозрачность меню атрибутов */
@@ -457,6 +461,32 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-selected-indicator-height': string;
   /** Цвет индикатора выбранного элемента */
   '--chotto-communicationpanel-selected-indicator-color': string;
+  /** Цвет индикатора подтверждённого (не выбранного) атрибута */
+  '--chotto-communicationpanel-confirmed-indicator-color': string;
+  /** Курсор атрибута в процессе подтверждения */
+  '--chotto-communicationpanel-attribute-confirming-cursor': string;
+  /** События указателя атрибута в процессе подтверждения */
+  '--chotto-communicationpanel-attribute-confirming-pointer-events': string;
+  /** Курсор над индикатором (спиннер + тултип) при подтверждении */
+  '--chotto-communicationpanel-attribute-confirming-indicator-cursor': string;
+  /** Цвет заблокированного атрибута (неудачное подтверждение) */
+  '--chotto-communicationpanel-attribute-blocked-color': string;
+  /** Курсор заблокированного атрибута */
+  '--chotto-communicationpanel-attribute-blocked-cursor': string;
+  /** События указателя заблокированного атрибута */
+  '--chotto-communicationpanel-attribute-blocked-pointer-events': string;
+  /** Курсор над индикатором (тултип) у заблокированного атрибута */
+  '--chotto-communicationpanel-attribute-blocked-indicator-cursor': string;
+  /** Прозрачность иконок заблокированного атрибута */
+  '--chotto-communicationpanel-attribute-blocked-icon-opacity': string;
+  /** Отображение маркера blocked в слоте индикатора */
+  '--chotto-communicationpanel-blocked-indicator-display': string;
+  /** Радиус маркера blocked */
+  '--chotto-communicationpanel-blocked-indicator-border-radius': string;
+  /** Прозрачность маркера blocked */
+  '--chotto-communicationpanel-blocked-indicator-opacity': string;
+  /** Цвет спиннера подтверждения атрибута */
+  '--chotto-communicationpanel-confirming-indicator-color': string;
   /** Размер шрифта индикатора выбранного элемента */
   '--chotto-communicationpanel-selected-indicator-font-size': string;
   /** Сжатие индикатора выбранного элемента */

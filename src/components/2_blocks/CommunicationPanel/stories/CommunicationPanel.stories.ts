@@ -56,6 +56,7 @@ const contactAttributes = [
     type: 'whatsapp',
     data: '73910001100',
     value: '73910001100',
+    status: 'confirmed',
   },
   {
     id: 'atr_telegram',
@@ -66,18 +67,21 @@ const contactAttributes = [
       phone: '79135292926'
     },
     value: '@georgiy_zvonar',
+    status: 'unconfirmed',
   },
   {
     id: 'atr_max',
     type: 'max',
     data: '79135292926',
     value: '79135292926',
+    status: 'confirmed',
   },
   {
     id: 'atr_sms',
     type: 'sms',
     data: '79135292926',
     value: '79135292926',
+    status: 'unconfirmed',
   },
 ];
 
@@ -344,9 +348,17 @@ export const InteractiveWithFeed: Story = {
       provide('selectedChat', selectedChat);
       provide('chatAppId', 'story-chat-app');
       
+      const attributeIndicatorTooltips = {
+        selected: 'Выбранный канал связи',
+        confirmed: 'Подтверждённый контакт',
+        confirming: 'Подтверждение контакта…',
+        blocked: 'Не удалось подтвердить',
+      };
+
       return {
         channelsData,
         contactAttributes,
+        attributeIndicatorTooltips,
         selectedDialogId,
         selectedChannel,
         filteredMessages,
@@ -382,7 +394,9 @@ export const InteractiveWithFeed: Story = {
                 :contact-attributes="contactAttributes"
                 :recent-attribute-channels="{}"
                 :selected-dialog="selectedDialog"
+                :attribute-indicator-tooltips="attributeIndicatorTooltips"
                 @select-attribute-channel="handleSelectChannel"
+                @confirm-attribute="(payload) => console.log('confirm-attribute', payload)"
               />
             </div>
           </div>

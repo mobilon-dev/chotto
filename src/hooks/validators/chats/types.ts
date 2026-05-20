@@ -8,6 +8,8 @@ export interface ChatAction {
   icon?: string;
 }
 
+export type ContactAttributeStatus = 'confirmed' | 'unconfirmed';
+
 export interface ContactAttribute {
   id: string;
   type?: string;
@@ -17,6 +19,7 @@ export interface ContactAttribute {
     phone: string;
   };
   value: string;
+  status?: ContactAttributeStatus;
 }
 
 export interface Contact {

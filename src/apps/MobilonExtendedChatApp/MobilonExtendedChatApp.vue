@@ -109,9 +109,14 @@
                         :selected-dialog="selectedDialog"
                         :channel-tooltips="channelTooltips"
                         :attribute-tooltips="attributeTooltips"
+                        :attribute-indicator-tooltips="attributeIndicatorTooltips"
                         :empty-channels-placeholder="emptyChannelsPlaceholder"
                         :show-channel-icons="false"
+                        :confirming-attribute-id="confirmingAttributeId"
+                        :blocked-attribute-ids="blockedAttributeIds"
                         @select-attribute-channel="handleAttributeChannelSelect"
+                        @confirm-attribute="handleConfirmAttribute"
+                        @reset-blocked-attributes="blockedAttributeIds = []"
                         @phone-call="handlePhoneCall"
                       />
                       <button
@@ -498,7 +503,9 @@ const {
 });
 
 const selectedChat = ref(null);
-const selectedDialog = ref(null)
+const selectedDialog = ref(null);
+const confirmingAttributeId = ref(null);
+const blockedAttributeIds = ref([]);
 
 const contactActions = computed(() => {
   if (selectedChat.value?.chatId === TEST_CHAT_ID_WITHOUT_CONTACT_MENU) {
@@ -663,12 +670,19 @@ const channelTooltips = ref({
 
 // Пример текстов тултипов для атрибутов в CommunicationPanel
 // Ключи: attributeId / id (приоритетно), fallback - значение attribute.value
-const attributeTooltips = ref({
-  '170': 'Основной номер клиента',
-  '171': 'Дополнительный номер для связи',
-  '79135292926': 'Проверенный номер контакта',
-  '73910001100': 'Проверенный номер контакта'
-})
+// const attributeTooltips = ref({
+//   '170': 'Основной номер клиента',
+//   '171': 'Дополнительный номер для связи',
+//   '79135292926': 'Проверенный номер контакта',
+//   '73910001100': 'Проверенный номер контакта'
+// })
+
+const attributeIndicatorTooltips = ref({
+  selected: 'Выбранный канал связи',
+  confirmed: 'Подтверждённый контакт',
+  confirming: 'Подтверждение контакта…',
+  blocked: 'Не удалось подтвердить. Откройте меню канала снова',
+});
 
 // Тексты placeholder для пустых каналов в панели CommunicationPanel
 const emptyChannelsPlaceholder = ref({
@@ -1052,10 +1066,33 @@ const handleAttributeChannelSelect = (data) => {
   console.log('Выбран атрибут/канал:', data);
   if (selectedChat.value) {
     const targetDialog = selectedChat.value.dialogs.find(
-      d => d.attributeId === data.attributeId && 
+      d => d.attributeId === data.attributeId &&
       d.channelId === data.channelId
     );
     if (targetDialog) selectChat({chat: selectedChat.value, dialog: targetDialog});
+  }
+};
+
+/**
+ * Неподтверждённый атрибут: запрос на сервер (dataProvider / API).
+ * Демо: всегда отрицательный ответ. При успехе — status + handleAttributeChannelSelect.
+ */
+const handleConfirmAttribute = async (data) => {
+  confirmingAttributeId.value = data.attributeId;
+  console.log('Подтверждение атрибута (запрос на сервер):', data);
+
+  try {
+    // const result = await props.dataProvider.confirmContactAttribute?.({ ... });
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    // Демо: отрицательный ответ
+    console.warn('Подтверждение атрибута не пришло:', data);
+    if (!blockedAttributeIds.value.includes(data.attributeId)) {
+      blockedAttributeIds.value = [...blockedAttributeIds.value, data.attributeId];
+    }
+    alert('Не удалось подтвердить контакт. Попробуйте позже.');
+  } finally {
+    confirmingAttributeId.value = null;
   }
 };
 

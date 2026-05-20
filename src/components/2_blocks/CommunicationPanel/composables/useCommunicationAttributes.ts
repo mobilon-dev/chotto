@@ -1,6 +1,11 @@
 import { ref, computed, unref, watch, type Ref, type ComputedRef } from 'vue';
 import { CHANNEL_TYPES } from './useCommunicationChannels';
 
+/** Допустимые статусы контактного атрибута */
+export const CONTACT_ATTRIBUTE_STATUSES = ['confirmed', 'unconfirmed'] as const;
+
+export type ContactAttributeStatus = (typeof CONTACT_ATTRIBUTE_STATUSES)[number];
+
 /**
  * Тип контактного атрибута из панели коммуникаций.
  */
@@ -9,8 +14,154 @@ export type ContactAttribute = {
   type: string;
   value?: string;
   data?: unknown;
+  status?: ContactAttributeStatus;
   [key: string]: unknown;
 };
+
+export function isContactAttributeStatus(value: unknown): value is ContactAttributeStatus {
+  return CONTACT_ATTRIBUTE_STATUSES.includes(value as ContactAttributeStatus);
+}
+
+/**
+ * CSS-класс для привязки UI к статусу атрибута (`status-confirmed` / `status-unconfirmed`).
+ */
+export function getAttributeStatusClass(
+  attribute: ContactAttribute | null | undefined
+): `status-${ContactAttributeStatus}` | null {
+  const status = attribute?.status;
+  return isContactAttributeStatus(status) ? `status-${status}` : null;
+}
+
+export function isAttributeConfirmed(attribute: ContactAttribute | null | undefined): boolean {
+  return attribute?.status === 'confirmed';
+}
+
+export function isAttributeUnconfirmed(attribute: ContactAttribute | null | undefined): boolean {
+  return attribute?.status === 'unconfirmed';
+}
+
+/** Нужно запросить подтверждение атрибута у родителя (запрос на сервер). */
+export function needsAttributeConfirmation(attribute: ContactAttribute | null | undefined): boolean {
+  return isAttributeUnconfirmed(attribute);
+}
+
+/** Payload события confirm-attribute */
+export type ConfirmAttributePayload = {
+  attributeId: string;
+  channelId: string;
+  channelType: string;
+  attribute: ContactAttribute;
+};
+
+export function shouldShowAttributeCheckmark(
+  attribute: ContactAttribute | null | undefined,
+  isSelected: boolean
+): boolean {
+  return isSelected || isAttributeConfirmed(attribute);
+}
+
+export function getAttributeCheckIndicatorClass(
+  attribute: ContactAttribute | null | undefined,
+  isSelected: boolean
+): 'selected-indicator' | 'confirmed-indicator' | null {
+  if (!shouldShowAttributeCheckmark(attribute, isSelected)) {
+    return null;
+  }
+  return isSelected ? 'selected-indicator' : 'confirmed-indicator';
+}
+
+export function isAttributeConfirming(
+  attribute: ContactAttribute | null | undefined,
+  confirmingAttributeId: string | null | undefined
+): boolean {
+  if (!confirmingAttributeId || !attribute?.id) {
+    return false;
+  }
+  return attribute.id === confirmingAttributeId;
+}
+
+/** Атрибут заблокирован после неудачного подтверждения (до повторного входа в меню). */
+export function isAttributeBlocked(
+  attribute: ContactAttribute | null | undefined,
+  blockedAttributeIds: readonly string[] | null | undefined
+): boolean {
+  if (!attribute?.id || !blockedAttributeIds?.length) {
+    return false;
+  }
+  return blockedAttributeIds.includes(attribute.id);
+}
+
+/** Ключи подсказок для галочки / спиннера в слоте индикатора */
+export type AttributeIndicatorTooltipKey = 'selected' | 'confirmed' | 'confirming' | 'blocked';
+
+export type AttributeIndicatorTooltips = Partial<Record<AttributeIndicatorTooltipKey, string>>;
+
+export type AttributeIndicatorTooltipContext = {
+  isSelected: boolean;
+  confirmingAttributeId: string | null | undefined;
+  blockedAttributeIds: readonly string[];
+};
+
+export function shouldShowAttributeIndicator(
+  attribute: ContactAttribute | null | undefined,
+  context: AttributeIndicatorTooltipContext
+): boolean {
+  return (
+    isAttributeConfirming(attribute, context.confirmingAttributeId) ||
+    shouldShowAttributeCheckmark(attribute, context.isSelected)
+  );
+}
+
+/** Слот индикатора для заблокированного атрибута без галочки / спиннера (только тултип). */
+export function shouldShowBlockedIndicatorSlot(
+  attribute: ContactAttribute | null | undefined,
+  context: AttributeIndicatorTooltipContext
+): boolean {
+  if (!isAttributeBlocked(attribute, context.blockedAttributeIds)) {
+    return false;
+  }
+  return (
+    !isAttributeConfirming(attribute, context.confirmingAttributeId) &&
+    !shouldShowAttributeCheckmark(attribute, context.isSelected)
+  );
+}
+
+/**
+ * Определяет ключ подсказки индикатора по приоритету состояния.
+ */
+export function getAttributeIndicatorTooltipKey(
+  attribute: ContactAttribute | null | undefined,
+  context: AttributeIndicatorTooltipContext
+): AttributeIndicatorTooltipKey | null {
+  if (isAttributeConfirming(attribute, context.confirmingAttributeId)) {
+    return 'confirming';
+  }
+  if (isAttributeBlocked(attribute, context.blockedAttributeIds)) {
+    return 'blocked';
+  }
+  if (!shouldShowAttributeIndicator(attribute, context)) {
+    return null;
+  }
+  if (context.isSelected) {
+    return 'selected';
+  }
+  if (isAttributeConfirmed(attribute)) {
+    return 'confirmed';
+  }
+  return null;
+}
+
+export function getAttributeIndicatorTooltipText(
+  attribute: ContactAttribute | null | undefined,
+  tooltips: AttributeIndicatorTooltips | null | undefined,
+  context: AttributeIndicatorTooltipContext
+): string {
+  const key = getAttributeIndicatorTooltipKey(attribute, context);
+  if (!key || !tooltips) {
+    return '';
+  }
+  return tooltips[key] ?? '';
+}
 
 type MaybeRef<T> = T | Ref<T> | ComputedRef<T>;
 

@@ -6,8 +6,6 @@ import { ref, type Ref } from 'vue';
 interface UseCommunicationMenuOptions {
   /** Ссылка на корневой контейнер панели */
   panelRef: Ref<HTMLElement | null>;
-  /** Ссылка на панель с кнопками каналов */
-  channelsPanelRef: Ref<HTMLElement | null>;
   /** Текущий выбранный тип канала */
   selectedChannelType: Ref<string | null>;
   /** Замороженный атрибут (для подсветки при наведении) */
@@ -15,12 +13,10 @@ interface UseCommunicationMenuOptions {
 }
 
 /**
- * Компонует состояние и методы открытия/закрытия меню каналов, обработки кликов
- * и вычисления ширины меню.
+ * Компонует состояние и методы открытия/закрытия меню каналов и обработки кликов.
  */
 export function useCommunicationMenu({
   panelRef,
-  channelsPanelRef,
   selectedChannelType,
   frozenAttribute,
 }: UseCommunicationMenuOptions) {
@@ -32,17 +28,6 @@ export function useCommunicationMenu({
   const showMenu = ref(false);
   /** Флаг отображения подменю выбора канала */
   const showSubMenu = ref(false);
-  /** Ширина меню атрибутов (синхронизируется с панелью каналов) */
-  const menuWidth = ref('0px');
-
-  /**
-   * Обновляет ширину меню атрибутов, подстраивая её под ширину панели каналов.
-   */
-  const updateMenuWidth = () => {
-    if (channelsPanelRef.value) {
-      menuWidth.value = `${channelsPanelRef.value.offsetWidth}px`;
-    }
-  };
 
   /**
    * Закрывает меню и сбрасывает связанные состояния.
@@ -69,7 +54,6 @@ export function useCommunicationMenu({
     showMenu.value = true;
     showSubMenu.value = false;
     frozenAttribute.value = null;
-    updateMenuWidth();
   };
 
   /**
@@ -87,8 +71,6 @@ export function useCommunicationMenu({
     hoveredChannel,
     showMenu,
     showSubMenu,
-    menuWidth,
-    updateMenuWidth,
     handleChannelClick,
     closeMenu,
     handleClickOutside,

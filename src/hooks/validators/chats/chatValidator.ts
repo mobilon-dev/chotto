@@ -81,6 +81,16 @@ function validateContactAttribute(attr: any, chatIndex: number, attrIndex: numbe
     errors.push({ path: `${path}.value`, message: 'Поле value обязательно и должно быть строкой', value: attr.value });
   }
 
+  if (attr.status !== undefined) {
+    if (typeof attr.status !== 'string' || !['confirmed', 'unconfirmed'].includes(attr.status)) {
+      errors.push({
+        path: `${path}.status`,
+        message: 'Поле status должно быть "confirmed" или "unconfirmed"',
+        value: attr.status,
+      });
+    }
+  }
+
   return errors;
 }
 

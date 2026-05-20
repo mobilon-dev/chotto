@@ -113,12 +113,14 @@ export const chats = [
           type: 'phone',
           data: '79135292926',
           value: 'whatsapp 79135292926',
+          status: 'confirmed',
         },
         {
           id: 'atr_2',
           type: 'phone',
           data: '7913529XXXX',
           value: 'whatsapp 7913529XXXX',
+          status: 'unconfirmed',
         },
         {
           id: 'atr_3',
@@ -129,6 +131,7 @@ export const chats = [
             phone: '79139310012'
           },
           value: '@antirek',
+          status: 'confirmed',
         },
       ],
       "tags": [
@@ -219,14 +222,17 @@ export const chats = [
         {
           id: 'phone:79831693504',
           value: 'whatsapp 79831693504',
+          status: 'confirmed',
         },
         {
           id: 'phone:74992907555',
           value: 'whatsapp 74992907555',
+          status: 'unconfirmed',
         },
         {
           id: 'tgNickName:@Ivan12345',
           value: 'telegram @Ivan12345',
+          status: 'confirmed',
         },
       ],
     },
@@ -300,12 +306,14 @@ export const chats = [
           type: 'phone',
           data: '79000000000',
           value: 'whatsapp 79000000000',
+          status: 'confirmed',
         },
         {
           id: 'atr_2',
           type: 'phone',
           data: '7913529XXXX',
           value: 'whatsapp 7900000XXXX',
+          status: 'unconfirmed',
         },
         {
           id: 'atr_3',
@@ -316,6 +324,7 @@ export const chats = [
             phone: '79139310012'
           },
           value: '@antirek',
+          status: 'confirmed',
         },
       ],
       "tags": [
@@ -365,12 +374,14 @@ export const chats = [
           type: 'phone',
           data: '79000000000',
           value: 'whatsapp 79000000000',
+          status: 'confirmed',
         },
         {
           id: 'atr_2',
           type: 'phone',
           data: '7913529XXXX',
           value: 'whatsapp 7900000XXXX',
+          status: 'unconfirmed',
         },
         {
           id: 'atr_3',
@@ -381,6 +392,7 @@ export const chats = [
             phone: '79139310012'
           },
           value: '@antirek',
+          status: 'confirmed',
         },
       ],
       "tags": [
@@ -475,6 +487,7 @@ export const chats = [
           type: 'whatsapp',
           data: '73910001100',
           value: '73910001100',
+          status: 'confirmed',
         },
         {
           id: 'atr_telegram',
@@ -485,24 +498,28 @@ export const chats = [
             phone: '79135292926'
           },
           value: '@georgiy_zvonar',
+          status: 'unconfirmed',
         },
         {
           id: 'atr_telegram_phone',
           type: 'telegram',
           data: { phone: '79135292926' },
           value: '+79135292926',
+          status: 'confirmed',
         },
         {
           id: 'atr_max',
           type: 'max',
           data: '79135292926',
           value: '79135292926',
+          status: 'unconfirmed',
         },
         {
           id: 'atr_sms',
           type: 'sms',
           data: '79135292926',
           value: '79135292926',
+          status: 'unconfirmed',
         },
       ],
     },

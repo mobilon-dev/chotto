@@ -7,6 +7,7 @@ interface UseCommunicationSubMenuOptions {
   frozenAttribute: Ref<ContactAttribute | null>;
   hoveredAttribute: Ref<ContactAttribute | null>;
   hasMultipleChannels: (channelType: string) => boolean;
+  isAttributeBlocked: (attribute: ContactAttribute | null | undefined) => boolean;
 }
 
 /**
@@ -18,6 +19,7 @@ export function useCommunicationSubMenu({
   frozenAttribute,
   hoveredAttribute,
   hasMultipleChannels,
+  isAttributeBlocked,
 }: UseCommunicationSubMenuOptions) {
   const subMenuTop = ref(0);
 
@@ -26,7 +28,7 @@ export function useCommunicationSubMenu({
    */
   const handleAttributeMouseEnter = (attribute: ContactAttribute, eventTarget: EventTarget | null) => {
     const channelType = activeChannelType.value;
-    if (!channelType || !hasMultipleChannels(channelType)) {
+    if (!channelType || !hasMultipleChannels(channelType) || isAttributeBlocked(attribute)) {
       return null;
     }
 

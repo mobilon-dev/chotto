@@ -99,7 +99,9 @@
   --chotto-communicationpanel-menu-padding: 8px 0;
   --chotto-communicationpanel-menu-z-index: 10000;
   --chotto-communicationpanel-menu-max-height: 300px;
-  --chotto-communicationpanel-menu-min-width: auto;
+  --chotto-communicationpanel-menu-width: max-content;
+  --chotto-communicationpanel-menu-min-width: 250px;
+  --chotto-communicationpanel-menu-max-width: 290px;
   --chotto-communicationpanel-menu-gap: 2px;
   --chotto-communicationpanel-menu-opacity: 1;
   --chotto-communicationpanel-menu-transform: none;
@@ -210,6 +212,19 @@
   --chotto-communicationpanel-selected-indicator-width: 18px;
   --chotto-communicationpanel-selected-indicator-height: 18px;
   --chotto-communicationpanel-selected-indicator-color: #1976d2;
+  --chotto-communicationpanel-confirmed-indicator-color: #DCDBDC;
+  --chotto-communicationpanel-attribute-confirming-cursor: wait;
+  --chotto-communicationpanel-attribute-confirming-pointer-events: none;
+  --chotto-communicationpanel-attribute-confirming-indicator-cursor: pointer;
+  --chotto-communicationpanel-attribute-blocked-color: #ACACAC;
+  --chotto-communicationpanel-attribute-blocked-cursor: not-allowed;
+  --chotto-communicationpanel-attribute-blocked-pointer-events: none;
+  --chotto-communicationpanel-attribute-blocked-indicator-cursor: pointer;
+  --chotto-communicationpanel-blocked-indicator-display: block;
+  --chotto-communicationpanel-blocked-indicator-border-radius: 50%;
+  --chotto-communicationpanel-blocked-indicator-opacity: 0.85;
+  --chotto-communicationpanel-attribute-blocked-icon-opacity: 1;
+  --chotto-communicationpanel-confirming-indicator-color: #5F5F5F;
   --chotto-communicationpanel-selected-indicator-font-size: 16px;
   --chotto-communicationpanel-selected-indicator-flex-shrink: 0;
 
