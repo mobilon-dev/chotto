@@ -1,5 +1,5 @@
 import { ref, computed, unref, watch, type Ref, type ComputedRef } from 'vue';
-import { CHANNEL_TYPES } from './useCommunicationChannels';
+import { type ChannelType } from './useCommunicationChannels';
 
 /** Допустимые статусы контактного атрибута */
 export const CONTACT_ATTRIBUTE_STATUSES = ['confirmed', 'unconfirmed'] as const;
@@ -168,11 +168,13 @@ type MaybeRef<T> = T | Ref<T> | ComputedRef<T>;
 /**
  * Параметры composable для работы с контактными атрибутами.
  */
+type PanelChannelTypesRef = MaybeRef<readonly ChannelType[]>;
+
 interface UseCommunicationAttributesOptions {
   /** Реактивный список контактных атрибутов */
   contactAttributes: MaybeRef<ContactAttribute[]>;
-  /** Текущий активный тип канала */
-  activeChannelType: Ref<string | null>;
+  /** Типы каналов, отображаемые в панели */
+  panelChannelTypes: PanelChannelTypesRef;
   /** Текущий замороженный атрибут (подсвеченный) */
   frozenAttribute: Ref<{ id?: string } | null>;
 }
@@ -182,21 +184,26 @@ interface UseCommunicationAttributesOptions {
  */
 export function useCommunicationAttributes({
   contactAttributes,
+  panelChannelTypes,
   frozenAttribute,
 }: UseCommunicationAttributesOptions) {
   const contactAttributesList = computed(() => unref(contactAttributes) ?? []);
+  const panelTypesList = computed(() => unref(panelChannelTypes) ?? []);
+
+  const createEmptyOrganized = (types: readonly ChannelType[]) =>
+    Object.fromEntries(types.map((type) => [type, [] as ContactAttribute[]]));
 
   const organizedContactAttributes = ref<Record<string, ContactAttribute[]>>(
-    Object.fromEntries(CHANNEL_TYPES.map((type) => [type, []]))
+    createEmptyOrganized(panelTypesList.value),
   );
 
   /**
    * Строит карту атрибутов по типам каналов.
    */
   const organizeContactAttributes = () => {
-    const organized = Object.fromEntries(
-      CHANNEL_TYPES.map((type) => [type, [] as ContactAttribute[]])
-    );
+    const types = panelTypesList.value;
+    const organized = createEmptyOrganized(types);
+    const panelTypeSet = new Set(types);
 
     contactAttributesList.value.forEach((attr) => {
       if (!attr || !attr.type) {
@@ -204,23 +211,29 @@ export function useCommunicationAttributes({
       }
 
       if (attr.type === 'telegram') {
-        (organized.telegram as ContactAttribute[]).push(attr);
+        if (panelTypeSet.has('telegram')) {
+          (organized.telegram as ContactAttribute[]).push(attr);
+        }
         return;
       }
 
       if (attr.type === 'max') {
-        (organized.max as ContactAttribute[]).push(attr);
+        if (panelTypeSet.has('max')) {
+          (organized.max as ContactAttribute[]).push(attr);
+        }
         return;
       }
 
       if (attr.type === 'phone') {
-        ['whatsapp', 'sms', 'phone'].forEach((type) => {
-          (organized[type] as ContactAttribute[]).push(attr);
+        (['whatsapp', 'sms', 'phone'] as const).forEach((type) => {
+          if (panelTypeSet.has(type)) {
+            (organized[type] as ContactAttribute[]).push(attr);
+          }
         });
         return;
       }
 
-      if (organized[attr.type]) {
+      if (panelTypeSet.has(attr.type as ChannelType) && organized[attr.type]) {
         (organized[attr.type] as ContactAttribute[]).push(attr);
       }
     });
@@ -229,6 +242,7 @@ export function useCommunicationAttributes({
   };
 
   watch(contactAttributesList, organizeContactAttributes, { deep: true, immediate: true });
+  watch(panelTypesList, organizeContactAttributes);
 
   /**
    * Проверяет, совпадает ли атрибут с замороженным (подсвеченным).

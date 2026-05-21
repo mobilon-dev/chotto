@@ -13,11 +13,50 @@ import {
 } from '../icons/index.ts';
 
 /**
- * Список поддерживаемых типов каналов в панели коммуникаций.
+ * Все поддерживаемые типы каналов в панели коммуникаций.
  */
 export const CHANNEL_TYPES = ['whatsapp', 'telegram', 'max', 'sms', 'phone'] as const;
 
 export type ChannelType = (typeof CHANNEL_TYPES)[number];
+
+/** Порядок кнопок каналов по умолчанию. */
+export const DEFAULT_CHANNEL_ORDER: readonly ChannelType[] = ['max', 'telegram', 'whatsapp', 'sms', 'phone'];
+
+export function isChannelType(value: string): value is ChannelType {
+  return (CHANNEL_TYPES as readonly string[]).includes(value);
+}
+
+/**
+ * Собирает итоговый список типов для панели: порядок из channelOrder, видимость из visibleChannelTypes.
+ * Типы из visibleChannelTypes, отсутствующие в channelOrder, добавляются в конце.
+ */
+export function resolvePanelChannelTypes(
+  channelOrder: readonly string[] | undefined,
+  visibleChannelTypes: readonly string[] | undefined,
+): ChannelType[] {
+  const order = (channelOrder ?? DEFAULT_CHANNEL_ORDER).filter(isChannelType);
+  const visibleList = visibleChannelTypes === undefined ? [...CHANNEL_TYPES] : visibleChannelTypes.filter(isChannelType);
+  const visibleSet = new Set(visibleList);
+
+  const seen = new Set<ChannelType>();
+  const result: ChannelType[] = [];
+
+  for (const type of order) {
+    if (visibleSet.has(type) && !seen.has(type)) {
+      seen.add(type);
+      result.push(type);
+    }
+  }
+
+  for (const type of visibleList) {
+    if (!seen.has(type)) {
+      seen.add(type);
+      result.push(type);
+    }
+  }
+
+  return result;
+}
 
 /**
  * Базовое описание канала.
@@ -69,27 +108,43 @@ type ChannelsRef = MaybeRef<Channel[]>;
 
 type ChannelTooltipsRef = MaybeRef<ChannelTooltips | undefined>;
 
+type ChannelTypesRef = MaybeRef<readonly string[] | undefined>;
+
 interface UseCommunicationChannelsOptions {
   /** Реактивный список каналов */
   channels: ChannelsRef;
   /** Реактивная карта пользовательских подсказок */
   channelTooltips?: ChannelTooltipsRef;
+  /** Порядок кнопок каналов в панели */
+  channelOrder?: ChannelTypesRef;
+  /** Типы каналов, которые нужно отображать (с бэка — доступные пользователю) */
+  visibleChannelTypes?: ChannelTypesRef;
   /** Текущий выбранный тип канала */
   selectedChannelType: Ref<string | null>;
 }
 
-export function useCommunicationChannels({ channels, channelTooltips, selectedChannelType }: UseCommunicationChannelsOptions) {
+export function useCommunicationChannels({
+  channels,
+  channelTooltips,
+  channelOrder,
+  visibleChannelTypes,
+  selectedChannelType,
+}: UseCommunicationChannelsOptions) {
   const channelsList = computed(() => unref(channels) ?? []);
   const channelTooltipsMap = computed(() => unref(channelTooltips) ?? {});
+
+  const panelChannelTypes = computed(() =>
+    resolvePanelChannelTypes(unref(channelOrder), unref(visibleChannelTypes)),
+  );
 
   /**
    * Возвращает типовые данные для рендера списка каналов слева.
    */
   const channelsTypes = computed(() =>
-    CHANNEL_TYPES.map((type) => ({
+    panelChannelTypes.value.map((type) => ({
       type,
       component: channelIconsMap[type],
-    }))
+    })),
   );
 
   /**
@@ -171,6 +226,7 @@ export function useCommunicationChannels({ channels, channelTooltips, selectedCh
   };
 
   return {
+    panelChannelTypes,
     channelsTypes,
     getTooltipText,
     getChannelTypeFromId,

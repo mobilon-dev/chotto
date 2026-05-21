@@ -17,6 +17,22 @@ export const Default: Story = {
   args: {},
 };
 
+/** Только телефон — без мессенджеров (нет доступных каналов связи). */
+export const PhoneOnly: Story = {
+  args: {
+    channels: [],
+    visibleChannelTypes: ['phone'],
+  },
+};
+
+/** Доступны только WhatsApp и Telegram, свой порядок. */
+export const LimitedMessengers: Story = {
+  args: {
+    visibleChannelTypes: ['telegram', 'whatsapp'],
+    channelOrder: ['whatsapp', 'telegram'],
+  },
+};
+
 // Данные каналов для чата "Георгий Звонарь"
 const channelsData = [
   {

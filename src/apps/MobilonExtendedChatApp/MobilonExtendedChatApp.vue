@@ -114,6 +114,8 @@
                         :show-channel-icons="false"
                         :confirming-attribute-id="confirmingAttributeId"
                         :blocked-attribute-ids="blockedAttributeIds"
+                        :visible-channel-types="['telegram', 'whatsapp', 'max', 'sms', 'phone']"
+                        :channel-order="['max', 'telegram', 'whatsapp', 'sms', 'phone']"
                         @select-attribute-channel="handleAttributeChannelSelect"
                         @confirm-attribute="handleConfirmAttribute"
                         @reset-blocked-attributes="blockedAttributeIds = []"

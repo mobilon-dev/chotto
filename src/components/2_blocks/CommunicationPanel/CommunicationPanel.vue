@@ -5,6 +5,7 @@
   >
     <!-- Панель с кнопками каналов -->
     <div
+      v-if="channelsTypes.length"
       ref="channelsPanelRef"
       class="channels-panel"
     >
@@ -278,6 +279,24 @@ const props = defineProps({
     required: false,
     default: () => [],
   },
+  /**
+   * Порядок кнопок каналов в панели.
+   * По умолчанию: max → telegram → whatsapp → sms → phone.
+   */
+  channelOrder: {
+    type: Array,
+    required: false,
+    default: undefined,
+  },
+  /**
+   * Типы каналов для отображения (обычно с бэка — доступные пользователю).
+   * Если не задан — показываются все поддерживаемые типы.
+   */
+  visibleChannelTypes: {
+    type: Array,
+    required: false,
+    default: undefined,
+  },
 });
 
 const emit = defineEmits([
@@ -309,6 +328,8 @@ const isAttributeBlocked = (attribute) =>
   checkAttributeBlocked(attribute, blockedAttributeIdsRef.value);
 
 const channelsRef = computed(() => props.channels ?? []);
+const channelOrderRef = computed(() => props.channelOrder);
+const visibleChannelTypesRef = computed(() => props.visibleChannelTypes);
 const channelTooltipsRef = computed(() => props.channelTooltips ?? {});
 const attributeTooltipsRef = computed(() => props.attributeTooltips ?? {});
 const attributeIndicatorTooltipsRef = computed(() => props.attributeIndicatorTooltips ?? {});
@@ -360,6 +381,7 @@ const hasAttributeTooltip = (attribute) => {
 };
 
 const {
+  panelChannelTypes,
   channelsTypes,
   getTooltipText,
   getChannelTypeFromId,
@@ -372,6 +394,8 @@ const {
 } = useCommunicationChannels({
   channels: channelsRef,
   channelTooltips: channelTooltipsRef,
+  channelOrder: channelOrderRef,
+  visibleChannelTypes: visibleChannelTypesRef,
   selectedChannelType,
 });
 
@@ -457,6 +481,7 @@ const {
   isAttributeFrozen,
 } = useCommunicationAttributes({
   contactAttributes: contactAttributesRef,
+  panelChannelTypes,
   frozenAttribute,
 });
 

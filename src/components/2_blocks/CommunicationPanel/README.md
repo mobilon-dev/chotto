@@ -19,7 +19,9 @@
 
 ## Props
 
-- `channels` (Array, optional) - доступные каналы связи
+- `channels` (Array, optional) - доступные каналы связи (инстансы каналов для подменю и placeholder)
+- `channelOrder` (Array, optional) - порядок кнопок в панели. По умолчанию: `max`, `telegram`, `whatsapp`, `sms`, `phone`
+- `visibleChannelTypes` (Array, optional) - какие типы каналов показывать (список с бэка). Если не задан — все поддерживаемые типы
 - `confirmingAttributeId` (String, optional) - id атрибута в процессе подтверждения (спиннер в слоте галочки; задаёт родитель на время запроса)
 - `blockedAttributeIds` (Array, optional) - id атрибутов, заблокированных после неудачного подтверждения (серый #ACACAC, без клика до `reset-blocked-attributes`)
 - `attributeIndicatorTooltips` (Object, optional) - подсказки для галочки / спиннера. Ключи: `selected`, `confirmed`, `confirming`, `blocked`
