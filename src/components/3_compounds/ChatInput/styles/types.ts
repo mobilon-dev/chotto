@@ -127,6 +127,8 @@ export interface ChatInputThemeCSSVariables {
   '--chotto-chatinput-button-height': string;
   /** Курсор отключенной кнопки */
   '--chotto-chatinput-button-disabled-cursor': string;
+  /** Прозрачность отключенной кнопки */
+  '--chotto-chatinput-button-disabled-opacity': string;
   /** Размер иконки кнопки */
   '--chotto-chatinput-button-icon-size': string;
 

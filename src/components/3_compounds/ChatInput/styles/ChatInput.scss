@@ -103,6 +103,7 @@
     span {
       cursor: var(--chotto-chatinput-button-disabled-cursor, auto);
       color: var(--chotto-chatinput-icon-color-disabled, #e5e5e5);
+      opacity: var(--chotto-chatinput-button-disabled-opacity, 0.4);
     }
   }
 
