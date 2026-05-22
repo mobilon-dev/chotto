@@ -64,6 +64,7 @@
   --chotto-chatitem-name-font-size: var(--chotto-theme-title-font-size);
   --chotto-chatitem-name-font-weight: var(--chotto-theme-title-font-weight);
   --chotto-chatitem-name-text-color: var(--chotto-theme-primary-text-color);
+  --chotto-chatitem-name-max-width: 240px;
   
   // Last message
   --chotto-chatitem-last-message-overflow: hidden;
@@ -80,7 +81,7 @@
   --chotto-chatitem-last-message-text-flex: 1;
   --chotto-chatitem-last-message-text-min-width: 0;
   --chotto-chatitem-last-message-text-white-space: nowrap;
-  --chotto-chatitem-last-message-text-max-width: 350px;
+  --chotto-chatitem-last-message-text-max-width: 280px;
   
   // Message icon
   --chotto-chatitem-message-icon-flex-shrink: 0;
@@ -156,6 +157,7 @@
   --chotto-chatitem-status-unread-container-bottom: 0;
   --chotto-chatitem-status-unread-container-right: 0;
   --chotto-chatitem-status-unread-container-margin: 0;
+  --chotto-chatitem-status-unread-container-top: 27px;
 
   // Status chat container
   --chotto-chatitem-status-chat-container-display: flex;

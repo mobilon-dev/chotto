@@ -2,7 +2,7 @@
   &__container {
     height: var(--chotto-extendedlayout-container-height, inherit);
     display: var(--chotto-extendedlayout-container-display, grid);
-    grid-template-columns: var(--chotto-extendedlayout-container-grid-template-columns, min-content 1fr 3fr min-content);
+    grid-template-columns: var(--chotto-extendedlayout-container-grid-template-columns, min-content 1fr 4fr min-content);
     transition: var(--chotto-extendedlayout-container-transition, all 0.3s ease);
     position: var(--chotto-extendedlayout-container-position, relative);
     border-top: var(--chotto-extendedlayout-container-border-top, none);
@@ -30,7 +30,7 @@
     display: var(--chotto-extendedlayout-second-col-display, flex);
     flex-direction: var(--chotto-extendedlayout-second-col-flex-direction, column);
     height: var(--chotto-extendedlayout-second-col-height, inherit);
-    width: var(--chotto-extendedlayout-second-col-width, 508px);
+    width: var(--chotto-extendedlayout-second-col-width, 420px);
     overflow: var(--chotto-extendedlayout-second-col-overflow, hidden);
     border-right: var(--chotto-extendedlayout-second-col-border-right, none);
     border-bottom: var(--chotto-extendedlayout-second-col-border-bottom, none);

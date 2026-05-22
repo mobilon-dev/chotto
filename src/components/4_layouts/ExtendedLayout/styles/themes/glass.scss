@@ -2,7 +2,7 @@
   // ExtendedLayout container variables
   --chotto-extendedlayout-container-height: inherit;
   --chotto-extendedlayout-container-display: grid;
-  --chotto-extendedlayout-container-grid-template-columns: min-content 1fr 3fr min-content;
+  --chotto-extendedlayout-container-grid-template-columns: min-content 1fr 4fr min-content;
   --chotto-extendedlayout-container-transition: all 0.3s ease;
   --chotto-extendedlayout-container-position: relative;
   --chotto-extendedlayout-container-border-top: var(--chotto-theme-border, none);
@@ -27,7 +27,7 @@
   --chotto-extendedlayout-second-col-display: flex;
   --chotto-extendedlayout-second-col-flex-direction: column;
   --chotto-extendedlayout-second-col-height: inherit;
-  --chotto-extendedlayout-second-col-width: 508px;
+  --chotto-extendedlayout-second-col-width: 420px;
   --chotto-extendedlayout-second-col-overflow: hidden;
   --chotto-extendedlayout-second-col-border-right: 1px solid rgba(255, 255, 255, 0.2);
   --chotto-extendedlayout-second-col-border-bottom: var(--chotto-theme-border, none);

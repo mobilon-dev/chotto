@@ -121,6 +121,8 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-name-font-weight': string;
   /** Цвет текста имени */
   '--chotto-chatitem-name-text-color': string;
+  /** Максимальная ширина имени */
+  '--chotto-chatitem-name-max-width': string;
 
   // Last message
   /** Переполнение последнего сообщения */
@@ -285,6 +287,8 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-status-unread-container-right': string;
   /** Отступы контейнера статуса и непрочитанных */
   '--chotto-chatitem-status-unread-container-margin': string;
+  /** Позиция контейнера статуса и непрочитанных сверху */
+  '--chotto-chatitem-status-unread-container-top': string;
 
   // Status chat container
   /** Отображение контейнера статуса чата */
