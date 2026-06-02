@@ -221,9 +221,10 @@
   &__status-message {
     display: var(--chotto-chatitem-status-message-display, flex);
 
-    span {
-      color: var(--chotto-chatitem-status-color-received, #5F5F5F);
-      font-size: var(--chotto-chatitem-status-font-size, 14px);
+    :deep(.status-icon) {
+      width: var(--chotto-chatitem-status-icon-size, 20px);
+      height: var(--chotto-chatitem-status-icon-size, 20px);
+      flex-shrink: 0;
     }
   }
 
@@ -287,26 +288,22 @@
   }
 }
 
-.status--received span {
+.status--received :deep(.status-icon) {
   color: var(--chotto-chatitem-status-color-received, #5F5F5F);
 }
 
-.status--read span {
+.status--read :deep(.status-icon) {
   color: var(--chotto-chatitem-status-color-read, #5F5F5F);
 }
 
-.status--pending span {
+.status--pending :deep(.status-icon) {
   color: var(--chotto-chatitem-status-color-pending, #5F5F5F);
 }
 
-.status--error span {
+.status--error :deep(.status-icon) {
   color: var(--chotto-chatitem-status-color-error, #ff4444);
 }
 
-.status--received span:first-child,
-.status--read span:first-child {
-  margin-right: var(--chotto-chatitem-status-first-icon-margin-right, -8px);
-}
 
 .text-enter-active,
 .text-leave-active {

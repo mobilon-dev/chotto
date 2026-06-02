@@ -38,7 +38,7 @@ import {
   ReadStatusIcon,
   ReceivedStatusIcon,
   SentStatusIcon,
-} from './icons';
+} from '@/components/1_icons/MessageStatus';
 
 defineOptions({
   name: 'MessageStatusIndicator',

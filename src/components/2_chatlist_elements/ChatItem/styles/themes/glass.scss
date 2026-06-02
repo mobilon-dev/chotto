@@ -171,7 +171,7 @@
   --chotto-chatitem-status-color-read: var(--chotto-theme-status-color-read);
   --chotto-chatitem-status-color-pending: var(--chotto-theme-secondary-text-color);
   --chotto-chatitem-status-color-error: #ff4444;
-  --chotto-chatitem-status-font-size: var(--chotto-theme-text-font-size);
+  --chotto-chatitem-status-icon-size: 20px;
   
   // Dialog buttons
   --chotto-chatitem-dialog-buttons-display: flex;
@@ -218,9 +218,6 @@
   --chotto-chatitem-dialog-time-box-orient: vertical;
   --chotto-chatitem-dialog-time-text-color: #ffffff67;
   --chotto-chatitem-dialog-time-font-size: var(--chotto-theme-additional-text-font-size);
-  
-  // Status first icon
-  --chotto-chatitem-status-first-icon-margin-right: -8px;
   
   // Animations
   --chotto-chatitem-text-transition: opacity 0.2s ease;

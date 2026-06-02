@@ -311,8 +311,8 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-status-color-pending': string;
   /** Цвет статуса "ошибка" */
   '--chotto-chatitem-status-color-error': string;
-  /** Размер шрифта статуса */
-  '--chotto-chatitem-status-font-size': string;
+  /** Размер иконки статуса (width/height) */
+  '--chotto-chatitem-status-icon-size': string;
 
   // Dialog buttons
   /** Отображение кнопок диалога */
@@ -389,10 +389,6 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-dialog-time-text-color': string;
   /** Размер шрифта времени диалога */
   '--chotto-chatitem-dialog-time-font-size': string;
-
-  // Status first icon
-  /** Отступ справа от первой иконки статуса */
-  '--chotto-chatitem-status-first-icon-margin-right': string;
 
   // Animations
   /** Переход текста */

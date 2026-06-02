@@ -97,19 +97,11 @@
             class="chat-item__status-message"
             :class="status"
           >
-            <template v-if="chat['lastMessage.status'] === 'pending'">
-              <span class="pi pi-clock" />
-            </template>
-            <template v-else-if="chat['lastMessage.status'] === 'error'">
-              <span class="pi pi-exclamation-circle" />
-            </template>
-            <template v-else>
-              <span
-                v-if="chat['lastMessage.status'] !== 'sent'"
-                class="pi pi-check"
-              />
-              <span class="pi pi-check" />
-            </template>
+            <PendingStatusIcon v-if="chat['lastMessage.status'] === 'pending'" />
+            <ErrorStatusIcon v-else-if="chat['lastMessage.status'] === 'error'" />
+            <ReadStatusIcon v-else-if="chat['lastMessage.status'] === 'read'" />
+            <ReceivedStatusIcon v-else-if="chat['lastMessage.status'] === 'received'" />
+            <SentStatusIcon v-else />
           </div>
 
           <div
@@ -211,6 +203,13 @@ import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import AvatarIcon from '@/components/1_icons/AvatarIcon.vue';
+import {
+  ErrorStatusIcon,
+  PendingStatusIcon,
+  ReadStatusIcon,
+  ReceivedStatusIcon,
+  SentStatusIcon,
+} from '@/components/1_icons/MessageStatus';
 import {
   AudioIcon,
   FileIcon,

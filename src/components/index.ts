@@ -16,6 +16,11 @@ export { default as SearchIcon } from './1_icons/SearchIcon.vue';
 export { default as SettingsIcon } from './1_icons/SettingsIcon.vue';
 export { default as TelegramIcon } from './1_icons/TelegramIcon.vue';
 export { default as WhatsAppIcon } from './1_icons/WhatsAppIcon.vue';
+export { default as ErrorStatusIcon } from './1_icons/MessageStatus/ErrorStatusIcon.vue';
+export { default as PendingStatusIcon } from './1_icons/MessageStatus/PendingStatusIcon.vue';
+export { default as ReadStatusIcon } from './1_icons/MessageStatus/ReadStatusIcon.vue';
+export { default as ReceivedStatusIcon } from './1_icons/MessageStatus/ReceivedStatusIcon.vue';
+export { default as SentStatusIcon } from './1_icons/MessageStatus/SentStatusIcon.vue';
 
 // 2_blocks
 export { default as CommunicationPanel } from './2_blocks/CommunicationPanel/CommunicationPanel.vue';
