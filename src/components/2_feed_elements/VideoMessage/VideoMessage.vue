@@ -193,7 +193,7 @@ import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIn
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
-import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
+import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers, safeMediaPlayVoid } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IVideoMessage } from '@/types';
 
@@ -281,7 +281,7 @@ const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
 const playAgain = () => {
   if (previewPlayer.value) {
     previewPlayer.value.currentTime = 0;
-    previewPlayer.value.play();
+    safeMediaPlayVoid(previewPlayer.value);
   }
 };
 
@@ -293,8 +293,8 @@ watch([player, previewPlayer], ([playerVal, previewVal]) => {
       previewVal.currentTime = 0;
     }
   } else if (previewVal) {
-    previewVal.play();
     previewVal.currentTime = 0;
+    safeMediaPlayVoid(previewVal);
   }
 });
 

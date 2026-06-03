@@ -348,13 +348,18 @@ const setTgsTabPlayerRef = (tabIndex: number, el: unknown) => {
   }
 };
 
+const safeTgsPlay = (player: { play?: () => void } | undefined) => {
+  if (!player || typeof player.play !== 'function') return;
+  try {
+    player.play();
+  } catch {
+    // AbortError и прочие ошибки при unmount — игнорируем
+  }
+};
+
 // Обработка наведения на вкладку
 const handleTabMouseEnter = (tabIndex: number) => {
-  // Запускаем анимацию TGS иконки вкладки при наведении
-  const player = tgsTabPlayerRefs.value.get(tabIndex);
-  if (player && typeof player.play === 'function') {
-    player.play();
-  }
+  safeTgsPlay(tgsTabPlayerRefs.value.get(tabIndex));
 };
 
 // Обработка ухода курсора с вкладки
@@ -415,10 +420,7 @@ const onSelectSticker = (sticker: Sticker) => {
 const handleStickerMouseEnter = (sticker: Sticker, index: number) => {
   // Запускаем анимацию TGS стикера при наведении
   if (isTgsSticker(sticker) && tgsLibsLoaded.value) {
-    const player = tgsPlayerRefs.value.get(index);
-    if (player && typeof player.play === 'function') {
-      player.play();
-    }
+    safeTgsPlay(tgsPlayerRefs.value.get(index));
   }
   
   // Очищаем предыдущий таймер, если он был установлен

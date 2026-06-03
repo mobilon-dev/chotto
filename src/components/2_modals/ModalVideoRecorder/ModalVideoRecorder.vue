@@ -88,6 +88,7 @@
 <script setup lang="ts">
 
 import { ref, computed, onMounted, unref, nextTick } from 'vue';
+import { safeMediaPlayVoid } from '@/functions';
 
 const timer = ref()
 const ms = ref(0)
@@ -211,7 +212,7 @@ const runIdleVideo = async () => {
       stream.value = s;
       v.srcObject = s;
       v.addEventListener("loadedmetadata", () => {
-        unref(refVideo.value)?.play()
+        safeMediaPlayVoid(unref(refVideo.value))
       });
       v.muted = true;
     })
@@ -231,7 +232,7 @@ const runIdleScreenVideo = async () => {
     stream.value = s;
     v.srcObject = s;
     v.addEventListener("loadedmetadata", () => {
-      unref(refVideo.value)?.play()
+      safeMediaPlayVoid(unref(refVideo.value))
     });
     v.muted = true;
   })

@@ -122,6 +122,7 @@ import { onMounted, ref, computed, inject } from 'vue';
 import { IFilePreview } from '@/types'
 import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscreen.vue';
 import { useTheme } from '@/hooks';
+import { safeMediaPlay } from '@/functions';
 
 const chatAppId = inject('chatAppId')
 
@@ -150,7 +151,7 @@ function togglePlayPause() {
     if (isPlaying.value) {
       audio.value.pause();
     } else {
-      audio.value.play();
+      void safeMediaPlay(audio.value);
     }
     isPlaying.value = !isPlaying.value;
   }
