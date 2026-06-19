@@ -28,6 +28,8 @@
             :text="showDefaultChannelTooltip ? 'Выбран канал по умолчанию, можно изменить в настройках профиля' : selectedChannel?.title"
             position="bottom-left"
             :offset="8"
+            :delay="tooltipDelay"
+            hide-on-click
             :trigger="showDefaultChannelTooltip ? 'auto' : 'hover'"
             :auto-show-duration="showDefaultChannelTooltip ? 5000 : 0"
           >
@@ -42,6 +44,8 @@
             :text="getTooltipText(channel.type)"
             position="bottom-left"
             :offset="8"
+            :delay="tooltipDelay"
+            hide-on-click
           >
             <span class="channel-icon">
               <component :is="channel.component" />
@@ -75,6 +79,8 @@
             :text="getAttributeTooltipText(attribute)"
             position="bottom-left"
             :offset="8"
+            :delay="tooltipDelay"
+            hide-on-click
           >
             <div
               :class="['attribute-item', getAttributeStatusClass(attribute), {
@@ -95,6 +101,7 @@
                   :confirming-attribute-id="effectiveConfirmingAttributeId"
                   :blocked-attribute-ids="blockedAttributeIdsRef"
                   :indicator-tooltips="attributeIndicatorTooltipsRef"
+                  :tooltip-delay="tooltipDelay"
                 />
                 <span class="attribute-value">{{ attribute.value }}</span>
               </div>
@@ -133,6 +140,7 @@
                 :confirming-attribute-id="effectiveConfirmingAttributeId"
                 :blocked-attribute-ids="blockedAttributeIdsRef"
                 :indicator-tooltips="attributeIndicatorTooltipsRef"
+                :tooltip-delay="tooltipDelay"
               />
               <span class="attribute-value">{{ attribute.value }}</span>
             </div>
@@ -296,6 +304,12 @@ const props = defineProps({
     type: Array,
     required: false,
     default: undefined,
+  },
+  /** Задержка показа тултипов (ms) */
+  tooltipDelay: {
+    type: Number,
+    required: false,
+    default: 3000,
   },
 });
 

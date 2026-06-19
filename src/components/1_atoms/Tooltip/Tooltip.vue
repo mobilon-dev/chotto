@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, unref, inject, nextTick, onUnmounted } from 'vue';
+import { computed, ref, unref, inject, nextTick, onMounted, onUnmounted } from 'vue';
 // import { onMounted } from 'vue';
 import { useTheme } from '@/hooks';
 
@@ -78,6 +78,10 @@ const props = defineProps({
   delay: {
     type: Number,
     default: 600,
+  },
+  hideOnClick: {
+    type: Boolean,
+    default: false,
   },
   maxWidth: {
     type: String,
@@ -258,6 +262,23 @@ const handleTooltipLeave = () => {
   scheduleHide();
 };
 
+const handleDocumentMouseDown = () => {
+  if (!props.hideOnClick) {
+    return;
+  }
+
+  isOverTrigger.value = false;
+  isOverTooltip.value = false;
+
+  if (props.trigger === 'auto') {
+    clearAutoTimer();
+    show.value = false;
+    return;
+  }
+
+  hideTooltip();
+};
+
 const startAutoShow = () => {
   clearAutoTimer();
   show.value = true;
@@ -280,7 +301,16 @@ const clearAutoTimer = () => {
 };
 
 // Очищаем таймеры при размонтировании компонента
+onMounted(() => {
+  if (props.hideOnClick) {
+    document.addEventListener('mousedown', handleDocumentMouseDown, true);
+  }
+});
+
 onUnmounted(() => {
+  if (props.hideOnClick) {
+    document.removeEventListener('mousedown', handleDocumentMouseDown, true);
+  }
   if (showTimer.value) {
     clearTimeout(showTimer.value);
   }
@@ -292,7 +322,8 @@ onUnmounted(() => {
 
 defineExpose({
   startAutoShow,
-  clearAutoTimer
+  clearAutoTimer,
+  hide: hideTooltip,
 })
 
 </script>

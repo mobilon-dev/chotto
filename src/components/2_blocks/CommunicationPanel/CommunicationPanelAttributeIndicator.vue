@@ -6,6 +6,8 @@
         :text="tooltipText"
         position="bottom-left"
         :offset="8"
+        :delay="tooltipDelay"
+        hide-on-click
       >
         <span :class="indicatorClass">
           <CommunicationPanelConfirmSpinner v-if="showSpinner" />
@@ -69,6 +71,11 @@ const props = defineProps({
     type: Object,
     required: false,
     default: () => ({}),
+  },
+  tooltipDelay: {
+    type: Number,
+    required: false,
+    default: 600,
   },
 });
 
