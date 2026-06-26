@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue';
+import { ref, nextTick, type Ref } from 'vue';
 
 /**
  * Опции для composable управления меню коммуникаций.
@@ -28,6 +28,8 @@ export function useCommunicationMenu({
   const showMenu = ref(false);
   /** Флаг отображения подменю выбора канала */
   const showSubMenu = ref(false);
+  /** Игнорировать click-outside на том же жесте, что открыл меню (кнопка может пересоздаться в DOM). */
+  const suppressOutsideClick = ref(false);
 
   /**
    * Закрывает меню и сбрасывает связанные состояния.
@@ -37,6 +39,23 @@ export function useCommunicationMenu({
     activeChannelType.value = null;
     frozenAttribute.value = null;
     showSubMenu.value = false;
+  };
+
+  const armOutsideClickSuppression = () => {
+    suppressOutsideClick.value = true;
+    nextTick(() => {
+      nextTick(() => {
+        suppressOutsideClick.value = false;
+      });
+    });
+  };
+
+  const openMenu = (channelType: string) => {
+    activeChannelType.value = channelType;
+    showMenu.value = true;
+    showSubMenu.value = false;
+    frozenAttribute.value = null;
+    armOutsideClickSuppression();
   };
 
   /**
@@ -50,20 +69,28 @@ export function useCommunicationMenu({
       }
     }
 
-    activeChannelType.value = channelType;
-    showMenu.value = true;
-    showSubMenu.value = false;
-    frozenAttribute.value = null;
+    openMenu(channelType);
   };
 
   /**
    * Закрывает меню при клике вне панели.
    */
   const handleClickOutside = (event: Event) => {
-    const element = panelRef.value;
-    if (element && !element.contains(event.target as Node)) {
-      closeMenu();
+    if (suppressOutsideClick.value) {
+      return;
     }
+    const element = panelRef.value;
+    if (!element) {
+      return;
+    }
+    const path = typeof event.composedPath === 'function' ? event.composedPath() : [];
+    if (Array.isArray(path) && path.includes(element)) {
+      return;
+    }
+    if (element.contains(event.target as Node)) {
+      return;
+    }
+    closeMenu();
   };
 
   return {
@@ -72,6 +99,7 @@ export function useCommunicationMenu({
     showMenu,
     showSubMenu,
     handleChannelClick,
+    openMenu,
     closeMenu,
     handleClickOutside,
   };

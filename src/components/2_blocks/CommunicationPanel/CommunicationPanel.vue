@@ -12,6 +12,7 @@
       <button
         v-for="channel in channelsTypes"
         :key="channel.type"
+        :data-channel-type="channel.type"
         :class="['channel-btn', { 
           active: isChannelActive(channel.type),
           hover: hoveredChannel === channel.type && !isChannelActive(channel.type) || 
@@ -311,6 +312,15 @@ const props = defineProps({
     required: false,
     default: 3000,
   },
+  /**
+   * Последний выбор attribute+channel per тип кнопки (whatsapp/telegram/max/sms/phone).
+   * Используется для one-click при переключении между мессенджерами.
+   */
+  recentAttributeChannels: {
+    type: Object,
+    required: false,
+    default: () => ({}),
+  },
 });
 
 const emit = defineEmits([
@@ -327,6 +337,8 @@ const hoveredAttribute = ref(null);
 const frozenAttribute = ref(null);
 const selectedChannelType = ref(null);
 const selectedChannel = ref({});
+/** До обновления selectedDialog родителем — для галочек в открытом меню после one-click (#15146). */
+const panelPendingSelection = ref(null);
 const showDefaultChannelTooltip = ref(false);
 const defaultChannelTooltipTimer = ref(null);
 const channelTooltipRef = ref(null);
@@ -347,6 +359,7 @@ const visibleChannelTypesRef = computed(() => props.visibleChannelTypes);
 const channelTooltipsRef = computed(() => props.channelTooltips ?? {});
 const attributeTooltipsRef = computed(() => props.attributeTooltips ?? {});
 const attributeIndicatorTooltipsRef = computed(() => props.attributeIndicatorTooltips ?? {});
+const recentAttributeChannelsRef = computed(() => props.recentAttributeChannels ?? {});
 const messagesRef = computed(() => props.messages ?? []);
 const selectedChatRef = computed(() => props.selectedChat ?? null);
 const isNewDialogRef = computed(() => props.isNewDialog ?? false);
@@ -354,22 +367,16 @@ const isNewDialogRef = computed(() => props.isNewDialog ?? false);
 // вычисляем currentChannelId из selectedDialog
 const currentChannelId = computed(() => props.selectedDialog?.channelId ?? null);
 
-// Обновляем функцию проверки выбранного канала
-const isChannelSelected = (channelId) => {
-  return currentChannelId.value === channelId;
-};
-
-// Получаем выбранный атрибут из selectedDialog
-const selectedAttributeId = computed(() => props.selectedDialog?.attributeId ?? null);
-
-// Проверяем, выбран ли атрибут (текущий диалог)
-const isAttributeSelected = (attribute) => {
-  const selectedId = selectedAttributeId.value;
+const attributeIdMatches = (attribute, selectedId) => {
   if (!selectedId || !attribute) {
     return false;
   }
   const attributeId = attribute.id ?? attribute.attributeId;
-  return selectedId === attributeId;
+  if (!attributeId) {
+    return false;
+  }
+  const suffix = selectedId.includes('.') ? selectedId.split('.').pop() : selectedId;
+  return selectedId === attributeId || attributeId === suffix || attributeId.endsWith(`.${suffix}`);
 };
 
 const getAttributeTooltipText = (attribute) => {
@@ -419,6 +426,7 @@ const {
   showMenu,
   showSubMenu,
   handleChannelClick,
+  openMenu,
   closeMenu,
   handleClickOutside,
 } = useCommunicationMenu({
@@ -426,6 +434,35 @@ const {
   selectedChannelType,
   frozenAttribute,
 });
+
+const selectedAttributeId = computed(() => props.selectedDialog?.attributeId ?? null);
+
+const effectivePanelSelection = computed(() => {
+  if (!showMenu.value || !activeChannelType.value) {
+    return null;
+  }
+  const pending = panelPendingSelection.value;
+  if (pending && pending.channelType === activeChannelType.value) {
+    return pending;
+  }
+  return null;
+});
+
+const isChannelSelected = (channelId) => {
+  const pending = effectivePanelSelection.value;
+  if (pending?.channelId) {
+    return pending.channelId === channelId;
+  }
+  return currentChannelId.value === channelId;
+};
+
+const isAttributeSelected = (attribute) => {
+  const pending = effectivePanelSelection.value;
+  if (pending?.attributeId) {
+    return attributeIdMatches(attribute, pending.attributeId);
+  }
+  return attributeIdMatches(attribute, selectedAttributeId.value);
+};
 
 const contactAttributesRef = computed(() => props.contactAttributes ?? []);
 
@@ -503,6 +540,8 @@ const {
   handleAttributeClick,
   selectChannel,
   availableChannels: resolveAvailableChannels,
+  applyRecentChannelButtonSelection,
+  clearPanelPendingSelection,
 } = useCommunicationActions({
   activeChannelType,
   channels: channelsRef,
@@ -520,6 +559,7 @@ const {
   showDefaultChannelTooltipWithTimer,
   clearDefaultChannelTooltip,
   emit,
+  panelPendingSelection,
 });
 
 const {
@@ -538,16 +578,40 @@ const {
   isAttributeBlocked,
 });
 
-const onChannelButtonClick = (channelType) => {
+const onChannelButtonClick = async (channelType) => {
   const isClosingSameChannel =
     showMenu.value && activeChannelType.value === channelType;
 
-  if (!isClosingSameChannel) {
-    emit('reset-blocked-attributes');
+  if (isClosingSameChannel) {
+    closeMenu();
+    return;
   }
 
+  emit('reset-blocked-attributes');
+
+  const isSwitchingType = selectedChannelType.value !== channelType;
+
   handleChannelClick(channelType);
+
+  if (isSwitchingType) {
+    applyRecentChannelButtonSelection(
+      channelType,
+      recentAttributeChannelsRef.value,
+      organizedContactAttributes.value,
+    );
+    // После one-click кнопка может перерисоваться (inactive → active) — держим меню открытым.
+    await nextTick();
+    openMenu(channelType);
+  } else {
+    panelPendingSelection.value = null;
+  }
 };
+
+watch(showMenu, (open) => {
+  if (!open) {
+    clearPanelPendingSelection();
+  }
+});
 
 const onAttributeClick = (attribute) => {
   if (isAttributeBlocked(attribute)) {
@@ -622,8 +686,8 @@ watch(contactAttributesRef, () => {
 
 // Watchers
 watch(() => props.selectedDialog, () => {
-  // Логика при изменении selectedDialog
-  // currentChannelId автоматически обновится через computed
+  // Родитель обновил диалог — pending для галочек больше не нужен
+  clearPanelPendingSelection();
 }, { deep: true });
 
 // Lifecycle

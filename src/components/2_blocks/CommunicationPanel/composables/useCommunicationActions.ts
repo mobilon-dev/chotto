@@ -4,6 +4,10 @@ import type {
   ConfirmAttributePayload,
 } from './useCommunicationAttributes';
 import { needsAttributeConfirmation } from './useCommunicationAttributes';
+import {
+  resolveRecentChannelSelection,
+  type RecentChannelEntry,
+} from './useCommunicationRecentSelection';
 
 /**
  * Тип канала панели коммуникаций.
@@ -43,6 +47,12 @@ interface UseCommunicationActionsOptions {
   showDefaultChannelTooltipWithTimer: () => void;
   clearDefaultChannelTooltip: () => void;
   emit: CommunicationActionsEmit;
+  /** Временный выбор для галочек в открытом меню до обновления selectedDialog родителем (#15146). */
+  panelPendingSelection?: Ref<{
+    channelType: string;
+    attributeId: string;
+    channelId: string;
+  } | null>;
 }
 
 /**
@@ -65,6 +75,7 @@ export function useCommunicationActions({
   showDefaultChannelTooltipWithTimer,
   clearDefaultChannelTooltip,
   emit,
+  panelPendingSelection,
 }: UseCommunicationActionsOptions) {
   /**
    * Эмитит подтверждение неподтверждённого атрибута — родитель выполняет запрос на сервер.
@@ -208,11 +219,68 @@ export function useCommunicationActions({
     return getAvailableChannels(channelType);
   };
 
+  /**
+   * One-click: выбор последнего attribute+channel по кнопке типа канала.
+   * Меню остаётся открытым (в отличие от selectSingleChannel).
+   */
+  const applyRecentChannelButtonSelection = (
+    channelType: string,
+    recentMap: Record<string, RecentChannelEntry> | undefined,
+    organizedAttributes: Record<string, ContactAttribute[]>,
+  ): boolean => {
+    const resolved = resolveRecentChannelSelection(
+      channelType,
+      recentMap,
+      organizedAttributes,
+      getSingleChannelForType,
+      getAvailableChannels,
+    );
+    if (!resolved) {
+      return false;
+    }
+
+    const { attribute, channelId } = resolved;
+    if (isAttributeBlocked(attribute)) {
+      return false;
+    }
+
+    if (panelPendingSelection) {
+      panelPendingSelection.value = {
+        channelType,
+        attributeId: attribute.id,
+        channelId,
+      };
+    }
+
+    emit('select-attribute-channel', {
+      attributeId: attribute.id,
+      channelId,
+    });
+    selectedChannelType.value = channelType;
+    selectedChannel.value = channels.value.find((ch) => ch.channelId === channelId) ?? {};
+
+    if (isChannelEmpty(channelId) && isNewDialog.value) {
+      showDefaultChannelTooltipWithTimer();
+    } else {
+      clearDefaultChannelTooltip();
+    }
+
+    return true;
+  };
+
+  const clearPanelPendingSelection = () => {
+    if (panelPendingSelection) {
+      panelPendingSelection.value = null;
+    }
+  };
+
   return {
     handlePhoneCall,
     handleAttributeClick,
     selectSingleChannel,
     selectChannel,
     availableChannels,
+    applyRecentChannelButtonSelection,
+    clearPanelPendingSelection,
   };
 }
