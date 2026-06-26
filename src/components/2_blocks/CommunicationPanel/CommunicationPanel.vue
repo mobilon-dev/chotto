@@ -173,19 +173,27 @@
         <div class="sub-menu-header">
           Канал связи
         </div>
-        
+
         <div
           v-for="channel in availableChannels"
           :key="channel.channelId"
           class="sub-menu-item"
-          :class="{ 'selected': isChannelSelected(channel.channelId) }"
+          :class="{ 'selected': isChannelSelected(channel) }"
           @click="selectChannel(channel.channelId)"
         >
-          <span
-            v-if="isChannelSelected(channel.channelId)"
-            class="selected-indicator"
-          >
-            <CommunicationPanelCheckIcon />
+          <span class="sub-menu-indicator-slot">
+            <span
+              v-if="getSubMenuChannelIndicatorTypeForChannel(channel)"
+              :class="getSubMenuChannelIndicatorClassForChannel(channel)"
+            >
+              <CommunicationPanelConfirmSpinner
+                v-if="getSubMenuChannelIndicatorTypeForChannel(channel) === 'spinner'"
+              />
+              <CommunicationPanelUnconfirmedIcon
+                v-else-if="getSubMenuChannelIndicatorTypeForChannel(channel) === 'unconfirmed'"
+              />
+              <CommunicationPanelCheckIcon v-else />
+            </span>
           </span>
           <span class="sub-menu-title">{{ channel.title || channel.channelId }}</span>
           <span
@@ -211,13 +219,15 @@ import {
   getAttributeStatusClass,
   isAttributeConfirming,
   isAttributeBlocked as checkAttributeBlocked,
+  getSubMenuChannelIndicatorType,
+  getSubMenuChannelIndicatorClass,
 } from './composables/useCommunicationAttributes';
 import { useCommunicationActions } from './composables/useCommunicationActions';
 import { useCommunicationSubMenu } from './composables/useCommunicationSubMenu';
 import { useCommunicationDialogSync } from './composables/useCommunicationDialogSync';
 import { useCommunicationPlaceholder } from './composables/useCommunicationPlaceholder';
 import CommunicationPanelAttributeIndicator from './CommunicationPanelAttributeIndicator.vue';
-import { CommunicationPanelCheckIcon } from './icons';
+import { CommunicationPanelCheckIcon, CommunicationPanelConfirmSpinner, CommunicationPanelUnconfirmedIcon } from './icons';
 
 const props = defineProps({
   contactAttributes: {
@@ -448,12 +458,52 @@ const effectivePanelSelection = computed(() => {
   return null;
 });
 
-const isChannelSelected = (channelId) => {
+const isChannelSelected = (channel) => {
+  const channelId = typeof channel === 'string' ? channel : channel?.channelId;
+  const backendChannelId = typeof channel === 'object' && channel != null
+    ? channel.backendChannelId
+    : undefined;
+
+  const channelIdsMatch = (left, right) => {
+    if (!left || !right) return false;
+    if (left === right) return true;
+    if (backendChannelId && (left === backendChannelId || right === backendChannelId)) {
+      return true;
+    }
+    return false;
+  };
+
   const pending = effectivePanelSelection.value;
-  if (pending?.channelId) {
-    return pending.channelId === channelId;
+  if (pending?.channelId && channelIdsMatch(pending.channelId, channelId)) {
+    return true;
   }
-  return currentChannelId.value === channelId;
+
+  const activeType = activeChannelType.value;
+  const subAttr = subMenuAttribute.value;
+  if (showMenu.value && activeType && subAttr) {
+    const recent = recentAttributeChannelsRef.value?.[activeType];
+    if (recent?.channelId && recent?.attributeId) {
+      if (
+        attributeIdMatches(subAttr, recent.attributeId)
+        && channelIdsMatch(recent.channelId, channelId)
+      ) {
+        return true;
+      }
+    }
+  }
+
+  if (
+    showMenu.value
+    && activeType
+    && subAttr
+    && selectedAttributeId.value
+    && attributeIdMatches(subAttr, selectedAttributeId.value)
+    && channelIdsMatch(currentChannelId.value, channelId)
+  ) {
+    return true;
+  }
+
+  return channelIdsMatch(currentChannelId.value, channelId);
 };
 
 const isAttributeSelected = (attribute) => {
@@ -463,6 +513,31 @@ const isAttributeSelected = (attribute) => {
   }
   return attributeIdMatches(attribute, selectedAttributeId.value);
 };
+
+const subMenuAttribute = computed(() => hoveredAttribute.value ?? frozenAttribute.value ?? null);
+
+const getChannelIndicatorAliases = (channel) => {
+  const backendId = channel?.backendChannelId;
+  return backendId ? [backendId] : [];
+};
+
+const getSubMenuChannelIndicatorTypeForChannel = (channel) =>
+  getSubMenuChannelIndicatorType(
+    subMenuAttribute.value,
+    channel.channelId,
+    isChannelSelected(channel),
+    effectiveConfirmingAttributeId.value,
+    getChannelIndicatorAliases(channel),
+  );
+
+const getSubMenuChannelIndicatorClassForChannel = (channel) =>
+  getSubMenuChannelIndicatorClass(
+    subMenuAttribute.value,
+    channel.channelId,
+    isChannelSelected(channel),
+    effectiveConfirmingAttributeId.value,
+    getChannelIndicatorAliases(channel),
+  ) ?? '';
 
 const contactAttributesRef = computed(() => props.contactAttributes ?? []);
 
@@ -659,7 +734,6 @@ const shouldShowSubMenu = computed(() =>
 
 const onAttributeMouseEnter = async (attribute, event) => {
   const target = baseHandleAttributeMouseEnter(attribute, event.currentTarget);
-  // Ждем обновления DOM
   await nextTick();
   if (target instanceof HTMLElement) {
     alignSubMenuWithTarget(panelRef, target);

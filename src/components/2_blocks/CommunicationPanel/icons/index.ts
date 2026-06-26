@@ -1,4 +1,5 @@
 export { default as CommunicationPanelCheckIcon } from './CommunicationPanelCheckIcon.vue';
+export { default as CommunicationPanelUnconfirmedIcon } from './CommunicationPanelUnconfirmedIcon.vue';
 export { default as CommunicationPanelConfirmSpinner } from './CommunicationPanelConfirmSpinner.vue';
 
 export { default as CommunicationPanelPhoneIcon } from './CommunicationPanelPhoneIcon.vue';

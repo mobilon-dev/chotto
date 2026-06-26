@@ -128,10 +128,17 @@
   --chotto-communicationpanel-attribute-margin: 0;
   --chotto-communicationpanel-attribute-background: transparent;
   --chotto-communicationpanel-attribute-font-size: inherit;
+  --chotto-communicationpanel-attribute-min-width: 0;
+  --chotto-communicationpanel-attribute-overflow: hidden;
   --chotto-communicationpanel-attribute-value-color: #262626;
   --chotto-communicationpanel-attribute-value-font-weight: 500;
   --chotto-communicationpanel-attribute-value-font-size: inherit;
   --chotto-communicationpanel-attribute-value-line-height: normal;
+  --chotto-communicationpanel-attribute-value-flex: 1 1 auto;
+  --chotto-communicationpanel-attribute-value-min-width: 0;
+  --chotto-communicationpanel-attribute-value-overflow: hidden;
+  --chotto-communicationpanel-attribute-value-text-overflow: ellipsis;
+  --chotto-communicationpanel-attribute-value-white-space: nowrap;
 
   --chotto-communicationpanel-attribute-selected-background: #f6f6f6;
   --chotto-communicationpanel-attribute-selected-color: #1976d2;
@@ -153,10 +160,15 @@
   --chotto-communicationpanel-attribute-info-align-items: center;
   --chotto-communicationpanel-attribute-info-gap: 8px;
   --chotto-communicationpanel-attribute-info-flex: 1;
+  --chotto-communicationpanel-attribute-info-min-width: 0;
+  --chotto-communicationpanel-attribute-info-overflow: hidden;
   --chotto-communicationpanel-attribute-indicator-slot-display: flex;
   --chotto-communicationpanel-attribute-indicator-slot-align-items: center;
   --chotto-communicationpanel-attribute-indicator-slot-justify-content: center;
   --chotto-communicationpanel-attribute-indicator-slot-flex-shrink: 0;
+  --chotto-communicationpanel-attribute-indicator-tooltip-display: inline-flex;
+  --chotto-communicationpanel-attribute-indicator-tooltip-align-items: center;
+  --chotto-communicationpanel-attribute-indicator-tooltip-justify-content: center;
   --chotto-communicationpanel-menu-icon-display: flex;
   --chotto-communicationpanel-menu-icon-align-items: center;
   --chotto-communicationpanel-menu-icon-justify-content: center;
@@ -166,6 +178,7 @@
   --chotto-communicationpanel-menu-icon-font-size: inherit;
   --chotto-communicationpanel-menu-icon-width: auto;
   --chotto-communicationpanel-menu-icon-height: auto;
+  --chotto-communicationpanel-menu-icon-flex-shrink: 0;
   --chotto-communicationpanel-menu-icon-grey-color: var(--chotto-theme-tertiary-color);
   --chotto-communicationpanel-menu-icon-grey-font-size: inherit;
   --chotto-communicationpanel-menu-arrow-border-top: 1px solid var(--chotto-theme-tertiary-color);
@@ -195,16 +208,15 @@
     0 8px 32px rgba(15, 23, 42, 0.12),
     0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   --chotto-communicationpanel-submenu-header-color: #737373;
-  --chotto-communicationpanel-submenu-item-display: flex;
+  --chotto-communicationpanel-submenu-item-display: grid;
+  --chotto-communicationpanel-submenu-item-grid-columns: 18px 1fr auto;
   --chotto-communicationpanel-submenu-item-align-items: center;
-  --chotto-communicationpanel-submenu-item-justify-content: space-between;
   --chotto-communicationpanel-submenu-item-color: #404040;
   --chotto-communicationpanel-submenu-item-hover-background: #e5e5e5;
 
   --chotto-communicationpanel-selected-background: #f6f6f6;
   --chotto-communicationpanel-selected-color: #1976d2;
   --chotto-communicationpanel-selected-font-weight: 500;
-  --chotto-communicationpanel-selected-padding: 6px 12px;
 
   --chotto-communicationpanel-selected-indicator-display: flex;
   --chotto-communicationpanel-selected-indicator-align-items: center;
@@ -222,6 +234,7 @@
   --chotto-communicationpanel-attribute-blocked-indicator-cursor: pointer;
   --chotto-communicationpanel-blocked-indicator-display: block;
   --chotto-communicationpanel-blocked-indicator-border-radius: 50%;
+  --chotto-communicationpanel-blocked-indicator-mark-size: 8px;
   --chotto-communicationpanel-blocked-indicator-mark-background: transparent;
   --chotto-communicationpanel-blocked-indicator-opacity: 0;
   --chotto-communicationpanel-attribute-blocked-icon-opacity: 1;
@@ -253,11 +266,15 @@
   --chotto-communicationpanel-submenu-header-margin-bottom: 4px;
   --chotto-communicationpanel-submenu-header-text-transform: none;
   --chotto-communicationpanel-submenu-header-border-bottom: none;
+  --chotto-communicationpanel-submenu-indicator-slot-display: flex;
+  --chotto-communicationpanel-submenu-indicator-slot-align-items: center;
+  --chotto-communicationpanel-submenu-indicator-slot-justify-content: center;
+  --chotto-communicationpanel-submenu-indicator-slot-flex-shrink: 0;
   --chotto-communicationpanel-submenu-item-padding: 6px 12px;
   --chotto-communicationpanel-submenu-item-cursor: pointer;
   --chotto-communicationpanel-submenu-item-transition: background 0.2s ease;
   --chotto-communicationpanel-submenu-item-border-radius: 0;
-  --chotto-communicationpanel-submenu-item-gap: 12px;
+  --chotto-communicationpanel-submenu-item-column-gap: 8px;
   --chotto-communicationpanel-submenu-item-background: transparent;
   --chotto-communicationpanel-submenu-item-font-size: inherit;
   --chotto-communicationpanel-submenu-item-margin: 0;
@@ -266,13 +283,12 @@
   --chotto-communicationpanel-submenu-icon-width: 20px;
   --chotto-communicationpanel-submenu-icon-height: 20px;
   --chotto-communicationpanel-submenu-icon-flex-shrink: 0;
-  --chotto-communicationpanel-submenu-icon-margin-left: auto;
   --chotto-communicationpanel-submenu-icon-font-size: inherit;
   --chotto-communicationpanel-submenu-title-font-size: inherit;
   --chotto-communicationpanel-submenu-title-white-space: nowrap;
   --chotto-communicationpanel-submenu-title-overflow: hidden;
   --chotto-communicationpanel-submenu-title-text-overflow: ellipsis;
-  --chotto-communicationpanel-submenu-title-flex-grow: 1;
+  --chotto-communicationpanel-submenu-title-min-width: 0;
   --chotto-communicationpanel-submenu-title-font-weight: normal;
   --chotto-communicationpanel-submenu-title-line-height: normal;
   

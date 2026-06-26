@@ -237,6 +237,10 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-attribute-color': string;
   /** Размер шрифта элемента атрибута */
   '--chotto-communicationpanel-attribute-font-size': string;
+  /** Минимальная ширина элемента атрибута */
+  '--chotto-communicationpanel-attribute-min-width': string;
+  /** Переполнение элемента атрибута */
+  '--chotto-communicationpanel-attribute-overflow': string;
   /** Цвет фона элемента атрибута при наведении */
   '--chotto-communicationpanel-attribute-hover-background': string;
   /** Цвет элемента атрибута при наведении */
@@ -261,6 +265,10 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-attribute-info-flex': string;
   /** Выравнивание по поперечной оси информации атрибута */
   '--chotto-communicationpanel-attribute-info-align-items': string;
+  /** Минимальная ширина информации атрибута */
+  '--chotto-communicationpanel-attribute-info-min-width': string;
+  /** Переполнение информации атрибута */
+  '--chotto-communicationpanel-attribute-info-overflow': string;
 
   // Attribute indicator slot (слот под галку в пункте атрибута)
   /** Отображение слота индикатора атрибута */
@@ -271,8 +279,24 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-attribute-indicator-slot-justify-content': string;
   /** Сжатие слота индикатора атрибута */
   '--chotto-communicationpanel-attribute-indicator-slot-flex-shrink': string;
+  /** Отображение тултипа в слоте индикатора атрибута */
+  '--chotto-communicationpanel-attribute-indicator-tooltip-display': string;
+  /** Выравнивание по поперечной оси тултипа в слоте индикатора атрибута */
+  '--chotto-communicationpanel-attribute-indicator-tooltip-align-items': string;
+  /** Выравнивание по главной оси тултипа в слоте индикатора атрибута */
+  '--chotto-communicationpanel-attribute-indicator-tooltip-justify-content': string;
 
   // Attribute value
+  /** Коэффициент роста значения атрибута */
+  '--chotto-communicationpanel-attribute-value-flex': string;
+  /** Минимальная ширина значения атрибута */
+  '--chotto-communicationpanel-attribute-value-min-width': string;
+  /** Переполнение значения атрибута */
+  '--chotto-communicationpanel-attribute-value-overflow': string;
+  /** Обрезка текста значения атрибута */
+  '--chotto-communicationpanel-attribute-value-text-overflow': string;
+  /** Перенос пробелов значения атрибута */
+  '--chotto-communicationpanel-attribute-value-white-space': string;
   /** Жирность шрифта значения атрибута */
   '--chotto-communicationpanel-attribute-value-font-weight': string;
   /** Размер шрифта значения атрибута */
@@ -303,6 +327,8 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-empty-placeholder-line-height': string;
 
   // Menu icon
+  /** Сжатие иконки меню */
+  '--chotto-communicationpanel-menu-icon-flex-shrink': string;
   /** Цвет серой иконки меню */
   '--chotto-communicationpanel-menu-icon-grey-color': string;
   /** Размер шрифта серой иконки меню */
@@ -410,13 +436,25 @@ export interface CommunicationPanelThemeCSSVariables {
   /** Граница снизу заголовка подменю */
   '--chotto-communicationpanel-submenu-header-border-bottom': string;
 
+  // Sub menu indicator slot (слот под галку в пункте подменю)
+  /** Отображение слота индикатора подменю */
+  '--chotto-communicationpanel-submenu-indicator-slot-display': string;
+  /** Выравнивание по поперечной оси слота индикатора подменю */
+  '--chotto-communicationpanel-submenu-indicator-slot-align-items': string;
+  /** Выравнивание по главной оси слота индикатора подменю */
+  '--chotto-communicationpanel-submenu-indicator-slot-justify-content': string;
+  /** Сжатие слота индикатора подменю */
+  '--chotto-communicationpanel-submenu-indicator-slot-flex-shrink': string;
+
   // Sub menu item
   /** Отображение элемента подменю */
   '--chotto-communicationpanel-submenu-item-display': string;
+  /** Колонки сетки элемента подменю */
+  '--chotto-communicationpanel-submenu-item-grid-columns': string;
   /** Выравнивание по поперечной оси элемента подменю */
   '--chotto-communicationpanel-submenu-item-align-items': string;
-  /** Выравнивание по главной оси элемента подменю */
-  '--chotto-communicationpanel-submenu-item-justify-content': string;
+  /** Промежуток между колонками элемента подменю */
+  '--chotto-communicationpanel-submenu-item-column-gap': string;
   /** Отступы элемента подменю */
   '--chotto-communicationpanel-submenu-item-padding': string;
   /** Курсор элемента подменю */
@@ -425,8 +463,6 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-submenu-item-transition': string;
   /** Радиус границы элемента подменю */
   '--chotto-communicationpanel-submenu-item-border-radius': string;
-  /** Промежуток между элементами подменю */
-  '--chotto-communicationpanel-submenu-item-gap': string;
   /** Цвет фона элемента подменю */
   '--chotto-communicationpanel-submenu-item-background': string;
   /** Цвет элемента подменю */
@@ -447,8 +483,6 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-selected-color': string;
   /** Жирность шрифта выбранного элемента подменю */
   '--chotto-communicationpanel-selected-font-weight': string;
-  /** Отступы выбранного элемента подменю */
-  '--chotto-communicationpanel-selected-padding': string;
   /** Отображение индикатора выбранного элемента */
   '--chotto-communicationpanel-selected-indicator-display': string;
   /** Выравнивание по поперечной оси индикатора выбранного элемента */
@@ -483,6 +517,8 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-blocked-indicator-display': string;
   /** Радиус маркера blocked */
   '--chotto-communicationpanel-blocked-indicator-border-radius': string;
+  /** Размер маркера blocked */
+  '--chotto-communicationpanel-blocked-indicator-mark-size': string;
   /** Фон маркера blocked (прозрачный — только зона для тултипа) */
   '--chotto-communicationpanel-blocked-indicator-mark-background': string;
   /** Прозрачность маркера blocked */
@@ -507,8 +543,6 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-submenu-icon-height': string;
   /** Сжатие иконки подменю */
   '--chotto-communicationpanel-submenu-icon-flex-shrink': string;
-  /** Отступ слева иконки подменю */
-  '--chotto-communicationpanel-submenu-icon-margin-left': string;
   /** Цвет иконки подменю */
   '--chotto-communicationpanel-submenu-icon-color': string;
   /** Размер шрифта иконки подменю */
@@ -525,8 +559,8 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-submenu-title-overflow': string;
   /** Обрезка текста заголовка подменю */
   '--chotto-communicationpanel-submenu-title-text-overflow': string;
-  /** Коэффициент роста заголовка подменю */
-  '--chotto-communicationpanel-submenu-title-flex-grow': string;
+  /** Минимальная ширина заголовка подменю */
+  '--chotto-communicationpanel-submenu-title-min-width': string;
   /** Жирность шрифта заголовка подменю */
   '--chotto-communicationpanel-submenu-title-font-weight': string;
   /** Высота строки заголовка подменю */

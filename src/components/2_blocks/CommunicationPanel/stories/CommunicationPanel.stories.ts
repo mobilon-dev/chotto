@@ -84,6 +84,9 @@ const contactAttributes = [
     },
     value: '@georgiy_zvonar',
     status: 'unconfirmed',
+    canonResolveStates: [
+      { channelId: 'telegram.T222', substatus: 'not_found', updatedTimestampms: 1 },
+    ],
   },
   {
     id: 'atr_max',
@@ -367,6 +370,7 @@ export const InteractiveWithFeed: Story = {
       const attributeIndicatorTooltips = {
         selected: 'Выбранный канал связи',
         confirmed: 'Подтверждённый контакт',
+        unconfirmed: 'Не удалось подтвердить контакт в мессенджере',
         confirming: 'Подтверждение контакта…',
         blocked: 'Не удалось подтвердить',
       };

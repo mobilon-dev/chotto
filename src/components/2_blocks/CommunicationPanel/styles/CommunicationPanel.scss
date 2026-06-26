@@ -304,15 +304,25 @@
   border-bottom: var(--chotto-communicationpanel-submenu-header-border-bottom, none);
 }
 
+.sub-menu-indicator-slot {
+  display: var(--chotto-communicationpanel-submenu-indicator-slot-display, flex);
+  align-items: var(--chotto-communicationpanel-submenu-indicator-slot-align-items, center);
+  justify-content: var(--chotto-communicationpanel-submenu-indicator-slot-justify-content, center);
+  width: var(--chotto-communicationpanel-selected-indicator-width, 18px);
+  min-width: var(--chotto-communicationpanel-selected-indicator-width, 18px);
+  height: var(--chotto-communicationpanel-selected-indicator-height, 18px);
+  flex-shrink: var(--chotto-communicationpanel-submenu-indicator-slot-flex-shrink, 0);
+}
+
 .sub-menu-item {
-  display: var(--chotto-communicationpanel-submenu-item-display, flex);
+  display: var(--chotto-communicationpanel-submenu-item-display, grid);
+  grid-template-columns: var(--chotto-communicationpanel-submenu-item-grid-columns, 18px 1fr auto);
   align-items: var(--chotto-communicationpanel-submenu-item-align-items, center);
-  justify-content: var(--chotto-communicationpanel-submenu-item-justify-content, space-between);
+  column-gap: var(--chotto-communicationpanel-submenu-item-column-gap, 8px);
   padding: var(--chotto-communicationpanel-submenu-item-padding, 6px 12px);
   cursor: var(--chotto-communicationpanel-submenu-item-cursor, pointer);
   transition: var(--chotto-communicationpanel-submenu-item-transition, background 0.2s ease);
   border-radius: var(--chotto-communicationpanel-submenu-item-border-radius, 0);
-  gap: var(--chotto-communicationpanel-submenu-item-gap, 8px);
   background: var(--chotto-communicationpanel-submenu-item-background, transparent);
   color: var(--chotto-communicationpanel-submenu-item-color, inherit);
   font-size: var(--chotto-communicationpanel-submenu-item-font-size, inherit);
@@ -329,11 +339,11 @@
   background: var(--chotto-communicationpanel-selected-background, #f6f6f6);
   color: var(--chotto-communicationpanel-selected-color, #1976d2);
   font-weight: var(--chotto-communicationpanel-selected-font-weight, 500);
-  padding: var(--chotto-communicationpanel-selected-padding, 6px 12px);
 }
 
 :deep(.selected-indicator),
-:deep(.confirmed-indicator) {
+:deep(.confirmed-indicator),
+:deep(.unconfirmed-indicator) {
   display: var(--chotto-communicationpanel-selected-indicator-display, flex);
   align-items: var(--chotto-communicationpanel-selected-indicator-align-items, center);
   justify-content: var(--chotto-communicationpanel-selected-indicator-justify-content, center);
@@ -435,7 +445,6 @@
   width: var(--chotto-communicationpanel-submenu-icon-width, 20px);
   height: var(--chotto-communicationpanel-submenu-icon-height, 20px);
   flex-shrink: var(--chotto-communicationpanel-submenu-icon-flex-shrink, 0);
-  margin-left: var(--chotto-communicationpanel-submenu-icon-margin-left, auto);
   color: var(--chotto-communicationpanel-submenu-icon-color, inherit);
   font-size: var(--chotto-communicationpanel-submenu-icon-font-size, inherit);
 }
@@ -446,9 +455,9 @@
   white-space: var(--chotto-communicationpanel-submenu-title-white-space, nowrap);
   overflow: var(--chotto-communicationpanel-submenu-title-overflow, hidden);
   text-overflow: var(--chotto-communicationpanel-submenu-title-text-overflow, ellipsis);
-  flex-grow: var(--chotto-communicationpanel-submenu-title-flex-grow, 1);
   font-weight: var(--chotto-communicationpanel-submenu-title-font-weight, normal);
   line-height: var(--chotto-communicationpanel-submenu-title-line-height, normal);
+  min-width: var(--chotto-communicationpanel-submenu-title-min-width, 0);
 }
 
 .attributes-menu :deep(.tooltip-wrapper) {

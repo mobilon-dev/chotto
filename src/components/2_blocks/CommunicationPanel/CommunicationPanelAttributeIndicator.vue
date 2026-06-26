@@ -12,6 +12,7 @@
         <span :class="indicatorClass">
           <CommunicationPanelConfirmSpinner v-if="showSpinner" />
           <CommunicationPanelCheckIcon v-else-if="showCheckmark" />
+          <CommunicationPanelUnconfirmedIcon v-else-if="showUnconfirmedIcon" />
           <span
             v-else-if="showBlockedSlot"
             class="blocked-indicator-mark"
@@ -25,6 +26,7 @@
       >
         <CommunicationPanelConfirmSpinner v-if="showSpinner" />
         <CommunicationPanelCheckIcon v-else-if="showCheckmark" />
+        <CommunicationPanelUnconfirmedIcon v-else-if="showUnconfirmedIcon" />
         <span
           v-else-if="showBlockedSlot"
           class="blocked-indicator-mark"
@@ -38,9 +40,10 @@
 <script setup>
 import { computed } from 'vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { CommunicationPanelCheckIcon, CommunicationPanelConfirmSpinner } from './icons';
+import { CommunicationPanelCheckIcon, CommunicationPanelConfirmSpinner, CommunicationPanelUnconfirmedIcon } from './icons';
 import {
   shouldShowAttributeCheckmark,
+  shouldShowAttributeUnconfirmedIndicator,
   getAttributeCheckIndicatorClass,
   isAttributeConfirming,
   shouldShowBlockedIndicatorSlot,
@@ -93,11 +96,17 @@ const showCheckmark = computed(() =>
   shouldShowAttributeCheckmark(props.attribute, props.isSelected)
 );
 
+const showUnconfirmedIcon = computed(() =>
+  shouldShowAttributeUnconfirmedIndicator(props.attribute)
+);
+
 const showBlockedSlot = computed(() =>
   shouldShowBlockedIndicatorSlot(props.attribute, indicatorContext.value)
 );
 
-const showIndicator = computed(() => showSpinner.value || showCheckmark.value);
+const showIndicator = computed(() =>
+  showSpinner.value || showCheckmark.value || showUnconfirmedIcon.value
+);
 
 const showSlot = computed(() => showIndicator.value || showBlockedSlot.value);
 

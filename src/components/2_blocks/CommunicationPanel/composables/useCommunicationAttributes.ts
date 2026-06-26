@@ -6,6 +6,17 @@ export const CONTACT_ATTRIBUTE_STATUSES = ['confirmed', 'unconfirmed'] as const;
 
 export type ContactAttributeStatus = (typeof CONTACT_ATTRIBUTE_STATUSES)[number];
 
+export const CANON_RESOLVE_SUBSTATUS_NOT_FOUND = 'not_found';
+
+/** Результат неудачного resolveCanon для пары attribute + channel (с бэкенда). */
+export type CanonResolveState = {
+  channelId: string;
+  substatus: typeof CANON_RESOLVE_SUBSTATUS_NOT_FOUND | string;
+  updatedTimestampms?: number;
+  /** chn_* — для сопоставления с display channelId в подменю */
+  backendChannelId?: string;
+};
+
 /**
  * Тип контактного атрибута из панели коммуникаций.
  */
@@ -15,6 +26,7 @@ export type ContactAttribute = {
   value?: string;
   data?: unknown;
   status?: ContactAttributeStatus;
+  canonResolveStates?: CanonResolveState[];
   [key: string]: unknown;
 };
 
@@ -40,6 +52,78 @@ export function isAttributeUnconfirmed(attribute: ContactAttribute | null | unde
   return attribute?.status === 'unconfirmed';
 }
 
+export function getAttributeCanonResolveStates(
+  attribute: ContactAttribute | null | undefined,
+): CanonResolveState[] {
+  return Array.isArray(attribute?.canonResolveStates) ? attribute.canonResolveStates : [];
+}
+
+export function isCanonResolveSubstatusNotFound(substatus: unknown): boolean {
+  return String(substatus ?? '').toLowerCase() === CANON_RESOLVE_SUBSTATUS_NOT_FOUND;
+}
+
+/** Есть неудачная попытка подтверждения хотя бы в одном канале. */
+export function hasCanonResolveNotFound(
+  attribute: ContactAttribute | null | undefined,
+): boolean {
+  if (!isAttributeUnconfirmed(attribute)) {
+    return false;
+  }
+  return getAttributeCanonResolveStates(attribute).some((state) =>
+    isCanonResolveSubstatusNotFound(state.substatus),
+  );
+}
+
+export function isChannelCanonResolveNotFound(
+  attribute: ContactAttribute | null | undefined,
+  channelId: string | null | undefined,
+  extraChannelIds: readonly string[] = [],
+): boolean {
+  const targets = new Set(
+    [channelId, ...extraChannelIds]
+      .map((id) => String(id ?? '').trim())
+      .filter(Boolean),
+  );
+  if (!targets.size || !isAttributeUnconfirmed(attribute)) {
+    return false;
+  }
+  return getAttributeCanonResolveStates(attribute).some((state) => {
+    if (!isCanonResolveSubstatusNotFound(state.substatus)) return false;
+    const stateId = String(state.channelId ?? '').trim();
+    const backendId = String(state.backendChannelId ?? '').trim();
+    if (!stateId && !backendId) return false;
+    if (targets.has(stateId) || targets.has(backendId)) return true;
+    for (const target of targets) {
+      const targetSuffix = target.includes('.') ? target.split('.').slice(1).join('.') : target;
+      const stateSuffix = stateId.includes('.') ? stateId.split('.').slice(1).join('.') : stateId;
+      if (targetSuffix && stateSuffix && targetSuffix === stateSuffix) return true;
+    }
+    return false;
+  });
+}
+
+export type SubMenuChannelIndicatorType = 'spinner' | 'check' | 'unconfirmed';
+
+/** Индикатор в списке каналов связи: (!) для not_found, галочка — для выбранного. */
+export function getSubMenuChannelIndicatorType(
+  attribute: ContactAttribute | null | undefined,
+  channelId: string | null | undefined,
+  isChannelSelected: boolean,
+  confirmingAttributeId: string | null | undefined,
+  extraChannelIds: readonly string[] = [],
+): SubMenuChannelIndicatorType | null {
+  if (isChannelCanonResolveNotFound(attribute, channelId, extraChannelIds)) {
+    return 'unconfirmed';
+  }
+  if (!isChannelSelected) {
+    return null;
+  }
+  if (isAttributeConfirming(attribute, confirmingAttributeId)) {
+    return 'spinner';
+  }
+  return 'check';
+}
+
 /** Нужно запросить подтверждение атрибута у родителя (запрос на сервер). */
 export function needsAttributeConfirmation(attribute: ContactAttribute | null | undefined): boolean {
   return isAttributeUnconfirmed(attribute);
@@ -53,17 +137,36 @@ export type ConfirmAttributePayload = {
   attribute: ContactAttribute;
 };
 
+export function shouldShowAttributeStatusIndicator(
+  attribute: ContactAttribute | null | undefined,
+  isSelected: boolean
+): boolean {
+  return isSelected || isAttributeConfirmed(attribute) || hasCanonResolveNotFound(attribute);
+}
+
 export function shouldShowAttributeCheckmark(
   attribute: ContactAttribute | null | undefined,
   isSelected: boolean
 ): boolean {
+  if (isAttributeUnconfirmed(attribute)) {
+    return false;
+  }
   return isSelected || isAttributeConfirmed(attribute);
+}
+
+export function shouldShowAttributeUnconfirmedIndicator(
+  attribute: ContactAttribute | null | undefined
+): boolean {
+  return hasCanonResolveNotFound(attribute);
 }
 
 export function getAttributeCheckIndicatorClass(
   attribute: ContactAttribute | null | undefined,
   isSelected: boolean
-): 'selected-indicator' | 'confirmed-indicator' | null {
+): 'selected-indicator' | 'confirmed-indicator' | 'unconfirmed-indicator' | null {
+  if (hasCanonResolveNotFound(attribute)) {
+    return 'unconfirmed-indicator';
+  }
   if (!shouldShowAttributeCheckmark(attribute, isSelected)) {
     return null;
   }
@@ -92,7 +195,12 @@ export function isAttributeBlocked(
 }
 
 /** Ключи подсказок для галочки / спиннера в слоте индикатора */
-export type AttributeIndicatorTooltipKey = 'selected' | 'confirmed' | 'confirming' | 'blocked';
+export type AttributeIndicatorTooltipKey =
+  | 'selected'
+  | 'confirmed'
+  | 'unconfirmed'
+  | 'confirming'
+  | 'blocked';
 
 export type AttributeIndicatorTooltips = Partial<Record<AttributeIndicatorTooltipKey, string>>;
 
@@ -108,7 +216,7 @@ export function shouldShowAttributeIndicator(
 ): boolean {
   return (
     isAttributeConfirming(attribute, context.confirmingAttributeId) ||
-    shouldShowAttributeCheckmark(attribute, context.isSelected)
+    shouldShowAttributeStatusIndicator(attribute, context.isSelected)
   );
 }
 
@@ -122,7 +230,7 @@ export function shouldShowBlockedIndicatorSlot(
   }
   return (
     !isAttributeConfirming(attribute, context.confirmingAttributeId) &&
-    !shouldShowAttributeCheckmark(attribute, context.isSelected)
+    !shouldShowAttributeStatusIndicator(attribute, context.isSelected)
   );
 }
 
@@ -148,6 +256,9 @@ export function getAttributeIndicatorTooltipKey(
   if (isAttributeConfirmed(attribute)) {
     return 'confirmed';
   }
+  if (hasCanonResolveNotFound(attribute)) {
+    return 'unconfirmed';
+  }
   return null;
 }
 
@@ -161,6 +272,32 @@ export function getAttributeIndicatorTooltipText(
     return '';
   }
   return tooltips[key] ?? '';
+}
+
+export function getSubMenuChannelIndicatorClass(
+  attribute: ContactAttribute | null | undefined,
+  channelId: string | null | undefined,
+  isChannelSelected: boolean,
+  confirmingAttributeId: string | null | undefined,
+  extraChannelIds: readonly string[] = [],
+): 'selected-indicator' | 'unconfirmed-indicator' | 'confirming-indicator' | null {
+  const indicatorType = getSubMenuChannelIndicatorType(
+    attribute,
+    channelId,
+    isChannelSelected,
+    confirmingAttributeId,
+    extraChannelIds,
+  );
+  if (!indicatorType) {
+    return null;
+  }
+  if (indicatorType === 'spinner') {
+    return 'confirming-indicator';
+  }
+  if (indicatorType === 'unconfirmed') {
+    return 'unconfirmed-indicator';
+  }
+  return 'selected-indicator';
 }
 
 type MaybeRef<T> = T | Ref<T> | ComputedRef<T>;
