@@ -311,7 +311,7 @@
   padding: var(--chotto-communicationpanel-submenu-item-padding, 6px 12px);
   cursor: var(--chotto-communicationpanel-submenu-item-cursor, pointer);
   transition: var(--chotto-communicationpanel-submenu-item-transition, background 0.2s ease);
-  border-radius: var(--chotto-communicationpanel-submenu-item-border-radius, 4px);
+  border-radius: var(--chotto-communicationpanel-submenu-item-border-radius, 0);
   gap: var(--chotto-communicationpanel-submenu-item-gap, 8px);
   background: var(--chotto-communicationpanel-submenu-item-background, transparent);
   color: var(--chotto-communicationpanel-submenu-item-color, inherit);
