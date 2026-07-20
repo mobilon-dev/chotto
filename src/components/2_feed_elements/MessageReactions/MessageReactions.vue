@@ -3,6 +3,8 @@
     ref="reactionsContainerRef"
     class="message-reactions"
     :class="{ 'has-reactions': hasReactions, 'is-right-message': isRight, 'is-disabled': !enabled }"
+    @pointerenter="onMessageMouseEnter"
+    @pointerleave="onMessageMouseLeave"
   >
     <button
       v-for="item in displayedReactions"
@@ -15,24 +17,16 @@
       <span class="message-reactions__emoji">
         <EmojiGlyph :emoji="item.key" />
       </span>
-      <span class="message-reactions__count">{{ item.count }}</span>
-    </button>
-
-    <button
-      v-if="!readonly && enabled"
-      ref="addButtonRef"
-      class="message-reactions__add"
-      aria-label="Add reaction"
-      title="Добавить реакцию"
-      @click="onAddClick"
-    >
-      <span>+</span>
+      <span
+        v-if="showCount"
+        class="message-reactions__count"
+      >{{ item.count }}</span>
     </button>
 
     <!-- Панель быстрых реакций -->
     <transition name="message-reactions-popover">
       <div
-        v-show="isQuickReactionsOpen && !readonly && enabled && !isFullPickerOpen"
+        v-show="isQuickReactionsOpen && !readonly && enabled"
         ref="quickReactionsRef"
         class="message-reactions__quick-panel"
         :style="quickPanelStyle"
@@ -53,7 +47,7 @@
           title="Развернуть"
           @click.stop="onExpandClick"
         >
-          <span>⋯</span>
+          <ExpandReactions />
         </button>
       </div>
     </transition>
@@ -82,14 +76,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, onUnmounted } from 'vue'
+import { ref, computed, inject, onMounted, onUnmounted, watch } from 'vue'
 import EmojiPicker from 'vue3-emoji-picker-ru'
 import 'vue3-emoji-picker-ru/css'
 import type { MessageReactions } from '@/types'
 import { useEmojiNative } from '@/hooks'
 import EmojiGlyph from '@/components/1_atoms/EmojiGlyph/EmojiGlyph.vue'
+import ExpandReactions from './icons/ExpandReactions.vue'
 import { QUICK_REACTION_EMOJIS } from './utils/quickReactions'
-import { isRightMessage, useReactionsState, useReactionsPanel } from './composables'
+import {
+  findMessageContent,
+  isRightMessage,
+  useReactionsState,
+  useReactionsPanel,
+  type ReactionsMode,
+} from './composables'
 
 const props = defineProps({
   reactions: {
@@ -109,6 +110,11 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  mode: {
+    type: String as () => ReactionsMode,
+    default: 'single',
+    validator: (value: string) => ['single', 'multi'].includes(value),
+  },
 })
 
 const emit = defineEmits<{
@@ -119,18 +125,20 @@ const emit = defineEmits<{
 
 const chatAppId = inject('chatAppId') as string | undefined
 const reactionsContainerRef = ref<HTMLElement | null>(null)
-const addButtonRef = ref<HTMLButtonElement | null>(null)
+const messageContentEl = ref<HTMLElement | null>(null)
 const emojiTheme = ref<'light' | 'dark'>('light')
 const { isNative } = useEmojiNative(chatAppId || '')
 
 const quickEmojis = computed(() => QUICK_REACTION_EMOJIS)
+const reactionsMode = computed(() => props.mode)
+const showCount = computed(() => props.mode === 'multi')
 
 // Используем композабл для управления состоянием реакций
-const reactionsState = useReactionsState(computed(() => props.reactions))
+const reactionsState = useReactionsState(computed(() => props.reactions), reactionsMode)
 const { displayedReactions, hasReactions, addReaction, removeReaction, toggleReaction } = reactionsState
 
 // Используем композабл для управления панелями реакций
-const panel = useReactionsPanel(quickEmojis, addButtonRef)
+const panel = useReactionsPanel(quickEmojis, reactionsContainerRef)
 const {
   isQuickReactionsOpen,
   isFullPickerOpen,
@@ -138,8 +146,9 @@ const {
   quickReactionsRef,
   quickPanelStyle,
   pickerStyle,
-  openQuickPanel,
   closeQuickPanel,
+  handleMessageMouseEnter,
+  handleMessageMouseLeave,
   openFullPicker,
   closeFullPicker,
   handleQuickPanelMouseEnter,
@@ -162,35 +171,54 @@ const changeThemeDialogEmoji = (): 'light' | 'dark' => {
 
 function onToggle(key: string) {
   if (props.readonly || !props.enabled) return
+
+  if (props.mode === 'single') {
+    const myKey = reactionsState.myReactionKey.value
+    if (myKey === key) {
+      removeReaction(key)
+      emit('remove-reaction', { messageId: props.messageId, key })
+    } else {
+      const previousKey = addReaction(key)
+      if (previousKey) {
+        emit('remove-reaction', { messageId: props.messageId, key: previousKey })
+      }
+      emit('add-reaction', { messageId: props.messageId, key })
+    }
+    return
+  }
+
   toggleReaction(key)
   emit('toggle-reaction', { messageId: props.messageId, key })
 }
 
-function onAddClick() {
+function onMessageMouseEnter() {
   if (props.readonly || !props.enabled) return
-  if (isQuickReactionsOpen.value) {
-    closeQuickPanel()
-  } else {
-    openQuickPanel()
-  }
+  handleMessageMouseEnter()
+}
+
+function onMessageMouseLeave() {
+  if (props.readonly || !props.enabled) return
+  handleMessageMouseLeave()
 }
 
 function onQuickEmojiClick(key: string) {
   if (props.readonly || !props.enabled) return
-  // Проверяем, есть ли уже эта реакция у пользователя
-  const existingReaction = reactionsState.localReactions.value?.items?.find(item => item.key === key && item.reactedByMe)
-  
+
+  const existingReaction = reactionsState.localReactions.value?.items?.find(
+    item => item.key === key && item.reactedByMe
+  )
+
   if (existingReaction) {
-    // Если реакция уже есть, удаляем её
     removeReaction(key)
     emit('remove-reaction', { messageId: props.messageId, key })
   } else {
-    // Если реакции нет, добавляем её
-    addReaction(key)
+    const previousKey = addReaction(key)
+    if (previousKey) {
+      emit('remove-reaction', { messageId: props.messageId, key: previousKey })
+    }
     emit('add-reaction', { messageId: props.messageId, key })
   }
-  
-  // Закрываем панель после выбора
+
   closeQuickPanel()
 }
 
@@ -202,22 +230,58 @@ async function onExpandClick() {
 
 function onSelectEmoji(emojiObj: { i: string }) {
   closeFullPicker()
+  closeQuickPanel()
   if (props.readonly || !props.enabled) return
-  addReaction(emojiObj.i)
-  emit('add-reaction', { messageId: props.messageId, key: emojiObj.i })
+
+  const key = emojiObj.i
+  const existingReaction = reactionsState.localReactions.value?.items?.find(
+    item => item.key === key && item.reactedByMe
+  )
+
+  if (existingReaction) {
+    // Та же реакция уже стоит — ничего не меняем
+    return
+  }
+
+  const previousKey = addReaction(key)
+  if (previousKey) {
+    emit('remove-reaction', { messageId: props.messageId, key: previousKey })
+  }
+  emit('add-reaction', { messageId: props.messageId, key })
 }
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
+
+  // Делаем hover более надёжным: слушаем `*__content`, чтобы курсор попадал даже когда
+  // у `.message-reactions` нет удобной hitbox-области (например, когда нет реакций).
+  const contentEl = findMessageContent(reactionsContainerRef.value)
+  if (contentEl) {
+    messageContentEl.value = contentEl
+    contentEl.addEventListener('pointerenter', onMessageMouseEnter)
+    contentEl.addEventListener('pointerleave', onMessageMouseLeave)
+  }
 })
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
+  if (messageContentEl.value) {
+    messageContentEl.value.removeEventListener('pointerenter', onMessageMouseEnter)
+    messageContentEl.value.removeEventListener('pointerleave', onMessageMouseLeave)
+  }
 })
+
+watch(
+  () => [props.enabled, props.readonly],
+  ([enabled, readonly]) => {
+    if (!enabled || readonly) {
+      closeQuickPanel()
+      closeFullPicker()
+    }
+  }
+)
 </script>
 
 <style scoped lang="scss">
 @use './styles/MessageReactions.scss';
 </style>
-
-

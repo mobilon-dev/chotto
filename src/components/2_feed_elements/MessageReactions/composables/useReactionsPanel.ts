@@ -1,31 +1,45 @@
 import { ref, watch, nextTick, type Ref } from 'vue'
-import { calculatePanelPosition, calculateFixedPanelPosition } from './usePositioning'
+import {
+  calculatePanelPosition,
+  calculateFixedPanelPosition,
+  calculatePickerPositionAboveQuickPanel,
+} from './usePositioning'
 
 /**
  * Композабл для управления панелями реакций (быстрые реакции и полный picker)
  */
 export function useReactionsPanel(
   quickEmojis: Ref<readonly string[]>,
-  addButtonRef: Ref<HTMLButtonElement | null>
+  messageRef: Ref<HTMLElement | null>
 ) {
   const isQuickReactionsOpen = ref(false)
   const isFullPickerOpen = ref(false)
   const pickerRef = ref<HTMLElement | null>(null)
   const quickReactionsRef = ref<HTMLElement | null>(null)
-  
+
   const quickPanelStyle = ref<Record<string, string>>({})
   const pickerStyle = ref<Record<string, string>>({})
 
   // Вспомогательные флаги для hover-режима
   let isMouseOverPicker = false
   let isMouseOverQuickPanel = false
-  let isMouseOverButton = false
+  let isMouseOverMessage = false
+  let openQuickPanelTimer: ReturnType<typeof setTimeout> | null = null
+  let closePanelsTimer: ReturnType<typeof setTimeout> | null = null
 
   // Обновляем позицию панели быстрых реакций при открытии
   watch(isQuickReactionsOpen, async (isOpen) => {
     if (isOpen) {
-      const estimatedWidth = quickEmojis.value.length * 40 + 40 // Примерная ширина
-      const style = await calculatePanelPosition(quickReactionsRef.value, addButtonRef.value, estimatedWidth)
+      await nextTick()
+
+      let attempts = 0
+      while (quickReactionsRef.value?.offsetWidth === 0 && attempts < 10) {
+        await new Promise(resolve => setTimeout(resolve, 10))
+        attempts++
+      }
+
+      const estimatedWidth = quickReactionsRef.value?.offsetWidth || quickEmojis.value.length * 40 + 40
+      const style = await calculatePanelPosition(quickReactionsRef.value, messageRef.value, estimatedWidth)
       quickPanelStyle.value = style
     }
   })
@@ -42,110 +56,146 @@ export function useReactionsPanel(
         await new Promise(resolve => setTimeout(resolve, 10))
         attempts++
       }
-      
+
       // Дополнительный nextTick для гарантии, что элемент полностью отрендерился
       await nextTick()
-      
-      // Первый расчет позиции (может быть неточным, если элемент еще не имеет размеров)
-      const estimatedWidth = 350 // Примерная ширина EmojiPicker
-      let style = await calculateFixedPanelPosition(pickerRef.value, addButtonRef.value, estimatedWidth)
+
+      const estimatedWidth = 350
+      const calculatePickerPosition = () => {
+        if (quickReactionsRef.value && isQuickReactionsOpen.value) {
+          return calculatePickerPositionAboveQuickPanel(
+            pickerRef.value,
+            quickReactionsRef.value,
+            messageRef.value,
+            estimatedWidth
+          )
+        }
+        return calculateFixedPanelPosition(pickerRef.value, messageRef.value, estimatedWidth)
+      }
+
+      let style = await calculatePickerPosition()
       pickerStyle.value = style
-      
-      // Ждем, пока элемент получит правильные размеры, затем пересчитываем позицию
+
       if (pickerRef.value) {
-        // Ждем, пока элемент получит размеры
         let sizeAttempts = 0
         const maxSizeAttempts = 10
         while (pickerRef.value.offsetWidth === 0 && sizeAttempts < maxSizeAttempts) {
           await new Promise(resolve => setTimeout(resolve, 10))
           sizeAttempts++
         }
-        
-        // Пересчитываем позицию с правильными размерами
+
         await nextTick()
-        style = await calculateFixedPanelPosition(pickerRef.value, addButtonRef.value, pickerRef.value.offsetWidth || estimatedWidth)
+        style = await calculatePickerPosition()
         pickerStyle.value = style
       }
     }
   })
 
+  function clearOpenQuickPanelTimer() {
+    if (openQuickPanelTimer) {
+      clearTimeout(openQuickPanelTimer)
+      openQuickPanelTimer = null
+    }
+  }
+
+  function clearClosePanelsTimer() {
+    if (closePanelsTimer) {
+      clearTimeout(closePanelsTimer)
+      closePanelsTimer = null
+    }
+  }
+
+  function scheduleClosePanels() {
+    clearClosePanelsTimer()
+    closePanelsTimer = setTimeout(() => {
+      if (!isMouseOverMessage && !isMouseOverQuickPanel && !isMouseOverPicker) {
+        isQuickReactionsOpen.value = false
+        isFullPickerOpen.value = false
+      }
+    }, 150)
+  }
+
   function openQuickPanel() {
+    clearClosePanelsTimer()
     isQuickReactionsOpen.value = true
-    isFullPickerOpen.value = false
   }
 
   function closeQuickPanel() {
+    clearOpenQuickPanelTimer()
+    clearClosePanelsTimer()
     isQuickReactionsOpen.value = false
   }
 
   async function openFullPicker() {
-    isQuickReactionsOpen.value = false
-    await nextTick()
+    // Отменяем отложенные open/close, иначе openQuickPanel через 1с
+    // закроет только что открытый picker (isFullPickerOpen = false раньше стоял в openQuickPanel)
+    clearOpenQuickPanelTimer()
+    clearClosePanelsTimer()
+    isMouseOverQuickPanel = true
     isFullPickerOpen.value = true
   }
 
   function closeFullPicker() {
+    clearClosePanelsTimer()
     isFullPickerOpen.value = false
   }
 
   function handleQuickPanelMouseEnter() {
     isMouseOverQuickPanel = true
+    clearClosePanelsTimer()
   }
 
   function handleQuickPanelMouseLeave() {
     isMouseOverQuickPanel = false
-    setTimeout(() => {
-      if (!isMouseOverButton && !isMouseOverQuickPanel) {
-        isQuickReactionsOpen.value = false
-      }
-    }, 150)
+    scheduleClosePanels()
   }
 
   function handlePickerMouseEnter() {
     isMouseOverPicker = true
+    clearClosePanelsTimer()
   }
 
   function handlePickerMouseLeave() {
     isMouseOverPicker = false
-    setTimeout(() => {
-      if (!isMouseOverButton && !isMouseOverPicker) {
-        isFullPickerOpen.value = false
-      }
-    }, 150)
+    scheduleClosePanels()
   }
 
-  function handleButtonMouseEnter() {
-    isMouseOverButton = true
+  function handleMessageMouseEnter() {
+    isMouseOverMessage = true
+    clearClosePanelsTimer()
+    clearOpenQuickPanelTimer()
+
+    // Если панели уже открыты — не перезапускаем таймер,
+    // иначе через 1с openQuickPanel снова вызовется и может сбить picker
+    if (isQuickReactionsOpen.value || isFullPickerOpen.value) return
+
+    openQuickPanelTimer = setTimeout(() => {
+      if (!isMouseOverMessage) return
+      openQuickPanel()
+    }, 1000)
   }
 
-  function handleButtonMouseLeave() {
-    isMouseOverButton = false
+  function handleMessageMouseLeave() {
+    isMouseOverMessage = false
+    clearOpenQuickPanelTimer()
+    scheduleClosePanels()
   }
 
   // Закрытие по клику вне панели
   function handleClickOutside(event: MouseEvent) {
     const target = event.target as Node
-    
-    if (isQuickReactionsOpen.value) {
-      if (
-        quickReactionsRef.value &&
-        addButtonRef.value &&
-        !quickReactionsRef.value.contains(target) &&
-        !addButtonRef.value.contains(target)
-      ) {
-        isQuickReactionsOpen.value = false
-      }
+
+    const isInsideQuick = quickReactionsRef.value?.contains(target)
+    const isInsidePicker = pickerRef.value?.contains(target)
+    const isInsideMessage = messageRef.value?.contains(target)
+
+    if (isQuickReactionsOpen.value && !isInsideQuick && !isInsideMessage && !isInsidePicker) {
+      isQuickReactionsOpen.value = false
+      isFullPickerOpen.value = false
     }
-    
-    if (isFullPickerOpen.value) {
-      if (
-        pickerRef.value &&
-        addButtonRef.value &&
-        !pickerRef.value.contains(target) &&
-        !addButtonRef.value.contains(target)
-      ) {
-        isFullPickerOpen.value = false
-      }
+
+    if (isFullPickerOpen.value && !isInsidePicker && !isInsideQuick && !isInsideMessage) {
+      isFullPickerOpen.value = false
     }
   }
 
@@ -160,13 +210,12 @@ export function useReactionsPanel(
     closeQuickPanel,
     openFullPicker,
     closeFullPicker,
+    handleMessageMouseEnter,
+    handleMessageMouseLeave,
     handleQuickPanelMouseEnter,
     handleQuickPanelMouseLeave,
     handlePickerMouseEnter,
     handlePickerMouseLeave,
-    handleButtonMouseEnter,
-    handleButtonMouseLeave,
     handleClickOutside,
   }
 }
-

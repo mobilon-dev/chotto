@@ -150,6 +150,7 @@
         :reactions="message.reactions"
         :message-id="message.messageId"
         :enabled="reactionsEnabled"
+        :mode="reactionsMode"
         @toggle-reaction="onToggleReaction"
         @add-reaction="onAddReaction"
         @remove-reaction="onRemoveReaction"
@@ -221,6 +222,11 @@ const props = defineProps({
   reactionsEnabled: {
     type: Boolean,
     default: true
+  },
+  reactionsMode: {
+    type: String as () => 'single' | 'multi',
+    default: 'single',
+    validator: (value: string) => ['single', 'multi'].includes(value)
   },
   subtextTooltipData: {
     type: Object as () => Record<string, string>,

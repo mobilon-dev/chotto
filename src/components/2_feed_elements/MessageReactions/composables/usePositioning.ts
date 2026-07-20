@@ -16,6 +16,26 @@ export function findFeedContainer(element: HTMLElement | null): HTMLElement | nu
 }
 
 /**
+ * Находит контейнер содержимого сообщения (например, text-message__content)
+ */
+export function findMessageContent(element: HTMLElement | null): HTMLElement | null {
+  if (!element) return null
+  let current = element.parentElement
+  while (current) {
+    for (const className of current.classList) {
+      if (className.endsWith('__content')) {
+        return current
+      }
+    }
+    if (current.classList.contains('message-feed')) {
+      break
+    }
+    current = current.parentElement
+  }
+  return null
+}
+
+/**
  * Определяет, является ли сообщение правым (outgoing)
  */
 export function isRightMessage(element: HTMLElement | null): boolean {
@@ -37,7 +57,8 @@ export function isRightMessage(element: HTMLElement | null): boolean {
 }
 
 /**
- * Вычисляет позицию панели реакций относительно кнопки и feed контейнера
+ * Вычисляет позицию панели быстрых реакций относительно сообщения:
+ * по центру высоты, слева для правых сообщений и справа для левых.
  */
 export async function calculatePanelPosition(
   panelElement: HTMLElement | null,
@@ -47,69 +68,45 @@ export async function calculatePanelPosition(
   if (!buttonElement) return {} as Record<string, string>
 
   const feedContainer = findFeedContainer(buttonElement)
-  if (!feedContainer) return {} as Record<string, string>
+  const messageContent = findMessageContent(buttonElement)
+  if (!feedContainer || !messageContent) return {} as Record<string, string>
 
   const isRight = isRightMessage(buttonElement)
   await nextTick()
 
-  // Находим контейнер реакций (родитель кнопки)
   const reactionsContainer = buttonElement.closest('.message-reactions') as HTMLElement
   if (!reactionsContainer) return {} as Record<string, string>
 
-  const buttonRect = buttonElement.getBoundingClientRect()
+  const messageRect = messageContent.getBoundingClientRect()
   const feedRect = feedContainer.getBoundingClientRect()
   const containerRect = reactionsContainer.getBoundingClientRect()
   const panelActualWidth = panelElement?.offsetWidth || estimatedWidth
+  const panelActualHeight = panelElement?.offsetHeight || 44
 
-  const padding = 8 // Отступ от краев
-  
-  // Для правых сообщений позиционируем панель справа от кнопки
+  const padding = 8
+  const gap = 6
+
+  const top = (messageRect.top - containerRect.top) + (messageRect.height / 2) - (panelActualHeight / 2)
+
+  let left: number
+
   if (isRight) {
-    // Вычисляем расстояние от правого края кнопки до правого края feed
-    const spaceRight = feedRect.right - buttonRect.right
-    
-    // Вычисляем позицию кнопки относительно контейнера реакций
-    const buttonPositionInContainer = buttonRect.left - containerRect.left
-    const buttonWidth = buttonRect.width
-    
-    // Если панель помещается справа от кнопки
-    if (panelActualWidth <= spaceRight - padding) {
-      // Позиционируем панель справа от кнопки (относительно левого края контейнера)
-      return {
-        left: `${buttonPositionInContainer + buttonWidth + 6}px`, // справа от кнопки с gap 6px
-        right: 'auto',
-        transform: 'none',
-      }
+    left = (messageRect.left - containerRect.left) - panelActualWidth - gap
+    if (messageRect.left - panelActualWidth - gap < feedRect.left + padding) {
+      left = (messageRect.right - containerRect.left) + gap
     }
-    // Если не помещается справа, позиционируем слева от кнопки
-    return {
-      left: `${buttonPositionInContainer - panelActualWidth - 6}px`,
-      right: 'auto',
-      transform: 'none',
+  } else {
+    left = (messageRect.right - containerRect.left) + gap
+    if (messageRect.right + panelActualWidth + gap > feedRect.right - padding) {
+      left = (messageRect.left - containerRect.left) - panelActualWidth - gap
     }
   }
 
-  // Для левых сообщений - позиционируем панель слева от кнопки
-  const buttonPositionInContainer = buttonRect.left - containerRect.left
-  const buttonWidth = buttonRect.width
-  
-  // Вычисляем доступное пространство слева от кнопки
-  const spaceLeft = buttonRect.left - feedRect.left
-  
-  // Если панель помещается слева от кнопки
-  if (panelActualWidth <= spaceLeft - padding) {
-    // Позиционируем панель слева от кнопки (относительно левого края контейнера)
-    return {
-      left: `${buttonPositionInContainer - panelActualWidth - 6}px`, // слева от кнопки с gap 6px
-      right: 'auto',
-      transform: 'none',
-    }
-  }
-  
-  // Если не помещается слева, позиционируем справа от кнопки
   return {
-    left: `${buttonPositionInContainer + buttonWidth + 6}px`, // справа от кнопки с gap 6px
+    top: `${top}px`,
+    left: `${left}px`,
     right: 'auto',
+    marginTop: '0',
     transform: 'none',
   }
 }
@@ -130,7 +127,10 @@ export async function calculateFixedPanelPosition(
   const isRight = isRightMessage(buttonElement)
   await nextTick()
 
-  const buttonRect = buttonElement.getBoundingClientRect()
+  const messageContent = findMessageContent(buttonElement)
+  if (!messageContent) return {} as Record<string, string>
+
+  const anchorRect = messageContent.getBoundingClientRect()
   const feedRect = feedContainer.getBoundingClientRect()
   const panelActualWidth = panelElement?.offsetWidth || estimatedWidth
   const panelActualHeight = panelElement?.offsetHeight || 450 // Примерная высота EmojiPicker
@@ -139,29 +139,29 @@ export async function calculateFixedPanelPosition(
   const gap = 6
 
   // Проверяем, помещается ли picker снизу от кнопки
-  const spaceBelow = window.innerHeight - buttonRect.bottom - gap
-  const spaceAbove = buttonRect.top - gap
+  const spaceBelow = window.innerHeight - anchorRect.bottom - gap
+  const spaceAbove = anchorRect.top - gap
   
   // Определяем, позиционировать ли picker снизу или сверху от кнопки
   let verticalPosition: { top?: string; bottom?: string }
   if (spaceBelow >= panelActualHeight || spaceBelow >= spaceAbove) {
     // Позиционируем снизу от кнопки
-    verticalPosition = { top: `${buttonRect.bottom + gap}px` }
+    verticalPosition = { top: `${anchorRect.bottom + gap}px` }
   } else {
     // Позиционируем сверху от кнопки
-    verticalPosition = { bottom: `${window.innerHeight - buttonRect.top + gap}px` }
+    verticalPosition = { bottom: `${window.innerHeight - anchorRect.top + gap}px` }
   }
 
   // Для правых сообщений позиционируем панель справа от кнопки
   if (isRight) {
-    const spaceRight = feedRect.right - buttonRect.right
+    const spaceRight = feedRect.right - anchorRect.right
     
     // Если панель помещается справа от кнопки
     if (panelActualWidth <= spaceRight - padding) {
       return {
         position: 'fixed',
         ...verticalPosition,
-        left: `${buttonRect.right + gap}px`,
+        left: `${anchorRect.right + gap}px`,
         right: 'auto',
         transform: 'none',
       }
@@ -170,21 +170,21 @@ export async function calculateFixedPanelPosition(
     return {
       position: 'fixed',
       ...verticalPosition,
-      left: `${buttonRect.left - panelActualWidth - gap}px`,
+      left: `${anchorRect.left - panelActualWidth - gap}px`,
       right: 'auto',
       transform: 'none',
     }
   }
 
   // Для левых сообщений - позиционируем панель слева от кнопки
-  const spaceLeft = buttonRect.left - feedRect.left
+  const spaceLeft = anchorRect.left - feedRect.left
   
   // Если панель помещается слева от кнопки
   if (panelActualWidth <= spaceLeft - padding) {
     return {
       position: 'fixed',
       ...verticalPosition,
-      left: `${buttonRect.left - panelActualWidth - gap}px`,
+      left: `${anchorRect.left - panelActualWidth - gap}px`,
       right: 'auto',
       transform: 'none',
     }
@@ -194,7 +194,54 @@ export async function calculateFixedPanelPosition(
   return {
     position: 'fixed',
     ...verticalPosition,
-    left: `${buttonRect.right + gap}px`,
+    left: `${anchorRect.right + gap}px`,
+    right: 'auto',
+    transform: 'none',
+  }
+}
+
+/**
+ * Вычисляет позицию EmojiPicker над панелью быстрых реакций
+ */
+export async function calculatePickerPositionAboveQuickPanel(
+  pickerElement: HTMLElement | null,
+  quickPanelElement: HTMLElement | null,
+  messageElement: HTMLElement | null,
+  estimatedWidth: number = 350
+): Promise<Record<string, string>> {
+  if (!quickPanelElement || !messageElement) return {} as Record<string, string>
+
+  const feedContainer = findFeedContainer(messageElement)
+  if (!feedContainer) return {} as Record<string, string>
+
+  await nextTick()
+
+  const quickPanelRect = quickPanelElement.getBoundingClientRect()
+  const feedRect = feedContainer.getBoundingClientRect()
+  const panelActualWidth = pickerElement?.offsetWidth || estimatedWidth
+  const panelActualHeight = pickerElement?.offsetHeight || 450
+
+  const padding = 8
+  const gap = 6
+
+  // Центрируем picker по горизонтали относительно панели быстрых реакций
+  let left = quickPanelRect.left + (quickPanelRect.width / 2) - (panelActualWidth / 2)
+  if (left + panelActualWidth > feedRect.right - padding) {
+    left = feedRect.right - padding - panelActualWidth
+  }
+  if (left < feedRect.left + padding) {
+    left = feedRect.left + padding
+  }
+
+  const topAbove = quickPanelRect.top - panelActualHeight - gap
+  const top = topAbove >= padding
+    ? topAbove
+    : quickPanelRect.bottom + gap
+
+  return {
+    position: 'fixed',
+    top: `${top}px`,
+    left: `${left}px`,
     right: 'auto',
     transform: 'none',
   }

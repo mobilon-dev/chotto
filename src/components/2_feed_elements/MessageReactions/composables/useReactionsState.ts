@@ -1,11 +1,20 @@
 import { ref, computed, watch, type Ref } from 'vue'
 import type { MessageReactions } from '@/types'
-import { updateLocalReactionsAdd, updateLocalReactionsRemove, updateLocalReactionsToggle } from './useReactions'
+import {
+  updateLocalReactionsAdd,
+  updateLocalReactionsRemove,
+  updateLocalReactionsToggle,
+  updateLocalReactionsReplace,
+  type ReactionsMode,
+} from './useReactions'
 
 /**
  * Композабл для управления локальным состоянием реакций
  */
-export function useReactionsState(initialReactions: Ref<MessageReactions | undefined>) {
+export function useReactionsState(
+  initialReactions: Ref<MessageReactions | undefined>,
+  mode: Ref<ReactionsMode>
+) {
   // Локальное состояние реакций для немедленного обновления UI
   const localReactions = ref<MessageReactions | undefined>(initialReactions.value)
 
@@ -24,9 +33,17 @@ export function useReactionsState(initialReactions: Ref<MessageReactions | undef
     return displayedReactions.value.length > 0
   })
 
+  const myReactionKey = computed(() => {
+    return localReactions.value?.items?.find(item => item.reactedByMe)?.key
+  })
+
   // Функции для обновления реакций
-  function addReaction(key: string) {
-    updateLocalReactionsAdd(localReactions, key)
+  function addReaction(key: string): string | undefined {
+    if (mode.value === 'single') {
+      return updateLocalReactionsReplace(localReactions, key)
+    }
+    updateLocalReactionsAdd(localReactions, key, mode.value)
+    return undefined
   }
 
   function removeReaction(key: string) {
@@ -34,16 +51,16 @@ export function useReactionsState(initialReactions: Ref<MessageReactions | undef
   }
 
   function toggleReaction(key: string) {
-    updateLocalReactionsToggle(localReactions, key)
+    updateLocalReactionsToggle(localReactions, key, mode.value)
   }
 
   return {
     localReactions,
     displayedReactions,
     hasReactions,
+    myReactionKey,
     addReaction,
     removeReaction,
     toggleReaction,
   }
 }
-

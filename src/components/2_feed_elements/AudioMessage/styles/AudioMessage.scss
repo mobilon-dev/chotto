@@ -601,9 +601,6 @@
       padding-left: var(--chotto-audiomessage-reactions-padding-right, 5px);
     }
 
-    :deep(.message-reactions.is-right-message:not(.has-reactions) .message-reactions__add) {
-      left: -15px;
-    }
   }
 
   &__modal {
@@ -709,10 +706,6 @@
     padding-bottom: var(--chotto-audiomessage-reactions-padding-bottom, 10px);
   }
 
-.audio-message:hover :deep(.message-reactions__add) {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
 
 .audio-message__content :deep(.message-sms-invite) {
   grid-column: 1 / -1;

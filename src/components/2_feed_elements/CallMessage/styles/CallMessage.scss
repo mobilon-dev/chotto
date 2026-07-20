@@ -599,8 +599,3 @@
   max-height: var(--chotto-callmessage-expand-transition-max-height, min(80vh, 720px));
   opacity: 1;
 }
-
-.call-message:hover :deep(.message-reactions__add) {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}

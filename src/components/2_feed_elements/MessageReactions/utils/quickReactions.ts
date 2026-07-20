@@ -5,10 +5,7 @@
 export const QUICK_REACTION_EMOJIS = [
   '👍', // thumbs up
   '❤️', // heart
-  '🔥', // fire
-  '😂', // laughing
-  '😮', // surprised
-  '😢', // sad
+  '🤝', // handshake
 ] as const
 
 export type QuickReactionEmoji = typeof QUICK_REACTION_EMOJIS[number]

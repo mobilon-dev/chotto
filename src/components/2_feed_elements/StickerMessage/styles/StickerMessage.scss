@@ -263,10 +263,6 @@
   opacity: var(--chotto-stickermessage-modal-fade-enter-to-opacity, 1);
 }
 
-.sticker-message:hover :deep(.message-reactions__add) {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
 
 .sticker-message :deep(.message-sms-invite__text) {
   width: var(--chotto-stickermessage-sms-invite-width, 100%);

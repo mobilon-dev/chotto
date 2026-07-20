@@ -38,11 +38,4 @@ function onImgError(event: Event) {
 </script>
 
 <style scoped>
-.chotto-emoji {
-  height: 1.2em;
-  width: 1.2em;
-  margin: 0 0.05em;
-  vertical-align: -0.2em;
-  display: inline;
-}
 </style>

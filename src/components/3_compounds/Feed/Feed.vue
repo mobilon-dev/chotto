@@ -45,6 +45,7 @@
           :apply-style="applyStyle"
           :is-first-in-series="object.isFirstInSeries"
           :reactions-enabled="reactionsEnabled"
+          :reactions-mode="reactionsMode"
           :subtext-tooltip-data="subtextTooltipData"
           :channel="getChannelForMessage(object)"
           v-bind="getExtraMessageProps(object)"
@@ -198,6 +199,11 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
+  reactionsMode: {
+    type: String as () => 'single' | 'multi',
+    default: 'single',
+    validator: (value: string) => ['single', 'multi'].includes(value)
+  },
   subtextTooltipData: {
     type: Object,
     required: false,
@@ -232,6 +238,7 @@ const { componentsMap } = useFeedComponents()
 
 // Получаем значение reactionsEnabled из props
 const reactionsEnabled = computed(() => props.reactionsEnabled)
+const reactionsMode = computed(() => props.reactionsMode)
 
 // Инициализация логики группировки
 const { groupedObjects } = useFeedGrouping({
