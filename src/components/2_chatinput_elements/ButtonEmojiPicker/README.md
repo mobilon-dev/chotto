@@ -18,3 +18,4 @@
 
 - `state` (String, optional) - состояние кнопки ('active', 'disabled')
 - `mode` (String, optional) - режим активации ('click', 'hover')
+- `native` (Boolean, optional) - `true` (по умолчанию): системные эмодзи; `false`: 3D Apple в пикере, поле ввода и ленте сообщений. Значение общее для инстанса чата.

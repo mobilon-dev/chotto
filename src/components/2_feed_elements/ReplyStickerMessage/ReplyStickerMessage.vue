@@ -98,11 +98,13 @@ import { ref, watch, inject, computed, onMounted } from 'vue';
 import linkifyStr from "linkify-string";
 import { IStickerMessage } from '@/types';
 import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscreen.vue';
-import { useTheme } from "@/hooks";
+import { useEmojiNative, useTheme } from "@/hooks";
+import { replaceEmojisInHtml } from '@/functions/renderAppleEmojis';
 import { isAnimatedSticker } from '../StickerMessage/utils/stickerUtils';
 import '../StickerMessage/utils/suppress-lit-warning';
 
 const chatAppId = inject('chatAppId')
+const { isNative } = useEmojiNative(chatAppId as string)
 
 const { getTheme } = useTheme(chatAppId as string)
 
@@ -142,10 +144,16 @@ const isOpenModal = ref(false);
 const linkedText = ref('')
 
 watch(
-  () => props.message.text,
+  [() => props.message.text, isNative],
   () => {
     if (props.message.text) {
-      linkedText.value = linkifyStr(props.message.text)
+      let html = linkifyStr(props.message.text)
+      if (!isNative.value) {
+        html = replaceEmojisInHtml(html)
+      }
+      linkedText.value = html
+    } else {
+      linkedText.value = ''
     }
   },
   { immediate: true }

@@ -1451,7 +1451,7 @@ export const messages = [
     chatId: 8, 
     dialogId: 'dlg_43543111', 
     type: "message.text", 
-    text: "О, добрый день!",
+    text: "О, добрый день! 😎",
     direction: 'incoming',
     status: 'read',
     timestamp: '1763036703',

@@ -34,8 +34,8 @@
 <script setup lang="ts">
 import EmojiPicker from 'vue3-emoji-picker-ru';
 import 'vue3-emoji-picker-ru/css';
-import { onMounted, onUnmounted, ref, computed, watchEffect, inject } from 'vue';
-import { useMessageDraft } from '@/hooks';
+import { onMounted, onUnmounted, ref, computed, watch, watchEffect, inject } from 'vue';
+import { useEmojiNative, useMessageDraft } from '@/hooks';
 import { SmilesIcon } from './icons';
 
 const props = defineProps({
@@ -48,6 +48,10 @@ const props = defineProps({
     default: 'click', // или 'hover'
     validator: (value: string) => ['click', 'hover'].includes(value),
   },
+  /**
+   * true — системные эмодзи; false — 3D (Apple) в пикере, инпуте и ленте.
+   * Значение пишется в общий store чата (useEmojiNative).
+   */
   native: {
     type: Boolean,
     default: true,
@@ -60,6 +64,13 @@ const isEmojiPickerVisible = ref(false);
 const emojiTheme = ref<'light' | 'dark'>('light');
 const chatAppId = inject<string>('chatAppId');
 const { setMessageText, getMessage } = useMessageDraft(chatAppId as string);
+const { setNative } = useEmojiNative(chatAppId as string);
+
+watch(
+  () => props.native,
+  (value) => setNative(value),
+  { immediate: true },
+);
 
 const iconFillColor = ref('#5F5F5F');
 const iconHoverColor = ref('#404040');

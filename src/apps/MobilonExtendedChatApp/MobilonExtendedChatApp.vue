@@ -246,7 +246,7 @@
                     />
                     <ButtonEmojiPicker
                       :mode="'click'"
-                      :native="true"
+                      :native="false"
                     />
                     <StickerPicker
                       :mode="'click'"

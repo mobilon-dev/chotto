@@ -12,7 +12,9 @@
       :title="item.key"
       @click="onToggle(item.key)"
     >
-      <span class="message-reactions__emoji">{{ item.key }}</span>
+      <span class="message-reactions__emoji">
+        <EmojiGlyph :emoji="item.key" />
+      </span>
       <span class="message-reactions__count">{{ item.count }}</span>
     </button>
 
@@ -44,7 +46,7 @@
           :title="emoji"
           @click.stop="onQuickEmojiClick(emoji)"
         >
-          {{ emoji }}
+          <EmojiGlyph :emoji="emoji" />
         </button>
         <button
           class="message-reactions__expand"
@@ -68,7 +70,7 @@
           @mouseleave="handlePickerMouseLeave"
         >
           <EmojiPicker
-            :native="true"
+            :native="isNative"
             :theme="emojiTheme"
             picker-type=""
             @select="onSelectEmoji"
@@ -84,6 +86,8 @@ import { ref, computed, inject, onMounted, onUnmounted } from 'vue'
 import EmojiPicker from 'vue3-emoji-picker-ru'
 import 'vue3-emoji-picker-ru/css'
 import type { MessageReactions } from '@/types'
+import { useEmojiNative } from '@/hooks'
+import EmojiGlyph from '@/components/1_atoms/EmojiGlyph/EmojiGlyph.vue'
 import { QUICK_REACTION_EMOJIS } from './utils/quickReactions'
 import { isRightMessage, useReactionsState, useReactionsPanel } from './composables'
 
@@ -117,6 +121,7 @@ const chatAppId = inject('chatAppId') as string | undefined
 const reactionsContainerRef = ref<HTMLElement | null>(null)
 const addButtonRef = ref<HTMLButtonElement | null>(null)
 const emojiTheme = ref<'light' | 'dark'>('light')
+const { isNative } = useEmojiNative(chatAppId || '')
 
 const quickEmojis = computed(() => QUICK_REACTION_EMOJIS)
 

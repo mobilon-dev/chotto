@@ -13,22 +13,35 @@
       <slot name="inline-buttons" />
     </div>
       
-    <div 
+    <div
       v-if="disabledPlaceholder && (state == 'disabled' || getMessage().isRecording)"
       class="chat-input__input chat-input__disabled-placeholder"
     >
       {{ disabledPlaceholder }}
     </div>
-    <textarea
+    <div
       v-else
-      ref="refInput"
-      v-model="getMessage().text"
-      :disabled="state == 'disabled' || getMessage().isRecording"
-      class="chat-input__input"
-      :placeholder="inputPlaceholder"
-      @keydown.enter="keyEnter"
-      @input="sendTyping"
-    />
+      class="chat-input__input-wrap"
+    >
+      <div
+        v-if="!isNative && getMessage().text"
+        ref="refMirror"
+        class="chat-input__input-mirror"
+        aria-hidden="true"
+        v-html="emojiMirrorHtml"
+      />
+      <textarea
+        ref="refInput"
+        v-model="getMessage().text"
+        :disabled="state == 'disabled' || getMessage().isRecording"
+        class="chat-input__input"
+        :class="{ 'chat-input__input--emoji-images': !isNative }"
+        :placeholder="inputPlaceholder"
+        @keydown.enter="keyEnter"
+        @input="sendTyping"
+        @scroll="syncMirrorScroll"
+      />
+    </div>
     <TextFormatToolbar
       :textarea="refInput"
       @format-applied="handleFormatApplied"
@@ -52,7 +65,8 @@
 
 <script setup lang="ts">
 import { unref, ref, watch, nextTick, inject, computed, onMounted } from 'vue';
-import { useMessageDraft, useImmediateDebouncedRef } from '@/hooks';
+import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef } from '@/hooks';
+import { textToAppleEmojiHtml } from '@/functions/renderAppleEmojis';
 import { t } from '../../../locale/useLocale';
 import { IFilePreview, IInputMessage } from '@/types';
 import { SendIcon } from './icons';
@@ -62,10 +76,20 @@ const emit = defineEmits(['send','typing']);
 
 const chatAppId = inject('chatAppId')
 const { resetMessage, getMessage, setMessageText, setForceSendMessage } = useMessageDraft(chatAppId as string)
+const { isNative } = useEmojiNative(chatAppId as string)
 
 const refInput = ref<HTMLTextAreaElement>();
+const refMirror = ref<HTMLElement>();
 const typing = useImmediateDebouncedRef('', 2000)
 const fileInfo = ref<IFilePreview>()
+
+const emojiMirrorHtml = computed(() => textToAppleEmojiHtml(getMessage().text || ''))
+
+const syncMirrorScroll = () => {
+  if (refMirror.value && refInput.value) {
+    refMirror.value.scrollTop = refInput.value.scrollTop
+  }
+}
 
 const props = defineProps({
   state: {
@@ -220,6 +244,8 @@ watch(
         el.style.overflowY = 'auto';
         el.scrollTop = scrollTop;
       }
+
+      syncMirrorScroll();
     });
   },
   { immediate: true }

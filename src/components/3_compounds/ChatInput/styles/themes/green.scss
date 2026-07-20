@@ -22,12 +22,12 @@
   --chotto-chatinput-input-font-size: 16px;
   --chotto-chatinput-input-border-radius: 2px;
   --chotto-chatinput-button-height: 30px;
-  --chotto-chatinput-inline-buttons-margin: 0 5px 0 2px;
+  --chotto-chatinput-inline-buttons-margin: 0 5px 4px 2px;
   --chotto-chatinput-inline-buttons-gap: 7px;
   --chotto-chatinput-inline-buttons-height: 30px;
   --chotto-chatinput-container-position: relative;
   --chotto-chatinput-container-display: grid;
-  --chotto-chatinput-container-align-items: center;
+  --chotto-chatinput-container-align-items: end;
   --chotto-chatinput-container-grid-template-columns: min-content auto min-content;
   --chotto-chatinput-container-grid-template-rows: auto auto auto auto;
   --chotto-chatinput-reply-line-grid-column: 2;
@@ -66,7 +66,7 @@
   --chotto-chatinput-inline-buttons-margin-auto: auto 0;
   --chotto-chatinput-inline-buttons-grid-row: 3;
   --chotto-chatinput-inline-buttons-grid-column: 1;
-  --chotto-chatinput-inline-buttons-align-self: flex-end;
+  --chotto-chatinput-inline-buttons-align-self: end;
   --chotto-chatinput-enter-transition: all var(--chotto-chatinput-enter-duration, 0.2s) ease-out;
   --chotto-chatinput-leave-transition: all var(--chotto-chatinput-leave-duration, 0.2s) cubic-bezier(1, 0.5, 0.8, 1);
   --chotto-chatinput-enter-transform: translateY(var(--chotto-chatinput-enter-translate-y, 20px));

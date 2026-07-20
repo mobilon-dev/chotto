@@ -2,7 +2,7 @@
   &__container {
     position: var(--chotto-chatinput-container-position, relative);
     display: var(--chotto-chatinput-container-display, grid);
-    align-items: var(--chotto-chatinput-container-align-items, center);
+    align-items: var(--chotto-chatinput-container-align-items, end);
     border-top: var(--chotto-chatinput-container-border-top, none);
     background-color: var(--chotto-chatinput-container-bg, #ffffff);
     padding: var(--chotto-chatinput-container-padding, 12px 0 8px 15px);
@@ -30,9 +30,38 @@
     grid-column-end: var(--chotto-chatinput-third-line-grid-column-end, 3);
   }
 
-  &__input {
+  &__input-wrap {
     grid-row: var(--chotto-chatinput-input-grid-row, 3);
     grid-column: var(--chotto-chatinput-input-grid-column, 2);
+    position: relative;
+    min-width: 0;
+    align-self: var(--chotto-chatinput-input-align-self, end);
+    margin-bottom: var(--chotto-chatinput-input-margin-bottom, 4px);
+  }
+
+  &__input-mirror {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border: var(--chotto-chatinput-input-border, 1px solid #d0d0d0);
+    border-color: transparent;
+    background-color: transparent;
+    padding: var(--chotto-chatinput-input-padding, 0.5rem 0.60rem);
+    color: var(--chotto-chatinput-input-text-color, #1E1E1E);
+    font-size: var(--chotto-chatinput-input-font-size, 16px);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: var(--chotto-chatinput-input-line-height, 1.4);
+    border-radius: var(--chotto-chatinput-input-border-radius, 2px);
+    font-family: var(--chotto-chatinput-font-family, "Open Sans", sans-serif);
+  }
+
+  &__input {
+    width: 100%;
+    display: block;
     border: var(--chotto-chatinput-input-border, 1px solid #d0d0d0);
     background-color: var(--chotto-chatinput-input-background-color, transparent);
     padding: var(--chotto-chatinput-input-padding, 0.5rem 0.60rem);
@@ -46,6 +75,14 @@
     max-height: calc(1.5em * var(--chotto-chatinput-input-max-rows, 10));
     border-radius: var(--chotto-chatinput-input-border-radius, 2px);
     font-family: var(--chotto-chatinput-font-family, "Open Sans", sans-serif);
+    position: relative;
+    z-index: 1;
+
+    &--emoji-images {
+      color: transparent;
+      caret-color: var(--chotto-chatinput-input-text-color, #1E1E1E);
+      background-color: transparent;
+    }
 
     &:focus-visible {
       outline: var(--chotto-chatinput-input-focus-outline, none);
@@ -71,6 +108,18 @@
   }
 
   &__disabled-placeholder {
+    grid-row: var(--chotto-chatinput-input-grid-row, 3);
+    grid-column: var(--chotto-chatinput-input-grid-column, 2);
+    align-self: var(--chotto-chatinput-input-align-self, end);
+    margin-bottom: var(--chotto-chatinput-input-margin-bottom, 4px);
+    border: var(--chotto-chatinput-input-border, 1px solid #d0d0d0);
+    background-color: var(--chotto-chatinput-input-background-color, transparent);
+    padding: var(--chotto-chatinput-input-padding, 0.5rem 0.60rem);
+    font-size: var(--chotto-chatinput-input-font-size, 16px);
+    line-height: var(--chotto-chatinput-input-line-height, 1.4);
+    min-height: var(--chotto-chatinput-input-min-height, 40px);
+    border-radius: var(--chotto-chatinput-input-border-radius, 2px);
+    font-family: var(--chotto-chatinput-font-family, "Open Sans", sans-serif);
     color: var(--chotto-chatinput-disabled-placeholder-text-color, #5F5F5F);
     text-align: var(--chotto-chatinput-disabled-placeholder-text-align, center);
     user-select: var(--chotto-chatinput-disabled-placeholder-user-select, none);
@@ -109,13 +158,13 @@
 
   &__inline-buttons{
     display: var(--chotto-chatinput-inline-buttons-display, flex);
-    margin: var(--chotto-chatinput-inline-buttons-margin-auto, auto 0);
+    align-items: var(--chotto-chatinput-inline-buttons-align-items, center);
     grid-row: var(--chotto-chatinput-inline-buttons-grid-row, 3);
     grid-column: var(--chotto-chatinput-inline-buttons-grid-column, 1);
-    margin: var(--chotto-chatinput-inline-buttons-margin, 0 5px 0 2px);
+    margin: var(--chotto-chatinput-inline-buttons-margin, 0 5px 4px 2px);
     gap: var(--chotto-chatinput-inline-buttons-gap, 5px);
     min-height: var(--chotto-chatinput-inline-buttons-height, 30px);
-    align-self: var(--chotto-chatinput-inline-buttons-align-self, flex-end);
+    align-self: var(--chotto-chatinput-inline-buttons-align-self, end);
     min-width: 0;
     overflow: hidden;
     max-width: 100%;
