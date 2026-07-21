@@ -208,13 +208,23 @@ function onToggle(key: string) {
   emit('toggle-reaction', { messageId: props.messageId, key })
 }
 
+function isStillInsideMessage(relatedTarget: EventTarget | null): boolean {
+  if (!(relatedTarget instanceof Node)) return false
+  if (messageContentEl.value?.contains(relatedTarget)) return true
+  if (reactionsContainerRef.value?.contains(relatedTarget)) return true
+  return false
+}
+
 function onMessageMouseEnter() {
   if (props.readonly || !props.enabled) return
   handleMessageMouseEnter()
 }
 
-function onMessageMouseLeave() {
+function onMessageMouseLeave(event: PointerEvent) {
   if (props.readonly || !props.enabled) return
+  // Игнорируем уход на соседний элемент внутри того же сообщения
+  // (иначе узкий absolute-hitbox реакций сбрасывает таймер открытия панели)
+  if (isStillInsideMessage(event.relatedTarget)) return
   handleMessageMouseLeave()
 }
 

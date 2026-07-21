@@ -125,11 +125,31 @@
     color: var(--chotto-filemessage-filename-text-color, #1E1E1E);
   }
 
+  &__footer {
+    display: var(--chotto-filemessage-footer-display, flex);
+    align-items: var(--chotto-filemessage-footer-align-items, flex-end);
+    justify-content: var(--chotto-filemessage-footer-justify-content, space-between);
+    column-gap: var(--chotto-filemessage-footer-column-gap, 8px);
+    margin-top: var(--chotto-filemessage-footer-margin-top, 0);
+  }
+
+  :deep(.message-reactions.has-reactions) {
+    flex: var(--chotto-filemessage-reactions-flex, 1);
+    flex-wrap: var(--chotto-filemessage-reactions-flex-wrap, wrap);
+    min-width: var(--chotto-filemessage-reactions-min-width, 0);
+  }
+
+  &:has(:deep(.message-reactions.has-reactions)) &__footer {
+    margin-top: var(--chotto-filemessage-footer-margin-top, 4px);
+  }
+
   &__info-container {
     display: var(--chotto-filemessage-info-container-display, flex);
     align-items: var(--chotto-filemessage-info-container-align-items, center);
     justify-content: var(--chotto-filemessage-info-container-justify-content, flex-end);
     column-gap: var(--chotto-filemessage-info-container-column-gap, 4px);
+    flex-shrink: var(--chotto-filemessage-info-container-flex-shrink, 0);
+    margin-left: var(--chotto-filemessage-info-container-margin-left, auto);
   }
 
   &__download-button {

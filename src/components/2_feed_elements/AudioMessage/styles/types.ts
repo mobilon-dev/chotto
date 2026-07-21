@@ -246,8 +246,23 @@ export interface AudioMessageThemeCSSVariables {
   /** Скругление аватара */
   '--chotto-audiomessage-avatar-border-radius': string;
 
-  /** Колонки грида инфо-контейнера */
-  '--chotto-audiomessage-info-container-grid-column': string;
+  /** Колонки грида футера */
+  '--chotto-audiomessage-footer-grid-column': string;
+  /** Отображение футера */
+  '--chotto-audiomessage-footer-display': string;
+  /** Выравнивание элементов футера по поперечной оси */
+  '--chotto-audiomessage-footer-align-items': string;
+  /** Выравнивание элементов футера по главной оси */
+  '--chotto-audiomessage-footer-justify-content': string;
+  /** Промежуток между элементами футера */
+  '--chotto-audiomessage-footer-column-gap': string;
+  /** Отступ сверху футера */
+  '--chotto-audiomessage-footer-margin-top': string;
+  /** Отступ справа футера */
+  '--chotto-audiomessage-footer-margin-right': string;
+  /** Доп. отступ сверху футера при наличии реакций */
+  '--chotto-audiomessage-footer-reactions-extra-margin-top': string;
+
   /** Отображение инфо-контейнера */
   '--chotto-audiomessage-info-container-display': string;
   /** Выравнивание элементов инфо-контейнера */
@@ -256,12 +271,12 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-info-container-justify-content': string;
   /** Промежуток между элементами инфо-контейнера */
   '--chotto-audiomessage-info-container-column-gap': string;
-  /** Отступ справа инфо-контейнера */
-  '--chotto-audiomessage-info-container-margin-right': string;
-  /** Отступ сверху инфо-контейнера */
-  '--chotto-audiomessage-info-container-margin-top': string;
   /** События указателя инфо-контейнера */
   '--chotto-audiomessage-info-container-pointer-events': string;
+  /** Растягивание инфо-контейнера в футере */
+  '--chotto-audiomessage-info-container-flex': string;
+  /** Минимальная ширина инфо-контейнера */
+  '--chotto-audiomessage-info-container-min-width': string;
 
   /** Отображение контейнера кнопок "Текст / Резюме" */
   '--chotto-audiomessage-actions-display': string;
@@ -414,20 +429,14 @@ export interface AudioMessageThemeCSSVariables {
   /** Скругление разделителя */
   '--chotto-audiomessage-transcript-delimiter-border-radius': string;
 
-  /** Колонка грида реакций */
-  '--chotto-audiomessage-reactions-grid-column': string;
-  /** Отступ сверху реакций */
-  '--chotto-audiomessage-reactions-margin-top': string;
-  /** Отступ снизу реакций */
-  '--chotto-audiomessage-reactions-margin-bottom': string;
+  /** Растягивание блока реакций в футере */
+  '--chotto-audiomessage-reactions-flex': string;
   /** Перенос строк реакций */
   '--chotto-audiomessage-reactions-flex-wrap': string;
+  /** Минимальная ширина реакций */
+  '--chotto-audiomessage-reactions-min-width': string;
   /** Максимальная ширина реакций */
   '--chotto-audiomessage-reactions-max-width': string;
-  /** Внутренний отступ справа реакций */
-  '--chotto-audiomessage-reactions-padding-right': string;
-  /** Внутренний отступ снизу реакций */
-  '--chotto-audiomessage-reactions-padding-bottom': string;
 
   /** Отображение общего контейнера лево/право */
   '--chotto-audiomessage-left-right-display': string;

@@ -160,63 +160,65 @@
         :embed="message.embed" 
       />
 
-      <MessageReactions
-        :reactions="message.reactions"
-        :message-id="message.messageId"
-        :reply="buildReplyPayload(message, 'message.audio')"
-        :enabled="reactionsEnabled"
-        :mode="reactionsMode"
-        @toggle-reaction="onToggleReaction"
-        @add-reaction="onAddReaction"
-        @remove-reaction="onRemoveReaction"
-      />
-
-      <div class="audio-message__info-container">
-        <div
-          v-if="hasTextOption || hasSummaryOption"
-          class="audio-message__actions"
-        >
-          <button
-            v-if="hasTextOption"
-            :class="[
-              'audio-message__action-button',
-              { 'audio-message__action-button--active': expandedPanel === 'text' }
-            ]"
-            type="button"
-            @click="handleText"
-          >
-            Текст
-          </button>
-          <button
-            v-if="hasSummaryOption"
-            :class="[
-              'audio-message__action-button',
-              { 'audio-message__action-button--active': expandedPanel === 'summary' }
-            ]"
-            type="button"
-            @click="handleSummary"
-          >
-            Резюме
-          </button>
-        </div>
-
-        <div
-          v-if="message.views"
-          class="audio-message__views"
-          @click="viewsAction"
-        >
-          <span class="pi pi-eye" />
-          <p>{{ message.views }}</p>
-        </div>
-
-        <span class="audio-message__time">{{ message.time }}</span>
-        <MessageStatusIndicator
-          base-class="audio-message"
-          :message-class="getClass(message)"
-          :message-status="message.status"
-          :status-class="status"
-          :status-title="statusTitle"
+      <div class="audio-message__footer">
+        <MessageReactions
+          :reactions="message.reactions"
+          :message-id="message.messageId"
+          :reply="buildReplyPayload(message, 'message.audio')"
+          :enabled="reactionsEnabled"
+          :mode="reactionsMode"
+          @toggle-reaction="onToggleReaction"
+          @add-reaction="onAddReaction"
+          @remove-reaction="onRemoveReaction"
         />
+
+        <div class="audio-message__info-container">
+          <div
+            v-if="hasTextOption || hasSummaryOption"
+            class="audio-message__actions"
+          >
+            <button
+              v-if="hasTextOption"
+              :class="[
+                'audio-message__action-button',
+                { 'audio-message__action-button--active': expandedPanel === 'text' }
+              ]"
+              type="button"
+              @click="handleText"
+            >
+              Текст
+            </button>
+            <button
+              v-if="hasSummaryOption"
+              :class="[
+                'audio-message__action-button',
+                { 'audio-message__action-button--active': expandedPanel === 'summary' }
+              ]"
+              type="button"
+              @click="handleSummary"
+            >
+              Резюме
+            </button>
+          </div>
+
+          <div
+            v-if="message.views"
+            class="audio-message__views"
+            @click="viewsAction"
+          >
+            <span class="pi pi-eye" />
+            <p>{{ message.views }}</p>
+          </div>
+
+          <span class="audio-message__time">{{ message.time }}</span>
+          <MessageStatusIndicator
+            base-class="audio-message"
+            :message-class="getClass(message)"
+            :message-status="message.status"
+            :status-class="status"
+            :status-title="statusTitle"
+          />
+        </div>
       </div>
 
       <transition name="audio-message-expand">

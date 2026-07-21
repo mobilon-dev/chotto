@@ -45,14 +45,18 @@ const simpleChats = [
   {
     chatId: 1,
     name: "Анна",
-    avatar: 'https://placehold.jp/30/ffc5d3/ffffff/64x64.png?text=A',
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     countUnread: 2,
-    lastMessage: 'Привет! Как дела?',
+    lastMessage: {
+      type: 'message.image',
+      data: {
+        text: 'Как тебе аватар?',
+      }
+    },
     'lastActivity.time': '5 минут назад',
     'lastActivity.timestamp': '1700000000000',
     isFixedBottom: false,
     status: "#10b981",
-    'lastMessage.status': 'read',
     typing: false,
     metadata: '',
     dialogsExpanded: false,
@@ -60,7 +64,7 @@ const simpleChats = [
   {
     chatId: 2,
     name: "Иван",
-    avatar: 'https://placehold.jp/30/90d5ff/ffffff/64x64.png?text=I',
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     countUnread: 0,
     lastMessage: 'Спасибо за помощь!',
     'lastActivity.time': 'час назад',
@@ -134,6 +138,18 @@ const simpleMessages = [
     timestamp: '1762164100',
     status: 'read',
   },
+  {
+    chatId: 1,
+    type: "message.image",
+    direction: 'incoming',
+    text: "Как тебе аватар?",
+    header: "Иван",
+    messageId: '10',
+    url: "https://polka.cs.mobilon.ru/avatars/vector/man?size=256&palette=soft&seed=1&style=round",
+    alt: "Avatar",
+    timestamp: '1762164300',
+    status: 'read',
+  },
   // Сообщения для чата 2 (Иван)
   {
     chatId: 2,
@@ -190,6 +206,18 @@ const simpleMessages = [
     url: "https://axiomabio.com/pdf/test.pdf",
     filename: "Расписание.pdf",
     timestamp: '1762164200',
+    status: 'read',
+  },
+  {
+    chatId: 2,
+    type: "message.image",
+    direction: 'outgoing',
+    text: "Как тебе аватар?",
+    header: "Иван",
+    messageId: '10',
+    url: "https://polka.cs.mobilon.ru/avatars/vector/man?size=256&palette=soft&seed=1&style=round",
+    alt: "Avatar",
+    timestamp: '1762164300',
     status: 'read',
   },
 ];

@@ -55,6 +55,24 @@ export interface TextMessageThemeCSSVariables {
   /** Фильтр псевдоэлемента справа */
   '--chotto-textmessage-right-after-filter': string;
 
+  /** Отображение футера (реакции + время) */
+  '--chotto-textmessage-footer-display': string;
+  /** Выравнивание элементов футера по поперечной оси */
+  '--chotto-textmessage-footer-align-items': string;
+  /** Выравнивание элементов футера по главной оси */
+  '--chotto-textmessage-footer-justify-content': string;
+  /** Промежуток между элементами футера */
+  '--chotto-textmessage-footer-column-gap': string;
+  /** Отступ сверху футера при наличии реакций */
+  '--chotto-textmessage-footer-margin-top': string;
+
+  /** Растягивание блока реакций в футере */
+  '--chotto-textmessage-reactions-flex': string;
+  /** Перенос реакций */
+  '--chotto-textmessage-reactions-flex-wrap': string;
+  /** Минимальная ширина блока реакций */
+  '--chotto-textmessage-reactions-min-width': string;
+
   /** Отображение контейнера информации */
   '--chotto-textmessage-info-container-display': string;
   /** Выравнивание элементов контейнера информации по поперечной оси */
@@ -63,6 +81,10 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-info-container-justify-content': string;
   /** Промежуток между элементами контейнера информации */
   '--chotto-textmessage-info-container-column-gap': string;
+  /** Сжатие контейнера информации */
+  '--chotto-textmessage-info-container-flex-shrink': string;
+  /** Отступ слева у контейнера информации */
+  '--chotto-textmessage-info-container-margin-left': string;
 
   /** Отображение блока просмотров */
   '--chotto-textmessage-views-display': string;

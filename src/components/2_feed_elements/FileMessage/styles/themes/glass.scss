@@ -115,11 +115,25 @@
   --chotto-filemessage-filename-text-webkit-box-orient: vertical;
   --chotto-filemessage-filename-text-margin-right: 40px;
 
+  // FileMessage footer variables
+  --chotto-filemessage-footer-display: flex;
+  --chotto-filemessage-footer-align-items: flex-end;
+  --chotto-filemessage-footer-justify-content: space-between;
+  --chotto-filemessage-footer-column-gap: 8px;
+  --chotto-filemessage-footer-margin-top: 4px;
+
+  // FileMessage reactions variables
+  --chotto-filemessage-reactions-flex: 1;
+  --chotto-filemessage-reactions-flex-wrap: wrap;
+  --chotto-filemessage-reactions-min-width: 0;
+
   // FileMessage info container variables
   --chotto-filemessage-info-container-display: flex;
   --chotto-filemessage-info-container-align-items: center;
   --chotto-filemessage-info-container-justify-content: flex-end;
   --chotto-filemessage-info-container-column-gap: 4px;
+  --chotto-filemessage-info-container-flex-shrink: 0;
+  --chotto-filemessage-info-container-margin-left: auto;
 
   // FileMessage download button variables
   --chotto-filemessage-download-button-margin-bottom: 5px;

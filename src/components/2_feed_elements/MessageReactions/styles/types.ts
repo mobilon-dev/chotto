@@ -33,6 +33,8 @@ export interface MessageReactionsThemeCSSVariables {
   '--chotto-messagereactions-no-reactions-padding': string;
   /** Z-index контейнера реакций без реакций */
   '--chotto-messagereactions-no-reactions-z-index': string;
+  /** События указателя контейнера реакций без реакций */
+  '--chotto-messagereactions-no-reactions-pointer-events': string;
 
   /** Отступ справа для левых сообщений без реакций */
   '--chotto-messagereactions-left-no-reactions-right': string;

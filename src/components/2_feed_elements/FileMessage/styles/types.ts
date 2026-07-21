@@ -123,6 +123,24 @@ export interface FileMessageThemeCSSVariables {
   /** Цвет имени файла */
   '--chotto-filemessage-filename-text-color': string;
 
+  /** Отображение футера (реакции + время) */
+  '--chotto-filemessage-footer-display': string;
+  /** Выравнивание элементов футера по поперечной оси */
+  '--chotto-filemessage-footer-align-items': string;
+  /** Выравнивание элементов футера по главной оси */
+  '--chotto-filemessage-footer-justify-content': string;
+  /** Промежуток между элементами футера */
+  '--chotto-filemessage-footer-column-gap': string;
+  /** Отступ сверху футера */
+  '--chotto-filemessage-footer-margin-top': string;
+
+  /** Растягивание блока реакций в футере */
+  '--chotto-filemessage-reactions-flex': string;
+  /** Перенос реакций */
+  '--chotto-filemessage-reactions-flex-wrap': string;
+  /** Минимальная ширина блока реакций */
+  '--chotto-filemessage-reactions-min-width': string;
+
   /** Отображение контейнера информации */
   '--chotto-filemessage-info-container-display': string;
   /** Выравнивание элементов контейнера информации */
@@ -131,6 +149,10 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-info-container-justify-content': string;
   /** Промежуток между элементами контейнера информации */
   '--chotto-filemessage-info-container-column-gap': string;
+  /** Сжатие контейнера информации */
+  '--chotto-filemessage-info-container-flex-shrink': string;
+  /** Отступ слева у контейнера информации */
+  '--chotto-filemessage-info-container-margin-left': string;
 
   /** Отступ снизу кнопки скачивания */
   '--chotto-filemessage-download-button-margin-bottom': string;

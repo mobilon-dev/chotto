@@ -35,11 +35,31 @@
     filter: var(--chotto-textmessage-right-after-filter, none);
   }
 
+  &__footer {
+    display: var(--chotto-textmessage-footer-display, flex);
+    align-items: var(--chotto-textmessage-footer-align-items, flex-end);
+    justify-content: var(--chotto-textmessage-footer-justify-content, space-between);
+    column-gap: var(--chotto-textmessage-footer-column-gap, 8px);
+    margin-top: 0;
+  }
+
+  :deep(.message-reactions.has-reactions) {
+    flex: var(--chotto-textmessage-reactions-flex, 1);
+    flex-wrap: var(--chotto-textmessage-reactions-flex-wrap, wrap);
+    min-width: var(--chotto-textmessage-reactions-min-width, 0);
+  }
+
+  &:has(:deep(.message-reactions.has-reactions)) &__footer {
+    margin-top: var(--chotto-textmessage-footer-margin-top, 4px);
+  }
+
   &__info-container {
     display: var(--chotto-textmessage-info-container-display, flex);
     align-items: var(--chotto-textmessage-info-container-align-items, center);
     justify-content: var(--chotto-textmessage-info-container-justify-content, flex-end);
     column-gap: var(--chotto-textmessage-info-container-column-gap, 4px);
+    flex-shrink: var(--chotto-textmessage-info-container-flex-shrink, 0);
+    margin-left: var(--chotto-textmessage-info-container-margin-left, auto);
   }
 
   &__views {

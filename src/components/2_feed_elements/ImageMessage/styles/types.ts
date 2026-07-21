@@ -377,6 +377,9 @@ export interface ImageMessageThemeCSSVariables {
   /** Отступ контекстного меню справа сверху */
   '--chotto-imagemessage-right-context-menu-margin-top': string;
 
+  /** Внешние отступы реакций */
+  '--chotto-imagemessage-reactions-margin': string;
+
   /** Ширина изображения в модальном окне */
   '--chotto-imagemessage-modal-image-width': string;
   /** Высота изображения в модальном окне */

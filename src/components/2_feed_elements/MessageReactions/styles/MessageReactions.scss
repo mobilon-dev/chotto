@@ -23,6 +23,9 @@
   margin: var(--chotto-messagereactions-no-reactions-margin, 0);
   padding: var(--chotto-messagereactions-no-reactions-padding, 0);
   z-index: var(--chotto-messagereactions-no-reactions-z-index, 1000);
+  // Не перехватываем hover/click — слушаем *__content, иначе узкий hitbox
+  // сбрасывает таймер при движении курсора внутри сообщения (особенно правые медиа).
+  pointer-events: var(--chotto-messagereactions-no-reactions-pointer-events, none);
 }
 
 // Для левых сообщений без реакций - позиционируем справа от содержимого

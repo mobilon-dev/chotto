@@ -78,36 +78,38 @@
         :embed="message.embed"
       />
 
-      <MessageReactions
-        :reactions="message.reactions"
-        :message-id="message.messageId"
-        :reply="buildReplyPayload(message, 'message.file')"
-        :enabled="reactionsEnabled"
-        :mode="reactionsMode"
-        @toggle-reaction="onToggleReaction"
-        @add-reaction="onAddReaction"
-        @remove-reaction="onRemoveReaction"
-      />
-
-      <div class="file-message__info-container">
-        <div
-          v-if="message.views"
-          class="file-message__views"
-          @click="viewsAction"
-        >
-          <span class="pi pi-eye" />
-          <p>{{ message.views }}</p>
-        </div>
-
-        <span class="file-message__time">{{ message.time }}</span>
-
-        <MessageStatusIndicator
-          base-class="file-message"
-          :message-class="getClass(message)"
-          :message-status="message.status"
-          :status-class="status"
-          :status-title="statusTitle"
+      <div class="file-message__footer">
+        <MessageReactions
+          :reactions="message.reactions"
+          :message-id="message.messageId"
+          :reply="buildReplyPayload(message, 'message.file')"
+          :enabled="reactionsEnabled"
+          :mode="reactionsMode"
+          @toggle-reaction="onToggleReaction"
+          @add-reaction="onAddReaction"
+          @remove-reaction="onRemoveReaction"
         />
+
+        <div class="file-message__info-container">
+          <div
+            v-if="message.views"
+            class="file-message__views"
+            @click="viewsAction"
+          >
+            <span class="pi pi-eye" />
+            <p>{{ message.views }}</p>
+          </div>
+
+          <span class="file-message__time">{{ message.time }}</span>
+
+          <MessageStatusIndicator
+            base-class="file-message"
+            :message-class="getClass(message)"
+            :message-status="message.status"
+            :status-class="status"
+            :status-title="statusTitle"
+          />
+        </div>
       </div>
 
       <MessageSmsInvite

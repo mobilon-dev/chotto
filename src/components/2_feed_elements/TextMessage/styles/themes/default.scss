@@ -30,11 +30,25 @@
   --chotto-textmessage-right-after-z-index: 1;
   --chotto-textmessage-right-after-filter: none;
 
+  // TextMessage footer variables
+  --chotto-textmessage-footer-display: flex;
+  --chotto-textmessage-footer-align-items: flex-end;
+  --chotto-textmessage-footer-justify-content: space-between;
+  --chotto-textmessage-footer-column-gap: 8px;
+  --chotto-textmessage-footer-margin-top: 4px;
+
+  // TextMessage reactions variables
+  --chotto-textmessage-reactions-flex: 1;
+  --chotto-textmessage-reactions-flex-wrap: wrap;
+  --chotto-textmessage-reactions-min-width: 0;
+
   // TextMessage info-container variables
   --chotto-textmessage-info-container-display: flex;
   --chotto-textmessage-info-container-align-items: center;
   --chotto-textmessage-info-container-justify-content: flex-end;
   --chotto-textmessage-info-container-column-gap: 4px;
+  --chotto-textmessage-info-container-flex-shrink: 0;
+  --chotto-textmessage-info-container-margin-left: auto;
 
   // TextMessage views variables
   --chotto-textmessage-views-display: flex;

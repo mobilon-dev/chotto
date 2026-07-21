@@ -342,6 +342,10 @@
       margin-top: var(--chotto-imagemessage-right-context-menu-margin-top, 20px);
     }
   }
+
+  :deep(.message-reactions.has-reactions) {
+    margin: var(--chotto-imagemessage-reactions-margin, 4px 0 6px 10px);
+  }
 }
 
 .context-menu-enter-active {
