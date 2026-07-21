@@ -6,9 +6,10 @@
     <span class="pi pi-play" />
   </div>
   <div class="audio-message__text-container">
-    <p v-if="message.header">
-      {{ message.header }}
-    </p>
+    <p
+      v-if="message.header"
+      v-text="`В ответ ${message.header}`"
+    />
     <div class="audio-message__reply-description">
       <span class="pi pi-microphone" />
       <p>Аудиосообщение</p>

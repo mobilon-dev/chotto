@@ -8,11 +8,11 @@
       :is="componentsMap(message?.type || '')"
       :message="message"
     />
-    <div class="reply__reset">
-      <span
-        class="pi pi-times "
-        @click="emit('reset')"
-      />
+    <div
+      class="reply__reset"
+      @click.stop="emit('reset')"
+    >
+      <CloseIcon />
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@ import ReplyAudioMessage from '@/components/2_feed_elements/ReplyAudioMessage/Re
 import ReplyVideoMessage from '@/components/2_feed_elements/ReplyVideoMessage/ReplyVideoMessage.vue';
 import ReplyFileMessage from '@/components/2_feed_elements/ReplyFileMessage/ReplyFileMessage.vue';
 import ReplyCallMessage from '@/components/2_feed_elements/ReplyCallMessage/ReplyCallMessage.vue';
+import CloseIcon from '@/components/1_icons/CloseIcon.vue';
 import { IFeedObject } from '@/types';
 
 const emit = defineEmits(['action', 'reply', 'reset']);

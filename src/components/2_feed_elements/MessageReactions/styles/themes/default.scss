@@ -5,7 +5,7 @@
   --chotto-messagereactions-gap: 6px;
   --chotto-messagereactions-position: relative;
   --chotto-messagereactions-min-height: 0;
-  --chotto-messagereactions-z-index: 1;
+  --chotto-messagereactions-z-index: 10;
 
   // MessageReactions no reactions variables
   --chotto-messagereactions-no-reactions-position: absolute;
@@ -52,7 +52,7 @@
   --chotto-messagereactions-count-line-height: 1;
 
   // MessageReactions quick panel variables
-  --chotto-messagereactions-quick-panel-position: absolute;
+  --chotto-messagereactions-quick-panel-position: fixed;
   --chotto-messagereactions-quick-panel-bg: #fff;
   --chotto-messagereactions-quick-panel-border: 1px solid #F6F6F6;
   --chotto-messagereactions-quick-panel-border-radius: 20px;

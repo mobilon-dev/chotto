@@ -6,6 +6,8 @@ export interface ReplyImageMessageThemeCSSVariables {
   '--chotto-replyimagemessage-p-margin': string;
   /** Размер шрифта абзаца */
   '--chotto-replyimagemessage-p-font-size': string;
+  /** Жирность абзаца (заголовок «В ответ») */
+  '--chotto-replyimagemessage-p-font-weight': string;
   /** Цвет абзаца */
   '--chotto-replyimagemessage-p-color': string;
   /** Переполнение абзаца */
@@ -67,6 +69,8 @@ export interface ReplyImageMessageThemeCSSVariables {
   '--chotto-replyimagemessage-text-margin-top': string;
   /** Размер шрифта текста */
   '--chotto-replyimagemessage-text-font-size': string;
+  /** Жирность текста */
+  '--chotto-replyimagemessage-text-font-weight': string;
   /** Цвет текста */
   '--chotto-replyimagemessage-text-color': string;
 
@@ -82,6 +86,8 @@ export interface ReplyImageMessageThemeCSSVariables {
   '--chotto-replyimagemessage-reply-description-white-space': string;
   /** Цвет спана в описании ответа */
   '--chotto-replyimagemessage-reply-description-span-color': string;
+  /** Жирность текста «Фотография» */
+  '--chotto-replyimagemessage-reply-description-p-font-weight': string;
 
   /** Переход появления модального окна */
   '--chotto-replyimagemessage-modal-fade-enter-active-transition': string;

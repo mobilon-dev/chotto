@@ -34,9 +34,10 @@
   </div>
 
   <div class="sticker-message__text-container">
-    <p v-if="message.header">
-      {{ message.header }}
-    </p>
+    <p
+      v-if="message.header"
+      v-text="`В ответ ${message.header}`"
+    />
     <div class="sticker-message__reply-description">
       <span class="pi pi-image" />
       <p>Стикер</p>

@@ -6,6 +6,8 @@ export interface ReplyAudioMessageThemeCSSVariables {
   '--chotto-replyaudiomessage-p-margin': string;
   /** Размер шрифта абзаца */
   '--chotto-replyaudiomessage-p-font-size': string;
+  /** Жирность абзаца (заголовок «В ответ») */
+  '--chotto-replyaudiomessage-p-font-weight': string;
   /** Цвет абзаца */
   '--chotto-replyaudiomessage-p-color': string;
   /** Переполнение абзаца */
@@ -59,6 +61,8 @@ export interface ReplyAudioMessageThemeCSSVariables {
   '--chotto-replyaudiomessage-text-margin-top': string;
   /** Размер шрифта текста */
   '--chotto-replyaudiomessage-text-font-size': string;
+  /** Жирность текста */
+  '--chotto-replyaudiomessage-text-font-weight': string;
   /** Цвет текста */
   '--chotto-replyaudiomessage-text-color': string;
 
@@ -72,6 +76,8 @@ export interface ReplyAudioMessageThemeCSSVariables {
   '--chotto-replyaudiomessage-reply-description-margin-bottom': string;
   /** Цвет спана в описании ответа */
   '--chotto-replyaudiomessage-reply-description-span-color': string;
+  /** Жирность текста «Аудиосообщение» */
+  '--chotto-replyaudiomessage-reply-description-p-font-weight': string;
 
   /** Жирность жирного текста (markdown **текст**) */
   '--chotto-replyaudiomessage-markdown-strong-font-weight': string;

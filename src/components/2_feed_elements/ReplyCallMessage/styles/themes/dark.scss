@@ -18,6 +18,7 @@
   --chotto-replycallmessage-text-container-word-break: break-word;
   --chotto-replycallmessage-text-container-p-margin: 0;
   --chotto-replycallmessage-text-container-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replycallmessage-text-container-p-font-weight: 700;
   --chotto-replycallmessage-text-container-p-color: var(--chotto-theme-secondary-text-color);
   --chotto-replycallmessage-text-container-p-overflow: hidden;
   --chotto-replycallmessage-text-container-p-text-overflow: ellipsis;
@@ -32,4 +33,6 @@
   --chotto-replycallmessage-reply-description-column-gap: 6px;
   --chotto-replycallmessage-reply-description-margin-bottom: 4px;
   --chotto-replycallmessage-reply-description-span-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replycallmessage-reply-description-span-font-weight: 400;
+  --chotto-replycallmessage-duration-font-weight: 400;
 }

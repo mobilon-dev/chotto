@@ -8,6 +8,17 @@ import {
   type ReactionsMode,
 } from './useReactions'
 
+/** Глубокое копирование, чтобы локальные мутации не портили props и не сбрасывали UI через deep-watch */
+function cloneReactions(reactions: MessageReactions | undefined): MessageReactions | undefined {
+  if (!reactions) return undefined
+
+  return {
+    ...reactions,
+    items: reactions.items.map(item => ({ ...item })),
+    meta: reactions.meta ? { ...reactions.meta } : undefined,
+  }
+}
+
 /**
  * Композабл для управления локальным состоянием реакций
  */
@@ -16,11 +27,11 @@ export function useReactionsState(
   mode: Ref<ReactionsMode>
 ) {
   // Локальное состояние реакций для немедленного обновления UI
-  const localReactions = ref<MessageReactions | undefined>(initialReactions.value)
+  const localReactions = ref<MessageReactions | undefined>(cloneReactions(initialReactions.value))
 
   // Синхронизируем локальное состояние с props
   watch(initialReactions, (newReactions) => {
-    localReactions.value = newReactions ? { ...newReactions } : undefined
+    localReactions.value = cloneReactions(newReactions)
   }, { deep: true, immediate: true })
 
   // Отфильтрованные реакции без count === 0

@@ -61,9 +61,10 @@
   --chotto-chatinput-inline-buttons-align-self: end;
 
   // ChatInput reply-line variables
-  --chotto-chatinput-reply-line-grid-column: 2;
+  --chotto-chatinput-reply-line-grid-column: 1 / -1;
   --chotto-chatinput-reply-line-grid-row: 1;
   --chotto-chatinput-reply-line-display: none;
+  --chotto-chatinput-reply-line-margin-bottom: 12px;
 
   // ChatInput file-line variables
   --chotto-chatinput-file-line-grid-column: 2;

@@ -2,6 +2,7 @@
   // ReplyVideoMessage p variables
   --chotto-replyvideomessage-p-margin: 0;
   --chotto-replyvideomessage-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replyvideomessage-p-font-weight: 700;
   --chotto-replyvideomessage-p-color: var(--chotto-theme-secondary-text-color);
   --chotto-replyvideomessage-p-overflow: hidden;
   --chotto-replyvideomessage-p-text-overflow: ellipsis;
@@ -31,6 +32,7 @@
   // ReplyVideoMessage text variables
   --chotto-replyvideomessage-text-margin-top: 8px;
   --chotto-replyvideomessage-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-replyvideomessage-text-font-weight: 400;
   --chotto-replyvideomessage-text-color: var(--chotto-theme-primary-text-color);
 
   // ReplyVideoMessage reply-description variables
@@ -39,6 +41,7 @@
   --chotto-replyvideomessage-reply-description-column-gap: 6px;
   --chotto-replyvideomessage-reply-description-margin-bottom: 4px;
   --chotto-replyvideomessage-reply-description-span-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replyvideomessage-reply-description-p-font-weight: 400;
 
   // ReplyVideoMessage modal-video variables
   --chotto-replyvideomessage-modal-video-width: 100%;

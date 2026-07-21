@@ -2,15 +2,17 @@
   // ReplyTextMessage container variables
   --chotto-replytextmessage-container-display: flex;
   --chotto-replytextmessage-container-flex-direction: column;
-  --chotto-replytextmessage-container-gap: 8px;
+  --chotto-replytextmessage-container-gap: 4px;
 
   // ReplyTextMessage text variables
   --chotto-replytextmessage-text-font-size: var(--chotto-theme-text-font-size);
   --chotto-replytextmessage-text-color: var(--chotto-theme-primary-text-color);
+  --chotto-replytextmessage-text-font-weight: 400;
 
   // ReplyTextMessage p variables
   --chotto-replytextmessage-p-margin: 0;
   --chotto-replytextmessage-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replytextmessage-p-font-weight: 700;
   --chotto-replytextmessage-p-color: var(--chotto-theme-secondary-text-color);
   --chotto-replytextmessage-p-white-space: pre-wrap;
   --chotto-replytextmessage-p-overflow: hidden;

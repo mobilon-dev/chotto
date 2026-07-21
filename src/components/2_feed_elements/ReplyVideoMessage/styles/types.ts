@@ -6,6 +6,8 @@ export interface ReplyVideoMessageThemeCSSVariables {
   '--chotto-replyvideomessage-p-margin': string;
   /** Размер шрифта текста ответа */
   '--chotto-replyvideomessage-p-font-size': string;
+  /** Жирность абзаца (заголовок «В ответ») */
+  '--chotto-replyvideomessage-p-font-weight': string;
   /** Цвет текста ответа */
   '--chotto-replyvideomessage-p-color': string;
   /** Переполнение текста ответа */
@@ -52,6 +54,8 @@ export interface ReplyVideoMessageThemeCSSVariables {
   '--chotto-replyvideomessage-text-margin-top': string;
   /** Размер шрифта текста */
   '--chotto-replyvideomessage-text-font-size': string;
+  /** Жирность текста */
+  '--chotto-replyvideomessage-text-font-weight': string;
   /** Цвет текста */
   '--chotto-replyvideomessage-text-color': string;
 
@@ -65,6 +69,8 @@ export interface ReplyVideoMessageThemeCSSVariables {
   '--chotto-replyvideomessage-reply-description-margin-bottom': string;
   /** Цвет текста описания ответа */
   '--chotto-replyvideomessage-reply-description-span-color': string;
+  /** Жирность текста «Видео» */
+  '--chotto-replyvideomessage-reply-description-p-font-weight': string;
 
   /** Ширина видео в модальном окне */
   '--chotto-replyvideomessage-modal-video-width': string;

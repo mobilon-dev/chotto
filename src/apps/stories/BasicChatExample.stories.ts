@@ -81,6 +81,7 @@ const simpleMessages = [
     chatId: 1,
     type: "message.text",
     direction: 'incoming',
+    header: "Анна",
     messageId: '1',
     text: "Привет! Как дела?",
     timestamp: '1761991199',
@@ -90,6 +91,7 @@ const simpleMessages = [
     chatId: 1,
     type: "message.audio",
     direction: 'outgoing',
+    header: "Иван",
     messageId: '2',
     url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
     timestamp: '1762077999',
@@ -99,6 +101,7 @@ const simpleMessages = [
     chatId: 1,
     type: "message.text",
     direction: 'incoming',
+    header: "Анна",
     messageId: '3',
     text: "Отлично! Рада слышать 😊",
     timestamp: '1762163999',
@@ -113,6 +116,7 @@ const simpleMessages = [
     chatId: 1,
     type: "message.file",
     direction: 'incoming',
+    header: "Анна",
     messageId: '7',
     url: "https://axiomabio.com/pdf/test.pdf",
     filename: "Расписание.pdf",
@@ -123,6 +127,7 @@ const simpleMessages = [
     chatId: 1,
     type: "message.sticker",
     direction: 'outgoing',
+    header: "Иван",
     messageId: '9',
     url: sticker,
     alt: "Animated sticker",
@@ -134,6 +139,7 @@ const simpleMessages = [
     chatId: 2,
     type: "message.text",
     direction: 'outgoing',
+    header: "Анна",
     messageId: '4',
     text: "Привет! Как дела?",
     timestamp: '1761991199',
@@ -143,6 +149,7 @@ const simpleMessages = [
     chatId: 2,
     type: "message.audio",
     direction: 'incoming',
+    header: "Иван",
     messageId: '5',
     url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
     timestamp: '1762077599',
@@ -152,6 +159,7 @@ const simpleMessages = [
     chatId: 2,
     type: "message.text",
     direction: 'outgoing',
+    header: "Анна",
     messageId: '6',
     text: "Отлично! Рада слышать 😊",
     timestamp: '1762163999',
@@ -166,6 +174,7 @@ const simpleMessages = [
     chatId: 2,
     type: "message.sticker",
     direction: 'incoming',
+    header: "Иван",
     messageId: '9',
     url: sticker,
     alt: "Animated sticker",
@@ -176,6 +185,7 @@ const simpleMessages = [
     chatId: 2,
     type: "message.file",
     direction: 'outgoing',
+    header: "Анна",
     messageId: '8',
     url: "https://axiomabio.com/pdf/test.pdf",
     filename: "Расписание.pdf",
@@ -451,7 +461,8 @@ export const BasicExample: Story = {
                 <ChatInfo :chat="selectedChat" />
                 <div style="flex: 1 1 0; min-height: 0; overflow-y: auto;">
                   <Feed 
-                    :objects="messages" 
+                    :objects="messages"
+                    :enable-double-click-reply="true" 
                     @message-action="handleMessageAction"
                     @load-more="handleLoadMore"
                   />
@@ -460,7 +471,7 @@ export const BasicExample: Story = {
                   <template #inline-buttons>
                     <FileUploader :state="'active'" />
                     <ButtonTemplateSelector :mode="'click'" :state="'active'" :templates="templates" :group-templates="groupTemplates" />
-                    <ButtonEmojiPicker :mode="'click'" :state="'active'" />
+                    <ButtonEmojiPicker :mode="'click'" :state="'active'" :native="false" />
                     <StickerPicker :mode="'click'" :state="'active'" :stickers="stickers" />          
                   </template>
                 </ChatInput>

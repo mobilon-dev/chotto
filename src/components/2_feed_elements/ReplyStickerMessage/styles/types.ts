@@ -6,6 +6,8 @@ export interface ReplyStickerMessageThemeCSSVariables {
   '--chotto-replystickermessage-p-margin': string;
   /** Размер шрифта абзаца */
   '--chotto-replystickermessage-p-font-size': string;
+  /** Жирность абзаца (заголовок «В ответ») */
+  '--chotto-replystickermessage-p-font-weight': string;
   /** Цвет абзаца */
   '--chotto-replystickermessage-p-color': string;
   /** Переполнение абзаца */
@@ -91,6 +93,8 @@ export interface ReplyStickerMessageThemeCSSVariables {
   '--chotto-replystickermessage-text-margin-top': string;
   /** Размер шрифта текста */
   '--chotto-replystickermessage-text-font-size': string;
+  /** Жирность текста */
+  '--chotto-replystickermessage-text-font-weight': string;
   /** Цвет текста */
   '--chotto-replystickermessage-text-color': string;
 
@@ -106,6 +110,8 @@ export interface ReplyStickerMessageThemeCSSVariables {
   '--chotto-replystickermessage-reply-description-white-space': string;
   /** Цвет спана в описании ответа */
   '--chotto-replystickermessage-reply-description-span-color': string;
+  /** Жирность текста «Стикер» */
+  '--chotto-replystickermessage-reply-description-p-font-weight': string;
 
   /** Переход появления модального окна */
   '--chotto-replystickermessage-modal-fade-enter-active-transition': string;

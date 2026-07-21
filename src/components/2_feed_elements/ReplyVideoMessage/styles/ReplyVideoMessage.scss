@@ -1,6 +1,7 @@
 p {
   margin: var(--chotto-replyvideomessage-p-margin, 0);
   font-size: var(--chotto-replyvideomessage-p-font-size, 14px);
+  font-weight: var(--chotto-replyvideomessage-p-font-weight, 700);
   color: var(--chotto-replyvideomessage-p-color, #5F5F5F);
   overflow: var(--chotto-replyvideomessage-p-overflow, hidden);
   text-overflow: var(--chotto-replyvideomessage-p-text-overflow, ellipsis);
@@ -36,6 +37,7 @@ p {
   &__text{
     margin-top: var(--chotto-replyvideomessage-text-margin-top, 8px);
     font-size: var(--chotto-replyvideomessage-text-font-size, 14px);
+    font-weight: var(--chotto-replyvideomessage-text-font-weight, 400);
     color: var(--chotto-replyvideomessage-text-color, #1E1E1E);
 
     // Markdown форматирование
@@ -92,6 +94,10 @@ p {
 
     span {
       color: var(--chotto-replyvideomessage-reply-description-span-color, #5F5F5F);
+    }
+
+    p {
+      font-weight: var(--chotto-replyvideomessage-reply-description-p-font-weight, 400);
     }
   }
 

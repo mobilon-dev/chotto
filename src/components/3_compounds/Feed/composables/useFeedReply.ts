@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import { useMessageDraft } from '@/hooks';
+import { useMessageDraft, hideReplyPreview, useStartReply } from '@/hooks';
 import { IFeedObject } from '@/types';
 
 interface UseFeedReplyOptions {
@@ -11,8 +11,9 @@ interface UseFeedReplyOptions {
  * Композабл для обработки ответов на сообщения
  */
 export function useFeedReply({ enableDoubleClickReply, emit }: UseFeedReplyOptions) {
-  const chatAppId = inject('chatAppId');
-  const { setReply, getMessage, resetReply } = useMessageDraft(chatAppId as string);
+  const chatAppId = inject('chatAppId') as string;
+  const { getMessage, resetReply } = useMessageDraft(chatAppId);
+  const { startReply } = useStartReply(chatAppId);
 
   /**
    * Обработчик действия с сообщением
@@ -38,13 +39,7 @@ export function useFeedReply({ enableDoubleClickReply, emit }: UseFeedReplyOptio
 
     // Проверяем, что это не системное сообщение
     if (object.type.indexOf('system') === -1 && object.type.indexOf('typing') === -1) {
-      const previewContainer = document.getElementById('chat-input-reply-line-' + chatAppId);
-      
-      if (previewContainer) {
-        previewContainer.style.display = 'inherit';
-      }
-
-      setReply({
+      startReply({
         messageId: object.messageId,
         type: object.type,
         text: object.text,
@@ -61,11 +56,7 @@ export function useFeedReply({ enableDoubleClickReply, emit }: UseFeedReplyOptio
    */
   const handleResetReply = () => {
     resetReply();
-    
-    const previewContainer = document.getElementById('chat-input-reply-line-' + chatAppId);
-    if (previewContainer) {
-      previewContainer.style.display = 'none';
-    }
+    hideReplyPreview(chatAppId);
   };
 
   return {

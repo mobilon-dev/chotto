@@ -27,12 +27,18 @@ export function useReactionsPanel(
   let openQuickPanelTimer: ReturnType<typeof setTimeout> | null = null
   let closePanelsTimer: ReturnType<typeof setTimeout> | null = null
 
-  // Обновляем позицию панели быстрых реакций при открытии
+  // Обновляем позицию панели быстрых реакций при открытии (Teleport → body)
   watch(isQuickReactionsOpen, async (isOpen) => {
     if (isOpen) {
       await nextTick()
 
       let attempts = 0
+      while (!quickReactionsRef.value && attempts < 20) {
+        await new Promise(resolve => setTimeout(resolve, 10))
+        attempts++
+      }
+
+      attempts = 0
       while (quickReactionsRef.value?.offsetWidth === 0 && attempts < 10) {
         await new Promise(resolve => setTimeout(resolve, 10))
         attempts++

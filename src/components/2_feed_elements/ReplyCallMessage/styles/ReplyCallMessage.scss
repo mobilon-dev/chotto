@@ -21,6 +21,7 @@
     p {
       margin: var(--chotto-replycallmessage-text-container-p-margin, 0);
       font-size: var(--chotto-replycallmessage-text-container-p-font-size, 14px);
+      font-weight: var(--chotto-replycallmessage-text-container-p-font-weight, 700);
       color: var(--chotto-replycallmessage-text-container-p-color, #5F5F5F);
       overflow: var(--chotto-replycallmessage-text-container-p-overflow, hidden);
       text-overflow: var(--chotto-replycallmessage-text-container-p-text-overflow, ellipsis);
@@ -39,6 +40,11 @@
 
     span {
       color: var(--chotto-replycallmessage-reply-description-span-color, #5F5F5F);
+      font-weight: var(--chotto-replycallmessage-reply-description-span-font-weight, 400);
+    }
+
+    + p {
+      font-weight: var(--chotto-replycallmessage-duration-font-weight, 400);
     }
   }
 }

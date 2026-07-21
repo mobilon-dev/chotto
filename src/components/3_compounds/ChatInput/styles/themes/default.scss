@@ -30,9 +30,10 @@
   --chotto-chatinput-container-align-items: end;
   --chotto-chatinput-container-grid-template-columns: min-content auto min-content;
   --chotto-chatinput-container-grid-template-rows: auto auto auto auto;
-  --chotto-chatinput-reply-line-grid-column: 2;
+  --chotto-chatinput-reply-line-grid-column: 1 / -1;
   --chotto-chatinput-reply-line-grid-row: 1;
   --chotto-chatinput-reply-line-display: none;
+  --chotto-chatinput-reply-line-margin-bottom: 12px;
   --chotto-chatinput-file-line-grid-column: 2;
   --chotto-chatinput-file-line-grid-row: 2;
   --chotto-chatinput-file-line-display: none;

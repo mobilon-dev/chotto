@@ -1,6 +1,7 @@
 p {
   margin: var(--chotto-replyaudiomessage-p-margin, 0);
   font-size: var(--chotto-replyaudiomessage-p-font-size, 14px);
+  font-weight: var(--chotto-replyaudiomessage-p-font-weight, 700);
   color: var(--chotto-replyaudiomessage-p-color, #5F5F5F);
   overflow: var(--chotto-replyaudiomessage-p-overflow, hidden);
   text-overflow: var(--chotto-replyaudiomessage-p-text-overflow, ellipsis);
@@ -40,6 +41,7 @@ p {
   &__text{
     margin-top: var(--chotto-replyaudiomessage-text-margin-top, 8px);
     font-size: var(--chotto-replyaudiomessage-text-font-size, 14px);
+    font-weight: var(--chotto-replyaudiomessage-text-font-weight, 400);
     color: var(--chotto-replyaudiomessage-text-color, #1E1E1E);
 
     // Markdown форматирование
@@ -96,6 +98,10 @@ p {
 
     span {
       color: var(--chotto-replyaudiomessage-reply-description-span-color, #5F5F5F);
+    }
+
+    p {
+      font-weight: var(--chotto-replyaudiomessage-reply-description-p-font-weight, 400);
     }
   }
 }

@@ -2,6 +2,7 @@
   // ReplyAudioMessage p variables
   --chotto-replyaudiomessage-p-margin: 0;
   --chotto-replyaudiomessage-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replyaudiomessage-p-font-weight: 700;
   --chotto-replyaudiomessage-p-color: var(--chotto-theme-secondary-text-color);
   --chotto-replyaudiomessage-p-overflow: hidden;
   --chotto-replyaudiomessage-p-text-overflow: ellipsis;
@@ -33,6 +34,7 @@
   // ReplyAudioMessage text variables
   --chotto-replyaudiomessage-text-margin-top: 8px;
   --chotto-replyaudiomessage-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-replyaudiomessage-text-font-weight: 400;
   --chotto-replyaudiomessage-text-color: var(--chotto-theme-primary-text-color);
 
   // ReplyAudioMessage reply description variables
@@ -41,6 +43,7 @@
   --chotto-replyaudiomessage-reply-description-column-gap: 6px;
   --chotto-replyaudiomessage-reply-description-margin-bottom: 4px;
   --chotto-replyaudiomessage-reply-description-span-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replyaudiomessage-reply-description-p-font-weight: 400;
 
   // ReplyAudioMessage markdown formatting variables
   --chotto-replyaudiomessage-markdown-strong-font-weight: bold;

@@ -12,6 +12,8 @@ export interface ReplyFileMessageThemeCSSVariables {
   '--chotto-replyfilemessage-p-white-space': string;
   /** Размер шрифта абзаца */
   '--chotto-replyfilemessage-p-font-size': string;
+  /** Жирность абзаца (заголовок «В ответ») */
+  '--chotto-replyfilemessage-p-font-weight': string;
   /** Цвет абзаца */
   '--chotto-replyfilemessage-p-color': string;
   /** Переполнение абзаца */
@@ -31,6 +33,8 @@ export interface ReplyFileMessageThemeCSSVariables {
   '--chotto-replyfilemessage-text-margin-top': string;
   /** Размер шрифта текста */
   '--chotto-replyfilemessage-text-font-size': string;
+  /** Жирность текста */
+  '--chotto-replyfilemessage-text-font-weight': string;
   /** Цвет текста */
   '--chotto-replyfilemessage-text-color': string;
 
@@ -63,6 +67,8 @@ export interface ReplyFileMessageThemeCSSVariables {
   '--chotto-replyfilemessage-filename-text-margin-right': string;
   /** Размер шрифта имени файла */
   '--chotto-replyfilemessage-filename-text-font-size': string;
+  /** Жирность имени файла */
+  '--chotto-replyfilemessage-filename-text-font-weight': string;
   /** Цвет имени файла */
   '--chotto-replyfilemessage-filename-text-color': string;
   /** Подчёркивание имени файла */

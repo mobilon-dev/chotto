@@ -2,6 +2,7 @@
   // ReplyStickerMessage p variables
   --chotto-replystickermessage-p-margin: 0;
   --chotto-replystickermessage-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replystickermessage-p-font-weight: 700;
   --chotto-replystickermessage-p-color: var(--chotto-theme-secondary-text-color);
   --chotto-replystickermessage-p-overflow: hidden;
   --chotto-replystickermessage-p-text-overflow: ellipsis;
@@ -55,6 +56,7 @@
   // ReplyStickerMessage text variables
   --chotto-replystickermessage-text-margin-top: 8px;
   --chotto-replystickermessage-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-replystickermessage-text-font-weight: 400;
   --chotto-replystickermessage-text-color: var(--chotto-theme-primary-text-color);
 
   // ReplyStickerMessage reply description variables
@@ -64,6 +66,7 @@
   --chotto-replystickermessage-reply-description-margin-bottom: 4px;
   --chotto-replystickermessage-reply-description-white-space: nowrap;
   --chotto-replystickermessage-reply-description-span-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replystickermessage-reply-description-p-font-weight: 400;
 
   // ReplyStickerMessage animation variables
   --chotto-replystickermessage-modal-fade-enter-active-transition: opacity 0.2s ease;

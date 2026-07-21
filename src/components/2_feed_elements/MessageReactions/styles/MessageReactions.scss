@@ -70,7 +70,7 @@
 }
 
 .message-reactions__quick-panel {
-  position: var(--chotto-messagereactions-quick-panel-position, absolute);
+  position: var(--chotto-messagereactions-quick-panel-position, fixed);
   background: var(--chotto-messagereactions-quick-panel-bg, #fff);
   border: var(--chotto-messagereactions-quick-panel-border, 1px solid rgba(0,0,0,0.1));
   border-radius: var(--chotto-messagereactions-quick-panel-border-radius, 20px);
@@ -98,6 +98,10 @@
   img {
     height: var(--chotto-messagereactions-quick-item-img-height, 20px);
     width: var(--chotto-messagereactions-quick-item-img-width, 20px);
+  }
+
+  :deep(svg) {
+    display: block;
   }
 }
 

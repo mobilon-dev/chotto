@@ -29,6 +29,8 @@ export interface ChatInputThemeCSSVariables {
   '--chotto-chatinput-reply-line-grid-row': string;
   /** Отображение строки ответа */
   '--chotto-chatinput-reply-line-display': string;
+  /** Отступ снизу строки ответа */
+  '--chotto-chatinput-reply-line-margin-bottom': string;
 
   // File line
   /** Колонка сетки строки файла */

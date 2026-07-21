@@ -12,9 +12,10 @@
   }
 
   &__reply-line {
-    grid-column: var(--chotto-chatinput-reply-line-grid-column, 2);
+    grid-column: var(--chotto-chatinput-reply-line-grid-column, 1 / -1);
     grid-row: var(--chotto-chatinput-reply-line-grid-row, 1);
     display: var(--chotto-chatinput-reply-line-display, none);
+    margin-bottom: var(--chotto-chatinput-reply-line-margin-bottom, 12px);
   }
 
   &__file-line {

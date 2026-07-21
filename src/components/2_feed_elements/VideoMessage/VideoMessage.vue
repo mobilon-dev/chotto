@@ -149,6 +149,7 @@
       <MessageReactions
         :reactions="message.reactions"
         :message-id="message.messageId"
+        :reply="buildReplyPayload(message, 'message.video')"
         :enabled="reactionsEnabled"
         :mode="reactionsMode"
         @toggle-reaction="onToggleReaction"
@@ -193,7 +194,7 @@ import MessageReactions from '@/components/2_feed_elements/MessageReactions/Mess
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers, safeMediaPlayVoid } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IVideoMessage } from '@/types';

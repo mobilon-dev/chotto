@@ -57,8 +57,9 @@ export function isRightMessage(element: HTMLElement | null): boolean {
 }
 
 /**
- * Вычисляет позицию панели быстрых реакций относительно сообщения:
+ * Вычисляет позицию панели быстрых реакций в координатах viewport (position: fixed):
  * по центру высоты, слева для правых сообщений и справа для левых.
+ * Fixed нужен, чтобы панель не обрезалась overflow ленты и могла перекрывать ChatList.
  */
 export async function calculatePanelPosition(
   panelElement: HTMLElement | null,
@@ -74,35 +75,19 @@ export async function calculatePanelPosition(
   const isRight = isRightMessage(buttonElement)
   await nextTick()
 
-  const reactionsContainer = buttonElement.closest('.message-reactions') as HTMLElement
-  if (!reactionsContainer) return {} as Record<string, string>
-
   const messageRect = messageContent.getBoundingClientRect()
-  const feedRect = feedContainer.getBoundingClientRect()
-  const containerRect = reactionsContainer.getBoundingClientRect()
   const panelActualWidth = panelElement?.offsetWidth || estimatedWidth
   const panelActualHeight = panelElement?.offsetHeight || 44
 
-  const padding = 8
   const gap = 6
 
-  const top = (messageRect.top - containerRect.top) + (messageRect.height / 2) - (panelActualHeight / 2)
-
-  let left: number
-
-  if (isRight) {
-    left = (messageRect.left - containerRect.left) - panelActualWidth - gap
-    if (messageRect.left - panelActualWidth - gap < feedRect.left + padding) {
-      left = (messageRect.right - containerRect.left) + gap
-    }
-  } else {
-    left = (messageRect.right - containerRect.left) + gap
-    if (messageRect.right + panelActualWidth + gap > feedRect.right - padding) {
-      left = (messageRect.left - containerRect.left) - panelActualWidth - gap
-    }
-  }
+  const top = messageRect.top + (messageRect.height / 2) - (panelActualHeight / 2)
+  const left = isRight
+    ? messageRect.left - panelActualWidth - gap
+    : messageRect.right + gap
 
   return {
+    position: 'fixed',
     top: `${top}px`,
     left: `${left}px`,
     right: 'auto',

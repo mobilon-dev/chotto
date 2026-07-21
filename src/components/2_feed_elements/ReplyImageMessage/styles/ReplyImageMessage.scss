@@ -1,6 +1,7 @@
 p {
   margin: var(--chotto-replyimagemessage-p-margin, 0);
   font-size: var(--chotto-replyimagemessage-p-font-size, 14px);
+  font-weight: var(--chotto-replyimagemessage-p-font-weight, 700);
   color: var(--chotto-replyimagemessage-p-color, #5F5F5F);
   overflow: var(--chotto-replyimagemessage-p-overflow, hidden);
   text-overflow: var(--chotto-replyimagemessage-p-text-overflow, ellipsis);
@@ -47,6 +48,7 @@ p {
   &__text{
     margin-top: var(--chotto-replyimagemessage-text-margin-top, 8px);
     font-size: var(--chotto-replyimagemessage-text-font-size, 14px);
+    font-weight: var(--chotto-replyimagemessage-text-font-weight, 400);
     color: var(--chotto-replyimagemessage-text-color, #1E1E1E);
 
     // Markdown форматирование
@@ -103,6 +105,10 @@ p {
     white-space: var(--chotto-replyimagemessage-reply-description-white-space, nowrap);
     span {
       color: var(--chotto-replyimagemessage-reply-description-span-color, #5F5F5F);
+    }
+
+    p {
+      font-weight: var(--chotto-replyimagemessage-reply-description-p-font-weight, 400);
     }
   }
 }

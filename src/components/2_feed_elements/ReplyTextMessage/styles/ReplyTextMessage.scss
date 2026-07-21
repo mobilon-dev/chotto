@@ -1,11 +1,12 @@
 .container{
   display: var(--chotto-replytextmessage-container-display, flex);
   flex-direction: var(--chotto-replytextmessage-container-flex-direction, column);
-  gap: var(--chotto-replytextmessage-container-gap, 8px);
+  gap: var(--chotto-replytextmessage-container-gap, 4px);
 }
 
 .text{
   font-size: var(--chotto-replytextmessage-text-font-size, 14px);
+  font-weight: var(--chotto-replytextmessage-text-font-weight, 400);
   color: var(--chotto-replytextmessage-text-color, #1E1E1E);
 
   // Markdown форматирование
@@ -57,6 +58,7 @@
 p {
   margin: var(--chotto-replytextmessage-p-margin, 0);
   font-size: var(--chotto-replytextmessage-p-font-size, 14px);
+  font-weight: var(--chotto-replytextmessage-p-font-weight, 700);
   color: var(--chotto-replytextmessage-p-color, #5F5F5F);
   white-space: var(--chotto-replytextmessage-p-white-space, pre-wrap);
   overflow: var(--chotto-replytextmessage-p-overflow, hidden);

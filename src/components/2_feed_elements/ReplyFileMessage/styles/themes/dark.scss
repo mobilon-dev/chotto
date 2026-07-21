@@ -5,6 +5,7 @@
   --chotto-replyfilemessage-p-word-wrap: break-word;
   --chotto-replyfilemessage-p-white-space: pre-wrap;
   --chotto-replyfilemessage-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replyfilemessage-p-font-weight: 700;
   --chotto-replyfilemessage-p-color: var(--chotto-theme-secondary-text-color);
   --chotto-replyfilemessage-p-overflow: hidden;
   --chotto-replyfilemessage-p-text-overflow: ellipsis;
@@ -16,6 +17,7 @@
   // ReplyFileMessage text variables
   --chotto-replyfilemessage-text-margin-top: 8px;
   --chotto-replyfilemessage-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-replyfilemessage-text-font-weight: 400;
   --chotto-replyfilemessage-text-color: var(--chotto-theme-primary-text-color);
 
   // ReplyFileMessage link variables
@@ -35,6 +37,7 @@
   --chotto-replyfilemessage-filename-text-webkit-box-orient: vertical;
   --chotto-replyfilemessage-filename-text-margin-right: 40px;
   --chotto-replyfilemessage-filename-text-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replyfilemessage-filename-text-font-weight: 400;
   --chotto-replyfilemessage-filename-text-color: var(--chotto-theme-secondary-text-color);
   --chotto-replyfilemessage-filename-text-text-decoration: underline;
 

@@ -4,6 +4,7 @@ p {
   word-wrap: var(--chotto-replyfilemessage-p-word-wrap, break-word);
   white-space: var(--chotto-replyfilemessage-p-white-space, pre-wrap);
   font-size: var(--chotto-replyfilemessage-p-font-size, 14px);
+  font-weight: var(--chotto-replyfilemessage-p-font-weight, 700);
   color: var(--chotto-replyfilemessage-p-color, #5F5F5F);
   overflow: var(--chotto-replyfilemessage-p-overflow, hidden);
   text-overflow: var(--chotto-replyfilemessage-p-text-overflow, ellipsis);
@@ -18,6 +19,7 @@ p {
   &__text {
     margin-top: var(--chotto-replyfilemessage-text-margin-top, 8px);
     font-size: var(--chotto-replyfilemessage-text-font-size, 14px);
+    font-weight: var(--chotto-replyfilemessage-text-font-weight, 400);
     color: var(--chotto-replyfilemessage-text-color, #1E1E1E);
 
     // Markdown форматирование
@@ -87,6 +89,7 @@ p {
     -webkit-box-orient: var(--chotto-replyfilemessage-filename-text-webkit-box-orient, vertical);
     margin-right: var(--chotto-replyfilemessage-filename-text-margin-right, 40px);
     font-size: var(--chotto-replyfilemessage-filename-text-font-size, 14px);
+    font-weight: var(--chotto-replyfilemessage-filename-text-font-weight, 400);
     color: var(--chotto-replyfilemessage-filename-text-color, #5F5F5F);
     text-decoration: var(--chotto-replyfilemessage-filename-text-text-decoration, underline);
   }

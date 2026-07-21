@@ -23,37 +23,44 @@
       >{{ item.count }}</span>
     </button>
 
-    <!-- Панель быстрых реакций -->
-    <transition name="message-reactions-popover">
-      <div
-        v-show="isQuickReactionsOpen && !readonly && enabled"
-        ref="quickReactionsRef"
-        class="message-reactions__quick-panel"
-        :style="quickPanelStyle"
-        @mouseenter="handleQuickPanelMouseEnter"
-        @mouseleave="handleQuickPanelMouseLeave"
-      >
-        <button
-          v-for="emoji in quickEmojis"
-          :key="emoji"
-          class="message-reactions__quick-item"
-          :title="emoji"
-          @click.stop="onQuickEmojiClick(emoji)"
-        >
-          <EmojiGlyph :emoji="emoji" />
-        </button>
-        <button
-          class="message-reactions__expand"
-          title="Развернуть"
-          @click.stop="onExpandClick"
-        >
-          <ExpandReactions />
-        </button>
-      </div>
-    </transition>
-
-    <!-- Полный EmojiPicker для выбора реакций -->
+    <!-- Панель быстрых реакций и полный EmojiPicker — в body, чтобы не обрезались overflow ленты -->
     <Teleport to="body">
+      <transition name="message-reactions-popover">
+        <div
+          v-show="isQuickReactionsOpen && !readonly && enabled"
+          ref="quickReactionsRef"
+          class="message-reactions__quick-panel"
+          :style="quickPanelStyle"
+          @mouseenter="handleQuickPanelMouseEnter"
+          @mouseleave="handleQuickPanelMouseLeave"
+        >
+          <button
+            v-for="emoji in quickEmojis"
+            :key="emoji"
+            class="message-reactions__quick-item"
+            :title="emoji"
+            @click.stop="onQuickEmojiClick(emoji)"
+          >
+            <EmojiGlyph :emoji="emoji" />
+          </button>
+          <button
+            class="message-reactions__expand"
+            title="Развернуть"
+            @click.stop="onExpandClick"
+          >
+            <ExpandReactionsIcon />
+          </button>
+          <button
+            v-if="replyEnabled && reply"
+            class="message-reactions__quick-item"
+            title="Ответить"
+            @click.stop="onReplyClick"
+          >
+            <ReplyIcon />
+          </button>
+        </div>
+      </transition>
+
       <transition name="message-reactions-popover">
         <div
           v-show="isFullPickerOpen && !readonly && enabled"
@@ -79,10 +86,11 @@
 import { ref, computed, inject, onMounted, onUnmounted, watch } from 'vue'
 import EmojiPicker from 'vue3-emoji-picker-ru'
 import 'vue3-emoji-picker-ru/css'
-import type { MessageReactions } from '@/types'
-import { useEmojiNative } from '@/hooks'
+import type { MessageReactions, Reply } from '@/types'
+import { useEmojiNative, useStartReply } from '@/hooks'
 import EmojiGlyph from '@/components/1_atoms/EmojiGlyph/EmojiGlyph.vue'
-import ExpandReactions from './icons/ExpandReactions.vue'
+import ExpandReactionsIcon from './icons/ExpandReactionsIcon.vue'
+import ReplyIcon from './icons/ReplyIcon.vue'
 import { QUICK_REACTION_EMOJIS } from './utils/quickReactions'
 import {
   findMessageContent,
@@ -115,6 +123,14 @@ const props = defineProps({
     default: 'single',
     validator: (value: string) => ['single', 'multi'].includes(value),
   },
+  reply: {
+    type: Object as () => Reply | undefined,
+    default: undefined,
+  },
+  replyEnabled: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const emit = defineEmits<{
@@ -124,6 +140,7 @@ const emit = defineEmits<{
 }>()
 
 const chatAppId = inject('chatAppId') as string | undefined
+const { startReply } = useStartReply(chatAppId || '')
 const reactionsContainerRef = ref<HTMLElement | null>(null)
 const messageContentEl = ref<HTMLElement | null>(null)
 const emojiTheme = ref<'light' | 'dark'>('light')
@@ -219,6 +236,13 @@ function onQuickEmojiClick(key: string) {
     emit('add-reaction', { messageId: props.messageId, key })
   }
 
+  closeQuickPanel()
+}
+
+function onReplyClick() {
+  if (props.readonly || !props.enabled || !props.reply) return
+
+  startReply(props.reply)
   closeQuickPanel()
 }
 

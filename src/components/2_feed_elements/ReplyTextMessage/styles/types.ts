@@ -13,11 +13,15 @@ export interface ReplyTextMessageThemeCSSVariables {
   '--chotto-replytextmessage-text-font-size': string;
   /** Цвет текста ответа */
   '--chotto-replytextmessage-text-color': string;
+  /** Жирность текста ответа */
+  '--chotto-replytextmessage-text-font-weight': string;
 
   /** Внешние отступы абзаца */
   '--chotto-replytextmessage-p-margin': string;
   /** Размер шрифта абзаца */
   '--chotto-replytextmessage-p-font-size': string;
+  /** Жирность абзаца */
+  '--chotto-replytextmessage-p-font-weight': string;
   /** Цвет абзаца */
   '--chotto-replytextmessage-p-color': string;
   /** Правила переноса строк */

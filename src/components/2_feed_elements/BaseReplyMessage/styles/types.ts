@@ -21,6 +21,10 @@ export interface BaseReplyMessageThemeCSSVariables {
   '--chotto-basereplymessage-container-overflow': string;
   /** Отступ снизу контейнера */
   '--chotto-basereplymessage-container-margin-bottom': string;
+  /** Отступ справа контейнера */
+  '--chotto-basereplymessage-container-margin-right': string;
+  /** Цвет фона контейнера */
+  '--chotto-basereplymessage-container-background-color': string;
 
   /** Контент псевдоэлемента перед контейнером */
   '--chotto-basereplymessage-container-before-content': string;
@@ -34,6 +38,10 @@ export interface BaseReplyMessageThemeCSSVariables {
   '--chotto-basereplymessage-container-before-width': string;
   /** Высота псевдоэлемента */
   '--chotto-basereplymessage-container-before-height': string;
+  /** Скругление верхнего левого угла псевдоэлемента */
+  '--chotto-basereplymessage-container-before-border-top-left-radius': string;
+  /** Скругление нижнего левого угла псевдоэлемента */
+  '--chotto-basereplymessage-container-before-border-bottom-left-radius': string;
 
   /** Отображение кнопки сброса */
   '--chotto-basereplymessage-reset-display': string;
@@ -57,10 +65,6 @@ export interface BaseReplyMessageThemeCSSVariables {
 
   /** Правый внутренний отступ блока ответа в инпуте */
   '--chotto-basereplymessage-chat-input-reply-padding-right': string;
-  /** Граница блока ответа в инпуте */
-  '--chotto-basereplymessage-chat-input-reply-border': string;
-  /** Скругление блока ответа в инпуте */
-  '--chotto-basereplymessage-chat-input-reply-border-radius': string;
   /** Перенос слов в блоке ответа в инпуте */
   '--chotto-basereplymessage-chat-input-reply-word-break': string;
   /** Отступ снизу блока ответа в инпуте */

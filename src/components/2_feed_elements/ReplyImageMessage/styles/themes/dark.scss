@@ -2,6 +2,7 @@
   // ReplyImageMessage p variables
   --chotto-replyimagemessage-p-margin: 0;
   --chotto-replyimagemessage-p-font-size: var(--chotto-theme-additional-text-font-size);
+  --chotto-replyimagemessage-p-font-weight: 700;
   --chotto-replyimagemessage-p-color: var(--chotto-theme-secondary-text-color);
   --chotto-replyimagemessage-p-overflow: hidden;
   --chotto-replyimagemessage-p-text-overflow: ellipsis;
@@ -40,6 +41,7 @@
   // ReplyImageMessage text variables
   --chotto-replyimagemessage-text-margin-top: 8px;
   --chotto-replyimagemessage-text-font-size: var(--chotto-theme-text-font-size);
+  --chotto-replyimagemessage-text-font-weight: 400;
   --chotto-replyimagemessage-text-color: var(--chotto-theme-primary-text-color);
 
   // ReplyImageMessage reply description variables
@@ -49,6 +51,7 @@
   --chotto-replyimagemessage-reply-description-margin-bottom: 4px;
   --chotto-replyimagemessage-reply-description-white-space: nowrap;
   --chotto-replyimagemessage-reply-description-span-color: var(--chotto-theme-secondary-text-color);
+  --chotto-replyimagemessage-reply-description-p-font-weight: 400;
 
   // ReplyImageMessage animation variables
   --chotto-replyimagemessage-modal-fade-enter-active-transition: opacity 0.2s ease;

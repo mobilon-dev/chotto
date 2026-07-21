@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <span
-      class="call-message__icon pi pi-phone"
-      :class="{'call-message__icon-missed': message.isMissedCall}"
-    />
-  </div>
+  <div
+    class="call-message__icon pi pi-phone"
+    :class="{'call-message__icon-missed': message.isMissedCall}"
+  />
 
   <div class="call-message__text-container">
-    <p v-if="message.header">
-      {{ message.header }}
-    </p>
+    <p
+      v-if="message.header"
+      v-text="`В ответ ${message.header}`"
+    />
     <div class="call-message__reply-description">
       <span
         v-if="!message.isMissedCall"

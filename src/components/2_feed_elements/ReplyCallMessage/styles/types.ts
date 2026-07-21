@@ -35,6 +35,8 @@ export interface ReplyCallMessageThemeCSSVariables {
   '--chotto-replycallmessage-text-container-p-margin': string;
   /** Размер шрифта абзаца */
   '--chotto-replycallmessage-text-container-p-font-size': string;
+  /** Жирность абзаца (заголовок «В ответ») */
+  '--chotto-replycallmessage-text-container-p-font-weight': string;
   /** Цвет абзаца */
   '--chotto-replycallmessage-text-container-p-color': string;
   /** Переполнение абзаца */
@@ -60,6 +62,10 @@ export interface ReplyCallMessageThemeCSSVariables {
   '--chotto-replycallmessage-reply-description-margin-bottom': string;
   /** Цвет спана в описании ответа */
   '--chotto-replycallmessage-reply-description-span-color': string;
+  /** Жирность текста типа звонка */
+  '--chotto-replycallmessage-reply-description-span-font-weight': string;
+  /** Жирность длительности звонка */
+  '--chotto-replycallmessage-duration-font-weight': string;
 }
 
 

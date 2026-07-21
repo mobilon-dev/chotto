@@ -9,9 +9,10 @@
   </a>
 
   <div>
-    <p v-if="message.header">
-      {{ message.header }}
-    </p>
+    <p
+      v-if="message.header"
+      v-text="`В ответ ${message.header}`"
+    />
     <a
       class="file-message__link"
       :href="message.url"

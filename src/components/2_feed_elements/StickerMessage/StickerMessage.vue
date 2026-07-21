@@ -166,6 +166,7 @@
       <MessageReactions
         :reactions="message.reactions"
         :message-id="message.messageId"
+        :reply="buildReplyPayload(message, 'message.sticker')"
         :enabled="reactionsEnabled"
         :mode="reactionsMode"
         @toggle-reaction="onToggleReaction"
@@ -230,7 +231,7 @@ import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscre
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
-import { useMessageLinks, useMessageActions, useChannelAccentColor } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useChannelAccentColor, buildReplyPayload } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IStickerMessage } from '@/types';

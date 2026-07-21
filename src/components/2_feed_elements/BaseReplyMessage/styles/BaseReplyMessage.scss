@@ -2,9 +2,11 @@
   &__container {
     position: var(--chotto-basereplymessage-container-position, relative);
     padding: var(--chotto-basereplymessage-container-padding, 10px 6px 10px 20px);
-    border-radius: var(--chotto-basereplymessage-container-border-radius, 10px);
+    border-radius: var(--chotto-basereplymessage-container-border-radius, 5px);
     overflow: var(--chotto-basereplymessage-container-overflow, hidden);
     margin-bottom: var(--chotto-basereplymessage-container-margin-bottom, 6px);
+    margin-right: var(--chotto-basereplymessage-container-margin-right, 13px);
+    background-color: var(--chotto-basereplymessage-container-background-color, #F6F6F6);
 
     &::before {
       content: var(--chotto-basereplymessage-container-before-content, "");
@@ -13,7 +15,9 @@
       left: var(--chotto-basereplymessage-container-before-left, 0);
       width: var(--chotto-basereplymessage-container-before-width, 4px);
       height: var(--chotto-basereplymessage-container-before-height, 100%);
-      background-color: var(--chotto-basereplymessage-accent-line-color, #34d399);
+      background-color: var(--chotto-basereplymessage-accent-line-color, #D0D0D0);
+      border-top-left-radius: var(--chotto-basereplymessage-container-before-border-top-left-radius, 5px);
+      border-bottom-left-radius: var(--chotto-basereplymessage-container-before-border-bottom-left-radius, 5px);
     }
   }
 
@@ -46,8 +50,6 @@
 
 .chat-input-reply {
   padding-right: var(--chotto-basereplymessage-chat-input-reply-padding-right, 30px);
-  border: var(--chotto-basereplymessage-chat-input-reply-border, 1px solid var(--chotto-basereplymessage-item-border-color, #d0d0d0));
-  border-radius: var(--chotto-basereplymessage-chat-input-reply-border-radius, 0);
   word-break: var(--chotto-basereplymessage-chat-input-reply-word-break, break-word);
   margin-bottom: var(--chotto-basereplymessage-chat-input-reply-margin-bottom, 0);
 
@@ -55,9 +57,9 @@
     font-size: var(--chotto-basereplymessage-chat-input-reset-font-size, 1.1rem);
     display: var(--chotto-basereplymessage-chat-input-reset-display, flex);
     height: var(--chotto-basereplymessage-chat-input-reset-height, 100%);
-    margin-right: var(--chotto-basereplymessage-chat-input-reset-margin-right, 10px);
+    margin-right: var(--chotto-basereplymessage-chat-input-reset-margin-right, 11px);
 
-    span{
+    :deep(svg) {
       margin: var(--chotto-basereplymessage-chat-input-reset-span-margin, auto);
     }
   }
