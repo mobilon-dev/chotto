@@ -277,6 +277,16 @@ export const BasicExample: Story = {
         filename?: string; 
         size?: string;
         alt?: string;
+        reply?: {
+          messageId: string;
+          type: string;
+          text?: string;
+          url?: string;
+          filename?: string;
+          header?: string;
+          callDuration?: string;
+          isMissedCall?: boolean;
+        };
       }) => {
         if (!selectedChatRef.value) return;
         
@@ -307,6 +317,7 @@ export const BasicExample: Story = {
           filename?: string;
           alt?: string;
           size?: string;
+          reply?: typeof message.reply;
         } = {
           chatId: currentChatId,
           type: messageType,
@@ -330,6 +341,9 @@ export const BasicExample: Story = {
         if (message.size) {
           outgoingMessage.size = message.size;
         }
+        if (message.reply) {
+          outgoingMessage.reply = message.reply;
+        }
         
         // Создаем сообщение для другого чата (входящее - слева)
         const incomingMessage: {
@@ -344,6 +358,7 @@ export const BasicExample: Story = {
           filename?: string;
           alt?: string;
           size?: string;
+          reply?: typeof message.reply;
         } = {
           chatId: senderChatId,
           type: messageType,
@@ -366,6 +381,9 @@ export const BasicExample: Story = {
         }
         if (message.size) {
           incomingMessage.size = message.size;
+        }
+        if (message.reply) {
+          incomingMessage.reply = message.reply;
         }
         
         // Добавляем оба сообщения в массив
