@@ -68,6 +68,8 @@
           :reply="buildReplyPayload(message, 'message.text')"
           :enabled="reactionsEnabled"
           :mode="reactionsMode"
+          :current-user-id="currentUserId"
+          :reaction-user-names="reactionUserNames"
           @toggle-reaction="onToggleReaction"
           @add-reaction="onAddReaction"
           @remove-reaction="onRemoveReaction"
@@ -164,6 +166,14 @@ const props = defineProps({
     type: String as () => 'single' | 'multi',
     default: 'single',
     validator: (value: string) => ['single', 'multi'].includes(value)
+  },
+  currentUserId: {
+    type: [String, Number] as unknown as () => string | number | undefined,
+    default: undefined,
+  },
+  reactionUserNames: {
+    type: Object as () => Record<string, string>,
+    default: undefined,
   },
   subtextTooltipData: {
     type: Object as () => Record<string, string>,

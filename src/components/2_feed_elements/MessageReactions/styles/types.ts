@@ -81,8 +81,12 @@ export interface MessageReactionsThemeCSSVariables {
   /** Высота строки эмодзи реакции */
   '--chotto-messagereactions-emoji-line-height': string;
 
+  /** Размер шрифта счётчика реакции */
+  '--chotto-messagereactions-count-font-size': string;
   /** Высота строки счётчика реакции */
   '--chotto-messagereactions-count-line-height': string;
+  /** Цвет счётчика реакции */
+  '--chotto-messagereactions-count-color': string;
 
   /** Позиционирование панели быстрых реакций */
   '--chotto-messagereactions-quick-panel-position': string;

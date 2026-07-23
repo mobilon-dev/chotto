@@ -20,6 +20,40 @@ import ThemeMode from '../../../2_elements/ThemeMode/ThemeMode.vue';
 import chatBackgroundRaw from '../../../3_compounds/Feed/assets/chat-background.svg?raw';
 import stickerWebp from '../../../../apps/data/images/sticker.webp';
 
+const ME = 'usr_me'
+const REACTION_USER_NAMES: Record<string, string> = {
+  usr_me: 'Елена',
+  usr_other_0: 'Василий Васильев',
+  usr_other_1: 'Иван Иванов',
+  usr_other_2: 'Пётр Петров',
+  usr_other_3: 'Анна Смирнова',
+  usr_other_4: 'Мария Козлова',
+}
+
+function rx(key: string, count: number, reactedByMe = false) {
+  const items = []
+  let i = 0
+  if (reactedByMe) {
+    items.push({
+      key,
+      userId: ME,
+      name: REACTION_USER_NAMES[ME],
+      date: 1757151901,
+    })
+    i = 1
+  }
+  for (; i < count; i++) {
+    const userId = `usr_other_${i}`
+    items.push({
+      key,
+      userId,
+      name: REACTION_USER_NAMES[userId] ?? `Пользователь ${i}`,
+      date: 1757151901 + i,
+    })
+  }
+  return items
+}
+
 const themes = [
   { code: 'light', name: 'Light', default: true },
   { code: 'dark', name: 'Dark' },
@@ -88,9 +122,9 @@ export const Default: Story = {
         status: 'read',
         reactions: {
           items: [
-            { key: '👍', count: 5, reactedByMe: false },
-            { key: '❤️', count: 3, reactedByMe: true },
-            { key: '😄', count: 2, reactedByMe: false },
+            ...rx('👍', 5),
+            ...rx('❤️', 3, true),
+            ...rx('😄', 2),
           ],
         },
       };
@@ -103,9 +137,9 @@ export const Default: Story = {
         status: 'read',
         reactions: {
           items: [
-            { key: '👍', count: 12, reactedByMe: true },
-            { key: '❤️', count: 8, reactedByMe: false },
-            { key: '🎉', count: 1, reactedByMe: true },
+            ...rx('👍', 12, true),
+            ...rx('❤️', 8),
+            ...rx('🎉', 1, true),
           ],
         },
       };
@@ -119,8 +153,8 @@ export const Default: Story = {
         position: 'left',
         reactions: {
           items: [
-            { key: '❤️', count: 8, reactedByMe: true },
-            { key: '🔥', count: 5, reactedByMe: false },
+            ...rx('❤️', 8, true),
+            ...rx('🔥', 5),
           ],
         },
       };
@@ -134,8 +168,8 @@ export const Default: Story = {
         status: 'read',
         reactions: {
           items: [
-            { key: '👍', count: 3, reactedByMe: true },
-            { key: '🎵', count: 2, reactedByMe: false },
+            ...rx('👍', 3, true),
+            ...rx('🎵', 2),
           ],
         },
       };
@@ -150,8 +184,8 @@ export const Default: Story = {
         url: 'https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/10/file_example_PDF_500_kB.pdf',
         reactions: {
           items: [
-            { key: '👍', count: 4, reactedByMe: false },
-            { key: '📎', count: 1, reactedByMe: true },
+            ...rx('👍', 4),
+            ...rx('📎', 1, true),
           ],
         },
       };
@@ -165,8 +199,8 @@ export const Default: Story = {
         position: 'left',
         reactions: {
           items: [
-            { key: '😄', count: 6, reactedByMe: true },
-            { key: '❤️', count: 4, reactedByMe: false },
+            ...rx('😄', 6, true),
+            ...rx('❤️', 4),
           ],
         },
       };
@@ -209,13 +243,13 @@ export const Default: Story = {
         </div>
         <div class="message-feed" :style="containerStyle">
           <div style="display: flex; flex-direction: column; gap: 16px;">
-            <TextMessage :message="leftTextMessageWithReactions" />
-            <TextMessage :message="rightTextMessageWithReactions" />
-            <ImageMessage :message="leftImageMessageWithReactions" />
-            <AudioMessage :message="leftAudioMessageWithReactions" />
-            <FileMessage :message="leftFileMessageWithReactions" />
-            <StickerMessage :message="leftStickerMessageWithReactions" />
-            <TextMessage :message="leftMessageNoReactions" />
+            <TextMessage :message="leftTextMessageWithReactions" :current-user-id="'usr_me'" />
+            <TextMessage :message="rightTextMessageWithReactions" :current-user-id="'usr_me'" />
+            <ImageMessage :message="leftImageMessageWithReactions" :current-user-id="'usr_me'" />
+            <AudioMessage :message="leftAudioMessageWithReactions" :current-user-id="'usr_me'" />
+            <FileMessage :message="leftFileMessageWithReactions" :current-user-id="'usr_me'" />
+            <StickerMessage :message="leftStickerMessageWithReactions" :current-user-id="'usr_me'" />
+            <TextMessage :message="leftMessageNoReactions" :current-user-id="'usr_me'" />
           </div>
         </div>
       </BaseContainer>
@@ -233,14 +267,15 @@ const message: ITextMessage = {
 
 export const LeftMessageReactions: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'left',
       reactions: {
         items: [
-          { key: '👍', count: 5, reactedByMe: false },
-          { key: '❤️', count: 3, reactedByMe: true },
-          { key: '😄', count: 2, reactedByMe: false },
+          ...rx('👍', 5),
+          ...rx('❤️', 3, true),
+          ...rx('😄', 2),
         ],
       },
     },
@@ -250,12 +285,13 @@ export const LeftMessageReactions: Story = {
 
 export const LeftMessageSingleReaction: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'left',
       reactions: {
         items: [
-          { key: '👍', count: 1, reactedByMe: true },
+          ...rx('👍', 1, true),
         ],
       },
     },
@@ -265,16 +301,17 @@ export const LeftMessageSingleReaction: Story = {
 
 export const LeftMessageMultipleReactions: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'left',
       reactions: {
         items: [
-          { key: '👍', count: 15, reactedByMe: false },
-          { key: '❤️', count: 8, reactedByMe: true },
-          { key: '😄', count: 5, reactedByMe: false },
-          { key: '🎉', count: 3, reactedByMe: true },
-          { key: '🔥', count: 2, reactedByMe: false },
+          ...rx('👍', 15),
+          ...rx('❤️', 8, true),
+          ...rx('😄', 5),
+          ...rx('🎉', 3, true),
+          ...rx('🔥', 2),
         ],
       },
     },
@@ -284,6 +321,7 @@ export const LeftMessageMultipleReactions: Story = {
 
 export const LeftMessageNoReactions: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'left',
@@ -294,14 +332,15 @@ export const LeftMessageNoReactions: Story = {
 
 export const RightMessageReactions: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'right',
       reactions: {
         items: [
-          { key: '👍', count: 5, reactedByMe: false },
-          { key: '❤️', count: 3, reactedByMe: true },
-          { key: '😄', count: 2, reactedByMe: false },
+          ...rx('👍', 5),
+          ...rx('❤️', 3, true),
+          ...rx('😄', 2),
         ],
       },
     },
@@ -311,12 +350,13 @@ export const RightMessageReactions: Story = {
 
 export const RightMessageSingleReaction: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'right',
       reactions: {
         items: [
-          { key: '❤️', count: 1, reactedByMe: true },
+          ...rx('❤️', 1, true),
         ],
       },
     },
@@ -326,16 +366,17 @@ export const RightMessageSingleReaction: Story = {
 
 export const RightMessageMultipleReactions: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'right',
       reactions: {
         items: [
-          { key: '👍', count: 20, reactedByMe: true },
-          { key: '❤️', count: 12, reactedByMe: false },
-          { key: '😄', count: 7, reactedByMe: true },
-          { key: '🎉', count: 4, reactedByMe: false },
-          { key: '🔥', count: 3, reactedByMe: true },
+          ...rx('👍', 20, true),
+          ...rx('❤️', 12),
+          ...rx('😄', 7, true),
+          ...rx('🎉', 4),
+          ...rx('🔥', 3, true),
         ],
       },
     },
@@ -345,6 +386,7 @@ export const RightMessageMultipleReactions: Story = {
 
 export const RightMessageNoReactions: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'right',
@@ -355,15 +397,16 @@ export const RightMessageNoReactions: Story = {
 
 export const AllReactionsActive: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'left',
       reactions: {
         items: [
-          { key: '👍', count: 5, reactedByMe: true },
-          { key: '❤️', count: 3, reactedByMe: true },
-          { key: '😄', count: 2, reactedByMe: true },
-          { key: '🎉', count: 1, reactedByMe: true },
+          ...rx('👍', 5, true),
+          ...rx('❤️', 3, true),
+          ...rx('😄', 2, true),
+          ...rx('🎉', 1, true),
         ],
       },
     },
@@ -373,14 +416,15 @@ export const AllReactionsActive: Story = {
 
 export const LargeCountReactions: Story = {
   args: {
+    currentUserId: 'usr_me',
     message: {
       ...message,
       position: 'left',
       reactions: {
         items: [
-          { key: '👍', count: 1234, reactedByMe: false },
-          { key: '❤️', count: 567, reactedByMe: true },
-          { key: '😄', count: 89, reactedByMe: false },
+          ...rx('👍', 1234),
+          ...rx('❤️', 567, true),
+          ...rx('😄', 89),
         ],
       },
     },
@@ -405,16 +449,16 @@ export const ImageMessageWithReactions: StoryObj<typeof ImageMessage> = {
     setup() {
       return { args };
     },
-    template: '<ImageMessage :message="args.message" />',
+    template: '<ImageMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
       ...imageMessage,
       reactions: {
         items: [
-          { key: '❤️', count: 8, reactedByMe: true },
-          { key: '🔥', count: 5, reactedByMe: false },
-          { key: '👍', count: 3, reactedByMe: true },
+          ...rx('❤️', 8, true),
+          ...rx('🔥', 5),
+          ...rx('👍', 3, true),
         ],
       },
     },
@@ -428,7 +472,7 @@ export const ImageMessageRightWithReactions: StoryObj<typeof ImageMessage> = {
     setup() {
       return { args };
     },
-    template: '<ImageMessage :message="args.message" />',
+    template: '<ImageMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
@@ -436,8 +480,8 @@ export const ImageMessageRightWithReactions: StoryObj<typeof ImageMessage> = {
       position: 'right',
       reactions: {
         items: [
-          { key: '❤️', count: 12, reactedByMe: false },
-          { key: '🔥', count: 7, reactedByMe: true },
+          ...rx('❤️', 12),
+          ...rx('🔥', 7, true),
         ],
       },
     },
@@ -460,16 +504,16 @@ export const AudioMessageWithReactions: StoryObj<typeof AudioMessage> = {
     setup() {
       return { args };
     },
-    template: '<AudioMessage :message="args.message" />',
+    template: '<AudioMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
       ...audioMessage,
       reactions: {
         items: [
-          { key: '👍', count: 3, reactedByMe: true },
-          { key: '🎵', count: 2, reactedByMe: false },
-          { key: '❤️', count: 1, reactedByMe: true },
+          ...rx('👍', 3, true),
+          ...rx('🎵', 2),
+          ...rx('❤️', 1, true),
         ],
       },
     },
@@ -483,7 +527,7 @@ export const AudioMessageRightWithReactions: StoryObj<typeof AudioMessage> = {
     setup() {
       return { args };
     },
-    template: '<AudioMessage :message="args.message" />',
+    template: '<AudioMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
@@ -491,8 +535,8 @@ export const AudioMessageRightWithReactions: StoryObj<typeof AudioMessage> = {
       position: 'right',
       reactions: {
         items: [
-          { key: '👍', count: 5, reactedByMe: true },
-          { key: '🎵', count: 3, reactedByMe: false },
+          ...rx('👍', 5, true),
+          ...rx('🎵', 3),
         ],
       },
     },
@@ -515,16 +559,16 @@ export const VideoMessageWithReactions: StoryObj<typeof VideoMessage> = {
     setup() {
       return { args };
     },
-    template: '<VideoMessage :message="args.message" />',
+    template: '<VideoMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
       ...videoMessage,
       reactions: {
         items: [
-          { key: '👍', count: 6, reactedByMe: true },
-          { key: '❤️', count: 4, reactedByMe: false },
-          { key: '🔥', count: 2, reactedByMe: true },
+          ...rx('👍', 6, true),
+          ...rx('❤️', 4),
+          ...rx('🔥', 2, true),
         ],
       },
     },
@@ -538,7 +582,7 @@ export const VideoMessageRightWithReactions: StoryObj<typeof VideoMessage> = {
     setup() {
       return { args };
     },
-    template: '<VideoMessage :message="args.message" />',
+    template: '<VideoMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
@@ -546,8 +590,8 @@ export const VideoMessageRightWithReactions: StoryObj<typeof VideoMessage> = {
       position: 'right',
       reactions: {
         items: [
-          { key: '👍', count: 10, reactedByMe: false },
-          { key: '❤️', count: 7, reactedByMe: true },
+          ...rx('👍', 10),
+          ...rx('❤️', 7, true),
         ],
       },
     },
@@ -571,15 +615,15 @@ export const FileMessageWithReactions: StoryObj<typeof FileMessage> = {
     setup() {
       return { args };
     },
-    template: '<FileMessage :message="args.message" />',
+    template: '<FileMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
       ...fileMessage,
       reactions: {
         items: [
-          { key: '👍', count: 4, reactedByMe: false },
-          { key: '📎', count: 1, reactedByMe: true },
+          ...rx('👍', 4),
+          ...rx('📎', 1, true),
         ],
       },
     },
@@ -593,7 +637,7 @@ export const FileMessageRightWithReactions: StoryObj<typeof FileMessage> = {
     setup() {
       return { args };
     },
-    template: '<FileMessage :message="args.message" />',
+    template: '<FileMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
@@ -601,8 +645,8 @@ export const FileMessageRightWithReactions: StoryObj<typeof FileMessage> = {
       position: 'right',
       reactions: {
         items: [
-          { key: '👍', count: 6, reactedByMe: true },
-          { key: '📎', count: 2, reactedByMe: false },
+          ...rx('👍', 6, true),
+          ...rx('📎', 2),
         ],
       },
     },
@@ -625,16 +669,16 @@ export const StickerMessageWithReactions: StoryObj<typeof StickerMessage> = {
     setup() {
       return { args };
     },
-    template: '<StickerMessage :message="args.message" />',
+    template: '<StickerMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
       ...stickerMessage,
       reactions: {
         items: [
-          { key: '😄', count: 6, reactedByMe: true },
-          { key: '❤️', count: 4, reactedByMe: false },
-          { key: '🎉', count: 2, reactedByMe: true },
+          ...rx('😄', 6, true),
+          ...rx('❤️', 4),
+          ...rx('🎉', 2, true),
         ],
       },
     },
@@ -648,7 +692,7 @@ export const StickerMessageRightWithReactions: StoryObj<typeof StickerMessage> =
     setup() {
       return { args };
     },
-    template: '<StickerMessage :message="args.message" />',
+    template: '<StickerMessage :message="args.message" :current-user-id="\'usr_me\'" />',
   }),
   args: {
     message: {
@@ -656,12 +700,11 @@ export const StickerMessageRightWithReactions: StoryObj<typeof StickerMessage> =
       position: 'right',
       reactions: {
         items: [
-          { key: '😄', count: 8, reactedByMe: false },
-          { key: '❤️', count: 5, reactedByMe: true },
+          ...rx('😄', 8),
+          ...rx('❤️', 5, true),
         ],
       },
     },
   },
   decorators: commonDecorator,
 };
-

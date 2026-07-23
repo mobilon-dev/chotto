@@ -18,19 +18,25 @@ export interface ILinkPreview {
   description: string
 }
 
-// Reactions types (унифицировано для Telegram/WhatsApp)
+// Reactions types (event-list: UI сам считает count / reactedByMe)
 export type ReactionKey = string
 
+/** Одна реакция от конкретного пользователя */
 export interface MessageReactionItem {
   key: ReactionKey
-  count: number
-  reactedByMe?: boolean
+  userId: string | number
+  date?: number
+  /** Имя автора (snapshot); если нет — берётся из reactionUserNames */
+  name?: string
 }
 
-export interface MessageRecentReaction {
-  userId: string | number
+/** Агрегированный чип для отображения (считается в UI) */
+export interface MessageReactionChip {
   key: ReactionKey
-  date?: number
+  count: number
+  reactedByMe: boolean
+  /** Исходные события по этому эмодзи (для тултипа) */
+  events: MessageReactionItem[]
 }
 
 export interface MessageReactions {
@@ -38,7 +44,6 @@ export interface MessageReactions {
   meta?: {
     mode?: 'single' | 'multi'
   }
-  recent?: MessageRecentReaction[]
   vendor?: {
     telegram?: {
       total_count?: number

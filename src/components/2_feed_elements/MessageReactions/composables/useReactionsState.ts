@@ -1,6 +1,9 @@
 import { ref, computed, watch, type Ref } from 'vue'
 import type { MessageReactions } from '@/types'
 import {
+  aggregateReactions,
+  getMyReactionKey,
+  hasMyReaction,
   updateLocalReactionsAdd,
   updateLocalReactionsRemove,
   updateLocalReactionsToggle,
@@ -20,49 +23,65 @@ function cloneReactions(reactions: MessageReactions | undefined): MessageReactio
 }
 
 /**
- * Композабл для управления локальным состоянием реакций
+ * Композабл для управления локальным состоянием реакций (event-list → агрегированные чипы)
  */
 export function useReactionsState(
   initialReactions: Ref<MessageReactions | undefined>,
-  mode: Ref<ReactionsMode>
+  mode: Ref<ReactionsMode>,
+  currentUserId: Ref<string | number | undefined>,
+  currentUserName?: Ref<string | undefined>
 ) {
-  // Локальное состояние реакций для немедленного обновления UI
   const localReactions = ref<MessageReactions | undefined>(cloneReactions(initialReactions.value))
 
-  // Синхронизируем локальное состояние с props
   watch(initialReactions, (newReactions) => {
     localReactions.value = cloneReactions(newReactions)
   }, { deep: true, immediate: true })
 
-  // Отфильтрованные реакции без count === 0
   const displayedReactions = computed(() => {
-    if (!localReactions.value?.items) return []
-    return localReactions.value.items.filter(item => item.count > 0)
+    return aggregateReactions(localReactions.value, currentUserId.value)
   })
 
-  const hasReactions = computed(() => {
-    return displayedReactions.value.length > 0
-  })
+  const hasReactions = computed(() => displayedReactions.value.length > 0)
 
   const myReactionKey = computed(() => {
-    return localReactions.value?.items?.find(item => item.reactedByMe)?.key
+    return getMyReactionKey(localReactions, currentUserId.value)
   })
 
-  // Функции для обновления реакций
+  function resolveMyName(): string | undefined {
+    const name = currentUserName?.value?.trim()
+    return name || undefined
+  }
+
+  function requireUserId(): string | number | undefined {
+    return currentUserId.value
+  }
+
   function addReaction(key: string): string | undefined {
+    const userId = requireUserId()
+    if (userId == null) return undefined
+    const name = resolveMyName()
+
     if (mode.value === 'single') {
-      return updateLocalReactionsReplace(localReactions, key)
+      return updateLocalReactionsReplace(localReactions, key, userId, name)
     }
-    updateLocalReactionsAdd(localReactions, key, mode.value)
+    updateLocalReactionsAdd(localReactions, key, userId, mode.value, name)
     return undefined
   }
 
   function removeReaction(key: string) {
-    updateLocalReactionsRemove(localReactions, key)
+    const userId = requireUserId()
+    if (userId == null) return
+    updateLocalReactionsRemove(localReactions, key, userId)
   }
 
   function toggleReaction(key: string) {
-    updateLocalReactionsToggle(localReactions, key, mode.value)
+    const userId = requireUserId()
+    if (userId == null) return
+    updateLocalReactionsToggle(localReactions, key, userId, mode.value, resolveMyName())
+  }
+
+  function isMyReaction(key: string): boolean {
+    return hasMyReaction(localReactions, key, currentUserId.value)
   }
 
   return {
@@ -73,5 +92,6 @@ export function useReactionsState(
     addReaction,
     removeReaction,
     toggleReaction,
+    isMyReaction,
   }
 }

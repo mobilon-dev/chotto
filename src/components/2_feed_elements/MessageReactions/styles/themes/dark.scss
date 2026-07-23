@@ -27,12 +27,12 @@
   --chotto-messagereactions-right-no-reactions-left: -30px;
   --chotto-messagereactions-right-no-reactions-right: auto;
 
-  // MessageReactions chip variables
+  // MessageReactions chip variables (чужие: заливка без рамки)
   --chotto-messagereactions-chip-display: inline-flex;
   --chotto-messagereactions-chip-align-items: center;
   --chotto-messagereactions-chip-gap: 4px;
-  --chotto-messagereactions-chip-border: 1px solid rgba(255,255,255,0.15);
-  --chotto-messagereactions-chip-bg: rgba(255,255,255,0.08);
+  --chotto-messagereactions-chip-border: 1px solid transparent;
+  --chotto-messagereactions-chip-bg: rgba(255, 255, 255, 0.12);
   --chotto-messagereactions-chip-fg: inherit;
   --chotto-messagereactions-chip-border-radius: 20px;
   --chotto-messagereactions-chip-padding: 3px 9px;
@@ -41,16 +41,18 @@
   --chotto-messagereactions-chip-img-height: 20px;
   --chotto-messagereactions-chip-img-width: 20px;
 
-  // MessageReactions chip active variables
-  --chotto-messagereactions-chip-active-border: rgba(255,255,255,0.25);
-  --chotto-messagereactions-chip-active-bg: rgba(255,255,255,0.15);
+  // MessageReactions chip active variables (мои: с обводкой)
+  --chotto-messagereactions-chip-active-border: 1px solid rgba(255, 255, 255, 0.25);
+  --chotto-messagereactions-chip-active-bg: transparent;
   --chotto-messagereactions-chip-active-font-weight: 600;
 
   // MessageReactions emoji variables
   --chotto-messagereactions-emoji-line-height: 1;
 
   // MessageReactions count variables
+  --chotto-messagereactions-count-font-size: 14px;
   --chotto-messagereactions-count-line-height: 1;
+  --chotto-messagereactions-count-color: #5F5F5F;
 
   // MessageReactions quick panel variables
   --chotto-messagereactions-quick-panel-position: fixed;

@@ -532,7 +532,7 @@ export const messages = [
     },
     reactions: {
       items: [
-        { key: '🔥', count: 1, reactedByMe: true }
+        { key: '🔥', userId: 'usr_other', name: 'Василий Васильев', date: 1757151901 }
       ],
     }
   },
@@ -567,7 +567,7 @@ export const messages = [
     avatar:'https://placehold.jp/30/336633/ffffff/64x64.png?text=VIK',
     reactions: {
       items: [
-        { key: '🔥', count: 1, reactedByMe: true }
+        { key: '🔥', userId: 'usr_me', name: 'Елена', date: 1757151901 }
       ],
       meta: {
         mode: 'multi'
@@ -652,7 +652,7 @@ export const messages = [
     },
     reactions: {
       items: [
-        { key: '🔥', count: 1, reactedByMe: true }
+        { key: '🔥', userId: 'usr_me', name: 'Елена', date: 1757151901 }
       ],
       meta: {
         mode: 'multi'
@@ -839,7 +839,7 @@ export const messages = [
     avatar:'https://placehold.jp/30/1b97e4/ffffff/64x64.png?text=Jar',
     reactions: {
       items: [
-        { key: '🔥', count: 1, reactedByMe: true }
+        { key: '🔥', userId: 'usr_me', name: 'Елена', date: 1757151901 }
       ],
       meta: {
         mode: 'multi'
@@ -874,7 +874,7 @@ export const messages = [
     avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
     reactions: {
       items: [
-        { key: '🔥', count: 1, reactedByMe: true }
+        { key: '🔥', userId: 'usr_me', name: 'Елена', date: 1757151901 }
       ],
       meta: {
         mode: 'multi'
@@ -897,8 +897,11 @@ export const messages = [
     avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
     reactions: {
       items: [
-        { key: '🤣', count: 4 },
-        { key: '🔥', count: 1, reactedByMe: true }
+        { key: '🤣', userId: 'usr_other_0', name: 'Василий Васильев', date: 1757151901 },
+        { key: '🤣', userId: 'usr_other_1', name: 'Иван Иванов', date: 1757151902 },
+        { key: '🤣', userId: 'usr_other_2', name: 'Пётр Петров', date: 1757151903 },
+        { key: '🤣', userId: 'usr_other_3', name: 'Анна Смирнова', date: 1757151904 },
+        { key: '🔥', userId: 'usr_me', name: 'Елена', date: 1757151901 }
       ],
       meta: {
         mode: 'multi'
@@ -943,7 +946,7 @@ export const messages = [
     avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
     reactions: {
       items: [
-        { key: '🔥', count: 1, reactedByMe: true }
+        { key: '🔥', userId: 'usr_me', name: 'Елена', date: 1757151901 }
       ],
       meta: {
         mode: 'multi'

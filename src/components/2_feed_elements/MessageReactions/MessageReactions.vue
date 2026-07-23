@@ -6,22 +6,28 @@
     @pointerenter="onMessageMouseEnter"
     @pointerleave="onMessageMouseLeave"
   >
-    <button
+    <Tooltip
       v-for="item in displayedReactions"
       :key="item.key"
-      class="message-reactions__chip"
-      :class="{ 'is-active': item.reactedByMe }"
-      :title="item.key"
-      @click="onToggle(item.key)"
+      :text="getReactionTooltip(item)"
+      position="bottom-right"
+      :offset="6"
+      :delay="400"
     >
-      <span class="message-reactions__emoji">
-        <EmojiGlyph :emoji="item.key" />
-      </span>
-      <span
-        v-if="showCount"
-        class="message-reactions__count"
-      >{{ item.count }}</span>
-    </button>
+      <button
+        class="message-reactions__chip"
+        :class="{ 'is-active': item.reactedByMe && item.count === 1 }"
+        @click="onToggle(item.key)"
+      >
+        <span class="message-reactions__emoji">
+          <EmojiGlyph :emoji="item.key" />
+        </span>
+        <span
+          v-if="showCount || item.count > 1"
+          class="message-reactions__count"
+        >{{ item.count }}</span>
+      </button>
+    </Tooltip>
 
     <!-- Панель быстрых реакций и полный EmojiPicker — в body, чтобы не обрезались overflow ленты -->
     <Teleport to="body">
@@ -83,15 +89,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, inject, unref, onMounted, onUnmounted, watch } from 'vue'
 import EmojiPicker from 'vue3-emoji-picker-ru'
 import 'vue3-emoji-picker-ru/css'
-import type { MessageReactions, Reply } from '@/types'
+import type { MessageReactionChip, MessageReactions, Reply } from '@/types'
 import { useEmojiNative, useStartReply } from '@/hooks'
 import EmojiGlyph from '@/components/1_atoms/EmojiGlyph/EmojiGlyph.vue'
+import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
 import ExpandReactionsIcon from './icons/ExpandReactionsIcon.vue'
 import ReplyIcon from './icons/ReplyIcon.vue'
 import { QUICK_REACTION_EMOJIS } from './utils/quickReactions'
+import { buildReactionTooltipText } from './utils/reactionTooltip'
 import {
   findMessageContent,
   isRightMessage,
@@ -123,6 +131,21 @@ const props = defineProps({
     default: 'single',
     validator: (value: string) => ['single', 'multi'].includes(value),
   },
+  /** Id текущего пользователя — для расчёта reactedByMe и локальных add/remove */
+  currentUserId: {
+    type: [String, Number] as unknown as () => string | number | undefined,
+    default: undefined,
+  },
+  /** Имя текущего пользователя — для тултипа при локальном добавлении реакции */
+  currentUserName: {
+    type: String,
+    default: undefined,
+  },
+  /** userId → имя (если в item нет name) */
+  reactionUserNames: {
+    type: Object as () => Record<string, string>,
+    default: undefined,
+  },
   reply: {
     type: Object as () => Reply | undefined,
     default: undefined,
@@ -140,6 +163,8 @@ const emit = defineEmits<{
 }>()
 
 const chatAppId = inject('chatAppId') as string | undefined
+const injectedUserId = inject<string | number | undefined>('currentUserId', undefined)
+const injectedUserNames = inject<Record<string, string> | undefined>('reactionUserNames', undefined)
 const { startReply } = useStartReply(chatAppId || '')
 const reactionsContainerRef = ref<HTMLElement | null>(null)
 const messageContentEl = ref<HTMLElement | null>(null)
@@ -148,13 +173,30 @@ const { isNative } = useEmojiNative(chatAppId || '')
 
 const quickEmojis = computed(() => QUICK_REACTION_EMOJIS)
 const reactionsMode = computed(() => props.mode)
+const resolvedUserId = computed(() => props.currentUserId ?? unref(injectedUserId))
+const resolvedUserNames = computed(() => props.reactionUserNames ?? unref(injectedUserNames))
+const resolvedUserName = computed(() => {
+  const explicit = props.currentUserName?.trim()
+  if (explicit) return explicit
+  const id = resolvedUserId.value
+  if (id == null) return undefined
+  return resolvedUserNames.value?.[String(id)]
+})
+// В multi всегда показываем счётчик; в single — только если реакцию поставили несколько человек (count > 1)
 const showCount = computed(() => props.mode === 'multi')
 
-// Используем композабл для управления состоянием реакций
-const reactionsState = useReactionsState(computed(() => props.reactions), reactionsMode)
-const { displayedReactions, hasReactions, addReaction, removeReaction, toggleReaction } = reactionsState
+const reactionsState = useReactionsState(
+  computed(() => props.reactions),
+  reactionsMode,
+  resolvedUserId,
+  resolvedUserName
+)
+const { displayedReactions, hasReactions, addReaction, removeReaction, toggleReaction, isMyReaction } = reactionsState
 
-// Используем композабл для управления панелями реакций
+function getReactionTooltip(item: MessageReactionChip): string {
+  return buildReactionTooltipText(item.events, resolvedUserNames.value)
+}
+
 const panel = useReactionsPanel(quickEmojis, reactionsContainerRef)
 const {
   isQuickReactionsOpen,
@@ -186,8 +228,12 @@ const changeThemeDialogEmoji = (): 'light' | 'dark' => {
   return el?.getAttribute('data-theme')?.includes('dark') ? 'dark' : 'light'
 }
 
+function canMutate(): boolean {
+  return !props.readonly && props.enabled && resolvedUserId.value != null
+}
+
 function onToggle(key: string) {
-  if (props.readonly || !props.enabled) return
+  if (!canMutate()) return
 
   if (props.mode === 'single') {
     const myKey = reactionsState.myReactionKey.value
@@ -222,20 +268,14 @@ function onMessageMouseEnter() {
 
 function onMessageMouseLeave(event: PointerEvent) {
   if (props.readonly || !props.enabled) return
-  // Игнорируем уход на соседний элемент внутри того же сообщения
-  // (иначе узкий absolute-hitbox реакций сбрасывает таймер открытия панели)
   if (isStillInsideMessage(event.relatedTarget)) return
   handleMessageMouseLeave()
 }
 
 function onQuickEmojiClick(key: string) {
-  if (props.readonly || !props.enabled) return
+  if (!canMutate()) return
 
-  const existingReaction = reactionsState.localReactions.value?.items?.find(
-    item => item.key === key && item.reactedByMe
-  )
-
-  if (existingReaction) {
+  if (isMyReaction(key)) {
     removeReaction(key)
     emit('remove-reaction', { messageId: props.messageId, key })
   } else {
@@ -265,15 +305,10 @@ async function onExpandClick() {
 function onSelectEmoji(emojiObj: { i: string }) {
   closeFullPicker()
   closeQuickPanel()
-  if (props.readonly || !props.enabled) return
+  if (!canMutate()) return
 
   const key = emojiObj.i
-  const existingReaction = reactionsState.localReactions.value?.items?.find(
-    item => item.key === key && item.reactedByMe
-  )
-
-  if (existingReaction) {
-    // Та же реакция уже стоит — ничего не меняем
+  if (isMyReaction(key)) {
     return
   }
 
@@ -287,8 +322,6 @@ function onSelectEmoji(emojiObj: { i: string }) {
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
 
-  // Делаем hover более надёжным: слушаем `*__content`, чтобы курсор попадал даже когда
-  // у `.message-reactions` нет удобной hitbox-области (например, когда нет реакций).
   const contentEl = findMessageContent(reactionsContainerRef.value)
   if (contentEl) {
     messageContentEl.value = contentEl

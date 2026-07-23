@@ -195,6 +195,8 @@
                   :feed-keyboards="feedKeyboards"
                   feed-keyboard-align="left"
                   :reactions-enabled="true"
+                  :current-user-id="'usr_me'"
+                  :reaction-user-names="{ usr_me: 'Елена', usr_other: 'Василий Васильев', usr_other_0: 'Василий Васильев', usr_other_1: 'Иван Иванов', usr_other_2: 'Пётр Петров', usr_other_3: 'Анна Смирнова' }"
                   :subtext-tooltip-data="subtextTooltipData"
                   :call-message-on-callback="handleCallMessageCallback"
                   @message-action="messageAction"

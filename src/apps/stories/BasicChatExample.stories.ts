@@ -112,7 +112,7 @@ const simpleMessages = [
     status: 'read',
     reactions: {
       items: [
-        { key: '🔥', count: 1, reactedByMe: true }
+        { key: '🔥', userId: 'usr_me', name: 'Анна', date: 1757151901 }
       ]
     }
   },
@@ -182,7 +182,7 @@ const simpleMessages = [
     status: 'read',
     reactions: {
       items: [
-        { key: '🔥', count: 1, reactedByMe: false }
+        { key: '🔥', userId: 'usr_other_0', name: 'Анна', date: 1757151901 }
       ]
     }
   },
@@ -508,6 +508,8 @@ export const BasicExample: Story = {
                 <div style="flex: 1 1 0; min-height: 0; overflow-y: auto;">
                   <Feed 
                     :objects="messages"
+                    :current-user-id="'usr_me'"
+                    :reaction-user-names="{ usr_me: 'Виктория', usr_other_0: 'Василий Васильев' }"
                     :enable-double-click-reply="true" 
                     @message-action="handleMessageAction"
                     @load-more="handleLoadMore"

@@ -12,7 +12,7 @@
 ## Props
 
 - `text` (String, required) - текст подсказки
-- `position` (String, optional) - позиция отображения подсказки (top, bottom, left, right)
+- `position` (String, optional) - позиция отображения подсказки (top, top-center, top-left, top-right, bottom, bottom-center, bottom-left, bottom-right, left, right)
 
 ## Слоты
 

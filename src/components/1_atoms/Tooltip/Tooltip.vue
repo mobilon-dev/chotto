@@ -138,9 +138,21 @@ const getTooltipPosition = (
       top: bounds.top - tBounds.height - props.offset - correctTop,
       left: bounds.left + (bounds.width / 2) - (tBounds.width / 2) - correctLeft,
     },
+    'top-left': {
+      top: bounds.top - tBounds.height - props.offset - correctTop,
+      left: bounds.left + bounds.width - tBounds.width - correctLeft,
+    },
+    'top-right': {
+      top: bounds.top - tBounds.height - props.offset - correctTop,
+      left: bounds.left - correctLeft,
+    },
     'bottom-left': {
       top: bounds.bottom - correctTop + props.offset,
       left: bounds.left + bounds.width - tBounds.width - correctLeft,
+    },
+    'bottom-right': {
+      top: bounds.bottom - correctTop + props.offset,
+      left: bounds.left - correctLeft,
     },
   };
   return r[props.position];

@@ -5,6 +5,10 @@
   position: var(--chotto-messagereactions-position, relative);
   min-height: var(--chotto-messagereactions-min-height, 0);
   z-index: var(--chotto-messagereactions-z-index, 1);
+
+  :deep(.tooltip-wrapper) {
+    display: inline-flex;
+  }
 }
 
 // Когда нет реакций, компонент не занимает место в потоке
@@ -44,8 +48,9 @@
   display: var(--chotto-messagereactions-chip-display, inline-flex);
   align-items: var(--chotto-messagereactions-chip-align-items, center);
   gap: var(--chotto-messagereactions-chip-gap, 4px);
-  border: var(--chotto-messagereactions-chip-border, 1px solid rgba(0,0,0,0.1));
-  background: var(--chotto-messagereactions-chip-bg, rgba(0,0,0,0.04));
+  // Чужие реакции: заливка без видимой рамки (прозрачный border — без скачка размера)
+  border: var(--chotto-messagereactions-chip-border, 1px solid transparent);
+  background: var(--chotto-messagereactions-chip-bg, #F3F3F3B2);
   color: var(--chotto-messagereactions-chip-fg, inherit);
   border-radius: var(--chotto-messagereactions-chip-border-radius, 20px);
   padding: var(--chotto-messagereactions-chip-padding, 3px 9px);
@@ -59,7 +64,8 @@
 }
 
 .message-reactions__chip.is-active {
-  border-color: var(--chotto-messagereactions-chip-active-border, #F3F3F3B2);
+  // Мои реакции: с обводкой
+  border: var(--chotto-messagereactions-chip-active-border, 1px solid rgba(0, 0, 0, 0.1));
   background: var(--chotto-messagereactions-chip-active-bg, #F3F3F3B2);
   font-weight: var(--chotto-messagereactions-chip-active-font-weight, 600);
 }
@@ -69,7 +75,9 @@
 }
 
 .message-reactions__count {
+  font-size: var(--chotto-messagereactions-count-font-size, 14px);
   line-height: var(--chotto-messagereactions-count-line-height, 1);
+  color: var(--chotto-messagereactions-count-color, #5F5F5F);
 }
 
 .message-reactions__quick-panel {

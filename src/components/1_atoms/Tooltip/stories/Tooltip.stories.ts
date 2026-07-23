@@ -18,7 +18,7 @@ const meta: Meta<typeof Tooltip> = {
     },
     position: {
       control: 'select',
-      options: ['top', 'bottom', 'left', 'right', 'bottom-left'],
+      options: ['top', 'top-center', 'top-left', 'top-right', 'bottom', 'bottom-center', 'bottom-left', 'bottom-right', 'left', 'right'],
       description: 'Позиция отображения подсказки',
     },
     offset: {
@@ -117,6 +117,39 @@ export const BottomLeft: Story = {
   args: {
     text: 'Подсказка снизу слева',
     position: 'bottom-left',
+    offset: 8,
+    //@ts-expect-error - theme prop is only for Storybook selector
+    theme: themes,
+    default: '<span style="padding: 10px; background: #f0f0f0; border-radius: 4px; cursor: pointer;">Наведите курсор</span>',
+  },
+};
+
+export const BottomRight: Story = {
+  args: {
+    text: 'Подсказка снизу справа',
+    position: 'bottom-right',
+    offset: 8,
+    //@ts-expect-error - theme prop is only for Storybook selector
+    theme: themes,
+    default: '<span style="padding: 10px; background: #f0f0f0; border-radius: 4px; cursor: pointer;">Наведите курсор</span>',
+  },
+};
+
+export const TopLeft: Story = {
+  args: {
+    text: 'Подсказка сверху слева',
+    position: 'top-left',
+    offset: 8,
+    //@ts-expect-error - theme prop is only for Storybook selector
+    theme: themes,
+    default: '<span style="padding: 10px; background: #f0f0f0; border-radius: 4px; cursor: pointer;">Наведите курсор</span>',
+  },
+};
+
+export const TopRight: Story = {
+  args: {
+    text: 'Подсказка сверху справа',
+    position: 'top-right',
     offset: 8,
     //@ts-expect-error - theme prop is only for Storybook selector
     theme: themes,

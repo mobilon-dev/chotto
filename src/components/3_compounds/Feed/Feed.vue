@@ -46,6 +46,8 @@
           :is-first-in-series="object.isFirstInSeries"
           :reactions-enabled="reactionsEnabled"
           :reactions-mode="reactionsMode"
+          :current-user-id="currentUserId"
+          :reaction-user-names="reactionUserNames"
           :subtext-tooltip-data="subtextTooltipData"
           :channel="getChannelForMessage(object)"
           v-bind="getExtraMessageProps(object)"
@@ -124,7 +126,7 @@
   setup
   lang="ts"
 >
-import { ref, watch, nextTick, inject, computed, onMounted, unref, type Ref } from 'vue';
+import { ref, watch, nextTick, inject, provide, computed, onMounted, unref, type Ref } from 'vue';
 import DateMessageSticky from '@/components/2_feed_elements/DateMessageSticky/DateMessageSticky.vue';
 import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
 import MessageKeyboard from '@/components/2_feed_elements/MessageKeyboard/MessageKeyboard.vue';
@@ -204,6 +206,16 @@ const props = defineProps({
     default: 'single',
     validator: (value: string) => ['single', 'multi'].includes(value)
   },
+  /** Id текущего пользователя — для расчёта «моих» реакций */
+  currentUserId: {
+    type: [String, Number] as unknown as () => string | number | undefined,
+    default: undefined,
+  },
+  /** userId → имя для тултипов реакций */
+  reactionUserNames: {
+    type: Object as () => Record<string, string>,
+    default: undefined,
+  },
   subtextTooltipData: {
     type: Object,
     required: false,
@@ -239,6 +251,11 @@ const { componentsMap } = useFeedComponents()
 // Получаем значение reactionsEnabled из props
 const reactionsEnabled = computed(() => props.reactionsEnabled)
 const reactionsMode = computed(() => props.reactionsMode)
+const currentUserId = computed(() => props.currentUserId)
+const reactionUserNames = computed(() => props.reactionUserNames)
+
+provide('currentUserId', currentUserId)
+provide('reactionUserNames', reactionUserNames)
 
 // Инициализация логики группировки
 const { groupedObjects } = useFeedGrouping({

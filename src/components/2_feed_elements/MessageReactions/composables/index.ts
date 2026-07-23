@@ -12,6 +12,10 @@ export {
   updateLocalReactionsRemove,
   updateLocalReactionsToggle,
   updateLocalReactionsReplace,
+  aggregateReactions,
+  hasMyReaction,
+  getMyReactionKey,
+  sameUserId,
   type ReactionsMode,
 } from './useReactions'
 
