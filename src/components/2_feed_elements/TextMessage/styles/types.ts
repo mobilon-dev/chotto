@@ -54,6 +54,8 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-right-after-z-index': string;
   /** Фильтр псевдоэлемента справа */
   '--chotto-textmessage-right-after-filter': string;
+  /** Обрезка хвостика справа (скрывает часть внутри пузыря) */
+  '--chotto-textmessage-right-after-clip-path': string;
 
   /** Отображение футера (реакции + время) */
   '--chotto-textmessage-footer-display': string;

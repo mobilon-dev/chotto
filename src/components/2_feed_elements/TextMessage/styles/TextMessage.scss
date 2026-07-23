@@ -33,6 +33,7 @@
     border-top: var(--chotto-textmessage-right-after-border-top, 15px solid var(--chotto-textmessage-right-bg, #a7f3d0));
     z-index: var(--chotto-textmessage-right-after-z-index, 1);
     filter: var(--chotto-textmessage-right-after-filter, none);
+    clip-path: var(--chotto-textmessage-right-after-clip-path, inset(0 -40px -10px 25px));
   }
 
   &__footer {
