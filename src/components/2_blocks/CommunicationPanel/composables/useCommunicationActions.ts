@@ -39,6 +39,8 @@ interface UseCommunicationActionsOptions {
   confirmingAttributeId: Ref<string | null>;
   isAttributeBlocked: (attribute: ContactAttribute | null | undefined) => boolean;
   closeMenu: () => void;
+  /** Закрепить меню до closeMenu (клик снаружи) — на время confirm-attribute. */
+  pinMenuOpen: () => void;
   hasMultipleChannels: (channelType: string) => boolean;
   getSingleChannelForType: (channelType: string) => Channel | null;
   getAvailableChannels: (channelType: string) => Channel[];
@@ -67,6 +69,7 @@ export function useCommunicationActions({
   confirmingAttributeId,
   isAttributeBlocked,
   closeMenu,
+  pinMenuOpen,
   hasMultipleChannels,
   getSingleChannelForType,
   getAvailableChannels,
@@ -89,6 +92,7 @@ export function useCommunicationActions({
       return;
     }
 
+    pinMenuOpen();
     confirmingAttributeId.value = attribute.id;
     emit('confirm-attribute', {
       attributeId: attribute.id,
@@ -179,12 +183,18 @@ export function useCommunicationActions({
 
   /**
    * Выбор канала из подменю.
+   * Нет attribute/type → closeMenu; blocked → return без закрытия меню;
+   * confirm → без close; иначе select + close.
    */
   const selectChannel = (channelId: string) => {
     const attribute = hoveredAttribute.value;
     const channelType = activeChannelType.value;
-    if (!attribute || !channelType || isAttributeBlocked(attribute)) {
+    if (!attribute || !channelType) {
       closeMenu();
+      return;
+    }
+
+    if (isAttributeBlocked(attribute)) {
       return;
     }
 

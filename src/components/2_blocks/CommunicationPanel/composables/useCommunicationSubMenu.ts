@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue';
+import { ref, type ComputedRef, type Ref } from 'vue';
 import type { ContactAttribute } from './useCommunicationAttributes';
 
 interface UseCommunicationSubMenuOptions {
@@ -6,6 +6,8 @@ interface UseCommunicationSubMenuOptions {
   showSubMenu: Ref<boolean>;
   frozenAttribute: Ref<ContactAttribute | null>;
   hoveredAttribute: Ref<ContactAttribute | null>;
+  confirmingAttributeId: Ref<string | null> | ComputedRef<string | null>;
+  retainOpenUntilDismiss: Ref<boolean>;
   hasMultipleChannels: (channelType: string) => boolean;
   isAttributeBlocked: (attribute: ContactAttribute | null | undefined) => boolean;
 }
@@ -18,18 +20,37 @@ export function useCommunicationSubMenu({
   showSubMenu,
   frozenAttribute,
   hoveredAttribute,
+  confirmingAttributeId,
+  retainOpenUntilDismiss,
   hasMultipleChannels,
   isAttributeBlocked,
 }: UseCommunicationSubMenuOptions) {
   const subMenuTop = ref(0);
 
+  const shouldKeepSubMenuOpen = () =>
+    retainOpenUntilDismiss.value ||
+    Boolean(confirmingAttributeId.value) ||
+    isAttributeBlocked(hoveredAttribute.value ?? frozenAttribute.value);
+
   /**
    * Обрабатывает наведение на атрибут в списке.
+   * Blocked-атрибут не блокирует открытие — иначе после splash submenu «мёртвое».
+   * Пока идёт confirm / меню закреплено — не переключаем цель submenu.
    */
   const handleAttributeMouseEnter = (attribute: ContactAttribute, eventTarget: EventTarget | null) => {
     const channelType = activeChannelType.value;
-    if (!channelType || !hasMultipleChannels(channelType) || isAttributeBlocked(attribute)) {
+    if (!channelType || !hasMultipleChannels(channelType)) {
       return null;
+    }
+
+    if (retainOpenUntilDismiss.value || confirmingAttributeId.value) {
+      const pinnedAttr = frozenAttribute.value ?? hoveredAttribute.value;
+      if (showSubMenu.value) {
+        return null;
+      }
+      if (pinnedAttr && pinnedAttr.id !== attribute.id) {
+        return null;
+      }
     }
 
     hoveredAttribute.value = attribute;
@@ -56,8 +77,13 @@ export function useCommunicationSubMenu({
 
   /**
    * Закрывает подменю.
+   * Не закрываем, пока меню закреплено до клика снаружи (confirm / blocked fail).
    */
   const closeSubMenu = () => {
+    if (shouldKeepSubMenuOpen()) {
+      return;
+    }
+
     showSubMenu.value = false;
     frozenAttribute.value = null;
   };

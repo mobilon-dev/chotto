@@ -435,9 +435,12 @@ const {
   hoveredChannel,
   showMenu,
   showSubMenu,
+  retainOpenUntilDismiss,
   handleChannelClick,
   openMenu,
   closeMenu,
+  pinMenuOpen,
+  armOutsideClickSuppression,
   handleClickOutside,
 } = useCommunicationMenu({
   panelRef,
@@ -626,6 +629,7 @@ const {
   confirmingAttributeId: internalConfirmingAttributeId,
   isAttributeBlocked,
   closeMenu,
+  pinMenuOpen,
   hasMultipleChannels,
   getSingleChannelForType,
   getAvailableChannels,
@@ -649,6 +653,8 @@ const {
   showSubMenu,
   frozenAttribute,
   hoveredAttribute,
+  confirmingAttributeId: effectiveConfirmingAttributeId,
+  retainOpenUntilDismiss,
   hasMultipleChannels,
   isAttributeBlocked,
 });
@@ -740,9 +746,13 @@ const onAttributeMouseEnter = async (attribute, event) => {
   }
 };
 
-watch(() => props.confirmingAttributeId, (id) => {
+watch(() => props.confirmingAttributeId, (id, prevId) => {
   if (!id) {
     internalConfirmingAttributeId.value = null;
+    // После confirm (в т.ч. fail + alert) подавляем ложный click-outside.
+    if (prevId) {
+      armOutsideClickSuppression();
+    }
   }
 });
 
@@ -773,6 +783,11 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside);
   clearDefaultChannelTooltip();
+});
+
+defineExpose({
+  /** Снять pin и закрыть оба меню (вызывать с host при ОК на splash). */
+  closeMenu,
 });
 </script>
 
