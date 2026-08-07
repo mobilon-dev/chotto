@@ -59,10 +59,6 @@ export const Default: Story = {
           status: 'SUMMARY_READY',
           html: '<p><strong>Резюме:</strong> клиент уточнил срок доставки, оператор подтвердил доставку на завтра.</p>'
         },
-        actions: [
-          { action: 'download', title: 'Скачать' },
-          { action: 'transcribe', title: 'Перевести в текст', disabled: true }
-        ],
       };
 
       const rightMessage: ICallMessage & { dialogId?: string } = {
@@ -84,10 +80,6 @@ export const Default: Story = {
           status: 'SUMMARY_READY',
           html: '<p><strong>Итог:</strong> согласовали доставку на завтра до 15:00.</p>'
         },
-        actions: [
-          { action: 'download', title: 'Скачать' },
-          { action: 'transcribe', title: 'Перевести в текст', disabled: true }
-        ],
       };
 
       const missedCallMessage: ICallMessage & { dialogId?: string } = {

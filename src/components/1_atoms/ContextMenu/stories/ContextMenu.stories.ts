@@ -45,3 +45,14 @@ export const FileDropDownMenu: Story = {
     actions: actionsFileDropDown,
   },
 };
+
+export const WithSeparatorAndDanger: Story = {
+  args: {
+    actions: [
+      { action: 'reply', title: 'Ответить' },
+      { action: 'edit', title: 'Редактировать' },
+      { separator: true },
+      { action: 'delete', title: 'Удалить', danger: true },
+    ],
+  },
+};

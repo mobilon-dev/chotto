@@ -269,7 +269,7 @@
       </transition>
 
       <button
-        v-if="buttonMenuVisible && message.actions"
+        v-if="buttonMenuVisible && menuActions.length"
         class="call-message__menu-button"
         @click="isOpenMenu = !isOpenMenu"
       >
@@ -289,9 +289,9 @@
 
       <transition>
         <ContextMenu
-          v-if="isOpenMenu && message.actions"
-          class="call-message__context-menu"
-          :actions="message.actions"
+          v-if="isOpenMenu && menuActions.length"
+          class="call-message__context-menu message-actions-menu"
+          :actions="menuActions"
           @click="handleActionClick"
         />
       </transition>
@@ -305,7 +305,7 @@
 >
 import { ref, inject, computed, watch, toRefs, unref, nextTick, type Ref } from 'vue'
 import type { IAudioRecognitionPayload, IAudioSummaryPayload, ICallMessage } from '@/types'
-import { useMessageActions, useSubtextTooltip } from '@/hooks/messages'
+import { useMessageActions, useSubtextTooltip, useMessageMenuActions, buildReplyPayload, useStartReply } from '@/hooks/messages'
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue'
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
 import IncomingCallIcon from './icons/IncomingCallIcon.vue'
@@ -330,6 +330,9 @@ const selectedChat = computed(() => {
 })
 
 const emit = defineEmits(['action', 'reply', 'call'])
+const { menuActions } = useMessageMenuActions()
+const chatAppId = inject('chatAppId') as string | undefined
+const { startReply } = useStartReply(chatAppId || '')
 
 // Define props
 const props = defineProps({
@@ -372,7 +375,9 @@ const {
   showMenu,
   hideMenu,
   clickAction,
-} = useMessageActions(props.message, emit)
+} = useMessageActions(props.message, emit, {
+  onReply: () => startReply(buildReplyPayload(props.message, 'message.call')),
+})
 
 const expandedPanel = ref<null | 'text' | 'summary'>(null)
 const recognitionReadyStatus = 'RECOGNITION_READY'

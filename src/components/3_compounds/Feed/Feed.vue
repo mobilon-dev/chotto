@@ -134,9 +134,10 @@ import FeedKeyboard from '@/components/2_feed_elements/FeedKeyboard/FeedKeyboard
 import TypingMessage from '@/components/2_feed_elements/TypingMessage/TypingMessage.vue';
 import LoadingIndicator from '@/components/1_atoms/LoadingIndicator/LoadingIndicator.vue';
 
-import { IFeedObject, IFeedTyping, IFeedUnreadButton, IFeedKeyboard } from '@/types';
+import { IFeedObject, IFeedTyping, IFeedUnreadButton, IFeedKeyboard, IFeedMessageMenuAction } from '@/types';
 import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo } from './composables';
 import { throttle } from './functions/throttle';
+import { getDefaultMessageMenuActions } from './utils/getDefaultMessageMenuActions';
 
 import chatBackgroundRaw from './assets/chat-background.svg?raw';
 
@@ -230,6 +231,14 @@ const props = defineProps({
     required: false,
     default: undefined,
   },
+  /**
+   * Пункты контекстного меню сообщений (с иконками).
+   * По умолчанию: Ответить, Редактировать, разделитель, Удалить (красный).
+   */
+  messageMenuActions: {
+    type: Array as () => IFeedMessageMenuAction[],
+    default: () => getDefaultMessageMenuActions(),
+  },
 });
 
 const trackingObjects = ref();
@@ -256,6 +265,10 @@ const reactionUserNames = computed(() => props.reactionUserNames)
 
 provide('currentUserId', currentUserId)
 provide('reactionUserNames', reactionUserNames)
+provide(
+  'messageMenuActions',
+  computed(() => props.messageMenuActions)
+)
 
 // Инициализация логики группировки
 const { groupedObjects } = useFeedGrouping({

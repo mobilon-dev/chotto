@@ -59,6 +59,10 @@ export interface ContextMenuThemeCSSVariables {
   '--chotto-contextmenu-item-width': string;
   /** Промежуток между элементами внутри элемента контекстного меню */
   '--chotto-contextmenu-item-gap': string;
+  /** Box-sizing элемента контекстного меню */
+  '--chotto-contextmenu-item-box-sizing': string;
+  /** Высота элемента контекстного меню */
+  '--chotto-contextmenu-item-height': string;
   /** Отступ справа иконки элемента контекстного меню */
   '--chotto-contextmenu-item-icon-margin-right': string;
   /** Коэффициент сжатия иконки элемента контекстного меню */
@@ -73,4 +77,20 @@ export interface ContextMenuThemeCSSVariables {
   '--chotto-contextmenu-item-disabled-opacity': string;
   /** Курсор отключенного элемента контекстного меню */
   '--chotto-contextmenu-item-disabled-cursor': string;
+
+  // Separator
+  /** Отображение разделителя контекстного меню */
+  '--chotto-contextmenu-separator-display': string;
+  /** Высота разделителя контекстного меню */
+  '--chotto-contextmenu-separator-height': string;
+  /** Ширина разделителя контекстного меню */
+  '--chotto-contextmenu-separator-width': string;
+  /** Отступы разделителя контекстного меню */
+  '--chotto-contextmenu-separator-margin': string;
+  /** Внутренние отступы разделителя контекстного меню */
+  '--chotto-contextmenu-separator-padding': string;
+  /** Цвет фона разделителя контекстного меню */
+  '--chotto-contextmenu-separator-background-color': string;
+  /** Выравнивание разделителя по главной оси (grid) */
+  '--chotto-contextmenu-separator-justify-self': string;
 }

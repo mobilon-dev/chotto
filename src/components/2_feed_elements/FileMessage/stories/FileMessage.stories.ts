@@ -40,11 +40,6 @@ const longText = 'It is a long established fact that a reader will be distracted
   'sometimes by accident, sometimes on purpose (injected humour and the like).'
 
 
-const actions = [
-  { action: 'edit', title: 'изменить', },
-  { action: 'delete', title: 'удалить', },
-];
-
 const defaultBackground = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(chatBackgroundRaw)}`;
 
 // Общий декоратор для всех stories кроме Default (добавляет паддинги, фоновый контейнер и убирает горизонтальный скролл)
@@ -207,7 +202,6 @@ export const LeftFileMessageWithActions: Story = {
     message: {
       ...fileMessage,
       position: 'left',
-      actions,
     }
   },
   decorators: commonDecorator,
@@ -341,7 +335,6 @@ export const RightFileMessageWithActions: Story = {
     message: {
       ...fileMessage,
       position: 'right',
-      actions,
     }
   },
   decorators: commonDecorator,
@@ -352,7 +345,6 @@ export const RightFileMessageWithActionsAndText: Story = {
     message: {
       ...fileMessage,
       position: 'right',
-      actions,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
         'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ' +
         'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -366,7 +358,6 @@ export const LeftFileMessageWithActionsAndText: Story = {
     message: {
       ...fileMessage,
       position: 'left',
-      actions,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
         'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ' +
         'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -380,7 +371,6 @@ export const RightFileMessageWithActionsAndTextWithLink: Story = {
     message: {
       ...fileMessage,
       position: 'right',
-      actions,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
         'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ' +
         'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. vk.com',
@@ -394,7 +384,6 @@ export const LeftFileMessageWithActionsAndTextWithLink: Story = {
     message: {
       ...fileMessage,
       position: 'left',
-      actions,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
         'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ' +
         'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. vk.com',

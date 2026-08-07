@@ -50,19 +50,6 @@ const embedRutube = {
   url: 'https://rutube.ru/play/embed/6eb0c597c11c89ad5a5fafa3030d0e53/',
 }
 
-const actions = [
-  {
-    action: 'edit',
-    title: 'изменить',
-    icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=edit',
-  },
-  {
-    action: 'delete',
-    title: 'удалить',
-    icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=del',
-  },
-]
-
 const messageWithoutTime = {
   text: 'test test test',
   messageId: 'testMessageId',
@@ -201,7 +188,7 @@ export const LeftMessages: Story = {
         { ...messageLongText, text: 'Message with long text: ' + messageLongText.text, position: 'left' as const, messageId: 'left3' },
         { ...message, text: 'Message with subtext', position: 'left' as const, subText: '+79135292926', messageId: 'left4' },
         { ...messageWithoutTime, text: 'Message without time', position: 'left' as const, time: '', messageId: 'left5' },
-        { ...message, text: 'Message with actions', position: 'left' as const, actions, messageId: 'left6' },
+        { ...message, text: 'Another left message', position: 'left' as const, messageId: 'left6' },
         { ...message, text: 'Message with avatar', position: 'left' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'left7' },
         { ...message, text: 'Message with long time', position: 'left' as const, time: 'двенадцать дней назад', messageId: 'left8' },
         { 
@@ -266,10 +253,9 @@ export const LeftMessageMax: Story = {
   args: {
     message: {
       ...messageLongText,
-      text: 'Message with all features: long text, subtext, actions, avatar, long time',
+      text: 'Message with all features: long text, subtext, avatar, long time',
       position: 'left',
       subText: 'тест тест тест тест',
-      actions,
       avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=SD',
       time: 'два дня назад',
     },
@@ -281,10 +267,9 @@ export const RightMessageMax: Story = {
   args: {
     message: {
       ...messageLongText,
-      text: 'Message with all features: long text, subtext, actions, avatar, long time',
+      text: 'Message with all features: long text, subtext, avatar, long time',
       position: 'right',
       subText: 'тест тест тест тест',
-      actions,
       avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=SD',
       time: 'два дня назад',
     },

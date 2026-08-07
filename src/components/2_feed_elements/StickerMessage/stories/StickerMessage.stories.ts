@@ -34,11 +34,6 @@ const stickerMessage: IStickerMessage = {
   position: 'left',
 };
 
-const actions = [
-  { action: 'edit', title: 'изменить', },
-  { action: 'delete', title: 'удалить', },
-];
-
 const defaultBackground = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(chatBackgroundRaw)}`;
 
 // Общий декоратор для всех stories кроме Default (добавляет паддинги, фоновый контейнер и убирает горизонтальный скролл)
@@ -175,7 +170,6 @@ export const LeftStickerMessageWithActions: Story = {
     message: {
       ...stickerMessage,
       position: 'left',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -240,7 +234,6 @@ export const RightStickerMessageWithActions: Story = {
     message: {
       ...stickerMessage,
       position: 'right',
-      actions,
     },
   },
   decorators: commonDecorator,

@@ -50,7 +50,7 @@
       </div>
 
       <button
-        v-if="buttonMenuVisible && message.actions"
+        v-if="buttonMenuVisible && menuActions.length"
         class="missed-call-message__menu-button"
         @click="isOpenMenu = !isOpenMenu"
       >
@@ -59,9 +59,9 @@
 
       <transition>
         <ContextMenu
-          v-if="isOpenMenu && message.actions"
-          class="missed-call-message__context-menu"
-          :actions="message.actions"
+          v-if="isOpenMenu && menuActions.length"
+          class="missed-call-message__context-menu message-actions-menu"
+          :actions="menuActions"
           @click="clickAction"
         />
       </transition>
@@ -73,14 +73,18 @@
   setup
   lang="ts"
 >
+import { inject } from 'vue'
 import { IMissedCallMessage } from '@/types'
-import { useMessageActions, useSubtextTooltip } from '@/hooks/messages'
+import { useMessageActions, useSubtextTooltip, useMessageMenuActions, buildReplyPayload, useStartReply } from '@/hooks/messages'
 import { getMessageClass } from '@/functions'
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue'
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
 import MissedCallIcon from './icons/MissedCallIcon.vue'
 
 const emit = defineEmits(['action', 'reply'])
+const { menuActions } = useMessageMenuActions()
+const chatAppId = inject('chatAppId') as string | undefined
+const { startReply } = useStartReply(chatAppId || '')
 
 // Define props
 const props = defineProps({
@@ -105,7 +109,9 @@ const {
   showMenu,
   hideMenu,
   clickAction,
-} = useMessageActions(props.message, emit)
+} = useMessageActions(props.message, emit, {
+  onReply: () => startReply(buildReplyPayload(props.message, 'message.call')),
+})
 
 const subtextTooltipText = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
 

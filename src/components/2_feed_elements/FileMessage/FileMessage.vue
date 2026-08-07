@@ -87,9 +87,11 @@
           :mode="reactionsMode"
           :current-user-id="currentUserId"
           :reaction-user-names="reactionUserNames"
+          :menu-enabled="menuActions.length > 0"
           @toggle-reaction="onToggleReaction"
           @add-reaction="onAddReaction"
           @remove-reaction="onRemoveReaction"
+          @menu="isOpenMenu = true"
         />
 
         <div class="file-message__info-container">
@@ -122,7 +124,7 @@
       />
 
       <button
-        v-if="buttonMenuVisible && message.actions"
+        v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
         class="file-message__menu-button"
         @click="isOpenMenu = !isOpenMenu"
       >
@@ -131,9 +133,9 @@
 
       <transition>
         <ContextMenu
-          v-if="isOpenMenu && message.actions"
-          class="file-message__context-menu"
-          :actions="message.actions"
+          v-if="isOpenMenu && menuActions.length"
+          class="file-message__context-menu message-actions-menu"
+          :actions="menuActions"
           @click="clickAction"
         />
       </transition>
@@ -145,7 +147,7 @@
   setup
   lang="ts"
 >
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import LinkPreview from '@/components/1_atoms/LinkPreview/LinkPreview.vue';
@@ -155,7 +157,7 @@ import MessageReactions from '@/components/2_feed_elements/MessageReactions/Mess
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { IFileMessage } from '@/types';
 
@@ -204,6 +206,9 @@ const props = defineProps({
 
 const emit = defineEmits(['action','reply','sms-invite']);
 const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
+const { menuActions } = useMessageMenuActions()
+const chatAppId = inject('chatAppId') as string | undefined
+const { startReply } = useStartReply(chatAppId || '')
 
 const {
   isOpenMenu,
@@ -213,7 +218,9 @@ const {
   clickAction,
   viewsAction,
   handleClickReplied
-} = useMessageActions(props.message, emit)
+} = useMessageActions(props.message, emit, {
+  onReply: () => startReply(buildReplyPayload(props.message, 'message.file')),
+})
 
 // обработчик открытия ссылок предоставлен useMessageLinks
 

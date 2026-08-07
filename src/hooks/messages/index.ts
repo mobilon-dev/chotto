@@ -1,4 +1,5 @@
 export * from './useMessageActions'
+export * from './useMessageMenuActions'
 export * from './useMessageLinks'
 export * from './useChannelAccentColor'
 export * from './useSubtextTooltip'

@@ -21,11 +21,7 @@ export const messages = [
     header: 'Василий',
     callParticipant: 'Малафеева Любовь',
     avatar: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg',
-    subText: '89829445678',
-    actions: [
-      { action: 'download', title: 'Скачать' },
-      { action: 'transcribe', title: 'Перевести в текст', disabled: true }
-    ],
+    subText: '89829445678'
   },
   {
     chatId: 1, dialogId: 'dlg_43543555', type: "message.text", text: "зачетный обзор", direction: 'incoming', status: 'read', timestamp: '1727027959', subText: 'test test',
@@ -66,11 +62,7 @@ export const messages = [
   {
     chatId: 1, dialogId: 'dlg_43543555', type: "message.text", text: "Привет!", direction: 'incoming', status: 'read', timestamp: '1727027959', subText: 'test test',
     header: 'Василий',
-    messageId: '2',
-    actions: [
-      { action: 'edit', title: 'изменить', icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=pin' },
-      { action: 'delete', title: 'удалить' }]
-  },
+    messageId: '2'},
   {
     chatId: 1, dialogId: 'dlg_43543555', type: "message.typing", subText: '89829445678', avatar: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg',
   },
@@ -78,28 +70,18 @@ export const messages = [
     chatId: 1, dialogId: 'dlg_43543555', messageId: '3', type: "message.text", text: "Привет! Сообщение с просмотрами",
     direction: 'outgoing', status: 'received', timestamp: '1727027959',
     header: 'Вы',
-    views: 1000,
-    actions: [
-      { action: 'edit', title: 'изменить', icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=pin' },
-      { action: 'delete', title: 'удалить' }]
-  },
+    views: 1000},
   {
     chatId: 1, dialogId: 'dlg_43543555', type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", timestamp: '1727027959',
     alt: "Example Image", direction: 'outgoing',
     header: 'Вы',
     views: 1667, messageId: '4',
-    status: 'read', actions: [
-      { action: 'edit', title: 'изменить', icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=pin' },
-      { action: 'delete', title: 'удалить' }]
-  },
+    status: 'read'},
     {
     chatId: 1, dialogId: 'dlg_89789879',type: "message.text", text: "Привет! Извини, давно тебе не писал. Как дела?",
     messageId: '5',
     direction: 'outgoing', status: 'received', timestamp: '1727027959',
-    actions: [
-      { action: 'edit', title: 'изменить', icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=pin' },
-      { action: 'delete', title: 'удалить' }
-    ],
+    
     reply: {
       messageId: '14',
       type: 'message.text',
@@ -140,10 +122,7 @@ export const messages = [
   {
     chatId: 1, dialogId: 'dlg_89789879',type: "message.text", text: "Привет! Извини, давно тебе не писал. Как дела?",
     direction: 'incoming', status: 'received', timestamp: '1727027959',
-    actions: [
-      { action: 'edit', title: 'изменить', icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=pin' },
-      { action: 'delete', title: 'удалить' }
-    ],
+    
     messageId: '8',
     reply: {
       messageId: '14',
@@ -154,10 +133,7 @@ export const messages = [
   {
     chatId: 1, dialogId: 'dlg_89789879',type: "message.text",
     direction: 'incoming', status: 'received', timestamp: '1727027759',
-    actions: [
-      { action: 'edit', title: 'изменить', icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=pin' },
-      { action: 'delete', title: 'удалить' }
-    ],
+    
     messageId: '14',
     text: 'Привет, что-то давно не пишешь?',
   },
@@ -191,7 +167,7 @@ export const messages = [
       text: 'Привет, доехала хорошо, позвони мне завтра',
     },
     messageId: '11',
-    actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }],
+    
     reply: {
       messageId: 'msg_3450349543',
       type: 'message.audio',
@@ -254,28 +230,17 @@ export const messages = [
     alt: "Example Image", direction: 'outgoing',
     header: 'Вы',
     views: 1667, messageId: '4',
-    status: 'read', actions: [
-      { action: 'edit', title: 'изменить', icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=pin' },
-      { action: 'delete', title: 'удалить' }]
-  },
+    status: 'read'},
   {
     chatId: 2, type: "message.video", url: "https://filebump2.services.mobilon.ru/file/XgYPv3t1VT1RxoUVPpWvQuyOkpdSCayNgpv1",
     text: "Привет! Это видеосообщение с длииииииииииинным текстом", direction: 'outgoing', status: 'read', timestamp: '1727027959',
     header: 'Вы',
-    messageId: '41',
-    actions: [
-      { action: 'edit', title: 'изменить', icon: 'fa-edit' },
-      { action: 'delete', title: 'удалить' }]
-  },
+    messageId: '41'},
   {
     chatId: 2, type: "message.video", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     text: "Привет!", direction: 'outgoing', status: 'read', timestamp: '1727027959',
     header: 'Вы',
-    messageId: '42',
-    actions: [
-      { action: 'edit', title: 'изменить', icon: 'fa-edit' },
-      { action: 'delete', title: 'удалить' }]
-  },
+    messageId: '42'},
   {
     chatId: 2, type: "message.video", url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
     direction: 'outgoing', status: 'read', timestamp: '1727027959',
@@ -291,8 +256,7 @@ export const messages = [
 
   {
     chatId: 2, type: "message.file", url: "https://axiomabio.com/pdf/test.pdf", filename: "Документ.pdf", direction: 'incoming',
-    status: 'received', messageId: '44', timestamp: '1727027959', actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
-    ,header: 'Мария',
+    status: 'received', messageId: '44', timestamp: '1727027959', header: 'Мария',
     text: 'Привет!',
   },
   { chatId: 2, header: 'Мария', messageId: '45', type: "message.text", text: "Привет!", direction: 'incoming', status: 'read', timestamp: '1727027959' },
@@ -302,15 +266,11 @@ export const messages = [
     transcript: {
       text: 'Привет, доехала хорошо, позвони мне завтра. Ну или если очень хочешь можем созвониться через часик.',
     },
-    header: 'Мария',
-    actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
-  },
+    header: 'Мария'},
   {
     chatId: 2, type: "message.audio", url: "https://file-examples.com/storage/fef2ee44fa69158809a19fe/2017/11/file_example_MP3_700KB.mp3",
     direction: 'outgoing', messageId: '47', status: 'received', subText: '89829445678', timestamp: '1727027959',
-    header: 'Вы',
-    actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }]
-  },
+    header: 'Вы'},
   {
     chatId: 2, type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", alt: "Example Image",
     header: 'Мария',
@@ -367,13 +327,13 @@ export const messages = [
   },
   {
     chatId: 4, type: "message.file", url: "https://axiomabio.com/pdf/test.pdf", filename: "оченьдлинноеназваниедокумента.pdf", direction: 'outgoing',
-    status: 'received', timestamp: '1727027959', actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }],
+    status: 'received', timestamp: '1727027959', 
     text: "Оченьдлинноесообщениебезпробеловзанимающеесразунесколькострокивызывающеестранноеповедениеокон!",
 
   },
   {
     chatId: 4, type: "message.file", url: "https://axiomabio.com/pdf/test.pdf", filename: "Документ.pdf", direction: 'incoming',
-    status: 'received', timestamp: '1727027959', actions: [{ action: 'edit', title: 'изменить' }, { action: 'delete', title: 'удалить' }],
+    status: 'received', timestamp: '1727027959', 
     text: "Оченьдлинноесообщениебезпробеловзанимающеесразунесколькострокивызывающеестранноеповедениеокон!",
     keyboard: [
       {
@@ -398,12 +358,7 @@ export const messages = [
     timestamp: '1756960441',
     subText: 'Виктор',
     header: 'Анна',
-    avatar:'https://placehold.jp/30/336633/ffffff/64x64.png?text=VIK',
-    actions: [
-      { action: 'edit', title: 'изменить', icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=pin' },
-      { action: 'delete', title: 'удалить' }
-    ]
-  },
+    avatar:'https://placehold.jp/30/336633/ffffff/64x64.png?text=VIK'},
   {
     chatId: 6,
     dialogId: 'dlg_6_new',
@@ -919,19 +874,7 @@ export const messages = [
     subText: '89829445678', 
     timestamp: '1757497513',
     header: 'Анна',
-    avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
-    actions: [
-      {
-        title: 'Скачать',
-        action: 'download'
-      },
-      {
-        title: 'Перевести в текст',
-        disabled: true,
-        action: 'transcribe'
-      }
-    ]
-  },
+    avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann'},
   {
     chatId: 6, 
     dialogId: 'dlg_6_new',
@@ -951,19 +894,7 @@ export const messages = [
       meta: {
         mode: 'multi'
       }
-    },
-    actions: [
-      {
-        title: 'Скачать',
-        action: 'download'
-      },
-      {
-        title: 'Перевести в текст',
-        disabled: true,
-        action: 'transcribe'
-      }
-    ]
-  },
+    }},
   {
     chatId: 6, 
     dialogId: 'dlg_6_new',
@@ -975,19 +906,7 @@ export const messages = [
     subText: 'Ярослав', 
     timestamp: '1757497515',
     header: 'Ярослав',
-    avatar:'https://placehold.jp/30/1b97e4/ffffff/64x64.png?text=Jar',
-    actions: [
-      {
-        title: 'Скачать',
-        action: 'download'
-      },
-      {
-        title: 'Перевести в текст',
-        disabled: true,
-        action: 'transcribe'
-      }
-    ]
-  },
+    avatar:'https://placehold.jp/30/1b97e4/ffffff/64x64.png?text=Jar'},
   {
     chatId: 6,
     dialogId: 'dlg_6_new',
@@ -1060,11 +979,7 @@ export const messages = [
     timestamp: '1763036585',
     header: 'Василий',
     subText: 'whatsapp 73910001666 (основной)',
-    callParticipant: 'Малафеева Любовь',
-    actions: [
-      { action: 'download', title: 'Скачать' },
-      { action: 'transcribe', title: 'Перевести в текст', disabled: true }
-    ],
+    callParticipant: 'Малафеева Любовь'
   },
   {
     chatId: 8, 
@@ -1108,11 +1023,7 @@ export const messages = [
     timestamp: '1763036688',
     header: 'Георгий',
     subText: '@georgiy_zvonar',
-    callParticipant: 'Малафеева Любовь',
-    actions: [
-      { action: 'download', title: 'Скачать' },
-      { action: 'transcribe', title: 'Перевести в текст', disabled: true }
-    ],
+    callParticipant: 'Малафеева Любовь'
   },
   {
     chatId: 8, 
@@ -1151,10 +1062,7 @@ export const messages = [
       html: '<p><strong>Кратко:</strong> обсудили заказ, договорились уточнить детали и связаться завтра до 15:00.</p>'
     },
     transcript:
-      '{"replies":[{"timecode":5,"user":"2","text":"Алло, здравствуйте."},{"timecode":12,"user":"1","text":"Добрый день, перезвонил по заказу."}]}',
-    actions: [
-      { action: 'download', title: 'Скачать' },
-    ],
+      '{"replies":[{"timecode":5,"user":"2","text":"Алло, здравствуйте."},{"timecode":12,"user":"1","text":"Добрый день, перезвонил по заказу."}]}'
   },
   {
     chatId: 8,
@@ -1478,11 +1386,7 @@ export const messages = [
     timestamp: '1763036900',
     header: 'Георгий',
     subText: 'whatsapp 73910001100 (основной)',
-    callParticipant: 'Малафеева Любовь',
-    actions: [
-      { action: 'download', title: 'Скачать' },
-      { action: 'transcribe', title: 'Перевести в текст', disabled: true }
-    ],
+    callParticipant: 'Малафеева Любовь'
   },
   {
     chatId: 8, 
@@ -1627,11 +1531,7 @@ export const messages = [
     header: 'Георгий',
     subText: 'max 79135292926',
     callParticipant: 'Малафеева Любовь',
-    callDuration: "08:15",
-    actions: [
-      { action: 'download', title: 'Скачать' },
-      { action: 'transcribe', title: 'Перевести в текст', disabled: true }
-    ],
+    callDuration: "08:15"
   },
   {
     chatId: 8, 

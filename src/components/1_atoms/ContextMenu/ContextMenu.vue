@@ -2,42 +2,53 @@
   <div 
     :id="id"
     class="context-menu__container"
-    :data-theme="dataTheme"
     @mouseenter="emit('mouseenter')"
     @mouseleave="emit('mouseleave')"
   >
     <ul class="context-menu__list">
-      <li
+      <template
         v-for="(action, index) in props.actions"
         :key="index"
-        class="context-menu__item"
-        :class="{ 'context-menu__item--disabled': action.disabled }"
-        @click="!action.disabled && click(index)"
       >
-        <img
-          v-if="action.icon && typeof action.icon === 'string'"
-          :src="action.icon"
-          width="18"
-          height="18"
-        >
-        <component
-          v-else-if="action.icon && typeof action.icon === 'object'"
-          :is="action.icon"
-          width="18"
-          height="18"
+        <li
+          v-if="action.separator"
+          class="context-menu__separator"
+          role="separator"
         />
-        <i 
-          v-else-if="action.prime"
-          :class="'pi pi-' + action.prime" 
-        />
-        <span 
-          v-if="action.title" 
-          style="white-space: nowrap;"
+        <li
+          v-else
+          class="context-menu__item"
+          :class="{
+            'context-menu__item--disabled': action.disabled,
+            'context-menu__item--danger': action.danger,
+          }"
+          @click="!action.disabled && click(index)"
         >
-          {{ action.title }}
-        </span>
-        <span v-if="action.description">{{ action.description }}</span>
-      </li>
+          <img
+            v-if="action.icon && typeof action.icon === 'string'"
+            :src="action.icon"
+            width="18"
+            height="18"
+          >
+          <component
+            :is="action.icon"
+            v-else-if="action.icon && typeof action.icon !== 'string'"
+            width="18"
+            height="18"
+          />
+          <i 
+            v-else-if="action.prime"
+            :class="'pi pi-' + action.prime" 
+          />
+          <span 
+            v-if="action.title" 
+            style="white-space: nowrap;"
+          >
+            {{ action.title }}
+          </span>
+          <span v-if="action.description">{{ action.description }}</span>
+        </li>
+      </template>
     </ul>
   </div>
 </template>
@@ -52,17 +63,13 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  dataTheme: {
-    type: String,
-    default: 'light',
-  },
 });
 
 const emit = defineEmits(['click', 'mouseenter', 'mouseleave']);
 
 const click = (index) => {
   const action = props.actions[index];
-  // console.log('action', action);
+  if (action?.separator) return
   emit('click', action);
 }
 

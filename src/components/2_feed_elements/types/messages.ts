@@ -1,5 +1,3 @@
-import { IAction } from '@types'
-
 export interface Reply {
   messageId: string
   type: string
@@ -9,6 +7,20 @@ export interface Reply {
   header?: string
   callDuration?: string
   isMissedCall?: boolean
+}
+
+/** Пункт контекстного меню сообщения (задаётся пропом Feed) */
+export interface IFeedMessageMenuAction {
+  action?: string
+  title?: string
+  /** URL или Vue-компонент иконки */
+  icon?: string | object
+  prime?: string
+  disabled?: boolean
+  /** Красный пункт (например, «Удалить») */
+  danger?: boolean
+  /** Разделитель между группами пунктов */
+  separator?: boolean
 }
 
 export interface ILinkPreview {
@@ -80,7 +92,6 @@ export interface IAudioMessage {
   avatar?: string
   header?: string
   subText?: string
-  actions?: IAction[]
   views?: number,
   text?: string,
   /** Транскрипт со статусом и HTML */
@@ -155,7 +166,6 @@ export interface ICallMessage {
   header?: string
   subText?: string
   text?: string
-  actions?: IAction[]
   views?: number
   /** Транскрипт со статусом и HTML */
   transcript?: IAudioRecognitionPayload
@@ -183,7 +193,6 @@ export interface IFileMessage {
   avatar?: string
   header?: string
   subText?: string
-  actions?: IAction[]
   views?: number
   text?: string
   reply?: Reply,
@@ -207,7 +216,6 @@ export interface IImageMessage {
   avatar?: string
   header?: string
   subText?: string
-  actions?: IAction[]
   views?: number
   text?: string
   reply?: Reply,
@@ -243,7 +251,6 @@ export interface ITextMessage {
   avatar?: string
   header?: string
   subText?: string
-  actions?: IAction[]
   views?: number
   reply?: Reply
   linkPreview?: ILinkPreview
@@ -271,7 +278,6 @@ export interface IVideoMessage {
   avatar?: string
   header?: string
   subText?: string
-  actions?: IAction[]
   views?: number
   text?: string
   reply?: Reply,
@@ -295,7 +301,6 @@ export interface IStickerMessage {
   avatar?: string
   header?: string
   subText?: string
-  actions?: IAction[]
   views?: number
   text?: string
   reply?: Reply,
@@ -314,7 +319,6 @@ export interface IMissedCallMessage {
   avatar?: string
   header?: string
   subText?: string
-  actions?: IAction[]
   backgroundColor?: string
   hasMessengerAccount?: boolean
 }

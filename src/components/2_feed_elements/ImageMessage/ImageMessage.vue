@@ -111,7 +111,7 @@
 
       <transition name="modal-fade">
         <button
-          v-if="buttonMenuVisible && message.actions"
+          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
           class="image-message__menu-button"
           @click="isOpenMenu = !isOpenMenu"
         >
@@ -122,9 +122,9 @@
 
       <transition name="context-menu">
         <ContextMenu
-          v-if="isOpenMenu && message.actions"
-          class="image-message__context-menu"
-          :actions="message.actions"
+          v-if="isOpenMenu && menuActions.length"
+          class="image-message__context-menu message-actions-menu"
+          :actions="menuActions"
           @click="clickAction"
         />
       </transition>
@@ -167,10 +167,12 @@
         :enabled="reactionsEnabled"
         :mode="reactionsMode"
         :current-user-id="currentUserId"
-          :reaction-user-names="reactionUserNames"
+        :reaction-user-names="reactionUserNames"
+        :menu-enabled="menuActions.length > 0"
         @toggle-reaction="onToggleReaction"
         @add-reaction="onAddReaction"
         @remove-reaction="onRemoveReaction"
+        @menu="isOpenMenu = true"
       />
     </div>
 
@@ -209,14 +211,16 @@ import MessageReactions from '@/components/2_feed_elements/MessageReactions/Mess
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IImageMessage } from '@/types';
 
-const chatAppId = inject('chatAppId')
+const chatAppId = inject('chatAppId') as string | undefined
 
-const { getTheme } = useTheme(chatAppId as string)
+const { getTheme } = useTheme(chatAppId || '')
+const { menuActions } = useMessageMenuActions()
+const { startReply } = useStartReply(chatAppId || '')
 
 const props = defineProps({
   message: {
@@ -272,7 +276,9 @@ const {
   clickAction,
   viewsAction,
   handleClickReplied
-} = useMessageActions(props.message, emit)
+} = useMessageActions(props.message, emit, {
+  onReply: () => startReply(buildReplyPayload(props.message, 'message.image')),
+})
 const buttonDownloadVisible = ref(false)
 const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 

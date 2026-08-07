@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { onMounted, onUnmounted, ref, computed } from 'vue';
 
 import MissedCallMessage from '../MissedCallMessage.vue';
-import { IMissedCallMessage, IAction } from '@/types';
+import { IMissedCallMessage } from '@/types';
 import BaseContainer from '../../../5_containers/BaseContainer/BaseContainer.vue';
 import ThemeMode from '../../../2_elements/ThemeMode/ThemeMode.vue';
 
@@ -57,26 +57,6 @@ const messageWithAll: IMissedCallMessage = {
   avatar: 'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
   subText: '+7 983 169-35-04',
   header: 'Василий',
-};
-
-const actions: IAction[] = [
-  {
-    action: 'call',
-    title: 'Перезвонить',
-    icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=call',
-  },
-  {
-    action: 'delete',
-    title: 'Удалить',
-    icon: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=del',
-  },
-];
-
-const messageWithActions: IMissedCallMessage = {
-  messageId: 'missedCall6',
-  position: 'left',
-  time: '11:05',
-  actions,
 };
 
 export const Default: Story = {
@@ -243,7 +223,7 @@ export const WithActions: Story = {
     `,
   }),
   args: {
-    message: messageWithActions,
+    message: messageWithAll,
   },
 };
 
@@ -262,10 +242,7 @@ export const WithAllFeatures: Story = {
     `,
   }),
   args: {
-    message: {
-      ...messageWithAll,
-      actions,
-    },
+    message: messageWithAll,
   },
 };
 

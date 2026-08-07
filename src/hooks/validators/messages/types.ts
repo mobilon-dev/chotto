@@ -2,12 +2,6 @@
  * Типы для данных сообщений
  */
 
-export interface MessageAction {
-  action: string;
-  title: string;
-  icon?: string;
-}
-
 export interface MessageReply {
   messageId: string | number;
   type: string;
@@ -62,7 +56,6 @@ export interface Message {
   filename?: string;
   alt?: string;
   views?: number;
-  actions?: MessageAction[];
   reply?: MessageReply;
   embed?: MessageEmbed;
   linkPreview?: MessageLinkPreview;

@@ -38,11 +38,6 @@ const longText = 'It is a long established fact that a reader will be distracted
   'and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, ' +
   'sometimes by accident, sometimes on purpose (injected humour and the like).'
 
-const actions = [
-  { action: 'edit', title: 'изменить', },
-  { action: 'delete', title: 'удалить', },
-];
-
 const defaultBackground = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(chatBackgroundRaw)}`;
 
 // Общий декоратор для всех stories кроме Default (добавляет паддинги, фоновый контейнер и убирает горизонтальный скролл)
@@ -213,25 +208,23 @@ export const RightMessageWithMarkdownText: Story = {
   decorators: commonDecorator,
 };
 
-export const LeftMessageWithTextAndActions: Story = {
+export const LeftMessageWithText: Story = {
   args: {
     message: {
       ...videoMessage,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      actions,
       position: 'left',
     },
   },
   decorators: commonDecorator,
 };
 
-export const RightMessageWithTextAndActions: Story = {
+export const RightMessageWithText: Story = {
   args: {
     message: {
       ...videoMessage,
       position: 'right',
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -243,7 +236,6 @@ export const RightMessageWithStatusSent: Story = {
       ...videoMessage,
       position: 'right',
       status: 'sent',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -255,7 +247,6 @@ export const RightMessageWithStatusReceived: Story = {
       ...videoMessage,
       position: 'right',
       status: 'received',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -267,7 +258,6 @@ export const RightMessageWithStatusRead: Story = {
       ...videoMessage,
       position: 'right',
       status: 'read',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -279,7 +269,6 @@ export const RightMessageWithStatusPending: Story = {
       ...videoMessage,
       position: 'right',
       status: 'pending',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -292,7 +281,6 @@ export const RightMessageWithStatusError: Story = {
       position: 'right',
       status: 'error',
       statusMsg: 'Не удалось отправить сообщение',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -305,7 +293,6 @@ export const RightMessageWithVerticalVideo: Story = {
       url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
       position: 'right',
       status: 'read',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -319,7 +306,6 @@ export const RightMessageWithVerticalVideoAndText: Story = {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       position: 'right',
       status: 'read',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -335,7 +321,6 @@ export const LeftMessageWithVerticalVideoAndTextWithLink: Story = {
         'laboris nisi ut aliquip ex ea commodo consequat. github.com',
       position: 'left',
       status: 'read',
-      actions,
     },
   },
   decorators: commonDecorator,
@@ -352,7 +337,6 @@ export const RightMessageWithVerticalVideoAndTextWithLink: Story = {
         'laboris nisi ut aliquip ex ea commodo consequat. github.com',
       position: 'right',
       status: 'read',
-      actions,
     },
   },
   decorators: commonDecorator,

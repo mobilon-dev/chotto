@@ -169,9 +169,11 @@
           :mode="reactionsMode"
           :current-user-id="currentUserId"
           :reaction-user-names="reactionUserNames"
+          :menu-enabled="menuActions.length > 0"
           @toggle-reaction="onToggleReaction"
           @add-reaction="onAddReaction"
           @remove-reaction="onRemoveReaction"
+          @menu="isOpenMenu = true"
         />
 
         <div class="audio-message__info-container">
@@ -280,7 +282,7 @@
       />
 
       <button
-        v-if="buttonMenuVisible && message.actions"
+        v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
         class="audio-message__menu-button"
         @click="isOpenMenu = !isOpenMenu"
       >
@@ -300,9 +302,9 @@
 
       <transition>
         <ContextMenu
-          v-if="isOpenMenu && message.actions"
-          class="audio-message__context-menu"
-          :actions="message.actions"
+          v-if="isOpenMenu && menuActions.length"
+          class="audio-message__context-menu message-actions-menu"
+          :actions="menuActions"
           @click="handleActionClick"
         />
       </transition>
@@ -314,7 +316,7 @@
   setup
   lang="ts"
 >
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, inject } from 'vue'
 
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import LinkPreview from '@/components/1_atoms/LinkPreview/LinkPreview.vue';
@@ -324,7 +326,7 @@ import MessageReactions from '@/components/2_feed_elements/MessageReactions/Mess
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageActions, useMessageLinks, useChannelAccentColor, useSubtextTooltip, buildReplyPayload } from '@/hooks/messages';
+import { useMessageActions, useMessageLinks, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
 import type { IAudioMessage, IAudioRecognitionPayload, IAudioSummaryPayload } from '@/types';
 
@@ -402,6 +404,9 @@ const cycleSpeed = () => {
 }
 
 const emit = defineEmits(['action','reply','sms-invite']);
+const { menuActions } = useMessageMenuActions()
+const chatAppId = inject('chatAppId') as string | undefined
+const { startReply } = useStartReply(chatAppId || '')
 
 const player = ref<HTMLAudioElement | null>(null)
 const lazyAudioSrc = ref<string | undefined>(undefined)
@@ -481,7 +486,9 @@ const {
   clickAction,
   viewsAction,
   handleClickReplied
-} = useMessageActions(props.message, emit)
+} = useMessageActions(props.message, emit, {
+  onReply: () => startReply(buildReplyPayload(props.message, 'message.audio')),
+})
 
 const expandedPanel = ref<null | 'text' | 'summary'>(null)
 const requestedOnDemand = ref<{ text: boolean; summary: boolean }>({ text: false, summary: false })

@@ -1,7 +1,6 @@
 import { IAudioMessage, ICallMessage, IDateMessage, IFileMessage, 
   IImageMessage, IKeyBoard, ILinkPreview, ISystemMessage, 
   ITextMessage, ITypingMessage, IVideoMessage, Reply,
-  IAction,
 } from "@/types"
 
 export interface IFeedObject {
@@ -17,7 +16,6 @@ export interface IFeedObject {
   filename?: string
   avatar?: string
   subtext?: string
-  actions?: IAction[]
   views?: number
   callDuration?: string
   isMissedCall?: boolean

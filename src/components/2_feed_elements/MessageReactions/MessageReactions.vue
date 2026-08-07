@@ -64,6 +64,14 @@
           >
             <ReplyIcon />
           </button>
+          <button
+            v-if="menuEnabled"
+            class="message-reactions__quick-item"
+            title="Действия"
+            @click.stop="onMenuClick"
+          >
+            <MessageActionsIcon />
+          </button>
         </div>
       </transition>
 
@@ -98,6 +106,7 @@ import EmojiGlyph from '@/components/1_atoms/EmojiGlyph/EmojiGlyph.vue'
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
 import ExpandReactionsIcon from './icons/ExpandReactionsIcon.vue'
 import ReplyIcon from './icons/ReplyIcon.vue'
+import MessageActionsIcon from './icons/MessageActionsIcon.vue'
 import { QUICK_REACTION_EMOJIS } from './utils/quickReactions'
 import { buildReactionTooltipText } from './utils/reactionTooltip'
 import {
@@ -154,12 +163,18 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  /** Показывать кнопку меню действий сообщения в панели быстрых реакций */
+  menuEnabled: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const emit = defineEmits<{
   (e: 'toggle-reaction', payload: { messageId: string | number; key: string }): void
   (e: 'add-reaction', payload: { messageId: string | number; key: string }): void
   (e: 'remove-reaction', payload: { messageId: string | number; key: string }): void
+  (e: 'menu', payload: { messageId: string | number }): void
 }>()
 
 const chatAppId = inject('chatAppId') as string | undefined
@@ -294,6 +309,13 @@ function onReplyClick() {
 
   startReply(props.reply)
   closeQuickPanel()
+}
+
+function onMenuClick() {
+  if (props.readonly || !props.enabled || !props.menuEnabled) return
+
+  closeQuickPanel()
+  emit('menu', { messageId: props.messageId })
 }
 
 async function onExpandClick() {

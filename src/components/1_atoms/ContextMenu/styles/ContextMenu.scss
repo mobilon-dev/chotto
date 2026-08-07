@@ -9,7 +9,7 @@
     position: var(--chotto-contextmenu-container-position, absolute);
     width: var(--chotto-contextmenu-container-width, max-content);
     box-shadow: var(--chotto-contextmenu-container-box-shadow, 0px 2px 10px 1px #d4d4d4);
-    border-radius: var(--chotto-contextmenu-container-border-radius, 8px);
+    border-radius: var(--chotto-contextmenu-container-border-radius, 4px);
     font-size: var(--chotto-contextmenu-container-font-size, 14px);
     background-color: var(--chotto-contextmenu-container-background-color, #ffffff);
   }
@@ -20,7 +20,7 @@
     display: var(--chotto-contextmenu-list-display, grid);
     flex-direction: var(--chotto-contextmenu-list-flex-direction, column);
     align-items: var(--chotto-contextmenu-list-align-items, flex-start);
-    row-gap: var(--chotto-contextmenu-list-row-gap, 6px);
+    row-gap: var(--chotto-contextmenu-list-row-gap, 0);
     padding-left: var(--chotto-contextmenu-list-padding-left, 0px);
     min-width: var(--chotto-contextmenu-list-min-width, 115px);
   }
@@ -30,20 +30,27 @@
     justify-content: var(--chotto-contextmenu-item-justify-content, flex-start);
     align-items: var(--chotto-contextmenu-item-align-items, center);
     cursor: var(--chotto-contextmenu-item-cursor, pointer);
-    padding: var(--chotto-contextmenu-item-padding, 6px 16px);
+    padding: var(--chotto-contextmenu-item-padding, 10px 16px);
     width: var(--chotto-contextmenu-item-width, inherit);
     gap: var(--chotto-contextmenu-item-gap, 8px);
+    box-sizing: var(--chotto-contextmenu-item-box-sizing, border-box);
+    height: var(--chotto-contextmenu-item-height, 40px);
 
     img,
-    component,
     i {
       margin-right: var(--chotto-contextmenu-item-icon-margin-right, 0);
       flex-shrink: var(--chotto-contextmenu-item-icon-flex-shrink, 0);
     }
+
+    :deep(svg) {
+      width: var(--chotto-contextmenu-item-icon-size, 18px);
+      height: var(--chotto-contextmenu-item-icon-size, 18px);
+      flex-shrink: 0;
+    }
   }
 
   &__item:hover {
-    background-color: var(--chotto-contextmenu-item-hover-background-color, #EEF0F3);
+    background-color: var(--chotto-contextmenu-item-hover-background-color, #F6F6F6);
   }
 
   &__item--disabled {
@@ -51,7 +58,42 @@
     cursor: var(--chotto-contextmenu-item-disabled-cursor, not-allowed);
   }
 
+  &__item--danger {
+    color: var(--chotto-contextmenu-item-danger-color, #DC3545);
+  }
+
+  &__item--danger:hover {
+    background-color: var(--chotto-contextmenu-item-danger-hover-background-color, #FDE8EA);
+  }
+
+  &__separator {
+    display: var(--chotto-contextmenu-separator-display, block);
+    height: var(--chotto-contextmenu-separator-height, 1px);
+    width: var(--chotto-contextmenu-separator-width, 190px);
+    margin: var(--chotto-contextmenu-separator-margin, 4px auto);
+    padding: var(--chotto-contextmenu-separator-padding, 0);
+    border: none;
+    background-color: var(--chotto-contextmenu-separator-background-color, rgba(0, 0, 0, 0.08));
+    list-style: none;
+    pointer-events: none;
+    justify-self: var(--chotto-contextmenu-separator-justify-self, center);
+  }
+
   &__item:not(:last-child) {
     border-bottom: var(--chotto-contextmenu-item-not-last-child-border-bottom, none);
+  }
+
+  // Меню действий сообщения (Ответить / Редактировать / Удалить)
+  &__container.message-actions-menu {
+    width: var(--chotto-contextmenu-message-width, 220px);
+    height: var(--chotto-contextmenu-message-height, 152px);
+    box-sizing: border-box;
+
+    .context-menu__list {
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
   }
 }

@@ -38,11 +38,6 @@ const longText = 'It is a long established fact that a reader will be distracted
   'sometimes by accident, sometimes on purpose (injected humour and the like).'
 
 
-const actions = [
-  { action: 'edit', title: 'изменить', },
-  { action: 'delete', title: 'удалить', },
-];
-
 const defaultBackground = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(chatBackgroundRaw)}`;
 
 // Общий декоратор для всех stories кроме Default (добавляет паддинги, фоновый контейнер и убирает горизонтальный скролл)
@@ -171,7 +166,7 @@ export const LeftImageMessages: Story = {
         { ...imageMessage, position: 'left' as const, subText: 'sub text sub text', messageId: 'left5' },
         { ...imageMessage, position: 'left' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'left6' },
         { ...imageMessage, position: 'left' as const, subText: 'Это Коля', avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'left7' },
-        { ...imageMessage, position: 'left' as const, actions, messageId: 'left8' },
+        { ...imageMessage, position: 'left' as const, messageId: 'left8' },
         { 
           ...imageMessage, 
           position: 'left' as const, 
@@ -209,7 +204,7 @@ export const RightImageMessages: Story = {
         { ...imageMessage, position: 'right' as const, status: 'error' as const, statusMsg: 'Не удалось отправить сообщение', messageId: 'right10' },
         { ...imageMessage, position: 'right' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'right11' },
         { ...imageMessage, position: 'right' as const, subText: 'Это Коля', avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'right12' },
-        { ...imageMessage, position: 'right' as const, actions, messageId: 'right13' },
+        { ...imageMessage, position: 'right' as const, messageId: 'right13' },
         { 
           ...imageMessage, 
           position: 'right' as const, 

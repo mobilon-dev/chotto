@@ -15,33 +15,6 @@ export interface MessageValidationResult {
 }
 
 /**
- * Валидатор действий сообщения
- */
-function validateMessageAction(action: any, messageIndex: number, actionIndex: number): MessageValidationError[] {
-  const errors: MessageValidationError[] = [];
-  const path = `messages[${messageIndex}].actions[${actionIndex}]`;
-
-  if (typeof action !== 'object' || action === null) {
-    errors.push({ path, message: 'Action должен быть объектом', value: action });
-    return errors;
-  }
-
-  if (!action.action || typeof action.action !== 'string') {
-    errors.push({ path: `${path}.action`, message: 'Поле action обязательно и должно быть строкой', value: action.action });
-  }
-
-  if (!action.title || typeof action.title !== 'string') {
-    errors.push({ path: `${path}.title`, message: 'Поле title обязательно и должно быть строкой', value: action.title });
-  }
-
-  if (action.icon !== undefined && typeof action.icon !== 'string') {
-    errors.push({ path: `${path}.icon`, message: 'Поле icon должно быть строкой', value: action.icon });
-  }
-
-  return errors;
-}
-
-/**
  * Валидатор reply сообщения
  */
 function validateMessageReply(reply: any, messageIndex: number): MessageValidationError[] {
@@ -174,16 +147,6 @@ function validateMessage(message: any, index: number): MessageValidationError[] 
   }
 
   // Валидация вложенных структур
-  if (message.actions !== undefined) {
-    if (!Array.isArray(message.actions)) {
-      errors.push({ path: `${path}.actions`, message: 'Поле actions должно быть массивом', value: message.actions });
-    } else {
-      message.actions.forEach((action: any, actionIndex: number) => {
-        errors.push(...validateMessageAction(action, index, actionIndex));
-      });
-    }
-  }
-
   if (message.reply !== undefined) {
     errors.push(...validateMessageReply(message.reply, index));
   }

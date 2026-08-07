@@ -13,8 +13,8 @@
  * const { isOpenMenu, buttonMenuVisible, showMenu, hideMenu, clickAction, viewsAction, handleClickReplied } = useMessageActions(props.message, emit)
  * 
  * // шаблон
- * // <button v-if="buttonMenuVisible && message.actions" @click="isOpenMenu = !isOpenMenu" />
- * // <ContextMenu v-if="isOpenMenu && message.actions" :actions="message.actions" @click="clickAction" />
+ * // <button v-if="buttonMenuVisible" @click="isOpenMenu = !isOpenMenu" />
+ * // <ContextMenu v-if="isOpenMenu" :actions="menuActions" @click="clickAction" />
  */
 import { ref } from 'vue'
 
@@ -38,11 +38,14 @@ type EmitFn = (event: 'action' | 'reply', payload: ActionPayload | string) => vo
  * Минимально необходимая структура сообщения для работы composable
  * @interface MessageWithMeta
  * @property {string} messageId - Идентификатор сообщения
- * @property {unknown} [actions] - Описание доступных действий (передается в `ContextMenu`)
  */
 export interface MessageWithMeta {
   messageId: string
-  actions?: unknown
+}
+
+type UseMessageActionsOptions = {
+  /** Локальный обработчик «Ответить» из меню (вместо emit) */
+  onReply?: () => void
 }
 
 /**
@@ -52,19 +55,17 @@ export interface MessageWithMeta {
  * клик по просмотрам, эмит события ответа.
  * 
  * @template T Расширяет {@link MessageWithMeta}
- * @param {T} message - Сообщение с `messageId` (и опционально `actions`)
+ * @param {T} message - Сообщение с `messageId`
  * @param {EmitFn} emit - Эмиттер событий из компонента сообщения
+ * @param {UseMessageActionsOptions} [options] - Опции (например, локальный reply)
  * 
  * @returns {object} Объект с состояниями и методами
- * @returns {import('vue').Ref<boolean>} returns.isOpenMenu - Открыт ли контекстное меню
- * @returns {import('vue').Ref<boolean>} returns.buttonMenuVisible - Видна ли кнопка вызова меню
- * @returns {Function} returns.showMenu - Показать кнопку меню
- * @returns {Function} returns.hideMenu - Скрыть кнопку и закрыть меню
- * @returns {Function} returns.clickAction - Обработчик клика по пункту контекстного меню
- * @returns {Function} returns.viewsAction - Обработчик клика по просмотрам
- * @returns {Function} returns.handleClickReplied - Эмит события ответа по `replyMessageId`
  */
-export const useMessageActions = <T extends MessageWithMeta>(message: T, emit: EmitFn) => {
+export const useMessageActions = <T extends MessageWithMeta>(
+  message: T,
+  emit: EmitFn,
+  options: UseMessageActionsOptions = {}
+) => {
   const isOpenMenu = ref(false)
   const buttonMenuVisible = ref(false)
 
@@ -89,6 +90,10 @@ export const useMessageActions = <T extends MessageWithMeta>(message: T, emit: E
    */
   const clickAction = (action: Record<string, unknown>) => {
     hideMenu()
+    if (action.action === 'reply' && options.onReply) {
+      options.onReply()
+      return
+    }
     emit('action', { messageId: message.messageId, type: 'menu', ...action })
   }
 
@@ -120,5 +125,3 @@ export const useMessageActions = <T extends MessageWithMeta>(message: T, emit: E
     handleClickReplied,
   }
 }
-
-
