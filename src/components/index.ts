@@ -65,6 +65,7 @@ export { default as BaseReplyMessage } from './2_feed_elements/BaseReplyMessage/
 export { default as BaseEditMessage } from './2_feed_elements/BaseEditMessage/BaseEditMessage.vue';
 export { default as CallMessage } from './2_feed_elements/CallMessage/CallMessage.vue';
 export { default as DateMessage } from './2_feed_elements/DateMessage/DateMessage.vue';
+export { default as DeletedMessageContent } from './2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 export { default as MissedCallMessage } from './2_feed_elements/MissedCallMessage/MissedCallMessage.vue';
 export { default as DateMessageSticky } from './2_feed_elements/DateMessageSticky/DateMessageSticky.vue';
 export { default as DelimiterMessage } from './2_feed_elements/DelimiterMessage/DelimiterMessage.vue';
@@ -95,6 +96,7 @@ export { default as VideoMessage } from './2_feed_elements/VideoMessage/VideoMes
 export { default as Modal } from './2_modals/Modal/Modal.vue';
 export { default as ModalFullscreen } from './2_modals/ModalFullscreen/ModalFullscreen.vue';
 export { default as ModalNoFooter } from './2_modals/ModalNoFooter/ModalNoFooter.vue';
+export { default as ConfirmDeleteMessage } from './2_modals/ConfirmDeleteMessage/ConfirmDeleteMessage.vue';
 export { default as SelectUser } from './2_modals/SelectUser/SelectUser.vue';
 
 // 3_compounds

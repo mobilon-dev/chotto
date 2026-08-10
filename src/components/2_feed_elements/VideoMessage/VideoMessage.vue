@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="menuAnchorRef"
     class="video-message"
     :class="[
       getClass(message),
@@ -34,138 +35,163 @@
       class="video-message__content"
       :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
     >
-      <BaseReplyMessage
-        v-if="message.reply"
-        style="margin: 10px 10px 4px 16px;"
-        :class="message.position"
-        :message="message.reply"
-        @reply="handleClickReplied"
-      />
-      <div
-        class="video-message__preview-button"
-        @click="isOpenModal = true"
-        @mouseenter="showMenu"
-        @mouseleave="buttonDownloadVisible = !buttonDownloadVisible"
-      >
-        <video
-          ref="previewPlayer"
-          class="video-message__video"
-          :style="{ borderRadius: videoBorderRadius }"
-          :src="message.url"
-          :muted="true"
-          autoplay
-          @ended="playAgain"
+      <template v-if="message.deleted">
+        <DeletedMessageContent />
+        <div class="video-message__info-container">
+          <span
+            v-if="message.time"
+            class="video-message__time"
+          >{{ message.time }}</span>
+          <MessageStatusIndicator
+            base-class="video-message"
+            :message-class="getClass(message)"
+            :message-status="message.status"
+            :status-class="status"
+            :status-title="statusTitle"
+          />
+        </div>
+      </template>
+      <template v-else>
+        <BaseReplyMessage
+          v-if="message.reply"
+          style="margin: 10px 10px 4px 16px;"
+          :class="message.position"
+          :message="message.reply"
+          @reply="handleClickReplied"
         />
+        <div
+          class="video-message__preview-button"
+          @click="isOpenModal = true"
+          @mouseenter="showMenu"
+          @mouseleave="buttonDownloadVisible = !buttonDownloadVisible"
+        >
+          <video
+            ref="previewPlayer"
+            class="video-message__video"
+            :style="{ borderRadius: videoBorderRadius }"
+            :src="message.url"
+            :muted="true"
+            autoplay
+            @ended="playAgain"
+          />
 
-        <transition name="modal-fade">
-          <div
-            v-if="buttonDownloadVisible"
-            class="video-message__info-container"
-          >
+          <transition name="modal-fade">
             <div
-              v-if="message.views"
-              class="video-message__views"
-              @click.stop="viewsAction"
+              v-if="buttonDownloadVisible"
+              class="video-message__info-container"
             >
-              <span class="pi pi-eye" />
-              <p>{{ message.views }}</p>
+              <div
+                v-if="message.views"
+                class="video-message__views"
+                @click.stop="viewsAction"
+              >
+                <span class="pi pi-eye" />
+                <p>{{ message.views }}</p>
+              </div>
+
+              <span class="video-message__time">{{ message.time }}</span>
+
+              <MessageStatusIndicator
+                base-class="video-message"
+                :message-class="getClass(message)"
+                :message-status="message.status"
+                :status-class="status"
+                :status-title="statusTitle"
+              />
             </div>
+          </transition>
 
-            <span class="video-message__time">{{ message.time }}</span>
 
-            <MessageStatusIndicator
-              base-class="video-message"
-              :message-class="getClass(message)"
-              :message-status="message.status"
-              :status-class="status"
-              :status-title="statusTitle"
-            />
-          </div>
-        </transition>
-
+          <transition name="modal-fade">
+            <button
+              v-if="buttonDownloadVisible"
+              class="video-message__download-button"
+              type="button"
+              @click.stop="downloadVideo"
+            >
+              <span class="pi pi-download" />
+            </button>
+          </transition>
+        </div>
 
         <transition name="modal-fade">
           <button
-            v-if="buttonDownloadVisible"
-            class="video-message__download-button"
-            type="button"
-            @click.stop="downloadVideo"
+            v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
+            class="video-message__menu-button"
+            @click="toggleMenu"
           >
-            <span class="pi pi-download" />
+            <span class="pi pi-ellipsis-h" />
           </button>
         </transition>
-      </div>
 
-      <transition name="modal-fade">
-        <button
-          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
-          class="video-message__menu-button"
-          @click="isOpenMenu = !isOpenMenu"
+
+        <Teleport to="body">
+          <transition name="context-menu">
+            <ContextMenu
+              v-if="isOpenMenu && menuActions.length"
+              ref="menuRef"
+              class="video-message__context-menu message-actions-menu"
+              :style="menuStyle"
+              :data-theme="menuTheme"
+              :actions="menuActions"
+              @click="clickAction"
+              @mouseenter="onMenuMouseEnter"
+              @mouseleave="onMenuMouseLeave"
+            />
+          </transition>
+        </Teleport>
+
+        <div
+          v-if="message.text"
+          class="video-message__text-container"
         >
-          <span class="pi pi-ellipsis-h" />
-        </button>
-      </transition>
+          <p
+            @click="inNewWindow"
+            v-html="linkedHtml"
+          />
+        </div>
 
-
-      <transition name="context-menu">
-        <ContextMenu
-          v-if="isOpenMenu && menuActions.length"
-          class="video-message__context-menu message-actions-menu"
-          :actions="menuActions"
-          @click="clickAction"
+        <MessageSmsInvite
+          :status="message.status"
+          :has-messenger-account="message.hasMessengerAccount"
+          :channel="channel"
+          @sms-invite="handleSmsInvite"
         />
-      </transition>
 
-      <div
-        v-if="message.text"
-        class="video-message__text-container"
-      >
-        <p
-          @click="inNewWindow"
-          v-html="linkedHtml"
+        <LinkPreview
+          v-if="message.linkPreview"
+          class="video-message__link-preview"
+          :class="message.position"
+          :link-preview="message.linkPreview"
         />
-      </div>
 
-      <MessageSmsInvite
-        :status="message.status"
-        :has-messenger-account="message.hasMessengerAccount"
-        :channel="channel"
-        @sms-invite="handleSmsInvite"
-      />
+        <EmbedPreview
+          v-if="message.embed"
+          :class="message.position"
+          :embed="message.embed"
+        />
 
-      <LinkPreview
-        v-if="message.linkPreview"
-        class="video-message__link-preview"
-        :class="message.position"
-        :link-preview="message.linkPreview"
-      />
-
-      <EmbedPreview
-        v-if="message.embed"
-        :class="message.position"
-        :embed="message.embed"
-      />
-
-      <MessageReactions
-        :reactions="message.reactions"
-        :message-id="message.messageId"
-        :reply="buildReplyPayload(message, 'message.video')"
-        :enabled="reactionsEnabled"
-        :mode="reactionsMode"
-        :current-user-id="currentUserId"
-        :reaction-user-names="reactionUserNames"
-        :menu-enabled="menuActions.length > 0"
-        @toggle-reaction="onToggleReaction"
-        @add-reaction="onAddReaction"
-        @remove-reaction="onRemoveReaction"
-        @menu="isOpenMenu = true"
-      />
+        <MessageReactions
+          :reactions="message.reactions"
+          :message-id="message.messageId"
+          :reply="buildReplyPayload(message, 'message.video')"
+          :enabled="reactionsEnabled"
+          :mode="reactionsMode"
+          :current-user-id="currentUserId"
+          :reaction-user-names="reactionUserNames"
+          :menu-enabled="menuActions.length > 0"
+          @toggle-reaction="onToggleReaction"
+          @add-reaction="onAddReaction"
+          @remove-reaction="onRemoveReaction"
+          @menu="openMenu"
+        />
+      </template>
     </div>
   </div>
   <Teleport to="body">
     <transition name="modal-fade">
       <ModalFullscreen
-        v-if="isOpenModal"
+        v-if="isOpenModal && !message.deleted"
         :data-theme="getTheme().theme ? getTheme().theme : 'light'"
         :title="message.alt"
         @close="closeModal"
@@ -197,6 +223,7 @@ import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscre
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
+import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers, safeMediaPlayVoid } from "@/functions";
@@ -274,8 +301,16 @@ const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 const {
   isOpenMenu,
   buttonMenuVisible,
+  menuAnchorRef,
+  menuRef,
+  menuStyle,
+  menuTheme,
   showMenu: baseShowMenu,
   hideMenu,
+  openMenu,
+  toggleMenu,
+  onMenuMouseEnter,
+  onMenuMouseLeave,
   clickAction,
   viewsAction,
   handleClickReplied

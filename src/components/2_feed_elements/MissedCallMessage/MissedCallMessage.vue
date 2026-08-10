@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="menuAnchorRef"
     :class="[
       getClass(message),
       applyStyle(message)
@@ -34,6 +35,16 @@
       class="missed-call-message__content"
       :class="{ 'is-first': true }"
     >
+      <template v-if="message.deleted">
+        <DeletedMessageContent />
+        <div class="missed-call-message__info-container">
+          <span
+            v-if="message.time"
+            class="missed-call-message__time"
+          >{{ message.time }}</span>
+        </div>
+      </template>
+      <template v-else>
       <div class="missed-call-message__main-content">
         <div class="missed-call-message__icon-wrapper">
           <MissedCallIcon
@@ -52,19 +63,27 @@
       <button
         v-if="buttonMenuVisible && menuActions.length"
         class="missed-call-message__menu-button"
-        @click="isOpenMenu = !isOpenMenu"
+        @click="toggleMenu"
       >
         <span class="pi pi-ellipsis-h" />
       </button>
 
-      <transition>
-        <ContextMenu
-          v-if="isOpenMenu && menuActions.length"
-          class="missed-call-message__context-menu message-actions-menu"
-          :actions="menuActions"
-          @click="clickAction"
-        />
-      </transition>
+      <Teleport to="body">
+        <transition>
+          <ContextMenu
+            v-if="isOpenMenu && menuActions.length"
+            ref="menuRef"
+            class="missed-call-message__context-menu message-actions-menu"
+            :style="menuStyle"
+            :data-theme="menuTheme"
+            :actions="menuActions"
+            @click="clickAction"
+            @mouseenter="onMenuMouseEnter"
+            @mouseleave="onMenuMouseLeave"
+          />
+        </transition>
+      </Teleport>
+      </template>
     </div>
   </div>
 </template>
@@ -79,6 +98,7 @@ import { useMessageActions, useSubtextTooltip, useMessageMenuActions, buildReply
 import { getMessageClass } from '@/functions'
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue'
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
+import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue'
 import MissedCallIcon from './icons/MissedCallIcon.vue'
 
 const emit = defineEmits(['action', 'reply'])
@@ -106,8 +126,15 @@ const props = defineProps({
 const {
   isOpenMenu,
   buttonMenuVisible,
+  menuAnchorRef,
+  menuRef,
+  menuStyle,
+  menuTheme,
   showMenu,
   hideMenu,
+  toggleMenu,
+  onMenuMouseEnter,
+  onMenuMouseLeave,
   clickAction,
 } = useMessageActions(props.message, emit, {
   onReply: () => startReply(buildReplyPayload(props.message, 'message.call')),

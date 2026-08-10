@@ -22,4 +22,8 @@ export const en = {
     'component.TextFormatToolbar.Quote': 'Quote',
     'component.TextMessage.sendSmsInvite': 'Send SMS invitation',
     'component.TextMessage.edited': 'edited',
+    'component.ConfirmDeleteMessage.title': 'Delete message?',
+    'component.ConfirmDeleteMessage.delete': 'Delete',
+    'component.ConfirmDeleteMessage.cancel': 'Cancel',
+    'component.DeletedMessageContent.text': 'Message deleted',
 }

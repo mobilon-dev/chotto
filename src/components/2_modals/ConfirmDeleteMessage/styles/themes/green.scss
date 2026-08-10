@@ -1,0 +1,63 @@
+[data-theme="green"] {
+  // Backdrop
+  --chotto-confirmdeletemessage-backdrop-position: fixed;
+  --chotto-confirmdeletemessage-backdrop-bg: rgba(76, 175, 80, 0.2);
+  --chotto-confirmdeletemessage-backdrop-filter: none;
+  --chotto-confirmdeletemessage-backdrop-display: flex;
+  --chotto-confirmdeletemessage-backdrop-justify: center;
+  --chotto-confirmdeletemessage-backdrop-align: center;
+  --chotto-confirmdeletemessage-backdrop-z-index: 1000;
+
+  // Dialog
+  --chotto-confirmdeletemessage-width: 450px;
+  --chotto-confirmdeletemessage-height: 120px;
+  --chotto-confirmdeletemessage-padding: 20px;
+  --chotto-confirmdeletemessage-background: var(--chotto-theme-primary-color, #f8fff8);
+  --chotto-confirmdeletemessage-border: 1px solid #f3f3f3;
+  --chotto-confirmdeletemessage-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  --chotto-confirmdeletemessage-border-radius: 12px;
+  --chotto-confirmdeletemessage-display: flex;
+  --chotto-confirmdeletemessage-flex-direction: column;
+  --chotto-confirmdeletemessage-align-items: center;
+  --chotto-confirmdeletemessage-justify-content: space-between;
+  --chotto-confirmdeletemessage-max-width: calc(100vw - 32px);
+
+  // Title
+  --chotto-confirmdeletemessage-title-margin: 0;
+  --chotto-confirmdeletemessage-title-width: 100%;
+  --chotto-confirmdeletemessage-title-text-align: center;
+  --chotto-confirmdeletemessage-title-font-family: var(--chotto-theme-font-family, 'Open Sans', sans-serif);
+  --chotto-confirmdeletemessage-title-font-weight: 600;
+  --chotto-confirmdeletemessage-title-font-size: 16px;
+  --chotto-confirmdeletemessage-title-line-height: 1.25;
+  --chotto-confirmdeletemessage-title-color: var(--chotto-theme-primary-text-color, #1e1e1e);
+
+  // Actions
+  --chotto-confirmdeletemessage-actions-display: flex;
+  --chotto-confirmdeletemessage-actions-align-items: center;
+  --chotto-confirmdeletemessage-actions-justify-content: center;
+  --chotto-confirmdeletemessage-actions-gap: 16px;
+
+  // Button common
+  --chotto-confirmdeletemessage-btn-width: 136px;
+  --chotto-confirmdeletemessage-btn-height: 40px;
+  --chotto-confirmdeletemessage-btn-font-family: var(--chotto-theme-font-family, 'Open Sans', sans-serif);
+  --chotto-confirmdeletemessage-btn-font-weight: 600;
+  --chotto-confirmdeletemessage-btn-font-size: 14px;
+  --chotto-confirmdeletemessage-btn-cursor: pointer;
+  --chotto-confirmdeletemessage-btn-background: transparent;
+
+  // Delete button
+  --chotto-confirmdeletemessage-btn-delete-color: #f84932;
+  --chotto-confirmdeletemessage-btn-delete-border: 1px solid #f84932;
+  --chotto-confirmdeletemessage-btn-delete-border-radius: 20px;
+
+  // Cancel button
+  --chotto-confirmdeletemessage-btn-cancel-color: #5f5f5f;
+  --chotto-confirmdeletemessage-btn-cancel-border: none;
+
+  // Animation
+  --chotto-confirmdeletemessage-transition: opacity 0.2s ease;
+  --chotto-confirmdeletemessage-enter-opacity: 0;
+  --chotto-confirmdeletemessage-enter-to-opacity: 1;
+}

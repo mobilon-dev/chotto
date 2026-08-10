@@ -11,30 +11,52 @@ import StickerMessage from '@/components/2_feed_elements/StickerMessage/StickerM
 import DelimiterMessage from '@/components/2_feed_elements/DelimiterMessage/DelimiterMessage.vue';
 import MissedCallMessage from '@/components/2_feed_elements/MissedCallMessage/MissedCallMessage.vue';
 
+const MESSAGE_COMPONENTS: Record<string, unknown> = {
+  'message.text': TextMessage,
+  'message.image': ImageMessage,
+  'message.file': FileMessage,
+  'message.audio': AudioMessage,
+  'message.video': VideoMessage,
+  'message.call': CallMessage,
+  'message.missedCall': MissedCallMessage,
+  'message.sticker': StickerMessage,
+  'message.system': SystemMessage,
+  'system.date': DateMessage,
+  'message.typing': TypingMessage,
+  'message.delimiter': DelimiterMessage,
+}
+
+const DELETED_AS_TEXT_TYPES = new Set([
+  'message.text',
+  'message.image',
+  'message.file',
+  'message.audio',
+  'message.video',
+  'message.call',
+  'message.missedCall',
+  'message.sticker',
+])
+
 /**
- * Композабл для маппинга типов сообщений на компоненты
+ * Композабл для маппинга типов сообщений на компоненты.
+ * Удалённые сообщения ленты всегда рендерятся как TextMessage.
  */
 export function useFeedComponents() {
-  const componentsMap = (type: string) => {
-    const r: Record<string, unknown> = {
-      'message.text': TextMessage,
-      'message.image': ImageMessage,
-      'message.file': FileMessage,
-      'message.audio': AudioMessage,
-      'message.video': VideoMessage,
-      'message.call': CallMessage,
-      'message.missedCall': MissedCallMessage,
-      'message.sticker': StickerMessage,
-      'message.system': SystemMessage,
-      'system.date': DateMessage,
-      'message.typing': TypingMessage,
-      'message.delimiter': DelimiterMessage
-    };
-    return r[type];
-  };
+  const componentsMap = (object: { type?: string; deleted?: boolean } | string) => {
+    // Обратная совместимость: раньше передавали только type
+    if (typeof object === 'string') {
+      return MESSAGE_COMPONENTS[object]
+    }
+
+    const type = object.type ?? ''
+    if (object.deleted && DELETED_AS_TEXT_TYPES.has(type)) {
+      return TextMessage
+    }
+
+    return MESSAGE_COMPONENTS[type]
+  }
 
   return {
     componentsMap,
-  };
+  }
 }
-

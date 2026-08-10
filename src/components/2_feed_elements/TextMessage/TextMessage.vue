@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="menuAnchorRef"
     class="text-message"
     :class="[
       getClass(message),
@@ -36,138 +37,168 @@
       :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
       @mouseenter="showMenu"
     >
-      <BaseReplyMessage
-        v-if="message.reply"
-        :class="message.position"
-        :message="message.reply"
-        @reply="handleClickReplied"
-      />
-      <p
-        class="text-message__text"
-        @click="inNewWindow"
-        v-html="linkedHtml"
-      />
-
-      <LinkPreview
-        v-if="message.linkPreview"
-        :class="message.position"
-        :link-preview="message.linkPreview"
-      />
-
-      <EmbedPreview
-        v-if="message.embed"
-        :class="message.position"
-        :embed="message.embed"
-      />
-
-      <div class="text-message__footer">
-        <MessageReactions
-          v-if="reactionsEnabled"
-          :reactions="message.reactions"
-          :message-id="message.messageId"
-          :reply="buildReplyPayload(message, 'message.text')"
-          :enabled="reactionsEnabled"
-          :mode="reactionsMode"
-          :current-user-id="currentUserId"
-          :reaction-user-names="reactionUserNames"
-          :menu-enabled="menuActions.length > 0"
-          @toggle-reaction="onToggleReaction"
-          @add-reaction="onAddReaction"
-          @remove-reaction="onRemoveReaction"
-          @menu="isOpenMenu = true"
+      <template v-if="message.deleted">
+        <DeletedMessageContent
+          :original-text="deletedTooltip.original"
+          :meta="deletedTooltip.meta"
+        />
+        <div class="text-message__footer">
+          <div class="text-message__info-container">
+            <span
+              v-if="message.time"
+              class="text-message__time"
+            >{{ message.time }}</span>
+            <MessageStatusIndicator
+              base-class="text-message"
+              :message-class="getClass(message)"
+              :message-status="message.status"
+              :status-class="status"
+              :status-title="statusTitle"
+            />
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <BaseReplyMessage
+          v-if="message.reply"
+          :class="message.position"
+          :message="message.reply"
+          @reply="handleClickReplied"
+        />
+        <p
+          class="text-message__text"
+          @click="inNewWindow"
+          v-html="linkedHtml"
         />
 
-        <div class="text-message__info-container">
-          <div
-            v-if="message.views"
-            class="text-message__views"
-            @click="viewsAction"
-          >
-            <span class="pi pi-eye" />
-            <p>{{ message.views }}</p>
-          </div>
-          <Tooltip
-            v-if="message.edited"
-            position="bottom-right"
-            :offset="8"
-            :delay="400"
-            max-width="280px"
-            :bubble-style="editTooltipBubbleStyle"
-          >
-            <template
-              v-if="hasEditTooltip"
-              #content
+        <LinkPreview
+          v-if="message.linkPreview"
+          :class="message.position"
+          :link-preview="message.linkPreview"
+        />
+
+        <EmbedPreview
+          v-if="message.embed"
+          :class="message.position"
+          :embed="message.embed"
+        />
+
+        <div class="text-message__footer">
+          <MessageReactions
+            v-if="reactionsEnabled"
+            :reactions="message.reactions"
+            :message-id="message.messageId"
+            :reply="buildReplyPayload(message, 'message.text')"
+            :enabled="reactionsEnabled"
+            :mode="reactionsMode"
+            :current-user-id="currentUserId"
+            :reaction-user-names="reactionUserNames"
+            :menu-enabled="menuActions.length > 0"
+            @toggle-reaction="onToggleReaction"
+            @add-reaction="onAddReaction"
+            @remove-reaction="onRemoveReaction"
+            @menu="openMenu"
+          />
+
+          <div class="text-message__info-container">
+            <div
+              v-if="message.views"
+              class="text-message__views"
+              @click="viewsAction"
             >
-              <div class="text-message__edit-tooltip">
-                <div
-                  v-if="editTooltipLines.original"
-                  class="text-message__edit-tooltip-original"
-                >
-                  {{ editTooltipLines.original }}
-                </div>
-                <div
-                  v-for="(edit, index) in editTooltipLines.edits"
-                  :key="`${edit.text}-${edit.meta}-${index}`"
-                  class="text-message__edit-tooltip-entry"
-                >
+              <span class="pi pi-eye" />
+              <p>{{ message.views }}</p>
+            </div>
+            <Tooltip
+              v-if="message.edited"
+              position="bottom-right"
+              :offset="8"
+              :delay="400"
+              max-width="280px"
+              :bubble-style="editTooltipBubbleStyle"
+            >
+              <template
+                v-if="hasEditTooltip"
+                #content
+              >
+                <div class="text-message__edit-tooltip">
                   <div
-                    v-if="edit.text"
+                    v-if="editTooltipLines.original"
                     class="text-message__edit-tooltip-original"
                   >
-                    {{ edit.text }}
+                    {{ editTooltipLines.original }}
                   </div>
                   <div
-                    v-if="edit.meta"
-                    class="text-message__edit-tooltip-meta"
+                    v-for="(edit, index) in editTooltipLines.edits"
+                    :key="`${edit.text}-${edit.meta}-${index}`"
+                    class="text-message__edit-tooltip-entry"
                   >
-                    {{ edit.meta }}
+                    <div
+                      v-if="edit.text"
+                      class="text-message__edit-tooltip-original"
+                    >
+                      {{ edit.text }}
+                    </div>
+                    <div
+                      v-if="edit.meta"
+                      class="text-message__edit-tooltip-meta"
+                    >
+                      {{ edit.meta }}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </template>
+              </template>
+              <span
+                class="text-message__edited"
+                @mouseenter="onEditedHover"
+              >{{ editedLabel }}</span>
+            </Tooltip>
             <span
-              class="text-message__edited"
-              @mouseenter="onEditedHover"
-            >{{ editedLabel }}</span>
-          </Tooltip>
-          <span
-            v-if="message.time"
-            class="text-message__time"
-          >{{ message.time }}</span>
-          <MessageStatusIndicator
-            base-class="text-message"
-            :message-class="getClass(message)"
-            :message-status="message.status"
-            :status-class="status"
-            :status-title="statusTitle"
-          />
+              v-if="message.time"
+              class="text-message__time"
+            >{{ message.time }}</span>
+            <MessageStatusIndicator
+              base-class="text-message"
+              :message-class="getClass(message)"
+              :message-status="message.status"
+              :status-class="status"
+              :status-title="statusTitle"
+            />
+          </div>
         </div>
-      </div>
 
-      <MessageSmsInvite
-        v-if="showSmsInvite"
-        :status="message.status"
-        :has-messenger-account="message.hasMessengerAccount"
-        :channel="channel"
-        @sms-invite="handleSmsInvite"
-      />
-
-      <button
-        v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
-        class="text-message__menu-button"
-        @click="isOpenMenu = !isOpenMenu"
-      >
-        <span class="pi pi-ellipsis-h" />
-      </button>
-
-      <transition>
-        <ContextMenu
-          v-if="isOpenMenu && menuActions.length"
-          class="text-message__context-menu message-actions-menu"
-          :actions="menuActions"
-          @click="clickAction"
+        <MessageSmsInvite
+          v-if="showSmsInvite"
+          :status="message.status"
+          :has-messenger-account="message.hasMessengerAccount"
+          :channel="channel"
+          @sms-invite="handleSmsInvite"
         />
-      </transition>
+
+        <button
+          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
+          class="text-message__menu-button"
+          @click="toggleMenu"
+        >
+          <span class="pi pi-ellipsis-h" />
+        </button>
+
+        <Teleport to="body">
+          <transition>
+            <ContextMenu
+              v-if="isOpenMenu && menuActions.length"
+              ref="menuRef"
+              class="text-message__context-menu message-actions-menu"
+              :style="menuStyle"
+              :data-theme="menuTheme"
+              :actions="menuActions"
+              @click="clickAction"
+              @mouseenter="onMenuMouseEnter"
+              @mouseleave="onMenuMouseLeave"
+            />
+          </transition>
+        </Teleport>
+      </template>
     </div>
   </div>
 </template>
@@ -185,6 +216,7 @@ import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/Base
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
+import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import {
   useMessageLinks,
@@ -197,15 +229,20 @@ import {
   useStartReply,
   useStartEdit,
   getEditTooltipLines,
+  getDeletedTooltipLines,
 } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useLocale } from '@/locale/useLocale';
-import { ITextMessage } from '@/types';
+import { ITextMessage, MessageDeleteInfo } from '@/types';
 
 // Define props
 const props = defineProps({
   message: {
-    type: Object as () => ITextMessage,
+    type: Object as () => ITextMessage & {
+      filename?: string
+      alt?: string
+      deletion?: MessageDeleteInfo
+    },
     required: true,
   },
   applyStyle: {
@@ -257,8 +294,16 @@ const editInfoRequested = ref(false)
 const { 
   isOpenMenu,
   buttonMenuVisible,
+  menuAnchorRef,
+  menuRef,
+  menuStyle,
+  menuTheme,
   showMenu,
   hideMenu,
+  openMenu,
+  toggleMenu,
+  onMenuMouseEnter,
+  onMenuMouseLeave,
   clickAction,
   viewsAction,
   handleClickReplied
@@ -276,6 +321,7 @@ const editTooltipLines = computed(() => getEditTooltipLines(props.message.edited
 const hasEditTooltip = computed(
   () => !!(editTooltipLines.value.original || editTooltipLines.value.edits.length)
 )
+const deletedTooltip = computed(() => getDeletedTooltipLines(props.message))
 const editTooltipBubbleStyle = {
   '--chotto-tooltip-border': '1px solid #5F5F5F',
 }

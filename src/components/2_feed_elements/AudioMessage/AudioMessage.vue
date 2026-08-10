@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="menuAnchorRef"
     class="audio-message"
     :class="[
       getClass(message),
@@ -36,6 +37,25 @@
       :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
       @mouseenter="showMenu"
     >
+      <template v-if="message.deleted">
+        <DeletedMessageContent />
+        <div class="audio-message__footer">
+          <div class="audio-message__info-container">
+            <span
+              v-if="message.time"
+              class="audio-message__time"
+            >{{ message.time }}</span>
+            <MessageStatusIndicator
+              base-class="audio-message"
+              :message-class="getClass(message)"
+              :message-status="message.status"
+              :status-class="status"
+              :status-title="statusTitle"
+            />
+          </div>
+        </div>
+      </template>
+      <template v-else>
       <BaseReplyMessage
         v-if="message.reply"
         style="grid-column: 1/3;"
@@ -173,7 +193,7 @@
           @toggle-reaction="onToggleReaction"
           @add-reaction="onAddReaction"
           @remove-reaction="onRemoveReaction"
-          @menu="isOpenMenu = true"
+          @menu="openMenu"
         />
 
         <div class="audio-message__info-container">
@@ -284,7 +304,7 @@
       <button
         v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
         class="audio-message__menu-button"
-        @click="isOpenMenu = !isOpenMenu"
+        @click="toggleMenu"
       >
         <svg
           width="4"
@@ -300,14 +320,22 @@
         </svg>
       </button>
 
-      <transition>
-        <ContextMenu
-          v-if="isOpenMenu && menuActions.length"
-          class="audio-message__context-menu message-actions-menu"
-          :actions="menuActions"
-          @click="handleActionClick"
-        />
-      </transition>
+      <Teleport to="body">
+        <transition>
+          <ContextMenu
+            v-if="isOpenMenu && menuActions.length"
+            ref="menuRef"
+            class="audio-message__context-menu message-actions-menu"
+            :style="menuStyle"
+            :data-theme="menuTheme"
+            :actions="menuActions"
+            @click="handleActionClick"
+            @mouseenter="onMenuMouseEnter"
+            @mouseleave="onMenuMouseLeave"
+          />
+        </transition>
+      </Teleport>
+      </template>
     </div>
   </div>
 </template>
@@ -325,6 +353,7 @@ import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/Base
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
+import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageActions, useMessageLinks, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
@@ -481,8 +510,16 @@ watch(
 const {
   isOpenMenu,
   buttonMenuVisible,
+  menuAnchorRef,
+  menuRef,
+  menuStyle,
+  menuTheme,
   showMenu,
   hideMenu,
+  openMenu,
+  toggleMenu,
+  onMenuMouseEnter,
+  onMenuMouseLeave,
   clickAction,
   viewsAction,
   handleClickReplied

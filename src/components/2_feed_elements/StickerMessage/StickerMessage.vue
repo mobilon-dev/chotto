@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="menuAnchorRef"
     class="sticker-message"
     :class="[
       getClass(message),
@@ -28,6 +29,23 @@
       class="sticker-message__content"
       :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
     >
+      <template v-if="message.deleted">
+        <DeletedMessageContent />
+        <div class="sticker-message__info-container">
+          <span
+            v-if="message.time"
+            class="sticker-message__time"
+          >{{ message.time }}</span>
+          <MessageStatusIndicator
+            base-class="sticker-message"
+            :message-class="getClass(message)"
+            :message-status="message.status"
+            :status-class="status"
+            :status-title="statusTitle"
+          />
+        </div>
+      </template>
+      <template v-else>
       <BaseReplyMessage
         v-if="message.reply"
         style="margin: 10px 10px 4px 16px;"
@@ -115,21 +133,28 @@
         <button
           v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
           class="sticker-message__menu-button"
-          @click="isOpenMenu = !isOpenMenu"
+          @click="toggleMenu"
         >
           <span class="pi pi-ellipsis-h" />
         </button>
       </transition>
 
 
-      <transition name="context-menu">
-        <ContextMenu
-          v-if="isOpenMenu && menuActions.length"
-          class="sticker-message__context-menu message-actions-menu"
-          :actions="menuActions"
-          @click="clickAction"
-        />
-      </transition>
+      <Teleport to="body">
+        <transition name="context-menu">
+          <ContextMenu
+            v-if="isOpenMenu && menuActions.length"
+            ref="menuRef"
+            class="sticker-message__context-menu message-actions-menu"
+            :style="menuStyle"
+            :data-theme="menuTheme"
+            :actions="menuActions"
+            @click="clickAction"
+            @mouseenter="onMenuMouseEnter"
+            @mouseleave="onMenuMouseLeave"
+          />
+        </transition>
+      </Teleport>
 
       <div
         v-if="message.text"
@@ -175,14 +200,15 @@
         @toggle-reaction="onToggleReaction"
         @add-reaction="onAddReaction"
         @remove-reaction="onRemoveReaction"
-        @menu="isOpenMenu = true"
+        @menu="openMenu"
       />
+      </template>
     </div>
 
     <Teleport to="body">
       <transition name="modal-fade">
         <ModalFullscreen
-          v-if="isOpenModal"
+          v-if="isOpenModal && !message.deleted"
           :data-theme="getTheme().theme ? getTheme().theme : 'light'"
           :title="message.alt"
           @close="closeModal"
@@ -235,6 +261,7 @@ import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscre
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
+import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
@@ -315,8 +342,16 @@ const isOpenModal = ref(false);
 const {
   isOpenMenu,
   buttonMenuVisible,
+  menuAnchorRef,
+  menuRef,
+  menuStyle,
+  menuTheme,
   showMenu: baseShowMenu,
   hideMenu,
+  openMenu,
+  toggleMenu,
+  onMenuMouseEnter,
+  onMenuMouseLeave,
   clickAction,
   viewsAction,
   handleClickReplied

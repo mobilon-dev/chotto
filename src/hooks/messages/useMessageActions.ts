@@ -1,68 +1,87 @@
 /**
  * Composable для общих действий в компонентах сообщений (контекстное меню, просмотры, ответ)
- * 
+ *
  * Предназначен для элементов ленты (`TextMessage`, `ImageMessage`, `VideoMessage`, `FileMessage`, `AudioMessage`).
  * Централизует управление состоянием кнопки меню/контекстного меню и единообразно эмитит события наружу.
- * 
- * Использование: импортируйте в компонент сообщения и передайте текущий объект сообщения и `emit` компонента.
- * 
+ *
  * @example
- * import { useMessageActions } from '@/hooks/messages'
- * 
- * const emit = defineEmits(['action','reply'])
- * const { isOpenMenu, buttonMenuVisible, showMenu, hideMenu, clickAction, viewsAction, handleClickReplied } = useMessageActions(props.message, emit)
- * 
- * // шаблон
- * // <button v-if="buttonMenuVisible" @click="isOpenMenu = !isOpenMenu" />
- * // <ContextMenu v-if="isOpenMenu" :actions="menuActions" @click="clickAction" />
+ * const { isOpenMenu, toggleMenu, openMenu, menuStyle, menuRef, menuAnchorRef } = useMessageActions(...)
+ * // <button @click="toggleMenu">
+ * // <MessageReactions @menu="openMenu" />
+ * // <Teleport to="body"><ContextMenu v-if="isOpenMenu" ref="menuRef" :style="menuStyle" /></Teleport>
  */
-import { ref } from 'vue'
+import {
+  ref,
+  watch,
+  nextTick,
+  inject,
+  onMounted,
+  onUnmounted,
+  computed,
+  type ComponentPublicInstance,
+} from 'vue'
+import { useConfirmDeleteMessage } from '@/hooks/modals/useConfirmDeleteMessage'
+import { useTheme } from '@/hooks/useTheme'
+import {
+  calculateMessageMenuPosition,
+  type MenuTriggerRect,
+} from './calculateMessageMenuPosition'
 
-/**
- * Полезная нагрузка для событий действия сообщения
- * @typedef ActionPayload
- * @property {string} messageId - Идентификатор сообщения
- * @property {string} type - Тип действия (например, 'menu' | 'views')
- */
 type ActionPayload = { messageId: string; type: string } & Record<string, unknown>
-
-/**
- * Тип эмиттера событий компонентов сообщений
- * @typedef EmitFn
- * @param {'action' | 'reply'} event - Имя события
- * @param {ActionPayload | string} payload - Данные события
- */
 type EmitFn = (event: 'action' | 'reply', payload: ActionPayload | string) => void
 
-/**
- * Минимально необходимая структура сообщения для работы composable
- * @interface MessageWithMeta
- * @property {string} messageId - Идентификатор сообщения
- */
 export interface MessageWithMeta {
   messageId: string
 }
 
 type UseMessageActionsOptions = {
-  /** Локальный обработчик «Ответить» из меню (вместо emit) */
   onReply?: () => void
-  /** Локальный обработчик «Редактировать» из меню (вместо emit) */
   onEdit?: () => void
 }
 
-/**
- * Composable для унификации поведения контекстного меню и связанных действий у сообщений ленты
- * 
- * Предоставляет реактивные флаги и обработчики действий: показать/скрыть меню, клик по пункту меню,
- * клик по просмотрам, эмит события ответа.
- * 
- * @template T Расширяет {@link MessageWithMeta}
- * @param {T} message - Сообщение с `messageId`
- * @param {EmitFn} emit - Эмиттер событий из компонента сообщения
- * @param {UseMessageActionsOptions} [options] - Опции (например, локальный reply)
- * 
- * @returns {object} Объект с состояниями и методами
- */
+/** Payload от MessageReactions @menu или клик по кнопке */
+export type OpenMessageMenuSource =
+  | Event
+  | { event?: Event; triggerRect?: MenuTriggerRect; messageId?: string | number }
+  | MenuTriggerRect
+  | undefined
+
+function resolveEl(
+  value: HTMLElement | ComponentPublicInstance | null | undefined
+): HTMLElement | null {
+  if (!value) return null
+  if (value instanceof HTMLElement) return value
+  const el = (value as ComponentPublicInstance).$el
+  return el instanceof HTMLElement ? el : null
+}
+
+function toTriggerRect(source?: OpenMessageMenuSource): MenuTriggerRect | null {
+  if (!source) return null
+
+  if (source instanceof Event) {
+    const target = source.currentTarget
+    if (target instanceof HTMLElement) {
+      const r = target.getBoundingClientRect()
+      return { top: r.top, right: r.right, bottom: r.bottom, left: r.left, width: r.width, height: r.height }
+    }
+    return null
+  }
+
+  if ('triggerRect' in source && source.triggerRect) {
+    return source.triggerRect
+  }
+
+  if ('event' in source && source.event instanceof Event) {
+    return toTriggerRect(source.event)
+  }
+
+  if ('top' in source && 'left' in source && 'bottom' in source && 'right' in source) {
+    return source as MenuTriggerRect
+  }
+
+  return null
+}
+
 export const useMessageActions = <T extends MessageWithMeta>(
   message: T,
   emit: EmitFn,
@@ -70,28 +89,113 @@ export const useMessageActions = <T extends MessageWithMeta>(
 ) => {
   const isOpenMenu = ref(false)
   const buttonMenuVisible = ref(false)
+  const menuAnchorRef = ref<HTMLElement | null>(null)
+  const menuRef = ref<HTMLElement | ComponentPublicInstance | null>(null)
+  const menuStyle = ref<Record<string, string>>({})
+  const menuTriggerRect = ref<MenuTriggerRect | null>(null)
 
-  /**
-   * Показать кнопку меню (обычно по `mouseenter` на контейнере сообщения)
-   */
+  const chatAppId = inject<string | undefined>('chatAppId', undefined)
+  const { getTheme } = useTheme(chatAppId || '')
+  const menuTheme = computed(() => getTheme().theme || 'light')
+
   const showMenu = () => {
     buttonMenuVisible.value = true
   }
 
   /**
-   * Скрыть кнопку меню и закрыть контекстное меню
+   * Скрыть кнопку меню. Открытое меню в body не закрываем здесь.
    */
-  const hideMenu = () => {
+  const hideMenu = (event?: MouseEvent) => {
+    const menuEl = resolveEl(menuRef.value)
+    if (event?.relatedTarget && menuEl?.contains(event.relatedTarget as Node)) {
+      return
+    }
     buttonMenuVisible.value = false
-    isOpenMenu.value = false
   }
 
-  /**
-   * Эмит события клика по пункту контекстного меню
-   * @param {Record<string, unknown>} action - Объект выбранного действия из `ContextMenu`
-   */
-  const clickAction = (action: Record<string, unknown>) => {
-    hideMenu()
+  const closeMenu = () => {
+    buttonMenuVisible.value = false
+    isOpenMenu.value = false
+    menuTriggerRect.value = null
+  }
+
+  const onMenuMouseEnter = () => {
+    buttonMenuVisible.value = true
+  }
+
+  const onMenuMouseLeave = () => {
+    closeMenu()
+  }
+
+  /** Открыть меню рядом с триггером (кнопка / пункт реакций) */
+  const openMenu = (source?: OpenMessageMenuSource) => {
+    menuTriggerRect.value = toTriggerRect(source)
+    isOpenMenu.value = true
+  }
+
+  /** Переключить меню (клик по трём точкам на сообщении) */
+  const toggleMenu = (event?: Event) => {
+    if (isOpenMenu.value) {
+      closeMenu()
+      return
+    }
+    openMenu(event)
+  }
+
+  async function updateMenuPosition() {
+    await nextTick()
+
+    let attempts = 0
+    while (!resolveEl(menuRef.value) && attempts < 20) {
+      await new Promise((resolve) => setTimeout(resolve, 10))
+      attempts++
+    }
+
+    const menuEl = resolveEl(menuRef.value)
+
+    attempts = 0
+    while (menuEl && menuEl.offsetWidth === 0 && attempts < 10) {
+      await new Promise((resolve) => setTimeout(resolve, 10))
+      attempts++
+    }
+
+    menuStyle.value = await calculateMessageMenuPosition(menuEl, {
+      triggerRect: menuTriggerRect.value,
+      boundsElement: menuAnchorRef.value,
+    })
+  }
+
+  watch(isOpenMenu, async (isOpen) => {
+    if (isOpen) {
+      await updateMenuPosition()
+    } else {
+      menuStyle.value = {}
+      menuTriggerRect.value = null
+    }
+  })
+
+  function handleClickOutside(event: MouseEvent) {
+    if (!isOpenMenu.value) return
+    const target = event.target as Node
+    const menuEl = resolveEl(menuRef.value)
+    const anchorEl = menuAnchorRef.value
+
+    if (menuEl?.contains(target)) return
+    if (anchorEl?.contains(target)) return
+
+    closeMenu()
+  }
+
+  onMounted(() => {
+    document.addEventListener('click', handleClickOutside, true)
+  })
+
+  onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside, true)
+  })
+
+  const clickAction = async (action: Record<string, unknown>) => {
+    closeMenu()
     if (action.action === 'reply' && options.onReply) {
       options.onReply()
       return
@@ -100,32 +204,35 @@ export const useMessageActions = <T extends MessageWithMeta>(
       options.onEdit()
       return
     }
+    if (action.action === 'delete') {
+      const confirmed = await useConfirmDeleteMessage()
+      if (!confirmed) return
+    }
     emit('action', { messageId: message.messageId, type: 'menu', ...action })
   }
 
-  /**
-   * Эмит события клика по просмотрам для сообщения
-   */
   const viewsAction = () => {
-    hideMenu()
+    closeMenu()
     emit('action', { messageId: message.messageId, type: 'views' })
   }
 
-  /**
-   * Эмит события ответа на сообщение по идентификатору цитируемого сообщения
-   * @param {string} replyMessageId - Идентификатор сообщения, к которому происходит скролл/фокус
-   */
   const handleClickReplied = (replyMessageId: string) => {
     emit('reply', replyMessageId)
   }
 
   return {
-    // state
     isOpenMenu,
     buttonMenuVisible,
-    // actions
+    menuAnchorRef,
+    menuRef,
+    menuStyle,
+    menuTheme,
     showMenu,
     hideMenu,
+    openMenu,
+    toggleMenu,
+    onMenuMouseEnter,
+    onMenuMouseLeave,
     clickAction,
     viewsAction,
     handleClickReplied,

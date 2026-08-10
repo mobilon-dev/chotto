@@ -22,4 +22,8 @@ export const ru = {
     'component.TextFormatToolbar.Quote': 'Цитата',
     'component.TextMessage.sendSmsInvite': 'Отправить SMS приглашение',
     'component.TextMessage.edited': 'изменено',
+    'component.ConfirmDeleteMessage.title': 'Удалить сообщение?',
+    'component.ConfirmDeleteMessage.delete': 'Удалить',
+    'component.ConfirmDeleteMessage.cancel': 'Отменить',
+    'component.DeletedMessageContent.text': 'Сообщение удалено',
 }

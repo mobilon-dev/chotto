@@ -174,7 +174,11 @@ const emit = defineEmits<{
   (e: 'toggle-reaction', payload: { messageId: string | number; key: string }): void
   (e: 'add-reaction', payload: { messageId: string | number; key: string }): void
   (e: 'remove-reaction', payload: { messageId: string | number; key: string }): void
-  (e: 'menu', payload: { messageId: string | number }): void
+  (e: 'menu', payload: {
+    messageId: string | number
+    triggerRect?: { top: number; right: number; bottom: number; left: number; width: number; height: number }
+    event?: MouseEvent
+  }): void
 }>()
 
 const chatAppId = inject('chatAppId') as string | undefined
@@ -311,11 +315,19 @@ function onReplyClick() {
   closeQuickPanel()
 }
 
-function onMenuClick() {
+function onMenuClick(event: MouseEvent) {
   if (props.readonly || !props.enabled || !props.menuEnabled) return
 
+  const target = event.currentTarget
+  const triggerRect = target instanceof HTMLElement
+    ? (() => {
+      const r = target.getBoundingClientRect()
+      return { top: r.top, right: r.right, bottom: r.bottom, left: r.left, width: r.width, height: r.height }
+    })()
+    : undefined
+
   closeQuickPanel()
-  emit('menu', { messageId: props.messageId })
+  emit('menu', { messageId: props.messageId, triggerRect, event })
 }
 
 async function onExpandClick() {

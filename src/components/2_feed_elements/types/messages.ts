@@ -43,11 +43,27 @@ export interface MessageEditInfo {
   history?: MessageEditRecord[]
 }
 
+/**
+ * Данные удаления для тултипа «Сообщение удалено»:
+ * текст + «Имя, дата в время».
+ */
+export interface MessageDeleteInfo {
+  /** Кто удалил */
+  deletedBy?: string
+  /** Когда удалили (уже отформатированная строка, напр. «20.07.26 в 11:08») */
+  deletedAt?: string
+}
+
 /** Контекст сообщения для условий пунктов меню */
 export type MessageMenuActionContext = {
   messageId?: string
   position?: string
   type?: string
+  deleted?: boolean
+  /** Можно ли ещё редактировать (окно не истекло); `false` — пункт «Редактировать» disabled */
+  canEdit?: boolean
+  /** Можно ли ещё удалить (окно не истекло); `false` — пункт «Удалить» disabled */
+  canDelete?: boolean
 }
 
 /** Пункт контекстного меню сообщения (задаётся пропом Feed) */
@@ -154,6 +170,12 @@ export interface IAudioMessage {
   backgroundColor?: string
   hasMessengerAccount?: boolean
   isVoiceMessage?: boolean
+  deleted?: boolean
+  deletion?: MessageDeleteInfo
+  /** Можно ли ещё редактировать (если `false` — пункт меню disabled) */
+  canEdit?: boolean
+  /** Можно ли ещё удалить (если `false` — пункт меню disabled) */
+  canDelete?: boolean
 }
 
 /** Реплика в JSON из meta.transcript (ответ API) */
@@ -216,6 +238,12 @@ export interface ICallMessage {
   reactions?: MessageReactions
   backgroundColor?: string
   hasMessengerAccount?: boolean
+  deleted?: boolean
+  deletion?: MessageDeleteInfo
+  /** Можно ли ещё редактировать (если `false` — пункт меню disabled) */
+  canEdit?: boolean
+  /** Можно ли ещё удалить (если `false` — пункт меню disabled) */
+  canDelete?: boolean
 }
 
 export interface IDateMessage {
@@ -245,6 +273,12 @@ export interface IFileMessage {
   direction?: string
   backgroundColor?: string
   hasMessengerAccount?: boolean
+  deleted?: boolean
+  deletion?: MessageDeleteInfo
+  /** Можно ли ещё редактировать (если `false` — пункт меню disabled) */
+  canEdit?: boolean
+  /** Можно ли ещё удалить (если `false` — пункт меню disabled) */
+  canDelete?: boolean
 }
 
 export interface IImageMessage {
@@ -267,6 +301,12 @@ export interface IImageMessage {
   reactions?: MessageReactions
   backgroundColor?: string
   hasMessengerAccount?: boolean
+  deleted?: boolean
+  deletion?: MessageDeleteInfo
+  /** Можно ли ещё редактировать (если `false` — пункт меню disabled) */
+  canEdit?: boolean
+  /** Можно ли ещё удалить (если `false` — пункт меню disabled) */
+  canDelete?: boolean
 }
 
 export interface ISystemMessage {
@@ -303,6 +343,12 @@ export interface ITextMessage {
   reactions?: MessageReactions
   backgroundColor?: string
   hasMessengerAccount?: boolean
+  deleted?: boolean
+  deletion?: MessageDeleteInfo
+  /** Можно ли ещё редактировать (если `false` — пункт меню disabled) */
+  canEdit?: boolean
+  /** Можно ли ещё удалить (если `false` — пункт меню disabled) */
+  canDelete?: boolean
 }
 
 export interface ITypingMessage {
@@ -331,6 +377,12 @@ export interface IVideoMessage {
   reactions?: MessageReactions
   backgroundColor?: string
   hasMessengerAccount?: boolean
+  deleted?: boolean
+  deletion?: MessageDeleteInfo
+  /** Можно ли ещё редактировать (если `false` — пункт меню disabled) */
+  canEdit?: boolean
+  /** Можно ли ещё удалить (если `false` — пункт меню disabled) */
+  canDelete?: boolean
 }
 
 export interface IStickerMessage {
@@ -354,6 +406,12 @@ export interface IStickerMessage {
   reactions?: MessageReactions
   backgroundColor?: string
   hasMessengerAccount?: boolean
+  deleted?: boolean
+  deletion?: MessageDeleteInfo
+  /** Можно ли ещё редактировать (если `false` — пункт меню disabled) */
+  canEdit?: boolean
+  /** Можно ли ещё удалить (если `false` — пункт меню disabled) */
+  canDelete?: boolean
 }
 
 export interface IMissedCallMessage {
@@ -365,4 +423,10 @@ export interface IMissedCallMessage {
   subText?: string
   backgroundColor?: string
   hasMessengerAccount?: boolean
+  deleted?: boolean
+  deletion?: MessageDeleteInfo
+  /** Можно ли ещё редактировать (если `false` — пункт меню disabled) */
+  canEdit?: boolean
+  /** Можно ли ещё удалить (если `false` — пункт меню disabled) */
+  canDelete?: boolean
 }

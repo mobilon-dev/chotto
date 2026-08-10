@@ -1,0 +1,88 @@
+.confirm-delete-message__backdrop {
+  position: var(--chotto-confirmdeletemessage-backdrop-position, fixed);
+  inset: 0;
+  display: var(--chotto-confirmdeletemessage-backdrop-display, flex);
+  justify-content: var(--chotto-confirmdeletemessage-backdrop-justify, center);
+  align-items: var(--chotto-confirmdeletemessage-backdrop-align, center);
+  background-color: var(--chotto-confirmdeletemessage-backdrop-bg, rgba(0, 0, 0, 0.3));
+  backdrop-filter: var(--chotto-confirmdeletemessage-backdrop-filter, none);
+  z-index: var(--chotto-confirmdeletemessage-backdrop-z-index, 1000);
+}
+
+.confirm-delete-message {
+  box-sizing: border-box;
+  width: var(--chotto-confirmdeletemessage-width, 450px);
+  height: var(--chotto-confirmdeletemessage-height, 120px);
+  padding: var(--chotto-confirmdeletemessage-padding, 20px);
+  background: var(--chotto-confirmdeletemessage-background, #ffffff);
+  border: var(--chotto-confirmdeletemessage-border, 1px solid #f3f3f3);
+  border-radius: var(--chotto-confirmdeletemessage-border-radius, 12px);
+  box-shadow: var(--chotto-confirmdeletemessage-box-shadow, 0px 4px 4px 0px rgba(0, 0, 0, 0.25));
+  display: var(--chotto-confirmdeletemessage-display, flex);
+  flex-direction: var(--chotto-confirmdeletemessage-flex-direction, column);
+  align-items: var(--chotto-confirmdeletemessage-align-items, center);
+  justify-content: var(--chotto-confirmdeletemessage-justify-content, space-between);
+  max-width: var(--chotto-confirmdeletemessage-max-width, calc(100vw - 32px));
+
+  &__title {
+    margin: var(--chotto-confirmdeletemessage-title-margin, 0);
+    width: var(--chotto-confirmdeletemessage-title-width, 100%);
+    text-align: var(--chotto-confirmdeletemessage-title-text-align, center);
+    font-family: var(--chotto-confirmdeletemessage-title-font-family, 'Open Sans', sans-serif);
+    font-weight: var(--chotto-confirmdeletemessage-title-font-weight, 600);
+    font-size: var(--chotto-confirmdeletemessage-title-font-size, 16px);
+    line-height: var(--chotto-confirmdeletemessage-title-line-height, 1.25);
+    color: var(--chotto-confirmdeletemessage-title-color, #1e1e1e);
+  }
+
+  &__actions {
+    display: var(--chotto-confirmdeletemessage-actions-display, flex);
+    align-items: var(--chotto-confirmdeletemessage-actions-align-items, center);
+    justify-content: var(--chotto-confirmdeletemessage-actions-justify-content, center);
+    gap: var(--chotto-confirmdeletemessage-actions-gap, 16px);
+  }
+
+  &__btn {
+    box-sizing: border-box;
+    width: var(--chotto-confirmdeletemessage-btn-width, 136px);
+    height: var(--chotto-confirmdeletemessage-btn-height, 40px);
+    margin: 0;
+    padding: 0;
+    font-family: var(--chotto-confirmdeletemessage-btn-font-family, 'Open Sans', sans-serif);
+    font-weight: var(--chotto-confirmdeletemessage-btn-font-weight, 600);
+    font-size: var(--chotto-confirmdeletemessage-btn-font-size, 14px);
+    line-height: 1;
+    cursor: var(--chotto-confirmdeletemessage-btn-cursor, pointer);
+    background: var(--chotto-confirmdeletemessage-btn-background, transparent);
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &--delete {
+      color: var(--chotto-confirmdeletemessage-btn-delete-color, #f84932);
+      border: var(--chotto-confirmdeletemessage-btn-delete-border, 1px solid #f84932);
+      border-radius: var(--chotto-confirmdeletemessage-btn-delete-border-radius, 20px);
+    }
+
+    &--cancel {
+      color: var(--chotto-confirmdeletemessage-btn-cancel-color, #5f5f5f);
+      border: var(--chotto-confirmdeletemessage-btn-cancel-border, none);
+    }
+  }
+}
+
+.confirm-delete-message-fade-enter-from,
+.confirm-delete-message-fade-leave-to {
+  opacity: var(--chotto-confirmdeletemessage-enter-opacity, 0);
+}
+
+.confirm-delete-message-fade-enter-active,
+.confirm-delete-message-fade-leave-active {
+  transition: var(--chotto-confirmdeletemessage-transition, opacity 0.2s ease);
+}
+
+.confirm-delete-message-fade-enter-to,
+.confirm-delete-message-fade-leave-from {
+  opacity: var(--chotto-confirmdeletemessage-enter-to-opacity, 1);
+}

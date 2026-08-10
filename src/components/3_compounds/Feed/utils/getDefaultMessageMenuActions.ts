@@ -15,8 +15,10 @@ export function getDefaultMessageMenuActions(): IFeedMessageMenuAction[] {
       action: 'edit',
       title: 'Редактировать',
       icon: EditIcon as unknown as object,
-      // Чужие (левые) и нетекстовые сообщения редактировать нельзя
+      // Чужие / нетекст / окно редактирования истекло / уже удалено
       disabled: (message) =>
+        message.canEdit === false ||
+        !!message.deleted ||
         message.position !== 'right' ||
         (message.type != null && message.type !== 'message.text'),
     },
@@ -26,6 +28,10 @@ export function getDefaultMessageMenuActions(): IFeedMessageMenuAction[] {
       title: 'Удалить',
       icon: DeleteIcon as unknown as object,
       danger: true,
+      // Окно удаления истекло или сообщение уже удалено
+      disabled: (message) =>
+        message.canDelete === false ||
+        !!message.deleted,
     },
   ]
 }

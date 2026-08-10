@@ -101,6 +101,13 @@ type DemoMessage = {
     }>;
   };
   edited?: MessageEditInfo;
+  deleted?: boolean;
+  deletion?: {
+    deletedBy?: string;
+    deletedAt?: string;
+  };
+  canEdit?: boolean;
+  canDelete?: boolean;
   reply?: {
     messageId: string;
     type: string;
@@ -250,6 +257,18 @@ const simpleMessages: DemoMessage[] = [
         { key: '🔥', userId: 'usr_other_0', name: 'Анна', date: 1757151901 }
       ]
     }
+  },
+  {
+    chatId: 2,
+    type: "message.text",
+    direction: 'outgoing',
+    header: "Анна",
+    messageId: '6-expired',
+    text: "Старое сообщение — редактировать и удалить уже нельзя",
+    timestamp: '1762164000',
+    status: 'read',
+    canEdit: false,
+    canDelete: false,
   },
   {
     chatId: 2,
@@ -587,6 +606,23 @@ export const BasicExample: Story = {
           type?: string;
           messageId?: string;
         };
+
+        if (payload.action === 'delete' && payload.messageId) {
+          const idx = messagesRef.value.findIndex((m) => m.messageId === payload.messageId);
+          if (idx === -1) return;
+          const now = new Date();
+          const deletedAt = `${String(now.getDate()).padStart(2, '0')}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getFullYear()).slice(-2)} в ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+          messagesRef.value[idx] = {
+            ...messagesRef.value[idx],
+            deleted: true,
+            deletion: {
+              deletedBy: 'Иванов Иван',
+              deletedAt,
+            },
+          };
+          return;
+        }
+
         // Симуляция запроса истории правки с бэка при наведении на «изменено»
         if (
           (payload.action === 'fetchEditInfo' || payload.type === 'editInfo') &&

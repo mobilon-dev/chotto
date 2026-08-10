@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="menuAnchorRef"
     class="file-message"
     :class="[
       getClass(message),
@@ -37,108 +38,135 @@
       :style="{ gridRow: message.subText ? '2' : '1' }"
       @mouseenter="showMenu"
     >
-      <BaseReplyMessage
-        v-if="message.reply"
-        :message="message.reply"
-        :class="message.position"
-        @reply="handleClickReplied"
-      />
-      <a
-        class="file-message__link"
-        :href="message.url"
-        @click.prevent="downloadFile"
-      >
-        <span class="pi pi-file" />
-        <p class="file-message__filename-text">
-          {{ message.filename }}
-        </p>
-        <div class="file-message__download-button">
-          <span class="pi pi-download" />
-        </div>
-      </a>
-      <div
-        v-if="message.text"
-        class="file-message__text-container"
-      >
-        <p
-          @click="inNewWindow"
-          v-html="linkedHtml"
-        />
-      </div>
-
-      <LinkPreview
-        v-if="message.linkPreview"
-        :class="message.position"
-        :link-preview="message.linkPreview"
-      />
-
-      <EmbedPreview
-        v-if="message.embed"
-        :class="message.position"
-        :embed="message.embed"
-      />
-
-      <div class="file-message__footer">
-        <MessageReactions
-          :reactions="message.reactions"
-          :message-id="message.messageId"
-          :reply="buildReplyPayload(message, 'message.file')"
-          :enabled="reactionsEnabled"
-          :mode="reactionsMode"
-          :current-user-id="currentUserId"
-          :reaction-user-names="reactionUserNames"
-          :menu-enabled="menuActions.length > 0"
-          @toggle-reaction="onToggleReaction"
-          @add-reaction="onAddReaction"
-          @remove-reaction="onRemoveReaction"
-          @menu="isOpenMenu = true"
-        />
-
-        <div class="file-message__info-container">
-          <div
-            v-if="message.views"
-            class="file-message__views"
-            @click="viewsAction"
-          >
-            <span class="pi pi-eye" />
-            <p>{{ message.views }}</p>
+      <template v-if="message.deleted">
+        <DeletedMessageContent />
+        <div class="file-message__footer">
+          <div class="file-message__info-container">
+            <span
+              v-if="message.time"
+              class="file-message__time"
+            >{{ message.time }}</span>
+            <MessageStatusIndicator
+              base-class="file-message"
+              :message-class="getClass(message)"
+              :message-status="message.status"
+              :status-class="status"
+              :status-title="statusTitle"
+            />
           </div>
-
-          <span class="file-message__time">{{ message.time }}</span>
-
-          <MessageStatusIndicator
-            base-class="file-message"
-            :message-class="getClass(message)"
-            :message-status="message.status"
-            :status-class="status"
-            :status-title="statusTitle"
+        </div>
+      </template>
+      <template v-else>
+        <BaseReplyMessage
+          v-if="message.reply"
+          :message="message.reply"
+          :class="message.position"
+          @reply="handleClickReplied"
+        />
+        <a
+          class="file-message__link"
+          :href="message.url"
+          @click.prevent="downloadFile"
+        >
+          <span class="pi pi-file" />
+          <p class="file-message__filename-text">
+            {{ message.filename }}
+          </p>
+          <div class="file-message__download-button">
+            <span class="pi pi-download" />
+          </div>
+        </a>
+        <div
+          v-if="message.text"
+          class="file-message__text-container"
+        >
+          <p
+            @click="inNewWindow"
+            v-html="linkedHtml"
           />
         </div>
-      </div>
 
-      <MessageSmsInvite
-        :status="message.status"
-        :has-messenger-account="message.hasMessengerAccount"
-        :channel="channel"
-        @sms-invite="handleSmsInvite"
-      />
-
-      <button
-        v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
-        class="file-message__menu-button"
-        @click="isOpenMenu = !isOpenMenu"
-      >
-        <span class="pi pi-ellipsis-h" />
-      </button>
-
-      <transition>
-        <ContextMenu
-          v-if="isOpenMenu && menuActions.length"
-          class="file-message__context-menu message-actions-menu"
-          :actions="menuActions"
-          @click="clickAction"
+        <LinkPreview
+          v-if="message.linkPreview"
+          :class="message.position"
+          :link-preview="message.linkPreview"
         />
-      </transition>
+
+        <EmbedPreview
+          v-if="message.embed"
+          :class="message.position"
+          :embed="message.embed"
+        />
+
+        <div class="file-message__footer">
+          <MessageReactions
+            :reactions="message.reactions"
+            :message-id="message.messageId"
+            :reply="buildReplyPayload(message, 'message.file')"
+            :enabled="reactionsEnabled"
+            :mode="reactionsMode"
+            :current-user-id="currentUserId"
+            :reaction-user-names="reactionUserNames"
+            :menu-enabled="menuActions.length > 0"
+            @toggle-reaction="onToggleReaction"
+            @add-reaction="onAddReaction"
+            @remove-reaction="onRemoveReaction"
+            @menu="openMenu"
+          />
+
+          <div class="file-message__info-container">
+            <div
+              v-if="message.views"
+              class="file-message__views"
+              @click="viewsAction"
+            >
+              <span class="pi pi-eye" />
+              <p>{{ message.views }}</p>
+            </div>
+
+            <span class="file-message__time">{{ message.time }}</span>
+
+            <MessageStatusIndicator
+              base-class="file-message"
+              :message-class="getClass(message)"
+              :message-status="message.status"
+              :status-class="status"
+              :status-title="statusTitle"
+            />
+          </div>
+        </div>
+
+        <MessageSmsInvite
+          :status="message.status"
+          :has-messenger-account="message.hasMessengerAccount"
+          :channel="channel"
+          @sms-invite="handleSmsInvite"
+        />
+
+        <button
+          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
+          class="file-message__menu-button"
+          @click="toggleMenu"
+        >
+          <span class="pi pi-ellipsis-h" />
+        </button>
+
+        <Teleport to="body">
+          <transition>
+            <ContextMenu
+              v-if="isOpenMenu && menuActions.length"
+              ref="menuRef"
+              class="file-message__context-menu message-actions-menu"
+              :style="menuStyle"
+              :data-theme="menuTheme"
+              :actions="menuActions"
+              @click="clickAction"
+              @mouseenter="onMenuMouseEnter"
+              @mouseleave="onMenuMouseLeave"
+            />
+          </transition>
+        </Teleport>
+      </template>
     </div>
   </div>
 </template>
@@ -156,6 +184,7 @@ import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/Base
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
+import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
@@ -213,8 +242,16 @@ const { startReply } = useStartReply(chatAppId || '')
 const {
   isOpenMenu,
   buttonMenuVisible,
+  menuAnchorRef,
+  menuRef,
+  menuStyle,
+  menuTheme,
   showMenu,
   hideMenu,
+  openMenu,
+  toggleMenu,
+  onMenuMouseEnter,
+  onMenuMouseLeave,
   clickAction,
   viewsAction,
   handleClickReplied

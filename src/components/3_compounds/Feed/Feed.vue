@@ -38,7 +38,7 @@
         @dblclick="feedObjectDoubleClick($event,object)"
       >
         <component
-          :is="componentsMap(object.type)"
+          :is="componentsMap(object)"
           :key="object.messageId ?? 'mid-' + index"
           class="message-feed__message"
           :message="object"

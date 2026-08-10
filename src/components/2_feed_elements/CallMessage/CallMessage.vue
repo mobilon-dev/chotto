@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="menuAnchorRef"
     :class="[
       getClass(message, elementType.message),
       applyStyle(message)
@@ -32,6 +33,16 @@
     <div 
       class="call-message__content"
     >
+      <template v-if="message.deleted">
+        <DeletedMessageContent />
+        <div class="call-message__info-container">
+          <span
+            v-if="message.time"
+            class="call-message__time"
+          >{{ message.time }}</span>
+        </div>
+      </template>
+      <template v-else>
       <div class="call-message__header-container">
         <div class="call-message__title-wrapper">
           <IncomingCallIcon
@@ -271,7 +282,7 @@
       <button
         v-if="buttonMenuVisible && menuActions.length"
         class="call-message__menu-button"
-        @click="isOpenMenu = !isOpenMenu"
+        @click="toggleMenu"
       >
         <svg
           width="4"
@@ -287,14 +298,22 @@
         </svg>
       </button>
 
-      <transition>
-        <ContextMenu
-          v-if="isOpenMenu && menuActions.length"
-          class="call-message__context-menu message-actions-menu"
-          :actions="menuActions"
-          @click="handleActionClick"
-        />
-      </transition>
+      <Teleport to="body">
+        <transition>
+          <ContextMenu
+            v-if="isOpenMenu && menuActions.length"
+            ref="menuRef"
+            class="call-message__context-menu message-actions-menu"
+            :style="menuStyle"
+            :data-theme="menuTheme"
+            :actions="menuActions"
+            @click="handleActionClick"
+            @mouseenter="onMenuMouseEnter"
+            @mouseleave="onMenuMouseLeave"
+          />
+        </transition>
+      </Teleport>
+      </template>
     </div>
   </div>
 </template>
@@ -308,6 +327,7 @@ import type { IAudioRecognitionPayload, IAudioSummaryPayload, ICallMessage } fro
 import { useMessageActions, useSubtextTooltip, useMessageMenuActions, buildReplyPayload, useStartReply } from '@/hooks/messages'
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue'
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
+import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue'
 import IncomingCallIcon from './icons/IncomingCallIcon.vue'
 import OutgoingCallIcon from './icons/OutgoingCallIcon.vue'
 
@@ -372,8 +392,15 @@ const callRecordUrl = computed(() => {
 const {
   isOpenMenu,
   buttonMenuVisible,
+  menuAnchorRef,
+  menuRef,
+  menuStyle,
+  menuTheme,
   showMenu,
   hideMenu,
+  toggleMenu,
+  onMenuMouseEnter,
+  onMenuMouseLeave,
   clickAction,
 } = useMessageActions(props.message, emit, {
   onReply: () => startReply(buildReplyPayload(props.message, 'message.call')),

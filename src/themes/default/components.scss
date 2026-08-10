@@ -62,6 +62,7 @@
 @use '../../components/2_feed_elements/MessageReactions/styles/themes/default.scss' as messagereactions-default;
 @use '../../components/2_feed_elements/MessageStatusIndicator/styles/themes/default.scss' as messagestatusindicator-default;
 @use '../../components/2_feed_elements/MessageSmsInvite/styles/themes/default.scss' as messagesmsinvite-default;
+@use '../../components/2_feed_elements/DeletedMessageContent/styles/themes/default.scss' as deletedmessagecontent-default;
 @use '../../components/2_feed_elements/ReplyAudioMessage/styles/themes/default.scss' as replyaudiomessage-default;
 @use '../../components/2_feed_elements/ReplyCallMessage/styles/themes/default.scss' as replycallmessage-default;
 @use '../../components/2_feed_elements/ReplyFileMessage/styles/themes/default.scss' as replyfilemessage-default;
@@ -81,6 +82,7 @@
 @use '../../components/2_modals/Modal/styles/themes/default.scss' as modal-default;
 @use '../../components/2_modals/ModalFullscreen/styles/themes/default.scss' as modalfullscreen-default;
 @use '../../components/2_modals/ModalNoFooter/styles/themes/default.scss' as modalnofooter-default;
+@use '../../components/2_modals/ConfirmDeleteMessage/styles/themes/default.scss' as confirmdeletemessage-default;
 @use '../../components/2_modals/ModalVideoRecorder/styles/themes/default.scss' as modalvideorecorder-default;
 
 // 3_compounds
