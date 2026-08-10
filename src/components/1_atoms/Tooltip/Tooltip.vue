@@ -10,10 +10,10 @@
   <Teleport to="body">
     <Transition>
       <div
-        v-if="show"
+        v-if="show && hasTooltipBody"
       >
         <span
-          v-for="(tooltipText, index) in resolvedTexts"
+          v-for="(tooltipText, index) in displayItems"
           :key="`${tooltipText}-${index}`"
           ref="tooltipItems"
           :data-theme="getTheme().theme ? getTheme().theme : 'light'"
@@ -22,7 +22,11 @@
           @mouseenter="handleTooltipEnter"
           @mouseleave="handleTooltipLeave"
         >
-          {{ tooltipText }}
+          <slot
+            v-if="hasContentSlot"
+            name="content"
+          />
+          <template v-else>{{ tooltipText }}</template>
         </span>
       </div>
     </Transition>
@@ -30,12 +34,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, unref, inject, nextTick, onMounted, onUnmounted } from 'vue';
+import { computed, ref, unref, inject, nextTick, onMounted, onUnmounted, useSlots } from 'vue';
 // import { onMounted } from 'vue';
 import { useTheme } from '@/hooks';
 
 const chatAppId = inject<string | undefined>('chatAppId')
 const { getTheme } = useTheme(chatAppId as string)
+const slots = useSlots()
 
 const container = ref<HTMLElement>() 
 const tooltipItems = ref<HTMLElement[]>([])
@@ -86,8 +91,14 @@ const props = defineProps({
   maxWidth: {
     type: String,
     default: '',
-  }
+  },
+  bubbleStyle: {
+    type: Object as () => Record<string, string>,
+    default: () => ({}),
+  },
 })
+
+const hasContentSlot = computed(() => typeof slots.content === 'function')
 
 const tooltipClasses = computed(() => ({
   'tooltip__text': true,
@@ -96,6 +107,7 @@ const tooltipClasses = computed(() => ({
 
 const tooltipStyle = computed(() => ({
   maxWidth: props.maxWidth || undefined,
+  ...props.bubbleStyle,
 }))
 
 const resolvedTexts = computed(() => {
@@ -105,6 +117,17 @@ const resolvedTexts = computed(() => {
 
   if (items.length > 0) return items;
   return props.text ? [props.text] : [];
+});
+
+/** Один пузырь для #content, иначе отдельный пузырь на каждую строку texts */
+const displayItems = computed(() => {
+  if (hasContentSlot.value) return ['__content__'];
+  return resolvedTexts.value;
+});
+
+const hasTooltipBody = computed(() => {
+  if (hasContentSlot.value) return true;
+  return resolvedTexts.value.length > 0;
 });
 
 const getTooltipPosition = (

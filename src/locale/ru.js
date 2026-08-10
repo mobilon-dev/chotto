@@ -21,4 +21,5 @@ export const ru = {
     'component.TextFormatToolbar.Code': 'Встроенный код',
     'component.TextFormatToolbar.Quote': 'Цитата',
     'component.TextMessage.sendSmsInvite': 'Отправить SMS приглашение',
+    'component.TextMessage.edited': 'изменено',
 }

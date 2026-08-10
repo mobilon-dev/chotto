@@ -18,6 +18,7 @@ import StickerPicker from '../../components/2_chatinput_elements/StickerPicker/S
 import { themes } from '../data/themes';
 import { templates, groupTemplates } from '../data';
 import { transformToFeed } from '../transform/transformToFeed';
+import type { MessageEditInfo } from '@/types';
 import sticker from '../data/images/sticker.webp';
 import {
   approveSticker,
@@ -79,7 +80,41 @@ const simpleChats = [
 ];
 
 // Простые сообщения для примеров
-const simpleMessages = [
+type DemoMessage = {
+  chatId: number;
+  type: string;
+  direction: string;
+  header?: string;
+  messageId: string;
+  text?: string;
+  timestamp: string;
+  status: string;
+  url?: string;
+  filename?: string;
+  alt?: string;
+  reactions?: {
+    items: Array<{
+      key: string;
+      userId: string;
+      name?: string;
+      date?: number;
+    }>;
+  };
+  edited?: MessageEditInfo;
+  reply?: {
+    messageId: string;
+    type: string;
+    text?: string;
+    url?: string;
+    filename?: string;
+    header?: string;
+    callDuration?: string;
+    isMissedCall?: boolean;
+  };
+  size?: string;
+};
+
+const simpleMessages: DemoMessage[] = [
   // Сообщения для чата 1 (Анна)
   {
     chatId: 1,
@@ -149,6 +184,36 @@ const simpleMessages = [
     alt: "Avatar",
     timestamp: '1762164300',
     status: 'read',
+  },
+  {
+    chatId: 1,
+    type: "message.text",
+    direction: 'outgoing',
+    header: "Иван",
+    messageId: '11-edited',
+    text: "Добрый день. Нет, у нас выходной",
+    timestamp: '1762164400',
+    status: 'read',
+    edited: {
+      originalText: 'Добрый день',
+      history: [
+        {
+          text: 'Добрый день. Нет у нас выходной',
+          editedBy: 'Иван',
+          editedAt: '18.07.26 в 09:15',
+        },
+        {
+          text: 'Добрый день. Нет, у нас выходной',
+          editedBy: 'Иван',
+          editedAt: '19.07.26 в 14:30',
+        },
+        {
+          text: 'Добрый день. Нет, у нас выходной',
+          editedBy: 'Иван',
+          editedAt: '20.07.26 в 11:08',
+        },
+      ],
+    },
   },
   // Сообщения для чата 2 (Иван)
   {
@@ -220,6 +285,36 @@ const simpleMessages = [
     timestamp: '1762164300',
     status: 'read',
   },
+  {
+    chatId: 2,
+    type: "message.text",
+    direction: 'incoming',
+    header: "Иван",
+    messageId: '12-edited',
+    text: "Добрый день. Нет, у нас выходной",
+    timestamp: '1762164400',
+    status: 'read',
+    edited: {
+      originalText: 'Добрый день',
+      history: [
+        {
+          text: 'Добрый день. Нет у нас выходной',
+          editedBy: 'Иван',
+          editedAt: '18.07.26 в 10:20',
+        },
+        {
+          text: 'Добрый день. Нет, у нас выходной',
+          editedBy: 'Иван',
+          editedAt: '19.07.26 в 16:45',
+        },
+        {
+          text: 'Добрый день. Нет, у нас выходной',
+          editedBy: 'Иван',
+          editedAt: '20.07.26 в 11:08',
+        },
+      ],
+    },
+  },
 ];
 
 const meta: Meta = {
@@ -252,7 +347,7 @@ export const BasicExample: Story = {
       const selectedChatRef = ref(chatsRef.value[0]);
       
       // Делаем сообщения реактивными
-      const messagesRef = ref([...simpleMessages]);
+      const messagesRef = ref<DemoMessage[]>([...simpleMessages]);
       
       // Вычисляем сообщения для выбранного чата
       const feedMessagesRef = computed(() => {
@@ -270,6 +365,12 @@ export const BasicExample: Story = {
         return transformToFeed(chatMessages);
       });
       
+      const formatEditAt = (date = new Date()) => {
+        const pad = (n: number) => String(n).padStart(2, '0');
+        const yy = String(date.getFullYear()).slice(-2);
+        return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${yy} в ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+      };
+
       const handleSend = (message: { 
         text?: string; 
         type?: string; 
@@ -287,6 +388,11 @@ export const BasicExample: Story = {
           callDuration?: string;
           isMissedCall?: boolean;
         };
+        edit?: {
+          messageId: string;
+          type: string;
+          text?: string;
+        };
       }) => {
         if (!selectedChatRef.value) return;
         
@@ -299,10 +405,60 @@ export const BasicExample: Story = {
         // Если выбран чат с Анной (1), то сообщение от Ивана (2)
         // Если выбран чат с Иваном (2), то сообщение от Анны (1)
         const senderChatId = currentChatId === 1 ? 2 : 1;
+        const editorName = currentChatId === 1 ? 'Иван' : 'Анна';
         
         // Определяем тип сообщения и текст для отображения
         const messageType = message.type || "message.text";
         const displayText = message.text || (messageType.includes('sticker') ? 'Стикер' : messageType.includes('file') ? message.filename || 'Файл' : '');
+
+        // Редактирование: обновляем существующее сообщение и ставим метку «изменено»
+        if (message.edit?.messageId) {
+          const idx = messagesRef.value.findIndex(
+            (m) => m.messageId === message.edit!.messageId && m.chatId === currentChatId
+          );
+          if (idx !== -1) {
+            const existing = messagesRef.value[idx];
+            const originalText =
+              existing.edited?.originalText ||
+              message.edit.text ||
+              existing.text ||
+              '';
+            const prevHistory = existing.edited?.history?.length
+              ? [...existing.edited.history]
+              : existing.edited?.editedBy || existing.edited?.editedAt
+                ? [{
+                    text: existing.text,
+                    editedBy: existing.edited.editedBy,
+                    editedAt: existing.edited.editedAt,
+                  }]
+                : [];
+            const editedAt = formatEditAt();
+            const editedBy = existing.header || editorName;
+            const editedText = message.text || '';
+
+            messagesRef.value[idx] = {
+              ...existing,
+              text: editedText,
+              edited: {
+                originalText,
+                history: [
+                  ...prevHistory,
+                  { text: editedText, editedBy, editedAt },
+                ],
+                editedBy,
+                editedAt,
+              },
+            };
+
+            const currentChat = chatsRef.value.find(c => c.chatId === currentChatId);
+            if (currentChat) {
+              currentChat.lastMessage = displayText;
+              currentChat['lastActivity.time'] = 'только что';
+              currentChat['lastActivity.timestamp'] = nowString;
+            }
+          }
+          return;
+        }
         
         // Создаем сообщение для текущего чата (исходящее - справа)
         const outgoingMessage: {
@@ -387,8 +543,8 @@ export const BasicExample: Story = {
         }
         
         // Добавляем оба сообщения в массив
-        messagesRef.value.push(outgoingMessage as typeof simpleMessages[0]);
-        messagesRef.value.push(incomingMessage as typeof simpleMessages[0]);
+        messagesRef.value.push(outgoingMessage);
+        messagesRef.value.push(incomingMessage);
         
         // Обновляем информацию о последнем сообщении в обоих чатах
         const currentChat = chatsRef.value.find(c => c.chatId === currentChatId);
@@ -426,6 +582,80 @@ export const BasicExample: Story = {
       
       const handleMessageAction = (data: unknown) => {
         console.log('Message action:', data);
+        const payload = data as {
+          action?: string;
+          type?: string;
+          messageId?: string;
+        };
+        // Симуляция запроса истории правки с бэка при наведении на «изменено»
+        if (
+          (payload.action === 'fetchEditInfo' || payload.type === 'editInfo') &&
+          payload.messageId
+        ) {
+          const idx = messagesRef.value.findIndex((m) => m.messageId === payload.messageId);
+          if (idx === -1) return;
+          const existing = messagesRef.value[idx];
+          if (!existing.edited) return;
+
+          const fullHistoryByMessageId: Record<string, DemoMessage['edited']> = {
+            '11-edited': {
+              originalText: 'Добрый день (оригинальный текст)',
+              history: [
+                {
+                  text: 'Добрый день. Нет у нас выходной',
+                  editedBy: 'Иван',
+                  editedAt: '18.07.26 в 09:15',
+                },
+                {
+                  text: 'Добрый день. Нет, у нас выходной',
+                  editedBy: 'Иван',
+                  editedAt: '19.07.26 в 14:30',
+                },
+                {
+                  text: 'Добрый день. Нет, у нас выходной!!!',
+                  editedBy: 'Иван',
+                  editedAt: '20.07.26 в 11:08',
+                },
+              ],
+            },
+            '12-edited': {
+              originalText: 'Добрый день',
+              history: [
+                {
+                  text: 'Добрый день. Нет у нас выходной',
+                  editedBy: 'Иван',
+                  editedAt: '18.07.26 в 09:15',
+                },
+                {
+                  text: 'Добрый день. Нет, у нас выходной',
+                  editedBy: 'Иван',
+                  editedAt: '19.07.26 в 14:30',
+                },
+                {
+                  text: 'Добрый день. Нет, у нас выходной!!!',
+                  editedBy: 'Иван',
+                  editedAt: '20.07.26 в 11:08',
+                },
+              ],
+            },
+          };
+
+          const fetchedEdit = fullHistoryByMessageId[payload.messageId] ?? {
+            ...existing.edited,
+            history: existing.edited.history?.length
+              ? existing.edited.history
+              : [{
+                  text: existing.text,
+                  editedBy: existing.edited.editedBy,
+                  editedAt: existing.edited.editedAt,
+                }],
+          };
+
+          messagesRef.value[idx] = {
+            ...existing,
+            edited: fetchedEdit,
+          };
+        }
       };
       
       const handleLoadMore = () => {

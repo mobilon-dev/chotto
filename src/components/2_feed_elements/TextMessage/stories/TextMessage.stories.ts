@@ -227,6 +227,18 @@ export const RightMessages: Story = {
         { ...message, text: 'Message with status: received', position: 'right' as const, status: 'received' as const, messageId: 'right8' },
         { ...message, text: 'Message with status: read', position: 'right' as const, status: 'read' as const, messageId: 'right9' },
         { ...message, text: 'Message with status: error', position: 'right' as const, status: 'error' as const, statusMsg: 'Не удалось отправить сообщение', messageId: 'right10' },
+        {
+          ...message,
+          text: 'Отредактированный текст сообщения',
+          position: 'right' as const,
+          status: 'read' as const,
+          messageId: 'right11-edited',
+          edited: {
+            originalText: 'Оригинальное сообщение',
+            editedBy: 'Васильев Василий',
+            editedAt: '20.07.26 в 11:08',
+          },
+        },
         { ...message, text: 'Message with avatar', position: 'right' as const, avatar: 'https://placehold.jp/30/336633/ffffff/64x64.png?text=PN', messageId: 'right12' },
         { ...message, text: 'Message with long time', position: 'right' as const, time: 'двенадцать дней назад', messageId: 'right13' },
         { 
@@ -274,6 +286,46 @@ export const RightMessageMax: Story = {
       time: 'два дня назад',
     },
   },
+  decorators: commonDecorator,
+};
+
+export const MessagesWithEdit: Story = {
+  render: () => ({
+    components: { TextMessage },
+    setup() {
+      const messages = [
+        {
+          ...message,
+          text: 'Отредактированный текст слева',
+          position: 'left' as const,
+          messageId: 'edited-left',
+          edited: {
+            originalText: 'Оригинальное сообщение',
+            editedBy: 'Васильев Василий',
+            editedAt: '20.07.26 в 11:08',
+          },
+        },
+        {
+          ...message,
+          text: 'Отредактированный текст справа',
+          position: 'right' as const,
+          status: 'read' as const,
+          messageId: 'edited-right',
+          edited: {
+            originalText: 'Оригинальное сообщение',
+            editedBy: 'Васильев Василий',
+            editedAt: '20.07.26 в 11:08',
+          },
+        },
+      ];
+      return { messages };
+    },
+    template: `
+      <div class="message-feed" style="display: flex; flex-direction: column; gap: 16px;">
+        <TextMessage v-for="msg in messages" :key="msg.messageId" :message="msg" />
+      </div>
+    `,
+  }),
   decorators: commonDecorator,
 };
 

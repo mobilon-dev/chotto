@@ -188,9 +188,10 @@
     }
 
     .sticker-message__context-menu {
-      top: var(--chotto-stickermessage-left-context-menu-top, 50%);
+      top: auto;
+      bottom: calc(50% + 8px);
       left: var(--chotto-stickermessage-left-context-menu-left, 100%);
-      margin-top: var(--chotto-stickermessage-left-context-menu-margin-top, 20px);
+      margin-top: 0;
     }
   }
 
@@ -227,9 +228,10 @@
     }
 
     .sticker-message__context-menu {
-      top: var(--chotto-stickermessage-right-context-menu-top, 50%);
+      top: auto;
+      bottom: calc(50% + 8px);
       right: var(--chotto-stickermessage-right-context-menu-right, 100%);
-      margin-top: var(--chotto-stickermessage-right-context-menu-margin-top, 20px);
+      margin-top: 0;
     }
   }
 }

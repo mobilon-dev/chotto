@@ -86,6 +86,50 @@
             <span class="pi pi-eye" />
             <p>{{ message.views }}</p>
           </div>
+          <Tooltip
+            v-if="message.edited"
+            position="bottom-right"
+            :offset="8"
+            :delay="400"
+            max-width="280px"
+            :bubble-style="editTooltipBubbleStyle"
+          >
+            <template
+              v-if="hasEditTooltip"
+              #content
+            >
+              <div class="text-message__edit-tooltip">
+                <div
+                  v-if="editTooltipLines.original"
+                  class="text-message__edit-tooltip-original"
+                >
+                  {{ editTooltipLines.original }}
+                </div>
+                <div
+                  v-for="(edit, index) in editTooltipLines.edits"
+                  :key="`${edit.text}-${edit.meta}-${index}`"
+                  class="text-message__edit-tooltip-entry"
+                >
+                  <div
+                    v-if="edit.text"
+                    class="text-message__edit-tooltip-original"
+                  >
+                    {{ edit.text }}
+                  </div>
+                  <div
+                    v-if="edit.meta"
+                    class="text-message__edit-tooltip-meta"
+                  >
+                    {{ edit.meta }}
+                  </div>
+                </div>
+              </div>
+            </template>
+            <span
+              class="text-message__edited"
+              @mouseenter="onEditedHover"
+            >{{ editedLabel }}</span>
+          </Tooltip>
           <span
             v-if="message.time"
             class="text-message__time"
@@ -132,7 +176,7 @@
   setup
   lang="ts"
 >
-import { computed, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
 
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import LinkPreview from '@/components/1_atoms/LinkPreview/LinkPreview.vue';
@@ -142,8 +186,20 @@ import MessageReactions from '@/components/2_feed_elements/MessageReactions/Mess
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, buildEditPayload, useStartReply, useStartEdit } from '@/hooks/messages';
+import {
+  useMessageLinks,
+  useMessageActions,
+  useMessageMenuActions,
+  useChannelAccentColor,
+  useSubtextTooltip,
+  buildReplyPayload,
+  buildEditPayload,
+  useStartReply,
+  useStartEdit,
+  getEditTooltipLines,
+} from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
+import { useLocale } from '@/locale/useLocale';
 import { ITextMessage } from '@/types';
 
 // Define props
@@ -190,11 +246,13 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['action','reply','sms-invite']);
+const { t } = useLocale()
 const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 const { menuActions } = useMessageMenuActions(() => props.message)
 const chatAppId = inject('chatAppId') as string | undefined
 const { startReply } = useStartReply(chatAppId || '')
 const { startEdit } = useStartEdit(chatAppId || '')
+const editInfoRequested = ref(false)
 
 const { 
   isOpenMenu,
@@ -213,6 +271,14 @@ const {
 
 const status = computed(() => getStatus(props.message.status))
 const statusTitle = computed(() => getStatusTitle(props.message.status, props.message.statusMsg))
+const editedLabel = computed(() => t('component.TextMessage.edited'))
+const editTooltipLines = computed(() => getEditTooltipLines(props.message.edited))
+const hasEditTooltip = computed(
+  () => !!(editTooltipLines.value.original || editTooltipLines.value.edits.length)
+)
+const editTooltipBubbleStyle = {
+  '--chotto-tooltip-border': '1px solid #5F5F5F',
+}
 
 const { bubbleStyle: rightBubbleStyle } = useChannelAccentColor(
   computed(() => props.message),
@@ -235,6 +301,17 @@ const showSmsInvite = computed(
 
 function handleSmsInvite() {
   emit('sms-invite', props.message)
+}
+
+/** При наведении на «изменено» — запрос истории правки на бэк (один раз за жизнь компонента) */
+function onEditedHover() {
+  if (editInfoRequested.value || !props.message.edited) return
+  editInfoRequested.value = true
+  emit('action', {
+    action: 'fetchEditInfo',
+    messageId: props.message.messageId,
+    type: 'editInfo',
+  })
 }
 </script>
 

@@ -139,7 +139,8 @@
     }
 
     .missed-call-message__context-menu {
-      top: var(--chotto-missedcallmessage-left-context-menu-top, 56%);
+      top: auto;
+      bottom: calc(50% + 8px);
       left: var(--chotto-missedcallmessage-left-context-menu-left, 100%);
     }
   }

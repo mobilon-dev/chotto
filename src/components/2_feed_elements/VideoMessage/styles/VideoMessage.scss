@@ -207,9 +207,10 @@
     }
 
     .video-message__context-menu {
-      top: var(--chotto-videomessage-left-context-menu-top, 50%);
+      top: auto;
+      bottom: calc(50% + 8px);
       left: var(--chotto-videomessage-left-context-menu-left, 100%);
-      margin-top: var(--chotto-videomessage-left-context-menu-margin-top, 20px);
+      margin-top: 0;
     }
   }
 
@@ -248,9 +249,10 @@
     }
 
     .video-message__context-menu {
-      top: var(--chotto-videomessage-right-context-menu-top, 50%);
+      top: auto;
+      bottom: calc(50% + 8px);
       right: var(--chotto-videomessage-right-context-menu-right, 100%);
-      margin-top: var(--chotto-videomessage-right-context-menu-margin-top, 20px);
+      margin-top: 0;
     }
   }
 

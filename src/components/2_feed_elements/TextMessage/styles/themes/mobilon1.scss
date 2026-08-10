@@ -60,6 +60,21 @@
   --chotto-textmessage-views-p-font-size: var(--chotto-theme-small-text-font-size);
   --chotto-textmessage-views-p-color: var(--chotto-theme-secondary-text-color);
 
+  // TextMessage edited variables
+  --chotto-textmessage-edited-font-size: var(--chotto-theme-text-font-size);
+  --chotto-textmessage-edited-color: var(--chotto-theme-secondary-text-color);
+  --chotto-textmessage-edited-font-style: normal;
+  --chotto-textmessage-edited-cursor: pointer;
+  --chotto-textmessage-edited-white-space: nowrap;
+
+  // TextMessage edit tooltip variables
+  --chotto-textmessage-edit-tooltip-display: flex;
+  --chotto-textmessage-edit-tooltip-flex-direction: column;
+  --chotto-textmessage-edit-tooltip-row-gap: 2px;
+  --chotto-textmessage-edit-tooltip-border: 1px solid #5F5F5F;
+  --chotto-textmessage-edit-tooltip-original-color: #1E1E1E;
+  --chotto-textmessage-edit-tooltip-meta-color: #5F5F5F;
+
   // TextMessage time variables
   --chotto-textmessage-time-font-size: var(--chotto-theme-text-font-size);
   --chotto-textmessage-time-color: var(--chotto-theme-secondary-text-color);

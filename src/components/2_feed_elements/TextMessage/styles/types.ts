@@ -103,6 +103,30 @@ export interface TextMessageThemeCSSVariables {
   /** Цвет текста просмотров */
   '--chotto-textmessage-views-p-color': string;
 
+  /** Размер шрифта метки «изменено» */
+  '--chotto-textmessage-edited-font-size': string;
+  /** Цвет метки «изменено» */
+  '--chotto-textmessage-edited-color': string;
+  /** Стиль шрифта метки «изменено» */
+  '--chotto-textmessage-edited-font-style': string;
+  /** Курсор метки «изменено» */
+  '--chotto-textmessage-edited-cursor': string;
+  /** Перенос строк метки «изменено» */
+  '--chotto-textmessage-edited-white-space': string;
+
+  /** Отображение контейнера тултипа правки */
+  '--chotto-textmessage-edit-tooltip-display': string;
+  /** Направление flex контейнера тултипа правки */
+  '--chotto-textmessage-edit-tooltip-flex-direction': string;
+  /** Промежуток между строками тултипа правки */
+  '--chotto-textmessage-edit-tooltip-row-gap': string;
+  /** Рамка тултипа правки */
+  '--chotto-textmessage-edit-tooltip-border': string;
+  /** Цвет оригинального текста в тултипе правки */
+  '--chotto-textmessage-edit-tooltip-original-color': string;
+  /** Цвет мета-строки (автор, дата) в тултипе правки */
+  '--chotto-textmessage-edit-tooltip-meta-color': string;
+
   /** Размер шрифта времени */
   '--chotto-textmessage-time-font-size': string;
   /** Цвет времени */

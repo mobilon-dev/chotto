@@ -16,6 +16,33 @@ export interface Edit {
   text?: string
 }
 
+/**
+ * Одна запись в истории правки сообщения
+ */
+export interface MessageEditRecord {
+  /** Текст сообщения после этой правки */
+  text?: string
+  /** Кто изменил */
+  editedBy?: string
+  /** Когда изменили (уже отформатированная строка, напр. «20.07.2026 в 11:08») */
+  editedAt?: string
+}
+
+/**
+ * Снимок правки для метки «изменено» и тултипа.
+ * При отправке заполняется сразу; при наведении хост может обновить через fetchEditInfo.
+ */
+export interface MessageEditInfo {
+  /** Оригинальный текст до первой правки */
+  originalText?: string
+  /** Кто изменил (последняя правка; для обратной совместимости) */
+  editedBy?: string
+  /** Когда изменили (последняя правка; для обратной совместимости) */
+  editedAt?: string
+  /** История правок от старых к новым */
+  history?: MessageEditRecord[]
+}
+
 /** Контекст сообщения для условий пунктов меню */
 export type MessageMenuActionContext = {
   messageId?: string
@@ -268,6 +295,8 @@ export interface ITextMessage {
   subText?: string
   views?: number
   reply?: Reply
+  /** Данные правки: наличие поля показывает метку «изменено» */
+  edited?: MessageEditInfo
   linkPreview?: ILinkPreview
   embed?: object
   keyboard?: IKeyBoard[]

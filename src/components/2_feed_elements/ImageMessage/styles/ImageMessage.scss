@@ -294,9 +294,10 @@
     }
 
     .image-message__context-menu {
-      top: var(--chotto-imagemessage-left-context-menu-top, 50%);
+      top: auto;
+      bottom: calc(50% + 8px);
       left: var(--chotto-imagemessage-left-context-menu-left, 100%);
-      margin-top: var(--chotto-imagemessage-left-context-menu-margin-top, 20px);
+      margin-top: 0;
     }
   }
 
@@ -337,9 +338,10 @@
     }
 
     .image-message__context-menu {
-      top: var(--chotto-imagemessage-right-context-menu-top, 50%);
+      top: auto;
+      bottom: calc(50% + 8px);
       right: var(--chotto-imagemessage-right-context-menu-right, 100%);
-      margin-top: var(--chotto-imagemessage-right-context-menu-margin-top, 20px);
+      margin-top: 0;
     }
   }
 
