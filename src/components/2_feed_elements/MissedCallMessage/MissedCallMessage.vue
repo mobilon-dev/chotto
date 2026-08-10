@@ -82,7 +82,7 @@ import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
 import MissedCallIcon from './icons/MissedCallIcon.vue'
 
 const emit = defineEmits(['action', 'reply'])
-const { menuActions } = useMessageMenuActions()
+const { menuActions } = useMessageMenuActions(() => props.message)
 const chatAppId = inject('chatAppId') as string | undefined
 const { startReply } = useStartReply(chatAppId || '')
 

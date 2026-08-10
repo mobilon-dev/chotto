@@ -206,7 +206,7 @@ import { IVideoMessage } from '@/types';
 const chatAppId = inject('chatAppId') as string | undefined
 
 const { getTheme } = useTheme(chatAppId || '')
-const { menuActions } = useMessageMenuActions()
+const { menuActions } = useMessageMenuActions(() => props.message)
 const { startReply } = useStartReply(chatAppId || '')
 
 defineOptions({

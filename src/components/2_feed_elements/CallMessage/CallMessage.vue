@@ -330,7 +330,7 @@ const selectedChat = computed(() => {
 })
 
 const emit = defineEmits(['action', 'reply', 'call'])
-const { menuActions } = useMessageMenuActions()
+const { menuActions } = useMessageMenuActions(() => props.message)
 const chatAppId = inject('chatAppId') as string | undefined
 const { startReply } = useStartReply(chatAppId || '')
 

@@ -9,6 +9,13 @@ export interface Reply {
   isMissedCall?: boolean
 }
 
+/** Контекст сообщения для условий пунктов меню */
+export type MessageMenuActionContext = {
+  messageId?: string
+  position?: string
+  type?: string
+}
+
 /** Пункт контекстного меню сообщения (задаётся пропом Feed) */
 export interface IFeedMessageMenuAction {
   action?: string
@@ -16,7 +23,8 @@ export interface IFeedMessageMenuAction {
   /** URL или Vue-компонент иконки */
   icon?: string | object
   prime?: string
-  disabled?: boolean
+  /** Недоступен: флаг или функция от сообщения */
+  disabled?: boolean | ((message: MessageMenuActionContext) => boolean)
   /** Красный пункт (например, «Удалить») */
   danger?: boolean
   /** Разделитель между группами пунктов */

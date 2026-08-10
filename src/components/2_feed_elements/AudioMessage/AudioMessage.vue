@@ -404,7 +404,7 @@ const cycleSpeed = () => {
 }
 
 const emit = defineEmits(['action','reply','sms-invite']);
-const { menuActions } = useMessageMenuActions()
+const { menuActions } = useMessageMenuActions(() => props.message)
 const chatAppId = inject('chatAppId') as string | undefined
 const { startReply } = useStartReply(chatAppId || '')
 

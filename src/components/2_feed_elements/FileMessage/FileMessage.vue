@@ -206,7 +206,7 @@ const props = defineProps({
 
 const emit = defineEmits(['action','reply','sms-invite']);
 const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
-const { menuActions } = useMessageMenuActions()
+const { menuActions } = useMessageMenuActions(() => props.message)
 const chatAppId = inject('chatAppId') as string | undefined
 const { startReply } = useStartReply(chatAppId || '')
 

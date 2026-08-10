@@ -245,7 +245,7 @@ import './utils/suppress-lit-warning';
 const chatAppId = inject('chatAppId') as string | undefined
 
 const { getTheme } = useTheme(chatAppId || '')
-const { menuActions } = useMessageMenuActions()
+const { menuActions } = useMessageMenuActions(() => props.message)
 const { startReply } = useStartReply(chatAppId || '')
 
 // Оптимизация: динамическая загрузка библиотек TGS только при необходимости

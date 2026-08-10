@@ -15,6 +15,8 @@ export function getDefaultMessageMenuActions(): IFeedMessageMenuAction[] {
       action: 'edit',
       title: 'Редактировать',
       icon: EditIcon as unknown as object,
+      // Чужие (левые) сообщения редактировать нельзя
+      disabled: (message) => message.position !== 'right',
     },
     { separator: true },
     {
