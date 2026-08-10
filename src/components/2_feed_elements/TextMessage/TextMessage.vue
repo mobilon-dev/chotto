@@ -142,7 +142,7 @@ import MessageReactions from '@/components/2_feed_elements/MessageReactions/Mess
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, buildEditPayload, useStartReply, useStartEdit } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { ITextMessage } from '@/types';
 
@@ -194,6 +194,7 @@ const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 const { menuActions } = useMessageMenuActions(() => props.message)
 const chatAppId = inject('chatAppId') as string | undefined
 const { startReply } = useStartReply(chatAppId || '')
+const { startEdit } = useStartEdit(chatAppId || '')
 
 const { 
   isOpenMenu,
@@ -205,6 +206,7 @@ const {
   handleClickReplied
 } = useMessageActions(props.message, emit, {
   onReply: () => startReply(buildReplyPayload(props.message, 'message.text')),
+  onEdit: () => startEdit(buildEditPayload(props.message, 'message.text')),
 })
 
 // обработчик открытия ссылок предоставлен useMessageLinks

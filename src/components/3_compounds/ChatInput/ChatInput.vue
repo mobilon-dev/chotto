@@ -358,6 +358,9 @@ const sendMessage = () => {
     if (Message.value.reply){
       messageObject.reply = Message.value.reply
     }
+    if (Message.value.edit) {
+      messageObject.edit = Message.value.edit
+    }
     emit('send', messageObject);
     resetMessage()
     fileInfo.value = undefined

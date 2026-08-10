@@ -62,11 +62,13 @@ export { default as VideoRecorder } from './2_elements/VideoRecorder/VideoRecord
 // 2_feed_elements
 export { default as AudioMessage } from './2_feed_elements/AudioMessage/AudioMessage.vue';
 export { default as BaseReplyMessage } from './2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
+export { default as BaseEditMessage } from './2_feed_elements/BaseEditMessage/BaseEditMessage.vue';
 export { default as CallMessage } from './2_feed_elements/CallMessage/CallMessage.vue';
 export { default as DateMessage } from './2_feed_elements/DateMessage/DateMessage.vue';
 export { default as MissedCallMessage } from './2_feed_elements/MissedCallMessage/MissedCallMessage.vue';
 export { default as DateMessageSticky } from './2_feed_elements/DateMessageSticky/DateMessageSticky.vue';
 export { default as DelimiterMessage } from './2_feed_elements/DelimiterMessage/DelimiterMessage.vue';
+export { default as EditTextMessage } from './2_feed_elements/EditTextMessage/EditTextMessage.vue';
 export { default as FeedKeyboard } from './2_feed_elements/FeedKeyboard/FeedKeyboard.vue';
 export { default as FileMessage } from './2_feed_elements/FileMessage/FileMessage.vue';
 export { default as ImageMessage } from './2_feed_elements/ImageMessage/ImageMessage.vue';

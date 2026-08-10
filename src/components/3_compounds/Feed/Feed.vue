@@ -119,6 +119,17 @@
         @reset="handleResetReply"
       />
     </teleport>
+
+    <teleport
+      v-if="getMessage().edit"
+      :to="'#chat-input-reply-line-'+chatAppId"
+    >
+      <BaseEditMessage
+        class="chat-input-reply"
+        :message="getMessage().edit"
+        @reset="handleResetEdit"
+      />
+    </teleport>
   </div>
 </template>
 
@@ -129,6 +140,7 @@
 import { ref, watch, nextTick, inject, provide, computed, onMounted, unref, type Ref } from 'vue';
 import DateMessageSticky from '@/components/2_feed_elements/DateMessageSticky/DateMessageSticky.vue';
 import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
+import BaseEditMessage from '@/components/2_feed_elements/BaseEditMessage/BaseEditMessage.vue';
 import MessageKeyboard from '@/components/2_feed_elements/MessageKeyboard/MessageKeyboard.vue';
 import FeedKeyboard from '@/components/2_feed_elements/FeedKeyboard/FeedKeyboard.vue';
 import TypingMessage from '@/components/2_feed_elements/TypingMessage/TypingMessage.vue';
@@ -339,7 +351,8 @@ const {
   messageAction,
   handleClickReplied,
   feedObjectDoubleClick,
-  handleResetReply
+  handleResetReply,
+  handleResetEdit,
 } = useFeedReply({
   enableDoubleClickReply: props.enableDoubleClickReply,
   emit

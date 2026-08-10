@@ -46,6 +46,8 @@ export interface MessageWithMeta {
 type UseMessageActionsOptions = {
   /** Локальный обработчик «Ответить» из меню (вместо emit) */
   onReply?: () => void
+  /** Локальный обработчик «Редактировать» из меню (вместо emit) */
+  onEdit?: () => void
 }
 
 /**
@@ -92,6 +94,10 @@ export const useMessageActions = <T extends MessageWithMeta>(
     hideMenu()
     if (action.action === 'reply' && options.onReply) {
       options.onReply()
+      return
+    }
+    if (action.action === 'edit' && options.onEdit) {
+      options.onEdit()
       return
     }
     emit('action', { messageId: message.messageId, type: 'menu', ...action })

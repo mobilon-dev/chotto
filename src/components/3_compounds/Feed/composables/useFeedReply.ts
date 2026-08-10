@@ -8,11 +8,11 @@ interface UseFeedReplyOptions {
 }
 
 /**
- * Композабл для обработки ответов на сообщения
+ * Композабл для обработки ответов и редактирования сообщений
  */
 export function useFeedReply({ enableDoubleClickReply, emit }: UseFeedReplyOptions) {
   const chatAppId = inject('chatAppId') as string;
-  const { getMessage, resetReply } = useMessageDraft(chatAppId);
+  const { getMessage, resetReply, resetEdit, setMessageText } = useMessageDraft(chatAppId);
   const { startReply } = useStartReply(chatAppId);
 
   /**
@@ -59,12 +59,22 @@ export function useFeedReply({ enableDoubleClickReply, emit }: UseFeedReplyOptio
     hideReplyPreview(chatAppId);
   };
 
+  /**
+   * Обработчик сброса редактирования
+   */
+  const handleResetEdit = () => {
+    resetEdit();
+    setMessageText('');
+    hideReplyPreview(chatAppId);
+  };
+
   return {
     getMessage,
     messageAction,
     handleClickReplied,
     feedObjectDoubleClick,
     handleResetReply,
+    handleResetEdit,
   };
 }
 

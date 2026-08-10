@@ -16,9 +16,14 @@ export function hideReplyPreview(chatAppId: string) {
 }
 
 export function useStartReply(chatAppId: string) {
-  const { setReply } = useMessageDraft(chatAppId)
+  const { setReply, resetEdit, setMessageText, getMessage } = useMessageDraft(chatAppId)
 
   const startReply = (reply: Reply) => {
+    // Ответ и редактирование взаимоисключающи
+    if (getMessage().edit) {
+      resetEdit()
+      setMessageText('')
+    }
     showReplyPreview(chatAppId)
     setReply(reply)
   }

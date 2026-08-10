@@ -9,6 +9,13 @@ export interface Reply {
   isMissedCall?: boolean
 }
 
+/** Сообщение в режиме редактирования (превью над инпутом) */
+export interface Edit {
+  messageId: string
+  type: string
+  text?: string
+}
+
 /** Контекст сообщения для условий пунктов меню */
 export type MessageMenuActionContext = {
   messageId?: string

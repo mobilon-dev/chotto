@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { Reply } from '@/types';
+import { Edit, Reply } from '@/types';
 
 /**
  * Структура сообщения с черновиком текста, файлами и метаданными
@@ -8,6 +8,7 @@ import { Reply } from '@/types';
  * @property {string} text - Текст сообщения
  * @property {UploadedFile} [file] - Прикрепленный файл
  * @property {Reply} [reply] - Ответ на другое сообщение
+ * @property {Edit} [edit] - Редактируемое сообщение
  * @property {boolean} forceSend - Флаг принудительной отправки сообщения
  * @property {boolean} isRecording - Флаг активной записи (аудио/видео)
  */
@@ -16,6 +17,7 @@ interface Message {
     text: string
     file?: UploadedFile
     reply?: Reply
+    edit?: Edit
     forceSend: boolean
     isRecording: boolean
 }
@@ -60,6 +62,8 @@ const messages = ref<Message[]>([])
  * @returns {Function} returns.resetMessageFile - Удалить прикрепленный файл
  * @returns {Function} returns.setReply - Установить ответ на сообщение
  * @returns {Function} returns.resetReply - Удалить ответ на сообщение
+ * @returns {Function} returns.setEdit - Установить редактируемое сообщение
+ * @returns {Function} returns.resetEdit - Сбросить режим редактирования
  * @returns {Function} returns.setForceSendMessage - Установить флаг принудительной отправки
  * @returns {Function} returns.setRecordingMessage - Установить флаг записи
  * 
@@ -134,8 +138,20 @@ export const useMessageDraft = (outId : string) => {
             text: '',
             file: undefined,
             reply: undefined,
+            edit: undefined,
             forceSend: false,
             isRecording: getMessage().isRecording,
+        }
+    }
+
+    /** Снимок полей черновика с возможностью точечной перезаписи */
+    const patchMessage = (patch: Partial<Omit<Message, 'id'>>) => {
+        const current = getMessage()
+        messages.value[index.value] = {
+            ...current,
+            forceSend: false,
+            ...patch,
+            id: current.id,
         }
     }
 
@@ -147,14 +163,7 @@ export const useMessageDraft = (outId : string) => {
      * @returns {void}
      */
     const setMessageText = (text : string) => {
-        messages.value[index.value] = {
-            id: getMessage().id,
-            text: text,
-            file: getMessage().file,
-            reply: getMessage().reply,
-            forceSend: false,
-            isRecording: getMessage().isRecording,
-        }
+        patchMessage({ text })
     }
 
     /**
@@ -165,14 +174,7 @@ export const useMessageDraft = (outId : string) => {
      * @returns {void}
      */
     const setMessageFile = (file : UploadedFile) => {
-        messages.value[index.value] = {
-            id: getMessage().id,
-            text: getMessage().text,
-            file: file,
-            reply: getMessage().reply,
-            forceSend: false,
-            isRecording: getMessage().isRecording,
-        }
+        patchMessage({ file })
     }
 
     /**
@@ -182,14 +184,7 @@ export const useMessageDraft = (outId : string) => {
      * @returns {void}
      */
     const resetMessageFile = () => {
-        messages.value[index.value] = {
-            id: getMessage().id,
-            text: getMessage().text,
-            file: undefined,
-            reply: getMessage().reply,
-            forceSend: false,
-            isRecording: getMessage().isRecording,
-        }
+        patchMessage({ file: undefined })
     }
 
     /**
@@ -200,14 +195,7 @@ export const useMessageDraft = (outId : string) => {
      * @returns {void}
      */
     const setReply = (reply : Reply) => {
-        messages.value[index.value] = {
-            id: getMessage().id,
-            text: getMessage().text,
-            file: getMessage().file,
-            reply: reply,
-            forceSend: false,
-            isRecording: getMessage().isRecording,
-        }
+        patchMessage({ reply, edit: undefined })
     }
 
     /**
@@ -217,14 +205,27 @@ export const useMessageDraft = (outId : string) => {
      * @returns {void}
      */
     const resetReply = () => {
-        messages.value[index.value] = {
-            id: getMessage().id,
-            text: getMessage().text,
-            file: getMessage().file,
-            reply: undefined,
-            forceSend: false,
-            isRecording: getMessage().isRecording,
-        }
+        patchMessage({ reply: undefined })
+    }
+
+    /**
+     * Установить сообщение в режим редактирования
+     * Сбрасывает ответ — режимы взаимоисключающи
+     * 
+     * @param {Edit} edit - Объект редактируемого сообщения
+     * @returns {void}
+     */
+    const setEdit = (edit: Edit) => {
+        patchMessage({ edit, reply: undefined })
+    }
+
+    /**
+     * Сбросить режим редактирования
+     * 
+     * @returns {void}
+     */
+    const resetEdit = () => {
+        patchMessage({ edit: undefined })
     }
 
     /**
@@ -267,6 +268,8 @@ export const useMessageDraft = (outId : string) => {
         setMessageText,
         setReply,
         resetReply,
+        setEdit,
+        resetEdit,
         setForceSendMessage,
         setRecordingMessage,
     }

@@ -1,4 +1,4 @@
-import { Reply } from "@/types";
+import { Edit, Reply } from "@/types";
 
 export interface IInputMessage {
   type: string
@@ -7,4 +7,5 @@ export interface IInputMessage {
   filename?: string
   size?: string
   reply?: Reply
+  edit?: Edit
 }
