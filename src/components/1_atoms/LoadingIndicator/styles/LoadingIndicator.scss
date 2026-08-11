@@ -18,9 +18,8 @@
 }
 
 .dot {
-  stroke: var(--chotto-loadingindicator-dot-stroke, #C9333C);
-  stroke-width: var(--chotto-loadingindicator-dot-stroke-width, 13.36);
   fill: var(--chotto-loadingindicator-dot-fill, none);
+  stroke-width: var(--chotto-loadingindicator-dot-stroke-width, 13.36);
   animation: pulse var(--chotto-loadingindicator-animation-duration, 0.8s) infinite ease-in-out;
 }
 

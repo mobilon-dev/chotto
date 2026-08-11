@@ -8,6 +8,7 @@ import App from './App.vue';
 
 import './themes/index.scss'
 import '@fontsource/inter/700'
+import '@fontsource/montserrat/700'
 import '@fontsource/open-sans/400'
 import '@fontsource/open-sans/600'
 

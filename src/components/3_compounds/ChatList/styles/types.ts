@@ -105,8 +105,8 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-title-logo-width': string;
   /** Высота логотипа заголовка */
   '--chotto-chatlist-title-logo-height': string;
-  /** Отступ слева логотипа заголовка */
-  '--chotto-chatlist-title-logo-margin-left': string;
+  /** Отступ справа логотипа заголовка */
+  '--chotto-chatlist-title-logo-margin-right': string;
   /** Коэффициент сжатия логотипа заголовка */
   '--chotto-chatlist-title-logo-flex-shrink': string;
 

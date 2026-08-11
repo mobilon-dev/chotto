@@ -179,9 +179,9 @@
   }
 
   &__title {
-    font-family: var(--chotto-chatlist-title-font-family, "Open Sans", sans-serif);
+    font-family: var(--chotto-chatlist-title-font-family, "Montserrat", sans-serif);
     font-size: var(--chotto-chatlist-title-font-size, 16px);
-    font-weight: var(--chotto-chatlist-title-font-weight, 400);
+    font-weight: var(--chotto-chatlist-title-font-weight, 700);
     color: var(--chotto-chatlist-title-text-color, #5F5F5F);
   }
 
@@ -199,7 +199,7 @@
   &__title-logo {
     width: var(--chotto-chatlist-title-logo-width, 27px);
     height: var(--chotto-chatlist-title-logo-height, 26px);
-    margin-left: var(--chotto-chatlist-title-logo-margin-left, 6px);
+    margin-right: var(--chotto-chatlist-title-logo-margin-right, 6px);
     flex-shrink: var(--chotto-chatlist-title-logo-flex-shrink, 0);
   }
 

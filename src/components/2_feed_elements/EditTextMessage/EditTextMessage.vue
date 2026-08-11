@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <p v-text="'Редактирование'" />
+    <p v-text="'Редактирование сообщения'" />
     <p
       class="text"
       @click="inNewWindow"

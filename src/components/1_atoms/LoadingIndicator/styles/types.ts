@@ -31,8 +31,6 @@ export interface LoadingIndicatorThemeCSSVariables {
   '--chotto-loadingindicator-small-height': string;
 
   // LoadingIndicator dots
-  /** Цвет обводки точек */
-  '--chotto-loadingindicator-dot-stroke': string;
   /** Толщина обводки точек */
   '--chotto-loadingindicator-dot-stroke-width': string;
   /** Заливка точек */

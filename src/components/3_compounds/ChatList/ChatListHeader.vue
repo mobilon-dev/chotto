@@ -1,16 +1,16 @@
 <template>
   <div class="chat-list__title-container">
     <div class="chat-list__title-block">
+      <LogoIcon
+        v-if="props.logoEnabled"
+        class="chat-list__title-logo"
+      />
       <h2
         v-if="props.titleEnabled"
         class="chat-list__title"
       >
         {{ props.title }}
       </h2>
-      <LogoIcon
-        v-if="props.logoEnabled"
-        class="chat-list__title-logo"
-      />
       <Tooltip
         v-if="props.betaEnabled"
         :text="props.betaTooltipText"
