@@ -181,8 +181,8 @@
   &__title {
     font-family: var(--chotto-chatlist-title-font-family, "Montserrat", sans-serif);
     font-size: var(--chotto-chatlist-title-font-size, 16px);
-    font-weight: var(--chotto-chatlist-title-font-weight, 700);
-    color: var(--chotto-chatlist-title-text-color, #5F5F5F);
+    font-weight: var(--chotto-chatlist-title-font-weight, 600);
+    color: var(--chotto-chatlist-title-text-color, #111827);
   }
 
   &__title-block {
