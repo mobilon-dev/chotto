@@ -7,6 +7,17 @@
   --chotto-textmessage-content-border-radius: var(--chotto-theme-message-border-radius, 14px);
   --chotto-textmessage-content-padding: 10px 10px 4px 18px;
 
+  // TextMessage content with reply variables
+  --chotto-textmessage-content-with-reply-display: inline-grid;
+  --chotto-textmessage-content-with-reply-grid-template-columns: minmax(0, max-content);
+  --chotto-textmessage-content-with-reply-reply-grid-column: 1;
+  --chotto-textmessage-content-with-reply-reply-width: 100%;
+  --chotto-textmessage-content-with-reply-reply-min-width: 0;
+  --chotto-textmessage-content-with-reply-reply-max-width: 100%;
+  --chotto-textmessage-content-with-reply-text-grid-column: 1;
+  --chotto-textmessage-content-with-reply-text-width: max-content;
+  --chotto-textmessage-content-with-reply-text-max-width: 100%;
+
   // TextMessage left before variables
   --chotto-textmessage-left-before-content: none;
   --chotto-textmessage-left-before-position: absolute;

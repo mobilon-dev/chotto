@@ -7,6 +7,24 @@
     max-width: var(--chotto-textmessage-content-max-width, 25rem);
     border-radius: var(--chotto-textmessage-content-border-radius, 14px);
     padding: var(--chotto-textmessage-content-padding, 10px 10px 4px 18px);
+
+    &:has(> :deep(.reply__container)) {
+      display: var(--chotto-textmessage-content-with-reply-display, inline-grid);
+      grid-template-columns: var(--chotto-textmessage-content-with-reply-grid-template-columns, minmax(0, max-content));
+
+      > :deep(.reply__container) {
+        grid-column: var(--chotto-textmessage-content-with-reply-reply-grid-column, 1);
+        width: var(--chotto-textmessage-content-with-reply-reply-width, 100%);
+        min-width: var(--chotto-textmessage-content-with-reply-reply-min-width, 0);
+        max-width: var(--chotto-textmessage-content-with-reply-reply-max-width, 100%);
+      }
+
+      > .text-message__text {
+        grid-column: var(--chotto-textmessage-content-with-reply-text-grid-column, 1);
+        width: var(--chotto-textmessage-content-with-reply-text-width, max-content);
+        max-width: var(--chotto-textmessage-content-with-reply-text-max-width, 100%);
+      }
+    }
   }
 
   &__left .text-message__content.is-first::before {

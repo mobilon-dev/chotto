@@ -160,6 +160,48 @@ const simpleMessages: DemoMessage[] = [
   },
   {
     chatId: 1,
+    type: "message.text",
+    direction: 'outgoing',
+    header: "Иван",
+    messageId: '1-reply',
+    text: "Отлично, спасибо!",
+    timestamp: '1762164005',
+    status: 'read',
+    reply: {
+      messageId: '1',
+      type: 'message.text',
+      text: 'Привет! Как дела?',
+      header: 'Анна',
+    },
+  },
+  {
+    chatId: 1,
+    type: "message.text",
+    direction: 'outgoing',
+    header: "Иван",
+    messageId: 'long-quote',
+    text: 'Уважаемые Алексей и Марина, благодарим вас за оперативную подготовку обновлённой версии макетов (v.2.1). Мы провели внутренний ревью с маркетингом, продуктом и юзабилити-командой — в целом прогресс заметен, и многие замечания из предыдущей итерации учтены. Однако остаются важные моменты, которые необходимо доработать до финального согласования. Прошу вас внимательно ознакомиться с перечнем правок ниже. Для удобства я разделила их по разделам и приоритетам. Также прикрепляю PDF с аннотациями — там вы найдёте визуальные пояснения к каждому пункту.',
+    timestamp: '1762164008',
+    status: 'read',
+  },
+  {
+    chatId: 1,
+    type: "message.text",
+    direction: 'incoming',
+    header: "Анна",
+    messageId: '1-reply-long',
+    text: "Ок",
+    timestamp: '1762164010',
+    status: 'read',
+    reply: {
+      messageId: 'long-quote',
+      type: 'message.text',
+      text: 'Уважаемые Алексей и Марина, благодарим вас за оперативную подготовку обновлённой версии макетов (v.2.1). Мы провели внутренний ревью с маркетингом, продуктом и юзабилити-командой — в целом прогресс заметен, и многие замечания из предыдущей итерации учтены. Однако остаются важные моменты, которые необходимо доработать до финального согласования. Прошу вас внимательно ознакомиться с перечнем правок ниже. Для удобства я разделила их по разделам и приоритетам. Также прикрепляю PDF с аннотациями — там вы найдёте визуальные пояснения к каждому пункту.',
+      header: 'Иван',
+    },
+  },
+  {
+    chatId: 1,
     type: "message.file",
     direction: 'incoming',
     header: "Анна",
@@ -272,6 +314,22 @@ const simpleMessages: DemoMessage[] = [
   },
   {
     chatId: 2,
+    type: "message.text",
+    direction: 'incoming',
+    header: "Иван",
+    messageId: '4-reply',
+    text: "Нормально, работаю",
+    timestamp: '1762164005',
+    status: 'read',
+    reply: {
+      messageId: '4',
+      type: 'message.text',
+      text: 'Привет! Как дела?',
+      header: 'Анна',
+    },
+  },
+  {
+    chatId: 2,
     type: "message.sticker",
     direction: 'incoming',
     header: "Иван",
@@ -364,6 +422,8 @@ export const BasicExample: Story = {
     setup() {
       const chatsRef = ref([...simpleChats]);
       const selectedChatRef = ref(chatsRef.value[0]);
+      const scrollToMessageId = ref<string | null>(null);
+      let scrollToTimer: ReturnType<typeof setTimeout> | null = null;
       
       // Делаем сообщения реактивными
       const messagesRef = ref<DemoMessage[]>([...simpleMessages]);
@@ -697,6 +757,21 @@ export const BasicExample: Story = {
       const handleLoadMore = () => {
         console.log('Load more messages');
       };
+
+      const handleClickRepliedMessage = (messageId: string) => {
+        const exists = messagesRef.value.some(
+          (message) => message.chatId === selectedChatRef.value?.chatId && message.messageId === messageId
+        );
+        if (!exists) return;
+
+        scrollToMessageId.value = `msg-${messageId}`;
+        if (scrollToTimer) {
+          clearTimeout(scrollToTimer);
+        }
+        scrollToTimer = setTimeout(() => {
+          scrollToMessageId.value = null;
+        }, 150);
+      };
       
       const handleThemeChange = (themeCode: string) => {
         window.dispatchEvent(new CustomEvent('storybook-theme-change', { detail: themeCode }));
@@ -739,6 +814,8 @@ export const BasicExample: Story = {
         handleChatAction,
         handleMessageAction,
         handleLoadMore,
+        handleClickRepliedMessage,
+        scrollToMessageId,
         themes,
         handleThemeChange,
         templates,
@@ -774,10 +851,12 @@ export const BasicExample: Story = {
                 <div style="flex: 1 1 0; min-height: 0; overflow-y: auto;">
                   <Feed 
                     :objects="messages"
+                    :scroll-to="scrollToMessageId"
                     :current-user-id="'usr_me'"
                     :reaction-user-names="{ usr_me: 'Виктория', usr_other_0: 'Василий Васильев' }"
                     :enable-double-click-reply="true" 
                     @message-action="handleMessageAction"
+                    @click-replied-message="handleClickRepliedMessage"
                     @load-more="handleLoadMore"
                   />
                 </div>

@@ -19,6 +19,12 @@ export interface BaseReplyMessageThemeCSSVariables {
   '--chotto-basereplymessage-container-border-radius': string;
   /** Переполнение контейнера */
   '--chotto-basereplymessage-container-overflow': string;
+  /** Минимальная ширина контейнера */
+  '--chotto-basereplymessage-container-min-width': string;
+  /** Максимальная ширина контейнера */
+  '--chotto-basereplymessage-container-max-width': string;
+  /** Курсор при наведении на блок цитаты */
+  '--chotto-basereplymessage-container-cursor': string;
   /** Отступ снизу контейнера */
   '--chotto-basereplymessage-container-margin-bottom': string;
   /** Отступ справа контейнера */

@@ -102,6 +102,19 @@ export const LongText: Story = {
   },
 };
 
+export const ShortReplyLongQuote: Story = {
+  args: {
+    //@ts-expect-error theme используется только для ThemeMode в доках
+    theme: themes,
+    message: {
+      ...baseMessage,
+      text: 'Оченьдлинноесообщениебезпробеловзанимающеесразунесколькострокивызывающеестранноеповедениеокон которое не должно расширять пузырь шире текста ответа',
+    },
+    mainText: 'Ок',
+    date: '22.09.2024',
+  },
+};
+
 export const WithLink: Story = {
   args: {
     //@ts-expect-error theme используется только для ThemeMode в доках

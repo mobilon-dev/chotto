@@ -3,11 +3,22 @@
   --chotto-replytextmessage-container-display: flex;
   --chotto-replytextmessage-container-flex-direction: column;
   --chotto-replytextmessage-container-gap: 4px;
+  --chotto-replytextmessage-container-min-width: 0;
+  --chotto-replytextmessage-container-max-width: 100%;
+  --chotto-replytextmessage-container-overflow: hidden;
 
   // ReplyTextMessage text variables
   --chotto-replytextmessage-text-font-size: var(--chotto-theme-text-font-size);
   --chotto-replytextmessage-text-color: var(--chotto-theme-primary-text-color);
   --chotto-replytextmessage-text-font-weight: 400;
+  --chotto-replytextmessage-text-margin: 0;
+  --chotto-replytextmessage-text-white-space: nowrap;
+  --chotto-replytextmessage-text-overflow: hidden;
+  --chotto-replytextmessage-text-text-overflow: ellipsis;
+  --chotto-replytextmessage-text-display: block;
+  --chotto-replytextmessage-text-min-width: 0;
+  --chotto-replytextmessage-text-max-width: 100%;
+  --chotto-replytextmessage-text-width: 100%;
 
   // ReplyTextMessage p variables
   --chotto-replytextmessage-p-margin: 0;

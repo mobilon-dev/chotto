@@ -15,6 +15,25 @@ export interface TextMessageThemeCSSVariables {
   /** Внутренние отступы пузыря сообщения */
   '--chotto-textmessage-content-padding': string;
 
+  /** Отображение контента с цитатой-ответом */
+  '--chotto-textmessage-content-with-reply-display': string;
+  /** Шаблон колонок контента с цитатой-ответом */
+  '--chotto-textmessage-content-with-reply-grid-template-columns': string;
+  /** Колонка грида блока цитаты */
+  '--chotto-textmessage-content-with-reply-reply-grid-column': string;
+  /** Ширина блока цитаты */
+  '--chotto-textmessage-content-with-reply-reply-width': string;
+  /** Минимальная ширина блока цитаты */
+  '--chotto-textmessage-content-with-reply-reply-min-width': string;
+  /** Максимальная ширина блока цитаты */
+  '--chotto-textmessage-content-with-reply-reply-max-width': string;
+  /** Колонка грида текста ответа */
+  '--chotto-textmessage-content-with-reply-text-grid-column': string;
+  /** Ширина текста ответа */
+  '--chotto-textmessage-content-with-reply-text-width': string;
+  /** Максимальная ширина текста ответа */
+  '--chotto-textmessage-content-with-reply-text-max-width': string;
+
   /** Содержимое псевдоэлемента "хвостик" слева */
   '--chotto-textmessage-left-before-content': string;
   /** Позиционирование псевдоэлемента слева */

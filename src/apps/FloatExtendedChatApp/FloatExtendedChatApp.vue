@@ -293,7 +293,7 @@ const highlightMessage = (messageId) => {
       if (m.messageId == messageId) return m
     })
   if (message) {
-    clickedReply.value = JSON.stringify(message)
+    clickedReply.value = `msg-${messageId}`
     timer = setTimeout(() => {
       clickedReply.value = ''
     }, 100)

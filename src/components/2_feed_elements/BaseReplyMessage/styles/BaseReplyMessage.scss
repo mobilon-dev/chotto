@@ -4,6 +4,9 @@
     padding: var(--chotto-basereplymessage-container-padding, 10px 6px 10px 20px);
     border-radius: var(--chotto-basereplymessage-container-border-radius, 5px);
     overflow: var(--chotto-basereplymessage-container-overflow, hidden);
+    min-width: var(--chotto-basereplymessage-container-min-width, 0);
+    max-width: var(--chotto-basereplymessage-container-max-width, 100%);
+    cursor: var(--chotto-basereplymessage-container-cursor, pointer);
     margin-bottom: var(--chotto-basereplymessage-container-margin-bottom, 6px);
     margin-right: var(--chotto-basereplymessage-container-margin-right, 13px);
     background-color: var(--chotto-basereplymessage-container-background-color, #F6F6F6);

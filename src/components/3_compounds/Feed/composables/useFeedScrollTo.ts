@@ -1,4 +1,4 @@
-import { watch, Ref } from 'vue';
+import { watch, Ref, nextTick } from 'vue';
 
 interface UseFeedScrollToOptions {
   /** ID целевого элемента для прокрутки */
@@ -7,6 +7,34 @@ interface UseFeedScrollToOptions {
   feedContainerId: string;
   /** CSS-класс для фокуса на сообщении */
   focusClass?: string;
+}
+
+function resolveTargetElementId(raw: string): string {
+  const trimmed = raw.trim();
+  if (!trimmed) return trimmed;
+
+  if (document.getElementById(trimmed)) {
+    return trimmed;
+  }
+
+  const prefixed = trimmed.startsWith('msg-') ? trimmed : `msg-${trimmed}`;
+  if (document.getElementById(prefixed)) {
+    return prefixed;
+  }
+
+  try {
+    const parsed = JSON.parse(trimmed) as { messageId?: string | number };
+    if (parsed?.messageId != null) {
+      const legacyId = `msg-${parsed.messageId}`;
+      if (document.getElementById(legacyId)) {
+        return legacyId;
+      }
+    }
+  } catch {
+    // legacy: не JSON
+  }
+
+  return prefixed;
 }
 
 /**
@@ -18,21 +46,28 @@ export function useFeedScrollTo({ targetIdRef, feedContainerId, focusClass = 'fo
     (targetId) => {
       if (!targetId) return;
 
-      const target = document.getElementById(targetId);
-      const list = document.getElementById(feedContainerId);
+      const scrollToTarget = (attempt = 0) => {
+        const resolvedId = resolveTargetElementId(targetId);
+        const target = document.getElementById(resolvedId);
+        const list = document.getElementById(feedContainerId);
 
-      if (target instanceof HTMLElement && list instanceof HTMLElement) {
-        // Прокручиваем к центру элемента
-        list.scrollTop = target.offsetTop + target.clientHeight / 2 - list.clientHeight / 2;
+        if (target instanceof HTMLElement && list instanceof HTMLElement) {
+          list.scrollTop = target.offsetTop + target.clientHeight / 2 - list.clientHeight / 2;
 
-        // Добавляем класс фокуса
-        target.children[0]?.classList.add(focusClass);
+          target.children[0]?.classList.add(focusClass);
 
-        // Убираем класс через 2 секунды
-        setTimeout(() => {
-          target.children[0]?.classList.remove(focusClass);
-        }, 2000);
-      }
+          setTimeout(() => {
+            target.children[0]?.classList.remove(focusClass);
+          }, 2000);
+          return;
+        }
+
+        if (attempt < 5) {
+          setTimeout(() => scrollToTarget(attempt + 1), 50);
+        }
+      };
+
+      nextTick(() => scrollToTarget());
     }
   );
 }

@@ -8,6 +8,12 @@ export interface ReplyTextMessageThemeCSSVariables {
   '--chotto-replytextmessage-container-flex-direction': string;
   /** Промежуток между элементами ответа */
   '--chotto-replytextmessage-container-gap': string;
+  /** Минимальная ширина контейнера ответа */
+  '--chotto-replytextmessage-container-min-width': string;
+  /** Максимальная ширина контейнера ответа */
+  '--chotto-replytextmessage-container-max-width': string;
+  /** Переполнение контейнера ответа */
+  '--chotto-replytextmessage-container-overflow': string;
 
   /** Размер шрифта текста ответа */
   '--chotto-replytextmessage-text-font-size': string;
@@ -15,6 +21,22 @@ export interface ReplyTextMessageThemeCSSVariables {
   '--chotto-replytextmessage-text-color': string;
   /** Жирность текста ответа */
   '--chotto-replytextmessage-text-font-weight': string;
+  /** Внешние отступы текста цитаты */
+  '--chotto-replytextmessage-text-margin': string;
+  /** Правила переноса строк текста цитаты */
+  '--chotto-replytextmessage-text-white-space': string;
+  /** Переполнение текста цитаты */
+  '--chotto-replytextmessage-text-overflow': string;
+  /** Обрезка текста цитаты */
+  '--chotto-replytextmessage-text-text-overflow': string;
+  /** Отображение текста цитаты */
+  '--chotto-replytextmessage-text-display': string;
+  /** Минимальная ширина текста цитаты */
+  '--chotto-replytextmessage-text-min-width': string;
+  /** Максимальная ширина текста цитаты */
+  '--chotto-replytextmessage-text-max-width': string;
+  /** Ширина текста цитаты */
+  '--chotto-replytextmessage-text-width': string;
 
   /** Внешние отступы абзаца */
   '--chotto-replytextmessage-p-margin': string;
