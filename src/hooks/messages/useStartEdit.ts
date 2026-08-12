@@ -8,8 +8,8 @@ export function useStartEdit(chatAppId: string) {
   const startEdit = (edit: Edit) => {
     resetReply()
     showReplyPreview(chatAppId)
-    setEdit(edit)
     setMessageText(edit.text ?? '')
+    setEdit(edit)
   }
 
   return { startEdit }

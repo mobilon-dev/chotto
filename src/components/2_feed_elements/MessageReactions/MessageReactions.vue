@@ -326,7 +326,6 @@ function onMenuClick(event: MouseEvent) {
     })()
     : undefined
 
-  closeQuickPanel()
   emit('menu', { messageId: props.messageId, triggerRect, event })
 }
 

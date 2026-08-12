@@ -24,9 +24,10 @@
       class="chat-input__input-wrap"
     >
       <div
-        v-if="!isNative && getMessage().text"
+        v-if="useEmojiMirror"
         ref="refMirror"
         class="chat-input__input-mirror"
+        :class="{ 'chat-input__input-mirror--hidden': isSelectingText }"
         aria-hidden="true"
         v-html="emojiMirrorHtml"
       />
@@ -35,11 +36,18 @@
         v-model="getMessage().text"
         :disabled="state == 'disabled' || getMessage().isRecording"
         class="chat-input__input"
-        :class="{ 'chat-input__input--emoji-images': !isNative }"
+        :class="{
+          'chat-input__input--emoji-images': useEmojiMirror && !isSelectingText,
+          'chat-input__input--selecting': useEmojiMirror && isSelectingText,
+        }"
         :placeholder="inputPlaceholder"
         @keydown.enter="keyEnter"
         @input="sendTyping"
         @scroll="syncMirrorScroll"
+        @select="updateSelectionState"
+        @mouseup="updateSelectionState"
+        @keyup="updateSelectionState"
+        @blur="isSelectingText = false"
       />
     </div>
     <TextFormatToolbar
@@ -65,8 +73,8 @@
 
 <script setup lang="ts">
 import { unref, ref, watch, nextTick, inject, computed, onMounted } from 'vue';
-import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef } from '@/hooks';
-import { textToAppleEmojiHtml } from '@/functions/renderAppleEmojis';
+import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview } from '@/hooks';
+import { textToAppleEmojiHtml, textContainsEmoji } from '@/functions/renderAppleEmojis';
 import { t } from '../../../locale/useLocale';
 import { IFilePreview, IInputMessage } from '@/types';
 import { SendIcon } from './icons';
@@ -75,20 +83,58 @@ import TextFormatToolbar from '../../2_chatinput_elements/TextFormatToolbar/Text
 const emit = defineEmits(['send','typing']);
 
 const chatAppId = inject('chatAppId')
-const { resetMessage, getMessage, setMessageText, setForceSendMessage } = useMessageDraft(chatAppId as string)
+const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit } = useMessageDraft(chatAppId as string)
 const { isNative } = useEmojiNative(chatAppId as string)
 
 const refInput = ref<HTMLTextAreaElement>();
 const refMirror = ref<HTMLElement>();
+const isSelectingText = ref(false)
+const focusAtEndAfterResize = ref(false)
 const typing = useImmediateDebouncedRef('', 2000)
 const fileInfo = ref<IFilePreview>()
 
 const emojiMirrorHtml = computed(() => textToAppleEmojiHtml(getMessage().text || ''))
+const useEmojiMirror = computed(
+  () => !isNative.value && textContainsEmoji(getMessage().text || '')
+)
 
 const syncMirrorScroll = () => {
-  if (refMirror.value && refInput.value) {
-    refMirror.value.scrollTop = refInput.value.scrollTop
+  if (!refMirror.value || !refInput.value) return
+
+  const el = refInput.value
+  const mirror = refMirror.value
+  const scrollbarWidth = Math.max(0, el.offsetWidth - el.clientWidth)
+
+  mirror.style.right = scrollbarWidth > 0 ? `${scrollbarWidth}px` : ''
+  mirror.scrollTop = el.scrollTop
+}
+
+let selectionSyncRaf = 0
+
+function updateSelectionState() {
+  if (!useEmojiMirror.value) {
+    isSelectingText.value = false
+    return
   }
+
+  if (selectionSyncRaf) cancelAnimationFrame(selectionSyncRaf)
+
+  selectionSyncRaf = requestAnimationFrame(() => {
+    selectionSyncRaf = 0
+    const el = refInput.value
+    if (!el) {
+      isSelectingText.value = false
+      return
+    }
+
+    const selecting = el.selectionStart !== el.selectionEnd
+    if (isSelectingText.value === selecting) return
+
+    isSelectingText.value = selecting
+    if (!selecting) {
+      nextTick(syncMirrorScroll)
+    }
+  })
 }
 
 const props = defineProps({
@@ -177,6 +223,26 @@ watch(
 )
 
 watch(
+  () => getMessage().edit?.messageId,
+  (messageId, prevMessageId) => {
+    if (messageId != null && messageId !== prevMessageId) {
+      focusAtEndAfterResize.value = true
+      nextTick(() => {
+        if (!focusAtEndAfterResize.value) return
+
+        const el = refInput.value
+        if (!el) return
+
+        resizeTextarea(el)
+        focusAtEndAfterResize.value = false
+        applyFocusAtEnd(el)
+        requestAnimationFrame(() => applyFocusAtEnd(el))
+      })
+    }
+  }
+)
+
+watch(
   () => props.focusOnInputArea,
   () => {
     if (props.focusOnInputArea)
@@ -195,61 +261,97 @@ watch(
       const el = refInput.value;
       if (!el) return;
 
-      const scrollTop = el.scrollTop;
-      el.style.height = 'auto';
+      resizeTextarea(el);
 
-      const computedStyle = getComputedStyle(el);
-      const fontSize = parseFloat(computedStyle.fontSize) || 16;
-      const lineHeight = parseFloat(computedStyle.lineHeight) || fontSize * 1.4;
-      const minHeight = 40; 
-      const maxHeight = lineHeight * 11;
-      const scrollHeight = el.scrollHeight;
-
-      const lineCount = getMessage().text.split('\n').length;
-      const hasExplicitLineBreaks = lineCount > 1;
-      
-      const tempEl = document.createElement('div');
-      tempEl.style.position = 'absolute';
-      tempEl.style.visibility = 'hidden';
-      tempEl.style.whiteSpace = 'nowrap';
-      tempEl.style.font = computedStyle.font;
-      tempEl.style.fontSize = computedStyle.fontSize;
-      tempEl.style.fontFamily = computedStyle.fontFamily;
-      tempEl.style.fontWeight = computedStyle.fontWeight;
-      tempEl.style.letterSpacing = computedStyle.letterSpacing;
-      tempEl.textContent = getMessage().text;
-      
-      document.body.appendChild(tempEl);
-      const textWidth = tempEl.offsetWidth;
-      document.body.removeChild(tempEl);
-      
-      const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
-      const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
-      const availableWidth = el.clientWidth - paddingLeft - paddingRight;
-      
-      const hasAutoWrap = textWidth > availableWidth;
-      const shouldGrow = hasExplicitLineBreaks || hasAutoWrap;    
-      
-      if (!getMessage().text.trim()) {
-        el.style.height = minHeight + 'px';
-        el.style.overflowY = 'hidden';
-      } else if (!shouldGrow) {
-        el.style.height = minHeight + 'px';
-        el.style.overflowY = 'hidden';
-      } else if (scrollHeight <= maxHeight) {
-        el.style.height = scrollHeight + 'px';
-        el.style.overflowY = 'hidden';
-      } else {
-        el.style.height = maxHeight + 'px';
-        el.style.overflowY = 'auto';
-        el.scrollTop = scrollTop;
+      if (focusAtEndAfterResize.value) {
+        focusAtEndAfterResize.value = false
+        applyFocusAtEnd(el)
+        requestAnimationFrame(() => applyFocusAtEnd(el))
       }
-
-      syncMirrorScroll();
     });
   },
   { immediate: true }
 );
+
+watch(useEmojiMirror, (enabled) => {
+  if (!enabled) return
+
+  nextTick(() => {
+    const el = refInput.value
+    if (!el) return
+
+    const scrollTop = el.scrollTop
+    resizeTextarea(el)
+    el.scrollTop = scrollTop
+    syncMirrorScroll()
+    requestAnimationFrame(syncMirrorScroll)
+  })
+})
+
+function resizeTextarea(el: HTMLTextAreaElement) {
+  const scrollTop = el.scrollTop;
+  el.style.height = 'auto';
+
+  const computedStyle = getComputedStyle(el);
+  const fontSize = parseFloat(computedStyle.fontSize) || 16;
+  const lineHeight = parseFloat(computedStyle.lineHeight) || fontSize * 1.4;
+  const minHeight = 40;
+  const maxHeight = lineHeight * 11;
+  const scrollHeight = el.scrollHeight;
+
+  const lineCount = getMessage().text.split('\n').length;
+  const hasExplicitLineBreaks = lineCount > 1;
+
+  const tempEl = document.createElement('div');
+  tempEl.style.position = 'absolute';
+  tempEl.style.visibility = 'hidden';
+  tempEl.style.whiteSpace = 'nowrap';
+  tempEl.style.font = computedStyle.font;
+  tempEl.style.fontSize = computedStyle.fontSize;
+  tempEl.style.fontFamily = computedStyle.fontFamily;
+  tempEl.style.fontWeight = computedStyle.fontWeight;
+  tempEl.style.letterSpacing = computedStyle.letterSpacing;
+  tempEl.textContent = getMessage().text;
+
+  document.body.appendChild(tempEl);
+  const textWidth = tempEl.offsetWidth;
+  document.body.removeChild(tempEl);
+
+  const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
+  const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
+  const availableWidth = el.clientWidth - paddingLeft - paddingRight;
+
+  const hasAutoWrap = textWidth > availableWidth;
+  const shouldGrow = hasExplicitLineBreaks || hasAutoWrap;
+
+  if (!getMessage().text.trim()) {
+    el.style.height = minHeight + 'px';
+    el.style.overflowY = 'hidden';
+  } else if (!shouldGrow) {
+    el.style.height = minHeight + 'px';
+    el.style.overflowY = 'hidden';
+  } else if (scrollHeight <= maxHeight) {
+    el.style.height = scrollHeight + 'px';
+    el.style.overflowY = 'hidden';
+  } else {
+    el.style.height = maxHeight + 'px';
+    el.style.overflowY = 'auto';
+    el.scrollTop = scrollTop;
+  }
+
+  syncMirrorScroll()
+  requestAnimationFrame(syncMirrorScroll)
+}
+
+function applyFocusAtEnd(el: HTMLTextAreaElement) {
+  if (props.state === 'disabled' || getMessage().isRecording) return
+
+  const len = el.value.length
+  el.focus()
+  el.setSelectionRange(len, len)
+  el.scrollTop = el.scrollHeight
+  syncMirrorScroll()
+}
 
 watch(
   () => getMessage().forceSend,
@@ -333,8 +435,28 @@ const handleFormatApplied = (data: { format: string; selectedText: string; start
   }
 };
 
+function cancelEditMode() {
+  resetEdit()
+  setMessageText('')
+  hideEditPreview(chatAppId as string)
+  fileInfo.value = undefined
+  if (refInput.value) refInput.value.focus()
+}
+
+function isEditTextUnchanged(): boolean {
+  const draft = getMessage()
+  if (!draft.edit) return false
+  return (draft.text ?? '').trim() === (draft.edit.text ?? '').trim()
+}
+
 const sendMessage = () => {
   const Message = ref(getMessage())
+
+  if (Message.value.edit && isEditTextUnchanged()) {
+    cancelEditMode()
+    return
+  }
+
   if (Message.value.text != '' || Message.value.file) {
     const messageObject: IInputMessage = {
       type: '',

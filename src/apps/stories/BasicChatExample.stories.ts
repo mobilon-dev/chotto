@@ -497,6 +497,12 @@ export const BasicExample: Story = {
           );
           if (idx !== -1) {
             const existing = messagesRef.value[idx];
+            const editedText = message.text || '';
+
+            if (editedText.trim() === (existing.text ?? '').trim()) {
+              return;
+            }
+
             const originalText =
               existing.edited?.originalText ||
               message.edit.text ||
@@ -513,7 +519,6 @@ export const BasicExample: Story = {
                 : [];
             const editedAt = formatEditAt();
             const editedBy = existing.header || editorName;
-            const editedText = message.text || '';
 
             messagesRef.value[idx] = {
               ...existing,

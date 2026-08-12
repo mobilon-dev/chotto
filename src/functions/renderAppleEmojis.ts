@@ -94,6 +94,12 @@ export function textToAppleEmojiHtml(text: string): string {
   return escaped.replace(EMOJI_REGEX, (match) => createAppleEmojiImgHtml(match))
 }
 
+export function textContainsEmoji(text: string): boolean {
+  if (!text) return false
+  EMOJI_REGEX.lastIndex = 0
+  return EMOJI_REGEX.test(text)
+}
+
 /** HTML → HTML, эмодзi в текстовых узлах заменяются на img */
 export function replaceEmojisInHtml(html: string): string {
   if (!html || typeof document === 'undefined') return html

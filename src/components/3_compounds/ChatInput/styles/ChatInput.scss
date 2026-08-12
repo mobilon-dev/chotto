@@ -45,7 +45,10 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    box-sizing: border-box;
     border: var(--chotto-chatinput-input-border, 1px solid #d0d0d0);
     border-color: transparent;
     background-color: transparent;
@@ -55,14 +58,24 @@
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    word-break: break-word;
     line-height: var(--chotto-chatinput-input-line-height, 1.4);
     border-radius: var(--chotto-chatinput-input-border-radius, 2px);
     font-family: var(--chotto-chatinput-font-family, "Open Sans", sans-serif);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
   }
 
   &__input {
     width: 100%;
     display: block;
+    box-sizing: border-box;
     border: var(--chotto-chatinput-input-border, 1px solid #d0d0d0);
     background-color: var(--chotto-chatinput-input-background-color, transparent);
     padding: var(--chotto-chatinput-input-padding, 0.5rem 0.60rem);
@@ -71,6 +84,8 @@
     overflow-y: var(--chotto-chatinput-input-overflow-y, hidden);
     resize: var(--chotto-chatinput-input-resize, none);
     white-space: var(--chotto-chatinput-input-white-space, pre-wrap);
+    word-break: break-word;
+    overflow-wrap: break-word;
     line-height: var(--chotto-chatinput-input-line-height, 1.4);
     min-height: var(--chotto-chatinput-input-min-height, 40px);
     max-height: calc(1.5em * var(--chotto-chatinput-input-max-rows, 10));
@@ -83,6 +98,12 @@
       color: transparent;
       caret-color: var(--chotto-chatinput-input-text-color, #1E1E1E);
       background-color: transparent;
+      scrollbar-gutter: stable;
+    }
+
+    &--selecting {
+      color: var(--chotto-chatinput-input-text-color, #1E1E1E);
+      background-color: var(--chotto-chatinput-input-background-color, transparent);
     }
 
     &:focus-visible {
