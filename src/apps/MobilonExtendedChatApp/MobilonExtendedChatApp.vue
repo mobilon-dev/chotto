@@ -249,6 +249,7 @@
                     <ButtonEmojiPicker
                       :mode="'click'"
                       :native="false"
+                      :display-recent="true"
                     />
                     <StickerPicker
                       :mode="'click'"

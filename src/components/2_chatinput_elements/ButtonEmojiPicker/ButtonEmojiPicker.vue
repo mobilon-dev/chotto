@@ -24,6 +24,7 @@
       <EmojiPicker
         :native="native"
         :theme="emojiTheme"
+        :display-recent="displayRecent"
         picker-type=""
         @select="onSelectEmoji"
       />
@@ -53,6 +54,13 @@ const props = defineProps({
    * Значение пишется в общий store чата (useEmojiNative).
    */
   native: {
+    type: Boolean,
+    default: true,
+  },
+  /**
+   * Показывать группу недавно использованных эмодзи.
+   */
+  displayRecent: {
     type: Boolean,
     default: true,
   },
