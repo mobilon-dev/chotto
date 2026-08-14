@@ -190,7 +190,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed, unref } from "vue";
+import { onMounted, ref, computed, unref, provide } from "vue";
 // import { nextTick } from "vue";
 import moment from 'moment';
 
@@ -267,6 +267,7 @@ const themes = themesData.map(theme =>
 const chatsStore = useChatsStore();
 
 const selectedChat = ref(null);
+provide('selectedChat', selectedChat);
 const messages = ref([]);
 const userProfile = ref({});
 const channels = ref([]);

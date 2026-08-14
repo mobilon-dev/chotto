@@ -1,9 +1,9 @@
-import { ref } from 'vue';
+import { computed, getCurrentInstance, inject, ref, unref, watch, type Ref } from 'vue';
 import { Edit, Reply } from '@/types';
 
 /**
  * Структура сообщения с черновиком текста, файлами и метаданными
- * @interface Message
+ * @interface MessageDraft
  * @property {string} id - Уникальный идентификатор сообщения (обычно chatAppId)
  * @property {string} text - Текст сообщения
  * @property {UploadedFile} [file] - Прикрепленный файл
@@ -12,7 +12,7 @@ import { Edit, Reply } from '@/types';
  * @property {boolean} forceSend - Флаг принудительной отправки сообщения
  * @property {boolean} isRecording - Флаг активной записи (аудио/видео)
  */
-interface Message {
+export interface MessageDraft {
     id: string
     text: string
     file?: UploadedFile
@@ -41,7 +41,37 @@ interface UploadedFile{
  * Глобальное хранилище черновиков сообщений для всех чатов
  * @private
  */
-const messages = ref<Message[]>([])
+const messages = ref<MessageDraft[]>([])
+
+type SelectedChatLike = { chatId?: string | number } | null | undefined
+
+function createEmptyDraft(id: string): MessageDraft {
+    return {
+        id,
+        text: '',
+        file: undefined,
+        forceSend: false,
+        isRecording: false,
+    }
+}
+
+function ensureDraft(id: string): MessageDraft {
+    const found = messages.value.find((message) => message.id === id)
+    if (found) return found
+
+    const created = createEmptyDraft(id)
+    messages.value.push(created)
+    return created
+}
+
+function syncDraftPreviews(chatAppId: string, message: MessageDraft) {
+    if (typeof document === 'undefined') return
+
+    const replyLine = document.getElementById('chat-input-reply-line-' + chatAppId)
+    if (replyLine) {
+        replyLine.style.display = (message.reply || message.edit) ? 'inherit' : 'none'
+    }
+}
 
 /**
  * Composable для управления состоянием черновика сообщения в конкретном чате
@@ -50,7 +80,9 @@ const messages = ref<Message[]>([])
  * 
  * Предоставляет методы для работы с текстом, файлами, ответами и флагами сообщения.
  * Автоматически создает новый черновик, если сообщение с указанным ID не существует.
- * Поддерживает множественные экземпляры для разных чатов одновременно.
+ * Черновики разделяются по контакту (selectedChat.chatId): при переключении
+ * на другого контакта текст не переносится, а при возврате восстанавливается.
+ * Переключение диалога внутри контакта (MAX → TG) сохраняет тот же черновик.
  * 
  * @param {string} outId - Уникальный идентификатор чата (chatAppId)
  * 
@@ -107,21 +139,37 @@ const messages = ref<Message[]>([])
  */
 export const useMessageDraft = (outId : string) => {
 
-    const index = ref<number>(0)
+    const selectedChat = getCurrentInstance()
+        ? inject<Ref<SelectedChatLike> | SelectedChatLike>('selectedChat', undefined)
+        : undefined
 
-    const foundMessage = messages.value.find(({id}) => id == outId)
-    if (foundMessage != undefined){
-        index.value = messages.value.indexOf(foundMessage)
-    } 
-    else {
-        messages.value.push({
-            id: outId,
-            text: '',
-            file: undefined,
-            forceSend: false,
-            isRecording: false
-        })
-        index.value = messages.value.length - 1
+    const draftId = computed(() => {
+        const chat = selectedChat ? unref(selectedChat) : undefined
+        const chatId = chat?.chatId
+        if (chatId === undefined || chatId === null || chatId === '') {
+            return outId
+        }
+        return `${outId}:${chatId}`
+    })
+
+    watch(
+        draftId,
+        (id, prevId) => {
+            const message = ensureDraft(id)
+            if (prevId !== undefined && prevId !== id) {
+                syncDraftPreviews(outId, message)
+            }
+        },
+        { immediate: true }
+    )
+
+    const getMessageIndex = () => {
+        const id = draftId.value
+        const index = messages.value.findIndex((message) => message.id === id)
+        if (index !== -1) return index
+
+        ensureDraft(id)
+        return messages.value.findIndex((message) => message.id === id)
     }
     
 /**================================================================ */
@@ -133,21 +181,22 @@ export const useMessageDraft = (outId : string) => {
      * @returns {void}
      */
     const resetMessage = () => {
-        messages.value[index.value] = {
-            id: getMessage().id,
+        const current = getMessage()
+        messages.value[getMessageIndex()] = {
+            id: current.id,
             text: '',
             file: undefined,
             reply: undefined,
             edit: undefined,
             forceSend: false,
-            isRecording: getMessage().isRecording,
+            isRecording: current.isRecording,
         }
     }
 
     /** Снимок полей черновика с возможностью точечной перезаписи */
-    const patchMessage = (patch: Partial<Omit<Message, 'id'>>) => {
+    const patchMessage = (patch: Partial<Omit<MessageDraft, 'id'>>) => {
         const current = getMessage()
-        messages.value[index.value] = {
+        messages.value[getMessageIndex()] = {
             ...current,
             forceSend: false,
             ...patch,
@@ -232,10 +281,10 @@ export const useMessageDraft = (outId : string) => {
      * Получить текущее состояние сообщения
      * Возвращает полный объект сообщения со всеми полями
      * 
-     * @returns {Message} Текущее сообщение с текстом, файлом, ответом и флагами
+     * @returns {MessageDraft} Текущее сообщение с текстом, файлом, ответом и флагами
      */
-    function getMessage () {
-        return messages.value[index.value]
+    function getMessage (): MessageDraft {
+        return ensureDraft(draftId.value)
     }
 
     /**
@@ -246,7 +295,7 @@ export const useMessageDraft = (outId : string) => {
      * @returns {void}
      */
     const setForceSendMessage = (val : boolean) => {
-        messages.value[index.value].forceSend = val
+        getMessage().forceSend = val
     } 
 
     /**
@@ -257,7 +306,7 @@ export const useMessageDraft = (outId : string) => {
      * @returns {void}
      */
     const setRecordingMessage = (val : boolean) => {
-        messages.value[index.value].isRecording = val
+        getMessage().isRecording = val
     } 
 
     return {

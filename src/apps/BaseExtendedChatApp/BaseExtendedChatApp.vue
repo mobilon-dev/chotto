@@ -151,7 +151,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, provide } from "vue";
 // import { computed, watch } from "vue";
 import moment from 'moment';
 
@@ -226,6 +226,7 @@ const themes = themesData.map(theme =>
 const chatsStore = useChatsStore();
 
 const selectedChat = ref(null);
+provide('selectedChat', selectedChat);
 const messages = ref([]);
 const userProfile = ref({});
 const channels = ref([]);

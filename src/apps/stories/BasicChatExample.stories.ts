@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
-import { ref, computed } from 'vue';
+import { ref, computed, provide } from 'vue';
 
 import BaseContainer from '../../components/5_containers/BaseContainer/BaseContainer.vue';
 import BaseLayout from '../../components/4_layouts/BaseLayout/BaseLayout.vue';
@@ -453,6 +453,7 @@ export const BasicExample: Story = {
     setup() {
       const chatsRef = ref([...simpleChats]);
       const selectedChatRef = ref(chatsRef.value[0]);
+      provide('selectedChat', selectedChatRef);
       const scrollToMessageId = ref<string | null>(null);
       let scrollToTimer: ReturnType<typeof setTimeout> | null = null;
       

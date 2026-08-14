@@ -91,7 +91,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, provide } from "vue";
 // import { watch } from "vue";
 
 import {
@@ -151,6 +151,7 @@ const chatsStore = useChatsStore();
 
 // Reactive data
 const selectedChat = ref(null);
+provide('selectedChat', selectedChat);
 const messages = ref([]);
 const userProfile = ref({});
 const channels = ref([]);

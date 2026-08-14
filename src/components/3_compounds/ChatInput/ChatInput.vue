@@ -21,6 +21,7 @@
     </div>
     <div
       v-else
+      :key="draftChatKey"
       class="chat-input__input-wrap"
     >
       <div
@@ -72,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-import { unref, ref, watch, nextTick, inject, computed, onMounted } from 'vue';
+import { unref, ref, watch, nextTick, inject, computed, onMounted, type Ref } from 'vue';
 import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview } from '@/hooks';
 import { textToAppleEmojiHtml, textContainsEmoji } from '@/functions/renderAppleEmojis';
 import { t } from '../../../locale/useLocale';
@@ -83,8 +84,14 @@ import TextFormatToolbar from '../../2_chatinput_elements/TextFormatToolbar/Text
 const emit = defineEmits(['send','typing']);
 
 const chatAppId = inject('chatAppId')
+const selectedChat = inject<Ref<{ chatId?: string | number } | null> | { chatId?: string | number } | undefined>('selectedChat', undefined)
 const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit } = useMessageDraft(chatAppId as string)
 const { isNative } = useEmojiNative(chatAppId as string)
+
+const draftChatKey = computed(() => {
+  const chat = selectedChat ? unref(selectedChat) : undefined
+  return chat?.chatId != null && chat.chatId !== '' ? String(chat.chatId) : 'default'
+})
 
 const refInput = ref<HTMLTextAreaElement>();
 const refMirror = ref<HTMLElement>();
