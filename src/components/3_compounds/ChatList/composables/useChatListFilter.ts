@@ -92,14 +92,10 @@ export function useChatListFilter({ props, emit }: UseChatListFilterOptions) {
           // В режиме поиска показываем все чаты из store (они уже отфильтрованы API)
           return true;
         } else {
-          // Обычная локальная фильтрация
-          if (!props.filterQuery) {
-            return c.name.includes(filter.value) ||
-              c.metadata.includes(filter.value);
-          } else {
-            return c.name.includes(props.filterQuery) ||
-              c.metadata.includes(props.filterQuery);
-          }
+          // Обычная локальная фильтрация без учёта регистра
+          const query = (props.filterQuery || filter.value).toLowerCase();
+          return (c.name ?? '').toLowerCase().includes(query) ||
+            (c.metadata ?? '').toLowerCase().includes(query);
         }
       });
 
