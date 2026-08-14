@@ -18,6 +18,19 @@
   --chotto-audiomessage-content-padding-bottom: 4px;
   --chotto-audiomessage-content-padding-left: 14px;
   --chotto-audiomessage-content-border-radius: var(--chotto-theme-message-border-radius, 14px);
+  // AudioMessage bottom shadow variables
+  --chotto-audiomessage-bottom-shadow-display: block;
+  --chotto-audiomessage-bottom-shadow-position: absolute;
+  --chotto-audiomessage-bottom-shadow-left: 0;
+  --chotto-audiomessage-bottom-shadow-right: 0;
+  --chotto-audiomessage-bottom-shadow-bottom: 0;
+  --chotto-audiomessage-bottom-shadow-height: 20px;
+  --chotto-audiomessage-bottom-shadow-background: transparent;
+  --chotto-audiomessage-bottom-shadow-border-bottom: 1px solid #D0D0D0;
+  --chotto-audiomessage-bottom-shadow-border-radius: 0 0 7px 7px;
+  --chotto-audiomessage-bottom-shadow-pointer-events: none;
+  --chotto-audiomessage-bottom-shadow-z-index: 0;
+
 
   // Left arrow variables
   --chotto-audiomessage-left-arrow-content: '';
@@ -139,9 +152,13 @@
 
   // Remaining time variables
   --chotto-audiomessage-time-margin: 0;
-  --chotto-audiomessage-time-font-size: 14px;
+  --chotto-audiomessage-time-font-size: 12px;
   --chotto-audiomessage-time-font-weight: 400;
   --chotto-audiomessage-time-color: var(--chotto-theme-secondary-text-color);
+  --chotto-audiomessage-duration-time-margin: 0;
+  --chotto-audiomessage-duration-time-font-size: 14px;
+  --chotto-audiomessage-duration-time-font-weight: 400;
+  --chotto-audiomessage-duration-time-color: var(--chotto-theme-secondary-text-color);
   --chotto-audiomessage-duration-margin-left: auto;
   --chotto-audiomessage-duration-text-align: right;
 
@@ -233,7 +250,6 @@
   --chotto-audiomessage-views-text-color: var(--chotto-theme-secondary-text-color);
 
   // Time variables
-  --chotto-audiomessage-time-font-size: var(--chotto-theme-text-font-size);
   --chotto-audiomessage-time-text-color: var(--chotto-theme-secondary-text-color);
 
   // Menu button variables
@@ -283,10 +299,11 @@
   --chotto-audiomessage-message-margin: var(--chotto-theme-message-margin);
 
   // Left layout variables
-  --chotto-audiomessage-left-grid-template-columns: min-content 1fr;
+  --chotto-audiomessage-left-grid-template-columns: var(--chotto-theme-avatar-small-size) 1fr;
+  --chotto-audiomessage-left-column-gap: 8px;
   --chotto-audiomessage-left-avatar-grid-column: 1;
   --chotto-audiomessage-left-avatar-grid-row: 2;
-  --chotto-audiomessage-left-avatar-margin-right: 12px;
+  --chotto-audiomessage-left-avatar-margin-right: 0;
   --chotto-audiomessage-left-subtext-grid-column: 2;
   --chotto-audiomessage-left-subtext-grid-row: 1;
   --chotto-audiomessage-left-subtext-margin: 0 0 2px 10px;
@@ -294,7 +311,7 @@
   --chotto-audiomessage-left-backdrop-filter: none;
   --chotto-audiomessage-left-border: none;
   --chotto-audiomessage-left-box-shadow: none;
-  --chotto-audiomessage-left-content-avatar-indent-margin-left: calc(40px + 12px);
+  --chotto-audiomessage-left-content-avatar-indent-margin-left: 0;
   --chotto-audiomessage-left-menu-button-top: 1px;
   --chotto-audiomessage-left-menu-button-right: -20px;
   --chotto-audiomessage-left-menu-button-bottom: auto;
@@ -308,10 +325,11 @@
   --chotto-audiomessage-left-context-menu-padding: 8px 0 8px 0;
 
   // Right layout variables
-  --chotto-audiomessage-right-grid-template-columns: 1fr min-content;
+  --chotto-audiomessage-right-grid-template-columns: 1fr var(--chotto-theme-avatar-small-size);
+  --chotto-audiomessage-right-column-gap: 8px;
   --chotto-audiomessage-right-avatar-grid-column: 2;
   --chotto-audiomessage-right-avatar-grid-row: 2;
-  --chotto-audiomessage-right-avatar-margin-left: 12px;
+  --chotto-audiomessage-right-avatar-margin-left: 0;
   --chotto-audiomessage-right-subtext-grid-column: 1;
   --chotto-audiomessage-right-subtext-grid-row: 1;
   --chotto-audiomessage-right-subtext-margin: 0 10px 2px auto;
@@ -320,7 +338,7 @@
   --chotto-audiomessage-right-backdrop-filter: none;
   --chotto-audiomessage-right-border: none;
   --chotto-audiomessage-right-box-shadow: none;
-  --chotto-audiomessage-right-content-avatar-indent-margin-right: calc(40px + 12px);
+  --chotto-audiomessage-right-content-avatar-indent-margin-right: 0;
   --chotto-audiomessage-right-menu-button-top: 1px;
   --chotto-audiomessage-right-menu-button-left: auto;
   --chotto-audiomessage-right-menu-button-right: -20px;

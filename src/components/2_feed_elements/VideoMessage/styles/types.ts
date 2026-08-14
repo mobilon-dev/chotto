@@ -8,6 +8,31 @@ export interface VideoMessageThemeCSSVariables {
   '--chotto-videomessage-content-max-width': string;
   /** Скругление контейнера контента видео */
   '--chotto-videomessage-content-border-radius': string;
+  /** Скругление контейнера контента видео с подписью */
+  '--chotto-videomessage-content-with-caption-border-radius': string;
+
+  /** Отображение нижней «тени» пузыря */
+  '--chotto-videomessage-bottom-shadow-display': string;
+  /** Позиционирование нижней «тени» */
+  '--chotto-videomessage-bottom-shadow-position': string;
+  /** Смещение нижней «тени» слева */
+  '--chotto-videomessage-bottom-shadow-left': string;
+  /** Смещение нижней «тени» справа */
+  '--chotto-videomessage-bottom-shadow-right': string;
+  /** Смещение нижней «тени» снизу */
+  '--chotto-videomessage-bottom-shadow-bottom': string;
+  /** Высота нижней «тени» */
+  '--chotto-videomessage-bottom-shadow-height': string;
+  /** Фон нижней «тени» */
+  '--chotto-videomessage-bottom-shadow-background': string;
+  /** Нижняя граница «тени» (stroke bottom) */
+  '--chotto-videomessage-bottom-shadow-border-bottom': string;
+  /** Скругление нижней «тени» */
+  '--chotto-videomessage-bottom-shadow-border-radius': string;
+  /** События указателя нижней «тени» */
+  '--chotto-videomessage-bottom-shadow-pointer-events': string;
+  /** Слой нижней «тени» */
+  '--chotto-videomessage-bottom-shadow-z-index': string;
 
   /** Позиционирование контейнера информации (время/статус/просмотры) */
   '--chotto-videomessage-info-container-position': string;
@@ -135,6 +160,12 @@ export interface VideoMessageThemeCSSVariables {
   '--chotto-videomessage-text-container-padding': string;
   /** Скругление контейнера текста */
   '--chotto-videomessage-text-container-border-radius': string;
+  /** Скругление превью видео */
+  '--chotto-videomessage-preview-border-radius': string;
+  /** Скругление превью видео с подписью */
+  '--chotto-videomessage-preview-with-caption-border-radius': string;
+  /** Скругление превью видео с цитатой */
+  '--chotto-videomessage-preview-with-reply-border-radius': string;
   /** Перенос слов в контейнере текста */
   '--chotto-videomessage-text-container-word-wrap': string;
   /** Максимальная ширина контейнера текста */
@@ -156,6 +187,8 @@ export interface VideoMessageThemeCSSVariables {
 
   /** Шаблон колонок левой раскладки */
   '--chotto-videomessage-left-grid-template-columns': string;
+  /** Промежуток между колонками слева (аватар / пузырь) */
+  '--chotto-videomessage-left-column-gap': string;
   /** Колонка грида аватара слева */
   '--chotto-videomessage-left-avatar-grid-column': string;
   /** Отступ справа от аватара слева */
@@ -187,6 +220,8 @@ export interface VideoMessageThemeCSSVariables {
 
   /** Шаблон колонок правой раскладки */
   '--chotto-videomessage-right-grid-template-columns': string;
+  /** Промежуток между колонками справа (пузырь / аватар) */
+  '--chotto-videomessage-right-column-gap': string;
   /** Колонка грида аватара справа */
   '--chotto-videomessage-right-avatar-grid-column': string;
   /** Отступ слева от аватара справа */

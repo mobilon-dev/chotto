@@ -33,6 +33,10 @@
     <div 
       class="call-message__content"
     >
+      <div
+        class="call-message__bottom-shadow"
+        aria-hidden="true"
+      />
       <template v-if="message.deleted">
         <DeletedMessageContent />
         <div class="call-message__info-container">

@@ -85,6 +85,8 @@ type DemoMessage = {
   type: string;
   direction: string;
   header?: string;
+  subText?: string;
+  avatar?: string;
   messageId: string;
   text?: string;
   timestamp: string;
@@ -128,6 +130,7 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'incoming',
     header: "Анна",
+    subText: "Анна",
     messageId: '1',
     text: "Привет! Как дела?",
     timestamp: '1761991199',
@@ -138,6 +141,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.audio",
     direction: 'outgoing',
     header: "Иван",
+    subText: "Иван",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     messageId: '2',
     url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
     timestamp: '1762077999',
@@ -148,6 +153,7 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'incoming',
     header: "Анна",
+    subText: "Анна",
     messageId: '3',
     text: "Отлично! Рада слышать 😊",
     timestamp: '1762163999',
@@ -163,6 +169,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'outgoing',
     header: "Иван",
+    subText: "Иван",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     messageId: '1-reply',
     text: "Отлично, спасибо!",
     timestamp: '1762164005',
@@ -179,6 +187,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'outgoing',
     header: "Иван",
+    subText: "Иван",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     messageId: 'long-quote',
     text: 'Уважаемые Алексей и Марина, благодарим вас за оперативную подготовку обновлённой версии макетов (v.2.1). Мы провели внутренний ревью с маркетингом, продуктом и юзабилити-командой — в целом прогресс заметен, и многие замечания из предыдущей итерации учтены. Однако остаются важные моменты, которые необходимо доработать до финального согласования. Прошу вас внимательно ознакомиться с перечнем правок ниже. Для удобства я разделила их по разделам и приоритетам. Также прикрепляю PDF с аннотациями — там вы найдёте визуальные пояснения к каждому пункту.',
     timestamp: '1762164008',
@@ -189,6 +199,7 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'incoming',
     header: "Анна",
+    subText: "Анна",
     messageId: '1-reply-long',
     text: "Ок",
     timestamp: '1762164010',
@@ -205,6 +216,7 @@ const simpleMessages: DemoMessage[] = [
     type: "message.file",
     direction: 'incoming',
     header: "Анна",
+    subText: "Анна",
     messageId: '7',
     url: "https://axiomabio.com/pdf/test.pdf",
     filename: "Расписание.pdf",
@@ -216,6 +228,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.sticker",
     direction: 'outgoing',
     header: "Иван",
+    subText: "Иван",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     messageId: '9',
     url: sticker,
     alt: "Animated sticker",
@@ -227,7 +241,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.image",
     direction: 'incoming',
     text: "Как тебе аватар?",
-    header: "Иван",
+    header: "Анна",
+    subText: "Анна",
     messageId: '10',
     url: "https://polka.cs.mobilon.ru/avatars/vector/man?size=256&palette=soft&seed=1&style=round",
     alt: "Avatar",
@@ -239,6 +254,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'outgoing',
     header: "Иван",
+    subText: "Иван",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     messageId: '11-edited',
     text: "Добрый день. Нет, у нас выходной",
     timestamp: '1762164400',
@@ -270,6 +287,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'outgoing',
     header: "Анна",
+    subText: "Анна",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     messageId: '4',
     text: "Привет! Как дела?",
     timestamp: '1761991199',
@@ -280,6 +299,7 @@ const simpleMessages: DemoMessage[] = [
     type: "message.audio",
     direction: 'incoming',
     header: "Иван",
+    subText: "Иван",
     messageId: '5',
     url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
     timestamp: '1762077599',
@@ -290,6 +310,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'outgoing',
     header: "Анна",
+    subText: "Анна",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     messageId: '6',
     text: "Отлично! Рада слышать 😊",
     timestamp: '1762163999',
@@ -305,6 +327,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'outgoing',
     header: "Анна",
+    subText: "Анна",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     messageId: '6-expired',
     text: "Старое сообщение — редактировать и удалить уже нельзя",
     timestamp: '1762164000',
@@ -317,6 +341,7 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'incoming',
     header: "Иван",
+    subText: "Иван",
     messageId: '4-reply',
     text: "Нормально, работаю",
     timestamp: '1762164005',
@@ -333,6 +358,7 @@ const simpleMessages: DemoMessage[] = [
     type: "message.sticker",
     direction: 'incoming',
     header: "Иван",
+    subText: "Иван",
     messageId: '9',
     url: sticker,
     alt: "Animated sticker",
@@ -344,6 +370,8 @@ const simpleMessages: DemoMessage[] = [
     type: "message.file",
     direction: 'outgoing',
     header: "Анна",
+    subText: "Анна",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     messageId: '8',
     url: "https://axiomabio.com/pdf/test.pdf",
     filename: "Расписание.pdf",
@@ -355,7 +383,9 @@ const simpleMessages: DemoMessage[] = [
     type: "message.image",
     direction: 'outgoing',
     text: "Как тебе аватар?",
-    header: "Иван",
+    header: "Анна",
+    subText: "Анна",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     messageId: '10',
     url: "https://polka.cs.mobilon.ru/avatars/vector/man?size=256&palette=soft&seed=1&style=round",
     alt: "Avatar",
@@ -367,6 +397,7 @@ const simpleMessages: DemoMessage[] = [
     type: "message.text",
     direction: 'incoming',
     header: "Иван",
+    subText: "Иван",
     messageId: '12-edited',
     text: "Добрый день. Нет, у нас выходной",
     timestamp: '1762164400',
@@ -549,6 +580,9 @@ export const BasicExample: Story = {
           chatId: number;
           type: string;
           direction: 'outgoing';
+          header: string;
+          subText: string;
+          avatar?: string;
           messageId: string;
           text: string;
           timestamp: string;
@@ -562,11 +596,19 @@ export const BasicExample: Story = {
           chatId: currentChatId,
           type: messageType,
           direction: 'outgoing',
+          header: editorName,
+          subText: editorName,
           messageId: `${now}-outgoing`,
           text: message.text || '',
           timestamp: nowString,
           status: 'sent',
         };
+
+        if (currentChatId === 1) {
+          outgoingMessage.avatar = 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round';
+        } else if (currentChatId === 2) {
+          outgoingMessage.avatar = 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round';
+        }
         
         // Добавляем поля для файлов и стикеров
         if (message.url) {
@@ -590,6 +632,8 @@ export const BasicExample: Story = {
           chatId: number;
           type: string;
           direction: 'incoming';
+          header: string;
+          subText: string;
           messageId: string;
           text: string;
           timestamp: string;
@@ -603,6 +647,8 @@ export const BasicExample: Story = {
           chatId: senderChatId,
           type: messageType,
           direction: 'incoming',
+          header: editorName,
+          subText: editorName,
           messageId: `${now}-incoming`,
           text: message.text || '',
           timestamp: nowString,
@@ -855,6 +901,7 @@ export const BasicExample: Story = {
                 <ChatInfo :chat="selectedChat" />
                 <div style="flex: 1 1 0; min-height: 0; overflow-y: auto;">
                   <Feed 
+                    style="--chotto-feed-padding: 10px 5px; --chotto-textmessage-content-max-width: 500px;"
                     :objects="messages"
                     :scroll-to="scrollToMessageId"
                     :current-user-id="'usr_me'"

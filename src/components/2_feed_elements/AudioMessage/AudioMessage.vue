@@ -37,6 +37,10 @@
       :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
       @mouseenter="showMenu"
     >
+      <div
+        class="audio-message__bottom-shadow"
+        aria-hidden="true"
+      />
       <template v-if="message.deleted">
         <DeletedMessageContent />
         <div class="audio-message__footer">

@@ -9,6 +9,25 @@
     display: var(--chotto-imagemessage-content-display, flex);
     flex-direction: var(--chotto-imagemessage-content-flex-direction, column);
     min-width: var(--chotto-imagemessage-content-min-width, 0);
+
+    &.has-caption {
+      border-radius: var(--chotto-imagemessage-content-with-caption-border-radius, 7px);
+    }
+  }
+
+  &__bottom-shadow {
+    display: var(--chotto-imagemessage-bottom-shadow-display, block);
+    position: var(--chotto-imagemessage-bottom-shadow-position, absolute);
+    left: var(--chotto-imagemessage-bottom-shadow-left, 0);
+    right: var(--chotto-imagemessage-bottom-shadow-right, 0);
+    bottom: var(--chotto-imagemessage-bottom-shadow-bottom, 0);
+    height: var(--chotto-imagemessage-bottom-shadow-height, 20px);
+    background: var(--chotto-imagemessage-bottom-shadow-background, transparent);
+    border-bottom: var(--chotto-imagemessage-bottom-shadow-border-bottom, 1px solid #D0D0D0);
+    border-radius: var(--chotto-imagemessage-bottom-shadow-border-radius, 0 0 7px 7px);
+    pointer-events: var(--chotto-imagemessage-bottom-shadow-pointer-events, none);
+    z-index: var(--chotto-imagemessage-bottom-shadow-z-index, 1);
+    box-sizing: border-box;
   }
 
   &__avatar {
@@ -97,7 +116,7 @@
       justify-content: var(--chotto-imagemessage-preview-button-blur-edges-justify-content, center);
       align-items: var(--chotto-imagemessage-preview-button-blur-edges-align-items, center);
       min-height: var(--chotto-imagemessage-preview-button-blur-edges-min-height, fit-content);
-      border-radius: var(--chotto-imagemessage-preview-button-blur-edges-border-radius, 8px 8px 0 0);
+      border-radius: var(--chotto-imagemessage-preview-button-blur-edges-border-radius, 7px 7px 0 0);
     }
   }
 
@@ -188,8 +207,8 @@
   }
 
   &__text-container {
-    padding: var(--chotto-imagemessage-text-container-padding, 6px 10px 6px 10px);
-    border-radius: var(--chotto-imagemessage-text-container-border-radius, 0 0 8px 8px);
+    padding: var(--chotto-imagemessage-text-container-padding, 4px 8px);
+    border-radius: var(--chotto-imagemessage-text-container-border-radius, 0 0 7px 7px);
     width: var(--chotto-imagemessage-text-container-width, 100%);
     min-width: var(--chotto-imagemessage-text-container-min-width, 0);
     word-wrap: var(--chotto-imagemessage-text-container-word-wrap, break-word);
@@ -263,11 +282,12 @@
   }
 
   &__left {
-    grid-template-columns: var(--chotto-imagemessage-left-grid-template-columns, min-content 1fr);
+    grid-template-columns: var(--chotto-imagemessage-left-grid-template-columns, var(--chotto-imagemessage-avatar-min-width, 40px) 1fr);
+    column-gap: var(--chotto-imagemessage-left-column-gap, 12px);
 
     .image-message__avatar {
       grid-column: var(--chotto-imagemessage-left-avatar-grid-column, 1);
-      margin-right: var(--chotto-imagemessage-left-avatar-margin-right, 12px);
+      margin-right: var(--chotto-imagemessage-left-avatar-margin-right, 0);
     }
 
     .image-message__subtext {
@@ -285,7 +305,7 @@
     }
 
     .image-message__content.with-avatar-indent {
-      margin-left: var(--chotto-imagemessage-left-content-with-avatar-indent-margin-left, calc(var(--chotto-imagemessage-avatar-min-width, 40px) + 12px));
+      margin-left: var(--chotto-imagemessage-left-content-with-avatar-indent-margin-left, 0);
     }
 
     .image-message__menu-button {
@@ -302,11 +322,12 @@
   }
 
   &__right {
-    grid-template-columns: var(--chotto-imagemessage-right-grid-template-columns, 1fr min-content);
+    grid-template-columns: var(--chotto-imagemessage-right-grid-template-columns, 1fr var(--chotto-imagemessage-avatar-min-width, 40px));
+    column-gap: var(--chotto-imagemessage-right-column-gap, 8px);
 
     .image-message__avatar {
       grid-column: var(--chotto-imagemessage-right-avatar-grid-column, 2);
-      margin-left: var(--chotto-imagemessage-right-avatar-margin-left, 12px);
+      margin-left: var(--chotto-imagemessage-right-avatar-margin-left, 0);
     }
 
     .image-message__subtext {
@@ -325,7 +346,7 @@
     }
 
     .image-message__content.with-avatar-indent {
-      margin-right: var(--chotto-imagemessage-right-content-with-avatar-indent-margin-right, calc(var(--chotto-imagemessage-avatar-min-width, 40px) + 12px));
+      margin-right: var(--chotto-imagemessage-right-content-with-avatar-indent-margin-right, 0);
     }
 
     .image-message__text-container {

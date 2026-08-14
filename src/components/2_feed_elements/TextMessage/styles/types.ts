@@ -8,6 +8,8 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-content-word-wrap': string;
   /** Ширина контейнера контента */
   '--chotto-textmessage-content-width': string;
+  /** Минимальная ширина контейнера контента */
+  '--chotto-textmessage-content-min-width': string;
   /** Максимальная ширина контейнера контента */
   '--chotto-textmessage-content-max-width': string;
   /** Скругление пузыря сообщения */
@@ -15,6 +17,33 @@ export interface TextMessageThemeCSSVariables {
   /** Внутренние отступы пузыря сообщения */
   '--chotto-textmessage-content-padding': string;
 
+  /** Отображение нижней «тени» пузыря */
+  '--chotto-textmessage-bottom-shadow-display': string;
+  /** Позиционирование нижней «тени» */
+  '--chotto-textmessage-bottom-shadow-position': string;
+  /** Смещение нижней «тени» слева */
+  '--chotto-textmessage-bottom-shadow-left': string;
+  /** Смещение нижней «тени» справа */
+  '--chotto-textmessage-bottom-shadow-right': string;
+  /** Смещение нижней «тени» снизу */
+  '--chotto-textmessage-bottom-shadow-bottom': string;
+  /** Высота нижней «тени» */
+  '--chotto-textmessage-bottom-shadow-height': string;
+  /** Фон нижней «тени» */
+  '--chotto-textmessage-bottom-shadow-background': string;
+  /** Нижняя граница «тени» (stroke bottom) */
+  '--chotto-textmessage-bottom-shadow-border-bottom': string;
+  /** Скругление нижней «тени» */
+  '--chotto-textmessage-bottom-shadow-border-radius': string;
+  /** События указателя нижней «тени» */
+  '--chotto-textmessage-bottom-shadow-pointer-events': string;
+  /** Слой нижней «тени» */
+  '--chotto-textmessage-bottom-shadow-z-index': string;
+
+  /** Ширина контейнера контента с цитатой-ответом */
+  '--chotto-textmessage-content-with-reply-width': string;
+  /** Минимальная ширина контейнера контента с цитатой-ответом */
+  '--chotto-textmessage-content-with-reply-min-width': string;
   /** Отображение контента с цитатой-ответом */
   '--chotto-textmessage-content-with-reply-display': string;
   /** Шаблон колонок контента с цитатой-ответом */
@@ -54,6 +83,8 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-left-before-z-index': string;
   /** Фильтр псевдоэлемента слева */
   '--chotto-textmessage-left-before-filter': string;
+  /** Обрезка хвостика слева (скрывает часть внутри пузыря) */
+  '--chotto-textmessage-left-before-clip-path': string;
 
   /** Содержимое псевдоэлемента "хвостик" справа */
   '--chotto-textmessage-right-after-content': string;
@@ -155,6 +186,8 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-text-font-size': string;
   /** Правила перевода строк текста */
   '--chotto-textmessage-text-white-space': string;
+  /** Нижний внутренний отступ текста */
+  '--chotto-textmessage-text-padding-bottom': string;
 
   /** Жирность жирного текста (markdown **текст**) */
   '--chotto-textmessage-markdown-strong-font-weight': string;
@@ -234,6 +267,8 @@ export interface TextMessageThemeCSSVariables {
 
   /** Шаблон колонок левой раскладки */
   '--chotto-textmessage-left-grid-template-columns': string;
+  /** Промежуток между колонками слева (аватар / пузырь) */
+  '--chotto-textmessage-left-column-gap': string;
   /** Колонка грида аватара слева */
   '--chotto-textmessage-left-avatar-grid-column': string;
   /** Ряд грида аватара слева */
@@ -256,7 +291,7 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-left-border': string;
   /** Тень пузыря слева */
   '--chotto-textmessage-left-box-shadow': string;
-  /** Отступ контента слева с учётом аватара */
+  /** Отступ контента слева с учётом аватара (колонка уже зарезервирована, обычно 0) */
   '--chotto-textmessage-left-content-with-avatar-indent-margin-left': string;
   /** Положение кнопки меню слева (top) */
   '--chotto-textmessage-left-menu-button-top': string;
@@ -269,6 +304,8 @@ export interface TextMessageThemeCSSVariables {
 
   /** Шаблон колонок правой раскладки */
   '--chotto-textmessage-right-grid-template-columns': string;
+  /** Промежуток между колонками справа (пузырь / аватар) */
+  '--chotto-textmessage-right-column-gap': string;
   /** Колонка грида аватара справа */
   '--chotto-textmessage-right-avatar-grid-column': string;
   /** Ряд грида аватара справа */
@@ -293,7 +330,7 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-right-border': string;
   /** Тень пузыря справа */
   '--chotto-textmessage-right-box-shadow': string;
-  /** Отступ контента справа с учётом аватара */
+  /** Отступ контента справа с учётом аватара (колонка уже зарезервирована, обычно 0) */
   '--chotto-textmessage-right-content-with-avatar-indent-margin-right': string;
   /** Положение кнопки меню справа (top) */
   '--chotto-textmessage-right-menu-button-top': string;

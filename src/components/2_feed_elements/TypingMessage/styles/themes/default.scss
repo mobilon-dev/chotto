@@ -1,7 +1,8 @@
 [data-theme="light"] {
   // TypingMessage container variables
   --chotto-typingmessage-container-display: grid;
-  --chotto-typingmessage-container-grid-template-columns: min-content 1fr;
+  --chotto-typingmessage-container-grid-template-columns: var(--chotto-theme-avatar-small-size) 1fr;
+  --chotto-typingmessage-container-column-gap: 12px;
   --chotto-typingmessage-container-position: relative;
   --chotto-typingmessage-container-margin: var(--chotto-theme-message-margin);
 
@@ -20,7 +21,7 @@
   --chotto-typingmessage-avatar-border-radius: 50%;
   --chotto-typingmessage-avatar-grid-column: 1;
   --chotto-typingmessage-avatar-grid-row: 2;
-  --chotto-typingmessage-avatar-margin-right: 12px;
+  --chotto-typingmessage-avatar-margin-right: 0;
 
   // TypingMessage loader-container variables
   --chotto-typingmessage-loader-container-min-height: 40px;

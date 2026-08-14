@@ -6,6 +6,8 @@ export interface TypingMessageThemeCSSVariables {
   '--chotto-typingmessage-container-display': string;
   /** Шаблон колонок контейнера печатающего сообщения */
   '--chotto-typingmessage-container-grid-template-columns': string;
+  /** Промежуток между колонками контейнера (аватар / лоадер) */
+  '--chotto-typingmessage-container-column-gap': string;
   /** Позиционирование контейнера печатающего сообщения */
   '--chotto-typingmessage-container-position': string;
   /** Внешние отступы контейнера печатающего сообщения */

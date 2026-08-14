@@ -34,9 +34,17 @@
 
     <div
       class="text-message__content"
-      :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
+      :class="{
+        'is-first': isFirstInSeries,
+        'with-avatar-indent': !isFirstInSeries && message.avatar,
+        'has-reply': Boolean(message.reply),
+      }"
       @mouseenter="showMenu"
     >
+      <div
+        class="text-message__bottom-shadow"
+        aria-hidden="true"
+      />
       <template v-if="message.deleted">
         <DeletedMessageContent
           :original-text="deletedTooltip.original"

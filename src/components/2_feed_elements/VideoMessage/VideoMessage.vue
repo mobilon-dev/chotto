@@ -33,8 +33,12 @@
 
     <div
       class="video-message__content"
-      :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
+      :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar, 'has-caption': Boolean(message.text) }"
     >
+      <div
+        class="video-message__bottom-shadow"
+        aria-hidden="true"
+      />
       <template v-if="message.deleted">
         <DeletedMessageContent />
         <div class="video-message__info-container">
@@ -358,9 +362,9 @@ watch([player, previewPlayer], ([playerVal, previewVal]) => {
 
 const videoBorderRadius = computed(() => {
   if (props.message.reply && props.message.text) return '0'
-  if (props.message.text) return '5px 5px 0 0'
-  if (props.message.reply) return '0 0 5px 5px'
-  return '8px'
+  if (props.message.text) return 'var(--chotto-videomessage-preview-with-caption-border-radius, 7px 7px 0 0)'
+  if (props.message.reply) return 'var(--chotto-videomessage-preview-with-reply-border-radius, 0 0 7px 7px)'
+  return 'var(--chotto-videomessage-preview-border-radius, 7px)'
 })
 
 const closeModal = () => isOpenModal.value = false

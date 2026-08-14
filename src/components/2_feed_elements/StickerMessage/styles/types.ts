@@ -175,6 +175,8 @@ export interface StickerMessageThemeCSSVariables {
 
   /** Шаблон колонок левой раскладки */
   '--chotto-stickermessage-left-grid-template-columns': string;
+  /** Промежуток между колонками слева (аватар / пузырь) */
+  '--chotto-stickermessage-left-column-gap': string;
   /** Колонка грида аватара слева */
   '--chotto-stickermessage-left-avatar-grid-column': string;
   /** Отступ справа от аватара слева */
@@ -202,6 +204,8 @@ export interface StickerMessageThemeCSSVariables {
 
   /** Шаблон колонок правой раскладки */
   '--chotto-stickermessage-right-grid-template-columns': string;
+  /** Промежуток между колонками справа (пузырь / аватар) */
+  '--chotto-stickermessage-right-column-gap': string;
   /** Колонка грида аватара справа */
   '--chotto-stickermessage-right-avatar-grid-column': string;
   /** Отступ слева от аватара справа */

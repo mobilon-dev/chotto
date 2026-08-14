@@ -36,6 +36,29 @@ export interface AudioMessageThemeCSSVariables {
   /** Внутренний отступ слева контейнера */
   '--chotto-audiomessage-content-padding-left': string;
 
+  /** Отображение нижней «тени» пузыря */
+  '--chotto-audiomessage-bottom-shadow-display': string;
+  /** Позиционирование нижней «тени» */
+  '--chotto-audiomessage-bottom-shadow-position': string;
+  /** Смещение нижней «тени» слева */
+  '--chotto-audiomessage-bottom-shadow-left': string;
+  /** Смещение нижней «тени» справа */
+  '--chotto-audiomessage-bottom-shadow-right': string;
+  /** Смещение нижней «тени» снизу */
+  '--chotto-audiomessage-bottom-shadow-bottom': string;
+  /** Высота нижней «тени» */
+  '--chotto-audiomessage-bottom-shadow-height': string;
+  /** Фон нижней «тени» */
+  '--chotto-audiomessage-bottom-shadow-background': string;
+  /** Нижняя граница «тени» (stroke bottom) */
+  '--chotto-audiomessage-bottom-shadow-border-bottom': string;
+  /** Скругление нижней «тени» */
+  '--chotto-audiomessage-bottom-shadow-border-radius': string;
+  /** События указателя нижней «тени» */
+  '--chotto-audiomessage-bottom-shadow-pointer-events': string;
+  /** Слой нижней «тени» */
+  '--chotto-audiomessage-bottom-shadow-z-index': string;
+
   /** Контент псевдоэлемента "хвостик" слева */
   '--chotto-audiomessage-left-arrow-content': string;
   /** Позиционирование хвостика слева */
@@ -230,6 +253,14 @@ export interface AudioMessageThemeCSSVariables {
   '--chotto-audiomessage-time-font-weight': string;
   /** Цвет времени */
   '--chotto-audiomessage-time-color': string;
+  /** Отступ текущего времени и длительности */
+  '--chotto-audiomessage-duration-time-margin': string;
+  /** Размер шрифта текущего времени и длительности */
+  '--chotto-audiomessage-duration-time-font-size': string;
+  /** Толщина шрифта текущего времени и длительности */
+  '--chotto-audiomessage-duration-time-font-weight': string;
+  /** Цвет текущего времени и длительности */
+  '--chotto-audiomessage-duration-time-color': string;
   /** Отступ слева длительности */
   '--chotto-audiomessage-duration-margin-left': string;
   /** Выравнивание текста длительности */
@@ -443,6 +474,8 @@ export interface AudioMessageThemeCSSVariables {
 
   /** Шаблон колонок левой раскладки */
   '--chotto-audiomessage-left-grid-template-columns': string;
+  /** Промежуток между колонками слева (аватар / пузырь) */
+  '--chotto-audiomessage-left-column-gap': string;
   /** Колонка грида аватара слева */
   '--chotto-audiomessage-left-avatar-grid-column': string;
   /** Ряд грида аватара слева */
@@ -484,6 +517,8 @@ export interface AudioMessageThemeCSSVariables {
 
   /** Шаблон колонок правой раскладки */
   '--chotto-audiomessage-right-grid-template-columns': string;
+  /** Промежуток между колонками справа (пузырь / аватар) */
+  '--chotto-audiomessage-right-column-gap': string;
   /** Колонка грида аватара справа */
   '--chotto-audiomessage-right-avatar-grid-column': string;
   /** Ряд грида аватара справа */

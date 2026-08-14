@@ -4,10 +4,27 @@
   --chotto-imagemessage-content-max-width: 430px;
   --chotto-imagemessage-content-width: fit-content;
   --chotto-imagemessage-content-border-radius: 14px;
+  --chotto-imagemessage-content-with-caption-border-radius: 7px;
+  --chotto-imagemessage-preview-border-radius: 7px;
+  --chotto-imagemessage-preview-with-caption-border-radius: 7px 7px 0 0;
+  --chotto-imagemessage-preview-with-reply-border-radius: 0 0 7px 7px;
   --chotto-imagemessage-content-align-items: stretch;
   --chotto-imagemessage-content-display: flex;
   --chotto-imagemessage-content-flex-direction: column;
   --chotto-imagemessage-content-min-width: 0;
+  // ImageMessage bottom shadow variables
+  --chotto-imagemessage-bottom-shadow-display: block;
+  --chotto-imagemessage-bottom-shadow-position: absolute;
+  --chotto-imagemessage-bottom-shadow-left: 0;
+  --chotto-imagemessage-bottom-shadow-right: 0;
+  --chotto-imagemessage-bottom-shadow-bottom: 0;
+  --chotto-imagemessage-bottom-shadow-height: 20px;
+  --chotto-imagemessage-bottom-shadow-background: transparent;
+  --chotto-imagemessage-bottom-shadow-border-bottom: 1px solid #D0D0D0;
+  --chotto-imagemessage-bottom-shadow-border-radius: 0 0 7px 7px;
+  --chotto-imagemessage-bottom-shadow-pointer-events: none;
+  --chotto-imagemessage-bottom-shadow-z-index: 1;
+
 
   // ImageMessage avatar variables
   --chotto-imagemessage-avatar-grid-row: 1 / -1;
@@ -56,7 +73,7 @@
   --chotto-imagemessage-views-p-font-size: var(--chotto-theme-small-text-font-size);
 
   // ImageMessage time variables
-  --chotto-imagemessage-time-font-size: var(--chotto-theme-small-text-font-size);
+  --chotto-imagemessage-time-font-size: 12px;
 
   // ImageMessage subtext variables
   --chotto-imagemessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
@@ -78,7 +95,7 @@
   --chotto-imagemessage-preview-button-blur-edges-justify-content: center;
   --chotto-imagemessage-preview-button-blur-edges-align-items: center;
   --chotto-imagemessage-preview-button-blur-edges-min-height: fit-content;
-  --chotto-imagemessage-preview-button-blur-edges-border-radius: 8px 8px 0 0;
+  --chotto-imagemessage-preview-button-blur-edges-border-radius: 7px 7px 0 0;
 
   // ImageMessage preview image variables
   --chotto-imagemessage-preview-image-width: 100%;
@@ -144,8 +161,8 @@
   --chotto-imagemessage-context-menu-position: absolute;
 
   // ImageMessage text container variables
-  --chotto-imagemessage-text-container-padding: 6px 10px 6px 10px;
-  --chotto-imagemessage-text-container-border-radius: 0 0 8px 8px;
+  --chotto-imagemessage-text-container-padding: 4px 8px;
+  --chotto-imagemessage-text-container-border-radius: 0 0 7px 7px;
   --chotto-imagemessage-text-container-width: 100%;
   --chotto-imagemessage-text-container-min-width: 0;
   --chotto-imagemessage-text-container-word-wrap: break-word;
@@ -184,9 +201,10 @@
   --chotto-imagemessage-left-right-margin: var(--chotto-theme-message-margin);
 
   // ImageMessage left variables - glassmorphism эффект
-  --chotto-imagemessage-left-grid-template-columns: min-content 1fr;
+  --chotto-imagemessage-left-grid-template-columns: var(--chotto-theme-avatar-small-size) 1fr;
+  --chotto-imagemessage-left-column-gap: 8px;
   --chotto-imagemessage-left-avatar-grid-column: 1;
-  --chotto-imagemessage-left-avatar-margin-right: 12px;
+  --chotto-imagemessage-left-avatar-margin-right: 0;
   --chotto-imagemessage-left-subtext-grid-column: 2;
   --chotto-imagemessage-left-subtext-grid-row: 1;
   --chotto-imagemessage-left-subtext-margin: 0 0 2px 10px;
@@ -201,7 +219,7 @@
   --chotto-imagemessage-left-box-shadow: 
     0 8px 32px rgba(15, 23, 42, 0.12),
     0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  --chotto-imagemessage-left-content-with-avatar-indent-margin-left: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-imagemessage-left-content-with-avatar-indent-margin-left: 0;
   --chotto-imagemessage-left-menu-button-top: 50%;
   --chotto-imagemessage-left-menu-button-right: -40px;
   --chotto-imagemessage-left-context-menu-top: 50%;
@@ -209,9 +227,10 @@
   --chotto-imagemessage-left-context-menu-margin-top: 20px;
 
   // ImageMessage right variables - glassmorphism эффект
-  --chotto-imagemessage-right-grid-template-columns: 1fr min-content;
+  --chotto-imagemessage-right-grid-template-columns: 1fr var(--chotto-theme-avatar-small-size);
+  --chotto-imagemessage-right-column-gap: 8px;
   --chotto-imagemessage-right-avatar-grid-column: 2;
-  --chotto-imagemessage-right-avatar-margin-left: 12px;
+  --chotto-imagemessage-right-avatar-margin-left: 0;
   --chotto-imagemessage-right-subtext-grid-column: 1;
   --chotto-imagemessage-right-subtext-grid-row: 1;
   --chotto-imagemessage-right-subtext-margin: 0 10px 2px auto;
@@ -227,7 +246,7 @@
   --chotto-imagemessage-right-box-shadow: 
     0 8px 32px rgba(15, 23, 42, 0.12),
     0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  --chotto-imagemessage-right-content-with-avatar-indent-margin-right: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-imagemessage-right-content-with-avatar-indent-margin-right: 0;
   --chotto-imagemessage-right-text-container-margin-left: auto;
   --chotto-imagemessage-right-menu-button-top: 50%;
   --chotto-imagemessage-right-menu-button-left: -40px;

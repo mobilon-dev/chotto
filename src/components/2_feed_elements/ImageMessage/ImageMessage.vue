@@ -33,8 +33,12 @@
 
     <div
       class="image-message__content"
-      :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
+      :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar, 'has-caption': Boolean(message.text) }"
     >
+      <div
+        class="image-message__bottom-shadow"
+        aria-hidden="true"
+      />
       <template v-if="message.deleted">
         <DeletedMessageContent />
         <div class="image-message__info-container">
@@ -430,10 +434,10 @@ const imageBorderRadius = computed(() => {
     if (textWidth.value > imageWidth.value && imageWidth.value > 0) {
       return '0'
     }
-    return '8px 8px 0 0'
+    return 'var(--chotto-imagemessage-preview-with-caption-border-radius, 7px 7px 0 0)'
   }
-  if (props.message.reply) return '0 0 8px 8px'
-  return '8px'
+  if (props.message.reply) return 'var(--chotto-imagemessage-preview-with-reply-border-radius, 0 0 7px 7px)'
+  return 'var(--chotto-imagemessage-preview-border-radius, 7px)'
 })
 
 const status = computed(() => getStatus(props.message.status))

@@ -19,14 +19,14 @@
 // Стили для разных статусов
 .message-status-indicator.status--received :deep(.status-icon--received) {
   color: var(--chotto-messagestatusindicator-color-received, #5F5F5F);
-  width: var(--chotto-messagestatusindicator-received-icon-size, 20px);
-  height: var(--chotto-messagestatusindicator-received-icon-size, 20px);
+  width: var(--chotto-messagestatusindicator-received-icon-size, 16px);
+  height: var(--chotto-messagestatusindicator-received-icon-size, 16px);
 }
 
 .message-status-indicator.status--read :deep(.status-icon--read) {
   color: var(--chotto-messagestatusindicator-color-read, #5F5F5F);
-  width: var(--chotto-messagestatusindicator-read-icon-size, 20px);
-  height: var(--chotto-messagestatusindicator-read-icon-size, 20px);
+  width: var(--chotto-messagestatusindicator-read-icon-size, 16px);
+  height: var(--chotto-messagestatusindicator-read-icon-size, 16px);
 }
 
 .message-status-indicator.status--pending :deep(.status-icon--pending) {
@@ -39,8 +39,8 @@
 
 .message-status-indicator.status--sent :deep(.status-icon--sent) {
   color: var(--chotto-messagestatusindicator-icon-color, #5F5F5F);
-  width: var(--chotto-messagestatusindicator-sent-icon-size, 20px);
-  height: var(--chotto-messagestatusindicator-sent-icon-size, 20px);
+  width: var(--chotto-messagestatusindicator-sent-icon-size, 16px);
+  height: var(--chotto-messagestatusindicator-sent-icon-size, 16px);
 }
 
 // Глубокие стили для работы с динамическими классами от родительских компонентов
@@ -61,8 +61,8 @@
 
 :deep(.status--received) :deep(.status-icon--received) {
   color: var(--chotto-messagestatusindicator-color-received, #5F5F5F);
-  width: var(--chotto-messagestatusindicator-received-icon-size, 20px);
-  height: var(--chotto-messagestatusindicator-received-icon-size, 20px);
+  width: var(--chotto-messagestatusindicator-received-icon-size, 16px);
+  height: var(--chotto-messagestatusindicator-received-icon-size, 16px);
 }
 
 :deep(.status--read) :deep(.status-icon--read) {

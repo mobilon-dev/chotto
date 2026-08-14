@@ -35,6 +35,10 @@
       class="missed-call-message__content"
       :class="{ 'is-first': true }"
     >
+      <div
+        class="missed-call-message__bottom-shadow"
+        aria-hidden="true"
+      />
       <template v-if="message.deleted">
         <DeletedMessageContent />
         <div class="missed-call-message__info-container">

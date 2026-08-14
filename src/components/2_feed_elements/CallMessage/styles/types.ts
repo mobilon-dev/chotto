@@ -24,6 +24,29 @@ export interface CallMessageThemeCSSVariables {
   /** Внутренние отступы контейнера */
   '--chotto-callmessage-content-padding': string;
 
+  /** Отображение нижней «тени» пузыря */
+  '--chotto-callmessage-bottom-shadow-display': string;
+  /** Позиционирование нижней «тени» */
+  '--chotto-callmessage-bottom-shadow-position': string;
+  /** Смещение нижней «тени» слева */
+  '--chotto-callmessage-bottom-shadow-left': string;
+  /** Смещение нижней «тени» справа */
+  '--chotto-callmessage-bottom-shadow-right': string;
+  /** Смещение нижней «тени» снизу */
+  '--chotto-callmessage-bottom-shadow-bottom': string;
+  /** Высота нижней «тени» */
+  '--chotto-callmessage-bottom-shadow-height': string;
+  /** Фон нижней «тени» */
+  '--chotto-callmessage-bottom-shadow-background': string;
+  /** Нижняя граница «тени» (stroke bottom) */
+  '--chotto-callmessage-bottom-shadow-border-bottom': string;
+  /** Скругление нижней «тени» */
+  '--chotto-callmessage-bottom-shadow-border-radius': string;
+  /** События указателя нижней «тени» */
+  '--chotto-callmessage-bottom-shadow-pointer-events': string;
+  /** Слой нижней «тени» */
+  '--chotto-callmessage-bottom-shadow-z-index': string;
+
   /** Колонки грида инфо-контейнера */
   '--chotto-callmessage-info-container-grid-column': string;
   /** Отступ слева у инфо-контейнера */
@@ -284,6 +307,8 @@ export interface CallMessageThemeCSSVariables {
 
   /** Шаблон колонок левой раскладки */
   '--chotto-callmessage-left-grid-template-columns': string;
+  /** Промежуток между колонками слева (аватар / пузырь) */
+  '--chotto-callmessage-left-column-gap': string;
   /** Колонка грида аватара слева */
   '--chotto-callmessage-left-avatar-grid-column': string;
   /** Ряд грида аватара слева */
@@ -331,6 +356,8 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-right-position': string;
   /** Шаблон колонок правой раскладки */
   '--chotto-callmessage-right-grid-template-columns': string;
+  /** Промежуток между колонками справа (пузырь / аватар) */
+  '--chotto-callmessage-right-column-gap': string;
   /** Правый внутренний отступ справа */
   '--chotto-callmessage-right-padding-right': string;
   /** Контент псевдоэлемента справа */

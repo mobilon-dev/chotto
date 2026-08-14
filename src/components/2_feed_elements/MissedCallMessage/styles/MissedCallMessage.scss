@@ -13,6 +13,21 @@
     max-height: var(--chotto-missedcallmessage-content-max-height, 78px);
   }
 
+  &__bottom-shadow {
+    display: var(--chotto-missedcallmessage-bottom-shadow-display, block);
+    position: var(--chotto-missedcallmessage-bottom-shadow-position, absolute);
+    left: var(--chotto-missedcallmessage-bottom-shadow-left, 0);
+    right: var(--chotto-missedcallmessage-bottom-shadow-right, 0);
+    bottom: var(--chotto-missedcallmessage-bottom-shadow-bottom, 0);
+    height: var(--chotto-missedcallmessage-bottom-shadow-height, 20px);
+    background: var(--chotto-missedcallmessage-bottom-shadow-background, transparent);
+    border-bottom: var(--chotto-missedcallmessage-bottom-shadow-border-bottom, 1px solid #D0D0D0);
+    border-radius: var(--chotto-missedcallmessage-bottom-shadow-border-radius, 0 0 7px 7px);
+    pointer-events: var(--chotto-missedcallmessage-bottom-shadow-pointer-events, none);
+    z-index: var(--chotto-missedcallmessage-bottom-shadow-z-index, 0);
+    box-sizing: border-box;
+  }
+
   &__main-content {
     display: var(--chotto-missedcallmessage-main-content-display, flex);
     align-items: var(--chotto-missedcallmessage-main-content-align-items, center);
@@ -112,12 +127,13 @@
   &__left {
     display: var(--chotto-missedcallmessage-left-display, grid);
     margin: var(--chotto-missedcallmessage-left-margin, 0 0 10px 0);
-    grid-template-columns: var(--chotto-missedcallmessage-left-grid-template-columns, min-content 1fr);
+    grid-template-columns: var(--chotto-missedcallmessage-left-grid-template-columns, var(--chotto-missedcallmessage-avatar-min-width, 40px) 1fr);
+    column-gap: var(--chotto-missedcallmessage-left-column-gap, 8px);
 
     .missed-call-message__avatar {
       grid-column: var(--chotto-missedcallmessage-left-avatar-grid-column, 1);
       grid-row: var(--chotto-missedcallmessage-left-avatar-grid-row, 2);
-      margin-right: var(--chotto-missedcallmessage-left-avatar-margin-right, 12px);
+      margin-right: var(--chotto-missedcallmessage-left-avatar-margin-right, 0);
     }
 
     .missed-call-message__subtext {

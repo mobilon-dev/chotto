@@ -10,6 +10,8 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-content-width': string;
   /** Скругление контейнера контента изображения */
   '--chotto-imagemessage-content-border-radius': string;
+  /** Скругление контейнера контента изображения с подписью */
+  '--chotto-imagemessage-content-with-caption-border-radius': string;
   /** Выравнивание элементов контейнера контента */
   '--chotto-imagemessage-content-align-items': string;
   /** Отображение контейнера контента */
@@ -18,6 +20,29 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-content-flex-direction': string;
   /** Минимальная ширина контейнера контента */
   '--chotto-imagemessage-content-min-width': string;
+
+  /** Отображение нижней «тени» пузыря */
+  '--chotto-imagemessage-bottom-shadow-display': string;
+  /** Позиционирование нижней «тени» */
+  '--chotto-imagemessage-bottom-shadow-position': string;
+  /** Смещение нижней «тени» слева */
+  '--chotto-imagemessage-bottom-shadow-left': string;
+  /** Смещение нижней «тени» справа */
+  '--chotto-imagemessage-bottom-shadow-right': string;
+  /** Смещение нижней «тени» снизу */
+  '--chotto-imagemessage-bottom-shadow-bottom': string;
+  /** Высота нижней «тени» */
+  '--chotto-imagemessage-bottom-shadow-height': string;
+  /** Фон нижней «тени» */
+  '--chotto-imagemessage-bottom-shadow-background': string;
+  /** Нижняя граница «тени» (stroke bottom) */
+  '--chotto-imagemessage-bottom-shadow-border-bottom': string;
+  /** Скругление нижней «тени» */
+  '--chotto-imagemessage-bottom-shadow-border-radius': string;
+  /** События указателя нижней «тени» */
+  '--chotto-imagemessage-bottom-shadow-pointer-events': string;
+  /** Слой нижней «тени» */
+  '--chotto-imagemessage-bottom-shadow-z-index': string;
 
   /** Ряд грида аватара */
   '--chotto-imagemessage-avatar-grid-row': string;
@@ -239,6 +264,12 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-text-container-padding': string;
   /** Скругление контейнера текста */
   '--chotto-imagemessage-text-container-border-radius': string;
+  /** Скругление превью изображения */
+  '--chotto-imagemessage-preview-border-radius': string;
+  /** Скругление превью изображения с подписью */
+  '--chotto-imagemessage-preview-with-caption-border-radius': string;
+  /** Скругление превью изображения с цитатой */
+  '--chotto-imagemessage-preview-with-reply-border-radius': string;
   /** Ширина контейнера текста */
   '--chotto-imagemessage-text-container-width': string;
   /** Минимальная ширина контейнера текста */
@@ -305,6 +336,8 @@ export interface ImageMessageThemeCSSVariables {
 
   /** Шаблон колонок левой раскладки */
   '--chotto-imagemessage-left-grid-template-columns': string;
+  /** Промежуток между колонками слева (аватар / пузырь) */
+  '--chotto-imagemessage-left-column-gap': string;
   /** Колонка грида аватара слева */
   '--chotto-imagemessage-left-avatar-grid-column': string;
   /** Отступ справа от аватара слева */
@@ -340,6 +373,8 @@ export interface ImageMessageThemeCSSVariables {
 
   /** Шаблон колонок правой раскладки */
   '--chotto-imagemessage-right-grid-template-columns': string;
+  /** Промежуток между колонками справа (пузырь / аватар) */
+  '--chotto-imagemessage-right-column-gap': string;
   /** Колонка грида аватара справа */
   '--chotto-imagemessage-right-avatar-grid-column': string;
   /** Отступ слева от аватара справа */

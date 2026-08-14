@@ -38,6 +38,10 @@
       :style="{ gridRow: message.subText ? '2' : '1' }"
       @mouseenter="showMenu"
     >
+      <div
+        class="file-message__bottom-shadow"
+        aria-hidden="true"
+      />
       <template v-if="message.deleted">
         <DeletedMessageContent />
         <div class="file-message__footer">

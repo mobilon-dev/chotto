@@ -161,11 +161,12 @@
   }
 
   &__left {
-    grid-template-columns: var(--chotto-stickermessage-left-grid-template-columns, min-content 1fr);
+    grid-template-columns: var(--chotto-stickermessage-left-grid-template-columns, var(--chotto-stickermessage-avatar-min-width, 40px) 1fr);
+    column-gap: var(--chotto-stickermessage-left-column-gap, 12px);
 
     .sticker-message__avatar {
       grid-column: var(--chotto-stickermessage-left-avatar-grid-column, 1);
-      margin-right: var(--chotto-stickermessage-left-avatar-margin-right, 12px);
+      margin-right: var(--chotto-stickermessage-left-avatar-margin-right, 0);
     }
 
     .sticker-message__subtext {
@@ -179,7 +180,7 @@
     }
 
     .sticker-message__content.with-avatar-indent {
-      margin-left: var(--chotto-stickermessage-left-content-with-avatar-indent-margin-left, calc(var(--chotto-stickermessage-avatar-min-width, 40px) + 12px));
+      margin-left: var(--chotto-stickermessage-left-content-with-avatar-indent-margin-left, 0);
     }
 
     .sticker-message__menu-button {
@@ -196,11 +197,12 @@
   }
 
   &__right {
-    grid-template-columns: var(--chotto-stickermessage-right-grid-template-columns, 1fr min-content);
+    grid-template-columns: var(--chotto-stickermessage-right-grid-template-columns, 1fr var(--chotto-stickermessage-avatar-min-width, 40px));
+    column-gap: var(--chotto-stickermessage-right-column-gap, 8px);
 
     .sticker-message__avatar {
       grid-column: var(--chotto-stickermessage-right-avatar-grid-column, 2);
-      margin-left: var(--chotto-stickermessage-right-avatar-margin-left, 12px);
+      margin-left: var(--chotto-stickermessage-right-avatar-margin-left, 0);
     }
 
     .sticker-message__subtext {
@@ -215,7 +217,7 @@
     }
 
     .sticker-message__content.with-avatar-indent {
-      margin-right: var(--chotto-stickermessage-right-content-with-avatar-indent-margin-right, calc(var(--chotto-stickermessage-avatar-min-width, 40px) + 12px));
+      margin-right: var(--chotto-stickermessage-right-content-with-avatar-indent-margin-right, 0);
     }
 
     .sticker-message__text-container {

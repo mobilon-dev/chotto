@@ -1,7 +1,8 @@
 .typing-message {
   &__container {
     display: var(--chotto-typingmessage-container-display, grid);
-    grid-template-columns: var(--chotto-typingmessage-container-grid-template-columns, min-content 1fr);
+    grid-template-columns: var(--chotto-typingmessage-container-grid-template-columns, var(--chotto-typingmessage-avatar-min-width, 40px) 1fr);
+    column-gap: var(--chotto-typingmessage-container-column-gap, 12px);
     position: var(--chotto-typingmessage-container-position, relative);
     margin: var(--chotto-typingmessage-container-margin, 0 0 10px 0);
   }
@@ -22,7 +23,7 @@
     border-radius: var(--chotto-typingmessage-avatar-border-radius, 50%);
     grid-column: var(--chotto-typingmessage-avatar-grid-column, 1);
     grid-row: var(--chotto-typingmessage-avatar-grid-row, 2);
-    margin-right: var(--chotto-typingmessage-avatar-margin-right, 12px);
+    margin-right: var(--chotto-typingmessage-avatar-margin-right, 0);
   }
 
   &__loader-container {

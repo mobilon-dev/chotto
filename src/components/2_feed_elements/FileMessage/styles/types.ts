@@ -13,6 +13,29 @@ export interface FileMessageThemeCSSVariables {
   /** Максимальная ширина контейнера контента файла */
   '--chotto-filemessage-content-max-width': string;
 
+  /** Отображение нижней «тени» пузыря */
+  '--chotto-filemessage-bottom-shadow-display': string;
+  /** Позиционирование нижней «тени» */
+  '--chotto-filemessage-bottom-shadow-position': string;
+  /** Смещение нижней «тени» слева */
+  '--chotto-filemessage-bottom-shadow-left': string;
+  /** Смещение нижней «тени» справа */
+  '--chotto-filemessage-bottom-shadow-right': string;
+  /** Смещение нижней «тени» снизу */
+  '--chotto-filemessage-bottom-shadow-bottom': string;
+  /** Высота нижней «тени» */
+  '--chotto-filemessage-bottom-shadow-height': string;
+  /** Фон нижней «тени» */
+  '--chotto-filemessage-bottom-shadow-background': string;
+  /** Нижняя граница «тени» (stroke bottom) */
+  '--chotto-filemessage-bottom-shadow-border-bottom': string;
+  /** Скругление нижней «тени» */
+  '--chotto-filemessage-bottom-shadow-border-radius': string;
+  /** События указателя нижней «тени» */
+  '--chotto-filemessage-bottom-shadow-pointer-events': string;
+  /** Слой нижней «тени» */
+  '--chotto-filemessage-bottom-shadow-z-index': string;
+
   /** Содержимое псевдоэлемента "хвостик" слева */
   '--chotto-filemessage-left-triangle-content': string;
   /** Позиционирование хвостика слева */
@@ -31,6 +54,8 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-left-triangle-border-top': string;
   /** Слой псевдоэлемента слева */
   '--chotto-filemessage-left-triangle-z-index': string;
+  /** Обрезка хвостика слева (скрывает часть внутри пузыря) */
+  '--chotto-filemessage-left-triangle-clip-path': string;
 
   /** Содержимое псевдоэлемента "хвостик" справа */
   '--chotto-filemessage-right-triangle-content': string;
@@ -50,6 +75,8 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-right-triangle-border-top': string;
   /** Слой псевдоэлемента справа */
   '--chotto-filemessage-right-triangle-z-index': string;
+  /** Обрезка хвостика справа (скрывает часть внутри пузыря) */
+  '--chotto-filemessage-right-triangle-clip-path': string;
 
   /** Цвет фона пузыря слева */
   '--chotto-filemessage-left-bg': string;
@@ -224,6 +251,8 @@ export interface FileMessageThemeCSSVariables {
 
   /** Шаблон колонок левой раскладки */
   '--chotto-filemessage-left-grid-template-columns': string;
+  /** Промежуток между колонками слева (аватар / пузырь) */
+  '--chotto-filemessage-left-column-gap': string;
   /** Колонка грида аватара слева */
   '--chotto-filemessage-left-avatar-grid-column': string;
   /** Отступ справа от аватара слева */
@@ -251,6 +280,8 @@ export interface FileMessageThemeCSSVariables {
 
   /** Шаблон колонок правой раскладки */
   '--chotto-filemessage-right-grid-template-columns': string;
+  /** Промежуток между колонками справа (пузырь / аватар) */
+  '--chotto-filemessage-right-column-gap': string;
   /** Колонка грида аватара справа */
   '--chotto-filemessage-right-avatar-grid-column': string;
   /** Ряд грида аватара справа */

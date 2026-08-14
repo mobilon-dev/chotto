@@ -16,6 +16,24 @@
     padding-left: var(--chotto-audiomessage-content-padding-left, 14px);
   }
 
+  &__bottom-shadow {
+    display: var(--chotto-audiomessage-bottom-shadow-display, block);
+    position: var(--chotto-audiomessage-bottom-shadow-position, absolute);
+    left: var(--chotto-audiomessage-bottom-shadow-left, 0);
+    right: var(--chotto-audiomessage-bottom-shadow-right, 0);
+    bottom: var(--chotto-audiomessage-bottom-shadow-bottom, 0);
+    height: var(--chotto-audiomessage-bottom-shadow-height, 20px);
+    background: var(--chotto-audiomessage-bottom-shadow-background, transparent);
+    border-bottom: var(--chotto-audiomessage-bottom-shadow-border-bottom, 1px solid #D0D0D0);
+    border-radius: var(--chotto-audiomessage-bottom-shadow-border-radius, 0 0 7px 7px);
+    pointer-events: var(--chotto-audiomessage-bottom-shadow-pointer-events, none);
+    z-index: var(--chotto-audiomessage-bottom-shadow-z-index, 0);
+    box-sizing: border-box;
+    grid-column: auto;
+    grid-row: auto;
+    width: auto;
+  }
+
     &__left .audio-message__content.is-first::before {
     content: var(--chotto-audiomessage-left-arrow-content, '');
     position: var(--chotto-audiomessage-left-arrow-position, absolute);
@@ -291,10 +309,10 @@
 
   &__current-time,
   &__duration {
-    margin: var(--chotto-audiomessage-time-margin, 0);
-    font-size: var(--chotto-audiomessage-time-font-size, 14px);
-    font-weight: var(--chotto-audiomessage-time-font-weight, 400);
-    color: var(--chotto-audiomessage-time-color, #5F5F5F);
+    margin: var(--chotto-audiomessage-duration-time-margin, 0);
+    font-size: var(--chotto-audiomessage-duration-time-font-size, 14px);
+    font-weight: var(--chotto-audiomessage-duration-time-font-weight, 400);
+    color: var(--chotto-audiomessage-duration-time-color, #5F5F5F);
   }
 
   &__duration {
@@ -387,7 +405,7 @@
   }
 
   &__time {
-    font-size: var(--chotto-audiomessage-time-font-size, 14px);
+    font-size: var(--chotto-audiomessage-time-font-size, 12px);
     color: var(--chotto-audiomessage-time-text-color, #5F5F5F);
   }
 
@@ -524,12 +542,13 @@
   }
 
   &__left {
-    grid-template-columns: var(--chotto-audiomessage-left-grid-template-columns, min-content 1fr);
+    grid-template-columns: var(--chotto-audiomessage-left-grid-template-columns, var(--chotto-audiomessage-avatar-min-width, 40px) 1fr);
+    column-gap: var(--chotto-audiomessage-left-column-gap, 8px);
 
     .audio-message__avatar {
       grid-column: var(--chotto-audiomessage-left-avatar-grid-column, 1);
       grid-row: var(--chotto-audiomessage-left-avatar-grid-row, 2);
-      margin-right: var(--chotto-audiomessage-left-avatar-margin-right, 12px);
+      margin-right: var(--chotto-audiomessage-left-avatar-margin-right, 0);
     }
 
     .audio-message__subtext {
@@ -547,7 +566,7 @@
     }
 
     .audio-message__content.with-avatar-indent {
-      margin-left: var(--chotto-audiomessage-left-content-avatar-indent-margin-left, calc(var(--chotto-audiomessage-avatar-min-width, 40px) + 12px));
+      margin-left: var(--chotto-audiomessage-left-content-avatar-indent-margin-left, 0);
     }
 
     .audio-message__menu-button {
@@ -573,12 +592,13 @@
   }
 
   &__right {
-    grid-template-columns: var(--chotto-audiomessage-right-grid-template-columns, 1fr min-content);
+    grid-template-columns: var(--chotto-audiomessage-right-grid-template-columns, 1fr var(--chotto-audiomessage-avatar-min-width, 40px));
+    column-gap: var(--chotto-audiomessage-right-column-gap, 8px);
 
     .audio-message__avatar {
       grid-column: var(--chotto-audiomessage-right-avatar-grid-column, 2);
       grid-row: var(--chotto-audiomessage-right-avatar-grid-row, 2);
-      margin-left: var(--chotto-audiomessage-right-avatar-margin-left, 12px);
+      margin-left: var(--chotto-audiomessage-right-avatar-margin-left, 0);
     }
 
     .audio-message__subtext {
@@ -597,7 +617,7 @@
     }
 
     .audio-message__content.with-avatar-indent {
-      margin-right: var(--chotto-audiomessage-right-content-avatar-indent-margin-right, calc(var(--chotto-audiomessage-avatar-min-width, 40px) + 12px));
+      margin-right: var(--chotto-audiomessage-right-content-avatar-indent-margin-right, 0);
     }
 
     .audio-message__menu-button {

@@ -3,8 +3,21 @@
   --chotto-filemessage-content-position: relative;
   --chotto-filemessage-content-width: fit-content;
   --chotto-filemessage-content-border-radius: var(--chotto-theme-message-border-radius, 14px);
-  --chotto-filemessage-content-padding: 10px 10px 4px 18px;
+  --chotto-filemessage-content-padding: 4px 8px;
   --chotto-filemessage-content-max-width: 25rem;
+  // FileMessage bottom shadow variables
+  --chotto-filemessage-bottom-shadow-display: block;
+  --chotto-filemessage-bottom-shadow-position: absolute;
+  --chotto-filemessage-bottom-shadow-left: 0;
+  --chotto-filemessage-bottom-shadow-right: 0;
+  --chotto-filemessage-bottom-shadow-bottom: 0;
+  --chotto-filemessage-bottom-shadow-height: 20px;
+  --chotto-filemessage-bottom-shadow-background: transparent;
+  --chotto-filemessage-bottom-shadow-border-bottom: 1px solid #D0D0D0;
+  --chotto-filemessage-bottom-shadow-border-radius: 0 0 7px 7px;
+  --chotto-filemessage-bottom-shadow-pointer-events: none;
+  --chotto-filemessage-bottom-shadow-z-index: 0;
+
 
   // FileMessage triangle variables
   --chotto-filemessage-left-triangle-content: '';
@@ -16,6 +29,7 @@
   --chotto-filemessage-left-triangle-border: 20px solid transparent;
   --chotto-filemessage-left-triangle-border-top: 15px solid var(--chotto-theme-message-left-bg);
   --chotto-filemessage-left-triangle-z-index: 1;
+  --chotto-filemessage-left-triangle-clip-path: inset(0 25px -10px -40px);
 
   --chotto-filemessage-right-triangle-content: '';
   --chotto-filemessage-right-triangle-position: absolute;
@@ -26,6 +40,7 @@
   --chotto-filemessage-right-triangle-border: 20px solid transparent;
   --chotto-filemessage-right-triangle-border-top: 15px solid var(--chotto-theme-message-right-bg);
   --chotto-filemessage-right-triangle-z-index: 1;
+  --chotto-filemessage-right-triangle-clip-path: inset(0 -40px -10px 25px);
 
   // FileMessage background variables
   --chotto-filemessage-left-bg: var(--chotto-theme-message-left-bg);
@@ -77,7 +92,7 @@
   --chotto-filemessage-footer-align-items: flex-end;
   --chotto-filemessage-footer-justify-content: space-between;
   --chotto-filemessage-footer-column-gap: 8px;
-  --chotto-filemessage-footer-margin-top: 4px;
+  --chotto-filemessage-footer-margin-top: 0;
 
   // FileMessage reactions variables
   --chotto-filemessage-reactions-flex: 1;
@@ -113,7 +128,7 @@
   --chotto-filemessage-views-p-color: var(--chotto-theme-secondary-text-color);
 
   // FileMessage time variables
-  --chotto-filemessage-time-font-size: var(--chotto-theme-text-font-size);
+  --chotto-filemessage-time-font-size: 12px;
   --chotto-filemessage-time-color: var(--chotto-theme-secondary-text-color);
 
   // FileMessage menu button variables
@@ -136,14 +151,15 @@
   --chotto-filemessage-left-right-margin: var(--chotto-theme-message-margin);
 
   // FileMessage left variables
-  --chotto-filemessage-left-grid-template-columns: min-content 1fr;
+  --chotto-filemessage-left-grid-template-columns: var(--chotto-theme-avatar-small-size) 1fr;
+  --chotto-filemessage-left-column-gap: 8px;
   --chotto-filemessage-left-avatar-grid-column: 1;
-  --chotto-filemessage-left-avatar-margin-right: 12px;
+  --chotto-filemessage-left-avatar-margin-right: 0;
   --chotto-filemessage-left-subtext-grid-column: 2;
   --chotto-filemessage-left-subtext-grid-row: 1;
   --chotto-filemessage-left-subtext-margin: 0 0 2px 10px;
   --chotto-filemessage-left-content-grid-column: 2;
-  --chotto-filemessage-left-content-with-avatar-indent-margin-left: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-filemessage-left-content-with-avatar-indent-margin-left: 0;
   --chotto-filemessage-left-menu-button-top: 50%;
   --chotto-filemessage-left-menu-button-right: -40px;
   --chotto-filemessage-left-context-menu-top: 50%;
@@ -151,16 +167,17 @@
   --chotto-filemessage-left-context-menu-margin-top: 20px;
 
   // FileMessage right variables
-  --chotto-filemessage-right-grid-template-columns: 1fr min-content;
+  --chotto-filemessage-right-grid-template-columns: 1fr var(--chotto-theme-avatar-small-size);
+  --chotto-filemessage-right-column-gap: 8px;
   --chotto-filemessage-right-avatar-grid-column: 2;
   --chotto-filemessage-right-avatar-grid-row: 2;
-  --chotto-filemessage-right-avatar-margin-left: 12px;
+  --chotto-filemessage-right-avatar-margin-left: 0;
   --chotto-filemessage-right-subtext-grid-column: 1;
   --chotto-filemessage-right-subtext-grid-row: 1;
   --chotto-filemessage-right-subtext-margin: 0 10px 2px auto;
   --chotto-filemessage-right-content-grid-column: 1;
   --chotto-filemessage-right-content-margin-left: auto;
-  --chotto-filemessage-right-content-with-avatar-indent-margin-right: calc(var(--chotto-theme-avatar-small-size) + 12px);
+  --chotto-filemessage-right-content-with-avatar-indent-margin-right: 0;
   --chotto-filemessage-right-menu-button-top: 50%;
   --chotto-filemessage-right-menu-button-left: -40px;
   --chotto-filemessage-right-context-menu-top: 50%;
