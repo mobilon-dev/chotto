@@ -1,7 +1,18 @@
 import { generatePreview } from './generatePreview';
 import { getTypeFileByMime } from './getTypeFileByMime'
 
-export const uploadFile = async ( filebumpUrl: string|null, selectedFile: File ) => {
+type UploadFileResult =
+  | {
+      url: string
+      name: string
+      size: number
+      type: string
+      status: 'success'
+      preview: ReturnType<typeof generatePreview>
+    }
+  | { status: 'error' }
+
+export const uploadFile = async ( filebumpUrl: string|null, selectedFile: File ): Promise<UploadFileResult> => {
     const formData = new FormData();
     formData.append("file", selectedFile);
   

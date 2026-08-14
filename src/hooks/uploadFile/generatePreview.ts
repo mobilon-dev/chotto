@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import { getTypeFileByMime } from "./getTypeFileByMime";
+import type { IFilePreview } from '@/types';
 
 export const generatePreview = (file: File) => {
   const fileType = getTypeFileByMime(file.type);
@@ -36,3 +37,18 @@ export const generatePreview = (file: File) => {
     fileSize: size.toFixed(2) + sizeMeasurement[index],
   })
 };
+
+export function buildFilePreview(
+  name: string | undefined,
+  preview: ReturnType<typeof generatePreview> | undefined,
+): IFilePreview | undefined {
+  if (!preview) return undefined
+  return {
+    previewUrl: preview.previewUrl,
+    isImage: preview.isImage,
+    isVideo: preview.isVideo,
+    isAudio: preview.isAudio,
+    fileName: name,
+    fileSize: preview.fileSize,
+  }
+}

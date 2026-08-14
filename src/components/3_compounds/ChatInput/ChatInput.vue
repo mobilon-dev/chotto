@@ -7,7 +7,14 @@
     <div
       :id="'chat-input-file-line-' + chatAppId"
       class="chat-input__file-line"
-    />
+      :class="{ 'chat-input__file-line--visible': !!filePreview }"
+    >
+      <FilePreview
+        v-if="filePreview"
+        :file-info="filePreview"
+        @reset="resetSelectedFile"
+      />
+    </div>
 
     <div class="chat-input__inline-buttons">
       <slot name="inline-buttons" />
@@ -75,15 +82,16 @@ import { unref, ref, watch, nextTick, inject, computed, onMounted, onUnmounted, 
 import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview } from '@/hooks';
 import { textToAppleEmojiHtml, textContainsEmoji, snapIndexToGrapheme, nextGraphemeIndex, previousGraphemeIndex } from '@/functions/renderAppleEmojis';
 import { t } from '../../../locale/useLocale';
-import { IFilePreview, IInputMessage } from '@/types';
+import { IInputMessage } from '@/types';
 import { SendIcon } from './icons';
 import TextFormatToolbar from '../../2_chatinput_elements/TextFormatToolbar/TextFormatToolbar.vue';
+import FilePreview from '../../2_chatinput_elements/FilePreview/FilePreview.vue';
 
 const emit = defineEmits(['send','typing']);
 
 const chatAppId = inject('chatAppId')
 const selectedChat = inject<Ref<{ chatId?: string | number } | null> | { chatId?: string | number } | undefined>('selectedChat', undefined)
-const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit } = useMessageDraft(chatAppId as string)
+const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit, resetMessageFile } = useMessageDraft(chatAppId as string)
 const { isNative } = useEmojiNative(chatAppId as string)
 
 const draftChatKey = computed(() => {
@@ -96,7 +104,8 @@ const refMirror = ref<HTMLElement>();
 const selectionRange = ref<{ start: number; end: number } | null>(null)
 const focusAtEndAfterResize = ref(false)
 const typing = useImmediateDebouncedRef('', 2000)
-const fileInfo = ref<IFilePreview>()
+
+const filePreview = computed(() => getMessage().file?.preview)
 
 const emojiMirrorHtml = computed(() =>
   textToAppleEmojiHtml(getMessage().text || '', selectionRange.value)
@@ -529,11 +538,14 @@ const handleFormatApplied = (data: { format: string; selectedText: string; start
   }
 };
 
+function resetSelectedFile() {
+  resetMessageFile()
+}
+
 function cancelEditMode() {
   resetEdit()
   setMessageText('')
   hideEditPreview(chatAppId as string)
-  fileInfo.value = undefined
   if (refInput.value) refInput.value.focus()
 }
 
@@ -579,7 +591,6 @@ const sendMessage = () => {
     }
     emit('send', messageObject);
     resetMessage()
-    fileInfo.value = undefined
     if (refInput.value) refInput.value.focus()
   }
 };

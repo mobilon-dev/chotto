@@ -33,24 +33,11 @@
     type="file"
     @change="onFileSelected"
   >
-  <teleport
-    v-if="getMessage().file"
-    :to="'#chat-input-file-line-'+chatAppId"
-  >
-    <FilePreview
-      v-if="fileInfo"
-      :file-info="fileInfo"
-      @reset="resetSelectedFile"
-    />
-  </teleport>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, onUnmounted, watchEffect } from "vue";
-// import ButtonContextMenu from "./ButtonContextMenu.vue";
-import FilePreview from '@/components/2_chatinput_elements/FilePreview/FilePreview.vue';
-import { useMessageDraft, uploadFile } from '@/hooks';
-import { IFilePreview } from "@/types";
+import { ref, computed, inject, onMounted, onUnmounted, watch, watchEffect } from "vue";
+import { useMessageDraft, uploadFile, buildFilePreview } from '@/hooks';
 import { FileUploaderIcon } from "./icons";
 
 const props = defineProps({
@@ -67,7 +54,6 @@ const props = defineProps({
 const uploadStatus = ref("");
 
 const fileInput = ref<HTMLInputElement>();
-const fileInfo = ref<IFilePreview>()
 const triggerElement = ref<HTMLElement>()
 void triggerElement.value
 
@@ -142,12 +128,7 @@ const resetNativeFileInput = () => {
 };
 
 const resetSelectedFile = () => {
-  const previewContainer = document.getElementById('chat-input-file-line-'+chatAppId)
-  if (previewContainer){
-    previewContainer.style.display = 'none'
-  }
   resetMessageFile()
-  fileInfo.value = undefined
   uploadStatus.value = ""
   resetNativeFileInput()
 };
@@ -205,23 +186,21 @@ const handleFileUpload = async (file: File) => {
           name: data.name,
           size: data.size,
           type: data.type,
+          preview: buildFilePreview(data.name, data.preview),
         })
-        const previewContainer = document.getElementById('chat-input-file-line-'+chatAppId)
-        if (previewContainer){
-          previewContainer.style.display = 'inherit'
-        }
-        if (data.preview)
-          fileInfo.value = ({
-            previewUrl: data.preview.previewUrl,
-            isImage: data.preview.isImage,
-            isVideo: data.preview.isVideo,
-            isAudio: data.preview.isAudio,
-            fileName: data.name,
-            fileSize: data.preview.fileSize,
-          })
       }
     }) 
 }
+
+watch(
+  () => getMessage().file,
+  (file) => {
+    if (!file) {
+      uploadStatus.value = ""
+      resetNativeFileInput()
+    }
+  }
+)
 
 onMounted(() => {
   window.addEventListener('paste', pasteFromClipboard)

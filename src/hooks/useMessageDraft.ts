@@ -1,5 +1,5 @@
 import { computed, getCurrentInstance, inject, ref, unref, watch, type Ref } from 'vue';
-import { Edit, Reply } from '@/types';
+import { Edit, IFilePreview, Reply } from '@/types';
 
 /**
  * Структура сообщения с черновиком текста, файлами и метаданными
@@ -29,12 +29,14 @@ export interface MessageDraft {
  * @property {string} [name] - Имя файла
  * @property {number} [size] - Размер файла в байтах
  * @property {string} [type] - MIME-тип файла
+ * @property {IFilePreview} [preview] - Превью для строки файла в ChatInput
  */
 interface UploadedFile{
     url: string
     name?: string
     size?: number
     type?: string
+    preview?: IFilePreview
 }
 
 /**

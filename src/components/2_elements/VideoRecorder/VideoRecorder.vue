@@ -20,30 +20,17 @@
       <span>Загрузка файла...</span>
     </div>
   </div>
-  <teleport
-    v-if="getMessage().file"
-    :to="'#chat-input-file-line-'+chatAppId"
-  >
-    <FilePreview
-      v-if="videoPreview"
-      :file-info="videoPreview"
-      @reset="resetRecordedAudio"
-    />
-  </teleport>
 </template>
 
 <script setup lang="ts">
-import { watch, ref, inject } from 'vue';
-import { useMessageDraft, uploadFile, useModalVideoRecorder, useTheme } from '@/hooks';
-import FilePreview from '@/components/2_chatinput_elements/FilePreview/FilePreview.vue';
-import { IFilePreview } from '@/types';
+import { ref, inject } from 'vue';
+import { useMessageDraft, uploadFile, useModalVideoRecorder, useTheme, buildFilePreview } from '@/hooks';
 
 const chatAppId = inject('chatAppId')
-const { getMessage, setMessageFile, setRecordingMessage, resetMessageFile } = useMessageDraft(chatAppId as string)
+const { getMessage, setMessageFile, setRecordingMessage } = useMessageDraft(chatAppId as string)
 const { getTheme } = useTheme(chatAppId as string)
 
 const uploadStatus = ref("");
-const videoPreview = ref<IFilePreview>()
 
 const props = defineProps({
   state:{
@@ -74,43 +61,14 @@ const openVideoRecorder = async () => {
                 name: u.name,
                 size: u.size,
                 type: u.type,
+                preview: buildFilePreview(u.name, u.preview),
               })
-              const previewContainer = document.getElementById('chat-input-file-line-'+chatAppId)
-              if (previewContainer){
-                previewContainer.style.display = 'inherit'
-              }
-              if (u.preview)
-                videoPreview.value = ({
-                  previewUrl: u.preview.previewUrl,
-                  isImage: u.preview.isImage,
-                  isVideo: u.preview.isVideo,
-                  isAudio: u.preview.isAudio,
-                  fileName: u.name,
-                  fileSize: u.preview.fileSize,
-                })
-              
             }
           })
       }
     })
   }
 }
-
-const resetRecordedAudio = () => {
-  resetMessageFile()
-  const previewContainer = document.getElementById('chat-input-file-line-'+chatAppId)
-  if (previewContainer){
-    previewContainer.style.display = 'none'
-  }
-  videoPreview.value = undefined
-}
-
-watch(
-  () => getMessage().file,
-  () => {
-    if (!getMessage().file) videoPreview.value = undefined
-  }
-);
 
 </script>
 

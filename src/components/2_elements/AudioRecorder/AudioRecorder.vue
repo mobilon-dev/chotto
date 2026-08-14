@@ -35,28 +35,16 @@
     >
       <span class="pi pi-microphone" />
     </button>
-    <teleport
-      v-if="getMessage().file"
-      :to="'#chat-input-file-line-'+chatAppId"
-    >
-      <FilePreview
-        v-if="audioPreview"
-        :file-info="audioPreview"
-        @reset="resetRecordedAudio"
-      />
-    </teleport>
   </div>
 </template>
 
 <script setup lang="ts">
-import { watch, ref, inject, computed } from 'vue';
-import { useMessageDraft, uploadFile } from '@/hooks';
-import { IFilePreview } from '@/types';
-import FilePreview from '@/components/2_chatinput_elements/FilePreview/FilePreview.vue';
+import { ref, inject, computed } from 'vue';
+import { useMessageDraft, uploadFile, buildFilePreview } from '@/hooks';
 // const emit = defineEmits(['send', 'typing']);
 
 const chatAppId = inject('chatAppId')
-const { getMessage, setMessageFile, resetMessageFile, setRecordingMessage } = useMessageDraft(chatAppId as string)
+const { getMessage, setMessageFile, setRecordingMessage } = useMessageDraft(chatAppId as string)
 
 const timer = ref()
 const ms = ref(0)
@@ -77,7 +65,6 @@ const audioRecording = ref(false)
 const mediaRecorder = ref<MediaRecorder>()
 const chunks = ref<Blob[]>([])
 const audio = ref<string>()
-const audioPreview = ref<IFilePreview>()
 
 const props = defineProps({
   state:{
@@ -135,25 +122,13 @@ const stopAudioRecording = () => {
       .then((data) => {
         uploadStatus.value = data.status
         if (data.status == 'success'){
-          const previewContainer = document.getElementById('chat-input-file-line-'+chatAppId)
-          if (previewContainer){
-            previewContainer.style.display = 'inherit'
-          }
           setMessageFile({
             url: data.url,
             name: data.name,
             size: data.size,
             type: data.type,
+            preview: buildFilePreview(data.name, data.preview),
           })
-          if (data.preview)
-            audioPreview.value = ({
-              previewUrl: data.preview.previewUrl,
-              isImage: data.preview.isImage,
-              isVideo: data.preview.isVideo,
-              isAudio: data.preview.isAudio,
-              fileName: data.name,
-              fileSize: data.preview.fileSize,
-            })
         }
       }) 
     }
@@ -172,22 +147,6 @@ const clearTemp = () => {
   mediaRecorder.value = undefined
   chunks.value = []
 }
-
-const resetRecordedAudio = () => {
-  const previewContainer = document.getElementById('chat-input-file-line-'+chatAppId)
-  if (previewContainer){
-    previewContainer.style.display = 'none'
-  }
-  resetMessageFile()
-  audioPreview.value = undefined
-}
-
-watch(
-  () => getMessage().file,
-  () => {
-    if (!getMessage().file) audioPreview.value = undefined
-  }
-);
 
 </script>
 
