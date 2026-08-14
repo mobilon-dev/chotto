@@ -123,9 +123,6 @@ const changeThemeDialogEmoji = (): 'light' | 'dark' => {
 
 const onSelectEmoji = (emojiObj: { i: string }) => {
   setMessageText(getMessage().text + emojiObj.i);
-  if (props.mode === 'click') {
-    isEmojiPickerVisible.value = false;
-  }
 };
 
 // Общая функция открытия

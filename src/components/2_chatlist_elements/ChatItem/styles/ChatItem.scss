@@ -95,6 +95,28 @@
     -webkit-box-orient: var(--chotto-chatitem-name-box-orient, vertical);
     color: var(--chotto-chatitem-name-text-color, #1E1E1E);
     max-width: var(--chotto-chatitem-name-max-width, 240px);
+
+    :deep(.chotto-emoji-slot) {
+      position: relative;
+      display: inline-block;
+      vertical-align: -0.15em;
+    }
+
+    :deep(.chotto-emoji-metric) {
+      visibility: hidden;
+    }
+
+    :deep(.chotto-emoji-slot .chotto-emoji) {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      margin: 0;
+      display: block;
+    }
   }
 
   &__last-message {
@@ -114,6 +136,28 @@
     min-width: var(--chotto-chatitem-last-message-text-min-width, 0);
     white-space: var(--chotto-chatitem-last-message-text-white-space, nowrap);
     max-width: var(--chotto-chatitem-last-message-text-max-width, 280px);
+
+    :deep(.chotto-emoji-slot) {
+      position: relative;
+      display: inline-block;
+      vertical-align: -0.15em;
+    }
+
+    :deep(.chotto-emoji-metric) {
+      visibility: hidden;
+    }
+
+    :deep(.chotto-emoji-slot .chotto-emoji) {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      margin: 0;
+      display: block;
+    }
   }
 
   &__message-icon {

@@ -28,7 +28,6 @@
         v-if="useEmojiMirror"
         ref="refMirror"
         class="chat-input__input-mirror"
-        :class="{ 'chat-input__input-mirror--hidden': isSelectingText }"
         aria-hidden="true"
         v-html="emojiMirrorHtml"
       />
@@ -37,18 +36,17 @@
         v-model="getMessage().text"
         :disabled="state == 'disabled' || getMessage().isRecording"
         class="chat-input__input"
-        :class="{
-          'chat-input__input--emoji-images': useEmojiMirror && !isSelectingText,
-          'chat-input__input--selecting': useEmojiMirror && isSelectingText,
-        }"
+        :class="{ 'chat-input__input--emoji-images': useEmojiMirror }"
         :placeholder="inputPlaceholder"
+        @keydown="onInputKeydown"
         @keydown.enter="keyEnter"
         @input="sendTyping"
         @scroll="syncMirrorScroll"
         @select="updateSelectionState"
-        @mouseup="updateSelectionState"
-        @keyup="updateSelectionState"
-        @blur="isSelectingText = false"
+        @mouseup="snapCaretAndUpdateSelection"
+        @keyup="snapCaretAndUpdateSelection"
+        @mousemove="onInputMouseMove"
+        @blur="clearSelectionHighlight"
       />
     </div>
     <TextFormatToolbar
@@ -73,9 +71,9 @@
 </template>
 
 <script setup lang="ts">
-import { unref, ref, watch, nextTick, inject, computed, onMounted, type Ref } from 'vue';
+import { unref, ref, watch, nextTick, inject, computed, onMounted, onUnmounted, type Ref } from 'vue';
 import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview } from '@/hooks';
-import { textToAppleEmojiHtml, textContainsEmoji } from '@/functions/renderAppleEmojis';
+import { textToAppleEmojiHtml, textContainsEmoji, snapIndexToGrapheme, nextGraphemeIndex, previousGraphemeIndex } from '@/functions/renderAppleEmojis';
 import { t } from '../../../locale/useLocale';
 import { IFilePreview, IInputMessage } from '@/types';
 import { SendIcon } from './icons';
@@ -95,12 +93,14 @@ const draftChatKey = computed(() => {
 
 const refInput = ref<HTMLTextAreaElement>();
 const refMirror = ref<HTMLElement>();
-const isSelectingText = ref(false)
+const selectionRange = ref<{ start: number; end: number } | null>(null)
 const focusAtEndAfterResize = ref(false)
 const typing = useImmediateDebouncedRef('', 2000)
 const fileInfo = ref<IFilePreview>()
 
-const emojiMirrorHtml = computed(() => textToAppleEmojiHtml(getMessage().text || ''))
+const emojiMirrorHtml = computed(() =>
+  textToAppleEmojiHtml(getMessage().text || '', selectionRange.value)
+)
 const useEmojiMirror = computed(
   () => !isNative.value && textContainsEmoji(getMessage().text || '')
 )
@@ -118,9 +118,67 @@ const syncMirrorScroll = () => {
 
 let selectionSyncRaf = 0
 
+function clearSelectionHighlight() {
+  selectionRange.value = null
+}
+
+function snapTextareaCaret(prefer: 'before' | 'after' | 'nearest' = 'nearest') {
+  const el = refInput.value
+  if (!el || !useEmojiMirror.value) return
+
+  const text = el.value
+  const start = snapIndexToGrapheme(text, el.selectionStart, prefer)
+  const end = snapIndexToGrapheme(text, el.selectionEnd, prefer)
+  if (start !== el.selectionStart || end !== el.selectionEnd) {
+    el.setSelectionRange(start, end)
+  }
+}
+
+function snapCaretAndUpdateSelection() {
+  snapTextareaCaret('nearest')
+  updateSelectionState()
+}
+
+function onInputKeydown(event: KeyboardEvent) {
+  if (!useEmojiMirror.value) return
+  if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+  if (event.altKey || event.metaKey || event.ctrlKey) return
+
+  const el = refInput.value
+  if (!el) return
+
+  const text = el.value
+  const hasRange = el.selectionStart !== el.selectionEnd
+
+  if (event.shiftKey) {
+    // Расширение выделения — после браузера подровняем границы
+    requestAnimationFrame(() => snapCaretAndUpdateSelection())
+    return
+  }
+
+  if (hasRange) {
+    event.preventDefault()
+    const collapsed = event.key === 'ArrowLeft' ? el.selectionStart : el.selectionEnd
+    const next =
+      event.key === 'ArrowLeft'
+        ? previousGraphemeIndex(text, collapsed)
+        : nextGraphemeIndex(text, collapsed)
+    el.setSelectionRange(next, next)
+    updateSelectionState()
+    return
+  }
+
+  event.preventDefault()
+  const pos = el.selectionStart
+  const next =
+    event.key === 'ArrowLeft' ? previousGraphemeIndex(text, pos) : nextGraphemeIndex(text, pos)
+  el.setSelectionRange(next, next)
+  updateSelectionState()
+}
+
 function updateSelectionState() {
   if (!useEmojiMirror.value) {
-    isSelectingText.value = false
+    clearSelectionHighlight()
     return
   }
 
@@ -130,18 +188,40 @@ function updateSelectionState() {
     selectionSyncRaf = 0
     const el = refInput.value
     if (!el) {
-      isSelectingText.value = false
+      clearSelectionHighlight()
       return
     }
 
-    const selecting = el.selectionStart !== el.selectionEnd
-    if (isSelectingText.value === selecting) return
-
-    isSelectingText.value = selecting
-    if (!selecting) {
-      nextTick(syncMirrorScroll)
+    const start = el.selectionStart
+    const end = el.selectionEnd
+    if (start === end) {
+      if (selectionRange.value !== null) {
+        selectionRange.value = null
+        nextTick(syncMirrorScroll)
+      }
+      return
     }
+
+    const prev = selectionRange.value
+    if (prev && prev.start === start && prev.end === end) return
+
+    const mirrorScrollTop = refMirror.value?.scrollTop ?? 0
+    selectionRange.value = { start, end }
+    nextTick(() => {
+      if (refMirror.value) refMirror.value.scrollTop = mirrorScrollTop
+      syncMirrorScroll()
+    })
   })
+}
+
+function onInputMouseMove(event: MouseEvent) {
+  if (event.buttons) updateSelectionState()
+}
+
+function onDocumentSelectionChange() {
+  if (document.activeElement === refInput.value) {
+    updateSelectionState()
+  }
 }
 
 const props = defineProps({
@@ -374,6 +454,7 @@ const sendTyping = (event: Event) => {
   // console.log('typing', event.target.value);
   const target = event.target as HTMLTextAreaElement;
   emit('typing', target.value);
+  updateSelectionState()
 }
 
 const initializeTextareaHeight = () => {
@@ -388,6 +469,12 @@ const initializeTextareaHeight = () => {
 
 onMounted(() => {
   initializeTextareaHeight();
+  document.addEventListener('selectionchange', onDocumentSelectionChange)
+});
+
+onUnmounted(() => {
+  document.removeEventListener('selectionchange', onDocumentSelectionChange)
+  if (selectionSyncRaf) cancelAnimationFrame(selectionSyncRaf)
 });
 
 const keyEnter = (event: KeyboardEvent) => {

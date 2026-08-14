@@ -79,6 +79,8 @@ export interface ChatInputThemeCSSVariables {
   '--chotto-chatinput-input-border-radius': string;
   /** Контур поля ввода при фокусе */
   '--chotto-chatinput-input-focus-outline': string;
+  /** Радиус скругления выделения эмодзи */
+  '--chotto-chatinput-selection-border-radius': string;
 
   // Disabled placeholder
   /** Выравнивание текста отключенного плейсхолдера */

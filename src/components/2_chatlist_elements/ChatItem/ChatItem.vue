@@ -33,7 +33,15 @@
           :text="chat.name"
           position="bottom"
         >
-          <div class="chat-item__name">
+          <div
+            v-if="useAppleEmojisInName"
+            class="chat-item__name"
+            v-html="nameHtml"
+          />
+          <div
+            v-else
+            class="chat-item__name"
+          >
             {{ chat.name }}
           </div>
         </Tooltip>
@@ -51,7 +59,15 @@
               v-if="messageIcon"
               class="chat-item__message-icon"
             />
-            <span class="chat-item__last-message-text">{{ showText }}</span>
+            <span
+              v-if="useAppleEmojisInLastMessage"
+              class="chat-item__last-message-text"
+              v-html="lastMessageHtml"
+            />
+            <span
+              v-else
+              class="chat-item__last-message-text"
+            >{{ showText }}</span>
           </div>
         </Tooltip>
       </div>
@@ -198,7 +214,8 @@ import { ref, computed, watch, onMounted, onUnmounted, useId, inject, nextTick} 
 
 import { getStatus, statuses } from '@/functions';
 import { t } from '../../../locale/useLocale'
-import { useTheme } from '@/hooks';
+import { useTheme, useEmojiNative } from '@/hooks';
+import { textToAppleEmojiHtml, textContainsEmoji } from '@/functions/renderAppleEmojis';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
@@ -223,6 +240,7 @@ import { IAction, IChatItem, IChatDialog, ILastMessageObject } from './types';
 
 const chatAppId = inject('chatAppId')
 const { getTheme } = useTheme(chatAppId as string)
+const { isNative } = useEmojiNative(chatAppId as string)
 
 const props = withDefaults(defineProps<{
   chat: IChatItem;
@@ -441,6 +459,18 @@ const showText = computed(() => {
     return getLastMessageText(props.chat.lastMessage);
   }
 });
+
+const useAppleEmojisInLastMessage = computed(
+  () => !isNative.value && textContainsEmoji(showText.value || ''),
+)
+
+const useAppleEmojisInName = computed(
+  () => !isNative.value && textContainsEmoji(props.chat.name || ''),
+)
+
+const lastMessageHtml = computed(() => textToAppleEmojiHtml(showText.value || ''))
+
+const nameHtml = computed(() => textToAppleEmojiHtml(props.chat.name || ''))
 
 watch(
   () => props.chat.typing,

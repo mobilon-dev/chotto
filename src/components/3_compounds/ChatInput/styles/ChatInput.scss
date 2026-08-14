@@ -67,8 +67,33 @@
       display: none;
     }
 
-    &--hidden {
+    :deep(.chat-input__emoji-selection) {
+      background-color: var(--chotto-chatinput-selection-bg, rgba(51, 133, 255, 0.35));
+      border-radius: var(--chotto-chatinput-selection-border-radius, 2px);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    :deep(.chotto-emoji-slot) {
+      position: relative;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+
+    :deep(.chotto-emoji-metric) {
       visibility: hidden;
+    }
+
+    :deep(.chotto-emoji-slot .chotto-emoji) {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      margin: 0;
+      display: block;
     }
   }
 
@@ -99,11 +124,17 @@
       caret-color: var(--chotto-chatinput-input-text-color, #1E1E1E);
       background-color: transparent;
       scrollbar-gutter: stable;
-    }
 
-    &--selecting {
-      color: var(--chotto-chatinput-input-text-color, #1E1E1E);
-      background-color: var(--chotto-chatinput-input-background-color, transparent);
+      /* Системное выделение скрыто: подсветка только в зеркале, иначе два слоя */
+      &::selection {
+        background-color: transparent;
+        color: transparent;
+      }
+
+      &::-moz-selection {
+        background-color: transparent;
+        color: transparent;
+      }
     }
 
     &:focus-visible {
