@@ -20,6 +20,7 @@ import { templates, groupTemplates } from '../data';
 import { transformToFeed } from '../transform/transformToFeed';
 import type { MessageEditInfo } from '@/types';
 import sticker from '../data/images/sticker.webp';
+import audioFile from '../data/audio/file_example_MP3_700KB.mp3';
 import {
   approveSticker,
   callSticker,
@@ -61,6 +62,7 @@ const simpleChats = [
     typing: false,
     metadata: '',
     dialogsExpanded: false,
+    isSelected: true,
   },
   {
     chatId: 2,
@@ -76,6 +78,7 @@ const simpleChats = [
     typing: false,
     metadata: '',
     dialogsExpanded: false,
+    isSelected: false,
   }
 ];
 
@@ -94,6 +97,7 @@ type DemoMessage = {
   url?: string;
   filename?: string;
   alt?: string;
+  duration?: string | number;
   reactions?: {
     items: Array<{
       key: string;
@@ -144,7 +148,8 @@ const simpleMessages: DemoMessage[] = [
     subText: "Иван",
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     messageId: '2',
-    url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    url: audioFile,
+    duration: 42,
     timestamp: '1762077999',
     status: 'read',
   },
@@ -301,7 +306,8 @@ const simpleMessages: DemoMessage[] = [
     header: "Иван",
     subText: "Иван",
     messageId: '5',
-    url: "https://file-examples.com/storage/fe40e015d566f1504935cfd/2017/11/file_example_MP3_700KB.mp3",
+    url: audioFile,
+    duration: 42,
     timestamp: '1762077599',
     status: 'read',
   },
@@ -455,7 +461,19 @@ export const BasicExample: Story = {
       const selectedChatRef = ref(chatsRef.value[0]);
       provide('selectedChat', selectedChatRef);
       const scrollToMessageId = ref<string | null>(null);
+      const scrollToBottom = ref(false);
       let scrollToTimer: ReturnType<typeof setTimeout> | null = null;
+      let scrollToBottomTimer: ReturnType<typeof setTimeout> | null = null;
+
+      const triggerScrollToBottom = () => {
+        scrollToBottom.value = true;
+        if (scrollToBottomTimer) {
+          clearTimeout(scrollToBottomTimer);
+        }
+        scrollToBottomTimer = setTimeout(() => {
+          scrollToBottom.value = false;
+        }, 50);
+      };
       
       // Делаем сообщения реактивными
       const messagesRef = ref<DemoMessage[]>([...simpleMessages]);
@@ -676,6 +694,7 @@ export const BasicExample: Story = {
         // Добавляем оба сообщения в массив
         messagesRef.value.push(outgoingMessage);
         messagesRef.value.push(incomingMessage);
+        triggerScrollToBottom();
         
         // Обновляем информацию о последнем сообщении в обоих чатах
         const currentChat = chatsRef.value.find(c => c.chatId === currentChatId);
@@ -698,12 +717,16 @@ export const BasicExample: Story = {
       const handleSelectChat = (args: { chat: typeof simpleChats[0]; dialog?: unknown }) => {
         // Находим чат в реактивном массиве
         const chat = chatsRef.value.find(c => c.chatId === args.chat.chatId);
-        if (chat) {
-          selectedChatRef.value = chat;
-          // Обновляем счетчик непрочитанных при выборе чата
-          if (chat.countUnread > 0) {
-            chat.countUnread = 0;
-          }
+        if (!chat) return;
+
+        const isSameChat = selectedChatRef.value?.chatId === chat.chatId;
+        if (!isSameChat) {
+          triggerScrollToBottom();
+        }
+        selectedChatRef.value = chat;
+        // Обновляем счетчик непрочитанных при выборе чата
+        if (chat.countUnread > 0) {
+          chat.countUnread = 0;
         }
       };
       
@@ -868,6 +891,7 @@ export const BasicExample: Story = {
         handleLoadMore,
         handleClickRepliedMessage,
         scrollToMessageId,
+        scrollToBottom,
         themes,
         handleThemeChange,
         templates,
@@ -900,11 +924,13 @@ export const BasicExample: Story = {
             <div style="height: 100%; min-height: 0; display: flex; flex-direction: column; overflow: hidden;">
               <ChatWrapper :is-selected-chat="!!selectedChat" style="height: 100%; min-height: 0; display: flex; flex-direction: column; overflow: hidden;">
                 <ChatInfo :chat="selectedChat" />
-                <div style="flex: 1 1 0; min-height: 0; overflow-y: auto;">
+                <div style="flex: 1 1 0; min-height: 0; overflow: hidden;">
                   <Feed 
-                    style="--chotto-feed-padding: 10px 5px; --chotto-textmessage-content-max-width: 500px;"
+                    :key="selectedChat.chatId"
+                    style="height: 100%; --chotto-feed-padding: 10px 5px; --chotto-textmessage-content-max-width: 500px; --chotto-feed-scroll-behavior: auto;"
                     :objects="messages"
                     :scroll-to="scrollToMessageId"
+                    :scroll-to-bottom="scrollToBottom"
                     :current-user-id="'usr_me'"
                     :reaction-user-names="{ usr_me: 'Виктория', usr_other_0: 'Василий Васильев' }"
                     :enable-double-click-reply="true" 
