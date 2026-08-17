@@ -3,6 +3,7 @@ export const ru = {
     'component.ChatFilter.InputPlaceholder': 'Поиск чата',
     'layout.ChatWrapper.noSelectedChat': 'Выберите контакт для начала общения',
     'component.ChatItem.typing': 'печатает',
+    'component.ChatItem.draft': 'Черновик:',
     'component.ChatInput.InputPlaceholder': 'Введите сообщение',
     'component.ChatInput.WhatsappInputPlaceholder': 'Введите сообщение WhatsApp или смените канал',
     'component.ChatInput.TelegramInputPlaceholder': 'Введите сообщение Telegram или смените канал',

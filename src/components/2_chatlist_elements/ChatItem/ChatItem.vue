@@ -51,16 +51,31 @@
           position="bottom"
         >
           <div
-            v-if="chat.lastMessage || chat.typing"
+            v-if="chat.lastMessage || chat.typing || draftPreview"
             class="chat-item__last-message"
           >
             <component
               :is="messageIcon"
-              v-if="messageIcon"
+              v-if="messageIcon && !draftPreview"
               class="chat-item__message-icon"
             />
             <span
-              v-if="useAppleEmojisInLastMessage"
+              v-if="draftPreview"
+              class="chat-item__last-message-text"
+            >
+              <span class="chat-item__draft-label">{{ draftLabel }}</span>
+              <span
+                v-if="useAppleEmojisInLastMessage"
+                class="chat-item__draft-text"
+                v-html="draftTextHtml"
+              />
+              <span
+                v-else
+                class="chat-item__draft-text"
+              >{{ draftPreview }}</span>
+            </span>
+            <span
+              v-else-if="useAppleEmojisInLastMessage"
               class="chat-item__last-message-text"
               v-html="lastMessageHtml"
             />
@@ -214,7 +229,7 @@ import { ref, computed, watch, onMounted, onUnmounted, useId, inject, nextTick} 
 
 import { getStatus, statuses } from '@/functions';
 import { t } from '../../../locale/useLocale'
-import { useTheme, useEmojiNative } from '@/hooks';
+import { useTheme, useEmojiNative, getChatDraft } from '@/hooks';
 import { textToAppleEmojiHtml, textContainsEmoji } from '@/functions/renderAppleEmojis';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
@@ -393,9 +408,20 @@ const getMessageType = (lastMessage: string | ILastMessageObject): string | null
   return lastMessage?.type || null;
 };
 
+const draftLabel = t('component.ChatItem.draft')
+
+const draftPreview = computed(() => {
+  if (props.chat.isSelected) return ''
+  const draft = getChatDraft(String(chatAppId ?? ''), props.chat.chatId)
+  if (!draft || draft.edit) return ''
+  return (draft.text || '').replace(/\s+/g, ' ').trim()
+})
+
+const draftTextHtml = computed(() => textToAppleEmojiHtml(draftPreview.value || ''))
+
 // Определяем иконку на основе типа сообщения
 const messageIcon = computed(() => {
-  if (props.chat.typing) {
+  if (props.chat.typing || draftPreview.value) {
     return null;
   }
   
@@ -449,6 +475,9 @@ const lastMessageText = computed(() => {
   if (props.chat.typing) {
     return typingText[typingIndex.value];
   }
+  if (draftPreview.value) {
+    return `${draftLabel} ${draftPreview.value}`
+  }
   return getLastMessageText(props.chat.lastMessage);
 });
 
@@ -461,7 +490,7 @@ const showText = computed(() => {
 });
 
 const useAppleEmojisInLastMessage = computed(
-  () => !isNative.value && textContainsEmoji(showText.value || ''),
+  () => !isNative.value && textContainsEmoji((draftPreview.value || showText.value) || ''),
 )
 
 const useAppleEmojisInName = computed(

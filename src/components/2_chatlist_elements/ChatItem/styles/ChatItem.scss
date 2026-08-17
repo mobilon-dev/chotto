@@ -160,6 +160,15 @@
     }
   }
 
+  &__draft-label {
+    color: var(--chotto-chatitem-draft-label-color, #F84932);
+    margin-right: var(--chotto-chatitem-draft-label-margin-right, 4px);
+  }
+
+  &__draft-text {
+    color: var(--chotto-chatitem-draft-text-color, #5F5F5F);
+  }
+
   &__message-icon {
     flex-shrink: var(--chotto-chatitem-message-icon-flex-shrink, 0);
     width: var(--chotto-chatitem-message-icon-size, 16px);

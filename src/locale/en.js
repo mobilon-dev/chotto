@@ -3,6 +3,7 @@ export const en = {
     'component.ChatFilter.InputPlaceholder': 'Chat search',
     'layout.ChatWrapper.noSelectedChat': 'Choose contact to start conversation',
     'component.ChatItem.typing': 'typing',
+    'component.ChatItem.draft': 'Draft:',
     'component.ChatInput.InputPlaceholder': 'Type a message...',
     'component.ChatInput.TelegramInputPlaceholder': 'Type a message Telegram or change channel',
     'component.ChatInput.WhatsappInputPlaceholder': 'Type a message WhatsApp or change channel',

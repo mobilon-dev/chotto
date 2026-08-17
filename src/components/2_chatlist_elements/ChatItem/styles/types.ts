@@ -137,6 +137,12 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-last-message-font-size': string;
   /** Цвет текста последнего сообщения */
   '--chotto-chatitem-last-message-text-color': string;
+  /** Цвет подписи черновика */
+  '--chotto-chatitem-draft-label-color': string;
+  /** Отступ справа от подписи черновика */
+  '--chotto-chatitem-draft-label-margin-right': string;
+  /** Цвет текста черновика */
+  '--chotto-chatitem-draft-text-color': string;
   
   // Last message text
   /** Переполнение текста последнего сообщения (скрытие) */

@@ -68,6 +68,11 @@ function ensureDraft(id: string): MessageDraft {
     return created
 }
 
+export function getChatDraft(chatAppId: string, chatId: string | number | null | undefined): MessageDraft | undefined {
+    if (chatId === undefined || chatId === null || chatId === '') return undefined
+    return messages.value.find((message) => message.id === `${chatAppId}:${chatId}`)
+}
+
 function syncDraftPreviews(chatAppId: string, message: MessageDraft) {
     if (typeof document === 'undefined') return
 
