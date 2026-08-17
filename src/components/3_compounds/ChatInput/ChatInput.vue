@@ -347,29 +347,30 @@ watch(
 watch(
   () => getMessage().text,
   () => {
-    nextTick(() => {
-      const el = refInput.value;
-      if (!el) return;
+    const el = refInput.value
+    if (!el) return
 
-      resizeTextarea(el);
+    resizeTextarea(el)
 
-      if (focusAtEndAfterResize.value) {
-        focusAtEndAfterResize.value = false
-        applyFocusAtEnd(el)
-        requestAnimationFrame(() => applyFocusAtEnd(el))
-      }
-    });
+    if (focusAtEndAfterResize.value) {
+      focusAtEndAfterResize.value = false
+      applyFocusAtEnd(el)
+      requestAnimationFrame(() => applyFocusAtEnd(el))
+    }
   },
-  { immediate: true }
+  { immediate: true, flush: 'post' }
 );
 
 watch(
   () => getMessage().id,
   () => {
-    nextTick(() => {
-      const el = refInput.value
-      if (!el) return
-      resizeTextarea(el)
+    const el = refInput.value
+    if (!el) return
+
+    applySavedInputHeight(el)
+    requestAnimationFrame(() => {
+      const current = refInput.value
+      if (current) resizeTextarea(current)
     })
   }
 )
@@ -389,18 +390,40 @@ watch(useEmojiMirror, (enabled) => {
   })
 })
 
+const INPUT_MIN_HEIGHT = 40
+
+function applySavedInputHeight(el: HTMLTextAreaElement) {
+  const saved = getMessage().inputHeight
+  el.style.height = (saved || INPUT_MIN_HEIGHT) + 'px'
+  if (!saved || saved <= INPUT_MIN_HEIGHT) {
+    el.style.overflowY = 'hidden'
+  }
+}
+
+function persistInputHeight(el: HTMLTextAreaElement) {
+  const height = parseFloat(el.style.height)
+  if (!Number.isFinite(height)) return
+  getMessage().inputHeight = height
+}
+
 function resizeTextarea(el: HTMLTextAreaElement) {
+  const text = getMessage().text || ''
+  if (el.value !== text || el.clientWidth === 0) {
+    applySavedInputHeight(el)
+    return
+  }
+
   const scrollTop = el.scrollTop;
   el.style.height = 'auto';
 
   const computedStyle = getComputedStyle(el);
   const fontSize = parseFloat(computedStyle.fontSize) || 16;
   const lineHeight = parseFloat(computedStyle.lineHeight) || fontSize * 1.4;
-  const minHeight = 40;
+  const minHeight = INPUT_MIN_HEIGHT;
   const maxHeight = lineHeight * 11;
   const scrollHeight = el.scrollHeight;
 
-  const lineCount = getMessage().text.split('\n').length;
+  const lineCount = text.split('\n').length;
   const hasExplicitLineBreaks = lineCount > 1;
 
   const tempEl = document.createElement('div');
@@ -412,7 +435,7 @@ function resizeTextarea(el: HTMLTextAreaElement) {
   tempEl.style.fontFamily = computedStyle.fontFamily;
   tempEl.style.fontWeight = computedStyle.fontWeight;
   tempEl.style.letterSpacing = computedStyle.letterSpacing;
-  tempEl.textContent = getMessage().text;
+  tempEl.textContent = text;
 
   document.body.appendChild(tempEl);
   const textWidth = tempEl.offsetWidth;
@@ -425,7 +448,12 @@ function resizeTextarea(el: HTMLTextAreaElement) {
   const hasAutoWrap = textWidth > availableWidth;
   const shouldGrow = hasExplicitLineBreaks || hasAutoWrap;
 
-  if (!getMessage().text.trim()) {
+  if (shouldGrow && scrollHeight <= minHeight + 1) {
+    applySavedInputHeight(el)
+    return
+  }
+
+  if (!text.trim()) {
     el.style.height = minHeight + 'px';
     el.style.overflowY = 'hidden';
   } else if (!shouldGrow) {
@@ -440,6 +468,7 @@ function resizeTextarea(el: HTMLTextAreaElement) {
     el.scrollTop = scrollTop;
   }
 
+  persistInputHeight(el)
   syncMirrorScroll()
   requestAnimationFrame(syncMirrorScroll)
 }
@@ -471,18 +500,12 @@ const sendTyping = (event: Event) => {
   updateSelectionState()
 }
 
-const initializeTextareaHeight = () => {
-  nextTick(() => {
-    const el = refInput.value;
-    if (!el) return;
-    
-    el.style.height = '40px';
-    el.style.overflowY = 'hidden';
-  });
-}
-
 onMounted(() => {
-  initializeTextareaHeight();
+  const el = refInput.value
+  if (el) {
+    applySavedInputHeight(el)
+    resizeTextarea(el)
+  }
   document.addEventListener('selectionchange', onDocumentSelectionChange)
 });
 

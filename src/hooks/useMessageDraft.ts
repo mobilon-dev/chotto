@@ -11,6 +11,7 @@ import { Edit, IFilePreview, Reply } from '@/types';
  * @property {Edit} [edit] - Редактируемое сообщение
  * @property {boolean} forceSend - Флаг принудительной отправки сообщения
  * @property {boolean} isRecording - Флаг активной записи (аудио/видео)
+ * @property {number} [inputHeight] - Высота поля ввода для этого черновика
  */
 export interface MessageDraft {
     id: string
@@ -20,6 +21,7 @@ export interface MessageDraft {
     edit?: Edit
     forceSend: boolean
     isRecording: boolean
+    inputHeight?: number
 }
 
 /**
