@@ -43,7 +43,7 @@
     "primeicons": "^7.0.0",
     "sass-embedded": "^1.96.0",
     "vue": "^3.5.25",
-    "vue3-emoji-picker-ru": "^1.1.9"
+    "vue3-emoji-picker-ru": "^1.1.10"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",

@@ -10,7 +10,7 @@
 
   &__container--left {
     justify-content: var(--chotto-feedkeyboard-container-left-justify-content, flex-start);
-    margin-left: var(--chotto-feedkeyboard-container-left-margin-left, 0);
+    margin-left: var(--chotto-feedkeyboard-container-left-margin-left, 48px);
     margin-right: var(--chotto-feedkeyboard-container-left-margin-right, auto);
   }
 
