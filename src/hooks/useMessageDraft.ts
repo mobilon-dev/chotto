@@ -12,7 +12,14 @@ import { Edit, IFilePreview, Reply } from '@/types';
  * @property {boolean} forceSend - Флаг принудительной отправки сообщения
  * @property {boolean} isRecording - Флаг активной записи (аудио/видео)
  * @property {number} [inputHeight] - Высота поля ввода для этого черновика
+ * @property {string} [listPreviewText] - Снимок текста черновика для списка чатов
+ * @property {MessageDraftListFile} [listPreviewFile] - Снимок прикреплённого файла для списка чатов
  */
+export interface MessageDraftListFile {
+    name: string
+    type?: string
+}
+
 export interface MessageDraft {
     id: string
     text: string
@@ -22,6 +29,8 @@ export interface MessageDraft {
     forceSend: boolean
     isRecording: boolean
     inputHeight?: number
+    listPreviewText?: string
+    listPreviewFile?: MessageDraftListFile
 }
 
 /**
@@ -71,6 +80,32 @@ function ensureDraft(id: string): MessageDraft {
 export function getChatDraft(chatAppId: string, chatId: string | number | null | undefined): MessageDraft | undefined {
     if (chatId === undefined || chatId === null || chatId === '') return undefined
     return messages.value.find((message) => message.id === `${chatAppId}:${chatId}`)
+}
+
+function toListPreviewText(text: string): string {
+    return text.replace(/\s+/g, ' ').trim()
+}
+
+function commitDraftToChatList(draft: MessageDraft | undefined) {
+    if (!draft) return
+    if (draft.edit) {
+        draft.listPreviewText = undefined
+        draft.listPreviewFile = undefined
+        return
+    }
+
+    const preview = toListPreviewText(draft.text || '')
+    draft.listPreviewText = preview || undefined
+
+    const fileName = draft.file?.name || draft.file?.preview?.fileName || ''
+    draft.listPreviewFile = draft.file
+        ? { name: fileName, type: draft.file.type }
+        : undefined
+}
+
+export function commitChatDraftToList(draftId: string | undefined) {
+    if (!draftId) return
+    commitDraftToChatList(messages.value.find((message) => message.id === draftId))
 }
 
 function syncDraftPreviews(chatAppId: string, message: MessageDraft) {
@@ -166,6 +201,8 @@ export const useMessageDraft = (outId : string) => {
         (id, prevId) => {
             const message = ensureDraft(id)
             if (prevId !== undefined && prevId !== id) {
+                const previous = messages.value.find((item) => item.id === prevId)
+                commitDraftToChatList(previous)
                 syncDraftPreviews(outId, message)
             }
         },

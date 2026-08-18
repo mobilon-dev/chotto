@@ -51,26 +51,31 @@
           position="bottom"
         >
           <div
-            v-if="chat.lastMessage || chat.typing || draftPreview"
+            v-if="chat.lastMessage || chat.typing || hasDraftPreview"
             class="chat-item__last-message"
           >
             <component
               :is="messageIcon"
-              v-if="messageIcon && !draftPreview"
+              v-if="messageIcon && !hasDraftPreview"
               class="chat-item__message-icon"
             />
             <span
-              v-if="draftPreview"
-              class="chat-item__last-message-text"
+              v-if="hasDraftPreview"
+              class="chat-item__last-message-text chat-item__last-message-text--draft"
             >
               <span class="chat-item__draft-label">{{ draftLabel }}</span>
+              <component
+                :is="draftFileIcon"
+                v-if="draftFileIcon"
+                class="chat-item__message-icon"
+              />
               <span
-                v-if="useAppleEmojisInLastMessage"
+                v-if="draftPreview && useAppleEmojisInLastMessage"
                 class="chat-item__draft-text"
                 v-html="draftTextHtml"
               />
               <span
-                v-else
+                v-else-if="draftPreview"
                 class="chat-item__draft-text"
               >{{ draftPreview }}</span>
             </span>
@@ -410,18 +415,53 @@ const getMessageType = (lastMessage: string | ILastMessageObject): string | null
 
 const draftLabel = t('component.ChatItem.draft')
 
-const draftPreview = computed(() => {
-  if (props.chat.isSelected) return ''
+const draftSnapshot = computed(() => {
   const draft = getChatDraft(String(chatAppId ?? ''), props.chat.chatId)
-  if (!draft || draft.edit) return ''
-  return (draft.text || '').replace(/\s+/g, ' ').trim()
+  if (!draft || draft.edit) return undefined
+  if (!draft.listPreviewText && !draft.listPreviewFile) return undefined
+  return draft
+})
+
+const hasDraftPreview = computed(() => !!draftSnapshot.value)
+
+const draftPreview = computed(() => {
+  const draft = draftSnapshot.value
+  if (!draft) return ''
+  if (draft.listPreviewFile) return (draft.listPreviewFile.name || '').trim()
+  return (draft.listPreviewText || '').trim()
+})
+
+const draftFileIcon = computed(() => {
+  const file = draftSnapshot.value?.listPreviewFile
+  if (!file) return null
+
+  const type = (file.type || '').toLowerCase()
+  const name = (file.name || '').toLowerCase()
+
+  if (type === 'sticker' || name.endsWith('.tgs') || name.endsWith('.webp')) {
+    return StickerIcon
+  }
+  if (type === 'image' || type.includes('image')) {
+    return ImageIcon
+  }
+  if (type === 'video' || type.includes('video')) {
+    return VideoIcon
+  }
+  if (type === 'audio' || type.includes('audio')) {
+    if (name.includes('voice') || name.includes('голос')) return VoiceIcon
+    return AudioIcon
+  }
+  if (type === 'file' || file.name) {
+    return FileIcon
+  }
+  return FileIcon
 })
 
 const draftTextHtml = computed(() => textToAppleEmojiHtml(draftPreview.value || ''))
 
 // Определяем иконку на основе типа сообщения
 const messageIcon = computed(() => {
-  if (props.chat.typing || draftPreview.value) {
+  if (props.chat.typing || hasDraftPreview.value) {
     return null;
   }
   
@@ -475,8 +515,8 @@ const lastMessageText = computed(() => {
   if (props.chat.typing) {
     return typingText[typingIndex.value];
   }
-  if (draftPreview.value) {
-    return `${draftLabel} ${draftPreview.value}`
+  if (hasDraftPreview.value) {
+    return draftPreview.value ? `${draftLabel} ${draftPreview.value}` : draftLabel
   }
   return getLastMessageText(props.chat.lastMessage);
 });

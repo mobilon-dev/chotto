@@ -79,7 +79,7 @@
 
 <script setup lang="ts">
 import { unref, ref, watch, nextTick, inject, computed, onMounted, onUnmounted } from 'vue';
-import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview } from '@/hooks';
+import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview, commitChatDraftToList } from '@/hooks';
 import { textToAppleEmojiHtml, textContainsEmoji, snapIndexToGrapheme, nextGraphemeIndex, previousGraphemeIndex } from '@/functions/renderAppleEmojis';
 import { t } from '../../../locale/useLocale';
 import { IInputMessage } from '@/types';
@@ -92,6 +92,14 @@ const emit = defineEmits(['send','typing']);
 const chatAppId = inject('chatAppId')
 const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit, resetMessageFile } = useMessageDraft(chatAppId as string)
 const { isNative } = useEmojiNative(chatAppId as string)
+
+let ownedDraftId = getMessage().id
+watch(
+  () => getMessage().id,
+  (id) => {
+    ownedDraftId = id
+  }
+)
 
 const refInput = ref<HTMLTextAreaElement>();
 const refMirror = ref<HTMLElement>();
@@ -510,6 +518,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+  commitChatDraftToList(ownedDraftId)
   document.removeEventListener('selectionchange', onDocumentSelectionChange)
   if (selectionSyncRaf) cancelAnimationFrame(selectionSyncRaf)
 });

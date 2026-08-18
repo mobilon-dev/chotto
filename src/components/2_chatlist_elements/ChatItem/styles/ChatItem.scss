@@ -137,6 +137,24 @@
     white-space: var(--chotto-chatitem-last-message-text-white-space, nowrap);
     max-width: var(--chotto-chatitem-last-message-text-max-width, 280px);
 
+    &--draft {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      column-gap: var(--chotto-chatitem-draft-label-margin-right, 4px);
+
+      .chat-item__draft-label {
+        flex-shrink: 0;
+        margin-right: 0;
+      }
+
+      .chat-item__draft-text {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
     :deep(.chotto-emoji-slot) {
       position: relative;
       display: inline-block;
