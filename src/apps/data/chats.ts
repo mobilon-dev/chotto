@@ -272,7 +272,7 @@ export const chats = [
     lastMessage: {
       type: 'message.missedCall',
     },
-    'lastMessage.status': 'read', 
+    'lastMessage.status': 'pending', 
     'lastActivity.time': '2 часа назад',
     'lastActivity.timestamp': '1727026259',
     actions: [
