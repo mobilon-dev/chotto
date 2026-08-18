@@ -103,6 +103,15 @@ function commitDraftToChatList(draft: MessageDraft | undefined) {
         : undefined
 }
 
+function hasLiveDraftContent(draft: MessageDraft) {
+    return Boolean(toListPreviewText(draft.text || '') || draft.file)
+}
+
+function clearDraftListPreview(draft: MessageDraft) {
+    draft.listPreviewText = undefined
+    draft.listPreviewFile = undefined
+}
+
 export function commitChatDraftToList(draftId: string | undefined) {
     if (!draftId) return
     commitDraftToChatList(messages.value.find((message) => message.id === draftId))
@@ -207,6 +216,27 @@ export const useMessageDraft = (outId : string) => {
             }
         },
         { immediate: true }
+    )
+
+    watch(
+        () => {
+            const current = getMessage()
+            return [current.text, current.file] as const
+        },
+        () => {
+            const current = getMessage()
+            if (current.edit) return
+            if (!hasLiveDraftContent(current)) {
+                clearDraftListPreview(current)
+                return
+            }
+            if (!current.file) {
+                current.listPreviewFile = undefined
+            }
+            if (!toListPreviewText(current.text || '')) {
+                current.listPreviewText = undefined
+            }
+        }
     )
 
     const getMessageIndex = () => {

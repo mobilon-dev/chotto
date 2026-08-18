@@ -419,6 +419,7 @@ const draftSnapshot = computed(() => {
   const draft = getChatDraft(String(chatAppId ?? ''), props.chat.chatId)
   if (!draft || draft.edit) return undefined
   if (!draft.listPreviewText && !draft.listPreviewFile) return undefined
+  if (!(draft.text || '').trim() && !draft.file) return undefined
   return draft
 })
 
@@ -427,16 +428,18 @@ const hasDraftPreview = computed(() => !!draftSnapshot.value)
 const draftPreview = computed(() => {
   const draft = draftSnapshot.value
   if (!draft) return ''
-  if (draft.listPreviewFile) return (draft.listPreviewFile.name || '').trim()
+  if (draft.file) {
+    return (draft.listPreviewFile?.name || draft.file.name || '').trim()
+  }
   return (draft.listPreviewText || '').trim()
 })
 
 const draftFileIcon = computed(() => {
-  const file = draftSnapshot.value?.listPreviewFile
-  if (!file) return null
-
-  const type = (file.type || '').toLowerCase()
-  const name = (file.name || '').toLowerCase()
+  const draft = draftSnapshot.value
+  if (!draft?.file) return null
+  const file = draft.listPreviewFile
+  const type = (file?.type || draft.file.type || '').toLowerCase()
+  const name = (file?.name || draft.file.name || '').toLowerCase()
 
   if (type === 'sticker' || name.endsWith('.tgs') || name.endsWith('.webp')) {
     return StickerIcon
@@ -451,7 +454,7 @@ const draftFileIcon = computed(() => {
     if (name.includes('voice') || name.includes('голос')) return VoiceIcon
     return AudioIcon
   }
-  if (type === 'file' || file.name) {
+  if (type === 'file' || name) {
     return FileIcon
   }
   return FileIcon
