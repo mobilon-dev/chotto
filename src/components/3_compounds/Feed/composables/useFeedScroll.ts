@@ -1,15 +1,14 @@
-import { Ref, ref, nextTick, watch } from 'vue';
+import { Ref, ref, nextTick, watch, onUnmounted } from 'vue';
 
 /**
  * Композабл для управления скроллом ленты сообщений.
- * Инкапсулирует типичные сценарии: принудительный скролл вниз,
- * гарантирование положения внизу, первичную инициализацию и
- * плавную прокрутку (например, по кнопке «вниз»).
+ *
+ * Вместо серии отложенных «подтверждающих» скроллов используется
+ * режим stick-to-bottom: при открытии чата лента прижимается вниз
+ * и остаётся там, пока растёт контент (картинки, клавиатура и т.п.).
+ * Любой пользовательский скролл сразу выключает этот режим.
  */
 
-/**
- * Параметры и зависимости композабла.
- */
 interface UseFeedScrollOptions<T = unknown> {
   /** Ссылка на DOM-элемент контейнера ленты */
   feedRef: Ref<HTMLElement | null>;
@@ -27,70 +26,114 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
   const isInitialized = ref(false);
 
   /**
-   * Мгновенно прокручивает контейнер в самый низ (без анимации),
-   * затем возвращает плавность прокрутки. Подходит для начальной
-   * установки позиции внизу при добавлении контента.
+   * Пока true — лента должна оставаться у последних сообщений.
+   * Выключается пользовательским скроллом.
    */
-  function performScrollToBottom(): void {
-    nextTick(() => {
-      const element = feedRef.value;
-      if (!element) return;
+  const stickToBottom = ref(false);
 
-      element.style.scrollBehavior = 'auto';
-      element.scrollTop = element.scrollHeight;
+  let isProgrammaticScroll = false;
+  let pointerIsDown = false;
+  let listenersElement: HTMLElement | null = null;
+  let resizeObserver: ResizeObserver | null = null;
 
-      nextTick(() => {
-        if (element.scrollHeight - element.scrollTop - element.clientHeight > 10) {
-          element.scrollTop = element.scrollHeight;
-        }
-      });
+  function snapToBottom(): void {
+    if (!stickToBottom.value) return;
 
-      setTimeout(() => {
-        element.style.scrollBehavior = 'smooth';
-      }, 1000);
-    });
-  }
-
-  /**
-   * Гарантирует, что контейнер окажется внизу, даже если
-   * контент меняется асинхронно и высота пересчитывается позже.
-   * Выполняет повторные проверки через таймеры.
-   */
-  function ensureScrollToBottom(): void {
     const element = feedRef.value;
     if (!element) return;
 
-    const scrollToBottom = () => {
-      const isAtBottom = element.scrollHeight - element.scrollTop - element.clientHeight < 5;
-      if (!isAtBottom) {
-        element.scrollTop = element.scrollHeight;
-        setTimeout(() => {
-          const stillNotAtBottom = element.scrollHeight - element.scrollTop - element.clientHeight > 5;
-          if (stillNotAtBottom) {
-            element.scrollTop = element.scrollHeight;
-          }
-        }, 200);
-      }
-    };
+    isProgrammaticScroll = true;
+    element.style.scrollBehavior = 'auto';
+    element.scrollTop = element.scrollHeight;
+    requestAnimationFrame(() => {
+      isProgrammaticScroll = false;
+    });
+  }
 
-    scrollToBottom();
-    setTimeout(scrollToBottom, 300);
+  function freezeScrollPosition(): void {
+    const element = feedRef.value;
+    if (!element) return;
+
+    const currentTop = element.scrollTop;
+    element.style.scrollBehavior = 'auto';
+    element.scrollTop = currentTop;
+  }
+
+  function activateStickToBottom(): void {
+    stickToBottom.value = true;
+    nextTick(() => {
+      snapToBottom();
+      requestAnimationFrame(() => snapToBottom());
+    });
+  }
+
+  function interruptStickToBottom(): void {
+    if (!stickToBottom.value) return;
+    stickToBottom.value = false;
+    freezeScrollPosition();
+  }
+
+  function observeFeed(element: HTMLElement): void {
+    resizeObserver?.disconnect();
+    resizeObserver = new ResizeObserver(() => {
+      snapToBottom();
+    });
+    resizeObserver.observe(element);
+    for (const child of element.children) {
+      if (child instanceof HTMLElement) {
+        resizeObserver.observe(child);
+      }
+    }
+  }
+
+  function handlePointerDown(): void {
+    pointerIsDown = true;
+  }
+
+  function handlePointerUp(): void {
+    pointerIsDown = false;
+  }
+
+  function handleScroll(): void {
+    if (isProgrammaticScroll) return;
+    if (pointerIsDown) {
+      interruptStickToBottom();
+    }
+  }
+
+  function attachUserScrollListeners(element: HTMLElement): void {
+    element.addEventListener('wheel', interruptStickToBottom, { passive: true });
+    element.addEventListener('touchstart', interruptStickToBottom, { passive: true });
+    element.addEventListener('pointerdown', handlePointerDown);
+    element.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointercancel', handlePointerUp);
+  }
+
+  function detachUserScrollListeners(element: HTMLElement): void {
+    element.removeEventListener('wheel', interruptStickToBottom);
+    element.removeEventListener('touchstart', interruptStickToBottom);
+    element.removeEventListener('pointerdown', handlePointerDown);
+    element.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('pointerup', handlePointerUp);
+    window.removeEventListener('pointercancel', handlePointerUp);
+    pointerIsDown = false;
+  }
+
+  /**
+   * Прижимает ленту к последним сообщениям и включает stick-to-bottom.
+   */
+  function performScrollToBottom(): void {
+    activateStickToBottom();
   }
 
   /**
    * Выполняет первичную инициализацию скролла: если есть элементы,
-   * прокручивает вниз и делает дополнительные проверки. Запоминает
-   * факт инициализации в `isInitialized`.
+   * прокручивает вниз. Запоминает факт инициализации в `isInitialized`.
    */
   function initializeScroll(): void {
     if (!isInitialized.value && objectsRef.value.length > 0) {
-      performScrollToBottom();
-      setTimeout(() => {
-        ensureScrollToBottom();
-      }, 300);
-      setTimeout(() => {
-        ensureScrollToBottom();
-      }, 800);
+      activateStickToBottom();
       isInitialized.value = true;
     }
   }
@@ -100,28 +143,49 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
    * пользовательского действия (например, нажатия на кнопку «вниз»).
    */
   function smoothScrollToBottom(): void {
+    stickToBottom.value = true;
     nextTick(() => {
       const element = feedRef.value;
       if (!element) return;
-      element.style.scrollBehavior = 'smooth';
-      element.scrollTop = element.scrollHeight;
+      element.scrollTo({ top: element.scrollHeight, behavior: 'smooth' });
     });
   }
 
-  // Реакция на внешний флаг «прокрутить вниз».
-  // При включении — выполняем серию прокруток и проверок,
-  // чтобы учесть асинхронные изменения DOM/высоты контейнера.
+  watch(
+    feedRef,
+    (element, previousElement) => {
+      if (previousElement) {
+        detachUserScrollListeners(previousElement);
+      }
+      listenersElement = element ?? null;
+      if (element) {
+        attachUserScrollListeners(element);
+        observeFeed(element);
+        if (stickToBottom.value) {
+          snapToBottom();
+        }
+      }
+    },
+    { immediate: true }
+  );
+
+  watch(
+    objectsRef,
+    () => {
+      nextTick(() => {
+        if (feedRef.value) {
+          observeFeed(feedRef.value);
+        }
+      });
+    }
+  );
+
+  // Внешний флаг «прокрутить вниз» (смена чата, новое сообщение).
   watch(
     () => scrollToBottomRef.value,
     (val) => {
       if (val) {
-        performScrollToBottom();
-        setTimeout(() => {
-          ensureScrollToBottom();
-        }, 500);
-        setTimeout(() => {
-          ensureScrollToBottom();
-        }, 1200);
+        activateStickToBottom();
       }
     },
     { immediate: true }
@@ -138,10 +202,18 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
     { immediate: true }
   );
 
+  onUnmounted(() => {
+    resizeObserver?.disconnect();
+    resizeObserver = null;
+    if (listenersElement) {
+      detachUserScrollListeners(listenersElement);
+      listenersElement = null;
+    }
+  });
+
   return {
     isInitialized,
     performScrollToBottom,
-    ensureScrollToBottom,
     initializeScroll,
     smoothScrollToBottom,
   };

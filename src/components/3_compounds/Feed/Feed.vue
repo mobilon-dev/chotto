@@ -390,8 +390,6 @@ const {
 // Инициализация логики скролла
 const {
   isInitialized,
-  performScrollToBottom,
-  ensureScrollToBottom,
   initializeScroll,
   smoothScrollToBottom,
 } = useFeedScroll({
@@ -470,30 +468,10 @@ useFeedScrollTo({
   feedContainerId: `feed-container-${chatAppId}`,
 })
 
-// watcher для инициализации при монтировании
 onMounted(() => {
   nextTick(() => {
     if (props.objects.length > 0 && !isInitialized.value) {
       initializeScroll();
-    }
-    
-    // Наблюдатель за изменениями размера контента
-    const resizeObserver = new ResizeObserver(() => {
-      if (props.scrollToBottom) {
-        // При изменении размера окна принудительно скроллим вниз
-        performScrollToBottom();
-        setTimeout(() => {
-          ensureScrollToBottom();
-        }, 200);
-        // Дополнительная проверка для медленных чатов
-        setTimeout(() => {
-          ensureScrollToBottom();
-        }, 800);
-      }
-    });
-    
-    if (refFeed.value) {
-      resizeObserver.observe(refFeed.value);
     }
   });
 });
