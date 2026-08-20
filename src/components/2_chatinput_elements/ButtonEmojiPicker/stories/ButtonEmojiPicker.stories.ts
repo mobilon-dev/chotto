@@ -22,6 +22,10 @@ const meta: Meta<typeof ButtonEmojiPicker> = {
       options: ['click', 'hover'],
       description: 'Режим активации пикера эмодзи',
     },
+    emojiSrc: {
+      control: 'text',
+      description: 'Базовый URL PNG-картинок эмодзи (при native=false)',
+    },
   },
   render: (args) => ({
     components: { BaseContainer, ButtonEmojiPicker, ThemeMode },

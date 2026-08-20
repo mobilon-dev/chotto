@@ -105,7 +105,7 @@ import { isAnimatedSticker } from '../StickerMessage/utils/stickerUtils';
 import '../StickerMessage/utils/suppress-lit-warning';
 
 const chatAppId = inject('chatAppId')
-const { isNative } = useEmojiNative(chatAppId as string)
+const { isNative, emojiSrc } = useEmojiNative(chatAppId as string)
 
 const { getTheme } = useTheme(chatAppId as string)
 
@@ -145,12 +145,12 @@ const isOpenModal = ref(false);
 const linkedText = ref('')
 
 watch(
-  [() => props.message.text, isNative],
+  [() => props.message.text, isNative, emojiSrc],
   () => {
     if (props.message.text) {
       let html = linkifyStr(props.message.text)
       if (!isNative.value) {
-        html = replaceEmojisInHtml(html)
+        html = replaceEmojisInHtml(html, emojiSrc.value)
       }
       linkedText.value = html
     } else {

@@ -36,7 +36,7 @@ function hasMarkdownOrFormatting(text: string): boolean {
  */
 export const useMessageLinks = (getText: () => string | undefined) => {
   const chatAppId = inject('chatAppId', '') as string
-  const { isNative } = useEmojiNative(chatAppId)
+  const { isNative, emojiSrc } = useEmojiNative(chatAppId)
 
   const linkedHtml = computed(() => {
     const text = getText()
@@ -119,7 +119,7 @@ export const useMessageLinks = (getText: () => string | undefined) => {
     }
 
     if (!isNative.value) {
-      html = replaceEmojisInHtml(html)
+      html = replaceEmojisInHtml(html, emojiSrc.value)
     }
 
     return html

@@ -260,7 +260,7 @@ import { IAction, IChatItem, IChatDialog, ILastMessageObject } from './types';
 
 const chatAppId = inject('chatAppId')
 const { getTheme } = useTheme(chatAppId as string)
-const { isNative } = useEmojiNative(chatAppId as string)
+const { isNative, emojiSrc } = useEmojiNative(chatAppId as string)
 
 const props = withDefaults(defineProps<{
   chat: IChatItem;
@@ -460,7 +460,7 @@ const draftFileIcon = computed(() => {
   return FileIcon
 })
 
-const draftTextHtml = computed(() => textToAppleEmojiHtml(draftPreview.value || ''))
+const draftTextHtml = computed(() => textToAppleEmojiHtml(draftPreview.value || '', null, emojiSrc.value))
 
 // Определяем иконку на основе типа сообщения
 const messageIcon = computed(() => {
@@ -540,9 +540,9 @@ const useAppleEmojisInName = computed(
   () => !isNative.value && textContainsEmoji(props.chat.name || ''),
 )
 
-const lastMessageHtml = computed(() => textToAppleEmojiHtml(showText.value || ''))
+const lastMessageHtml = computed(() => textToAppleEmojiHtml(showText.value || '', null, emojiSrc.value))
 
-const nameHtml = computed(() => textToAppleEmojiHtml(props.chat.name || ''))
+const nameHtml = computed(() => textToAppleEmojiHtml(props.chat.name || '', null, emojiSrc.value))
 
 watch(
   () => props.chat.typing,

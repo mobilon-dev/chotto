@@ -1,6 +1,6 @@
 <template>
   <img
-    v-if="!isNative"
+    v-if="!isNative && hasImage"
     class="chotto-emoji"
     :src="src"
     :alt="emoji"
@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import { useEmojiNative } from '@/hooks'
-import { getAppleEmojiFallbackUrl, getAppleEmojiUrl } from '@/functions/renderAppleEmojis'
+import { getAppleEmojiFallbackUrl, getAppleEmojiUrl, hasAppleEmojiImage } from '@/functions/renderAppleEmojis'
 
 const props = defineProps({
   emoji: {
@@ -23,10 +23,11 @@ const props = defineProps({
 })
 
 const chatAppId = inject('chatAppId', '') as string
-const { isNative } = useEmojiNative(chatAppId)
+const { isNative, emojiSrc } = useEmojiNative(chatAppId)
 
-const src = computed(() => getAppleEmojiUrl(props.emoji))
-const fallbackSrc = computed(() => getAppleEmojiFallbackUrl(props.emoji))
+const hasImage = computed(() => hasAppleEmojiImage(props.emoji, emojiSrc.value))
+const src = computed(() => getAppleEmojiUrl(props.emoji, emojiSrc.value))
+const fallbackSrc = computed(() => getAppleEmojiFallbackUrl(props.emoji, emojiSrc.value))
 
 function onImgError(event: Event) {
   const img = event.target as HTMLImageElement

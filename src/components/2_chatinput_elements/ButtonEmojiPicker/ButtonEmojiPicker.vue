@@ -25,6 +25,7 @@
         :native="native"
         :theme="emojiTheme"
         :display-recent="displayRecent"
+        :emoji-src="emojiSrc"
         picker-type=""
         @select="onSelectEmoji"
       />
@@ -50,7 +51,7 @@ const props = defineProps({
     validator: (value: string) => ['click', 'hover'].includes(value),
   },
   /**
-   * true — системные эмодзи; false — 3D (Apple) в пикере, инпуте и ленте.
+   * true — системные эмодзи; false — картинки в пикере, зеркале ввода и ленте.
    * Значение пишется в общий store чата (useEmojiNative).
    */
   native: {
@@ -64,6 +65,15 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  /**
+   * Базовый URL PNG-картинок эмодзи (без слэша в конце).
+   * При native=false используется пикером, зеркалом ввода, лентой и реакциями.
+   * Пустая строка — Apple CDN по умолчанию.
+   */
+  emojiSrc: {
+    type: String,
+    default: '',
+  },
 });
 
 const emoji = ref<HTMLElement | null>(null);
@@ -72,11 +82,17 @@ const isEmojiPickerVisible = ref(false);
 const emojiTheme = ref<'light' | 'dark'>('light');
 const chatAppId = inject<string>('chatAppId');
 const { setMessageText, getMessage } = useMessageDraft(chatAppId as string);
-const { setNative } = useEmojiNative(chatAppId as string);
+const { setNative, setEmojiSrc } = useEmojiNative(chatAppId as string);
 
 watch(
   () => props.native,
   (value) => setNative(value),
+  { immediate: true },
+);
+
+watch(
+  () => props.emojiSrc,
+  (value) => setEmojiSrc(value),
   { immediate: true },
 );
 

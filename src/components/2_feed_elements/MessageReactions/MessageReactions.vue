@@ -86,6 +86,7 @@
         >
           <EmojiPicker
             :native="isNative"
+            :emoji-src="emojiSrc"
             :theme="emojiTheme"
             picker-type=""
             @select="onSelectEmoji"
@@ -188,7 +189,7 @@ const { startReply } = useStartReply(chatAppId || '')
 const reactionsContainerRef = ref<HTMLElement | null>(null)
 const messageContentEl = ref<HTMLElement | null>(null)
 const emojiTheme = ref<'light' | 'dark'>('light')
-const { isNative } = useEmojiNative(chatAppId || '')
+const { isNative, emojiSrc } = useEmojiNative(chatAppId || '')
 
 const quickEmojis = computed(() => QUICK_REACTION_EMOJIS)
 const reactionsMode = computed(() => props.mode)

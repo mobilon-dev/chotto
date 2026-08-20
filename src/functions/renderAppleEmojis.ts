@@ -1,9 +1,32 @@
 /**
- * Рендер Unicode-эмодзi картинками Apple (тот же CDN, что vue3-emoji-picker-ru при native=false).
+ * Рендер Unicode-эмодзи картинками с CDN emoji-datasource
+ * (Apple по умолчанию; тот же URL, что vue3-emoji-picker-ru при native=false).
  */
 
 export const APPLE_EMOJI_CDN =
   'https://cdn.jsdelivr.net/npm/emoji-datasource-apple@6.0.1/img/apple/64'
+
+export function normalizeEmojiCdn(cdn?: string): string {
+  const value = (cdn || APPLE_EMOJI_CDN).trim()
+  return value.replace(/\/+$/, '') || APPLE_EMOJI_CDN
+}
+
+function isAppleEmojiCdn(cdn: string): boolean {
+  return /emoji-datasource-apple/i.test(cdn)
+}
+
+/**
+ * У Apple нет отдельных PNG: ♀ 2640, ♂ 2642, ⚕ 2695 (только как часть ZWJ).
+ * В зеркале ввода и в сообщениях показываем системный шрифт.
+ */
+const APPLE_EMOJI_CODES_WITHOUT_IMAGE = new Set([
+  '2640',
+  '2640-fe0f',
+  '2642',
+  '2642-fe0f',
+  '2695',
+  '2695-fe0f',
+])
 
 /** ZWJ-последовательности, флаги, keycaps, skin tones и обычные pictographic */
 const EMOJI_REGEX =
@@ -105,28 +128,41 @@ export function emojiToAppleCode(
   return points.join('-')
 }
 
-export function getAppleEmojiUrl(emoji: string): string {
-  return `${APPLE_EMOJI_CDN}/${emojiToAppleCode(emoji)}.png`
+export function hasAppleEmojiImage(emoji: string, cdn: string = APPLE_EMOJI_CDN): boolean {
+  const base = normalizeEmojiCdn(cdn)
+  const primary = emojiToAppleCode(emoji)
+  if (!primary) return false
+  if (isAppleEmojiCdn(base) && APPLE_EMOJI_CODES_WITHOUT_IMAGE.has(primary)) return false
+  const stripped = emojiToAppleCode(emoji, { stripVariationSelectors: true })
+  return !(isAppleEmojiCdn(base) && APPLE_EMOJI_CODES_WITHOUT_IMAGE.has(stripped))
+}
+
+export function getAppleEmojiUrl(emoji: string, cdn: string = APPLE_EMOJI_CDN): string {
+  return `${normalizeEmojiCdn(cdn)}/${emojiToAppleCode(emoji)}.png`
 }
 
 /** Альтернативный URL, если основной codepoint не совпал с именем файла в emoji-datasource */
-export function getAppleEmojiFallbackUrl(emoji: string): string | null {
+export function getAppleEmojiFallbackUrl(emoji: string, cdn: string = APPLE_EMOJI_CDN): string | null {
+  const base = normalizeEmojiCdn(cdn)
+  if (!hasAppleEmojiImage(emoji, base)) return null
   const primary = emojiToAppleCode(emoji)
   const withoutVs = emojiToAppleCode(emoji, { stripVariationSelectors: true })
   if (primary !== withoutVs) {
-    return `${APPLE_EMOJI_CDN}/${withoutVs}.png`
+    if (isAppleEmojiCdn(base) && APPLE_EMOJI_CODES_WITHOUT_IMAGE.has(withoutVs)) return null
+    return `${base}/${withoutVs}.png`
   }
   if (!/[\uFE0E\uFE0F]/.test(emoji)) {
     const withFe0f = emojiToAppleCode(`${emoji}\uFE0F`)
     if (withFe0f !== primary) {
-      return `${APPLE_EMOJI_CDN}/${withFe0f}.png`
+      if (isAppleEmojiCdn(base) && APPLE_EMOJI_CODES_WITHOUT_IMAGE.has(withFe0f)) return null
+      return `${base}/${withFe0f}.png`
     }
   }
   return null
 }
 
-function attachEmojiImgFallback(img: HTMLImageElement, emoji: string) {
-  const fallback = getAppleEmojiFallbackUrl(emoji)
+function attachEmojiImgFallback(img: HTMLImageElement, emoji: string, cdn: string) {
+  const fallback = getAppleEmojiFallbackUrl(emoji, cdn)
   if (!fallback) return
   img.addEventListener(
     'error',
@@ -141,13 +177,14 @@ function attachEmojiImgFallback(img: HTMLImageElement, emoji: string) {
 
 /**
  * Слот: скрытый системный эмодзи задаёт ширину (как в textarea),
- * поверх — Apple-картинка. Так caret совпадает с картинками.
+ * поверх — картинка с CDN. Так caret совпадает с картинками.
  */
-export function createAppleEmojiImgHtml(emoji: string): string {
+export function createAppleEmojiImgHtml(emoji: string, cdn: string = APPLE_EMOJI_CDN): string {
+  const base = normalizeEmojiCdn(cdn)
   const code = emojiToAppleCode(emoji)
-  if (!code) return escapeHtmlText(emoji)
-  const src = `${APPLE_EMOJI_CDN}/${code}.png`
-  const fallback = getAppleEmojiFallbackUrl(emoji)
+  if (!code || !hasAppleEmojiImage(emoji, base)) return escapeHtmlText(emoji)
+  const src = `${base}/${code}.png`
+  const fallback = getAppleEmojiFallbackUrl(emoji, base)
   const fallbackAttr = fallback
     ? ` data-fallback="${escapeHtmlAttr(fallback)}" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"`
     : ''
@@ -159,7 +196,14 @@ export function createAppleEmojiImgHtml(emoji: string): string {
   )
 }
 
-export function createAppleEmojiSlotElement(emoji: string): HTMLElement {
+export function createAppleEmojiSlotElement(emoji: string, cdn: string = APPLE_EMOJI_CDN): HTMLElement {
+  const base = normalizeEmojiCdn(cdn)
+  if (!hasAppleEmojiImage(emoji, base)) {
+    const native = document.createElement('span')
+    native.textContent = emoji
+    return native
+  }
+
   const slot = document.createElement('span')
   slot.className = 'chotto-emoji-slot'
   slot.setAttribute('style', EMOJI_SLOT_STYLE)
@@ -171,11 +215,11 @@ export function createAppleEmojiSlotElement(emoji: string): HTMLElement {
 
   const img = document.createElement('img')
   img.className = 'chotto-emoji'
-  img.src = getAppleEmojiUrl(emoji)
+  img.src = getAppleEmojiUrl(emoji, base)
   img.alt = emoji
   img.draggable = false
   img.setAttribute('style', EMOJI_IMG_OVERLAY_STYLE)
-  attachEmojiImgFallback(img, emoji)
+  attachEmojiImgFallback(img, emoji, base)
 
   slot.append(metric, img)
   return slot
@@ -196,32 +240,34 @@ function escapeHtmlText(value: string): string {
     .replace(/>/g, '&gt;')
 }
 
-function renderAppleEmojiFragment(text: string): string {
+function renderAppleEmojiFragment(text: string, cdn: string): string {
   if (!text) return ''
-  return escapeHtmlText(text).replace(EMOJI_REGEX, (match) => createAppleEmojiImgHtml(match))
+  return escapeHtmlText(text).replace(EMOJI_REGEX, (match) => createAppleEmojiImgHtml(match, cdn))
 }
 
 /**
- * Plain text → HTML с Apple-эмодзi (для зеркала инпута).
+ * Plain text → HTML с картинками эмодзи (для зеркала инпута).
  * Опционально подсвечивает выделенный диапазон (индексы как в textarea: UTF-16).
  */
 export function textToAppleEmojiHtml(
   text: string,
   selection?: { start: number; end: number } | null,
+  cdn: string = APPLE_EMOJI_CDN,
 ): string {
   if (!text) return ''
+  const base = normalizeEmojiCdn(cdn)
 
   const start = selection ? Math.max(0, Math.min(selection.start, selection.end)) : -1
   const end = selection ? Math.min(text.length, Math.max(selection.start, selection.end)) : -1
 
   if (start < 0 || start === end) {
-    return renderAppleEmojiFragment(text)
+    return renderAppleEmojiFragment(text, base)
   }
 
   return (
-    renderAppleEmojiFragment(text.slice(0, start)) +
-    `<span class="chat-input__emoji-selection" style="background-color: var(--chotto-chatinput-selection-bg, rgba(51, 133, 255, 0.35)); border-radius: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone;">${renderAppleEmojiFragment(text.slice(start, end))}</span>` +
-    renderAppleEmojiFragment(text.slice(end))
+    renderAppleEmojiFragment(text.slice(0, start), base) +
+    `<span class="chat-input__emoji-selection" style="background-color: var(--chotto-chatinput-selection-bg, rgba(51, 133, 255, 0.35)); border-radius: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone;">${renderAppleEmojiFragment(text.slice(start, end), base)}</span>` +
+    renderAppleEmojiFragment(text.slice(end), base)
   )
 }
 
@@ -231,9 +277,10 @@ export function textContainsEmoji(text: string): boolean {
   return EMOJI_REGEX.test(text)
 }
 
-/** HTML → HTML, эмодзi в текстовых узлах заменяются на img */
-export function replaceEmojisInHtml(html: string): string {
+/** HTML → HTML, эмодзи в текстовых узлах заменяются на img */
+export function replaceEmojisInHtml(html: string, cdn: string = APPLE_EMOJI_CDN): string {
   if (!html || typeof document === 'undefined') return html
+  const base = normalizeEmojiCdn(cdn)
 
   const tempDiv = document.createElement('div')
   tempDiv.innerHTML = html
@@ -272,7 +319,7 @@ export function replaceEmojisInHtml(html: string): string {
       if (match.index > lastIndex) {
         fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)))
       }
-      const slot = createAppleEmojiSlotElement(match[0])
+      const slot = createAppleEmojiSlotElement(match[0], base)
       fragment.appendChild(slot)
       lastIndex = match.index + match[0].length
     }

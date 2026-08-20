@@ -91,7 +91,7 @@ const emit = defineEmits(['send','typing']);
 
 const chatAppId = inject('chatAppId')
 const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit, resetMessageFile } = useMessageDraft(chatAppId as string)
-const { isNative } = useEmojiNative(chatAppId as string)
+const { isNative, emojiSrc } = useEmojiNative(chatAppId as string)
 
 let ownedDraftId = getMessage().id
 watch(
@@ -110,7 +110,7 @@ const typing = useImmediateDebouncedRef('', 2000)
 const filePreview = computed(() => getMessage().file?.preview)
 
 const emojiMirrorHtml = computed(() =>
-  textToAppleEmojiHtml(getMessage().text || '', selectionRange.value)
+  textToAppleEmojiHtml(getMessage().text || '', selectionRange.value, emojiSrc.value)
 )
 const useEmojiMirror = computed(
   () => !isNative.value && textContainsEmoji(getMessage().text || '')
