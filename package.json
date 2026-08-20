@@ -1,6 +1,6 @@
 {
   "name": "@mobilon-dev/chotto",
-  "version": "0.3.94",
+  "version": "0.3.95",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
