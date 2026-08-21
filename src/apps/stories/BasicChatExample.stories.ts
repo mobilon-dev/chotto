@@ -477,6 +477,18 @@ export const BasicExample: Story = {
       
       // Делаем сообщения реактивными
       const messagesRef = ref<DemoMessage[]>([...simpleMessages]);
+
+      const pad = (n: number) => String(n).padStart(2, '0');
+
+      const formatClockTime = (timestampSeconds: number) => {
+        const date = new Date(timestampSeconds * 1000);
+        return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+      };
+
+      const formatEditAt = (date = new Date()) => {
+        const yy = String(date.getFullYear()).slice(-2);
+        return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${yy} в ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+      };
       
       // Вычисляем сообщения для выбранного чата
       const feedMessagesRef = computed(() => {
@@ -491,14 +503,12 @@ export const BasicExample: Story = {
             direction: msg.direction!,
             timestamp: typeof msg.timestamp === 'string' ? parseInt(msg.timestamp, 10) : (msg.timestamp as number)
           }));
-        return transformToFeed(chatMessages);
+        return transformToFeed(chatMessages).map((item) => {
+          const feedItem = item as { timestamp?: number };
+          if (feedItem.timestamp == null) return item;
+          return { ...feedItem, time: formatClockTime(feedItem.timestamp) };
+        });
       });
-      
-      const formatEditAt = (date = new Date()) => {
-        const pad = (n: number) => String(n).padStart(2, '0');
-        const yy = String(date.getFullYear()).slice(-2);
-        return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${yy} в ${pad(date.getHours())}:${pad(date.getMinutes())}`;
-      };
 
       const handleSend = (message: { 
         text?: string; 
@@ -587,7 +597,7 @@ export const BasicExample: Story = {
             const currentChat = chatsRef.value.find(c => c.chatId === currentChatId);
             if (currentChat) {
               currentChat.lastMessage = displayText;
-              currentChat['lastActivity.time'] = 'только что';
+              currentChat['lastActivity.time'] = formatClockTime(nowInSeconds);
               currentChat['lastActivity.timestamp'] = nowString;
             }
           }
@@ -702,13 +712,13 @@ export const BasicExample: Story = {
         
         if (currentChat) {
           currentChat.lastMessage = displayText;
-          currentChat['lastActivity.time'] = 'только что';
+          currentChat['lastActivity.time'] = formatClockTime(nowInSeconds);
           currentChat['lastActivity.timestamp'] = nowString;
         }
         
         if (otherChat) {
           otherChat.lastMessage = displayText;
-          otherChat['lastActivity.time'] = 'только что';
+          otherChat['lastActivity.time'] = formatClockTime(nowInSeconds);
           otherChat['lastActivity.timestamp'] = nowString;
           otherChat.countUnread = (otherChat.countUnread || 0) + 1;
         }
