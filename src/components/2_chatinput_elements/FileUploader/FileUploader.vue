@@ -31,13 +31,14 @@
     ref="fileInput"
     style="display: none;"
     type="file"
+    multiple
     @change="onFileSelected"
   >
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, onUnmounted, watch, watchEffect } from "vue";
-import { useMessageDraft, uploadFile, buildFilePreview } from '@/hooks';
+import { ref, computed, inject, unref, onMounted, onUnmounted, watch, watchEffect, type ComputedRef } from "vue";
+import { useMessageDraft, uploadFile, buildFilePreview, getDraftFiles, MAX_ATTACHED_FILES } from '@/hooks';
 import { FileUploaderIcon } from "./icons";
 
 const props = defineProps({
@@ -49,6 +50,10 @@ const props = defineProps({
     type: String,
     default: 'active',
   },
+  maxAttachedFiles: {
+    type: Number,
+    default: undefined,
+  },
 });
 
 const uploadStatus = ref("");
@@ -58,7 +63,16 @@ const triggerElement = ref<HTMLElement>()
 void triggerElement.value
 
 const chatAppId = inject('chatAppId')
-const { setMessageFile, resetMessageFile, getMessage, setRecordingMessage } = useMessageDraft(chatAppId as string)
+const injectedMaxAttachedFiles = inject<number | ComputedRef<number>>('maxAttachedFiles', MAX_ATTACHED_FILES)
+const { addMessageFiles, getMessage, setRecordingMessage } = useMessageDraft(chatAppId as string)
+
+const maxAttachedFiles = computed(() => {
+  const fromProp = props.maxAttachedFiles
+  if (typeof fromProp === 'number' && fromProp > 0) return Math.floor(fromProp)
+  const injected = unref(injectedMaxAttachedFiles)
+  if (typeof injected === 'number' && injected > 0) return Math.floor(injected)
+  return MAX_ATTACHED_FILES
+})
 
 const iconFillColor = ref('#5F5F5F');
 const iconHoverColor = ref('#404040');
@@ -119,7 +133,7 @@ watchEffect(() => {
 const emit = defineEmits(["fileUploaded"]);
 
 const canUploadFile = computed(() => {
-  return !getMessage().file;
+  return getDraftFiles(getMessage()).length < maxAttachedFiles.value;
 })
 
 const resetNativeFileInput = () => {
@@ -127,20 +141,49 @@ const resetNativeFileInput = () => {
   if (fileInput.value) fileInput.value.value = '';
 };
 
-const resetSelectedFile = () => {
-  resetMessageFile()
-  uploadStatus.value = ""
-  resetNativeFileInput()
-};
+const remainingSlots = () => maxAttachedFiles.value - getDraftFiles(getMessage()).length
+
+const uploadAndAttach = async (files: File[]) => {
+  const batch = files.slice(0, Math.max(0, remainingSlots()))
+  if (!batch.length) return
+
+  uploadStatus.value = "uploading";
+  setRecordingMessage(true)
+  try {
+    const uploaded = []
+    for (const file of batch) {
+      const data = await uploadFile(
+        typeof props.filebumpUrl == 'string' ? props.filebumpUrl : null,
+        file,
+      )
+      if (data.status == 'success') {
+        uploaded.push({
+          url: data.url,
+          name: data.name,
+          size: data.size,
+          type: data.type,
+          preview: buildFilePreview(data.name, data.preview),
+        })
+      } else {
+        uploadStatus.value = 'error'
+      }
+    }
+    if (uploaded.length) {
+      addMessageFiles(uploaded, maxAttachedFiles.value)
+      if (uploadStatus.value !== 'error') uploadStatus.value = 'success'
+    } else if (uploadStatus.value !== 'error') {
+      uploadStatus.value = 'error'
+    }
+  } finally {
+    setRecordingMessage(false)
+  }
+}
 
 const onFileSelected = async () => {
-  const file = fileInput.value?.files?.[0]
-  // Сбрасываем предыдущее состояние (превью/драфт), но выбранный файл берём ДО сброса value инпута
-  resetSelectedFile()
-  if (file) {
-    await handleFileUpload(file)
-  }
+  const selected = fileInput.value?.files
+  const files = selected ? Array.from(selected) : []
   resetNativeFileInput()
+  await uploadAndAttach(files)
 };
 
 // const triggerFileUpload = (action: Record<string, unknown>) => {
@@ -158,44 +201,27 @@ const triggerFileUploadDefault = () => {
 };
 
 const pasteFromClipboard = async (event: ClipboardEvent) => {
+  if (!canUploadFile.value || props.state !== 'active') return
   const items = event.clipboardData?.items
-  if (items) {
-    for(let item of items){
-      if (item.type.indexOf('image')!==-1){
-        event.preventDefault()
-        const file = item.getAsFile()
-        if (file){
-          handleFileUpload(file)
-        }
-      }
+  if (!items) return
+
+  const images: File[] = []
+  for (const item of items) {
+    if (item.type.indexOf('image') !== -1) {
+      const file = item.getAsFile()
+      if (file) images.push(file)
     }
   }
-}
+  if (!images.length) return
 
-const handleFileUpload = async (file: File) => {
-  uploadStatus.value = "uploading";
-  setRecordingMessage(true)
-  const f = typeof props.filebumpUrl == 'string' ? props.filebumpUrl : null 
-  await uploadFile(f, file)
-    .then((data) => {
-      setRecordingMessage(false)
-      uploadStatus.value = data.status
-      if (data.status == 'success'){
-        setMessageFile({
-          url: data.url,
-          name: data.name,
-          size: data.size,
-          type: data.type,
-          preview: buildFilePreview(data.name, data.preview),
-        })
-      }
-    }) 
+  event.preventDefault()
+  await uploadAndAttach(images)
 }
 
 watch(
-  () => getMessage().file,
-  (file) => {
-    if (!file) {
+  () => getDraftFiles(getMessage()).length,
+  (count) => {
+    if (!count) {
       uploadStatus.value = ""
       resetNativeFileInput()
     }

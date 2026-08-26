@@ -39,6 +39,80 @@ export interface ChatInputThemeCSSVariables {
   '--chotto-chatinput-file-line-grid-row': string;
   /** Отображение строки файла */
   '--chotto-chatinput-file-line-display': string;
+  /** Выравнивание элементов строки файла */
+  '--chotto-chatinput-file-line-align-items': string;
+  /** Промежуток в строке файла */
+  '--chotto-chatinput-file-line-gap': string;
+  /** Минимальная ширина строки файла */
+  '--chotto-chatinput-file-line-min-width': string;
+  /** Ширина строки файла */
+  '--chotto-chatinput-file-line-width': string;
+  /** Отступ снизу строки файла */
+  '--chotto-chatinput-file-line-margin-bottom': string;
+  /** Отступ слева строки файла */
+  '--chotto-chatinput-file-line-padding-left': string;
+  /** Отступ справа строки файла */
+  '--chotto-chatinput-file-line-padding-right': string;
+  /** Переполнение строки файла */
+  '--chotto-chatinput-file-line-overflow': string;
+  /** Отображение видимой строки файла */
+  '--chotto-chatinput-file-line-visible-display': string;
+  /** Отображение счётчика файлов */
+  '--chotto-chatinput-file-counter-display': string;
+  /** Направление счётчика файлов */
+  '--chotto-chatinput-file-counter-flex-direction': string;
+  /** Сжатие счётчика файлов */
+  '--chotto-chatinput-file-counter-flex-shrink': string;
+  /** Размер шрифта счётчика файлов */
+  '--chotto-chatinput-file-counter-font-size': string;
+  /** Высота строки счётчика файлов */
+  '--chotto-chatinput-file-counter-line-height': string;
+  /** Перенос строк счётчика файлов */
+  '--chotto-chatinput-file-counter-white-space': string;
+  /** Цвет счётчика файлов */
+  '--chotto-chatinput-file-counter-color': string;
+  /** Отображение списка чипов */
+  '--chotto-chatinput-file-chips-display': string;
+  /** Гибкость списка чипов */
+  '--chotto-chatinput-file-chips-flex': string;
+  /** Минимальная ширина списка чипов */
+  '--chotto-chatinput-file-chips-min-width': string;
+  /** Промежуток между чипами */
+  '--chotto-chatinput-file-chips-gap': string;
+  /** Горизонтальное переполнение списка чипов */
+  '--chotto-chatinput-file-chips-overflow-x': string;
+  /** Позиционирование обёртки чипов */
+  '--chotto-chatinput-file-chips-wrap-position': string;
+  /** Ширина полосы прокрутки чипов */
+  '--chotto-chatinput-file-chips-scrollbar-width': string;
+  /** Отображение webkit-полосы прокрутки чипов */
+  '--chotto-chatinput-file-chips-webkit-scrollbar-display': string;
+  /** Позиционирование кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-position': string;
+  /** Смещение кнопки прокрутки файлов сверху */
+  '--chotto-chatinput-file-scroll-top': string;
+  /** Слой кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-z-index': string;
+  /** Отображение кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-display': string;
+  /** Отступы кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-padding': string;
+  /** Граница кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-border': string;
+  /** Фон кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-background': string;
+  /** Курсор кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-cursor': string;
+  /** Высота строки кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-line-height': string;
+  /** Трансформация кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-transform': string;
+  /** Смещение левой кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-left': string;
+  /** Трансформация левой кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-left-transform': string;
+  /** Смещение правой кнопки прокрутки файлов */
+  '--chotto-chatinput-file-scroll-right': string;
 
   // Third line
   /** Отображение третьей строки */

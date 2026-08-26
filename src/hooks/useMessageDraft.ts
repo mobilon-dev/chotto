@@ -1,12 +1,16 @@
 import { computed, getCurrentInstance, inject, ref, unref, watch, type Ref } from 'vue';
 import { Edit, IFilePreview, Reply } from '@/types';
 
+/** Максимум файлов, которые можно прикрепить к одному черновику */
+export const MAX_ATTACHED_FILES = 5
+
 /**
  * Структура сообщения с черновиком текста, файлами и метаданными
  * @interface MessageDraft
  * @property {string} id - Уникальный идентификатор сообщения (обычно chatAppId)
  * @property {string} text - Текст сообщения
- * @property {UploadedFile} [file] - Прикрепленный файл
+ * @property {UploadedFile} [file] - Первый прикрепленный файл (совместимость)
+ * @property {UploadedFile[]} [files] - Прикрепленные файлы (до MAX_ATTACHED_FILES)
  * @property {Reply} [reply] - Ответ на другое сообщение
  * @property {Edit} [edit] - Редактируемое сообщение
  * @property {boolean} forceSend - Флаг принудительной отправки сообщения
@@ -24,6 +28,7 @@ export interface MessageDraft {
     id: string
     text: string
     file?: UploadedFile
+    files?: UploadedFile[]
     reply?: Reply
     edit?: Edit
     forceSend: boolean
@@ -42,12 +47,28 @@ export interface MessageDraft {
  * @property {string} [type] - MIME-тип файла
  * @property {IFilePreview} [preview] - Превью для строки файла в ChatInput
  */
-interface UploadedFile{
+export interface UploadedFile {
     url: string
     name?: string
     size?: number
     type?: string
     preview?: IFilePreview
+}
+
+/** Файлы черновика с учётом старого поля `file` */
+export function getDraftFiles(draft: MessageDraft | undefined): UploadedFile[] {
+    if (!draft) return []
+    if (draft.files?.length) return draft.files
+    return draft.file ? [draft.file] : []
+}
+
+function withFiles(files: UploadedFile[], max: number = MAX_ATTACHED_FILES): Pick<MessageDraft, 'file' | 'files'> {
+    const cap = Number.isFinite(max) && max > 0 ? Math.floor(max) : MAX_ATTACHED_FILES
+    const next = files.slice(0, cap)
+    if (!next.length) {
+        return { file: undefined, files: undefined }
+    }
+    return { files: next, file: next[0] }
 }
 
 /**
@@ -97,14 +118,16 @@ function commitDraftToChatList(draft: MessageDraft | undefined) {
     const preview = toListPreviewText(draft.text || '')
     draft.listPreviewText = preview || undefined
 
-    const fileName = draft.file?.name || draft.file?.preview?.fileName || ''
-    draft.listPreviewFile = draft.file
-        ? { name: fileName, type: draft.file.type }
+    const attached = getDraftFiles(draft)
+    const first = attached[0]
+    const fileName = first?.name || first?.preview?.fileName || ''
+    draft.listPreviewFile = first
+        ? { name: fileName, type: first.type }
         : undefined
 }
 
 function hasLiveDraftContent(draft: MessageDraft) {
-    return Boolean(toListPreviewText(draft.text || '') || draft.file)
+    return Boolean(toListPreviewText(draft.text || '') || getDraftFiles(draft).length)
 }
 
 function clearDraftListPreview(draft: MessageDraft) {
@@ -221,7 +244,7 @@ export const useMessageDraft = (outId : string) => {
     watch(
         () => {
             const current = getMessage()
-            return [current.text, current.file] as const
+            return [current.text, current.file, current.files?.length] as const
         },
         () => {
             const current = getMessage()
@@ -230,7 +253,7 @@ export const useMessageDraft = (outId : string) => {
                 clearDraftListPreview(current)
                 return
             }
-            if (!current.file) {
+            if (!getDraftFiles(current).length) {
                 current.listPreviewFile = undefined
             }
             if (!toListPreviewText(current.text || '')) {
@@ -262,6 +285,7 @@ export const useMessageDraft = (outId : string) => {
             id: current.id,
             text: '',
             file: undefined,
+            files: undefined,
             reply: undefined,
             edit: undefined,
             forceSend: false,
@@ -299,17 +323,33 @@ export const useMessageDraft = (outId : string) => {
      * @returns {void}
      */
     const setMessageFile = (file : UploadedFile) => {
-        patchMessage({ file })
+        patchMessage(withFiles([file]))
     }
 
     /**
-     * Удалить прикрепленный файл из сообщения
+     * Добавить файлы к черновику (не больше max суммарно)
+     */
+    const addMessageFiles = (files: UploadedFile[], max: number = MAX_ATTACHED_FILES) => {
+        if (!files.length) return
+        patchMessage(withFiles([...getDraftFiles(getMessage()), ...files], max))
+    }
+
+    /**
+     * Удалить прикрепленный файл по индексу
+     */
+    const removeMessageFile = (index: number) => {
+        const remaining = getDraftFiles(getMessage()).filter((_, i) => i !== index)
+        patchMessage(withFiles(remaining, remaining.length || MAX_ATTACHED_FILES))
+    }
+
+    /**
+     * Удалить все прикрепленные файлы из сообщения
      * Сохраняет текст, ответ и другие поля
      * 
      * @returns {void}
      */
     const resetMessageFile = () => {
-        patchMessage({ file: undefined })
+        patchMessage(withFiles([]))
     }
 
     /**
@@ -389,6 +429,8 @@ export const useMessageDraft = (outId : string) => {
         getMessage,
         resetMessage,
         setMessageFile,
+        addMessageFiles,
+        removeMessageFile,
         resetMessageFile,
         setMessageText,
         setReply,

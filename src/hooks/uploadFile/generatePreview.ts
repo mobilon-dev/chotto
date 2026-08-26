@@ -22,19 +22,22 @@ export const generatePreview = (file: File) => {
   } else {
     previewUrl.value = ""; // No preview available
   }
-  const sizeMeasurement = ['б', 'Кб', "Мб", "Гб"]
+  const sizeMeasurement = ['Б', 'КБ', 'МБ', 'ГБ']
   let size = file.size
   let index = 0
-  while (size > 1024) {
+  while (size >= 1024 && index < sizeMeasurement.length - 1) {
     size = size / 1024
     index++
   }
+  const formatted = index === 0
+    ? String(Math.round(size))
+    : (Math.abs(size - Math.round(size)) < 0.05 ? String(Math.round(size)) : size.toFixed(1))
   return({
     isImage: isImage.value,
     isVideo: isVideo.value,
     isAudio: isAudio.value,
     previewUrl: previewUrl.value,
-    fileSize: size.toFixed(2) + sizeMeasurement[index],
+    fileSize: `${formatted} ${sizeMeasurement[index]}`,
   })
 };
 

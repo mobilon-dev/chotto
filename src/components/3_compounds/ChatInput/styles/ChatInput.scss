@@ -19,13 +19,69 @@
   }
 
   &__file-line {
-    grid-column: var(--chotto-chatinput-file-line-grid-column, 2);
+    grid-column: var(--chotto-chatinput-file-line-grid-column, 1 / 3);
     grid-row: var(--chotto-chatinput-file-line-grid-row, 2);
     display: var(--chotto-chatinput-file-line-display, none);
+    align-items: var(--chotto-chatinput-file-line-align-items, center);
+    gap: var(--chotto-chatinput-file-line-gap, 8px);
+    min-width: var(--chotto-chatinput-file-line-min-width, 100%);
+    width: var(--chotto-chatinput-file-line-width, 0);
+    margin-bottom: var(--chotto-chatinput-file-line-margin-bottom, 8px);
+    padding-left: var(--chotto-chatinput-file-line-padding-left, 16px);
+    padding-right: var(--chotto-chatinput-file-line-padding-right, 8px);
+    overflow: var(--chotto-chatinput-file-line-overflow, hidden);
 
     &--visible {
-      // block, не inherit: inherit от grid-контейнера делает вложенную сетку
-      display: block;
+      display: var(--chotto-chatinput-file-line-visible-display, flex);
+    }
+  }
+
+  &__file-counter {
+    display: var(--chotto-chatinput-file-counter-display, flex);
+    flex-direction: var(--chotto-chatinput-file-counter-flex-direction, column);
+    flex-shrink: var(--chotto-chatinput-file-counter-flex-shrink, 0);
+    font-size: var(--chotto-chatinput-file-counter-font-size, 14px);
+    line-height: var(--chotto-chatinput-file-counter-line-height, 1.3);
+    white-space: var(--chotto-chatinput-file-counter-white-space, nowrap);
+    color: var(--chotto-chatinput-file-counter-color, #5F5F5F);
+  }
+
+  &__file-chips-wrap {
+    position: var(--chotto-chatinput-file-chips-wrap-position, relative);
+    flex: var(--chotto-chatinput-file-chips-flex, 1);
+    min-width: var(--chotto-chatinput-file-chips-min-width, 0);
+  }
+
+  &__file-chips {
+    display: var(--chotto-chatinput-file-chips-display, flex);
+    gap: var(--chotto-chatinput-file-chips-gap, 8px);
+    overflow-x: var(--chotto-chatinput-file-chips-overflow-x, auto);
+    scrollbar-width: var(--chotto-chatinput-file-chips-scrollbar-width, none);
+
+    &::-webkit-scrollbar {
+      display: var(--chotto-chatinput-file-chips-webkit-scrollbar-display, none);
+    }
+  }
+
+  &__file-scroll {
+    position: var(--chotto-chatinput-file-scroll-position, absolute);
+    top: var(--chotto-chatinput-file-scroll-top, 50%);
+    z-index: var(--chotto-chatinput-file-scroll-z-index, 1);
+    display: var(--chotto-chatinput-file-scroll-display, flex);
+    padding: var(--chotto-chatinput-file-scroll-padding, 0);
+    border: var(--chotto-chatinput-file-scroll-border, none);
+    background: var(--chotto-chatinput-file-scroll-background, transparent);
+    cursor: var(--chotto-chatinput-file-scroll-cursor, pointer);
+    line-height: var(--chotto-chatinput-file-scroll-line-height, 0);
+    transform: var(--chotto-chatinput-file-scroll-transform, translateY(-50%));
+
+    &--left {
+      left: var(--chotto-chatinput-file-scroll-left, 0);
+      transform: var(--chotto-chatinput-file-scroll-left-transform, translateY(-50%) scaleX(-1));
+    }
+
+    &--right {
+      right: var(--chotto-chatinput-file-scroll-right, 0);
     }
   }
 

@@ -7,13 +7,44 @@
     <div
       :id="'chat-input-file-line-' + chatAppId"
       class="chat-input__file-line"
-      :class="{ 'chat-input__file-line--visible': !!filePreview }"
+      :class="{ 'chat-input__file-line--visible': attachedFiles.length > 0 }"
     >
-      <FilePreview
-        v-if="filePreview"
-        :file-info="filePreview"
-        @reset="resetSelectedFile"
-      />
+      <span class="chat-input__file-counter">
+        <span>{{ t('component.ChatInput.FilesSelected') }}</span>
+        <span>{{ filesSelectedCount }}</span>
+      </span>
+      <div class="chat-input__file-chips-wrap">
+        <button
+          v-if="canScrollLeft"
+          type="button"
+          class="chat-input__file-scroll chat-input__file-scroll--left"
+          :aria-label="t('component.ChatInput.FilesScrollLeft')"
+          @click="scrollFiles('left')"
+        >
+          <ArrowIcon />
+        </button>
+        <div
+          ref="refFileChips"
+          class="chat-input__file-chips"
+          @scroll="updateFileScrollState"
+        >
+          <FilePreview
+            v-for="(file, index) in attachedFiles"
+            :key="(file.url || file.name || '') + '-' + index"
+            :file-info="previewOf(file)"
+            @reset="removeAttachedFile(index)"
+          />
+        </div>
+        <button
+          v-if="canScrollRight"
+          type="button"
+          class="chat-input__file-scroll chat-input__file-scroll--right"
+          :aria-label="t('component.ChatInput.FilesScrollRight')"
+          @click="scrollFiles('right')"
+        >
+          <ArrowIcon />
+        </button>
+      </div>
     </div>
 
     <div class="chat-input__inline-buttons">
@@ -78,19 +109,20 @@
 </template>
 
 <script setup lang="ts">
-import { unref, ref, watch, nextTick, inject, computed, onMounted, onUnmounted } from 'vue';
-import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview, commitChatDraftToList } from '@/hooks';
+import { unref, ref, watch, nextTick, inject, provide, computed, onMounted, onUnmounted } from 'vue';
+import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview, commitChatDraftToList, getDraftFiles, MAX_ATTACHED_FILES } from '@/hooks';
+import type { UploadedFile } from '@/hooks';
 import { textToAppleEmojiHtml, textContainsEmoji, snapIndexToGrapheme, nextGraphemeIndex, previousGraphemeIndex } from '@/functions/renderAppleEmojis';
 import { t } from '../../../locale/useLocale';
-import { IInputMessage } from '@/types';
-import { SendIcon } from './icons';
+import { IFilePreview, IInputMessage } from '@/types';
+import { SendIcon, ArrowIcon } from './icons';
 import TextFormatToolbar from '../../2_chatinput_elements/TextFormatToolbar/TextFormatToolbar.vue';
 import FilePreview from '../../2_chatinput_elements/FilePreview/FilePreview.vue';
 
 const emit = defineEmits(['send','typing']);
 
 const chatAppId = inject('chatAppId')
-const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit, resetMessageFile } = useMessageDraft(chatAppId as string)
+const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit, removeMessageFile } = useMessageDraft(chatAppId as string)
 const { isNative, emojiSrc } = useEmojiNative(chatAppId as string)
 
 let ownedDraftId = getMessage().id
@@ -103,11 +135,60 @@ watch(
 
 const refInput = ref<HTMLTextAreaElement>();
 const refMirror = ref<HTMLElement>();
+const refFileChips = ref<HTMLElement>();
 const selectionRange = ref<{ start: number; end: number } | null>(null)
 const focusAtEndAfterResize = ref(false)
 const typing = useImmediateDebouncedRef('', 2000)
+const canScrollLeft = ref(false)
+const canScrollRight = ref(false)
+let fileChipsObserver: ResizeObserver | null = null
 
-const filePreview = computed(() => getMessage().file?.preview)
+const attachedFiles = computed(() => getDraftFiles(getMessage()))
+
+function updateFileScrollState() {
+  const el = refFileChips.value
+  if (!el) {
+    canScrollLeft.value = false
+    canScrollRight.value = false
+    return
+  }
+
+  const maxScroll = el.scrollWidth - el.clientWidth
+  canScrollLeft.value = el.scrollLeft > 1
+  canScrollRight.value = maxScroll - el.scrollLeft > 1
+}
+
+function getFileScrollStep(el: HTMLElement) {
+  const first = el.firstElementChild as HTMLElement | null
+  if (!first) return el.clientWidth
+  const gap = parseFloat(getComputedStyle(el).gap) || 8
+  return first.offsetWidth + gap
+}
+
+function scrollFiles(direction: 'left' | 'right') {
+  const el = refFileChips.value
+  if (!el) return
+  const step = getFileScrollStep(el)
+  el.scrollBy({ left: direction === 'right' ? step : -step, behavior: 'smooth' })
+}
+
+function setupFileChipsObserver() {
+  fileChipsObserver?.disconnect()
+  const el = refFileChips.value
+  if (!el) return
+  fileChipsObserver = new ResizeObserver(() => updateFileScrollState())
+  fileChipsObserver.observe(el)
+}
+
+function previewOf(file: UploadedFile): IFilePreview {
+  return file.preview ?? {
+    isImage: false,
+    isVideo: false,
+    isAudio: false,
+    fileName: file.name,
+    fileSize: '',
+  }
+}
 
 const emojiMirrorHtml = computed(() =>
   textToAppleEmojiHtml(getMessage().text || '', selectionRange.value, emojiSrc.value)
@@ -260,11 +341,29 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  maxAttachedFiles: {
+    type: Number,
+    required: false,
+    default: MAX_ATTACHED_FILES,
+  },
 })
+
+const maxAttachedFiles = computed(() => {
+  const n = Number(props.maxAttachedFiles)
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : MAX_ATTACHED_FILES
+})
+
+provide('maxAttachedFiles', maxAttachedFiles)
+
+const filesSelectedCount = computed(() =>
+  t('component.ChatInput.FilesSelectedCount')
+    .replace('{count}', String(attachedFiles.value.length))
+    .replace('{max}', String(maxAttachedFiles.value))
+)
 
 const disabledSendButton = computed(() => {
   if (props.state == 'disabled') return true
-  if (getMessage().text == '' && !getMessage().file) return true
+  if (getMessage().text == '' && !attachedFiles.value.length) return true
   if (getMessage().isRecording) return true
   return false
 })
@@ -508,18 +607,36 @@ const sendTyping = (event: Event) => {
   updateSelectionState()
 }
 
+watch(
+  attachedFiles,
+  (files, prev) => {
+    nextTick(() => {
+      setupFileChipsObserver()
+      updateFileScrollState()
+      const el = refFileChips.value
+      if (el && files.length > (prev?.length ?? 0)) {
+        el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' })
+      }
+    })
+  },
+  { flush: 'post' }
+)
+
 onMounted(() => {
   const el = refInput.value
   if (el) {
     applySavedInputHeight(el)
     resizeTextarea(el)
   }
+  setupFileChipsObserver()
+  updateFileScrollState()
   document.addEventListener('selectionchange', onDocumentSelectionChange)
 });
 
 onUnmounted(() => {
   commitChatDraftToList(ownedDraftId)
   document.removeEventListener('selectionchange', onDocumentSelectionChange)
+  fileChipsObserver?.disconnect()
   if (selectionSyncRaf) cancelAnimationFrame(selectionSyncRaf)
 });
 
@@ -575,8 +692,8 @@ const handleFormatApplied = (data: { format: string; selectedText: string; start
   }
 };
 
-function resetSelectedFile() {
-  resetMessageFile()
+function removeAttachedFile(index: number) {
+  removeMessageFile(index)
 }
 
 function cancelEditMode() {
@@ -595,12 +712,12 @@ function isEditTextUnchanged(): boolean {
 const sendMessage = () => {
   const Message = ref(getMessage())
 
-  if (Message.value.edit && isEditTextUnchanged()) {
+  if (Message.value.edit && isEditTextUnchanged() && !attachedFiles.value.length) {
     cancelEditMode()
     return
   }
 
-  if (Message.value.text != '' || Message.value.file) {
+  if (Message.value.text != '' || attachedFiles.value.length) {
     const messageObject: IInputMessage = {
       type: '',
       text: '',
@@ -610,23 +727,34 @@ const sendMessage = () => {
       reply: undefined,
     };
 
-    if (Message.value.file) {
-      messageObject.type = 'message.' + Message.value.file.type;
-      messageObject.url = Message.value.file.url;
-      messageObject.filename = Message.value.file.name;
-      messageObject.size = Message.value.file.size?.toString();
-      messageObject.text = Message?.value?.text.trim();
+    const files = attachedFiles.value
+    if (files.length) {
+      const caption = Message.value.text.trim()
+      files.forEach((file, index) => {
+        const fileMessage: IInputMessage = {
+          type: 'message.' + file.type,
+          url: file.url,
+          filename: file.name,
+          size: file.size?.toString(),
+          text: index === 0 ? caption : '',
+        }
+        if (index === 0) {
+          if (Message.value.reply) fileMessage.reply = Message.value.reply
+          if (Message.value.edit) fileMessage.edit = Message.value.edit
+        }
+        emit('send', fileMessage);
+      })
     } else {
       messageObject.type = 'message.text';
       messageObject.text = Message.value.text.trim();
+      if (Message.value.reply){
+        messageObject.reply = Message.value.reply
+      }
+      if (Message.value.edit) {
+        messageObject.edit = Message.value.edit
+      }
+      emit('send', messageObject);
     }
-    if (Message.value.reply){
-      messageObject.reply = Message.value.reply
-    }
-    if (Message.value.edit) {
-      messageObject.edit = Message.value.edit
-    }
-    emit('send', messageObject);
     resetMessage()
     if (refInput.value) refInput.value.focus()
   }

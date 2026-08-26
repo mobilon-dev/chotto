@@ -230,6 +230,7 @@
                 <ChatInput 
                   :focus-on-input-area="inputFocus"
                   :selected-channel="selectedDialog"
+                  :max-attached-files="5"
                 >
                   <template #inline-buttons>
                     <!-- <ButtonCommandsSelector

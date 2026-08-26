@@ -1,116 +1,116 @@
 .preview {
-  &__container{
-    position: var(--chotto-filepreview-container-position, relative);
-    display: var(--chotto-filepreview-container-display, flex);
-    border: var(--chotto-filepreview-container-border, 1px solid #d0d0d0);
-  }
+  position: var(--chotto-filepreview-position, relative);
+  display: var(--chotto-filepreview-display, flex);
+  align-items: var(--chotto-filepreview-align-items, center);
+  justify-content: var(--chotto-filepreview-justify-content, flex-start);
+  gap: var(--chotto-filepreview-gap, 8px);
+  width: var(--chotto-filepreview-width, 200px);
+  height: var(--chotto-filepreview-height, 65px);
+  min-width: var(--chotto-filepreview-min-width, 200px);
+  max-width: var(--chotto-filepreview-max-width, 200px);
+  flex: var(--chotto-filepreview-flex, 0 0 200px);
+  padding: var(--chotto-filepreview-padding, 12px 28px 12px 12px);
+  border: var(--chotto-filepreview-border, 1px solid #D0D0D0);
+  border-radius: var(--chotto-filepreview-border-radius, 5px);
+  background: var(--chotto-filepreview-background, #F6F6F6);
+  box-sizing: var(--chotto-filepreview-box-sizing, border-box);
 
-  &__image,
-  &__video{
-    max-width: var(--chotto-filepreview-image-max-width, 130px);
-    max-height: var(--chotto-filepreview-image-max-height, 130px);
-  }
-  &__modal-video, &__modal-image {
-    /*width: 100%;*/
-    height: var(--chotto-filepreview-modal-height, 100%);
-    object-fit: var(--chotto-filepreview-modal-object-fit, contain);
-    border-radius: var(--chotto-filepreview-modal-border-radius, 5px);
-    max-height: var(--chotto-filepreview-modal-max-height, 90vh);
-    max-width: var(--chotto-filepreview-modal-max-width, 90vw);
-  }
+  &:hover,
+  &:focus-within {
+    background: var(--chotto-filepreview-hover-background, #D6EBFF);
 
-  &__shadow{
-    display: var(--chotto-filepreview-shadow-display, none);
-  }
-
-  &__block:hover &__shadow{
-    display: var(--chotto-filepreview-shadow-hover-display, inherit);
-    cursor: var(--chotto-filepreview-shadow-hover-cursor, pointer);
-    position: var(--chotto-filepreview-shadow-hover-position, absolute);
-    top: var(--chotto-filepreview-shadow-hover-top, 50%);
-    left: var(--chotto-filepreview-shadow-hover-left, 50%);
-    transform: var(--chotto-filepreview-shadow-hover-transform, translate(-50%, -50%));
-    width: var(--chotto-filepreview-shadow-hover-width, 100%);
-    height: var(--chotto-filepreview-shadow-hover-height, 100%);
-    background: var(--chotto-filepreview-shadow-hover-background, black);
-    opacity: var(--chotto-filepreview-shadow-hover-opacity, 0.3);
-    span{
-      top: var(--chotto-filepreview-shadow-hover-span-top, 50%);
-      left: var(--chotto-filepreview-shadow-hover-span-left, 50%);
-      transform: var(--chotto-filepreview-shadow-hover-span-transform, translate(-50%, -50%));
-      position: var(--chotto-filepreview-shadow-hover-span-position, relative);
-      color: var(--chotto-filepreview-shadow-hover-span-color, white);
+    .preview__reset {
+      opacity: var(--chotto-filepreview-reset-hover-opacity, 1);
     }
   }
 
-  &__audio-control{
-    border: var(--chotto-filepreview-audio-control-border, none);
-    cursor: var(--chotto-filepreview-audio-control-cursor, pointer);
-    position: var(--chotto-filepreview-audio-control-position, relative);
-    grid-row: var(--chotto-filepreview-audio-control-grid-row, 1 / 3);
-    width: var(--chotto-filepreview-audio-control-width, 38px);
-    height: var(--chotto-filepreview-audio-control-height, 38px);
-    border-radius: var(--chotto-filepreview-audio-control-border-radius, 50%);
-    background-color: var(--chotto-filepreview-audio-control-background-color, #a3a3a3);
-
-    span {
-      display: var(--chotto-filepreview-audio-control-span-display, flex);
-      position: var(--chotto-filepreview-audio-control-span-position, absolute);
-      top: var(--chotto-filepreview-audio-control-span-top, 50%);
-      left: var(--chotto-filepreview-audio-control-span-left, 50%);
-      transform: var(--chotto-filepreview-audio-control-span-transform, translate(-50%, -50%));
-      font-size: var(--chotto-filepreview-audio-control-span-font-size, 23px);
-      color: var(--chotto-filepreview-audio-control-span-color, #f5f5f5);
-    }
+  &__icon {
+    flex-shrink: var(--chotto-filepreview-icon-flex-shrink, 0);
+    font-size: var(--chotto-filepreview-icon-font-size, 22px);
+    color: var(--chotto-filepreview-icon-color, #5F5F5F);
   }
 
-  &__block {
-    max-width: var(--chotto-filepreview-block-max-width, 60px);
-    max-height: var(--chotto-filepreview-block-max-height, 60px);
-    min-width: var(--chotto-filepreview-block-min-width, 60px);
-    min-height: var(--chotto-filepreview-block-min-height, 60px);
-    margin: var(--chotto-filepreview-block-margin, 5px);
-    overflow: var(--chotto-filepreview-block-overflow, hidden);
-    border-radius: var(--chotto-filepreview-block-border-radius, 5px);
-    display: var(--chotto-filepreview-block-display, flex);
-    align-items: var(--chotto-filepreview-block-align-items, center);
-    justify-content: var(--chotto-filepreview-block-justify-content, center);
+  &__thumb {
+    position: var(--chotto-filepreview-thumb-position, relative);
+    flex-shrink: var(--chotto-filepreview-thumb-flex-shrink, 0);
+    width: var(--chotto-filepreview-thumb-width, 40px);
+    height: var(--chotto-filepreview-thumb-height, 40px);
+    border-radius: var(--chotto-filepreview-thumb-border-radius, 4px);
+    overflow: var(--chotto-filepreview-thumb-overflow, hidden);
+    background: var(--chotto-filepreview-thumb-background, #E8E8E8);
+    cursor: var(--chotto-filepreview-thumb-cursor, pointer);
   }
 
-  &__information {
-    margin-left: var(--chotto-filepreview-information-margin-left, 5px);
-    display: var(--chotto-filepreview-information-display, grid);
-    span{
-      display: var(--chotto-filepreview-information-span-display, flex);
-      font-size: var(--chotto-filepreview-information-span-font-size, small);
-    }
+  &__thumb-media {
+    width: var(--chotto-filepreview-thumb-media-width, 100%);
+    height: var(--chotto-filepreview-thumb-media-height, 100%);
+    object-fit: var(--chotto-filepreview-thumb-media-object-fit, cover);
+    display: var(--chotto-filepreview-thumb-media-display, block);
+    pointer-events: var(--chotto-filepreview-thumb-media-pointer-events, none);
+  }
+
+  &__thumb-play {
+    position: var(--chotto-filepreview-thumb-play-position, absolute);
+    top: var(--chotto-filepreview-thumb-play-top, 50%);
+    left: var(--chotto-filepreview-thumb-play-left, 50%);
+    transform: var(--chotto-filepreview-thumb-play-transform, translate(-50%, -50%));
+    color: var(--chotto-filepreview-thumb-play-color, #ffffff);
+    font-size: var(--chotto-filepreview-thumb-play-font-size, 12px);
+    pointer-events: var(--chotto-filepreview-thumb-play-pointer-events, none);
+  }
+
+  &__info {
+    display: var(--chotto-filepreview-info-display, flex);
+    flex-direction: var(--chotto-filepreview-info-flex-direction, column);
+    min-width: var(--chotto-filepreview-info-min-width, 0);
+    gap: var(--chotto-filepreview-info-gap, 2px);
   }
 
   &__name {
-    align-items: var(--chotto-filepreview-name-align-items, end);
     overflow: var(--chotto-filepreview-name-overflow, hidden);
-    white-space: var(--chotto-filepreview-name-white-space, normal);
-    word-break: var(--chotto-filepreview-name-word-break, break-word);
+    white-space: var(--chotto-filepreview-name-white-space, nowrap);
     text-overflow: var(--chotto-filepreview-name-text-overflow, ellipsis);
+    font-size: var(--chotto-filepreview-name-font-size, 14px);
+    line-height: var(--chotto-filepreview-name-line-height, 1.2);
+    color: var(--chotto-filepreview-name-color, #1E1E1E);
   }
 
-  &__reset{
-    display: var(--chotto-filepreview-reset-display, flex);
-    margin-right: var(--chotto-filepreview-reset-margin-right, 10px);
-    font-size: var(--chotto-filepreview-reset-font-size, 1.1rem);
-    span{
-      margin: var(--chotto-filepreview-reset-span-margin, auto);
-    }
+  &__size {
+    font-size: var(--chotto-filepreview-size-font-size, 12px);
+    line-height: var(--chotto-filepreview-size-line-height, 1.2);
+    color: var(--chotto-filepreview-size-color, #5F5F5F);
   }
 
-  &__reset:hover {
-    cursor: var(--chotto-filepreview-reset-hover-cursor, pointer);
+  &__reset {
+    position: var(--chotto-filepreview-reset-position, absolute);
+    top: var(--chotto-filepreview-reset-top, 8px);
+    right: var(--chotto-filepreview-reset-right, 8px);
+    flex-shrink: var(--chotto-filepreview-reset-flex-shrink, 0);
+    opacity: var(--chotto-filepreview-reset-opacity, 0);
+    border: var(--chotto-filepreview-reset-border, none);
+    background: var(--chotto-filepreview-reset-background, transparent);
+    padding: var(--chotto-filepreview-reset-padding, 0);
+    cursor: var(--chotto-filepreview-reset-cursor, pointer);
+    color: var(--chotto-filepreview-reset-color, #5F5F5F);
+    font-size: var(--chotto-filepreview-reset-font-size, 12px);
+    line-height: var(--chotto-filepreview-reset-line-height, 1);
   }
+}
 
-  &__control-block{
-    display: var(--chotto-filepreview-control-block-display, flex);
-    justify-content: var(--chotto-filepreview-control-block-justify-content, space-between);
-    flex: var(--chotto-filepreview-control-block-flex, 1);
+.preview__modal-video,
+.preview__modal-image {
+  display: var(--chotto-filepreview-modal-display, block);
+  width: var(--chotto-filepreview-modal-width, 100%);
+  height: var(--chotto-filepreview-modal-height, auto);
+  object-fit: var(--chotto-filepreview-modal-object-fit, contain);
+  border-radius: var(--chotto-filepreview-modal-border-radius, 5px);
+  max-height: var(--chotto-filepreview-modal-max-height, calc(90vh - 80px));
+  max-width: var(--chotto-filepreview-modal-max-width, calc(95vw - 64px));
+}
+
+@media (hover: none) {
+  .preview__reset {
+    opacity: var(--chotto-filepreview-reset-hover-opacity, 1);
   }
 }
 
