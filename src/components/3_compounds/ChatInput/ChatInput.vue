@@ -110,8 +110,9 @@
 
 <script setup lang="ts">
 import { unref, ref, watch, nextTick, inject, provide, computed, onMounted, onUnmounted } from 'vue';
-import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview, commitChatDraftToList, getDraftFiles, MAX_ATTACHED_FILES } from '@/hooks';
-import type { UploadedFile } from '@/hooks';
+import type { PropType } from 'vue';
+import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview, commitChatDraftToList, getDraftFiles, MAX_ATTACHED_FILES, useStartEdit, buildEditPayload, canStartEditLastSent, isEditableLastSentCandidate } from '@/hooks';
+import type { UploadedFile, ResolveEditLastSentMessage } from '@/hooks';
 import { textToAppleEmojiHtml, textContainsEmoji, snapIndexToGrapheme, nextGraphemeIndex, previousGraphemeIndex } from '@/functions/renderAppleEmojis';
 import { t } from '../../../locale/useLocale';
 import { IFilePreview, IInputMessage } from '@/types';
@@ -123,6 +124,7 @@ const emit = defineEmits(['send','typing']);
 
 const chatAppId = inject('chatAppId')
 const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit, removeMessageFile } = useMessageDraft(chatAppId as string)
+const { startEdit } = useStartEdit(chatAppId as string)
 const { isNative, emojiSrc } = useEmojiNative(chatAppId as string)
 
 let ownedDraftId = getMessage().id
@@ -231,7 +233,35 @@ function snapCaretAndUpdateSelection() {
   updateSelectionState()
 }
 
+function tryStartEditLastSent(event: KeyboardEvent): boolean {
+  const draft = getMessage()
+  const el = refInput.value
+  if (!canStartEditLastSent({
+    key: event.key,
+    altKey: event.altKey,
+    metaKey: event.metaKey,
+    ctrlKey: event.ctrlKey,
+    shiftKey: event.shiftKey,
+    hasResolver: typeof props.resolveEditLastSentMessage === 'function',
+    disabled: props.state === 'disabled',
+    isRecording: draft.isRecording,
+    draftText: draft.text ?? '',
+    replyMessageId: draft.reply?.messageId,
+    editMessageId: draft.edit?.messageId,
+    textareaText: el?.value ?? draft.text ?? '',
+    selectionStart: el?.selectionStart ?? 0,
+  })) return false
+
+  const message = props.resolveEditLastSentMessage?.()
+  if (!isEditableLastSentCandidate(message)) return false
+
+  event.preventDefault()
+  startEdit(buildEditPayload(message))
+  return true
+}
+
 function onInputKeydown(event: KeyboardEvent) {
+  if (tryStartEditLastSent(event)) return
   if (!useEmojiMirror.value) return
   if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
   if (event.altKey || event.metaKey || event.ctrlKey) return
@@ -345,6 +375,11 @@ const props = defineProps({
     type: Number,
     required: false,
     default: MAX_ATTACHED_FILES,
+  },
+  resolveEditLastSentMessage: {
+    type: Function as PropType<ResolveEditLastSentMessage>,
+    required: false,
+    default: null,
   },
 })
 

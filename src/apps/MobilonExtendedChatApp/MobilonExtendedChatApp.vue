@@ -231,6 +231,7 @@
                   :focus-on-input-area="inputFocus"
                   :selected-channel="selectedDialog"
                   :max-attached-files="5"
+                  :resolve-edit-last-sent-message="resolveEditLastSentMessage"
                 >
                   <template #inline-buttons>
                     <!-- <ButtonCommandsSelector
@@ -908,6 +909,18 @@ const searchMessages = (string) => {
       foundMessages.value = t
     }
   }
+}
+
+const resolveEditLastSentMessage = () => {
+  for (let i = messages.value.length - 1; i >= 0; i--) {
+    const message = messages.value[i]
+    if (message.direction !== 'outgoing') continue
+    if (message.type !== 'message.text') continue
+    if (message.deleted) continue
+    return message
+  }
+
+  return null
 }
 
 const getFeedObjects = () => {

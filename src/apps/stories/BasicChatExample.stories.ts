@@ -724,6 +724,22 @@ export const BasicExample: Story = {
         }
       };
       
+      const resolveEditLastSentMessage = () => {
+        if (!selectedChatRef.value) return null
+        const chatId = selectedChatRef.value.chatId
+
+        for (let i = messagesRef.value.length - 1; i >= 0; i--) {
+          const message = messagesRef.value[i]
+          if (message.chatId !== chatId) continue
+          if (message.direction !== 'outgoing') continue
+          if (message.type !== 'message.text') continue
+          if (message.deleted) continue
+          return message
+        }
+
+        return null
+      }
+
       const handleSelectChat = (args: { chat: typeof simpleChats[0]; dialog?: unknown }) => {
         // Находим чат в реактивном массиве
         const chat = chatsRef.value.find(c => c.chatId === args.chat.chatId);
@@ -895,6 +911,7 @@ export const BasicExample: Story = {
         chats: chatsRef,
         selectedChat: selectedChatRef,
         handleSend,
+        resolveEditLastSentMessage,
         handleSelectChat,
         handleChatAction,
         handleMessageAction,
@@ -949,7 +966,10 @@ export const BasicExample: Story = {
                     @load-more="handleLoadMore"
                   />
                 </div>
-                <ChatInput @send="handleSend">
+                <ChatInput
+                  :resolve-edit-last-sent-message="resolveEditLastSentMessage"
+                  @send="handleSend"
+                >
                   <template #inline-buttons>
                     <FileUploader :state="'active'" />
                     <ButtonTemplateSelector :mode="'click'" :state="'active'" :templates="templates" :group-templates="groupTemplates" />
