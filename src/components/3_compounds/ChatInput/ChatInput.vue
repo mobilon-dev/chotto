@@ -419,22 +419,37 @@ watch(
   }
 )
 
+function scheduleInputFocusAtEnd(clearFocusFlag = false) {
+  nextTick(() => {
+    if (clearFocusFlag && !focusAtEndAfterResize.value) return
+
+    const el = refInput.value
+    if (!el) return
+
+    resizeTextarea(el)
+    if (clearFocusFlag) {
+      focusAtEndAfterResize.value = false
+    }
+    applyFocusAtEnd(el)
+    requestAnimationFrame(() => applyFocusAtEnd(el))
+  })
+}
+
 watch(
-  () => getMessage().edit?.messageId,
-  (messageId, prevMessageId) => {
-    if (messageId != null && messageId !== prevMessageId) {
+  () => getMessage().edit,
+  (edit) => {
+    if (edit?.messageId != null) {
       focusAtEndAfterResize.value = true
-      nextTick(() => {
-        if (!focusAtEndAfterResize.value) return
+      scheduleInputFocusAtEnd(true)
+    }
+  }
+)
 
-        const el = refInput.value
-        if (!el) return
-
-        resizeTextarea(el)
-        focusAtEndAfterResize.value = false
-        applyFocusAtEnd(el)
-        requestAnimationFrame(() => applyFocusAtEnd(el))
-      })
+watch(
+  () => getMessage().reply,
+  (reply) => {
+    if (reply?.messageId != null) {
+      scheduleInputFocusAtEnd()
     }
   }
 )
