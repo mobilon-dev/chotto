@@ -39,7 +39,7 @@
         'with-avatar-indent': !isFirstInSeries && message.avatar,
         'has-reply': Boolean(message.reply),
       }"
-      @mouseenter="showMenu"
+      @mouseenter="hoverActionsEnabled && showMenu()"
     >
       <div
         class="text-message__bottom-shadow"
@@ -93,11 +93,11 @@
 
         <div class="text-message__footer">
           <MessageReactions
-            v-if="reactionsEnabled"
+            v-if="reactionsActive"
             :reactions="message.reactions"
             :message-id="message.messageId"
             :reply="buildReplyPayload(message, 'message.text')"
-            :enabled="reactionsEnabled"
+            :enabled="reactionsActive"
             :mode="reactionsMode"
             :current-user-id="currentUserId"
             :reaction-user-names="reactionUserNames"
@@ -184,7 +184,7 @@
         />
 
         <button
-          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
+          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled && hoverActionsEnabled"
           class="text-message__menu-button"
           @click="toggleMenu"
         >
@@ -230,6 +230,7 @@ import {
   useMessageLinks,
   useMessageActions,
   useMessageMenuActions,
+  useMessageHoverActions,
   useChannelAccentColor,
   useSubtextTooltip,
   buildReplyPayload,
@@ -294,6 +295,11 @@ const emit = defineEmits(['action','reply','sms-invite']);
 const { t } = useLocale()
 const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 const { menuActions } = useMessageMenuActions(() => props.message)
+const { hoverActionsEnabled, reactionsActive } = useMessageHoverActions(
+  () => props.channel,
+  () => props.reactionsEnabled,
+  () => props.message,
+)
 const chatAppId = inject('chatAppId') as string | undefined
 const { startReply } = useStartReply(chatAppId || '')
 const { startEdit } = useStartEdit(chatAppId || '')

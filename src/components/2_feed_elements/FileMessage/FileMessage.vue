@@ -36,7 +36,7 @@
       class="file-message__content"
       :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
       :style="{ gridRow: message.subText ? '2' : '1' }"
-      @mouseenter="showMenu"
+      @mouseenter="hoverActionsEnabled && showMenu()"
     >
       <div
         class="file-message__bottom-shadow"
@@ -107,7 +107,7 @@
             :reactions="message.reactions"
             :message-id="message.messageId"
             :reply="buildReplyPayload(message, 'message.file')"
-            :enabled="reactionsEnabled"
+            :enabled="reactionsActive"
             :mode="reactionsMode"
             :current-user-id="currentUserId"
             :reaction-user-names="reactionUserNames"
@@ -148,7 +148,7 @@
         />
 
         <button
-          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
+          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled && hoverActionsEnabled"
           class="file-message__menu-button"
           @click="toggleMenu"
         >
@@ -190,7 +190,7 @@ import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIn
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { IFileMessage } from '@/types';
 
@@ -240,6 +240,11 @@ const props = defineProps({
 const emit = defineEmits(['action','reply','sms-invite']);
 const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 const { menuActions } = useMessageMenuActions(() => props.message)
+const { hoverActionsEnabled, reactionsActive } = useMessageHoverActions(
+  () => props.channel,
+  () => props.reactionsEnabled,
+  () => props.message,
+)
 const chatAppId = inject('chatAppId') as string | undefined
 const { startReply } = useStartReply(chatAppId || '')
 

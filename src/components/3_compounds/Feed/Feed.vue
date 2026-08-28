@@ -150,6 +150,7 @@ import { IFeedObject, IFeedTyping, IFeedUnreadButton, IFeedKeyboard, IFeedMessag
 import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo } from './composables';
 import { throttle } from './functions/throttle';
 import { getDefaultMessageMenuActions } from './utils/getDefaultMessageMenuActions';
+import { isSmsFeedMessage } from '@/functions';
 
 import chatBackgroundRaw from './assets/chat-background.svg?raw';
 
@@ -301,10 +302,22 @@ function getMessageTimestamp(obj: IFeedObject & { timestamp?: number | string })
 }
 
 /**
- * Получает channelId для сообщения на основе его dialogId
+ * Канал сообщения: сначала с самого объекта (channelId / meta), иначе из диалога чата.
+ * В message-server dialog.channelId часто `chn_*`, а тип SMS — в meta.messageStyle.
  */
 function getChannelForMessage(message: IFeedObject): string | undefined {
-  const messageWithDialog = message as IFeedObject & { dialogId?: string }
+  const messageWithDialog = message as IFeedObject & {
+    dialogId?: string
+    channelId?: string
+    channel?: { channelId?: string }
+    meta?: { channelId?: string }
+  }
+  const fromMessage =
+    messageWithDialog.channelId
+    || messageWithDialog.channel?.channelId
+    || messageWithDialog.meta?.channelId
+  if (fromMessage) return String(fromMessage)
+
   if (!messageWithDialog.dialogId || !selectedChat.value?.dialogs) {
     return undefined
   }
@@ -355,7 +368,8 @@ const {
   handleResetEdit,
 } = useFeedReply({
   enableDoubleClickReply: props.enableDoubleClickReply,
-  emit
+  emit,
+  isReplyAllowed: (object) => !isSmsFeedMessage(object, getChannelForMessage(object)),
 })
 
 function handleSmsInvite(message: IFeedObject) {

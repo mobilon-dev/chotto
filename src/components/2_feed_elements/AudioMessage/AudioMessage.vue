@@ -35,7 +35,7 @@
     <div
       class="audio-message__content"
       :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
-      @mouseenter="showMenu"
+      @mouseenter="hoverActionsEnabled && showMenu()"
     >
       <div
         class="audio-message__bottom-shadow"
@@ -189,7 +189,7 @@
           :reactions="message.reactions"
           :message-id="message.messageId"
           :reply="buildReplyPayload(message, 'message.audio')"
-          :enabled="reactionsEnabled"
+          :enabled="reactionsActive"
           :mode="reactionsMode"
           :current-user-id="currentUserId"
           :reaction-user-names="reactionUserNames"
@@ -306,7 +306,7 @@
       />
 
       <button
-        v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
+        v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled && hoverActionsEnabled"
         class="audio-message__menu-button"
         @click="toggleMenu"
       >
@@ -359,7 +359,7 @@ import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIn
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageActions, useMessageLinks, useMessageMenuActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
+import { useMessageActions, useMessageLinks, useMessageMenuActions, useMessageHoverActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
 import type { IAudioMessage, IAudioRecognitionPayload, IAudioSummaryPayload } from '@/types';
 
@@ -438,6 +438,11 @@ const cycleSpeed = () => {
 
 const emit = defineEmits(['action','reply','sms-invite']);
 const { menuActions } = useMessageMenuActions(() => props.message)
+const { hoverActionsEnabled, reactionsActive } = useMessageHoverActions(
+  () => props.channel,
+  () => props.reactionsEnabled,
+  () => props.message,
+)
 const chatAppId = inject('chatAppId') as string | undefined
 const { startReply } = useStartReply(chatAppId || '')
 

@@ -1,4 +1,5 @@
 export * from './useMessageActions'
+export * from './useMessageHoverActions'
 export * from './calculateMessageMenuPosition'
 export * from './useMessageMenuActions'
 export * from './useMessageLinks'

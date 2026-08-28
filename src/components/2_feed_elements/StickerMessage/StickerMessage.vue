@@ -131,7 +131,7 @@
 
       <transition name="modal-fade">
         <button
-          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled"
+          v-if="buttonMenuVisible && menuActions.length && !reactionsEnabled && hoverActionsEnabled"
           class="sticker-message__menu-button"
           @click="toggleMenu"
         >
@@ -192,7 +192,7 @@
         :reactions="message.reactions"
         :message-id="message.messageId"
         :reply="buildReplyPayload(message, 'message.sticker')"
-        :enabled="reactionsEnabled"
+        :enabled="reactionsActive"
         :mode="reactionsMode"
         :current-user-id="currentUserId"
         :reaction-user-names="reactionUserNames"
@@ -262,7 +262,7 @@ import MessageReactions from '@/components/2_feed_elements/MessageReactions/Mess
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
-import { useMessageLinks, useMessageActions, useMessageMenuActions, useChannelAccentColor, buildReplyPayload, useStartReply } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useChannelAccentColor, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IStickerMessage } from '@/types';
@@ -273,6 +273,11 @@ const chatAppId = inject('chatAppId') as string | undefined
 
 const { getTheme } = useTheme(chatAppId || '')
 const { menuActions } = useMessageMenuActions(() => props.message)
+const { hoverActionsEnabled, reactionsActive } = useMessageHoverActions(
+  () => props.channel,
+  () => props.reactionsEnabled,
+  () => props.message,
+)
 const { startReply } = useStartReply(chatAppId || '')
 
 // Оптимизация: динамическая загрузка библиотек TGS только при необходимости

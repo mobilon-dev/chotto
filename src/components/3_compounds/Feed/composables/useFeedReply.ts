@@ -5,12 +5,13 @@ import { IFeedObject } from '@/types';
 interface UseFeedReplyOptions {
   enableDoubleClickReply: boolean;
   emit: (event: 'messageAction' | 'clickRepliedMessage', payload: IFeedObject | string) => void;
+  isReplyAllowed?: (object: IFeedObject) => boolean;
 }
 
 /**
  * Композабл для обработки ответов и редактирования сообщений
  */
-export function useFeedReply({ enableDoubleClickReply, emit }: UseFeedReplyOptions) {
+export function useFeedReply({ enableDoubleClickReply, emit, isReplyAllowed }: UseFeedReplyOptions) {
   const chatAppId = inject('chatAppId') as string;
   const { getMessage, resetReply, resetEdit, setMessageText } = useMessageDraft(chatAppId);
   const { startReply } = useStartReply(chatAppId);
@@ -34,6 +35,7 @@ export function useFeedReply({ enableDoubleClickReply, emit }: UseFeedReplyOptio
    */
   const feedObjectDoubleClick = (event: MouseEvent, object: IFeedObject) => {
     if (!enableDoubleClickReply) return;
+    if (isReplyAllowed && !isReplyAllowed(object)) return;
 
     event?.preventDefault();
 
