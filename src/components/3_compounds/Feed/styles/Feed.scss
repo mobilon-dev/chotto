@@ -15,6 +15,7 @@
   flex-direction: var(--chotto-feed-flex-direction, column);
   overflow-y: var(--chotto-feed-overflow-y, auto);
   overflow-x: var(--chotto-feed-overflow-x, hidden);
+  overflow-anchor: none;
   scroll-behavior: var(--chotto-feed-scroll-behavior, smooth);
   padding: var(--chotto-feed-padding, 10px 13px 10px 13px);
   position: var(--chotto-feed-position, relative);

@@ -62,6 +62,7 @@ export { default as VideoRecorder } from './2_elements/VideoRecorder/VideoRecord
 // 2_feed_elements
 export { default as AudioMessage } from './2_feed_elements/AudioMessage/AudioMessage.vue';
 export { default as BaseReplyMessage } from './2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
+export { default as FeedReplyQuote } from './2_feed_elements/FeedReplyQuote/FeedReplyQuote.vue';
 export { default as BaseEditMessage } from './2_feed_elements/BaseEditMessage/BaseEditMessage.vue';
 export { default as CallMessage } from './2_feed_elements/CallMessage/CallMessage.vue';
 export { default as DateMessage } from './2_feed_elements/DateMessage/DateMessage.vue';

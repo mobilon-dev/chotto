@@ -30,20 +30,21 @@
         />
       </transition>
       <div
-        v-for="(object, index) in groupedObjects"
-        :id="'msg-' + (object.messageId ?? 'mid-' + index)"
-        :key="object.messageId ?? 'mid-' + index"
+        v-for="(object, index) in visibleObjects"
+        :id="'msg-' + feedItemKey(object, index)"
+        :key="feedItemKey(object, index)"
+        v-memo="[object.messageId, object.text, object.status, object.reply, seriesFlags[renderStart + index]]"
         :data-timestamp="getMessageTimestamp(object)"
         class="tracking-message"
-        @dblclick="feedObjectDoubleClick($event,object)"
+        @dblclick="feedObjectDoubleClick($event, object)"
       >
         <component
           :is="componentsMap(object)"
-          :key="object.messageId ?? 'mid-' + index"
+          :key="feedItemKey(object, index)"
           class="message-feed__message"
           :message="object"
           :apply-style="applyStyle"
-          :is-first-in-series="object.isFirstInSeries"
+          :is-first-in-series="seriesFlags[renderStart + index]"
           :reactions-enabled="reactionsEnabled"
           :reactions-mode="reactionsMode"
           :current-user-id="currentUserId"
@@ -147,7 +148,7 @@ import TypingMessage from '@/components/2_feed_elements/TypingMessage/TypingMess
 import LoadingIndicator from '@/components/1_atoms/LoadingIndicator/LoadingIndicator.vue';
 
 import { IFeedObject, IFeedTyping, IFeedUnreadButton, IFeedKeyboard, IFeedMessageMenuAction } from '@/types';
-import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo } from './composables';
+import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo, useFeedProgressiveRender } from './composables';
 import { throttle } from './functions/throttle';
 import { getDefaultMessageMenuActions } from './utils/getDefaultMessageMenuActions';
 import { isSmsFeedMessage } from '@/functions';
@@ -158,6 +159,9 @@ type DialogWithChannel = { dialogId: string; channelId?: string }
 type SelectedChat = { dialogs?: DialogWithChannel[] }
 
 const props = defineProps({
+  /**
+   * Объекты ленты. При смене чата сначала рисуется хвост, остальное дорисовывается пачками.
+   */
   objects: {
     type: Array <IFeedObject>,
     required: true,
@@ -284,8 +288,19 @@ provide(
 )
 
 // Инициализация логики группировки
-const { groupedObjects } = useFeedGrouping({
+const { seriesFlags } = useFeedGrouping({
   objects: computed(() => props.objects),
+})
+
+const {
+  visibleObjects,
+  renderStart,
+  isBackfilling,
+  revealThroughIndex,
+  accelerateBackfill,
+} = useFeedProgressiveRender({
+  objectsRef: computed(() => props.objects),
+  feedRef: refFeed,
 })
 
 const chatAppId = inject('chatAppId')
@@ -299,6 +314,10 @@ const selectedChat = computed(() => {
 /** timestamp для sticky date (data-атрибут), т.к. в IFeedObject поле может быть не объявлено */
 function getMessageTimestamp(obj: IFeedObject & { timestamp?: number | string }): number | string | undefined {
   return obj.timestamp
+}
+
+function feedItemKey(object: IFeedObject, index: number): string {
+  return object.messageId || `mid-${renderStart.value + index}`
 }
 
 /**
@@ -417,11 +436,16 @@ const defaultBackground = computed(() => {
 });
 
 function scrollTopCheck (allowLoadMore: boolean = true) {
-  // обновляем видимость кнопки и положение клавиатуры через композабл
   checkButtonVisibility();
-  // делегируем вычисления подгрузки в композабл
+  if (isBackfilling.value) {
+    const element = refFeed.value as HTMLElement | undefined
+    if (element && element.scrollTop < 300) {
+      accelerateBackfill()
+    }
+    showStickyDateComponent();
+    return
+  }
   checkScrollPosition(allowLoadMore);
-  // Показываем sticky date
   showStickyDateComponent();
 };
 
@@ -476,7 +500,33 @@ watch(
   { immediate: true }
 )
 
+watch(renderStart, () => {
+  nextTick(() => {
+    trackingObjects.value = document.querySelectorAll('.tracking-message')
+    restartObserving()
+  })
+})
+
 // Логика прокрутки к заданному сообщению
+watch(
+  () => props.scrollTo,
+  (targetId) => {
+    if (!targetId) return
+    const list = props.objects
+    const trimmed = targetId.trim()
+    const unprefixed = trimmed.startsWith('msg-') ? trimmed.slice(4) : trimmed
+    let index = -1
+    if (unprefixed.startsWith('mid-')) {
+      index = Number.parseInt(unprefixed.slice(4), 10)
+    } else {
+      index = list.findIndex((item) => item.messageId === unprefixed || item.messageId === trimmed)
+    }
+    if (Number.isFinite(index)) {
+      revealThroughIndex(index)
+    }
+  },
+)
+
 useFeedScrollTo({
   targetIdRef: computed(() => props.scrollTo),
   feedContainerId: `feed-container-${chatAppId}`,

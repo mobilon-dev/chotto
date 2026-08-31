@@ -4,6 +4,7 @@ export * from './useFeedGrouping';
 export * from './useFeedKeyboard';
 export * from './useFeedLoadMore';
 export * from './useFeedMessageVisibility';
+export * from './useFeedProgressiveRender';
 export * from './useFeedReply';
 export * from './useFeedScroll';
 export * from './useFeedScrollTo';

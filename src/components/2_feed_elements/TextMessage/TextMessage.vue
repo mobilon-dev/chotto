@@ -67,7 +67,7 @@
         </div>
       </template>
       <template v-else>
-        <BaseReplyMessage
+        <FeedReplyQuote
           v-if="message.reply"
           :class="message.position"
           :message="message.reply"
@@ -220,7 +220,7 @@ import { computed, inject, ref } from 'vue'
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import LinkPreview from '@/components/1_atoms/LinkPreview/LinkPreview.vue';
 import EmbedPreview from '@/components/1_atoms/EmbedPreview/EmbedPreview.vue';
-import BaseReplyMessage from '@/components/2_feed_elements/BaseReplyMessage/BaseReplyMessage.vue';
+import FeedReplyQuote from '@/components/2_feed_elements/FeedReplyQuote/FeedReplyQuote.vue';
 import MessageReactions from '@/components/2_feed_elements/MessageReactions/MessageReactions.vue';
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';

@@ -13,9 +13,6 @@ const NON_SERIES_TYPES = new Set([
   'system.date',
 ]);
 
-/**
- * Ищет предыдущее сообщение, участвующее в группировке по отправителю
- */
 function findPreviousSeriesMessage(
   messages: IFeedObject[],
   index: number,
@@ -29,39 +26,33 @@ function findPreviousSeriesMessage(
 }
 
 /**
- * Композабл для группировки сообщений в серии (по отправителю)
+ * Флаги «первое в серии» без копирования objects.
+ * Сами сообщения остаются исходными ссылками — Vue не патчит все пузыри зря.
  */
 export function useFeedGrouping({ objects }: UseFeedGroupingOptions) {
-  /**
-   * Группирует сообщения, определяя начало серии.
-   * Имя/аватар показываются в первом сообщении серии и при смене отправителя
-   * (другой клиент или исходящее). Разделители вроде «Новые сообщения» серию не рвут.
-   */
-  const groupedObjects = computed(() => {
-    if (!objects.value || objects.value.length === 0) return [];
+  const seriesFlags = computed(() => {
+    const messages = objects.value
+    if (!messages || messages.length === 0) return [] as boolean[]
 
-    return objects.value.map((message, index, arr) => {
+    const flags = new Array<boolean>(messages.length)
+    for (let i = 0; i < messages.length; i++) {
+      const message = messages[i]
       if (NON_SERIES_TYPES.has(message.type)) {
-        return {
-          ...message,
-          isFirstInSeries: true,
-        };
+        flags[i] = true
+        continue
       }
 
-      const previous = findPreviousSeriesMessage(arr, index);
-      const isSameSenderAsPrevious =
-        previous != null &&
-        previous.position === message.position &&
-        previous.header === message.header;
-
-      return {
-        ...message,
-        isFirstInSeries: !isSameSenderAsPrevious,
-      };
-    });
-  });
+      const previous = findPreviousSeriesMessage(messages, i)
+      flags[i] = !(
+        previous != null
+        && previous.position === message.position
+        && previous.header === message.header
+      )
+    }
+    return flags
+  })
 
   return {
-    groupedObjects,
-  };
+    seriesFlags,
+  }
 }
