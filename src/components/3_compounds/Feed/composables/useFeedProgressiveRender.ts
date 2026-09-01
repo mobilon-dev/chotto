@@ -143,15 +143,19 @@ export function useFeedProgressiveRender({
         }
       } else if (isAppend) {
         // новые снизу входят в slice автоматически
-      } else if (prevLength === 0) {
+      } else {
+        // полная замена массива (смена чата, первая загрузка) — сразу хвост, без пустого кадра
         cancelBackfill()
         showTail(next.length)
-      } else {
-        cancelBackfill()
-        renderStart.value = next.length
         nextTick(() => {
+          const el = feedRef.value
+          if (!el) return
+          const prevBehavior = el.style.scrollBehavior
+          el.style.scrollBehavior = 'auto'
+          el.scrollTop = el.scrollHeight
           requestAnimationFrame(() => {
-            showTail(objectsRef.value.length)
+            el.scrollTop = el.scrollHeight
+            el.style.scrollBehavior = prevBehavior
           })
         })
       }

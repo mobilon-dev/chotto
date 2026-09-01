@@ -55,6 +55,29 @@ function resolveEl(
   return el instanceof HTMLElement ? el : null
 }
 
+type OutsideClickHandler = (event: MouseEvent) => void
+
+const outsideClickHandlers = new Set<OutsideClickHandler>()
+
+function handleDocumentClick(event: MouseEvent): void {
+  for (const handler of outsideClickHandlers) {
+    handler(event)
+  }
+}
+
+function subscribeDocumentClick(handler: OutsideClickHandler): () => void {
+  if (outsideClickHandlers.size === 0) {
+    document.addEventListener('click', handleDocumentClick, true)
+  }
+  outsideClickHandlers.add(handler)
+  return () => {
+    outsideClickHandlers.delete(handler)
+    if (outsideClickHandlers.size === 0) {
+      document.removeEventListener('click', handleDocumentClick, true)
+    }
+  }
+}
+
 function toTriggerRect(source?: OpenMessageMenuSource): MenuTriggerRect | null {
   if (!source) return null
 
@@ -186,12 +209,14 @@ export const useMessageActions = <T extends MessageWithMeta>(
     closeMenu()
   }
 
+  let unsubscribeDocumentClick: (() => void) | undefined
+
   onMounted(() => {
-    document.addEventListener('click', handleClickOutside, true)
+    unsubscribeDocumentClick = subscribeDocumentClick(handleClickOutside)
   })
 
   onUnmounted(() => {
-    document.removeEventListener('click', handleClickOutside, true)
+    unsubscribeDocumentClick?.()
   })
 
   const clickAction = async (action: Record<string, unknown>) => {
