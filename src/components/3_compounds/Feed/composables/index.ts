@@ -5,6 +5,7 @@ export * from './useFeedKeyboard';
 export * from './useFeedLoadMore';
 export * from './useFeedMessageVisibility';
 export * from './useFeedProgressiveRender';
+export * from './useFeedReactionsOverlay';
 export * from './useFeedReply';
 export * from './useFeedScroll';
 export * from './useFeedScrollTo';

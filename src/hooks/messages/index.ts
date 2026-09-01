@@ -1,5 +1,7 @@
 export * from './useMessageActions'
 export * from './useMessageHoverActions'
+export * from './useMessageReactionsMount'
+export * from './useMessageReactionsInFeed'
 export * from './calculateMessageMenuPosition'
 export * from './useMessageMenuActions'
 export * from './useMessageLinks'

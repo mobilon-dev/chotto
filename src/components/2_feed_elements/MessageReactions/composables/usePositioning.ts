@@ -5,7 +5,7 @@ import { nextTick } from 'vue'
  */
 export function findFeedContainer(element: HTMLElement | null): HTMLElement | null {
   if (!element) return null
-  let current = element.parentElement
+  let current: HTMLElement | null = element
   while (current) {
     if (current.classList.contains('message-feed')) {
       return current
@@ -16,11 +16,12 @@ export function findFeedContainer(element: HTMLElement | null): HTMLElement | nu
 }
 
 /**
- * Находит контейнер содержимого сообщения (например, text-message__content)
+ * Находит контейнер содержимого сообщения (например, text-message__content).
+ * Якорь overlay может быть самим __content — проверяем элемент и предков.
  */
 export function findMessageContent(element: HTMLElement | null): HTMLElement | null {
   if (!element) return null
-  let current = element.parentElement
+  let current: HTMLElement | null = element
   while (current) {
     for (const className of current.classList) {
       if (className.endsWith('__content')) {
@@ -40,9 +41,8 @@ export function findMessageContent(element: HTMLElement | null): HTMLElement | n
  */
 export function isRightMessage(element: HTMLElement | null): boolean {
   if (!element) return false
-  let current = element.parentElement
+  let current: HTMLElement | null = element
   while (current) {
-    // Проверяем классы типа text-message__right, image-message__right и т.д.
     for (const className of current.classList) {
       if (className.includes('__right')) {
         return true

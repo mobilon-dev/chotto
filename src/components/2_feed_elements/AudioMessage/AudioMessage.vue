@@ -33,9 +33,12 @@
     </p>
 
     <div
+      ref="contentRef"
       class="audio-message__content"
       :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
       @mouseenter="hoverActionsEnabled && showMenu()"
+      @pointerenter="onContentPointerEnter"
+      @pointerleave="onContentPointerLeave"
     >
       <div
         class="audio-message__bottom-shadow"
@@ -186,18 +189,17 @@
 
       <div class="audio-message__footer">
         <MessageReactions
+          v-if="showReactions"
+          ref="reactionsRef"
           :reactions="message.reactions"
           :message-id="message.messageId"
-          :reply="buildReplyPayload(message, 'message.audio')"
           :enabled="reactionsActive"
           :mode="reactionsMode"
           :current-user-id="currentUserId"
           :reaction-user-names="reactionUserNames"
-          :menu-enabled="menuActions.length > 0"
           @toggle-reaction="onToggleReaction"
           @add-reaction="onAddReaction"
           @remove-reaction="onRemoveReaction"
-          @menu="openMenu"
         />
 
         <div class="audio-message__info-container">
@@ -359,7 +361,7 @@ import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIn
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageActions, useMessageLinks, useMessageMenuActions, useMessageHoverActions, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
+import { useMessageActions, useMessageLinks, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from '@/functions';
 import type { IAudioMessage, IAudioRecognitionPayload, IAudioSummaryPayload } from '@/types';
 
@@ -816,6 +818,31 @@ function getClass(message: IAudioMessage) {
 }
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
+
+const contentRef = ref<HTMLElement | null>(null)
+const reactionsRef = ref<InstanceType<typeof MessageReactions> | null>(null)
+const chipsRef = computed(() => {
+  const el = reactionsRef.value?.$el
+  return el instanceof HTMLElement ? el : null
+})
+
+const { showReactions, onContentPointerEnter, onContentPointerLeave } = useMessageReactionsInFeed({
+  message: () => props.message,
+  messageId: () => props.message.messageId,
+  reactions: () => props.message.reactions,
+  reactionsActive,
+  reactionsMode: () => props.reactionsMode,
+  reply: () => buildReplyPayload(props.message, 'message.audio'),
+  menuEnabled: () => menuActions.value.length > 0,
+  contentRef,
+  chipsRef,
+  handlers: {
+    onToggleReaction,
+    onAddReaction,
+    onRemoveReaction,
+    onMenu: openMenu,
+  },
+})
 
 const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
 

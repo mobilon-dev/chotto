@@ -33,7 +33,7 @@
         v-for="(object, index) in visibleObjects"
         :id="'msg-' + feedItemKey(object, index)"
         :key="feedItemKey(object, index)"
-        v-memo="[object.messageId, object.text, object.status, object.reply, seriesFlags[renderStart + index]]"
+        v-memo="[object.messageId, object.text, object.status, object.reply, seriesFlags[renderStart + index], feedReactionsMemoKey(object)]"
         :data-timestamp="getMessageTimestamp(object)"
         class="tracking-message"
         @dblclick="feedObjectDoubleClick($event, object)"
@@ -131,6 +131,8 @@
         @reset="handleResetEdit"
       />
     </teleport>
+
+    <MessageReactionsOverlay v-if="reactionsEnabled" />
   </div>
 </template>
 
@@ -146,9 +148,10 @@ import MessageKeyboard from '@/components/2_feed_elements/MessageKeyboard/Messag
 import FeedKeyboard from '@/components/2_feed_elements/FeedKeyboard/FeedKeyboard.vue';
 import TypingMessage from '@/components/2_feed_elements/TypingMessage/TypingMessage.vue';
 import LoadingIndicator from '@/components/1_atoms/LoadingIndicator/LoadingIndicator.vue';
+import MessageReactionsOverlay from '@/components/2_feed_elements/MessageReactions/MessageReactionsOverlay.vue';
 
-import { IFeedObject, IFeedTyping, IFeedUnreadButton, IFeedKeyboard, IFeedMessageMenuAction } from '@/types';
-import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo, useFeedProgressiveRender } from './composables';
+import { IFeedObject, IFeedTyping, IFeedUnreadButton, IFeedKeyboard, IFeedMessageMenuAction, MessageReactions } from '@/types';
+import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo, useFeedProgressiveRender, provideFeedReactionsOverlay } from './composables';
 import { throttle } from './functions/throttle';
 import { getDefaultMessageMenuActions } from './utils/getDefaultMessageMenuActions';
 import { isSmsFeedMessage } from '@/functions';
@@ -276,6 +279,8 @@ const { componentsMap } = useFeedComponents()
 
 // Получаем значение reactionsEnabled из props
 const reactionsEnabled = computed(() => props.reactionsEnabled)
+
+provideFeedReactionsOverlay()
 const reactionsMode = computed(() => props.reactionsMode)
 const currentUserId = computed(() => props.currentUserId)
 const reactionUserNames = computed(() => props.reactionUserNames)
@@ -318,6 +323,12 @@ function getMessageTimestamp(obj: IFeedObject & { timestamp?: number | string })
 
 function feedItemKey(object: IFeedObject, index: number): string {
   return object.messageId || `mid-${renderStart.value + index}`
+}
+
+function feedReactionsMemoKey(object: IFeedObject): string {
+  const items = (object as IFeedObject & { reactions?: MessageReactions }).reactions?.items
+  if (!items?.length) return ''
+  return items.map((item) => `${item.key}:${item.userId}`).join(',')
 }
 
 /**

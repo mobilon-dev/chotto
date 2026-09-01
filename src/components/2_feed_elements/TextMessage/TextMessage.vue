@@ -33,6 +33,7 @@
     </p>
 
     <div
+      ref="contentRef"
       class="text-message__content"
       :class="{
         'is-first': isFirstInSeries,
@@ -40,6 +41,8 @@
         'has-reply': Boolean(message.reply),
       }"
       @mouseenter="hoverActionsEnabled && showMenu()"
+      @pointerenter="onContentPointerEnter"
+      @pointerleave="onContentPointerLeave"
     >
       <div
         class="text-message__bottom-shadow"
@@ -93,19 +96,17 @@
 
         <div class="text-message__footer">
           <MessageReactions
-            v-if="reactionsActive"
+            v-if="showReactions"
+            ref="reactionsRef"
             :reactions="message.reactions"
             :message-id="message.messageId"
-            :reply="buildReplyPayload(message, 'message.text')"
             :enabled="reactionsActive"
             :mode="reactionsMode"
             :current-user-id="currentUserId"
             :reaction-user-names="reactionUserNames"
-            :menu-enabled="menuActions.length > 0"
             @toggle-reaction="onToggleReaction"
             @add-reaction="onAddReaction"
             @remove-reaction="onRemoveReaction"
-            @menu="openMenu"
           />
 
           <div class="text-message__info-container">
@@ -231,6 +232,7 @@ import {
   useMessageActions,
   useMessageMenuActions,
   useMessageHoverActions,
+  useMessageReactionsInFeed,
   useChannelAccentColor,
   useSubtextTooltip,
   buildReplyPayload,
@@ -350,6 +352,31 @@ function getClass(message: ITextMessage) {
 }
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
+
+const contentRef = ref<HTMLElement | null>(null)
+const reactionsRef = ref<InstanceType<typeof MessageReactions> | null>(null)
+const chipsRef = computed(() => {
+  const el = reactionsRef.value?.$el
+  return el instanceof HTMLElement ? el : null
+})
+
+const { showReactions, onContentPointerEnter, onContentPointerLeave } = useMessageReactionsInFeed({
+  message: () => props.message,
+  messageId: () => props.message.messageId,
+  reactions: () => props.message.reactions,
+  reactionsActive,
+  reactionsMode: () => props.reactionsMode,
+  reply: () => buildReplyPayload(props.message, 'message.text'),
+  menuEnabled: () => menuActions.value.length > 0,
+  contentRef,
+  chipsRef,
+  handlers: {
+    onToggleReaction,
+    onAddReaction,
+    onRemoveReaction,
+    onMenu: openMenu,
+  },
+})
 
 const channelInfo = useSubtextTooltip(() => props.message, () => props.subtextTooltipData)
 

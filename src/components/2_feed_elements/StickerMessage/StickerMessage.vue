@@ -26,8 +26,11 @@
     </p>
 
     <div
+      ref="contentRef"
       class="sticker-message__content"
       :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
+      @pointerenter="onContentPointerEnter"
+      @pointerleave="onContentPointerLeave"
     >
       <template v-if="message.deleted">
         <DeletedMessageContent />
@@ -189,18 +192,17 @@
       />
       
       <MessageReactions
+        v-if="showReactions"
+        ref="reactionsRef"
         :reactions="message.reactions"
         :message-id="message.messageId"
-        :reply="buildReplyPayload(message, 'message.sticker')"
         :enabled="reactionsActive"
         :mode="reactionsMode"
         :current-user-id="currentUserId"
         :reaction-user-names="reactionUserNames"
-        :menu-enabled="menuActions.length > 0"
         @toggle-reaction="onToggleReaction"
         @add-reaction="onAddReaction"
         @remove-reaction="onRemoveReaction"
-        @menu="openMenu"
       />
       </template>
     </div>
@@ -262,7 +264,7 @@ import MessageReactions from '@/components/2_feed_elements/MessageReactions/Mess
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
-import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useChannelAccentColor, buildReplyPayload, useStartReply } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, buildReplyPayload, useStartReply } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IStickerMessage } from '@/types';
@@ -426,6 +428,31 @@ function getClass(message: IStickerMessage) {
 const closeModal = () => isOpenModal.value = false
 
 const { onToggleReaction, onAddReaction, onRemoveReaction } = createReactionHandlers(emit)
+
+const contentRef = ref<HTMLElement | null>(null)
+const reactionsRef = ref<InstanceType<typeof MessageReactions> | null>(null)
+const chipsRef = computed(() => {
+  const el = reactionsRef.value?.$el
+  return el instanceof HTMLElement ? el : null
+})
+
+const { showReactions, onContentPointerEnter, onContentPointerLeave } = useMessageReactionsInFeed({
+  message: () => props.message,
+  messageId: () => props.message.messageId,
+  reactions: () => props.message.reactions,
+  reactionsActive,
+  reactionsMode: () => props.reactionsMode,
+  reply: () => buildReplyPayload(props.message, 'message.sticker'),
+  menuEnabled: () => menuActions.value.length > 0,
+  contentRef,
+  chipsRef,
+  handlers: {
+    onToggleReaction,
+    onAddReaction,
+    onRemoveReaction,
+    onMenu: openMenu,
+  },
+})
 
 function handleSmsInvite() {
   emit('sms-invite', props.message)
