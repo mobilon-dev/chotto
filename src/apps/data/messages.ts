@@ -1547,6 +1547,24 @@ export const messages = [
     subText: 'Анна',
     avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
   },
+  {
+    chatId: 8,
+    dialogId: 'dlg_89789222',
+    messageId: '889',
+    type: "message.text",
+    text: "Это сообщение было удалено",
+    direction: 'outgoing',
+    status: 'read',
+    timestamp: '1763037206',
+    header: 'Анна',
+    subText: 'Анна',
+    avatar:'https://placehold.jp/30/f1048e/ffffff/64x64.png?text=Ann',
+    deleted: true,
+    deletion: {
+      deletedBy: 'Иванов Иван',
+      deletedAt: '13.11.25 в 15:13',
+    },
+  },
   // Сообщения для Max диалога (dlg_00123333)
   {
     chatId: 8, 
