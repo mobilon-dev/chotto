@@ -1,3 +1,5 @@
 export * from './generatePreview'
 export * from './getTypeFileByMime'
+export * from './types'
 export * from './uploadFile'
+export * from './useChottoUploader'

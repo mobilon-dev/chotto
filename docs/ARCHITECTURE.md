@@ -396,7 +396,9 @@ src/hooks/
 │   ├── useModalSelectUser2.ts
 │   └── useVideoRecorder.ts
 ├── uploadFile/                 # Хуки для загрузки файлов
-│   ├── uploadFile.ts
+│   ├── types.ts                # ChottoUploadFileFn, chottoUploadFileKey
+│   ├── useChottoUploader.ts    # DI: prop > inject > default
+│   ├── uploadFile.ts           # Default adapter: POST {filebumpUrl}/upload
 │   ├── generatePreview.ts
 │   └── getTypeFileByMime.ts
 ├── validators/                 # Хуки для валидации

@@ -30,7 +30,7 @@
 <script setup>
 import { ref, onMounted, provide, inject } from 'vue';
 import WABATemplateSelector from '@/components/2_chatinput_elements/WABATemplateSelector/WABATemplateSelector.vue';
-import { useMessageDraft } from '@/hooks';
+import { useMessageDraft, chottoUploadFileKey } from '@/hooks';
 
 const props = defineProps({
   wabaTemplates: {
@@ -56,6 +56,10 @@ const props = defineProps({
     type: String,
     default: 'https://filebump2.services.mobilon.ru',
   },
+  uploader: {
+    type: Function,
+    default: undefined,
+  },
   elevatedWindow: {
     type: Boolean,
     required: false,
@@ -67,6 +71,9 @@ const props = defineProps({
 })
 
 provide('filebumpUrl', props.filebumpUrl)
+if (props.uploader) {
+  provide(chottoUploadFileKey, props.uploader)
+}
 
 const chatAppId = inject('chatAppId')
 const { getMessage } = useMessageDraft(chatAppId)

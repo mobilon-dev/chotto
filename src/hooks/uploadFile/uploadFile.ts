@@ -1,7 +1,7 @@
 import { generatePreview } from './generatePreview';
 import { getTypeFileByMime } from './getTypeFileByMime'
 
-type UploadFileResult =
+export type UploadFileResult =
   | {
       url: string
       name: string
@@ -12,17 +12,13 @@ type UploadFileResult =
     }
   | { status: 'error' }
 
-export const uploadFile = async ( filebumpUrl: string|null, selectedFile: File ): Promise<UploadFileResult> => {
+export const uploadFile = async ( filebumpUrl: string, selectedFile: File ): Promise<UploadFileResult> => {
     const formData = new FormData();
     formData.append("file", selectedFile);
-  
-    const oldFilebumpUrl = 'https://filebump2.services.mobilon.ru';
-    const url = (filebumpUrl ?
-      filebumpUrl : oldFilebumpUrl) + "/upload";
-  
+
     try {
       const response = await fetch(
-        url,
+        filebumpUrl + "/upload",
         {
           method: "POST",
           body: formData,

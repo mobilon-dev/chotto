@@ -19,6 +19,7 @@ import { themes } from '../data/themes';
 import { templates, groupTemplates } from '../data';
 import { transformToFeed } from '../transform/transformToFeed';
 import type { MessageEditInfo } from '@/types';
+import type { ChottoUploadFileFn } from '@/hooks';
 import sticker from '../data/images/sticker.webp';
 import audioFile from '../data/audio/file_example_MP3_700KB.mp3';
 import {
@@ -906,6 +907,14 @@ export const BasicExample: Story = {
         ],
       ];
       
+      const uploadFile: ChottoUploadFileFn = async (file) => {
+        const filename = file instanceof File ? file.name : 'blob';
+        return {
+          url: URL.createObjectURL(file),
+          filename,
+        };
+      };
+
       return { 
         messages: feedMessagesRef, 
         chats: chatsRef,
@@ -923,7 +932,8 @@ export const BasicExample: Story = {
         handleThemeChange,
         templates,
         groupTemplates,
-        stickers
+        stickers,
+        uploadFile,
       };
     },
     template: `
@@ -971,7 +981,7 @@ export const BasicExample: Story = {
                   @send="handleSend"
                 >
                   <template #inline-buttons>
-                    <FileUploader :state="'active'" />
+                    <FileUploader :state="'active'" :uploader="uploadFile" />
                     <ButtonTemplateSelector :mode="'click'" :state="'active'" :templates="templates" :group-templates="groupTemplates" />
                     <ButtonEmojiPicker :mode="'click'" :state="'active'" :native="false" />
                     <StickerPicker :mode="'click'" :state="'active'" :stickers="stickers" />          

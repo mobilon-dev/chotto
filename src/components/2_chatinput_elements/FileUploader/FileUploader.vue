@@ -37,14 +37,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject, unref, onMounted, onUnmounted, watch, watchEffect, type ComputedRef } from "vue";
-import { useMessageDraft, uploadFile, buildFilePreview, getDraftFiles, MAX_ATTACHED_FILES } from '@/hooks';
+import { ref, computed, inject, unref, onMounted, onUnmounted, watch, watchEffect, type ComputedRef, type PropType } from "vue";
+import { useMessageDraft, useChottoUploader, buildFilePreview, getDraftFiles, MAX_ATTACHED_FILES, type ChottoUploadFileFn } from '@/hooks';
 import { FileUploaderIcon } from "./icons";
 
 const props = defineProps({
   filebumpUrl: {
     type: String,
     default: '',
+  },
+  uploader: {
+    type: Function as PropType<ChottoUploadFileFn>,
+    default: undefined,
   },
   state:{
     type: String,
@@ -55,6 +59,11 @@ const props = defineProps({
     default: undefined,
   },
 });
+
+const { upload } = useChottoUploader({
+  uploader: () => props.uploader,
+  filebumpUrl: () => props.filebumpUrl,
+})
 
 const uploadStatus = ref("");
 
@@ -152,10 +161,7 @@ const uploadAndAttach = async (files: File[]) => {
   try {
     const uploaded = []
     for (const file of batch) {
-      const data = await uploadFile(
-        typeof props.filebumpUrl == 'string' ? props.filebumpUrl : null,
-        file,
-      )
+      const data = await upload(file, { kind: 'file' })
       if (data.status == 'success') {
         uploaded.push({
           url: data.url,

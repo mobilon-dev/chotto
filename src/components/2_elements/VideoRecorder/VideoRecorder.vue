@@ -23,8 +23,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue';
-import { useMessageDraft, uploadFile, useModalVideoRecorder, useTheme, buildFilePreview } from '@/hooks';
+import { ref, inject, type PropType } from 'vue';
+import { useMessageDraft, useChottoUploader, useModalVideoRecorder, useTheme, buildFilePreview, type ChottoUploadFileFn } from '@/hooks';
 
 const chatAppId = inject('chatAppId')
 const { getMessage, setMessageFile, setRecordingMessage } = useMessageDraft(chatAppId as string)
@@ -41,6 +41,15 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  uploader: {
+    type: Function as PropType<ChottoUploadFileFn>,
+    default: undefined,
+  },
+})
+
+const { upload } = useChottoUploader({
+  uploader: () => props.uploader,
+  filebumpUrl: () => props.filebumpUrl,
 })
 
 const openVideoRecorder = async () => {
@@ -51,7 +60,7 @@ const openVideoRecorder = async () => {
       if (data.videoFile){
         uploadStatus.value = 'uploading'
         setRecordingMessage(true)
-        await uploadFile(props.filebumpUrl, data.videoFile as File)
+        await upload(data.videoFile as File, { kind: 'video' })
           .then((u) => {
             setRecordingMessage(false)
             uploadStatus.value = u.status

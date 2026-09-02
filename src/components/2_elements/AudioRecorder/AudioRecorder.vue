@@ -39,8 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, computed } from 'vue';
-import { useMessageDraft, uploadFile, buildFilePreview } from '@/hooks';
+import { ref, inject, computed, type PropType } from 'vue';
+import { useMessageDraft, useChottoUploader, buildFilePreview, type ChottoUploadFileFn } from '@/hooks';
 // const emit = defineEmits(['send', 'typing']);
 
 const chatAppId = inject('chatAppId')
@@ -75,6 +75,15 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  uploader: {
+    type: Function as PropType<ChottoUploadFileFn>,
+    default: undefined,
+  },
+})
+
+const { upload } = useChottoUploader({
+  uploader: () => props.uploader,
+  filebumpUrl: () => props.filebumpUrl,
 })
 
 const startAudioRecording = async () => {
@@ -118,7 +127,7 @@ const stopAudioRecording = () => {
       const url = URL.createObjectURL(file);
       audio.value = url;
       uploadStatus.value = 'uploading'
-      await uploadFile(props.filebumpUrl, file)
+      await upload(file, { kind: 'audio' })
       .then((data) => {
         uploadStatus.value = data.status
         if (data.status == 'success'){

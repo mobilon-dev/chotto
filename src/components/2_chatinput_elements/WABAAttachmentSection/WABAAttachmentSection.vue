@@ -39,9 +39,9 @@
 </template>
 
 <script setup lang="ts">
-import { unref, ref, watch, inject } from "vue";
+import { ref, watch, inject, type PropType } from "vue";
 import FilePreview from '@/components/2_chatinput_elements/FilePreview/FilePreview.vue';
-import { uploadFile } from '@/hooks';
+import { useChottoUploader, type ChottoUploadFileFn } from '@/hooks';
 import { IFilePreview } from "@/types";
 const props = defineProps({
   type: {
@@ -52,9 +52,17 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  uploader: {
+    type: Function as PropType<ChottoUploadFileFn>,
+    default: undefined,
+  },
 });
 
-const filebumpUrl = ref<string | undefined>(inject('filebumpUrl'))
+const injectedFilebumpUrl = inject<string | undefined>('filebumpUrl', undefined)
+const { upload } = useChottoUploader({
+  uploader: () => props.uploader,
+  filebumpUrl: () => injectedFilebumpUrl,
+})
 const selectedFile = ref<File | null>(null);
 const fileInput = ref<HTMLInputElement>();
 const error = ref('')
@@ -111,8 +119,7 @@ const handleFileChange = (event: Event) => {
     else if (!error.value){
       selectedFile.value = file
       uploadStatus.value = "uploading";
-      const f = unref(filebumpUrl.value)
-      uploadFile(typeof f == 'string' ? f : null, file)
+      upload(file, { kind: 'file' })
       .then((data) => {
         uploadStatus.value = data.status
         if (data.status == 'success'){

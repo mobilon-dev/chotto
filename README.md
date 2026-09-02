@@ -332,6 +332,39 @@ console.log(t('component.ChatInput.InputPlaceholder'))
 }
 ```
 
+## 📎 Загрузка файлов
+
+По умолчанию `FileUploader`, `AudioRecorder` и `VideoRecorder` грузят файл через legacy adapter: `POST {filebumpUrl}/upload`. Host-приложение может подставить свой uploader **без правок internals** компонентов.
+
+Приоритет: prop `uploader` → `inject(chottoUploadFileKey)` → default + `filebump-url`.
+
+```vue
+<script setup>
+import { FileUploader, type ChottoUploadFileFn } from '@mobilon-dev/chotto'
+
+const uploadFile: ChottoUploadFileFn = async (file, meta) => {
+  // meta.kind: 'file' | 'audio' | 'video'
+  return hostUpload(file, meta) // { url, filename }
+}
+</script>
+
+<template>
+  <FileUploader :uploader="uploadFile" />
+  <!-- filebump-url не нужен, если передан uploader -->
+</template>
+```
+
+Чтобы recorder’ы в слотах `ChatInput` использовали тот же adapter:
+
+```ts
+import { provide } from 'vue'
+import { chottoUploadFileKey } from '@mobilon-dev/chotto'
+
+provide(chottoUploadFileKey, uploadFile)
+```
+
+Без `uploader` и без `filebump-url` загрузка не выполняется (ошибка в консоли, сообщение не отправляется). Существующий prop `filebump-url` сохранён: потребители без кастомного adapter работают как раньше.
+
 ## 🔌 Интеграция с бэкендом
 
 ### Data Provider
