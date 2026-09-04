@@ -13,6 +13,7 @@ import {
   validateNoCSSClassesInThemeFiles,
   validateCSSVariablePrefixes,
   validateComponentThemeInterface,
+  validateComponentStyleInterface,
   getComponentInterface,
   validateForbiddenGlobalVariablesInStyleFiles,
   validateForbiddenGlobalVariablesInThemeFiles,
@@ -238,6 +239,33 @@ async function validateAllThemes(): Promise<void> {
     log(`📋 Проверяю компонент: ${componentName}`, "blue");
     log(`   Ожидаемые переменные: ${expectedVariables.length}`, "blue");
 
+    // 1.0. Валидация соответствия главного .scss интерфейсу types.ts
+    if (fs.existsSync(stylePath)) {
+      if (shouldSkipValidation(stylePath)) {
+        log(
+          `   ⏭️  ${componentName}.scss ↔ types.ts: пропущен (найден комментарий исключения)`,
+          "yellow"
+        );
+      } else {
+        const styleInterfaceResult = validateComponentStyleInterface(
+          componentName,
+          componentFolder,
+          stylePath,
+          expectedVariables
+        );
+        interfaceResults.push(styleInterfaceResult);
+
+        if (styleInterfaceResult.isValid) {
+          log(`   ✅ ${componentName}.scss ↔ types.ts: интерфейс OK`, "green");
+        } else {
+          log(
+            `   ❌ ${componentName}.scss ↔ types.ts: ${styleInterfaceResult.errors.join("; ")}`,
+            "red"
+          );
+        }
+      }
+    }
+
     // Находим все темы компонента
     const normalizedPath = componentPath.replace(/\\/g, "/");
     const themePaths = await glob(`${normalizedPath}/styles/themes/*.scss`);
@@ -370,6 +398,7 @@ export {
   validateAllThemes,
   extractCSSVariablesFromSCSS,
   validateComponentThemeInterface,
+  validateComponentStyleInterface,
   validateCSSVariablePrefixes,
   validateForbiddenGlobalVariablesInStyleFiles,
   validateForbiddenGlobalVariablesInThemeFiles,

@@ -160,12 +160,6 @@ export interface VideoMessageThemeCSSVariables {
   '--chotto-videomessage-text-container-padding': string;
   /** Скругление контейнера текста */
   '--chotto-videomessage-text-container-border-radius': string;
-  /** Скругление превью видео */
-  '--chotto-videomessage-preview-border-radius': string;
-  /** Скругление превью видео с подписью */
-  '--chotto-videomessage-preview-with-caption-border-radius': string;
-  /** Скругление превью видео с цитатой */
-  '--chotto-videomessage-preview-with-reply-border-radius': string;
   /** Перенос слов в контейнере текста */
   '--chotto-videomessage-text-container-word-wrap': string;
   /** Максимальная ширина контейнера текста */
@@ -211,13 +205,8 @@ export interface VideoMessageThemeCSSVariables {
   '--chotto-videomessage-left-menu-button-top': string;
   /** Положение кнопки меню слева (right) */
   '--chotto-videomessage-left-menu-button-right': string;
-  /** Позиция контекстного меню слева (top) */
-  '--chotto-videomessage-left-context-menu-top': string;
   /** Позиция контекстного меню слева (left) */
   '--chotto-videomessage-left-context-menu-left': string;
-  /** Отступ контекстного меню слева сверху */
-  '--chotto-videomessage-left-context-menu-margin-top': string;
-
   /** Шаблон колонок правой раскладки */
   '--chotto-videomessage-right-grid-template-columns': string;
   /** Промежуток между колонками справа (пузырь / аватар) */
@@ -248,13 +237,8 @@ export interface VideoMessageThemeCSSVariables {
   '--chotto-videomessage-right-menu-button-top': string;
   /** Положение кнопки меню справа (left) */
   '--chotto-videomessage-right-menu-button-left': string;
-  /** Позиция контекстного меню справа (top) */
-  '--chotto-videomessage-right-context-menu-top': string;
   /** Позиция контекстного меню справа (right) */
   '--chotto-videomessage-right-context-menu-right': string;
-  /** Отступ контекстного меню справа сверху */
-  '--chotto-videomessage-right-context-menu-margin-top': string;
-
   /** Ширина видео в модальном окне */
   '--chotto-videomessage-modal-video-width': string;
   /** Высота видео в модальном окне */

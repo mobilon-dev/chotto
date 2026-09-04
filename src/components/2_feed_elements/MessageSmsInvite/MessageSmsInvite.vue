@@ -54,23 +54,6 @@ const handleClick = () => {
 
 <style scoped lang="scss">
 @use './styles/MessageSmsInvite.scss';
-
-.message-sms-invite {
-  &[data-channel-type="telegram"] .message-sms-invite__text {
-    color: var(--chotto-messagesmsinvite-text-color-telegram);
-    border-top-color: var(--chotto-messagesmsinvite-text-border-top-color-telegram);
-  }
-
-  &[data-channel-type="whatsapp"] .message-sms-invite__text {
-    color: var(--chotto-messagesmsinvite-text-color-whatsapp);
-    border-top-color: var(--chotto-messagesmsinvite-text-border-top-color-whatsapp);
-  }
-
-  &[data-channel-type="max"] .message-sms-invite__text {
-    color: var(--chotto-messagesmsinvite-text-color-max);
-    border-top-color: var(--chotto-messagesmsinvite-text-border-top-color-max);
-  }
-}
 </style>
 
 

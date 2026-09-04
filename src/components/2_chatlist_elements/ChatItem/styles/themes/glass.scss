@@ -33,6 +33,7 @@
   --chotto-chatitem-avatar-min-height: 50px;
   --chotto-chatitem-avatar-border-radius: 50%;
   --chotto-chatitem-avatar-text-font-size: 21px;
+  --chotto-chatitem-avatar-text-color: var(--chotto-theme-quaternary-color);
   
   --chotto-chatitem-avatar-img-border-radius: 50%;
   --chotto-chatitem-avatar-img-object-fit: cover;
@@ -114,6 +115,7 @@
   --chotto-chatitem-menu-button-width: 100%;
   --chotto-chatitem-menu-button-border: none;
   --chotto-chatitem-menu-button-bg: transparent;
+  --chotto-chatitem-menu-button-selected-bg: transparent;
   --chotto-chatitem-menu-button-cursor: pointer;
   --chotto-chatitem-menu-button-padding: 0;
   --chotto-chatitem-menu-button-transition: 0.2s;
@@ -131,8 +133,6 @@
   --chotto-chatitem-unread-border-radius: 10px;
   --chotto-chatitem-unread-min-width: 20px;
   --chotto-chatitem-unread-min-height: 20px;
-  --chotto-chatitem-unread-margin-left: auto;
-  --chotto-chatitem-unread-margin-top: auto;
   --chotto-chatitem-unread-max-height: 20px;
   --chotto-chatitem-unread-padding: 0 6px;
   --chotto-chatitem-unread-font-size: var(--chotto-theme-additional-text-font-size);

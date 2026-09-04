@@ -3,10 +3,6 @@
  */
 export interface FeedThemeCSSVariables {
   // Main container
-  /** Высота ленты сообщений */
-  '--chotto-feed-height': string;
-  /** Максимальная высота ленты сообщений */
-  '--chotto-feed-max-height': string;
   /** Отображение ленты сообщений */
   '--chotto-feed-display': string;
   /** Направление флекс-контейнера ленты сообщений */
@@ -32,30 +28,8 @@ export interface FeedThemeCSSVariables {
   '--chotto-feed-message-transition': string;
 
   // Button down
-  /** Позиционирование кнопки прокрутки вниз */
-  '--chotto-feed-button-down-position': string;
-  /** Z-index кнопки прокрутки вниз */
-  '--chotto-feed-button-down-z-index': string;
-  /** Позиция кнопки прокрутки вниз снизу */
-  '--chotto-feed-button-down-bottom': string;
-  /** Отступ слева кнопки прокрутки вниз */
-  '--chotto-feed-button-down-margin-left': string;
-  /** Граница кнопки прокрутки вниз */
-  '--chotto-feed-button-down-border': string;
-  /** Минимальная ширина кнопки прокрутки вниз */
-  '--chotto-feed-button-down-min-width': string;
-  /** Минимальная высота кнопки прокрутки вниз */
-  '--chotto-feed-button-down-min-height': string;
   /** Радиус границы кнопки прокрутки вниз */
   '--chotto-feed-button-down-border-radius': string;
-  /** Отображение кнопки прокрутки вниз */
-  '--chotto-feed-button-down-display': string;
-  /** Выравнивание по главной оси кнопки прокрутки вниз */
-  '--chotto-feed-button-down-justify-content': string;
-  /** Выравнивание по поперечной оси кнопки прокрутки вниз */
-  '--chotto-feed-button-down-align-items': string;
-  /** Курсор кнопки прокрутки вниз */
-  '--chotto-feed-button-down-cursor': string;
   /** Цвет фона кнопки прокрутки вниз */
   '--chotto-feed-button-down-background-color': string;
 
@@ -108,14 +82,10 @@ export interface FeedThemeCSSVariables {
   // Scrollbar
   /** Ширина скроллбара */
   '--chotto-feed-scrollbar-width': string;
-  /** Цвет фона скроллбара */
-  '--chotto-feed-scrollbar-background-color': string;
   /** Альтернативный ключ для цвета фона скроллбара (исп. в scss) */
   '--chotto-feed-scrollbar-bg': string;
   /** Радиус границы ползунка скроллбара */
   '--chotto-feed-scrollbar-thumb-border-radius': string;
-  /** Цвет фона ползунка скроллбара */
-  '--chotto-feed-scrollbar-thumb-background-color': string;
   /** Альтернативный ключ для цвета ползунка скроллбара (исп. в scss) */
   '--chotto-feed-scrollbar-thumb-bg': string;
   /** Радиус границы дорожки скроллбара */

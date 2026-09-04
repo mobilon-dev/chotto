@@ -1,4 +1,9 @@
 [data-theme="green"] {
+  // FileUploader status variables
+  --chotto-fileuploader-status-font-size: 14px;
+  --chotto-fileuploader-status-uploading-width: 75px;
+  --chotto-fileuploader-status-error-width: 110px;
+
   // FileUploader trigger variables
   --chotto-fileuploader-trigger-padding: 1px 0 0 3px;
   --chotto-fileuploader-trigger-display: block;

@@ -2,6 +2,10 @@
  * CSS переменные для компонента VideoRecorder
  */
 export interface VideoRecorderThemeCSSVariables {
+  // Status
+  /** Размер шрифта статуса */
+  '--chotto-videorecorder-status-font-size': string;
+
   // Container
   /** Позиционирование контейнера */
   '--chotto-videorecorder-container-position': string;

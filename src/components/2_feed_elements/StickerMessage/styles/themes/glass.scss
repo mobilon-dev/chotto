@@ -119,10 +119,7 @@
   --chotto-stickermessage-left-content-with-avatar-indent-margin-left: 0;
   --chotto-stickermessage-left-menu-button-top: 50%;
   --chotto-stickermessage-left-menu-button-right: -40px;
-  --chotto-stickermessage-left-context-menu-top: 50%;
   --chotto-stickermessage-left-context-menu-left: 100%;
-  --chotto-stickermessage-left-context-menu-margin-top: 20px;
-
   // StickerMessage right variables
   --chotto-stickermessage-right-grid-template-columns: 1fr var(--chotto-theme-avatar-small-size);
   --chotto-stickermessage-right-column-gap: 8px;
@@ -137,10 +134,7 @@
   --chotto-stickermessage-right-text-container-margin-left: auto;
   --chotto-stickermessage-right-menu-button-top: 50%;
   --chotto-stickermessage-right-menu-button-left: -40px;
-  --chotto-stickermessage-right-context-menu-top: 50%;
   --chotto-stickermessage-right-context-menu-right: 100%;
-  --chotto-stickermessage-right-context-menu-margin-top: 20px;
-
   // StickerMessage animation variables
   --chotto-stickermessage-context-menu-enter-active-transition: all 0.1s ease-out;
   --chotto-stickermessage-context-menu-leave-active-transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
@@ -159,5 +153,15 @@
   --chotto-stickermessage-sms-invite-min-width: fit-content;
   --chotto-stickermessage-sms-invite-padding-left: 8px;
   --chotto-stickermessage-sms-invite-padding-right: 8px;
+  --chotto-stickermessage-modal-image-height: 100%;
+  --chotto-stickermessage-modal-image-object-fit: contain;
+  --chotto-stickermessage-modal-image-border-radius: 5px;
+  --chotto-stickermessage-modal-image-max-height: 90vh;
+  --chotto-stickermessage-modal-image-max-width: 95vw;
+  --chotto-stickermessage-modal-image-animated-height: 100%;
+  --chotto-stickermessage-modal-image-animated-object-fit: contain;
+  --chotto-stickermessage-modal-image-animated-border-radius: 5px;
+  --chotto-stickermessage-modal-image-animated-max-height: 90vh;
+  --chotto-stickermessage-modal-image-animated-max-width: 95vw;
+  --chotto-stickermessage-right-bg: #D9FDD3;
 }
-

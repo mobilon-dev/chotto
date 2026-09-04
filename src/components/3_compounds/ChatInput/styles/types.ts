@@ -213,8 +213,6 @@ export interface ChatInputThemeCSSVariables {
   // Inline buttons
   /** Отображение встроенных кнопок */
   '--chotto-chatinput-inline-buttons-display': string;
-  /** Отступы встроенных кнопок */
-  '--chotto-chatinput-inline-buttons-margin-auto': string;
   /** Строка сетки встроенных кнопок */
   '--chotto-chatinput-inline-buttons-grid-row': string;
   /** Колонка сетки встроенных кнопок */
@@ -261,4 +259,12 @@ export interface ChatInputThemeCSSVariables {
   '--chotto-chatinput-enter-transform': string;
   /** Прозрачность входа */
   '--chotto-chatinput-enter-opacity': string;
+  /** CSS variable chatinput input align self */
+  '--chotto-chatinput-input-align-self': string;
+  /** CSS variable chatinput input margin bottom */
+  '--chotto-chatinput-input-margin-bottom': string;
+  /** CSS variable chatinput selection bg */
+  '--chotto-chatinput-selection-bg': string;
+  /** CSS variable chatinput inline buttons align items */
+  '--chotto-chatinput-inline-buttons-align-items': string;
 }

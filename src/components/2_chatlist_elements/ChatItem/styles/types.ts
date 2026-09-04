@@ -67,6 +67,8 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-avatar-border-radius': string;
   /** Размер шрифта текста аватара */
   '--chotto-chatitem-avatar-text-font-size': string;
+  /** Цвет текста аватара */
+  '--chotto-chatitem-avatar-text-color': string;
   /** Радиус границы изображения аватара */
   '--chotto-chatitem-avatar-img-border-radius': string;
   /** Обрезка изображения аватара */
@@ -205,6 +207,8 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-menu-button-border': string;
   /** Фон кнопки меню */
   '--chotto-chatitem-menu-button-bg': string;
+  /** Фон кнопки меню у выбранного элемента */
+  '--chotto-chatitem-menu-button-selected-bg': string;
   /** Курсор кнопки меню */
   '--chotto-chatitem-menu-button-cursor': string;
   /** Отступы кнопки меню */
@@ -237,10 +241,6 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-unread-min-width': string;
   /** Минимальная высота бейджа непрочитанного */
   '--chotto-chatitem-unread-min-height': string;
-  /** Отступ слева от непрочитанных сообщений */
-  '--chotto-chatitem-unread-margin-left': string;
-  /** Отступ сверху от непрочитанных сообщений */
-  '--chotto-chatitem-unread-margin-top': string;
   /** Максимальная высота непрочитанных сообщений */
   '--chotto-chatitem-unread-max-height': string;
   /** Отступы непрочитанных сообщений */

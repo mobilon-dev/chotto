@@ -10,7 +10,6 @@
   // MessageReactions no reactions variables
   --chotto-messagereactions-no-reactions-position: absolute;
   --chotto-messagereactions-no-reactions-bottom: 0;
-  --chotto-messagereactions-no-reactions-height: 22px;
   --chotto-messagereactions-no-reactions-width: 22px;
   --chotto-messagereactions-no-reactions-overflow: visible;
   --chotto-messagereactions-no-reactions-min-height: 0;
@@ -20,13 +19,7 @@
   --chotto-messagereactions-no-reactions-pointer-events: none;
 
   // MessageReactions left no reactions variables
-  --chotto-messagereactions-left-no-reactions-right: -30px;
-  --chotto-messagereactions-left-no-reactions-left: auto;
-
   // MessageReactions right no reactions variables
-  --chotto-messagereactions-right-no-reactions-left: -30px;
-  --chotto-messagereactions-right-no-reactions-right: auto;
-
   // MessageReactions chip variables (чужие: заливка без рамки)
   --chotto-messagereactions-chip-display: inline-flex;
   --chotto-messagereactions-chip-align-items: center;
@@ -106,5 +99,8 @@
   --chotto-messagereactions-popover-transition: opacity .15s ease, transform .15s ease;
   --chotto-messagereactions-popover-enter-from-opacity: 0;
   --chotto-messagereactions-popover-enter-from-transform: translateY(-4px);
+  --chotto-messagereactions-no-reactions-top: 0;
+  --chotto-messagereactions-no-reactions-left: 0;
+  --chotto-messagereactions-no-reactions-right: 0;
+  --chotto-messagereactions-no-reactions-display: block;
 }
-

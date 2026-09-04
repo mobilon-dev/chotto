@@ -8,8 +8,6 @@ export interface BaseReplyMessageThemeCSSVariables {
   '--chotto-basereplymessage-left-secondary-bg': string;
   /** Вторичный фон справа */
   '--chotto-basereplymessage-right-secondary-bg': string;
-  /** Цвет границы элементов */
-  '--chotto-basereplymessage-item-border-color': string;
 
   /** Позиционирование контейнера */
   '--chotto-basereplymessage-container-position': string;

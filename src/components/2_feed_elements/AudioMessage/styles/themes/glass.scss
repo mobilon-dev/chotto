@@ -51,7 +51,6 @@
   --chotto-audiomessage-right-arrow-width: 0;
   --chotto-audiomessage-right-arrow-height: 0;
   --chotto-audiomessage-right-arrow-border: 20px solid transparent;
-  --chotto-audiomessage-right-arrow-border-top: none;
   --chotto-audiomessage-right-arrow-z-index: 1;
 
   // Left background variables - glassmorphism эффект
@@ -83,8 +82,11 @@
   --chotto-audiomessage-audio-container-display: grid;
   --chotto-audiomessage-audio-container-grid-template-columns: min-content 1fr;
   --chotto-audiomessage-audio-container-column-gap: 15px;
+  --chotto-audiomessage-audio-container-width: 100%;
+  --chotto-audiomessage-audio-container-max-width: 415px;
   --chotto-audiomessage-audio-container-border-radius: 14px;
   --chotto-audiomessage-audio-container-padding: 0 30px 0 0;
+  --chotto-audiomessage-audio-container-margin: 0;
   --chotto-audiomessage-audio-container-grid-column: 1/3;
   --chotto-audiomessage-audio-container-align-items: center;
 
@@ -105,8 +107,6 @@
   --chotto-audiomessage-play-pause-box-shadow: 
     0 4px 16px rgba(15, 23, 42, 0.1),
     0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-  --chotto-audiomessage-type-icon-font-size: var(--chotto-theme-button-icon-size);
-  --chotto-audiomessage-type-icon-color: var(--chotto-theme-message-type-icon-color);
   --chotto-audiomessage-play-pause-display: flex;
   --chotto-audiomessage-play-pause-align-items: center;
   --chotto-audiomessage-play-pause-justify-content: center;
@@ -116,12 +116,9 @@
   --chotto-audiomessage-play-pause-icon-align-items: center;
   --chotto-audiomessage-play-pause-icon-justify-content: center;
 
-  // Play/Pause button span variables (legacy, kept for compatibility)
-  --chotto-audiomessage-play-pause-span-display: flex;
-  --chotto-audiomessage-play-pause-span-position: absolute;
-  --chotto-audiomessage-play-pause-span-top: 50%;
-  --chotto-audiomessage-play-pause-span-left: 50%;
-  --chotto-audiomessage-play-pause-span-transform: translate(-50%, -50%);
+  // Play icon variables
+  --chotto-audiomessage-play-icon-margin-left: 3px;
+
 
   // Progress bar variables
   --chotto-audiomessage-progress-bar-webkit-appearance: none;
@@ -161,8 +158,8 @@
   --chotto-audiomessage-player-controls-grid-row: 2;
   --chotto-audiomessage-player-controls-display: flex;
   --chotto-audiomessage-player-controls-justify-content: space-between;
+  --chotto-audiomessage-player-controls-width: 250px;
   --chotto-audiomessage-player-controls-margin-top: 6px;
-  --chotto-audiomessage-player-controls-extra-offset: 5px;
 
   // Speed button container variables
   --chotto-audiomessage-speed-btn-container-display: flex;
@@ -181,10 +178,7 @@
   --chotto-audiomessage-speed-btn-selected-font-weight: 600;
 
   // Remaining time variables
-  --chotto-audiomessage-time-margin: 0;
   --chotto-audiomessage-time-font-size: 12px;
-  --chotto-audiomessage-time-font-weight: 400;
-  --chotto-audiomessage-time-color: rgba(31, 31, 31, 0.8);
   --chotto-audiomessage-duration-time-margin: 0;
   --chotto-audiomessage-duration-time-font-size: 14px;
   --chotto-audiomessage-duration-time-font-weight: 400;
@@ -343,9 +337,7 @@
   --chotto-audiomessage-left-menu-button-right: -20px;
   --chotto-audiomessage-left-menu-button-bottom: auto;
   --chotto-audiomessage-left-menu-button-left: auto;
-  --chotto-audiomessage-left-context-menu-top: 30%;
   --chotto-audiomessage-left-context-menu-left: 55%;
-  --chotto-audiomessage-left-context-menu-margin-top: 0;
   --chotto-audiomessage-left-context-menu-width: 220px;
   --chotto-audiomessage-left-context-menu-height: 152px;
   --chotto-audiomessage-left-context-menu-row-gap: 0;
@@ -367,9 +359,7 @@
   --chotto-audiomessage-right-menu-button-left: auto;
   --chotto-audiomessage-right-menu-button-right: -20px;
   --chotto-audiomessage-right-menu-button-bottom: auto;
-  --chotto-audiomessage-right-context-menu-top: 30%;
   --chotto-audiomessage-right-context-menu-right: -7%;
-  --chotto-audiomessage-right-context-menu-margin-top: 0;
   --chotto-audiomessage-right-context-menu-width: 220px;
   --chotto-audiomessage-right-context-menu-height: 152px;
   --chotto-audiomessage-right-context-menu-row-gap: 0;

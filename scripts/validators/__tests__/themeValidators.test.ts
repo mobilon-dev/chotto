@@ -5,6 +5,7 @@ import {
   validateThemeVariablesInContent,
 } from '../forbiddenVariables'
 import { validateNoDataThemeInContent } from '../dataTheme'
+import { validateComponentStyleInterfaceInContent } from '../interfaceMatch'
 
 describe('validateCSSVariablePrefixesInContent', () => {
   it('принимает корректные префиксы компонента', () => {
@@ -89,5 +90,64 @@ describe('validateNoDataThemeInContent', () => {
 
     const ok = validateNoDataThemeInContent('ChatList', 'ChatList', '.x { color: red; }')
     expect(ok.isValid).toBe(true)
+  })
+})
+
+describe('validateComponentStyleInterfaceInContent', () => {
+  const expected = [
+    '--chotto-textmessage-bg',
+    '--chotto-textmessage-color',
+  ]
+
+  it('принимает полное совпадение style.scss и types.ts', () => {
+    const result = validateComponentStyleInterfaceInContent(
+      'TextMessage',
+      '2_feed_elements',
+      `
+        .text-message {
+          background: var(--chotto-textmessage-bg, #fff);
+          color: var(--chotto-textmessage-color, #000);
+        }
+      `,
+      expected,
+    )
+    expect(result.isValid).toBe(true)
+    expect(result.missingVariables).toEqual([])
+    expect(result.extraVariables).toEqual([])
+  })
+
+  it('ловят отсутствующие и лишние переменные', () => {
+    const result = validateComponentStyleInterfaceInContent(
+      'TextMessage',
+      '2_feed_elements',
+      `
+        .text-message {
+          background: var(--chotto-textmessage-bg, #fff);
+          padding: var(--chotto-textmessage-padding, 8px);
+          --chotto-tooltip-wrapper-width: 100%;
+        }
+      `,
+      expected,
+    )
+    expect(result.isValid).toBe(false)
+    expect(result.missingVariables).toEqual(['--chotto-textmessage-color'])
+    expect(result.extraVariables).toEqual(['--chotto-textmessage-padding'])
+  })
+
+  it('игнорирует переменные других компонентов', () => {
+    const result = validateComponentStyleInterfaceInContent(
+      'TextMessage',
+      '2_feed_elements',
+      `
+        .text-message {
+          background: var(--chotto-textmessage-bg, #fff);
+          color: var(--chotto-textmessage-color, #000);
+          --chotto-tooltip-wrapper-width: 100%;
+          width: var(--chotto-feed-width, 100%);
+        }
+      `,
+      expected,
+    )
+    expect(result.isValid).toBe(true)
   })
 })

@@ -264,12 +264,6 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-text-container-padding': string;
   /** Скругление контейнера текста */
   '--chotto-imagemessage-text-container-border-radius': string;
-  /** Скругление превью изображения */
-  '--chotto-imagemessage-preview-border-radius': string;
-  /** Скругление превью изображения с подписью */
-  '--chotto-imagemessage-preview-with-caption-border-radius': string;
-  /** Скругление превью изображения с цитатой */
-  '--chotto-imagemessage-preview-with-reply-border-radius': string;
   /** Ширина контейнера текста */
   '--chotto-imagemessage-text-container-width': string;
   /** Минимальная ширина контейнера текста */
@@ -364,13 +358,8 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-left-menu-button-top': string;
   /** Положение кнопки меню слева (right) */
   '--chotto-imagemessage-left-menu-button-right': string;
-  /** Позиция контекстного меню слева (top) */
-  '--chotto-imagemessage-left-context-menu-top': string;
   /** Позиция контекстного меню слева (left) */
   '--chotto-imagemessage-left-context-menu-left': string;
-  /** Отступ контекстного меню слева сверху */
-  '--chotto-imagemessage-left-context-menu-margin-top': string;
-
   /** Шаблон колонок правой раскладки */
   '--chotto-imagemessage-right-grid-template-columns': string;
   /** Промежуток между колонками справа (пузырь / аватар) */
@@ -405,13 +394,8 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-right-menu-button-top': string;
   /** Положение кнопки меню справа (left) */
   '--chotto-imagemessage-right-menu-button-left': string;
-  /** Позиция контекстного меню справа (top) */
-  '--chotto-imagemessage-right-context-menu-top': string;
   /** Позиция контекстного меню справа (right) */
   '--chotto-imagemessage-right-context-menu-right': string;
-  /** Отступ контекстного меню справа сверху */
-  '--chotto-imagemessage-right-context-menu-margin-top': string;
-
   /** Внешние отступы реакций */
   '--chotto-imagemessage-reactions-margin': string;
 
@@ -442,6 +426,6 @@ export interface ImageMessageThemeCSSVariables {
   '--chotto-imagemessage-modal-fade-enter-from-opacity': string;
   /** Прозрачность модального окна в конце */
   '--chotto-imagemessage-modal-fade-enter-to-opacity': string;
+  /** CSS variable imagemessage preview image object fit */
+  '--chotto-imagemessage-preview-image-object-fit': string;
 }
-
-
