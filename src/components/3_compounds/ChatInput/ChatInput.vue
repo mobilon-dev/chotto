@@ -3,6 +3,7 @@
     <div
       :id="'chat-input-reply-line-' + chatAppId"
       class="chat-input__reply-line"
+      data-testid="chat-input-reply-line"
     />
     <div
       :id="'chat-input-file-line-' + chatAppId"
@@ -72,6 +73,7 @@
         ref="refInput"
         v-model="getMessage().text"
         rows="1"
+        data-testid="chat-input-textarea"
         :disabled="state == 'disabled' || getMessage().isRecording"
         class="chat-input__input"
         :class="{ 'chat-input__input--emoji-images': useEmojiMirror }"
@@ -92,7 +94,9 @@
       @format-applied="handleFormatApplied"
     />
     <button
+      type="button"
       class="chat-input__button"
+      data-testid="chat-input-send"
       :disabled="getMessage().isRecording"
       :class="{ 'chat-input__button-disabled': disabledSendButton }"
       @click="sendMessage"

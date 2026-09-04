@@ -6,6 +6,7 @@
     <input
       ref="refInput"
       class="chat-filter__input"
+      data-testid="chat-filter-input"
       type="text"
       :placeholder="placeholder ? placeholder : t('component.ChatFilter.InputPlaceholder')"
       @input="update"

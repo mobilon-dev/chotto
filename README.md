@@ -167,6 +167,18 @@ npm run lint
 npm run lint-fix
 ```
 
+### Автотесты
+```bash
+npm test              # unit / component (Vitest)
+npm run test:watch    # watch-режим
+npm run test:coverage # coverage для functions / validators / uploadFile
+npm run test:e2e      # E2E Playwright (сам поднимает vite dev на :5173)
+npm run test:e2e:ui   # Playwright UI mode
+npm run validate-themes
+```
+
+Тесты лежат в `__tests__` рядом с модулями (например `src/functions/__tests__/`). E2E — в `e2e/`, против демо `MobilonExtendedChatApp` (`/?e2e=1` отключает фейковые server-push). Демо-apps (`src/apps`) и Storybook stories в unit-прогон не входят.
+
 ## 🏗️ Архитектура
 
 ```

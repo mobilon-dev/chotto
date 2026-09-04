@@ -1,28 +1,28 @@
-import fs from 'fs';
-import path from 'path';
-import { PrefixValidationResult } from './types';
+import fs from 'fs'
+import path from 'path'
+import { PrefixValidationResult } from './types'
 
-export function validateCSSVariablePrefixes(
+/** Чистая проверка префиксов CSS-переменных в содержимом файла темы. */
+export function validateCSSVariablePrefixesInContent(
   componentName: string,
   componentFolder: string,
-  themePath: string
+  themeName: string,
+  content: string,
 ): PrefixValidationResult {
-  const themeName = path.basename(themePath, '.scss');
-  const content = fs.readFileSync(themePath, 'utf-8');
-  const variableRegex = /--([a-zA-Z0-9-]+)\s*:/g;
-  const expectedPrefix = `--chotto-${componentName.toLowerCase()}-`;
-  const invalidPrefixes: string[] = [];
-  let match;
+  const variableRegex = /--([a-zA-Z0-9-]+)\s*:/g
+  const expectedPrefix = `--chotto-${componentName.toLowerCase()}-`
+  const invalidPrefixes: string[] = []
+  let match
   while ((match = variableRegex.exec(content)) !== null) {
-    const fullVariableName = `--${match[1]}`;
+    const fullVariableName = `--${match[1]}`
     if (!fullVariableName.startsWith(expectedPrefix)) {
-      invalidPrefixes.push(fullVariableName);
+      invalidPrefixes.push(fullVariableName)
     }
   }
-  const isValid = invalidPrefixes.length === 0;
-  const errors: string[] = [];
+  const isValid = invalidPrefixes.length === 0
+  const errors: string[] = []
   if (invalidPrefixes.length > 0) {
-    errors.push(`Неправильные префиксы: ${invalidPrefixes.join(', ')}`);
+    errors.push(`Неправильные префиксы: ${invalidPrefixes.join(', ')}`)
   }
   return {
     component: componentName,
@@ -30,8 +30,21 @@ export function validateCSSVariablePrefixes(
     theme: themeName,
     isValid,
     errors,
-    invalidPrefixes
-  };
+    invalidPrefixes,
+  }
 }
 
-
+export function validateCSSVariablePrefixes(
+  componentName: string,
+  componentFolder: string,
+  themePath: string,
+): PrefixValidationResult {
+  const themeName = path.basename(themePath, '.scss')
+  const content = fs.readFileSync(themePath, 'utf-8')
+  return validateCSSVariablePrefixesInContent(
+    componentName,
+    componentFolder,
+    themeName,
+    content,
+  )
+}

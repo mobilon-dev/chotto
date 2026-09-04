@@ -16,7 +16,7 @@
 import { useId, provide } from 'vue'
 // import { onMounted } from 'vue'
 
-const props = defineProps({
+defineProps({
   height: {
     type: String,
     default: '100%'

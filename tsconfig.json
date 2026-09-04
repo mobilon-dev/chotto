@@ -27,7 +27,7 @@
       "@types": ["./src/types"]
     }
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vitest.config.ts", "vitest.setup.ts"],
   "exclude": ["src/**/__tests__/*"]
 }
 

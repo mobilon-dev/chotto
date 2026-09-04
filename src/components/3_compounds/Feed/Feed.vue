@@ -1,10 +1,14 @@
 <template>
-  <div class="message-feed-wrapper">
+  <div
+    class="message-feed-wrapper"
+    data-testid="feed"
+  >
     <div
       v-if="objects.length > 0 || typing"
       :id="'feed-container-' + chatAppId"
       ref="refFeed"
       class="message-feed"
+      data-testid="feed-scroll"
       :style="{ backgroundImage: `url(${defaultBackground})` }"
       @scroll="throttledScrollTopCheck()"
       @mousedown="startScrollWatch"
@@ -35,6 +39,8 @@
         :key="feedItemKey(object, index)"
         v-memo="[object.messageId, object.text, object.status, object.reply, seriesFlags[renderStart + index], feedReactionsMemoKey(object)]"
         :data-timestamp="getMessageTimestamp(object)"
+        data-testid="feed-message"
+        :data-message-id="object.messageId"
         class="tracking-message"
         @dblclick="feedObjectDoubleClick($event, object)"
       >

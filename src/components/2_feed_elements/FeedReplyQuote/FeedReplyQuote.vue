@@ -1,6 +1,7 @@
 <template>
   <div
     class="reply__container"
+    data-testid="feed-reply-quote"
     :class="rootClass"
     @click="onClick"
   >

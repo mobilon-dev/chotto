@@ -1,43 +1,57 @@
-import fs from 'fs';
-import path from 'path';
-import { ForbiddenVariablesValidationResult } from './types';
+import fs from 'fs'
+import path from 'path'
+import { ForbiddenVariablesValidationResult } from './types'
+
+/** Чистая проверка: в style.scss компонента нельзя var(--chotto-theme-*). */
+export function validateForbiddenGlobalVariablesInContent(
+  componentName: string,
+  componentFolder: string,
+  themeLabel: string,
+  content: string,
+): ForbiddenVariablesValidationResult {
+  const globalVariableRegex = /var\(--chotto-theme-([a-zA-Z0-9-]+)\)/g
+  const forbiddenVariables: string[] = []
+  let match
+  while ((match = globalVariableRegex.exec(content)) !== null) {
+    forbiddenVariables.push(`--chotto-theme-${match[1]}`)
+  }
+  const isValid = forbiddenVariables.length === 0
+  const errors: string[] = []
+  if (forbiddenVariables.length > 0) {
+    errors.push(`Запрещенные глобальные переменные: ${forbiddenVariables.join(', ')}`)
+  }
+  return {
+    component: componentName,
+    componentFolder,
+    theme: themeLabel,
+    isValid,
+    errors,
+    forbiddenVariables,
+  }
+}
 
 // 3. Запрещенные глобальные переменные в файлах стилей компонентов
 export function validateForbiddenGlobalVariablesInStyleFiles(
   componentName: string,
   componentFolder: string,
-  stylePath: string
+  stylePath: string,
 ): ForbiddenVariablesValidationResult {
-  const content = fs.readFileSync(stylePath, 'utf-8');
-  const globalVariableRegex = /var\(--chotto-theme-([a-zA-Z0-9-]+)\)/g;
-  const forbiddenVariables: string[] = [];
-  let match;
-  while ((match = globalVariableRegex.exec(content)) !== null) {
-    const fullVariableName = `--chotto-theme-${match[1]}`;
-    forbiddenVariables.push(fullVariableName);
-  }
-  const isValid = forbiddenVariables.length === 0;
-  const errors: string[] = [];
-  if (forbiddenVariables.length > 0) {
-    errors.push(`Запрещенные глобальные переменные: ${forbiddenVariables.join(', ')}`);
-  }
-  return {
-    component: componentName,
+  const content = fs.readFileSync(stylePath, 'utf-8')
+  return validateForbiddenGlobalVariablesInContent(
+    componentName,
     componentFolder,
-    theme: 'style.scss',
-    isValid,
-    errors,
-    forbiddenVariables
-  };
+    'style.scss',
+    content,
+  )
 }
 
 // 3. Разрешены глобальные переменные в файлах тем компонентов
 export function validateForbiddenGlobalVariablesInThemeFiles(
   componentName: string,
   componentFolder: string,
-  themePath: string
+  themePath: string,
 ): ForbiddenVariablesValidationResult {
-  const themeName = path.basename(themePath, '.scss');
+  const themeName = path.basename(themePath, '.scss')
   // В файлах тем глобальные переменные разрешены
   return {
     component: componentName,
@@ -45,31 +59,32 @@ export function validateForbiddenGlobalVariablesInThemeFiles(
     theme: themeName,
     isValid: true,
     errors: [],
-    forbiddenVariables: []
-  };
+    forbiddenVariables: [],
+  }
 }
 
-// 3.1. Разрешенные переменные в файлах тем (только --chotto-theme-*)
-export function validateThemeVariablesInThemeFiles(
+/** Чистая проверка: в theme-файлах var() только --chotto-theme-*. */
+export function validateThemeVariablesInContent(
   componentName: string,
   componentFolder: string,
-  themePath: string
+  themeName: string,
+  content: string,
 ): ForbiddenVariablesValidationResult {
-  const themeName = path.basename(themePath, '.scss');
-  const content = fs.readFileSync(themePath, 'utf-8');
-  const forbiddenVariables: string[] = [];
-  const varRegex = /var\(--([a-zA-Z0-9-]+)\)/g;
-  let match;
+  const forbiddenVariables: string[] = []
+  const varRegex = /var\(--([a-zA-Z0-9-]+)\)/g
+  let match
   while ((match = varRegex.exec(content)) !== null) {
-    const variableName = `--${match[1]}`;
+    const variableName = `--${match[1]}`
     if (!variableName.startsWith('--chotto-theme-')) {
-      forbiddenVariables.push(variableName);
+      forbiddenVariables.push(variableName)
     }
   }
-  const isValid = forbiddenVariables.length === 0;
-  const errors: string[] = [];
+  const isValid = forbiddenVariables.length === 0
+  const errors: string[] = []
   if (forbiddenVariables.length > 0) {
-    errors.push(`Запрещенные переменные (разрешены только --chotto-theme-*): ${forbiddenVariables.join(', ')}`);
+    errors.push(
+      `Запрещенные переменные (разрешены только --chotto-theme-*): ${forbiddenVariables.join(', ')}`,
+    )
   }
   return {
     component: componentName,
@@ -77,8 +92,22 @@ export function validateThemeVariablesInThemeFiles(
     theme: themeName,
     isValid,
     errors,
-    forbiddenVariables
-  };
+    forbiddenVariables,
+  }
 }
 
-
+// 3.1. Разрешенные переменные в файлах тем (только --chotto-theme-*)
+export function validateThemeVariablesInThemeFiles(
+  componentName: string,
+  componentFolder: string,
+  themePath: string,
+): ForbiddenVariablesValidationResult {
+  const themeName = path.basename(themePath, '.scss')
+  const content = fs.readFileSync(themePath, 'utf-8')
+  return validateThemeVariablesInContent(
+    componentName,
+    componentFolder,
+    themeName,
+    content,
+  )
+}

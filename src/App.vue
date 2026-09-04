@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+    data-testid="demo-chat-app"
+  >
     <chat-app
       :auth-provider="authProvider"
       :data-provider="dataProvider"
@@ -144,8 +147,10 @@ const data = {
   userId: 'testUserId',
 };
 
-// Эмуляция событий с сервера
+// Эмуляция событий с сервера (отключается для Playwright: ?e2e=1)
 onMounted(() => {
+  if (new URLSearchParams(window.location.search).has('e2e')) return
+
   setTimeout(() => {
     const newM = { ...data, text: 'new message 1', timestamp: moment().unix() };
     data3.messages.push(newM);

@@ -1,5 +1,8 @@
 <template>
-  <div class="chat-list">
+  <div
+    class="chat-list"
+    data-testid="chat-list"
+  >
     <slot name="header" />
 
 

@@ -47,6 +47,10 @@ export default [
         sourceType: 'module',
       },
     },
+    rules: {
+      // валидаторы и динамические payload часто без жёсткой схемы
+      '@typescript-eslint/no-explicit-any': 'warn',
+    },
   },
   
   {
@@ -58,6 +62,18 @@ export default [
   },
   
   {
-    ignores: ["dist/**", "node_modules/**", ".history/**", "scripts/**"]
+    ignores: [
+      "dist/**",
+      "docs/**",
+      "node_modules/**",
+      ".history/**",
+      "scripts/**",
+      "coverage/**",
+      "playwright-report/**",
+      "test-results/**",
+      "env.d.ts",
+      // вендорные бандлы стикеров (минифицированный ESM)
+      "src/components/2_feed_elements/StickerMessage/libs/**",
+    ]
   }
 ];

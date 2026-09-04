@@ -134,3 +134,9 @@ dist
 .history
 
 *.mp4
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+

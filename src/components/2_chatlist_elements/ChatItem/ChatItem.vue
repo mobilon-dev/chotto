@@ -3,6 +3,8 @@
     <div
       ref="containerRef"
       class="chat-item__container"
+      data-testid="chat-item"
+      :data-chat-id="props.chat.chatId"
       :class="getClass()"
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"

@@ -232,6 +232,7 @@
                   :selected-channel="selectedDialog"
                   :max-attached-files="5"
                   :resolve-edit-last-sent-message="resolveEditLastSentMessage"
+                  @send="addMessage"
                 >
                   <template #inline-buttons>
                     <!-- <ButtonCommandsSelector
@@ -942,28 +943,25 @@ const getFeedObjects = () => {
 //   console.log('selected channel', channel);
 // }
 
-// const addMessage = (message) => {
-//   console.log(message);
-//   // Добавление сообщения в хранилище
-//   if (message.type != 'message.command'){
-//     props.dataProvider.addMessage({
-//       text: message.text,
-//       type: message.type,
-//       chatId: selectedChat.value.chatId,
-//       url: message.url || null,
-//       filename: message.filename || null,
-//       status: 'sent',
-//       direction: "outgoing",
-//       timestamp: moment().unix(),
-//       reply: message.reply || null,
-//     });
-//     messages.value = getFeedObjects(); // Обновление сообщений
-//   }
-//   else {
-//     //обработка команды 
-//   }
-//   
-// };
+const addMessage = (message) => {
+  if (message.type === 'message.command') return
+  if (!selectedChat.value) return
+
+  props.dataProvider.addMessage({
+    messageId: `e2e-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    text: message.text,
+    type: message.type,
+    chatId: selectedChat.value.chatId,
+    dialogId: selectedDialog.value?.dialogId,
+    url: message.url || null,
+    filename: message.filename || null,
+    status: 'sent',
+    direction: 'outgoing',
+    timestamp: Math.floor(Date.now() / 1000),
+    reply: message.reply || null,
+  })
+  messages.value = getFeedObjects()
+}
 
 // const sendWabaValues = (obj) => {
 //   console.log('send waba values', obj);
