@@ -1,10 +1,19 @@
 <template>
   <div class="chat-list__title-container">
     <div class="chat-list__title-block">
-      <LogoIcon
-        v-if="props.logoEnabled"
+      <div
+        v-if="$slots.logo || props.logoSrc || props.logoEnabled"
         class="chat-list__title-logo"
-      />
+      >
+        <slot name="logo">
+          <img
+            v-if="props.logoSrc"
+            :src="props.logoSrc"
+            alt=""
+          >
+          <LogoIcon v-else />
+        </slot>
+      </div>
       <h2
         v-if="props.titleEnabled"
         class="chat-list__title"
@@ -38,9 +47,13 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  logoSrc: {
+    type: String,
+    default: undefined,
+  },
   logoEnabled: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   betaEnabled: {
     type: Boolean,

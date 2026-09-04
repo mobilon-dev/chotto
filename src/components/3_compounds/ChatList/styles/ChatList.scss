@@ -197,10 +197,20 @@
   }
 
   &__title-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: var(--chotto-chatlist-title-logo-width, 27px);
     height: var(--chotto-chatlist-title-logo-height, 26px);
     margin-right: var(--chotto-chatlist-title-logo-margin-right, 6px);
     flex-shrink: var(--chotto-chatlist-title-logo-flex-shrink, 0);
+
+    :deep(svg),
+    :deep(img) {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 
   &__title-beta-badge {

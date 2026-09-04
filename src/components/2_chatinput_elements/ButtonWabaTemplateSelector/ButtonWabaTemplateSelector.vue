@@ -54,7 +54,7 @@ const props = defineProps({
   },
   filebumpUrl: {
     type: String,
-    default: 'https://filebump2.services.mobilon.ru',
+    default: '',
   },
   uploader: {
     type: Function,

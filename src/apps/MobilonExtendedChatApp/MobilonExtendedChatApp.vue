@@ -42,6 +42,7 @@
             <template #header>
               <ChatListHeader
                 title="Mobilon One 0.3"
+                :logo-enabled="true"
               >
                 <template #actions>
                   <div class="actions">
