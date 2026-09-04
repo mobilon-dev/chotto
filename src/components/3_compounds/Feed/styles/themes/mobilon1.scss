@@ -1,7 +1,5 @@
 [data-theme="mobilon1"] {
   // Основной контейнер Feed
-  --chotto-feed-height: 100%;
-  --chotto-feed-max-height: inherit;
   --chotto-feed-display: flex;
   --chotto-feed-flex-direction: column;
   --chotto-feed-overflow-y: auto;
@@ -18,18 +16,7 @@
   --chotto-feed-message-transition: all 2s;
 
   // Кнопка прокрутки вниз
-  --chotto-feed-button-down-position: sticky;
-  --chotto-feed-button-down-z-index: 100;
-  --chotto-feed-button-down-bottom: 0;
-  --chotto-feed-button-down-margin-left: auto;
-  --chotto-feed-button-down-border: none;
-  --chotto-feed-button-down-min-width: 46px;
-  --chotto-feed-button-down-min-height: 46px;
   --chotto-feed-button-down-border-radius: 50%;
-  --chotto-feed-button-down-display: flex;
-  --chotto-feed-button-down-justify-content: center;
-  --chotto-feed-button-down-align-items: center;
-  --chotto-feed-button-down-cursor: pointer;
   --chotto-feed-button-down-background-color: #e5e5e5;
 
   // Клавиатура
@@ -60,10 +47,8 @@
 
   // Скроллбар
   --chotto-feed-scrollbar-width: 6px;
-  --chotto-feed-scrollbar-background-color: #f5f5f5;
   --chotto-feed-scrollbar-bg: var(--chotto-theme-scrollbar-bg);
   --chotto-feed-scrollbar-thumb-border-radius: 10px;
-  --chotto-feed-scrollbar-thumb-background-color: #d4d4d4;
   --chotto-feed-scrollbar-thumb-bg: var(--chotto-theme-scrollbar-thumb-bg);
   --chotto-feed-scrollbar-track-border-radius: 10px;
 

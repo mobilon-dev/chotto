@@ -53,6 +53,15 @@
   --chotto-createchat2-form-input-placeholder-color: var(--chotto-theme-placeholder-color);
   --chotto-createchat2-form-input-placeholder-font-size: 14px;
 
+  // Form input error
+  --chotto-createchat2-form-input-error-border-color: #dc2626;
+  --chotto-createchat2-form-input-error-background: #fef2f2;
+  --chotto-createchat2-form-input-error-hover-border-color: #b91c1c;
+  --chotto-createchat2-form-input-error-hover-background: #fee2e2;
+  --chotto-createchat2-form-input-error-focus-border-color: #dc2626;
+  --chotto-createchat2-form-input-error-focus-box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  --chotto-createchat2-form-input-error-focus-background: #fef2f2;
+
   // Form error
   --chotto-createchat2-form-error-color: #dc2626;
   --chotto-createchat2-form-error-font-size: 12px;

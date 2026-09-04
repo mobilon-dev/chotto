@@ -25,8 +25,6 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-items-display': string;
   /** Поведение прокрутки контейнера элементов */
   '--chotto-chatlist-items-scroll-behavior': string;
-  /** Высота контейнера элементов */
-  '--chotto-chatlist-items-height': string;
   /** Переполнение по вертикали контейнера элементов */
   '--chotto-chatlist-items-overflow-y': string;
   /** Переполнение по горизонтали контейнера элементов */
@@ -47,22 +45,12 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-scrollbar-track-radius': string;
 
   // Fixed items
-  /** Z-index зафиксированных элементов */
-  '--chotto-chatlist-fixed-z-index': string;
   /** Отображение зафиксированных элементов */
   '--chotto-chatlist-fixed-display': string;
-  /** Позиционирование зафиксированных элементов */
-  '--chotto-chatlist-fixed-position': string;
   /** Цвет фона зафиксированных элементов */
   '--chotto-chatlist-fixed-background-color': string;
   /** Эффект размытия фона зафиксированных элементов */
   '--chotto-chatlist-fixed-backdrop-filter': string;
-  /** Позиция зафиксированных элементов сверху */
-  '--chotto-chatlist-fixed-top': string;
-  /** Позиция зафиксированных элементов снизу */
-  '--chotto-chatlist-fixed-bottom': string;
-  /** Тень зафиксированных элементов */
-  '--chotto-chatlist-fixed-box-shadow': string;
   /** Отступ снизу для зафиксированных элементов сверху */
   '--chotto-chatlist-fixed-top-margin-bottom': string;
   /** Отступ сверху для зафиксированных элементов снизу */
@@ -276,4 +264,6 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-title-beta-badge-tooltip-wrapper-line-height': string;
   /** Отображение обёртки тултипа бейджа beta заголовка */
   '--chotto-chatlist-title-beta-badge-tooltip-wrapper-display': string;
+  /** CSS variable chatlist items position */
+  '--chotto-chatlist-items-position': string;
 }

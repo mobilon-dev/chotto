@@ -67,10 +67,16 @@ export interface ContextMenuThemeCSSVariables {
   '--chotto-contextmenu-item-icon-margin-right': string;
   /** Коэффициент сжатия иконки элемента контекстного меню */
   '--chotto-contextmenu-item-icon-flex-shrink': string;
+  /** Размер иконки элемента контекстного меню */
+  '--chotto-contextmenu-item-icon-size': string;
   /** Цвет фона элемента контекстного меню при наведении */
   '--chotto-contextmenu-item-hover-background-color': string;
   /** Граница снизу элемента контекстного меню (не последний) */
   '--chotto-contextmenu-item-not-last-child-border-bottom': string;
+  /** Цвет опасного элемента контекстного меню */
+  '--chotto-contextmenu-item-danger-color': string;
+  /** Цвет фона опасного элемента при наведении */
+  '--chotto-contextmenu-item-danger-hover-background-color': string;
 
   // Disabled Item
   /** Непрозрачность отключенного элемента контекстного меню */
@@ -93,4 +99,10 @@ export interface ContextMenuThemeCSSVariables {
   '--chotto-contextmenu-separator-background-color': string;
   /** Выравнивание разделителя по главной оси (grid) */
   '--chotto-contextmenu-separator-justify-self': string;
+
+  // Message variant
+  /** Ширина контекстного меню сообщения */
+  '--chotto-contextmenu-message-width': string;
+  /** Высота контекстного меню сообщения */
+  '--chotto-contextmenu-message-height': string;
 }

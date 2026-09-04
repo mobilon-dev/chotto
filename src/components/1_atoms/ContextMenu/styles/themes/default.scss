@@ -34,8 +34,11 @@
   --chotto-contextmenu-item-height: 40px;
   --chotto-contextmenu-item-icon-margin-right: 0;
   --chotto-contextmenu-item-icon-flex-shrink: 0;
+  --chotto-contextmenu-item-icon-size: 18px;
   --chotto-contextmenu-item-hover-background-color: #F6F6F6;
   --chotto-contextmenu-item-not-last-child-border-bottom: none;
+  --chotto-contextmenu-item-danger-color: #DC3545;
+  --chotto-contextmenu-item-danger-hover-background-color: #FDE8EA;
 
   // ContextMenu disabled item variables
   --chotto-contextmenu-item-disabled-opacity: 0.5;
@@ -49,4 +52,8 @@
   --chotto-contextmenu-separator-padding: 0;
   --chotto-contextmenu-separator-background-color: rgba(0, 0, 0, 0.08);
   --chotto-contextmenu-separator-justify-self: center;
+
+  // ContextMenu message actions menu variables
+  --chotto-contextmenu-message-width: 220px;
+  --chotto-contextmenu-message-height: 152px;
 }

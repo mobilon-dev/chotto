@@ -7,12 +7,8 @@ export interface SideBarThemeCSSVariables {
   '--chotto-sidebar-padding-container': string;
   /** Промежуток между строками списка */
   '--chotto-sidebar-row-gap-list': string;
-  /** Граница активного изображения */
-  '--chotto-sidebar-image-active-border': string;
   /** Граница сверху фиксированного списка */
   '--chotto-sidebar-list-fixed-border-top': string;
-  /** Граница снизу фиксированного списка */
-  '--chotto-sidebar-list-fixed-border-bottom': string;
   /** Высота счетчика уведомлений */
   '--chotto-sidebar-notification-count-height': string;
   /** Радиус наведения */

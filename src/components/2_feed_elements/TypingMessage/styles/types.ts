@@ -64,8 +64,6 @@ export interface TypingMessageThemeCSSVariables {
   '--chotto-typingmessage-loader-top': string;
   /** Скругление индикатора набора */
   '--chotto-typingmessage-loader-border-radius': string;
-  /** Анимация индикатора набора */
-  '--chotto-typingmessage-loader-animation': string;
   /** Внешние отступы индикатора набора */
   '--chotto-typingmessage-loader-margin': string;
 
@@ -79,9 +77,6 @@ export interface TypingMessageThemeCSSVariables {
   '--chotto-typingmessage-loader-pseudo-height': string;
   /** Скругление псевдоэлемента точки */
   '--chotto-typingmessage-loader-pseudo-border-radius': string;
-  /** Анимация псевдоэлемента точки */
-  '--chotto-typingmessage-loader-pseudo-animation': string;
-
   /** Смещение левой точки индикатора */
   '--chotto-typingmessage-loader-before-left': string;
   /** Задержка анимации левой точки */

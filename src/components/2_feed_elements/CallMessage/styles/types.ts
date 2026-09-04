@@ -49,14 +49,14 @@ export interface CallMessageThemeCSSVariables {
 
   /** Колонки грида инфо-контейнера */
   '--chotto-callmessage-info-container-grid-column': string;
-  /** Отступ слева у инфо-контейнера */
-  '--chotto-callmessage-info-container-margin-left': string;
   /** Отображение инфо-контейнера */
   '--chotto-callmessage-info-container-display': string;
   /** Выравнивание элементов инфо-контейнера */
   '--chotto-callmessage-info-container-align-items': string;
   /** Промежуток между элементами инфо-контейнера */
   '--chotto-callmessage-info-container-column-gap': string;
+  /** Выравнивание содержимого инфо-контейнера по главной оси */
+  '--chotto-callmessage-info-container-justify-content': string;
 
   /** Отображение контейнера кнопок (Текст / Резюме / Перезвонить) */
   '--chotto-callmessage-actions-display': string;
@@ -82,6 +82,8 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-title-wrapper-align-items': string;
   /** Промежуток между колонками обёртки заголовка */
   '--chotto-callmessage-title-wrapper-column-gap': string;
+  /** Flex-свойство иконки направления звонка */
+  '--chotto-callmessage-direction-icon-flex': string;
 
   /** Колонка грида иконки */
   '--chotto-callmessage-icon-grid-column': string;
@@ -341,12 +343,8 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-left-context-menu-width': string;
   /** Высота контекстного меню слева */
   '--chotto-callmessage-left-context-menu-height': string;
-  /** Отступ сверху контекстного меню слева */
-  '--chotto-callmessage-left-context-menu-top': string;
   /** Отступ слева контекстного меню слева */
   '--chotto-callmessage-left-context-menu-left': string;
-  /** Внешний отступ сверху контекстного меню слева */
-  '--chotto-callmessage-left-context-menu-margin-top': string;
   /** Промежуток между рядами контекстного меню слева */
   '--chotto-callmessage-left-context-menu-row-gap': string;
   /** Внутренние отступы контекстного меню слева */
@@ -358,8 +356,6 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-right-grid-template-columns': string;
   /** Промежуток между колонками справа (пузырь / аватар) */
   '--chotto-callmessage-right-column-gap': string;
-  /** Правый внутренний отступ справа */
-  '--chotto-callmessage-right-padding-right': string;
   /** Контент псевдоэлемента справа */
   '--chotto-callmessage-right-after-content': string;
   /** Позиционирование псевдоэлемента справа */
@@ -406,14 +402,10 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-right-context-menu-width': string;
   /** Высота контекстного меню справа */
   '--chotto-callmessage-right-context-menu-height': string;
-  /** Отступ сверху контекстного меню справа */
-  '--chotto-callmessage-right-context-menu-top': string;
   /** Отступ справа контекстного меню справа */
   '--chotto-callmessage-right-context-menu-right': string;
   /** Отступ слева контекстного меню справа */
   '--chotto-callmessage-right-context-menu-left': string;
-  /** Внешний отступ сверху контекстного меню справа */
-  '--chotto-callmessage-right-context-menu-margin-top': string;
   /** Промежуток между рядами контекстного меню справа */
   '--chotto-callmessage-right-context-menu-row-gap': string;
   /** Внутренние отступы контекстного меню справа */
@@ -511,10 +503,20 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-time-font-size': string;
   /** Отступ справа у времени */
   '--chotto-callmessage-time-margin-right': string;
+  /** Граница кнопки звонка */
+  '--chotto-callmessage-call-button-border': string;
+  /** Фон кнопки звонка */
+  '--chotto-callmessage-call-button-background-color': string;
+  /** Внутренние отступы кнопки звонка */
+  '--chotto-callmessage-call-button-padding': string;
   /** Цвет кнопки звонка */
   '--chotto-callmessage-call-button-color': string;
   /** Размер шрифта кнопки звонка */
   '--chotto-callmessage-call-button-font-size': string;
+  /** Жирность шрифта кнопки звонка */
+  '--chotto-callmessage-call-button-font-weight': string;
+  /** Курсор кнопки звонка */
+  '--chotto-callmessage-call-button-cursor': string;
   /** Внешние отступы кнопки звонка */
   '--chotto-callmessage-call-button-margin': string;
   /** Нижняя граница активной кнопки (Текст / Резюме) */
@@ -557,8 +559,6 @@ export interface CallMessageThemeCSSVariables {
   '--chotto-callmessage-download-button-icon-color': string;
   /** Размер иконки кнопки скачивания */
   '--chotto-callmessage-download-button-icon-size': string;
-  /** Малый размер иконки текста */
-  '--chotto-callmessage-small-text-icon-size': string;
   /** Размер шрифта подзаголовка */
   '--chotto-callmessage-subtext-font-size': string;
   /** Цвет текста подзаголовка */

@@ -56,7 +56,6 @@
   --chotto-chatinput-inline-buttons-gap: 7px;
   --chotto-chatinput-inline-buttons-height: 30px;
   --chotto-chatinput-inline-buttons-display: flex;
-  --chotto-chatinput-inline-buttons-margin-auto: auto 0;
   --chotto-chatinput-inline-buttons-grid-row: 3;
   --chotto-chatinput-inline-buttons-grid-column: 1;
   --chotto-chatinput-inline-buttons-align-self: end;
@@ -140,6 +139,8 @@
   --chotto-chatinput-scrollbar-bg: var(--chotto-theme-scrollbar-bg);
   --chotto-chatinput-scrollbar-thumb-bg: var(--chotto-theme-scrollbar-thumb-bg);
   --chotto-chatinput-button-icon-size: var(--chotto-theme-button-icon-size);
+  --chotto-chatinput-input-align-self: end;
+  --chotto-chatinput-input-margin-bottom: 4px;
+  --chotto-chatinput-selection-bg: rgba(51, 133, 255, 0.35);
+  --chotto-chatinput-inline-buttons-align-items: center;
 }
-
-

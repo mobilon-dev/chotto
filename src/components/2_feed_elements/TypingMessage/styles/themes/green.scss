@@ -37,7 +37,6 @@
   --chotto-typingmessage-loader-position: relative;
   --chotto-typingmessage-loader-top: 50%;
   --chotto-typingmessage-loader-border-radius: 50%;
-  --chotto-typingmessage-loader-animation: typing-message__loader 0.8s 0.25s ease alternate infinite;
   --chotto-typingmessage-loader-margin: -20px auto 0;
 
   // TypingMessage loader pseudo-elements variables
@@ -46,8 +45,6 @@
   --chotto-typingmessage-loader-pseudo-width: 8px;
   --chotto-typingmessage-loader-pseudo-height: 8px;
   --chotto-typingmessage-loader-pseudo-border-radius: 50%;
-  --chotto-typingmessage-loader-pseudo-animation: typing-message__loader 0.8s ease alternate infinite;
-
   // TypingMessage loader before variables
   --chotto-typingmessage-loader-before-left: -20px;
   --chotto-typingmessage-loader-before-animation-delay: 0.1s;

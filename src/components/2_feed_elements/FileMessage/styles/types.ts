@@ -71,8 +71,6 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-right-triangle-height': string;
   /** Базовая рамка хвостика справа */
   '--chotto-filemessage-right-triangle-border': string;
-  /** Верхняя часть рамки хвостика справа (цвет пузыря) */
-  '--chotto-filemessage-right-triangle-border-top': string;
   /** Слой псевдоэлемента справа */
   '--chotto-filemessage-right-triangle-z-index': string;
   /** Обрезка хвостика справа (скрывает часть внутри пузыря) */
@@ -271,12 +269,8 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-left-menu-button-top': string;
   /** Положение кнопки меню слева (right) */
   '--chotto-filemessage-left-menu-button-right': string;
-  /** Позиция контекстного меню слева (top) */
-  '--chotto-filemessage-left-context-menu-top': string;
   /** Позиция контекстного меню слева (left) */
   '--chotto-filemessage-left-context-menu-left': string;
-  /** Отступ контекстного меню слева сверху */
-  '--chotto-filemessage-left-context-menu-margin-top': string;
 
   /** Шаблон колонок правой раскладки */
   '--chotto-filemessage-right-grid-template-columns': string;
@@ -284,8 +278,6 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-right-column-gap': string;
   /** Колонка грида аватара справа */
   '--chotto-filemessage-right-avatar-grid-column': string;
-  /** Ряд грида аватара справа */
-  '--chotto-filemessage-right-avatar-grid-row': string;
   /** Отступ слева от аватара справа */
   '--chotto-filemessage-right-avatar-margin-left': string;
   /** Колонка грида подписи справа */
@@ -304,12 +296,8 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-right-menu-button-top': string;
   /** Положение кнопки меню справа (left) */
   '--chotto-filemessage-right-menu-button-left': string;
-  /** Позиция контекстного меню справа (top) */
-  '--chotto-filemessage-right-context-menu-top': string;
   /** Позиция контекстного меню справа (right) */
   '--chotto-filemessage-right-context-menu-right': string;
-  /** Отступ контекстного меню справа сверху */
-  '--chotto-filemessage-right-context-menu-margin-top': string;
 
   /** Переход появления пузыря */
   '--chotto-filemessage-v-enter-active-transition': string;

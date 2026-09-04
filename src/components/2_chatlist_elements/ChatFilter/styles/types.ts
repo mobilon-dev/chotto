@@ -45,4 +45,30 @@ export interface ChatFilterThemeCSSVariables {
   '--chotto-chatfilter-input-focus-border-color': string;
   /** Контур поля ввода при фокусе */
   '--chotto-chatfilter-input-focus-outline': string;
+
+  // Clear button
+  /** Позиционирование кнопки очистки */
+  '--chotto-chatfilter-clear-position': string;
+  /** Позиция кнопки очистки справа */
+  '--chotto-chatfilter-clear-right': string;
+  /** Позиция кнопки очистки сверху */
+  '--chotto-chatfilter-clear-top': string;
+  /** Цвет кнопки очистки */
+  '--chotto-chatfilter-clear-color': string;
+  /** Курсор кнопки очистки */
+  '--chotto-chatfilter-clear-cursor': string;
+  /** Переход кнопки очистки */
+  '--chotto-chatfilter-clear-transition': string;
+  /** Отображение кнопки очистки */
+  '--chotto-chatfilter-clear-display': string;
+  /** Выравнивание по поперечной оси кнопки очистки */
+  '--chotto-chatfilter-clear-align-items': string;
+  /** Выравнивание по главной оси кнопки очистки */
+  '--chotto-chatfilter-clear-justify-content': string;
+  /** Ширина кнопки очистки */
+  '--chotto-chatfilter-clear-width': string;
+  /** Высота кнопки очистки */
+  '--chotto-chatfilter-clear-height': string;
+  /** Цвет кнопки очистки при наведении */
+  '--chotto-chatfilter-clear-hover-color': string;
 }

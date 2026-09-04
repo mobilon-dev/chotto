@@ -9,6 +9,21 @@
   &:hover {
     opacity: var(--chotto-messagesmsinvite-hover-opacity, 0.7);
   }
+
+  &[data-channel-type="telegram"] .message-sms-invite__text {
+    color: var(--chotto-messagesmsinvite-text-color-telegram, #2C93FF);
+    border-top-color: var(--chotto-messagesmsinvite-text-border-top-color-telegram, #B1DFFF);
+  }
+
+  &[data-channel-type="whatsapp"] .message-sms-invite__text {
+    color: var(--chotto-messagesmsinvite-text-color-whatsapp, #2C93FF);
+    border-top-color: var(--chotto-messagesmsinvite-text-border-top-color-whatsapp, #ADFF9F);
+  }
+
+  &[data-channel-type="max"] .message-sms-invite__text {
+    color: var(--chotto-messagesmsinvite-text-color-max, #2C93FF);
+    border-top-color: var(--chotto-messagesmsinvite-text-border-top-color-max, #DFBDFF);
+  }
 }
 
 .message-sms-invite__text {
@@ -21,4 +36,3 @@
   margin-right: var(--chotto-messagesmsinvite-text-margin-right, -10px);
   padding: var(--chotto-messagesmsinvite-text-padding, 7px 25px 6px 20px);
 }
-

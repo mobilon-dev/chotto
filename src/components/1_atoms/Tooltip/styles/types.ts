@@ -59,10 +59,6 @@ export interface TooltipThemeCSSVariables {
   '--chotto-tooltip-wrapper-position': string;
   /** Ширина обертки подсказки */
   '--chotto-tooltip-wrapper-width': string;
-  /** Высота обертки подсказки */
-  '--chotto-tooltip-wrapper-height': string;
-  /** Отображение обертки подсказки */
-  '--chotto-tooltip-wrapper-display': string;
   /** Курсор обертки подсказки */
   '--chotto-tooltip-wrapper-cursor': string;
 }

@@ -19,8 +19,6 @@ export interface MessageReactionsThemeCSSVariables {
   '--chotto-messagereactions-no-reactions-position': string;
   /** Отступ снизу контейнера реакций без реакций */
   '--chotto-messagereactions-no-reactions-bottom': string;
-  /** Высота контейнера реакций без реакций */
-  '--chotto-messagereactions-no-reactions-height': string;
   /** Ширина контейнера реакций без реакций */
   '--chotto-messagereactions-no-reactions-width': string;
   /** Переполнение контейнера реакций без реакций */
@@ -35,16 +33,6 @@ export interface MessageReactionsThemeCSSVariables {
   '--chotto-messagereactions-no-reactions-z-index': string;
   /** События указателя контейнера реакций без реакций */
   '--chotto-messagereactions-no-reactions-pointer-events': string;
-
-  /** Отступ справа для левых сообщений без реакций */
-  '--chotto-messagereactions-left-no-reactions-right': string;
-  /** Отступ слева для левых сообщений без реакций */
-  '--chotto-messagereactions-left-no-reactions-left': string;
-
-  /** Отступ слева для правых сообщений без реакций */
-  '--chotto-messagereactions-right-no-reactions-left': string;
-  /** Отступ справа для правых сообщений без реакций */
-  '--chotto-messagereactions-right-no-reactions-right': string;
 
   /** Отображение чипа реакции */
   '--chotto-messagereactions-chip-display': string;
@@ -178,5 +166,12 @@ export interface MessageReactionsThemeCSSVariables {
   '--chotto-messagereactions-popover-enter-from-opacity': string;
   /** Трансформация попапа реакций в начале */
   '--chotto-messagereactions-popover-enter-from-transform': string;
+  /** CSS variable messagereactions no reactions top */
+  '--chotto-messagereactions-no-reactions-top': string;
+  /** CSS variable messagereactions no reactions left */
+  '--chotto-messagereactions-no-reactions-left': string;
+  /** CSS variable messagereactions no reactions right */
+  '--chotto-messagereactions-no-reactions-right': string;
+  /** CSS variable messagereactions no reactions display */
+  '--chotto-messagereactions-no-reactions-display': string;
 }
-

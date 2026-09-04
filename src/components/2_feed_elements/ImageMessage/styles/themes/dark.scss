@@ -5,9 +5,6 @@
   --chotto-imagemessage-content-width: fit-content;
   --chotto-imagemessage-content-border-radius: 14px;
   --chotto-imagemessage-content-with-caption-border-radius: 7px;
-  --chotto-imagemessage-preview-border-radius: 7px;
-  --chotto-imagemessage-preview-with-caption-border-radius: 7px 7px 0 0;
-  --chotto-imagemessage-preview-with-reply-border-radius: 0 0 7px 7px;
   --chotto-imagemessage-content-align-items: stretch;
   --chotto-imagemessage-content-display: flex;
   --chotto-imagemessage-content-flex-direction: column;
@@ -216,10 +213,7 @@
   --chotto-imagemessage-left-content-with-avatar-indent-margin-left: 0;
   --chotto-imagemessage-left-menu-button-top: 50%;
   --chotto-imagemessage-left-menu-button-right: -40px;
-  --chotto-imagemessage-left-context-menu-top: 50%;
   --chotto-imagemessage-left-context-menu-left: 100%;
-  --chotto-imagemessage-left-context-menu-margin-top: 20px;
-
   // ImageMessage right variables
   --chotto-imagemessage-right-grid-template-columns: 1fr var(--chotto-theme-avatar-small-size);
   --chotto-imagemessage-right-column-gap: 8px;
@@ -238,10 +232,7 @@
   --chotto-imagemessage-right-text-container-margin-left: auto;
   --chotto-imagemessage-right-menu-button-top: 50%;
   --chotto-imagemessage-right-menu-button-left: -40px;
-  --chotto-imagemessage-right-context-menu-top: 50%;
   --chotto-imagemessage-right-context-menu-right: 100%;
-  --chotto-imagemessage-right-context-menu-margin-top: 20px;
-
   // ImageMessage reactions variables
   --chotto-imagemessage-reactions-margin: 4px 0 6px 10px;
 
@@ -253,4 +244,5 @@
   --chotto-imagemessage-modal-fade-enter-active-transition: opacity 0.2s ease;
   --chotto-imagemessage-modal-fade-enter-from-opacity: 0;
   --chotto-imagemessage-modal-fade-enter-to-opacity: 1;
+  --chotto-imagemessage-preview-image-object-fit: contain;
 }

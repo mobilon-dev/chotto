@@ -94,6 +94,22 @@ export interface CreateChat2ThemeCSSVariables {
   /** Размер шрифта плейсхолдера */
   '--chotto-createchat2-form-input-placeholder-font-size': string;
 
+  // Form input error
+  /** Цвет границы поля ввода при ошибке */
+  '--chotto-createchat2-form-input-error-border-color': string;
+  /** Цвет фона поля ввода при ошибке */
+  '--chotto-createchat2-form-input-error-background': string;
+  /** Цвет границы поля ввода при ошибке и наведении */
+  '--chotto-createchat2-form-input-error-hover-border-color': string;
+  /** Цвет фона поля ввода при ошибке и наведении */
+  '--chotto-createchat2-form-input-error-hover-background': string;
+  /** Цвет границы поля ввода при ошибке и фокусе */
+  '--chotto-createchat2-form-input-error-focus-border-color': string;
+  /** Тень поля ввода при ошибке и фокусе */
+  '--chotto-createchat2-form-input-error-focus-box-shadow': string;
+  /** Цвет фона поля ввода при ошибке и фокусе */
+  '--chotto-createchat2-form-input-error-focus-background': string;
+
   // Form error
   /** Цвет текста ошибки */
   '--chotto-createchat2-form-error-color': string;

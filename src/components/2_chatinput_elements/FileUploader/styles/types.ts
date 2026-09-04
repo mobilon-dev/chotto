@@ -2,6 +2,14 @@
  * CSS переменные для компонента FileUploader
  */
 export interface FileUploaderThemeCSSVariables {
+  // Status
+  /** Размер шрифта статуса загрузки файла */
+  '--chotto-fileuploader-status-font-size': string;
+  /** Ширина статуса при загрузке */
+  '--chotto-fileuploader-status-uploading-width': string;
+  /** Ширина статуса при ошибке */
+  '--chotto-fileuploader-status-error-width': string;
+
   // Trigger
   /** Отступы триггера загрузки файла */
   '--chotto-fileuploader-trigger-padding': string;

@@ -99,7 +99,6 @@
   --chotto-textmessage-edit-tooltip-display: flex;
   --chotto-textmessage-edit-tooltip-flex-direction: column;
   --chotto-textmessage-edit-tooltip-row-gap: 2px;
-  --chotto-textmessage-edit-tooltip-border: 1px solid #5F5F5F;
   --chotto-textmessage-edit-tooltip-original-color: #1E1E1E;
   --chotto-textmessage-edit-tooltip-meta-color: #5F5F5F;
 
@@ -172,12 +171,10 @@
   --chotto-textmessage-left-content-grid-column: 2;
   --chotto-textmessage-left-bg: var(--chotto-theme-message-left-bg);
   --chotto-textmessage-left-backdrop-filter: none;
-  --chotto-textmessage-left-border: none;
   --chotto-textmessage-left-box-shadow: none;
   --chotto-textmessage-left-content-with-avatar-indent-margin-left: 0;
   --chotto-textmessage-left-menu-button-top: 50%;
   --chotto-textmessage-left-menu-button-right: -40px;
-  --chotto-textmessage-left-context-menu-top: 56%;
   --chotto-textmessage-left-context-menu-left: 100%;
 
   // TextMessage right variables
@@ -198,7 +195,6 @@
   --chotto-textmessage-right-content-with-avatar-indent-margin-right: 0;
   --chotto-textmessage-right-menu-button-top: 50%;
   --chotto-textmessage-right-menu-button-left: -40px;
-  --chotto-textmessage-right-context-menu-top: 56%;
   --chotto-textmessage-right-context-menu-right: 100%;
 
   // TextMessage transition variables
@@ -206,4 +202,8 @@
   --chotto-textmessage-v-leave-active-transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
   --chotto-textmessage-v-enter-from-transform: scale(0.9);
   --chotto-textmessage-v-enter-from-opacity: 0;
+  --chotto-textmessage-edit-tooltip-entry-display: flex;
+  --chotto-textmessage-edit-tooltip-entry-flex-direction: column;
+  --chotto-textmessage-edit-tooltip-entry-row-gap: 2px;
+  --chotto-textmessage-edit-tooltip-entry-margin-top: 6px;
 }

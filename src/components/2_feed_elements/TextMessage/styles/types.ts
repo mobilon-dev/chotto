@@ -170,8 +170,6 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-edit-tooltip-flex-direction': string;
   /** Промежуток между строками тултипа правки */
   '--chotto-textmessage-edit-tooltip-row-gap': string;
-  /** Рамка тултипа правки */
-  '--chotto-textmessage-edit-tooltip-border': string;
   /** Цвет оригинального текста в тултипе правки */
   '--chotto-textmessage-edit-tooltip-original-color': string;
   /** Цвет мета-строки (автор, дата) в тултипе правки */
@@ -287,8 +285,6 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-left-bg': string;
   /** Эффект размытия фона пузыря слева */
   '--chotto-textmessage-left-backdrop-filter': string;
-  /** Граница пузыря слева */
-  '--chotto-textmessage-left-border': string;
   /** Тень пузыря слева */
   '--chotto-textmessage-left-box-shadow': string;
   /** Отступ контента слева с учётом аватара (колонка уже зарезервирована, обычно 0) */
@@ -297,8 +293,6 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-left-menu-button-top': string;
   /** Положение кнопки меню слева (right) */
   '--chotto-textmessage-left-menu-button-right': string;
-  /** Позиция контекстного меню слева (top) */
-  '--chotto-textmessage-left-context-menu-top': string;
   /** Позиция контекстного меню слева (left) */
   '--chotto-textmessage-left-context-menu-left': string;
 
@@ -336,8 +330,6 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-right-menu-button-top': string;
   /** Положение кнопки меню справа (left) */
   '--chotto-textmessage-right-menu-button-left': string;
-  /** Позиция контекстного меню справа (top) */
-  '--chotto-textmessage-right-context-menu-top': string;
   /** Позиция контекстного меню справа (right) */
   '--chotto-textmessage-right-context-menu-right': string;
 
@@ -349,6 +341,12 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-v-enter-from-transform': string;
   /** Стартовая прозрачность при появлении */
   '--chotto-textmessage-v-enter-from-opacity': string;
+  /** CSS variable textmessage edit tooltip entry display */
+  '--chotto-textmessage-edit-tooltip-entry-display': string;
+  /** CSS variable textmessage edit tooltip entry flex direction */
+  '--chotto-textmessage-edit-tooltip-entry-flex-direction': string;
+  /** CSS variable textmessage edit tooltip entry row gap */
+  '--chotto-textmessage-edit-tooltip-entry-row-gap': string;
+  /** CSS variable textmessage edit tooltip entry margin top */
+  '--chotto-textmessage-edit-tooltip-entry-margin-top': string;
 }
-
-

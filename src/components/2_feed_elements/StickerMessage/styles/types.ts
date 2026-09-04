@@ -195,13 +195,8 @@ export interface StickerMessageThemeCSSVariables {
   '--chotto-stickermessage-left-menu-button-top': string;
   /** Положение кнопки меню слева (right) */
   '--chotto-stickermessage-left-menu-button-right': string;
-  /** Позиция контекстного меню слева (top) */
-  '--chotto-stickermessage-left-context-menu-top': string;
   /** Позиция контекстного меню слева (left) */
   '--chotto-stickermessage-left-context-menu-left': string;
-  /** Отступ контекстного меню слева сверху */
-  '--chotto-stickermessage-left-context-menu-margin-top': string;
-
   /** Шаблон колонок правой раскладки */
   '--chotto-stickermessage-right-grid-template-columns': string;
   /** Промежуток между колонками справа (пузырь / аватар) */
@@ -228,13 +223,8 @@ export interface StickerMessageThemeCSSVariables {
   '--chotto-stickermessage-right-menu-button-top': string;
   /** Положение кнопки меню справа (left) */
   '--chotto-stickermessage-right-menu-button-left': string;
-  /** Позиция контекстного меню справа (top) */
-  '--chotto-stickermessage-right-context-menu-top': string;
   /** Позиция контекстного меню справа (right) */
   '--chotto-stickermessage-right-context-menu-right': string;
-  /** Отступ контекстного меню справа сверху */
-  '--chotto-stickermessage-right-context-menu-margin-top': string;
-
   /** Переход появления контекстного меню */
   '--chotto-stickermessage-context-menu-enter-active-transition': string;
   /** Переход скрытия контекстного меню */
@@ -266,6 +256,26 @@ export interface StickerMessageThemeCSSVariables {
   '--chotto-stickermessage-sms-invite-padding-left': string;
   /** Внутренний отступ справа текста SMS-приглашения в стикер-сообщениях */
   '--chotto-stickermessage-sms-invite-padding-right': string;
+  /** CSS variable stickermessage modal image height */
+  '--chotto-stickermessage-modal-image-height': string;
+  /** CSS variable stickermessage modal image object fit */
+  '--chotto-stickermessage-modal-image-object-fit': string;
+  /** CSS variable stickermessage modal image border radius */
+  '--chotto-stickermessage-modal-image-border-radius': string;
+  /** CSS variable stickermessage modal image max height */
+  '--chotto-stickermessage-modal-image-max-height': string;
+  /** CSS variable stickermessage modal image max width */
+  '--chotto-stickermessage-modal-image-max-width': string;
+  /** CSS variable stickermessage modal image animated height */
+  '--chotto-stickermessage-modal-image-animated-height': string;
+  /** CSS variable stickermessage modal image animated object fit */
+  '--chotto-stickermessage-modal-image-animated-object-fit': string;
+  /** CSS variable stickermessage modal image animated border radius */
+  '--chotto-stickermessage-modal-image-animated-border-radius': string;
+  /** CSS variable stickermessage modal image animated max height */
+  '--chotto-stickermessage-modal-image-animated-max-height': string;
+  /** CSS variable stickermessage modal image animated max width */
+  '--chotto-stickermessage-modal-image-animated-max-width': string;
+  /** CSS variable stickermessage right bg */
+  '--chotto-stickermessage-right-bg': string;
 }
-
-

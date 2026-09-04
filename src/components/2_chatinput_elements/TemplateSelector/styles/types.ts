@@ -5,8 +5,6 @@ export interface TemplateSelectorThemeCSSVariables {
   // Main container
   /** Базовый фон TemplateSelector */
   '--chotto-templateselector-primary-color': string;
-  /** Цвет границ элементов TemplateSelector */
-  '--chotto-templateselector-item-border-color': string;
   /** Позиционирование селектора шаблонов */
   '--chotto-templateselector-position': string;
   /** Позиция селектора шаблонов снизу */
@@ -35,8 +33,6 @@ export interface TemplateSelectorThemeCSSVariables {
   '--chotto-templateselector-container-inline-min-width': string;
 
   // Container elevated
-  /** Цвет тени контейнера */
-  '--chotto-templateselector-shadow-color': string;
   /** Позиционирование приподнятого контейнера */
   '--chotto-templateselector-container-elevated-position': string;
   /** Максимальная высота приподнятого контейнера */

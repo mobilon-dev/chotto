@@ -4,7 +4,13 @@ export { validateNoThemeImportsInStyleFiles } from "./noThemeImports";
 export { validateFallbacksInStyleFiles } from "./fallbacks";
 export { validateNoCSSClassesInThemeFiles } from "./cssClassesInTheme";
 export { validateCSSVariablePrefixes, validateCSSVariablePrefixesInContent } from "./prefixes";
-export { validateComponentThemeInterface, getComponentInterface } from "./interfaceMatch";
+export {
+  validateComponentThemeInterface,
+  validateComponentStyleInterface,
+  validateComponentStyleInterfaceInContent,
+  extractComponentVariablesFromStyleContent,
+  getComponentInterface,
+} from "./interfaceMatch";
 export { validateForbiddenGlobalVariablesInStyleFiles, validateForbiddenGlobalVariablesInThemeFiles, validateThemeVariablesInThemeFiles, validateForbiddenGlobalVariablesInContent, validateThemeVariablesInContent } from "./forbiddenVariables";
 export { validateThemeUsageInComponents } from "./themeUsage";
 export { validateNoDataThemeInStyleFiles, validateNoDataThemeInContent } from "./dataTheme";

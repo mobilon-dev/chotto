@@ -38,7 +38,6 @@
   --chotto-filemessage-right-triangle-width: 0;
   --chotto-filemessage-right-triangle-height: 0;
   --chotto-filemessage-right-triangle-border: 20px solid transparent;
-  --chotto-filemessage-right-triangle-border-top: 15px solid transparent;
   --chotto-filemessage-right-triangle-z-index: 1;
   --chotto-filemessage-right-triangle-clip-path: inset(0 -40px -10px 25px);
 
@@ -191,15 +190,12 @@
   --chotto-filemessage-left-content-with-avatar-indent-margin-left: 0;
   --chotto-filemessage-left-menu-button-top: 50%;
   --chotto-filemessage-left-menu-button-right: -40px;
-  --chotto-filemessage-left-context-menu-top: 50%;
   --chotto-filemessage-left-context-menu-left: 100%;
-  --chotto-filemessage-left-context-menu-margin-top: 20px;
 
   // FileMessage right variables
   --chotto-filemessage-right-grid-template-columns: 1fr var(--chotto-theme-avatar-small-size);
   --chotto-filemessage-right-column-gap: 8px;
   --chotto-filemessage-right-avatar-grid-column: 2;
-  --chotto-filemessage-right-avatar-grid-row: 2;
   --chotto-filemessage-right-avatar-margin-left: 0;
   --chotto-filemessage-right-subtext-grid-column: 1;
   --chotto-filemessage-right-subtext-grid-row: 1;
@@ -209,9 +205,7 @@
   --chotto-filemessage-right-content-with-avatar-indent-margin-right: 0;
   --chotto-filemessage-right-menu-button-top: 50%;
   --chotto-filemessage-right-menu-button-left: -40px;
-  --chotto-filemessage-right-context-menu-top: 50%;
   --chotto-filemessage-right-context-menu-right: 100%;
-  --chotto-filemessage-right-context-menu-margin-top: 20px;
 
   // FileMessage Vue animation variables
   --chotto-filemessage-v-enter-active-transition: all 0.1s ease-out;

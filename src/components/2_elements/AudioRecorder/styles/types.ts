@@ -2,6 +2,10 @@
  * CSS переменные для компонента AudioRecorder
  */
 export interface AudioRecorderThemeCSSVariables {
+  // Status
+  /** Размер шрифта статуса */
+  '--chotto-audiorecorder-status-font-size': string;
+
   // Container
   /** Позиционирование контейнера */
   '--chotto-audiorecorder-container-position': string;

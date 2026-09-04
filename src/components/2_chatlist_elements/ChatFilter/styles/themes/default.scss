@@ -8,6 +8,21 @@
   --chotto-chatfilter-icon-top: 25%;
   --chotto-chatfilter-icon-color: var(--chotto-theme-secondary-text-color);
 
+
+  // ChatFilter clear button variables
+  --chotto-chatfilter-clear-position: absolute;
+  --chotto-chatfilter-clear-right: 14px;
+  --chotto-chatfilter-clear-top: 25%;
+  --chotto-chatfilter-clear-color: var(--chotto-theme-secondary-text-color);
+  --chotto-chatfilter-clear-cursor: pointer;
+  --chotto-chatfilter-clear-transition: color 0.2s;
+  --chotto-chatfilter-clear-display: flex;
+  --chotto-chatfilter-clear-align-items: center;
+  --chotto-chatfilter-clear-justify-content: center;
+  --chotto-chatfilter-clear-width: 18px;
+  --chotto-chatfilter-clear-height: 18px;
+  --chotto-chatfilter-clear-hover-color: var(--chotto-theme-button-color-hover);
+
   // ChatFilter input variables
   --chotto-chatfilter-input-width: 100%;
   --chotto-chatfilter-input-background-color: transparent;
