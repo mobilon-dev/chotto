@@ -13,7 +13,6 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import moment from 'moment';
 
 // import ChatApp from './apps/BaseBaseChatApp/BaseBaseChatApp.vue';
 // import ChatApp from './apps/BaseExtendedChatApp/BaseExtendedChatApp.vue';
@@ -152,13 +151,13 @@ onMounted(() => {
   if (new URLSearchParams(window.location.search).has('e2e')) return
 
   setTimeout(() => {
-    const newM = { ...data, text: 'new message 1', timestamp: moment().unix() };
+    const newM = { ...data, text: 'new message 1', timestamp: Math.floor(Date.now() / 1000) };
     data3.messages.push(newM);
     eventor.push({ type: 'message', data: newM });
   }, 3000);
 
   setTimeout(() => {
-    const newM = { ...data, text: 'new message 2', timestamp: moment().unix() };
+    const newM = { ...data, text: 'new message 2', timestamp: Math.floor(Date.now() / 1000) };
     data3.messages.push(newM);
     eventor.push({ type: 'message', data: newM });
   }, 5000);
