@@ -46,7 +46,7 @@
 ### 🎯 **Продвинутые функции**
 - 🔍 **Поиск по сообщениям** с подсветкой результатов
 - 📱 **Адаптивные макеты** для всех устройств
-- 🎨 **3 готовые темы**: светлая, темная, зеленая
+- 🎨 **5 готовых тем**: светлая, темная, glass, зеленая, Mobilon1
 - 🌍 **Многоязычность**: русский и английский
 - 🔔 **Система уведомлений** в реальном времени
 - 📊 **Просмотры сообщений** с счетчиками
@@ -128,6 +128,7 @@ import '@mobilon-dev/chotto/style.css'
 // Если нужна конкретная тема, можно импортировать отдельно:
 import '@mobilon-dev/chotto/themes/default.css'
 import '@mobilon-dev/chotto/themes/dark.css'
+import '@mobilon-dev/chotto/themes/glass.css'
 import '@mobilon-dev/chotto/themes/green.css'
 import '@mobilon-dev/chotto/themes/mobilon1.css'
 
@@ -207,7 +208,7 @@ src/
 │   └── validators/             # Валидаторы
 ├── functions/                  # Утилитарные функции
 ├── types/                      # TypeScript типы и интерфейсы
-├── themes/                     # Система тем (default, dark, green, mobilon1)
+├── themes/                     # Система тем (default, dark, glass, green, mobilon1)
 ├── locale/                     # Локализация (EN, RU)
 └── utils/                      # Вспомогательные утилиты
 ```
@@ -225,7 +226,8 @@ dist/                 # Собранная библиотека (результ�
 
 ### Доступные темы
 - **Default** - светлая тема
-- **Dark** - темная тема  
+- **Dark** - темная тема
+- **Glass** - полупрозрачная glass-тема
 - **Green** - зеленая тема
 - **Mobilon1** - брендовая тема Mobilon
 
@@ -237,6 +239,7 @@ dist/                 # Собранная библиотека (результ�
 // Импорт конкретной темы
 import '@mobilon-dev/chotto/themes/default.css'
 import '@mobilon-dev/chotto/themes/dark.css'
+import '@mobilon-dev/chotto/themes/glass.css'
 import '@mobilon-dev/chotto/themes/green.css'
 import '@mobilon-dev/chotto/themes/mobilon1.css'
 ```
@@ -295,7 +298,7 @@ import '@mobilon-dev/chotto/themes/mobilon1.css'
 - ✅ Можно использовать глобальные переменные темы: `var(--chotto-theme-primary-color)`
 - ✅ Полная типизация через TypeScript интерфейсы
 
-**Доступные значения `data-theme`:** `"default"`, `"dark"`, `"green"`, `"mobilon1"`
+**Доступные значения `data-theme`:** `"default"`, `"dark"`, `"glass"`, `"green"`, `"mobilon1"`
 
 Полный список глобальных переменных доступен в типе `ChottoThemeVariables` из `@mobilon-dev/chotto`. Переменные компонентов типизированы в интерфейсах вида `ComponentNameThemeCSSVariables` в соответствующих компонентах.
 
