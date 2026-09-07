@@ -8,7 +8,7 @@
         <template #first-col>
           <UserProfile :user="userProfile" />
           <ChatList
-            :chats="chatsStore.chats"
+            :chats="sortedChats"
             filter-enabled
             @select="selectChat"
             @action="chatAction"
@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, provide } from "vue";
+import { onMounted, ref, computed, provide } from "vue";
 // import { watch } from "vue";
 
 import {
@@ -115,8 +115,7 @@ import { transformToFeed } from "../transform/transformToFeed";
 import { useLocale } from "../../locale/useLocale";
 import { themes } from '../data';
 
-const {locale: currentLocale, locales} = useLocale()
-// const {t} = useLocale()
+const { locale: currentLocale, locales } = useLocale()
 
 // Define props
 const props = defineProps({
@@ -139,10 +138,14 @@ const props = defineProps({
   }
 });
 
-// Use the locale from props or fallback to currentLocale
-const locale = props.locale || currentLocale;
-
 const chatsStore = useChatsStore();
+
+const sortedChats = computed(() => {
+  if (!chatsStore.chats || chatsStore.chats.length === 0) {
+    return [];
+  }
+  return [...chatsStore.chats];
+});
 
 // Reactive data
 const selectedChat = ref(null);
@@ -164,24 +167,6 @@ const onSelectChannel = (channel) => {
   console.log('selected channel', channel);
 };
 
-// const chatApp = ref(null);
-
-// const chatAppSize = ref({
-//   width: 0,
-//   height: 0,
-// });
-
-// const updateChatAppSize = () => {
-//   return (chatAppSize.value = {
-//     width: chatApp.value.offsetWidth,
-//     height: chatApp.value.offsetHeight,
-//   });
-// };
-
-// const selectItem = (item) => {
-//   console.log("selected sidebar item", item);
-// };
-
 const chatAction = async (data) => {
   console.log("chat action", data);
   if (data.action === "add") {
@@ -199,29 +184,22 @@ const messageAction = (data) => {
 
 const getUsers = () => {
   return props.dataProvider.getUsers();
-  // return (props.dataProvider.getChats()).map(c => { return { ...c, userId: c.chatId.toString() } });
 };
 
 const loadMore = () => {
-  // do load more messages to feed
   console.log("load more");
 };
 
 const getFeedObjects = () => {
-  // console.log('get feed')
   if (selectedChat.value) {
-    // здесь обработка для передачи сообщений в feed
     const messages = props.dataProvider.getFeed(selectedChat.value.chatId);
-    const messages3 = transformToFeed(messages);
-    return messages3;
-  } else {
-    return [];
+    return transformToFeed(messages);
   }
+  return [];
 };
 
 const addMessage = (message) => {
   console.log(message);
-  // Добавление сообщения в хранилище
 
   props.dataProvider.addMessage({
     text: message.text,
@@ -230,13 +208,13 @@ const addMessage = (message) => {
     direction: "outgoing",
     timestamp: "1727112546",
   });
-  messages.value = getFeedObjects(); // Обновление сообщений
+  messages.value = getFeedObjects();
 };
 
-const selectChat = (chat) => {
-  selectedChat.value = chat;
-  chatsStore.setUnreadCounter(chat.chatId, 0);
-  messages.value = getFeedObjects(); // Обновляем сообщения при выборе контакта
+const selectChat = (args) => {
+  selectedChat.value = args.chat;
+  chatsStore.setUnreadCounter(args.chat.chatId, 0);
+  messages.value = getFeedObjects();
 };
 
 const handleEvent = async (event) => {
@@ -252,7 +230,10 @@ const handleEvent = async (event) => {
 };
 
 onMounted(() => {
-  locale.value = locales.find((loc) => loc.code == props.locale)
+  const foundLocale = locales.find((loc) => loc.code == props.locale)
+  if (foundLocale) {
+    currentLocale.value = foundLocale
+  }
   props.eventor.subscribe(handleEvent);
   userProfile.value = props.authProvider.getUserProfile();
   chatsStore.chats = props.dataProvider.getChats();

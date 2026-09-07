@@ -251,9 +251,6 @@ const props = defineProps({
   }
 });
 
-// Use the locale from props or fallback to currentLocale
-const locale = props.locale || currentLocale;
-
 const buttonParams = {
   unreadAmount: 12
 }
@@ -603,7 +600,10 @@ const resizeObserver = new ResizeObserver((entries) => {
 });
 
 onMounted(() => {
-  locale.value = locales.find((loc) => loc.code == props.locale)
+  const foundLocale = locales.find((loc) => loc.code == props.locale)
+  if (foundLocale) {
+    currentLocale.value = foundLocale
+  }
   props.eventor.subscribe(handleEvent);
   userProfile.value = props.authProvider.getUserProfile();
   chatsStore.chats = props.dataProvider.getChats();

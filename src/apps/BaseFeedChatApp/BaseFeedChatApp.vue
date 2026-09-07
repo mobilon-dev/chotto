@@ -169,9 +169,9 @@ const addMessage = (message) => {
   messages.value = getFeedObjects(); // Обновление сообщений
 };
 
-const selectChat = (chat) => {
-  selectedChat.value = chat;
-  chatsStore.setUnreadCounter(chat.chatId, 0);
+const selectChat = (args) => {
+  selectedChat.value = args.chat;
+  chatsStore.setUnreadCounter(args.chat.chatId, 0);
   messages.value = getFeedObjects(); // Обновляем сообщения при выборе контакта
 };
 
