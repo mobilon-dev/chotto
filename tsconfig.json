@@ -12,7 +12,7 @@
     "noEmit": false,
     "jsx": "preserve",
     "strict": true,
-    "allowJs": true,
+    "allowJs": false,
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "noUnusedParameters": true,
@@ -28,6 +28,9 @@
     }
   },
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vitest.config.ts", "vitest.setup.ts"],
-  "exclude": ["src/**/__tests__/*"]
+  "exclude": [
+    "src/**/__tests__/*",
+    "src/**/libs/tgs-player/**"
+  ]
 }
 

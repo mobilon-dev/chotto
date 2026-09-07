@@ -35,3 +35,6 @@ declare module 'markdown-it' {
   
   export default MarkdownIt
 }
+
+// Vendored JS (tgs/lottie players и т.п.) — не типизируем, только резолвим импорт
+declare module '*.js'

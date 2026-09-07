@@ -627,40 +627,35 @@ const messagesWithDates = insertDaySeparators(messages);
 
 ### 9.1 Поддерживаемые языки
 
-- 🇷🇺 Русский (`ru.js`)
-- 🇺🇸 Английский (`en.js`)
+- 🇷🇺 Русский (`ru.ts`)
+- 🇺🇸 Английский (`en.ts`)
+
+Словари и `useLocale` — TypeScript (`src/locale/`); ключи типизированы через `LocaleMessageKey`.
 
 ### 9.2 Структура локализации
 
-```javascript
-// src/locale/ru.js
-export default {
-  component: {
-    ChatInput: {
-      InputPlaceholder: 'Введите сообщение...',
-      SendButton: 'Отправить'
-    },
-    ChatList: {
-      SearchPlaceholder: 'Поиск...',
-      NoChats: 'Нет чатов'
-    }
-    // ...
-  }
+```typescript
+// src/locale/ru.ts
+import type { LocaleMessages } from './types'
+
+export const ru: LocaleMessages = {
+  'component.ChatInput.InputPlaceholder': 'Введите сообщение',
+  'component.ChatList.Title': 'Чаты',
+  // ...
 }
 ```
 
 ### 9.3 Использование
 
 ```typescript
-import { useLocale } from '@mobilon-dev/chotto';
+import { useLocale } from '@/locale/useLocale'
 
-const { t, setLocale } = useLocale();
+const { t, locale, locales } = useLocale()
 
-// Получение перевода
-const placeholder = t('component.ChatInput.InputPlaceholder');
+const placeholder = t('component.ChatInput.InputPlaceholder')
 
 // Смена языка
-setLocale('en');
+locale.value = locales.find((l) => l.code === 'en')!
 ```
 
 ---

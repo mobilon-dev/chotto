@@ -77,7 +77,6 @@ const testChannelsList2 = [
 export const HaveSelectedChannel: Story = {
   args: {
     channels: testChannelsList,
-    //@ts-expect-error - theme arg for Storybook ThemeMode only
     theme: themes,
   },
 };
@@ -85,7 +84,6 @@ export const HaveSelectedChannel: Story = {
 export const HaveNotSelectedChannel: Story = {
   args: {
     channels: testChannelsList2,
-    //@ts-expect-error - theme arg for Storybook ThemeMode only
     theme: themes,
   },
 };
@@ -93,7 +91,6 @@ export const HaveNotSelectedChannel: Story = {
 export const ChannelsEmptyArray: Story = {
   args: {
     channels: [],
-    //@ts-expect-error - theme arg for Storybook ThemeMode only
     theme: themes,
   },
 };
@@ -102,7 +99,6 @@ export const InactiveChannels: Story = {
   args: {
     channels: [],
     state: 'disabled',
-    //@ts-expect-error - theme arg for Storybook ThemeMode only
     theme: themes,
   },
 };

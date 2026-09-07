@@ -81,7 +81,6 @@ export const Default: Story = {
     currentDialog: {
       attributeId: 1
     },
-    //@ts-expect-error - theme prop is only for Storybook selector
     theme: themes,
   },
 };
@@ -93,7 +92,6 @@ export const WithCurrentDialog: Story = {
     currentDialog: {
       attributeId: 2
     },
-    //@ts-expect-error - theme prop is only for Storybook selector
     theme: themes,
   },
 };
@@ -103,7 +101,6 @@ export const WithoutCurrentDialog: Story = {
     contact: defaultContact,
     channels: defaultChannels,
     currentDialog: {},
-    //@ts-expect-error - theme prop is only for Storybook selector
     theme: themes,
   },
 };
@@ -119,7 +116,6 @@ export const SingleAttribute: Story = {
     currentDialog: {
       attributeId: 1
     },
-    //@ts-expect-error - theme prop is only for Storybook selector
     theme: themes,
   },
 };
@@ -148,7 +144,6 @@ export const MultipleChannels: Story = {
     currentDialog: {
       attributeId: 1
     },
-    //@ts-expect-error - theme prop is only for Storybook selector
     theme: themes,
   },
 };
@@ -160,7 +155,6 @@ export const EmptyContact: Story = {
     },
     channels: defaultChannels,
     currentDialog: {},
-    //@ts-expect-error - theme prop is only for Storybook selector
     theme: themes,
   },
 };
@@ -183,7 +177,6 @@ export const WithIconUrls: Story = {
     currentDialog: {
       attributeId: 1
     },
-    //@ts-expect-error - theme prop is only for Storybook selector
     theme: themes,
   },
 };

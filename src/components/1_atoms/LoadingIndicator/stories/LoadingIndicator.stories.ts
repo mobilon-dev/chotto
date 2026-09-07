@@ -56,7 +56,6 @@ type Story = StoryObj<typeof LoadingIndicator>;
 export const Default: Story = {
   args: {
     isLoading: true,
-    // @ts-expect-error theme используется только для Storybook selector
     theme: themes,
   },
 };
@@ -64,7 +63,6 @@ export const Default: Story = {
 export const Hidden: Story = {
   args: {
     isLoading: false,
-    // @ts-expect-error theme используется только для Storybook selector
     theme: themes,
   },
 };
@@ -96,7 +94,6 @@ export const InContainer: Story = {
   }),
   args: {
     isLoading: true,
-    // @ts-expect-error theme используется только для Storybook selector
     theme: themes,
   },
 };
@@ -139,7 +136,6 @@ export const Overlay: Story = {
   }),
   args: {
     isLoading: true,
-    // @ts-expect-error theme используется только для Storybook selector
     theme: themes,
   },
 };
