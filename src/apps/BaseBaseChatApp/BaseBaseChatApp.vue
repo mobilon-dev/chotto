@@ -51,7 +51,7 @@
                 :button-params="buttonParams"
                 :objects="messages"
                 :is-scroll-to-bottom-on-update-objects-enabled="isScrollToBottomOnUpdateObjectsEnabled"
-                :typing="selectedChat.typing ? { avatar: selectedChat.avatar, title: selectedChat.title } : false"
+                :typing="selectedChat?.typing ? { avatar: selectedChat.avatar, title: selectedChat.title } : false"
                 @message-action="messageAction"
                 @load-more="loadMore"
               />
@@ -78,14 +78,6 @@
           </chat-wrapper>
         </template>
       </BaseLayout>
-      <!-- @todo: заменить на composable modals -->
-      <SelectUser
-        v-if="modalShow"
-        :title="modalTitle"
-        :users="users"
-        @confirm="selectUsers"
-        @close="onCloseModal"
-      />
     </BaseContainer>
   </div>
 </template>
@@ -109,9 +101,10 @@ import {
   ChatWrapper,
   ButtonEmojiPicker,
   ButtonTemplateSelector,
-  ChannelSelector
+  ChannelSelector,
+  BaseContainer,
 } from "../..";
-import { BaseContainer } from "../../components/5_containers";
+import { useModalSelectUser2 } from "../../hooks/modals";
 
 import { playNotificationAudio } from "@/functions";
 
@@ -156,12 +149,17 @@ const messages = ref([]);
 const userProfile = ref({});
 const channels = ref([]);
 const sidebarItems = ref([]);
+const templates = ref([]);
+const groupTemplates = ref([]);
 
 const isOpenChatPanel = ref(false);
+const buttonParams = { unreadAmount: 0 };
+const isScrollToBottomOnUpdateObjectsEnabled = ref(false);
+const filebumpUrl = ref('https://filebump2.services.mobilon.ru');
 
-const modalShow = ref(false);
-const modalTitle = ref("");
-const users = ref([]);
+const onSelectChannel = (channel) => {
+  console.log('selected channel', channel);
+};
 
 // const chatApp = ref(null);
 
@@ -181,21 +179,15 @@ const users = ref([]);
 //   console.log("selected sidebar item", item);
 // };
 
-const chatAction = (data) => {
+const chatAction = async (data) => {
   console.log("chat action", data);
   if (data.action === "add") {
-    modalTitle.value = `Добавить в чат ${data.chatId}`;
-    users.value = getUsers();
-    modalShow.value = true;
+    const selected = await useModalSelectUser2(
+      `Добавить в чат ${data.chatId}`,
+      getUsers(),
+    );
+    console.log("users selected", selected);
   }
-};
-
-const selectUsers = (users) => {
-  console.log("users selected", users);
-};
-
-const onCloseModal = () => {
-  modalShow.value = false;
 };
 
 const messageAction = (data) => {
@@ -262,6 +254,8 @@ onMounted(() => {
   userProfile.value = props.authProvider.getUserProfile();
   chatsStore.chats = props.dataProvider.getChats();
   channels.value = props.dataProvider.getChannels();
+  templates.value = props.dataProvider.getTemplates();
+  groupTemplates.value = props.dataProvider.getGroupTemplates();
   sidebarItems.value = props.dataProvider.getSidebarItems();
 });
 

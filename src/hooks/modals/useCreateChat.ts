@@ -1,6 +1,10 @@
 import { useModal } from './useModal';
 import Modal from '@/components/2_modals/Modal/Modal.vue';
 
+/**
+ * @deprecated Используйте {@link useModalCreateChat2} (имя + телефон).
+ * Будет удалён в следующем major.
+ */
 export const useModalCreateChat = async (title: string, theme: string) => {
   const data = await useModal({
     //в component должен быть встроен emit change(key: value)

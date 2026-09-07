@@ -176,8 +176,8 @@ import {
   FeedSearch,
   ChannelSelector,
   FeedFoundObjects,
+  BaseContainer,
 } from "../..";
-import { BaseContainer } from "../../components/5_containers";
 import { useModalSelectUser2 } from "../../hooks/modals";
 
 import { playNotificationAudio } from "@/functions";

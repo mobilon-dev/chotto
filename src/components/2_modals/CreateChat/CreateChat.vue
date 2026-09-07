@@ -11,7 +11,10 @@
 </template>
 
 <script setup>
-
+/**
+ * @deprecated Используйте CreateChat2 / useModalCreateChat2.
+ * Будет удалён в следующем major.
+ */
 import { ref } from 'vue';
 
 // Define props

@@ -34,8 +34,8 @@ import {
   // SideBar,
   // ChatPanel,
   FeedLayout,
+  BaseContainer,
 } from "../..";
-import { BaseContainer } from "../../components/5_containers";
 
 import { playNotificationAudio } from "@/functions";
 

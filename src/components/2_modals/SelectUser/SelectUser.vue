@@ -35,7 +35,10 @@
 </template>
 
 <script setup>
-
+/**
+ * @deprecated Используйте SelectUser2 / useModalSelectUser2.
+ * Будет удалён в следующем major.
+ */
 import { ref } from 'vue';
 
 // Define props

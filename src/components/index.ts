@@ -98,6 +98,7 @@ export { default as Modal } from './2_modals/Modal/Modal.vue';
 export { default as ModalFullscreen } from './2_modals/ModalFullscreen/ModalFullscreen.vue';
 export { default as ModalNoFooter } from './2_modals/ModalNoFooter/ModalNoFooter.vue';
 export { default as ConfirmDeleteMessage } from './2_modals/ConfirmDeleteMessage/ConfirmDeleteMessage.vue';
+/** @deprecated Используйте SelectUser2 / useModalSelectUser2. Будет удалён в следующем major. */
 export { default as SelectUser } from './2_modals/SelectUser/SelectUser.vue';
 
 // 3_compounds

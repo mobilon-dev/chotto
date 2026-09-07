@@ -216,8 +216,8 @@ import {
   ChannelSelector,
   FeedFoundObjects,
   AudioRecorder,
+  BaseContainer,
 } from "../..";
-import { BaseContainer } from "../../components/5_containers";
 import { useModalCreateDialog, useModalSelectUser2 } from "../../hooks/modals";
 
 import { playNotificationAudio } from "@/functions";
