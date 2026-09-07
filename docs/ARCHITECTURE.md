@@ -408,9 +408,11 @@ src/hooks/
 │   ├── chats/
 │   ├── messages/
 │   └── sidebar/
-├── useTheme.ts                # Управление темами
+├── useTheme.ts                # Управление темами (instance store)
 ├── useMessageDraft.ts         # Черновики: instance store (provide в BaseContainer)
-├── useSearchModel.ts          # Поиск
+├── useSearchModel.ts          # Поиск (instance store)
+├── useEmojiNative.ts          # Native/CDN emoji (instance store)
+├── provideChatAppStores.ts    # provide всех instance store в контейнере
 ├── useDelayDebouncedRef.ts    # Дебаунс с задержкой
 └── useImmediateDebouncedRef.ts # Мгновенный дебаунс
 ```
