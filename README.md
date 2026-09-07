@@ -217,7 +217,8 @@ src/
 
 ```
 .storybook/           # Storybook конфигурация (если используется)
-docs/                 # Документация (ARCHITECTURE.md, ARCHITECTURE_ANALYSIS.md, etc.)
+docs/                 # Markdown-документация (ARCHITECTURE.md и др.)
+storybook-static/     # Сборка Storybook (`npm run build-storybook`)
 scripts/              # Скрипты валидации тем и утилиты
 dist/                 # Собранная библиотека (результат сборки)
 ```

@@ -32,7 +32,7 @@ chotto-0.3/
 │   └── index.ts             # Главная точка входа библиотеки
 ├── scripts/                 # Скрипты валидации и сборки
 ├── dist/                    # Собранная библиотека
-└── docs/                    # Markdown-документация (сейчас сюда же пишется Storybook build)
+└── docs/                    # Markdown-документация (Storybook → storybook-static/)
 ```
 
 ### 1.2 Принципы архитектуры
@@ -694,7 +694,7 @@ locale.value = locales.find((l) => l.code === 'en')!
   "build:lib": "vite build && vue-tsc ...",   // Сборка библиотеки
   "build:themes": "vite build --config ...",  // Сборка тем
   "storybook": "storybook dev -p 6006",       // Запуск Storybook
-  "build-storybook": "storybook build ...",   // Сборка Storybook
+  "build-storybook": "storybook build -o storybook-static",
   "validate-themes": "tsx ./scripts/...",     // Валидация тем
   "prepublishOnly": "npm run build && ...",   // Pre-publish хук
   "lint": "npx eslint .",                     // Линтинг

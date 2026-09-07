@@ -27,7 +27,7 @@
     "build:themes": "vite build --config vite.themes.config.ts",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o docs",
+    "build-storybook": "storybook build -o storybook-static",
     "validate-themes": "tsx ./scripts/validate-themes.ts",
     "test": "vitest run",
     "test:watch": "vitest",
