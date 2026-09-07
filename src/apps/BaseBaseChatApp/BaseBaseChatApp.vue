@@ -57,7 +57,7 @@
               />
               <ChatInput @send="addMessage">
                 <template #buttons>
-                  <FileUploader :filebump-url="filebumpUrl" />
+                  <FileUploader />
                   <ButtonEmojiPicker
                     :mode="'hover'"
                     :state="'disabled'"
@@ -103,8 +103,10 @@ import {
   ButtonTemplateSelector,
   ChannelSelector,
   BaseContainer,
+  chottoUploadFileKey,
 } from "../..";
 import { useModalSelectUser2 } from "../../hooks/modals";
+import { mockUploader } from "../mockUploader";
 
 import { playNotificationAudio } from "@/functions";
 
@@ -155,7 +157,8 @@ const groupTemplates = ref([]);
 const isOpenChatPanel = ref(false);
 const buttonParams = { unreadAmount: 0 };
 const isScrollToBottomOnUpdateObjectsEnabled = ref(false);
-const filebumpUrl = ref('https://filebump2.services.mobilon.ru');
+
+provide(chottoUploadFileKey, mockUploader);
 
 const onSelectChannel = (channel) => {
   console.log('selected channel', channel);

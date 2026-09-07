@@ -139,9 +139,7 @@
                   @send="addMessage"
                 >
                   <template #buttons>
-                    <FileUploader
-                      :filebump-url="filebumpUrl"
-                    />
+                    <FileUploader />
                     <ButtonEmojiPicker
                       :mode="'hover'"
                     />
@@ -155,7 +153,6 @@
                       :waba-templates="wabaTemplates"
                       :group-templates="groupTemplates"
                       :mode="'click'"
-                      :filebump-url="filebumpUrl"
                       :elevated-window="false"
                       @send-waba-values="sendWabaValues"
                     />
@@ -164,8 +161,8 @@
                       :mode="'hover'"
                       @select-channel="onSelectChannel"
                     />
-                    <AudioRecorder :filebump-url="filebumpUrl" />
-                    <VideoRecorder :filebump-url="filebumpUrl" />
+                    <AudioRecorder />
+                    <VideoRecorder />
                   </template>
                 </ChatInput>
               </div>
@@ -217,8 +214,10 @@ import {
   FeedFoundObjects,
   AudioRecorder,
   BaseContainer,
+  chottoUploadFileKey,
 } from "../..";
 import { useModalCreateDialog, useModalSelectUser2 } from "../../hooks/modals";
+import { mockUploader } from "../mockUploader";
 
 import { playNotificationAudio } from "@/functions";
 
@@ -280,9 +279,10 @@ const notFoundMessage = ref(false)
 const isScrollToBottomOnUpdateObjectsEnabled = ref(false);
 const scrollToBottomOnSelectChat = ref(false)
 const inputFocus = ref(false)
-const filebumpUrl = ref('https://filebump2.services.mobilon.ru');
 const clickedReply = ref('')
 const foundMessages = ref([])
+
+provide(chottoUploadFileKey, mockUploader);
 
 const feedSearchFeedCol = ref(false)
 const sidebarFirstCol = ref(true)

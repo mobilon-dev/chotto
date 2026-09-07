@@ -4,15 +4,8 @@ import { provide } from 'vue';
 import FileUploader from '../FileUploader.vue';
 import BaseContainer from '../../../5_containers/BaseContainer/BaseContainer.vue';
 import ThemeMode from '../../../2_elements/ThemeMode/ThemeMode.vue';
-import { chottoUploadFileKey, type ChottoUploadFileFn } from '@/hooks';
-
-const mockUploader: ChottoUploadFileFn = async (file) => {
-  const filename = file instanceof File ? file.name : 'blob';
-  return {
-    url: URL.createObjectURL(file),
-    filename,
-  };
-};
+import { chottoUploadFileKey } from '@/hooks';
+import { mockUploader } from '@/apps/mockUploader';
 
 const theme = [{
   code: "light",
@@ -41,7 +34,7 @@ type Story = StoryObj<typeof FileUploader>;
 
 export const Standard: Story = {
   args: {
-    filebumpUrl: 'https://filebump2.services.mobilon.ru',
+    uploader: mockUploader,
     //@ts-expect-error - theme prop type mismatch in storybook
     theme
   },
@@ -78,6 +71,7 @@ export const InjectedUploader: Story = {
 export const InactiveButton: Story = {
   args: {
     state: 'disabled',
+    uploader: mockUploader,
     //@ts-expect-error - theme prop type mismatch in storybook
     theme
   },

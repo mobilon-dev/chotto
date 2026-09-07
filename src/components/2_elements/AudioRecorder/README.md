@@ -19,7 +19,7 @@
 ## Props
 
 - `state` (`'active'` | `'disabled'`, optional) — активность кнопки
-- `filebumpUrl` (String, optional) — URL default adapter (`POST {filebumpUrl}/upload`)
-- `uploader` (Function, optional) — `ChottoUploadFileFn`; иначе `inject(chottoUploadFileKey)`, иначе default + `filebump-url`
+- `filebumpUrl` (String, optional, **deprecated**) — URL default adapter (`POST {filebumpUrl}/upload`)
+- `uploader` (Function, optional) — `ChottoUploadFileFn`; иначе `inject(chottoUploadFileKey)`, иначе legacy `filebump-url`
 - `maxDuration` (Number, optional) - максимальная длительность записи
 - `format` (String, optional) - формат аудио файла

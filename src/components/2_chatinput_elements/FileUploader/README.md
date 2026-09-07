@@ -7,12 +7,12 @@
 - Выбор нескольких файлов
 - Вставка изображений из буфера обмена
 - Индикация загрузки и ошибки
-- Загрузка через injectable adapter (prop `uploader` / Vue `provide`) или legacy `filebump-url`
+- Загрузка через injectable adapter (prop `uploader` / Vue `provide`); legacy `filebump-url` deprecated
 
 ## Props
 
-- `filebumpUrl` (String, optional) — базовый URL filebump. Используется только default adapter: `POST {filebumpUrl}/upload`. Не нужен, если передан `uploader` или inject.
-- `uploader` (Function, optional) — `ChottoUploadFileFn`. Приоритет: prop `uploader` > `inject(chottoUploadFileKey)` > default + `filebump-url`.
+- `uploader` (Function, optional) — `ChottoUploadFileFn`. Приоритет: prop `uploader` > `inject(chottoUploadFileKey)` > legacy `filebump-url`.
+- `filebumpUrl` (String, optional, **deprecated**) — базовый URL filebump для default adapter: `POST {filebumpUrl}/upload`. Не нужен при `uploader` / inject. Будет удалён в следующем major.
 - `state` (`'active'` | `'disabled'`, optional) — активность кнопки
 - `maxAttachedFiles` (Number, optional) — лимит вложений
 

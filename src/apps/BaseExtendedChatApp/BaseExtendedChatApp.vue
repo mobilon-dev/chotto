@@ -101,7 +101,6 @@
               >
                 <template #buttons>
                   <FileUploader
-                    :filebump-url="filebumpUrl"
                     :state="'disabled'"
                   />
                   <ButtonEmojiPicker
@@ -119,7 +118,6 @@
                     :group-templates="groupTemplates"
                     :mode="'click'"
                     :state="'disabled'"
-                    :filebump-url="filebumpUrl"
                     @send-waba-values="sendWabaValues"
                   />
                   <ChannelSelector
@@ -177,8 +175,10 @@ import {
   ChannelSelector,
   FeedFoundObjects,
   BaseContainer,
+  chottoUploadFileKey,
 } from "../..";
 import { useModalSelectUser2 } from "../../hooks/modals";
+import { mockUploader } from "../mockUploader";
 
 import { playNotificationAudio } from "@/functions";
 
@@ -239,9 +239,10 @@ const notFoundMessage = ref(false)
 const isScrollToBottomOnUpdateObjectsEnabled = ref(false);
 const scrollToBottomOnSelectChat = ref(false)
 const inputFocus = ref(false)
-const filebumpUrl = ref('https://filebump2.services.mobilon.ru');
 const clickedReply = ref('')
 const foundMessages = ref([])
+
+provide(chottoUploadFileKey, mockUploader);
 
 const selectItem = (item) => {
   console.log("selected sidebar item", item);

@@ -52,6 +52,10 @@ const props = defineProps({
     type: String,
     default: 'active',
   },
+  /**
+   * @deprecated Используйте `uploader` или `provide(chottoUploadFileKey)`.
+   * Default пустой — prod URL не хардкодится. Будет удалён в следующем major.
+   */
   filebumpUrl: {
     type: String,
     default: '',
