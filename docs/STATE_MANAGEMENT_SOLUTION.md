@@ -1,8 +1,9 @@
 # Решение проблемы State Management в Chotto UI
 
 > **Historical / устарело (2026-09).** Документ описывает план вокруг удалённого `useMessage.ts`.
-> Актуальные черновики — `src/hooks/useMessageDraft.ts`; module-level refs по-прежнему есть
-> (`useMessageDraft`, `useTheme`, `useSearchModel`, `useEmojiNative`, locale).
+> Черновики: `useMessageDraft` теперь instance-scoped через `provideMessageDraftStore()` в
+> `BaseContainer` / `FloatContainer` (`messageDraftStoreKey`). Module-level refs ещё есть у
+> `useTheme`, `useSearchModel`, `useEmojiNative`, locale.
 > Актуальная карта: `docs/ARCHITECTURE.md`. Анализ долга: `LEGACY_ANALYSIS.md`.
 
 ## Содержание

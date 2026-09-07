@@ -409,7 +409,7 @@ src/hooks/
 │   ├── messages/
 │   └── sidebar/
 ├── useTheme.ts                # Управление темами
-├── useMessageDraft.ts         # Черновики сообщений (module-level state по chatAppId)
+├── useMessageDraft.ts         # Черновики: instance store (provide в BaseContainer)
 ├── useSearchModel.ts          # Поиск
 ├── useDelayDebouncedRef.ts    # Дебаунс с задержкой
 └── useImmediateDebouncedRef.ts # Мгновенный дебаунс
@@ -427,6 +427,9 @@ const theme = getTheme(); // { id: 'container-id', theme: 'dark' }
 ```
 
 #### useMessageDraft — Черновики сообщений
+
+Store создаётся в `BaseContainer` / `FloatContainer` через `provideMessageDraftStore()`.
+Публичный API хука без изменений:
 
 ```typescript
 import { useMessageDraft } from '@mobilon-dev/chotto';

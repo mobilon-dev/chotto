@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { getDraftFiles, useMessageDraft } from '../useMessageDraft'
+import { defineComponent, h, provide } from 'vue'
+import { mount } from '@vue/test-utils'
+import {
+  createMessageDraftStore,
+  getDraftFiles,
+  messageDraftStoreKey,
+  useMessageDraft,
+} from '../useMessageDraft'
 import { withSetup } from '@/test-utils/withSetup'
 
 describe('getDraftFiles', () => {
@@ -75,5 +82,58 @@ describe('useMessageDraft', () => {
 
     expect(getDraftFiles(result.getMessage())).toHaveLength(5)
     scope.stop()
+  })
+
+  it('два provided store изолированы друг от друга', () => {
+    const storeA = createMessageDraftStore()
+    const storeB = createMessageDraftStore()
+
+    const Child = defineComponent({
+      props: { label: { type: String, required: true } },
+      setup(props) {
+        const draft = useMessageDraft('shared-id')
+        draft.setMessageText(props.label)
+        return { text: () => draft.getMessage().text }
+      },
+      render() {
+        return h('div')
+      },
+    })
+
+    const Parent = defineComponent({
+      props: {
+        store: { type: Object, required: true },
+        label: { type: String, required: true },
+      },
+      setup(props) {
+        provide(messageDraftStoreKey, props.store as ReturnType<typeof createMessageDraftStore>)
+        return () => h(Child, { label: props.label })
+      },
+    })
+
+    const a = mount(Parent, { props: { store: storeA, label: 'из A' } })
+    const b = mount(Parent, { props: { store: storeB, label: 'из B' } })
+
+    expect(storeA.messages.value[0]?.text).toBe('из A')
+    expect(storeB.messages.value[0]?.text).toBe('из B')
+    expect(a.findComponent(Child).vm.text()).toBe('из A')
+    expect(b.findComponent(Child).vm.text()).toBe('из B')
+
+    a.unmount()
+    b.unmount()
+  })
+
+  it('getChatDraft через store видит listPreview после commit', () => {
+    const store = createMessageDraftStore()
+    const chatAppId = 'app-preview'
+    const chatId = 7
+    const draftId = `${chatAppId}:${chatId}`
+
+    const draft = store.ensureDraft(draftId)
+    draft.text = 'черновик в списке'
+    store.commitChatDraftToList(draftId)
+
+    const found = store.getChatDraft(chatAppId, chatId)
+    expect(found?.listPreviewText).toBe('черновик в списке')
   })
 })

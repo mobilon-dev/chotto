@@ -236,7 +236,7 @@ import { ref, computed, watch, onMounted, onUnmounted, useId, inject, nextTick} 
 
 import { getStatus, statuses } from '@/functions';
 import { t } from '../../../locale/useLocale'
-import { useTheme, useEmojiNative, getChatDraft } from '@/hooks';
+import { useTheme, useEmojiNative, resolveMessageDraftStore } from '@/hooks';
 import { textToAppleEmojiHtml, textContainsEmoji } from '@/functions/renderAppleEmojis';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
@@ -263,6 +263,7 @@ import { IAction, IChatItem, IChatDialog, ILastMessageObject } from './types';
 const chatAppId = inject('chatAppId')
 const { getTheme } = useTheme(chatAppId as string)
 const { isNative, emojiSrc } = useEmojiNative(chatAppId as string)
+const messageDraftStore = resolveMessageDraftStore(String(chatAppId ?? ''))
 
 const props = withDefaults(defineProps<{
   chat: IChatItem;
@@ -418,10 +419,10 @@ const getMessageType = (lastMessage: string | ILastMessageObject): string | null
 const draftLabel = t('component.ChatItem.draft')
 
 const draftSnapshot = computed(() => {
-  const draft = getChatDraft(String(chatAppId ?? ''), props.chat.chatId)
+  const draft = messageDraftStore.getChatDraft(String(chatAppId ?? ''), props.chat.chatId)
   if (!draft || draft.edit) return undefined
   if (!draft.listPreviewText && !draft.listPreviewFile) return undefined
-  if (!(draft.text || '').trim() && !draft.file) return undefined
+  if (!(draft.text || '').trim() && !draft.file && !draft.files?.length) return undefined
   return draft
 })
 

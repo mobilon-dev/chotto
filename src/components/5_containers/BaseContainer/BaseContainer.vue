@@ -14,6 +14,7 @@
 
 <script setup>
 import { useId, provide } from 'vue'
+import { provideMessageDraftStore } from '@/hooks'
 // import { onMounted } from 'vue'
 
 defineProps({
@@ -29,6 +30,7 @@ defineProps({
 
 const chatAppId = useId()
 provide('chatAppId', chatAppId)
+provideMessageDraftStore()
 
 </script>
 
