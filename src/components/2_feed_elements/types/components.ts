@@ -12,6 +12,8 @@ export interface IFeedObject {
   status?: string
   time?: string
   url?: string
+  /** URL превью картинки для ленты (для `message.image`) */
+  imagePreviewUrl?: string
   alt?: string
   filename?: string
   avatar?: string

@@ -3,6 +3,8 @@ export interface Reply {
   type: string
   text?: string
   url?: string
+  /** URL превью картинки в цитате (для `message.image`); если нет — используется `url` */
+  imagePreviewUrl?: string
   filename?: string
   header?: string
   callDuration?: string
@@ -286,6 +288,8 @@ export interface IImageMessage {
   position: string
   time: string
   url: string
+  /** URL превью для ленты. Если нет — в ленте показывается `url`. При широком просмотре открывается полноразмерный `url`. */
+  imagePreviewUrl?: string
   alt?: string
   status: string
   statusMsg?: string

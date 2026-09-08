@@ -44,6 +44,10 @@ function validateMessageReply(reply: any, messageIndex: number): MessageValidati
     errors.push({ path: `${path}.url`, message: 'Поле url должно быть строкой', value: reply.url });
   }
 
+  if (reply.imagePreviewUrl !== undefined && typeof reply.imagePreviewUrl !== 'string') {
+    errors.push({ path: `${path}.imagePreviewUrl`, message: 'Поле imagePreviewUrl должно быть строкой', value: reply.imagePreviewUrl });
+  }
+
   if (reply.filename !== undefined && typeof reply.filename !== 'string') {
     errors.push({ path: `${path}.filename`, message: 'Поле filename должно быть строкой', value: reply.filename });
   }
@@ -136,6 +140,10 @@ function validateMessage(message: any, index: number): MessageValidationError[] 
 
   if (message.url !== undefined && typeof message.url !== 'string') {
     errors.push({ path: `${path}.url`, message: 'Поле url должно быть строкой', value: message.url });
+  }
+
+  if (message.imagePreviewUrl !== undefined && typeof message.imagePreviewUrl !== 'string') {
+    errors.push({ path: `${path}.imagePreviewUrl`, message: 'Поле imagePreviewUrl должно быть строкой', value: message.imagePreviewUrl });
   }
 
   if (message.filename !== undefined && typeof message.filename !== 'string') {

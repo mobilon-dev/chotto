@@ -53,6 +53,29 @@ describe('validateMessages', () => {
     expect(result.errors.some((e) => e.path.endsWith('.status'))).toBe(true)
   })
 
+  it('валидирует опциональный imagePreviewUrl как строку', () => {
+    const valid = validateMessages([
+      {
+        ...validTextMessage,
+        type: 'message.image',
+        url: 'https://example.com/full.jpg',
+        imagePreviewUrl: 'https://example.com/preview.jpg',
+      },
+    ])
+    expect(valid.isValid).toBe(true)
+
+    const invalid = validateMessages([
+      {
+        ...validTextMessage,
+        type: 'message.image',
+        url: 'https://example.com/full.jpg',
+        imagePreviewUrl: 123,
+      },
+    ])
+    expect(invalid.isValid).toBe(false)
+    expect(invalid.errors.some((e) => e.path.endsWith('.imagePreviewUrl'))).toBe(true)
+  })
+
   it('валидирует file/image поля url и filename как строки', () => {
     const result = validateMessages([
       {

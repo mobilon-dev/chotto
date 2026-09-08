@@ -5,7 +5,7 @@
   >
     <img
       class="image-message__preview-image"
-      :src="message.url"
+      :src="feedImageUrl"
       :alt="message.alt"
     >
   </div>
@@ -49,7 +49,7 @@
   setup
   lang="ts"
 >
-import { ref, inject } from 'vue';
+import { ref, computed, inject } from 'vue';
 import { IImageMessage } from '@/types';
 import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscreen.vue';
 import { useTheme } from "@/hooks";
@@ -67,6 +67,8 @@ const props = defineProps({
 });
 
 const isOpenModal = ref(false);
+
+const feedImageUrl = computed(() => props.message.imagePreviewUrl || props.message.url)
 
 const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 

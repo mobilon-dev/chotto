@@ -72,7 +72,7 @@ export const messages = [
     header: 'Вы',
     views: 1000},
   {
-    chatId: 1, dialogId: 'dlg_43543555', type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", timestamp: '1727027959',
+    chatId: 1, dialogId: 'dlg_43543555', type: "message.image", url: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=1376x0", imagePreviewUrl: "https://sun9-26.userapi.com/s/v1/ig2/MUXBjbo1JtVSfo4XfEryXXqAHwU8S6HJAw1dwQL_JbSwEpwIHOrU2wg6JcFrTbE9s00WEDLWnqK0UpCfPNt6Up9T.jpg?quality=95&as=32x18,48x27,72x40,108x60,160x89,240x134,360x201,480x268,540x301,640x357,720x402,1080x603,1280x714,1376x768&from=bu&cs=360x0", timestamp: '1727027959',
     alt: "Example Image", direction: 'outgoing',
     header: 'Вы',
     views: 1667, messageId: '4',
@@ -102,6 +102,7 @@ export const messages = [
   },
   {
     chatId: 1,dialogId: 'dlg_89789879', url: 'https://placehold.jp/30/336633/ffffff/320x160.png?text=кроссовки',
+    imagePreviewUrl: 'https://placehold.jp/30/336633/ffffff/80x40.png?text=кроссовки',
     type: "message.image", text: "классное фото, тоже таки хочу",
     messageId: '7',
     direction: 'outgoing', status: 'received', timestamp: '1727027959',
@@ -110,10 +111,12 @@ export const messages = [
       type: 'message.image',
       text: 'мои новые кроссовки',
       url: 'https://placehold.jp/30/336633/ffffff/320x160.png?text=кроссовки',
+      imagePreviewUrl: 'https://placehold.jp/30/336633/ffffff/80x40.png?text=кроссовки',
     },
   },
   {
     chatId: 1, dialogId: 'dlg_89789879',url: 'https://placehold.jp/30/336633/ffffff/320x160.png?text=кроссовки',
+    imagePreviewUrl: 'https://placehold.jp/30/336633/ffffff/80x40.png?text=кроссовки',
     type: "message.image",
     messageId: '15',
     direction: 'outgoing', status: 'received', timestamp: '1727027859',

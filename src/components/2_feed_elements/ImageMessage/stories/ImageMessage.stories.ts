@@ -31,6 +31,9 @@ const imageMessage: IImageMessage = {
   position: 'left',
 };
 
+const imagePreviewUrl = "https://sun9-59.userapi.com/s/v1/if2/halgZJOi4Om6wnFsofNfRxloQs-WAqQVNlV3Z7kfQm2KWKjp0dsXQnk6ZjpkmQ_lqKJZonw5u7pHi6uhK0xbTvuX.jpg?quality=95&as=32x16,48x24,72x36,108x54,160x80,240x120,360x180,480x240,540x270,640x320,720x360,1080x540,1280x640,1440x720,1500x750&from=bu&cs=240x0";
+const imageFullUrl = "https://sun9-59.userapi.com/s/v1/if2/halgZJOi4Om6wnFsofNfRxloQs-WAqQVNlV3Z7kfQm2KWKjp0dsXQnk6ZjpkmQ_lqKJZonw5u7pHi6uhK0xbTvuX.jpg?quality=95&as=32x16,48x24,72x36,108x54,160x80,240x120,360x180,480x240,540x270,640x320,720x360,1080x540,1280x640,1440x720,1500x750&from=bu&cs=1500x0";
+
 const longText = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ' +
   'The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', ' +
   'making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, ' +
@@ -446,6 +449,32 @@ export const LeftMessageWithPreviewLink: Story = {
         description: 'Join the world\'s most widely adopted, AI-powered developer platform where millions of developers, ' +
           'businesses, and the largest open source community build software that advances humanity.',
       },
+    },
+  },
+  decorators: commonDecorator,
+};
+
+export const WithImagePreviewUrl: Story = {
+  args: {
+    message: {
+      ...imageMessage,
+      url: imageFullUrl,
+      imagePreviewUrl,
+      text: 'В ленте — превью, по клику открывается полноразмерный url',
+      position: 'left',
+    },
+  },
+  decorators: commonDecorator,
+};
+
+export const RightWithImagePreviewUrl: Story = {
+  args: {
+    message: {
+      ...imageMessage,
+      url: imageFullUrl,
+      imagePreviewUrl,
+      text: 'В ленте — превью, по клику открывается полноразмерный url',
+      position: 'right',
     },
   },
   decorators: commonDecorator,

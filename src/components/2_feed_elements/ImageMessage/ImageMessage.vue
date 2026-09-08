@@ -80,12 +80,12 @@
           >
             <img
               class="image-message__blur-left"
-              :src="message.url"
+              :src="feedImageUrl"
               :alt="message.alt"
             >
             <img
               class="image-message__blur-right"
-              :src="message.url"
+              :src="feedImageUrl"
               :alt="message.alt"
             >
           </div>
@@ -93,7 +93,7 @@
             ref="imageRef"
             class="image-message__preview-image"
             :style="{ borderRadius: imageBorderRadius }"
-            :src="message.url"
+            :src="feedImageUrl"
             :alt="message.alt"
           >
 
@@ -394,7 +394,7 @@ onUnmounted(() => {
 })
 
 watch(
-  () => [props.message.text, props.message.url],
+  () => [props.message.text, props.message.url, props.message.imagePreviewUrl],
   () => {
     updateWidths()
     // Переподключаем ResizeObserver после изменения элементов
@@ -433,6 +433,8 @@ const onMenuMouseLeave = () => {
   baseOnMenuMouseLeave()
   buttonDownloadVisible.value = false
 }
+
+const feedImageUrl = computed(() => props.message.imagePreviewUrl || props.message.url)
 
 const imageBorderRadius = computed(() => {
   if (props.message.reply && props.message.text) return '0'

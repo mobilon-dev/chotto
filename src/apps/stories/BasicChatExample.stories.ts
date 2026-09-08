@@ -97,6 +97,7 @@ type DemoMessage = {
   status: string;
   url?: string;
   filename?: string;
+  imagePreviewUrl?: string;
   alt?: string;
   duration?: string | number;
   reactions?: {
@@ -251,6 +252,7 @@ const simpleMessages: DemoMessage[] = [
     subText: "Анна",
     messageId: '10',
     url: "https://polka.cs.mobilon.ru/avatars/vector/man?size=256&palette=soft&seed=1&style=round",
+    imagePreviewUrl: "https://polka.cs.mobilon.ru/avatars/vector/man?size=128&palette=soft&seed=1&style=round",
     alt: "Avatar",
     timestamp: '1762164300',
     status: 'read',
@@ -395,6 +397,7 @@ const simpleMessages: DemoMessage[] = [
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     messageId: '10',
     url: "https://polka.cs.mobilon.ru/avatars/vector/man?size=256&palette=soft&seed=1&style=round",
+    imagePreviewUrl: "https://polka.cs.mobilon.ru/avatars/vector/man?size=128&palette=soft&seed=1&style=round",
     alt: "Avatar",
     timestamp: '1762164300',
     status: 'read',
