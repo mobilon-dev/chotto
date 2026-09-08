@@ -5,6 +5,10 @@ export interface Reply {
   url?: string
   /** URL превью картинки в цитате (для `message.image`); если нет — используется `url` */
   imagePreviewUrl?: string
+  /** URL сжатого превью видео в ленте (для `message.video`) */
+  videoPreviewUrl?: string
+  /** URL обложки видео (картинка) в ленте/цитате (для `message.video`) */
+  coverUrl?: string
   filename?: string
   header?: string
   callDuration?: string
@@ -368,6 +372,10 @@ export interface IVideoMessage {
   statusMsg?: string
   time: string
   url: string
+  /** URL сжатого превью видео для ленты. Если нет — используется `url`. При широком просмотре открывается полноразмерный `url`. */
+  videoPreviewUrl?: string
+  /** URL обложки (картинка) для ленты. Приоритет в ленте: `coverUrl`, затем `videoPreviewUrl`, затем `url`. */
+  coverUrl?: string
   alt?: string
   avatar?: string
   header?: string

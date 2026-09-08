@@ -48,6 +48,14 @@ function validateMessageReply(reply: any, messageIndex: number): MessageValidati
     errors.push({ path: `${path}.imagePreviewUrl`, message: 'Поле imagePreviewUrl должно быть строкой', value: reply.imagePreviewUrl });
   }
 
+  if (reply.videoPreviewUrl !== undefined && typeof reply.videoPreviewUrl !== 'string') {
+    errors.push({ path: `${path}.videoPreviewUrl`, message: 'Поле videoPreviewUrl должно быть строкой', value: reply.videoPreviewUrl });
+  }
+
+  if (reply.coverUrl !== undefined && typeof reply.coverUrl !== 'string') {
+    errors.push({ path: `${path}.coverUrl`, message: 'Поле coverUrl должно быть строкой', value: reply.coverUrl });
+  }
+
   if (reply.filename !== undefined && typeof reply.filename !== 'string') {
     errors.push({ path: `${path}.filename`, message: 'Поле filename должно быть строкой', value: reply.filename });
   }
@@ -144,6 +152,14 @@ function validateMessage(message: any, index: number): MessageValidationError[] 
 
   if (message.imagePreviewUrl !== undefined && typeof message.imagePreviewUrl !== 'string') {
     errors.push({ path: `${path}.imagePreviewUrl`, message: 'Поле imagePreviewUrl должно быть строкой', value: message.imagePreviewUrl });
+  }
+
+  if (message.videoPreviewUrl !== undefined && typeof message.videoPreviewUrl !== 'string') {
+    errors.push({ path: `${path}.videoPreviewUrl`, message: 'Поле videoPreviewUrl должно быть строкой', value: message.videoPreviewUrl });
+  }
+
+  if (message.coverUrl !== undefined && typeof message.coverUrl !== 'string') {
+    errors.push({ path: `${path}.coverUrl`, message: 'Поле coverUrl должно быть строкой', value: message.coverUrl });
   }
 
   if (message.filename !== undefined && typeof message.filename !== 'string') {

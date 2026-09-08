@@ -72,11 +72,26 @@
           @mouseenter="showMenu"
           @mouseleave="buttonDownloadVisible = !buttonDownloadVisible"
         >
+          <img
+            v-if="feedCoverUrl"
+            class="video-message__video"
+            :style="{ borderRadius: videoBorderRadius }"
+            :src="feedCoverUrl"
+            :alt="message.alt"
+          >
+          <span
+            v-if="feedCoverUrl"
+            class="video-message__play-badge"
+            aria-hidden="true"
+          >
+            <span class="pi pi-play" />
+          </span>
           <video
+            v-else
             ref="previewPlayer"
             class="video-message__video"
             :style="{ borderRadius: videoBorderRadius }"
-            :src="message.url"
+            :src="feedVideoUrl"
             :muted="true"
             autoplay
             @ended="playAgain"
@@ -193,26 +208,27 @@
         />
       </template>
     </div>
+
+    <Teleport to="body">
+      <transition name="modal-fade">
+        <ModalFullscreen
+          v-if="isOpenModal && !message.deleted"
+          :data-theme="getTheme().theme ? getTheme().theme : 'light'"
+          :title="message.alt"
+          @close="closeModal"
+        >
+          <video
+            ref="player"
+            class="video-message__modal-video"
+            :src="message.url"
+            :alt="message.alt"
+            controls
+            autoplay
+          />
+        </ModalFullscreen>
+      </transition>
+    </Teleport>
   </div>
-  <Teleport to="body">
-    <transition name="modal-fade">
-      <ModalFullscreen
-        v-if="isOpenModal && !message.deleted"
-        :data-theme="getTheme().theme ? getTheme().theme : 'light'"
-        :title="message.alt"
-        @close="closeModal"
-      >
-        <video
-          ref="player"
-          class="video-message__modal-video"
-          :src="message.url"
-          :alt="message.alt"
-          controls
-          autoplay
-        />
-      </ModalFullscreen>
-    </transition>
-  </Teleport>
 </template>
 
 <script
@@ -246,10 +262,6 @@ const { hoverActionsEnabled, reactionsActive } = useMessageHoverActions(
   () => props.message,
 )
 const { startReply } = useStartReply(chatAppId || '')
-
-defineOptions({
-  inheritAttrs: false,
-})
 
 const props = defineProps({
   message: {
@@ -373,6 +385,9 @@ const videoBorderRadius = computed(() => {
   if (props.message.reply) return 'var(--chotto-videomessage-preview-with-reply-border-radius, 0 0 7px 7px)'
   return 'var(--chotto-videomessage-preview-border-radius, 7px)'
 })
+
+const feedCoverUrl = computed(() => props.message.coverUrl || '')
+const feedVideoUrl = computed(() => props.message.videoPreviewUrl || props.message.url)
 
 const closeModal = () => isOpenModal.value = false
 

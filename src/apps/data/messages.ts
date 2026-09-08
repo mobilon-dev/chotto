@@ -236,6 +236,8 @@ export const messages = [
     status: 'read'},
   {
     chatId: 2, type: "message.video", url: "https://filebump2.services.mobilon.ru/file/XgYPv3t1VT1RxoUVPpWvQuyOkpdSCayNgpv1",
+    videoPreviewUrl: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    coverUrl: "https://placehold.jp/30/4caf50/ffffff/320x180.png?text=cover",
     text: "Привет! Это видеосообщение с длииииииииииинным текстом", direction: 'outgoing', status: 'read', timestamp: '1727027959',
     header: 'Вы',
     messageId: '41'},
@@ -246,6 +248,7 @@ export const messages = [
     messageId: '42'},
   {
     chatId: 2, type: "message.video", url: "https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT",
+    videoPreviewUrl: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
     direction: 'outgoing', status: 'read', timestamp: '1727027959',
     header: 'Вы',
     messageId: '43',
@@ -1627,6 +1630,7 @@ export const messages = [
     dialogId: 'dlg_00123333', 
     type: "message.video", 
     url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    coverUrl: "https://placehold.jp/30/4caf50/ffffff/320x180.png?text=cover",
     direction: 'outgoing',
     status: 'read',
     timestamp: '1763038102',

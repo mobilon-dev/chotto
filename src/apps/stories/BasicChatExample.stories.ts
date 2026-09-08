@@ -98,6 +98,8 @@ type DemoMessage = {
   url?: string;
   filename?: string;
   imagePreviewUrl?: string;
+  videoPreviewUrl?: string;
+  coverUrl?: string;
   alt?: string;
   duration?: string | number;
   reactions?: {
@@ -259,6 +261,20 @@ const simpleMessages: DemoMessage[] = [
   },
   {
     chatId: 1,
+    type: "message.video",
+    direction: 'incoming',
+    text: "Видео с обложкой",
+    header: "Анна",
+    subText: "Анна",
+    messageId: '10-video',
+    url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    coverUrl: "https://sun9-62.vkuserphoto.ru/s/v1/ig2/rcM0EnOEAQjEw_kwEU8lUuqJf-AwkguYVIkHVe6UfPRkAHcg_Q0fuvJtG4Xka_ZPGuxBM2xD1lRWwl4hO97NPdBE.jpg?quality=95&as=32x18,48x27,72x40,108x61,160x90,240x135,360x202,480x270,540x304,640x360,720x405,960x540&from=bu&u=XZBdOEdWipH4C2dWS9B_CqtJz5WA8xH6pBeOxYTUXlc&cs=960x0",
+    alt: "Flower",
+    timestamp: '1762164350',
+    status: 'read',
+  },
+  {
+    chatId: 1,
     type: "message.text",
     direction: 'outgoing',
     header: "Иван",
@@ -400,6 +416,21 @@ const simpleMessages: DemoMessage[] = [
     imagePreviewUrl: "https://polka.cs.mobilon.ru/avatars/vector/man?size=128&palette=soft&seed=1&style=round",
     alt: "Avatar",
     timestamp: '1762164300',
+    status: 'read',
+  },
+  {
+    chatId: 2,
+    type: "message.video",
+    direction: 'outgoing',
+    text: "Видео с обложкой",
+    header: "Анна",
+    subText: "Анна",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
+    messageId: '10-video',
+    url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    coverUrl: "https://sun9-62.vkuserphoto.ru/s/v1/ig2/rcM0EnOEAQjEw_kwEU8lUuqJf-AwkguYVIkHVe6UfPRkAHcg_Q0fuvJtG4Xka_ZPGuxBM2xD1lRWwl4hO97NPdBE.jpg?quality=95&as=32x18,48x27,72x40,108x61,160x90,240x135,360x202,480x270,540x304,640x360,720x405,960x540&from=bu&u=XZBdOEdWipH4C2dWS9B_CqtJz5WA8xH6pBeOxYTUXlc&cs=960x0",
+    alt: "Flower",
+    timestamp: '1762164350',
     status: 'read',
   },
   {

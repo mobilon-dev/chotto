@@ -8,6 +8,8 @@ export interface MessageReply {
   text?: string;
   url?: string;
   imagePreviewUrl?: string;
+  videoPreviewUrl?: string;
+  coverUrl?: string;
   filename?: string;
 }
 
@@ -55,6 +57,8 @@ export interface Message {
   avatar?: string;
   url?: string;
   imagePreviewUrl?: string;
+  videoPreviewUrl?: string;
+  coverUrl?: string;
   filename?: string;
   alt?: string;
   views?: number;

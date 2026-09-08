@@ -76,6 +76,32 @@ describe('validateMessages', () => {
     expect(invalid.errors.some((e) => e.path.endsWith('.imagePreviewUrl'))).toBe(true)
   })
 
+  it('валидирует опциональные videoPreviewUrl и coverUrl как строки', () => {
+    const valid = validateMessages([
+      {
+        ...validTextMessage,
+        type: 'message.video',
+        url: 'https://example.com/full.mp4',
+        videoPreviewUrl: 'https://example.com/preview.mp4',
+        coverUrl: 'https://example.com/cover.jpg',
+      },
+    ])
+    expect(valid.isValid).toBe(true)
+
+    const invalid = validateMessages([
+      {
+        ...validTextMessage,
+        type: 'message.video',
+        url: 'https://example.com/full.mp4',
+        videoPreviewUrl: 1,
+        coverUrl: false,
+      },
+    ])
+    expect(invalid.isValid).toBe(false)
+    expect(invalid.errors.some((e) => e.path.endsWith('.videoPreviewUrl'))).toBe(true)
+    expect(invalid.errors.some((e) => e.path.endsWith('.coverUrl'))).toBe(true)
+  })
+
   it('валидирует file/image поля url и filename как строки', () => {
     const result = validateMessages([
       {

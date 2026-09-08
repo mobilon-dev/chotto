@@ -43,6 +43,39 @@ export interface ReplyVideoMessageThemeCSSVariables {
   /** Направление флекс-контейнера кнопки превью */
   '--chotto-replyvideomessage-preview-button-flex-direction': string;
 
+  /** Позиционирование значка play на обложке */
+  '--chotto-replyvideomessage-play-badge-position': string;
+  /** Смещение значка play сверху */
+  '--chotto-replyvideomessage-play-badge-top': string;
+  /** Смещение значка play слева */
+  '--chotto-replyvideomessage-play-badge-left': string;
+  /** Трансформация значка play */
+  '--chotto-replyvideomessage-play-badge-transform': string;
+  /** Отображение значка play */
+  '--chotto-replyvideomessage-play-badge-display': string;
+  /** Выравнивание содержимого значка play по поперечной оси */
+  '--chotto-replyvideomessage-play-badge-align-items': string;
+  /** Выравнивание содержимого значка play по главной оси */
+  '--chotto-replyvideomessage-play-badge-justify-content': string;
+  /** Ширина значка play */
+  '--chotto-replyvideomessage-play-badge-width': string;
+  /** Высота значка play */
+  '--chotto-replyvideomessage-play-badge-height': string;
+  /** Скругление значка play */
+  '--chotto-replyvideomessage-play-badge-border-radius': string;
+  /** Фон значка play */
+  '--chotto-replyvideomessage-play-badge-background-color': string;
+  /** Цвет иконки play */
+  '--chotto-replyvideomessage-play-badge-color': string;
+  /** События указателя значка play */
+  '--chotto-replyvideomessage-play-badge-pointer-events': string;
+  /** Слой значка play */
+  '--chotto-replyvideomessage-play-badge-z-index': string;
+  /** Размер иконки play */
+  '--chotto-replyvideomessage-play-badge-icon-font-size': string;
+  /** Отступ иконки play слева */
+  '--chotto-replyvideomessage-play-badge-icon-margin-left': string;
+
   /** Перенос слов в контейнере текста */
   '--chotto-replyvideomessage-text-container-word-wrap': string;
   /** Выравнивание содержимого текстового контейнера */

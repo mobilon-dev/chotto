@@ -14,6 +14,10 @@ export interface IFeedObject {
   url?: string
   /** URL превью картинки для ленты (для `message.image`) */
   imagePreviewUrl?: string
+  /** URL сжатого превью видео для ленты (для `message.video`) */
+  videoPreviewUrl?: string
+  /** URL обложки видео для ленты (для `message.video`) */
+  coverUrl?: string
   alt?: string
   filename?: string
   avatar?: string

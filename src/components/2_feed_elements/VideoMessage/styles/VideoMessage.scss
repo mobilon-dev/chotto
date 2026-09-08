@@ -102,6 +102,28 @@
     flex-direction: var(--chotto-videomessage-preview-button-flex-direction, column);
   }
 
+  &__play-badge {
+    position: var(--chotto-videomessage-play-badge-position, absolute);
+    top: var(--chotto-videomessage-play-badge-top, 50%);
+    left: var(--chotto-videomessage-play-badge-left, 50%);
+    transform: var(--chotto-videomessage-play-badge-transform, translate(-50%, -50%));
+    display: var(--chotto-videomessage-play-badge-display, flex);
+    align-items: var(--chotto-videomessage-play-badge-align-items, center);
+    justify-content: var(--chotto-videomessage-play-badge-justify-content, center);
+    width: var(--chotto-videomessage-play-badge-width, 48px);
+    height: var(--chotto-videomessage-play-badge-height, 48px);
+    border-radius: var(--chotto-videomessage-play-badge-border-radius, 50%);
+    background-color: var(--chotto-videomessage-play-badge-background-color, rgba(0, 0, 0, 0.55));
+    color: var(--chotto-videomessage-play-badge-color, #ffffff);
+    pointer-events: var(--chotto-videomessage-play-badge-pointer-events, none);
+    z-index: var(--chotto-videomessage-play-badge-z-index, 2);
+
+    .pi {
+      font-size: var(--chotto-videomessage-play-badge-icon-font-size, 18px);
+      margin-left: var(--chotto-videomessage-play-badge-icon-margin-left, 3px);
+    }
+  }
+
   &__menu-button {
     position: var(--chotto-videomessage-menu-button-position, absolute);
     background-color: var(--chotto-videomessage-menu-button-background-color, transparent);

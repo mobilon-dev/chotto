@@ -6,6 +6,8 @@ export interface ReplyMessageSource {
   text?: string
   url?: string
   imagePreviewUrl?: string
+  videoPreviewUrl?: string
+  coverUrl?: string
   filename?: string
   header?: string
   callDuration?: string
@@ -19,6 +21,8 @@ export function buildReplyPayload(message: ReplyMessageSource, fallbackType: str
     filename: message.filename,
     url: message.url,
     imagePreviewUrl: message.imagePreviewUrl,
+    videoPreviewUrl: message.videoPreviewUrl,
+    coverUrl: message.coverUrl,
     header: message.header,
     callDuration: message.callDuration,
   }
