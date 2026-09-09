@@ -412,6 +412,47 @@ export interface ImageMessageThemeCSSVariables {
   /** Максимальная ширина изображения в модальном окне */
   '--chotto-imagemessage-modal-image-max-width': string;
 
+  /** Минимальная ширина сетки альбома */
+  '--chotto-imagemessage-album-size': string;
+  /** Отображение сетки альбома */
+  '--chotto-imagemessage-album-display': string;
+  /** Промежуток между фото в альбоме */
+  '--chotto-imagemessage-album-gap': string;
+  /** Ширина сетки альбома */
+  '--chotto-imagemessage-album-width': string;
+  /** Высота сетки альбома */
+  '--chotto-imagemessage-album-height': string;
+  /** Фон плитки альбома */
+  '--chotto-imagemessage-album-tile-background': string;
+  /** Курсор плитки альбома */
+  '--chotto-imagemessage-album-tile-cursor': string;
+  /** Вписывание фото в плитке альбома */
+  '--chotto-imagemessage-album-tile-object-fit': string;
+  /** Фон оверлея «ещё N» */
+  '--chotto-imagemessage-album-overflow-background': string;
+  /** Цвет текста оверлея «ещё N» */
+  '--chotto-imagemessage-album-overflow-color': string;
+  /** Размер шрифта оверлея «ещё N» */
+  '--chotto-imagemessage-album-overflow-font-size': string;
+  /** Размер кнопки навигации в модалке альбома */
+  '--chotto-imagemessage-modal-nav-size': string;
+  /** Фон кнопки навигации в модалке альбома */
+  '--chotto-imagemessage-modal-nav-background': string;
+  /** Цвет иконки навигации в модалке альбома */
+  '--chotto-imagemessage-modal-nav-color': string;
+  /** Скругление кнопки навигации в модалке альбома */
+  '--chotto-imagemessage-modal-nav-border-radius': string;
+  /** Размер иконки навигации в модалке альбома */
+  '--chotto-imagemessage-modal-nav-font-size': string;
+  /** Цвет счётчика в модалке альбома */
+  '--chotto-imagemessage-modal-counter-color': string;
+  /** Размер шрифта счётчика в модалке альбома */
+  '--chotto-imagemessage-modal-counter-font-size': string;
+  /** Внутренние отступы счётчика в модалке альбома */
+  '--chotto-imagemessage-modal-counter-padding': string;
+  /** Скругление счётчика в модалке альбома */
+  '--chotto-imagemessage-modal-counter-border-radius': string;
+
   /** Переход появления контекстного меню */
   '--chotto-imagemessage-context-menu-enter-active-transition': string;
   /** Переход скрытия контекстного меню */

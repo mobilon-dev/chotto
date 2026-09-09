@@ -287,13 +287,28 @@ export interface IFileMessage {
   canDelete?: boolean
 }
 
+/** Одно изображение в альбоме `message.image` */
+export interface IImageMessageItem {
+  url: string
+  /** URL превью для ленты. Если нет — показывается `url`. */
+  imagePreviewUrl?: string
+  filename?: string
+  size?: number | string
+}
+
 export interface IImageMessage {
   messageId: string
   position: string
   time: string
-  url: string
+  /**
+   * Полноразмерный URL (для одного фото или как дубль первого элемента `items`).
+   * Если задан `items`, в ленте используются элементы массива.
+   */
+  url?: string
   /** URL превью для ленты. Если нет — в ленте показывается `url`. При широком просмотре открывается полноразмерный `url`. */
   imagePreviewUrl?: string
+  /** Несколько изображений в одном сообщении. Один элемент — обычное фото. */
+  items?: IImageMessageItem[]
   alt?: string
   status: string
   statusMsg?: string

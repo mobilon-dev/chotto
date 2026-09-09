@@ -170,6 +170,32 @@ function validateMessage(message: any, index: number): MessageValidationError[] 
     errors.push({ path: `${path}.views`, message: 'Поле views должно быть числом', value: message.views });
   }
 
+  if (message.items !== undefined) {
+    if (!Array.isArray(message.items)) {
+      errors.push({ path: `${path}.items`, message: 'Поле items должно быть массивом', value: message.items });
+    } else {
+      message.items.forEach((item: any, itemIndex: number) => {
+        const itemPath = `${path}.items[${itemIndex}]`
+        if (typeof item !== 'object' || item === null) {
+          errors.push({ path: itemPath, message: 'Элемент items должен быть объектом', value: item });
+          return
+        }
+        if (!item.url || typeof item.url !== 'string') {
+          errors.push({ path: `${itemPath}.url`, message: 'Поле url обязательно и должно быть строкой', value: item.url });
+        }
+        if (item.imagePreviewUrl !== undefined && typeof item.imagePreviewUrl !== 'string') {
+          errors.push({ path: `${itemPath}.imagePreviewUrl`, message: 'Поле imagePreviewUrl должно быть строкой', value: item.imagePreviewUrl });
+        }
+        if (item.filename !== undefined && typeof item.filename !== 'string') {
+          errors.push({ path: `${itemPath}.filename`, message: 'Поле filename должно быть строкой', value: item.filename });
+        }
+        if (item.size !== undefined && typeof item.size !== 'number' && typeof item.size !== 'string') {
+          errors.push({ path: `${itemPath}.size`, message: 'Поле size должно быть числом или строкой', value: item.size });
+        }
+      })
+    }
+  }
+
   // Валидация вложенных структур
   if (message.reply !== undefined) {
     errors.push(...validateMessageReply(message.reply, index));

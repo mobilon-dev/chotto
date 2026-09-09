@@ -26,8 +26,8 @@
       </div>
       <div class="feed-found-item__second-line">
         <img
-          v-if="object.type == 'message.image'"
-          :src="object.url"
+          v-if="imagePreviewSrc"
+          :src="imagePreviewSrc"
           style="margin-right: 3px;"
           width="24"
           height="24"
@@ -49,6 +49,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { IFeedObject } from '@/types';
+import { getPrimaryImageItem } from '@/hooks/messages';
 const props = defineProps({
   object: {
     type: Object as () => IFeedObject,
@@ -59,6 +60,12 @@ const props = defineProps({
     default: false,
   }
 });
+
+const imagePreviewSrc = computed(() => {
+  if (props.object.type !== 'message.image') return ''
+  const primary = getPrimaryImageItem(props.object)
+  return primary?.imagePreviewUrl || primary?.url || ''
+})
 
 const typePreview = computed(() => {
   const r: Record<string, string> = {

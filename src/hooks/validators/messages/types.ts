@@ -61,6 +61,12 @@ export interface Message {
   coverUrl?: string;
   filename?: string;
   alt?: string;
+  items?: Array<{
+    url: string;
+    imagePreviewUrl?: string;
+    filename?: string;
+    size?: number | string;
+  }>;
   views?: number;
   reply?: MessageReply;
   embed?: MessageEmbed;

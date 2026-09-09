@@ -500,3 +500,58 @@ export const RightMessageWithPreviewLink: Story = {
   decorators: commonDecorator,
 };
 
+const albumItem = (seed: string) => ({
+  url: `https://picsum.photos/seed/${seed}/1200/800`,
+  imagePreviewUrl: `https://picsum.photos/seed/${seed}/400/300`,
+  filename: `${seed}.jpg`,
+})
+
+const albumItems = [
+  albumItem('chotto-mountains'),
+  albumItem('chotto-lake'),
+  albumItem('chotto-forest'),
+  albumItem('chotto-coast'),
+  albumItem('chotto-village'),
+]
+
+export const AlbumTwoImages: Story = {
+  args: {
+    message: {
+      ...imageMessage,
+      url: albumItems[0].url,
+      imagePreviewUrl: albumItems[0].imagePreviewUrl,
+      items: albumItems.slice(0, 2),
+      text: 'Два фото одним сообщением',
+    },
+  },
+  decorators: commonDecorator,
+};
+
+export const AlbumThreeImages: Story = {
+  args: {
+    message: {
+      ...imageMessage,
+      position: 'right',
+      status: 'read',
+      url: albumItems[0].url,
+      imagePreviewUrl: albumItems[0].imagePreviewUrl,
+      items: albumItems.slice(0, 3),
+      text: 'Несколько фото с той поездки. Горы — это значительные возвышения земной поверхности, резко поднимающиеся над окружающей территорией, с выраженными склонами и вершиной.',
+    },
+  },
+  decorators: commonDecorator,
+};
+
+export const AlbumFiveImages: Story = {
+  args: {
+    message: {
+      ...imageMessage,
+      url: albumItems[0].url,
+      imagePreviewUrl: albumItems[0].imagePreviewUrl,
+      items: albumItems,
+      text: 'Альбом из пяти фото',
+    },
+  },
+  decorators: commonDecorator,
+};
+

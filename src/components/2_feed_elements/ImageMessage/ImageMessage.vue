@@ -69,33 +69,63 @@
 
         <div
           class="image-message__preview-button"
-          :class="{ 'image-message__preview-button--blur-edges': shouldApplyBlur }"
-          @click="isOpenModal = true"
+          :class="{
+            'image-message__preview-button--blur-edges': shouldApplyBlur,
+            'image-message__preview-button--album': isAlbum,
+          }"
+          :style="isAlbum ? { borderRadius: imageBorderRadius } : undefined"
+          @click="onPreviewClick"
           @mouseenter="showMenu"
           @mouseleave="hideMenu"
         >
-          <div
-            v-if="shouldApplyBlur"
-            class="image-message__blur-wrapper"
-          >
+          <template v-if="isAlbum">
+            <div
+              class="image-message__album"
+              :class="'image-message__album--' + albumLayout"
+            >
+              <button
+                v-for="(item, index) in visibleAlbumItems"
+                :key="(item.url || '') + '-' + index"
+                type="button"
+                class="image-message__album-tile"
+                @click.stop="onAlbumTileClick(index)"
+              >
+                <img
+                  class="image-message__album-image"
+                  :src="item.imagePreviewUrl || item.url"
+                  :alt="item.filename"
+                >
+                <span
+                  v-if="albumOverflow > 0 && index === visibleAlbumItems.length - 1"
+                  class="image-message__album-overflow"
+                >+{{ albumOverflow }}</span>
+              </button>
+            </div>
+          </template>
+          <template v-else>
+            <div
+              v-if="shouldApplyBlur"
+              class="image-message__blur-wrapper"
+            >
+              <img
+                class="image-message__blur-left"
+                :src="feedImageUrl"
+                :alt="message.alt"
+              >
+              <img
+                class="image-message__blur-right"
+                :src="feedImageUrl"
+                :alt="message.alt"
+              >
+            </div>
             <img
-              class="image-message__blur-left"
+              ref="imageRef"
+              class="image-message__preview-image"
+              :style="{ borderRadius: imageBorderRadius }"
               :src="feedImageUrl"
               :alt="message.alt"
             >
-            <img
-              class="image-message__blur-right"
-              :src="feedImageUrl"
-              :alt="message.alt"
-            >
-          </div>
-          <img
-            ref="imageRef"
-            class="image-message__preview-image"
-            :style="{ borderRadius: imageBorderRadius }"
-            :src="feedImageUrl"
-            :alt="message.alt"
-          >
+          </template>
 
           <transition name="modal-fade">
             <div
@@ -214,14 +244,38 @@
         <ModalFullscreen
           v-if="isOpenModal && !message.deleted"
           :data-theme="getTheme().theme ? getTheme().theme : 'light'"
-          :title="message.alt"
+          :title="modalTitle"
           @close="closeModal"
         >
-          <img
-            class="image-message__modal-image"
-            :src="message.url"
-            :alt="message.alt"
-          >
+          <div class="image-message__modal-body">
+            <button
+              v-if="isAlbum"
+              type="button"
+              class="image-message__modal-nav image-message__modal-nav--prev"
+              aria-label="Предыдущее изображение"
+              @click.stop="showPrevModalImage"
+            >
+              <span class="pi pi-chevron-left" />
+            </button>
+            <img
+              class="image-message__modal-image"
+              :src="modalImageUrl"
+              :alt="modalImageAlt"
+            >
+            <button
+              v-if="isAlbum"
+              type="button"
+              class="image-message__modal-nav image-message__modal-nav--next"
+              aria-label="Следующее изображение"
+              @click.stop="showNextModalImage"
+            >
+              <span class="pi pi-chevron-right" />
+            </button>
+            <span
+              v-if="isAlbum"
+              class="image-message__modal-counter"
+            >{{ modalIndex + 1 }} / {{ imageItems.length }}</span>
+          </div>
         </ModalFullscreen>
       </transition>
     </Teleport>
@@ -244,7 +298,7 @@ import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIn
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply, getImageMessageItems } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IImageMessage } from '@/types';
@@ -305,6 +359,69 @@ const props = defineProps({
 const emit = defineEmits(['action', 'reply', 'sms-invite']);
 
 const isOpenModal = ref(false);
+const modalIndex = ref(0)
+const ALBUM_VISIBLE_LIMIT = 4
+
+const imageItems = computed(() => getImageMessageItems(props.message))
+const isAlbum = computed(() => imageItems.value.length > 1)
+const visibleAlbumItems = computed(() => imageItems.value.slice(0, ALBUM_VISIBLE_LIMIT))
+const albumOverflow = computed(() => Math.max(0, imageItems.value.length - ALBUM_VISIBLE_LIMIT))
+const albumLayout = computed(() => String(Math.min(imageItems.value.length, ALBUM_VISIBLE_LIMIT)))
+
+const feedImageUrl = computed(() => {
+  const primary = imageItems.value[0]
+  return primary?.imagePreviewUrl || primary?.url || ''
+})
+
+const modalImage = computed(() => imageItems.value[modalIndex.value] || imageItems.value[0])
+const modalImageUrl = computed(() => modalImage.value?.url || '')
+const modalImageAlt = computed(() => modalImage.value?.filename || props.message.alt)
+const modalTitle = computed(() => {
+  if (!isAlbum.value) return modalImageAlt.value
+  return modalImageAlt.value || `${modalIndex.value + 1} / ${imageItems.value.length}`
+})
+
+function openModal(index: number) {
+  modalIndex.value = index
+  isOpenModal.value = true
+}
+
+function onPreviewClick() {
+  if (!isAlbum.value) openModal(0)
+}
+
+function onAlbumTileClick(index: number) {
+  const isOverflowTile = albumOverflow.value > 0 && index === visibleAlbumItems.value.length - 1
+  openModal(isOverflowTile ? ALBUM_VISIBLE_LIMIT : index)
+}
+
+function showPrevModalImage() {
+  const count = imageItems.value.length
+  if (count < 2) return
+  modalIndex.value = (modalIndex.value - 1 + count) % count
+}
+
+function showNextModalImage() {
+  const count = imageItems.value.length
+  if (count < 2) return
+  modalIndex.value = (modalIndex.value + 1) % count
+}
+
+function onModalKeydown(event: KeyboardEvent) {
+  if (!isOpenModal.value || !isAlbum.value) return
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault()
+    showPrevModalImage()
+  } else if (event.key === 'ArrowRight') {
+    event.preventDefault()
+    showNextModalImage()
+  }
+}
+
+watch(isOpenModal, (open) => {
+  if (open) window.addEventListener('keydown', onModalKeydown)
+  else window.removeEventListener('keydown', onModalKeydown)
+})
 
 const {
   isOpenMenu,
@@ -391,10 +508,11 @@ onUnmounted(() => {
   if (resizeObserver) {
     resizeObserver.disconnect()
   }
+  window.removeEventListener('keydown', onModalKeydown)
 })
 
 watch(
-  () => [props.message.text, props.message.url, props.message.imagePreviewUrl],
+  () => [props.message.text, props.message.url, props.message.imagePreviewUrl, props.message.items],
   () => {
     updateWidths()
     // Переподключаем ResizeObserver после изменения элементов
@@ -414,7 +532,8 @@ watch(
 )
 
 const shouldApplyBlur = computed(() => {
-  return props.message.text && textWidth.value > imageWidth.value && imageWidth.value > 0
+  if (isAlbum.value) return false
+  return Boolean(props.message.text) && textWidth.value > imageWidth.value && imageWidth.value > 0
 })
 
 const showMenu = () => {
@@ -433,8 +552,6 @@ const onMenuMouseLeave = () => {
   baseOnMenuMouseLeave()
   buttonDownloadVisible.value = false
 }
-
-const feedImageUrl = computed(() => props.message.imagePreviewUrl || props.message.url)
 
 const imageBorderRadius = computed(() => {
   if (props.message.reply && props.message.text) return '0'
@@ -461,13 +578,21 @@ function getClass(message: IImageMessage) {
   return getMessageClass(message.position, 'image-message')
 }
 
-const closeModal = () => isOpenModal.value = false
+const closeModal = () => {
+  isOpenModal.value = false
+}
+
+const downloadTarget = computed(() => {
+  if (isOpenModal.value) return modalImage.value
+  return imageItems.value[0]
+})
 
 const downloadImage = async () => {
-  if (!props.message.url) return
+  const target = downloadTarget.value
+  if (!target?.url) return
   
   try {
-    const response = await fetch(props.message.url, {
+    const response = await fetch(target.url, {
       headers: {
         'Accept': 'image/*'
       }
@@ -480,7 +605,7 @@ const downloadImage = async () => {
     const blob = await response.blob()
     
     // Получаем расширение из URL
-    const urlExtension = props.message.url.split('.').pop()?.split('?')[0]?.toLowerCase() || ''
+    const urlExtension = target.url.split('.').pop()?.split('?')[0]?.toLowerCase() || ''
     
     // Определяем расширение по Content-Type или URL
     const mimeToExt: Record<string, string> = {
@@ -497,8 +622,9 @@ const downloadImage = async () => {
       ? urlExtension
       : (mimeToExt[contentType] || 'jpg')
     
-    const filename = props.message.alt 
-      ? (props.message.alt.includes('.') ? props.message.alt : `${props.message.alt}.${extension}`)
+    const nameSource = target.filename || props.message.alt
+    const filename = nameSource
+      ? (nameSource.includes('.') ? nameSource : `${nameSource}.${extension}`)
       : `image-${props.message.messageId}.${extension}`
     
     const url = window.URL.createObjectURL(blob)
