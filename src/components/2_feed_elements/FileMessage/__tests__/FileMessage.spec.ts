@@ -65,4 +65,30 @@ describe('FileMessage smoke', () => {
     expect(wrapper.find('.file-message__text-container').text()).toContain('подпись')
     wrapper.unmount()
   })
+
+  it('рендерит несколько файлов из items', () => {
+    const wrapper = mountFile({
+      ...makeFeedObject({ messageId: 'f4', text: '', type: 'message.file' }),
+      url: 'https://example.com/one.pdf',
+      filename: 'one.pdf',
+      items: [
+        { url: 'https://example.com/one.pdf', filename: 'one.pdf' },
+        { url: 'https://example.com/two.pdf', filename: 'two.pdf' },
+      ],
+    })
+    expect(wrapper.find('.file-message__files--many').exists()).toBe(true)
+    expect(wrapper.findAll('.file-message__link')).toHaveLength(2)
+    expect(wrapper.findAll('.file-message__filename-text')[1].text()).toBe('two.pdf')
+    wrapper.unmount()
+  })
+
+  it('один элемент в items показывает одну ссылку без класса many', () => {
+    const wrapper = mountFile({
+      ...makeFeedObject({ messageId: 'f5', text: '', type: 'message.file' }),
+      items: [{ url: 'https://example.com/single.pdf', filename: 'single.pdf' }],
+    })
+    expect(wrapper.find('.file-message__files--many').exists()).toBe(false)
+    expect(wrapper.findAll('.file-message__link')).toHaveLength(1)
+    wrapper.unmount()
+  })
 })

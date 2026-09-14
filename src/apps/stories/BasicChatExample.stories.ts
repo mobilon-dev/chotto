@@ -51,10 +51,16 @@ const simpleChats = [
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     countUnread: 2,
     lastMessage: {
-      type: 'message.image',
+      type: 'message.file',
       data: {
-        text: 'Несколько фото с поездки',
-      }
+        text: 'Пакет документов',
+        filename: 'Расписание.pdf',
+        items: [
+          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Расписание.pdf' },
+          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Смета.xlsx' },
+          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Отчет_за_квартал.pdf' },
+        ],
+      },
     },
     'lastActivity.time': '5 минут назад',
     'lastActivity.timestamp': '1700000000000',
@@ -70,7 +76,7 @@ const simpleChats = [
     name: "Иван",
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     countUnread: 0,
-    lastMessage: 'Спасибо за помощь!',
+    lastMessage: 'Добрый день, у нас выходной',
     'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1699996400000',
     isFixedBottom: false,
@@ -287,7 +293,7 @@ const simpleMessages: DemoMessage[] = [
     subText: "Иван",
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     messageId: '11-edited',
-    text: "Добрый день. Нет, у нас выходной",
+    text: "Добрый день, у нас выходной",
     timestamp: '1762164400',
     status: 'read',
     edited: {
@@ -327,6 +333,24 @@ const simpleMessages: DemoMessage[] = [
       { url: "https://sun9-23.vkuserphoto.ru/s/v1/ig2/lT5if6oqjRJ9hBZdbm9AzI8bdvVtsz1jECn4T_9eK4-t0ZcrpJAZi4ay0PvQ2XW4IhnFsfYs2GtuXfSlmXtGYwt6.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=1200x0", imagePreviewUrl: "https://sun9-23.vkuserphoto.ru/s/v1/ig2/lT5if6oqjRJ9hBZdbm9AzI8bdvVtsz1jECn4T_9eK4-t0ZcrpJAZi4ay0PvQ2XW4IhnFsfYs2GtuXfSlmXtGYwt6.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=360x0", filename: "машина.jpg" },
     ],
     timestamp: '1762164450',
+    status: 'read',
+  },
+  {
+    chatId: 1,
+    type: "message.file",
+    direction: 'incoming',
+    header: "Анна",
+    subText: "Анна",
+    messageId: '7-files',
+    text: "Пакет документов",
+    url: "https://axiomabio.com/pdf/test.pdf",
+    filename: "Расписание.pdf",
+    items: [
+      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Расписание.pdf" },
+      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Смета.xlsx" },
+      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Отчет_за_квартал.pdf" },
+    ],
+    timestamp: '1762164460',
     status: 'read',
   },
   // Сообщения для чата 2 (Иван)
@@ -464,7 +488,7 @@ const simpleMessages: DemoMessage[] = [
     header: "Иван",
     subText: "Иван",
     messageId: '12-edited',
-    text: "Добрый день. Нет, у нас выходной",
+    text: "Добрый день, у нас выходной",
     timestamp: '1762164400',
     status: 'read',
     edited: {

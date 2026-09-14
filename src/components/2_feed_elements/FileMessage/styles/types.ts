@@ -118,6 +118,15 @@ export interface FileMessageThemeCSSVariables {
   /** Цвет подписи */
   '--chotto-filemessage-subtext-color': string;
 
+  /** Отображение списка файлов */
+  '--chotto-filemessage-files-display': string;
+  /** Направление списка файлов */
+  '--chotto-filemessage-files-flex-direction': string;
+  /** Вертикальный промежуток между файлами (один файл) */
+  '--chotto-filemessage-files-row-gap': string;
+  /** Вертикальный промежуток между файлами (несколько файлов) */
+  '--chotto-filemessage-files-many-row-gap': string;
+
   /** Отображение ссылки на файл */
   '--chotto-filemessage-link-display': string;
   /** Выравнивание по главной оси ссылки */

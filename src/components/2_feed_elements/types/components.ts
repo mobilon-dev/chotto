@@ -1,4 +1,4 @@
-import { IAudioMessage, ICallMessage, IDateMessage, IFileMessage, 
+import { IAudioMessage, ICallMessage, IDateMessage, IFileMessage, IFileMessageItem,
   IImageMessage, IImageMessageItem, IKeyBoard, ILinkPreview, ISystemMessage, 
   ITextMessage, ITypingMessage, IVideoMessage, Reply,
 } from "@/types"
@@ -14,8 +14,8 @@ export interface IFeedObject {
   url?: string
   /** URL превью картинки для ленты (для `message.image`) */
   imagePreviewUrl?: string
-  /** Несколько изображений в одном `message.image` */
-  items?: IImageMessageItem[]
+  /** Несколько вложений в одном `message.image` или `message.file` */
+  items?: IImageMessageItem[] | IFileMessageItem[]
   /** URL сжатого превью видео для ленты (для `message.video`) */
   videoPreviewUrl?: string
   /** URL обложки видео для ленты (для `message.video`) */

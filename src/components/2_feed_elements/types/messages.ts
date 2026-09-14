@@ -258,12 +258,23 @@ export interface IDateMessage {
   hasMessengerAccount?: boolean
 }
 
+/** Один файл в сообщении `message.file` с несколькими вложениями */
+export interface IFileMessageItem {
+  url: string
+  filename?: string
+  size?: number | string
+}
+
 export interface IFileMessage {
   messageId: string
-  filename: string
+  /** Имя файла для одного вложения или дубль первого элемента `items` */
+  filename?: string
   position: string
   time: string
-  url: string
+  /** URL файла для одного вложения или дубль первого элемента `items` */
+  url?: string
+  /** Несколько файлов в одном сообщении. Один элемент — обычное вложение. */
+  items?: IFileMessageItem[]
   status: string
   statusMsg?: string
   avatar?: string
