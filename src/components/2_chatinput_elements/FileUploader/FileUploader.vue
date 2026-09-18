@@ -42,6 +42,10 @@ import { useMessageDraft, useChottoUploader, buildFilePreview, getDraftFiles, MA
 import { FileUploaderIcon } from "./icons";
 
 const props = defineProps({
+  /**
+   * @deprecated Используйте `uploader` или `provide(chottoUploadFileKey)`.
+   * Legacy adapter: POST `{filebumpUrl}/upload`. Будет удалён в следующем major.
+   */
   filebumpUrl: {
     type: String,
     default: '',

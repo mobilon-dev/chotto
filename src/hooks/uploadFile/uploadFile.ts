@@ -12,6 +12,11 @@ export type UploadFileResult =
     }
   | { status: 'error' }
 
+/**
+ * @deprecated Legacy filebump adapter (`POST {filebumpUrl}/upload`).
+ * Предпочтительный путь — `ChottoUploadFileFn` через prop `uploader` или `provide(chottoUploadFileKey)`.
+ * Будет удалён в следующем major.
+ */
 export const uploadFile = async ( filebumpUrl: string, selectedFile: File ): Promise<UploadFileResult> => {
     const formData = new FormData();
     formData.append("file", selectedFile);

@@ -132,6 +132,39 @@ export interface VideoMessageThemeCSSVariables {
   /** Направление флекс-контейнера кнопки превью */
   '--chotto-videomessage-preview-button-flex-direction': string;
 
+  /** Позиционирование значка play на обложке */
+  '--chotto-videomessage-play-badge-position': string;
+  /** Смещение значка play сверху */
+  '--chotto-videomessage-play-badge-top': string;
+  /** Смещение значка play слева */
+  '--chotto-videomessage-play-badge-left': string;
+  /** Трансформация значка play */
+  '--chotto-videomessage-play-badge-transform': string;
+  /** Отображение значка play */
+  '--chotto-videomessage-play-badge-display': string;
+  /** Выравнивание содержимого значка play по поперечной оси */
+  '--chotto-videomessage-play-badge-align-items': string;
+  /** Выравнивание содержимого значка play по главной оси */
+  '--chotto-videomessage-play-badge-justify-content': string;
+  /** Ширина значка play */
+  '--chotto-videomessage-play-badge-width': string;
+  /** Высота значка play */
+  '--chotto-videomessage-play-badge-height': string;
+  /** Скругление значка play */
+  '--chotto-videomessage-play-badge-border-radius': string;
+  /** Фон значка play */
+  '--chotto-videomessage-play-badge-background-color': string;
+  /** Цвет иконки play */
+  '--chotto-videomessage-play-badge-color': string;
+  /** События указателя значка play */
+  '--chotto-videomessage-play-badge-pointer-events': string;
+  /** Слой значка play */
+  '--chotto-videomessage-play-badge-z-index': string;
+  /** Размер иконки play */
+  '--chotto-videomessage-play-badge-icon-font-size': string;
+  /** Отступ иконки play слева (оптическое центрирование треугольника) */
+  '--chotto-videomessage-play-badge-icon-margin-left': string;
+
   /** Позиционирование кнопки меню сообщения */
   '--chotto-videomessage-menu-button-position': string;
   /** Прозрачный фон кнопки меню */

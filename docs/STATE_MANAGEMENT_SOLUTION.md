@@ -1,5 +1,11 @@
 # Решение проблемы State Management в Chotto UI
 
+> **Historical / устарело (2026-09).** Документ описывает план вокруг удалённого `useMessage.ts`.
+> Instance-scoped stores: `provideChatAppStores()` в `BaseContainer` / `FloatContainer`
+> (`useMessageDraft`, `useTheme`, `useSearchModel`, `useEmojiNative`).
+> Module-level остался у locale.
+> Актуальная карта: `docs/ARCHITECTURE.md`. Анализ долга: `LEGACY_ANALYSIS.md`.
+
 ## Содержание
 
 1. [Текущая проблема](#текущая-проблема)

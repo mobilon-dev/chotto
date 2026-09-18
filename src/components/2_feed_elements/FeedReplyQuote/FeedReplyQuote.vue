@@ -49,9 +49,11 @@ const MEDIA_PREVIEW_TYPES = new Set(['message.image', 'message.sticker'])
 
 const previewUrl = computed(() => {
   const reply = props.message
-  if (!reply?.url || !MEDIA_PREVIEW_TYPES.has(reply.type || '')) return ''
-  if (reply.url.endsWith('.tgs')) return ''
-  return reply.url
+  if (reply?.type === 'message.video') return reply.coverUrl || ''
+  if (!MEDIA_PREVIEW_TYPES.has(reply?.type || '')) return ''
+  const src = reply.imagePreviewUrl || reply.url
+  if (!src || src.endsWith('.tgs')) return ''
+  return src
 })
 
 const heading = computed(() => {

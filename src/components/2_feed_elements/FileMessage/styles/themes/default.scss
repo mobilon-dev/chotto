@@ -68,6 +68,12 @@
   --chotto-filemessage-subtext-font-size: var(--chotto-theme-additional-text-font-size);
   --chotto-filemessage-subtext-color: var(--chotto-theme-secondary-text-color);
 
+  // FileMessage files list variables
+  --chotto-filemessage-files-display: flex;
+  --chotto-filemessage-files-flex-direction: column;
+  --chotto-filemessage-files-row-gap: 0;
+  --chotto-filemessage-files-many-row-gap: 10px;
+
   // FileMessage link variables
   --chotto-filemessage-link-display: flex;
   --chotto-filemessage-link-justify-content: flex-start;

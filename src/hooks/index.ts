@@ -5,6 +5,7 @@ export * from './useMessageDraft';
 export * from './useSearchModel';
 export * from './useTheme';
 export * from './useEmojiNative';
+export * from './provideChatAppStores';
 
 export * from './modals';
 export * from './validators';

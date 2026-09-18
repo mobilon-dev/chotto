@@ -70,19 +70,27 @@
           :class="message.position"
           @reply="handleClickReplied"
         />
-        <a
-          class="file-message__link"
-          :href="message.url"
-          @click.prevent="downloadFile"
+        <div
+          v-if="fileItems.length"
+          class="file-message__files"
+          :class="{ 'file-message__files--many': fileItems.length > 1 }"
         >
-          <span class="pi pi-file" />
-          <p class="file-message__filename-text">
-            {{ message.filename }}
-          </p>
-          <div class="file-message__download-button">
-            <span class="pi pi-download" />
-          </div>
-        </a>
+          <a
+            v-for="(item, index) in fileItems"
+            :key="(item.url || '') + '-' + index"
+            class="file-message__link"
+            :href="item.url"
+            @click.prevent="downloadFile(item)"
+          >
+            <span class="pi pi-file" />
+            <p class="file-message__filename-text">
+              {{ item.filename || defaultFilename(index) }}
+            </p>
+            <div class="file-message__download-button">
+              <span class="pi pi-download" />
+            </div>
+          </a>
+        </div>
         <div
           v-if="message.text"
           class="file-message__text-container"
@@ -192,9 +200,9 @@ import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIn
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply, getFileMessageItems } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
-import { IFileMessage } from '@/types';
+import { IFileMessage, IFileMessageItem } from '@/types';
 
 // Define props
 const props = defineProps({
@@ -240,7 +248,13 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['action','reply','sms-invite']);
+const fileItems = computed(() => getFileMessageItems(props.message))
 const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
+
+function defaultFilename(index: number) {
+  if (props.message.filename && index === 0) return props.message.filename
+  return `file-${props.message.messageId}${fileItems.value.length > 1 ? `-${index + 1}` : ''}`
+}
 const { menuActions } = useMessageMenuActions(() => props.message)
 const { hoverActionsEnabled, reactionsActive } = useMessageHoverActions(
   () => props.channel,
@@ -311,18 +325,23 @@ const { showReactions, onContentPointerEnter, onContentPointerLeave } = useMessa
   },
 })
 
-const downloadFile = async () => {
-  if (!props.message.url) return
+const downloadFile = async (item?: IFileMessageItem) => {
+  const target = item ?? fileItems.value[0]
+  if (!target?.url) return
+
+  const downloadName = target.filename
+    || (item ? defaultFilename(fileItems.value.indexOf(item)) : props.message.filename)
+    || `file-${props.message.messageId}`
 
   try {
-    const targetUrl = new URL(props.message.url, window.location.href)
+    const targetUrl = new URL(target.url, window.location.href)
     const isSameOrigin = targetUrl.origin === window.location.origin
 
     if (isSameOrigin) {
       // Доверяем браузеру — он быстрее покажет диалог "Сохранить" для своих файлов
       const link = document.createElement('a')
       link.href = targetUrl.toString()
-      link.download = props.message.filename || `file-${props.message.messageId}`
+      link.download = downloadName
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
@@ -330,7 +349,7 @@ const downloadFile = async () => {
     }
 
     // Для внешних доменов остаёмся на fetch + blob, иначе download может быть заблокирован
-    const response = await fetch(props.message.url)
+    const response = await fetch(target.url)
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
@@ -340,7 +359,7 @@ const downloadFile = async () => {
     const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
-    link.download = props.message.filename || `file-${props.message.messageId}`
+    link.download = downloadName
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -348,7 +367,7 @@ const downloadFile = async () => {
   } catch (error) {
     console.error('Ошибка при скачивании файла:', error)
     // В случае ошибки открываем файл в новом окне
-    window.open(props.message.url, '_blank')
+    window.open(target.url, '_blank')
   }
 }
 

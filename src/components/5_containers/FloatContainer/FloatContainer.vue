@@ -51,6 +51,7 @@
 
 <script setup>
 import { ref, onMounted, useId, provide } from "vue";
+import { provideChatAppStores } from '@/hooks';
 
 const props = defineProps({
   title: {
@@ -83,6 +84,7 @@ const contentHeight = ref(0);
 
 const chatAppId = useId()
 provide('chatAppId', chatAppId)
+provideChatAppStores()
 
 // const centerWindow = () => {
 //   if (element.value) {

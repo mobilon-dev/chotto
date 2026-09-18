@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, getCurrentInstance, inject, provide, ref, type InjectionKey, type Ref } from 'vue'
 import { APPLE_EMOJI_CDN, normalizeEmojiCdn } from '@/functions/renderAppleEmojis'
 
 interface EmojiNativeState {
@@ -7,13 +7,46 @@ interface EmojiNativeState {
   emojiSrc: string
 }
 
-const states = ref<EmojiNativeState[]>([])
+export type EmojiNativeStore = {
+  states: Ref<EmojiNativeState[]>
+}
+
+export const emojiNativeStoreKey: InjectionKey<EmojiNativeStore> = Symbol('chottoEmojiNativeStore')
+
+const fallbackStores = new Map<string, EmojiNativeStore>()
+
+export function createEmojiNativeStore(): EmojiNativeStore {
+  return { states: ref<EmojiNativeState[]>([]) }
+}
+
+export function provideEmojiNativeStore(): EmojiNativeStore {
+  const store = createEmojiNativeStore()
+  provide(emojiNativeStoreKey, store)
+  return store
+}
+
+function resolveEmojiNativeStore(outId?: string): EmojiNativeStore {
+  if (getCurrentInstance()) {
+    const injected = inject(emojiNativeStoreKey, null)
+    if (injected) return injected
+  }
+
+  const key = outId || '__default__'
+  let store = fallbackStores.get(key)
+  if (!store) {
+    store = createEmojiNativeStore()
+    fallbackStores.set(key, store)
+  }
+  return store
+}
 
 /**
  * Общий флаг native/3D-эмодзи и CDN картинок для инстанса чата (ключ — chatAppId).
  * Источник правды — props `native` и `emojiSrc` у ButtonEmojiPicker.
+ * Store — instance-scoped через provide в BaseContainer / FloatContainer.
  */
 export const useEmojiNative = (outId: string) => {
+  const { states } = resolveEmojiNativeStore(outId)
   const index = ref(0)
 
   const found = states.value.find(({ id }) => id === outId)

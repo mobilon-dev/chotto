@@ -51,10 +51,16 @@ const simpleChats = [
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     countUnread: 2,
     lastMessage: {
-      type: 'message.image',
+      type: 'message.file',
       data: {
-        text: 'Как тебе аватар?',
-      }
+        text: 'Пакет документов',
+        filename: 'Расписание.pdf',
+        items: [
+          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Расписание.pdf' },
+          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Смета.xlsx' },
+          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Отчет_за_квартал.pdf' },
+        ],
+      },
     },
     'lastActivity.time': '5 минут назад',
     'lastActivity.timestamp': '1700000000000',
@@ -70,7 +76,7 @@ const simpleChats = [
     name: "Иван",
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     countUnread: 0,
-    lastMessage: 'Спасибо за помощь!',
+    lastMessage: 'Добрый день, у нас выходной',
     'lastActivity.time': 'час назад',
     'lastActivity.timestamp': '1699996400000',
     isFixedBottom: false,
@@ -97,6 +103,15 @@ type DemoMessage = {
   status: string;
   url?: string;
   filename?: string;
+  imagePreviewUrl?: string;
+  items?: Array<{
+    url: string;
+    imagePreviewUrl?: string;
+    filename?: string;
+    size?: number | string;
+  }>;
+  videoPreviewUrl?: string;
+  coverUrl?: string;
   alt?: string;
   duration?: string | number;
   reactions?: {
@@ -251,8 +266,23 @@ const simpleMessages: DemoMessage[] = [
     subText: "Анна",
     messageId: '10',
     url: "https://polka.cs.mobilon.ru/avatars/vector/man?size=256&palette=soft&seed=1&style=round",
+    imagePreviewUrl: "https://polka.cs.mobilon.ru/avatars/vector/man?size=128&palette=soft&seed=1&style=round",
     alt: "Avatar",
     timestamp: '1762164300',
+    status: 'read',
+  },
+  {
+    chatId: 1,
+    type: "message.video",
+    direction: 'incoming',
+    text: "Видео с обложкой",
+    header: "Анна",
+    subText: "Анна",
+    messageId: '10-video',
+    url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    coverUrl: "https://sun9-62.vkuserphoto.ru/s/v1/ig2/rcM0EnOEAQjEw_kwEU8lUuqJf-AwkguYVIkHVe6UfPRkAHcg_Q0fuvJtG4Xka_ZPGuxBM2xD1lRWwl4hO97NPdBE.jpg?quality=95&as=32x18,48x27,72x40,108x61,160x90,240x135,360x202,480x270,540x304,640x360,720x405,960x540&from=bu&u=XZBdOEdWipH4C2dWS9B_CqtJz5WA8xH6pBeOxYTUXlc&cs=960x0",
+    alt: "Flower",
+    timestamp: '1762164350',
     status: 'read',
   },
   {
@@ -263,7 +293,7 @@ const simpleMessages: DemoMessage[] = [
     subText: "Иван",
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=soft&seed=1&style=round',
     messageId: '11-edited',
-    text: "Добрый день. Нет, у нас выходной",
+    text: "Добрый день, у нас выходной",
     timestamp: '1762164400',
     status: 'read',
     edited: {
@@ -286,6 +316,42 @@ const simpleMessages: DemoMessage[] = [
         },
       ],
     },
+  },
+  {
+    chatId: 1,
+    type: "message.image",
+    direction: 'incoming',
+    text: "Несколько фото с поездки",
+    header: "Анна",
+    subText: "Анна",
+    messageId: '10-album',
+    items: [
+      { url: "https://sun9-41.vkuserphoto.ru/s/v1/ig2/jsck1YLg_Zspo9WsjO0KAAL8K02jEWiLEZIZvey482s5hriW4itNwBe4lDVOZJ9o5xaESB43IllTmHYoe-QMg1f3.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=1200x0", imagePreviewUrl: "https://sun9-41.vkuserphoto.ru/s/v1/ig2/jsck1YLg_Zspo9WsjO0KAAL8K02jEWiLEZIZvey482s5hriW4itNwBe4lDVOZJ9o5xaESB43IllTmHYoe-QMg1f3.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=360x0", filename: "горы.jpg" },
+      { url: "https://sun9-71.vkuserphoto.ru/s/v1/ig2/n8dIFjiMZ5sSEu9ol7_bFmbPWYW8rkqDiREFnqq8ZDzGfcso2Rw3gWHkRQWxKO0uCDwXy5FT_AKcDoZ9nEWEFHVy.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=1200x0", imagePreviewUrl: "https://sun9-71.vkuserphoto.ru/s/v1/ig2/n8dIFjiMZ5sSEu9ol7_bFmbPWYW8rkqDiREFnqq8ZDzGfcso2Rw3gWHkRQWxKO0uCDwXy5FT_AKcDoZ9nEWEFHVy.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=360x0", filename: "вода.jpg" },
+      { url: "https://sun9-15.userapi.com/s/v1/ig2/5ifa4RILacLTvbXHM0E0gmPbfhYCjoFo1s4J7IhNXL55aetwIIzUga_VLT9IX1yNswsXnPZ-6x3kHRRnYIIo98xE.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,740x1110&from=bu&cs=740x0", imagePreviewUrl: "https://sun9-15.userapi.com/s/v1/ig2/5ifa4RILacLTvbXHM0E0gmPbfhYCjoFo1s4J7IhNXL55aetwIIzUga_VLT9IX1yNswsXnPZ-6x3kHRRnYIIo98xE.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,740x1110&from=bu&cs=360x0", filename: "ещё_горы.jpg" },
+      { url: "https://sun9-22.vkuserphoto.ru/s/v1/ig2/CyJ8NdlG0tOKf0RU4SECj4c8dcqUfXpvzxVw-5y0ljBi0NKEyGuZP_LLfmMLx15KaKa6-9x70obJxetDUs7HwMLB.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=1200x0", imagePreviewUrl: "https://sun9-22.vkuserphoto.ru/s/v1/ig2/CyJ8NdlG0tOKf0RU4SECj4c8dcqUfXpvzxVw-5y0ljBi0NKEyGuZP_LLfmMLx15KaKa6-9x70obJxetDUs7HwMLB.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=360x0", filename: "блики.jpg" },
+      { url: "https://sun9-23.vkuserphoto.ru/s/v1/ig2/lT5if6oqjRJ9hBZdbm9AzI8bdvVtsz1jECn4T_9eK4-t0ZcrpJAZi4ay0PvQ2XW4IhnFsfYs2GtuXfSlmXtGYwt6.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=1200x0", imagePreviewUrl: "https://sun9-23.vkuserphoto.ru/s/v1/ig2/lT5if6oqjRJ9hBZdbm9AzI8bdvVtsz1jECn4T_9eK4-t0ZcrpJAZi4ay0PvQ2XW4IhnFsfYs2GtuXfSlmXtGYwt6.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1200x800&from=bu&cs=360x0", filename: "машина.jpg" },
+    ],
+    timestamp: '1762164450',
+    status: 'read',
+  },
+  {
+    chatId: 1,
+    type: "message.file",
+    direction: 'incoming',
+    header: "Анна",
+    subText: "Анна",
+    messageId: '7-files',
+    text: "Пакет документов",
+    url: "https://axiomabio.com/pdf/test.pdf",
+    filename: "Расписание.pdf",
+    items: [
+      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Расписание.pdf" },
+      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Смета.xlsx" },
+      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Отчет_за_квартал.pdf" },
+    ],
+    timestamp: '1762164460',
+    status: 'read',
   },
   // Сообщения для чата 2 (Иван)
   {
@@ -395,8 +461,24 @@ const simpleMessages: DemoMessage[] = [
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
     messageId: '10',
     url: "https://polka.cs.mobilon.ru/avatars/vector/man?size=256&palette=soft&seed=1&style=round",
+    imagePreviewUrl: "https://polka.cs.mobilon.ru/avatars/vector/man?size=128&palette=soft&seed=1&style=round",
     alt: "Avatar",
     timestamp: '1762164300',
+    status: 'read',
+  },
+  {
+    chatId: 2,
+    type: "message.video",
+    direction: 'outgoing',
+    text: "Видео с обложкой",
+    header: "Анна",
+    subText: "Анна",
+    avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
+    messageId: '10-video',
+    url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    coverUrl: "https://sun9-62.vkuserphoto.ru/s/v1/ig2/rcM0EnOEAQjEw_kwEU8lUuqJf-AwkguYVIkHVe6UfPRkAHcg_Q0fuvJtG4Xka_ZPGuxBM2xD1lRWwl4hO97NPdBE.jpg?quality=95&as=32x18,48x27,72x40,108x61,160x90,240x135,360x202,480x270,540x304,640x360,720x405,960x540&from=bu&u=XZBdOEdWipH4C2dWS9B_CqtJz5WA8xH6pBeOxYTUXlc&cs=960x0",
+    alt: "Flower",
+    timestamp: '1762164350',
     status: 'read',
   },
   {
@@ -406,7 +488,7 @@ const simpleMessages: DemoMessage[] = [
     header: "Иван",
     subText: "Иван",
     messageId: '12-edited',
-    text: "Добрый день. Нет, у нас выходной",
+    text: "Добрый день, у нас выходной",
     timestamp: '1762164400',
     status: 'read',
     edited: {

@@ -101,7 +101,6 @@
               >
                 <template #buttons>
                   <FileUploader
-                    :filebump-url="filebumpUrl"
                     :state="'disabled'"
                   />
                   <ButtonEmojiPicker
@@ -119,7 +118,6 @@
                     :group-templates="groupTemplates"
                     :mode="'click'"
                     :state="'disabled'"
-                    :filebump-url="filebumpUrl"
                     @send-waba-values="sendWabaValues"
                   />
                   <ChannelSelector
@@ -153,7 +151,6 @@
 <script setup>
 import { onMounted, ref, provide } from "vue";
 // import { computed, watch } from "vue";
-import moment from 'moment';
 
 import {
   ChatInfo,
@@ -177,9 +174,11 @@ import {
   FeedSearch,
   ChannelSelector,
   FeedFoundObjects,
+  BaseContainer,
+  chottoUploadFileKey,
 } from "../..";
-import { BaseContainer } from "../../components/5_containers";
 import { useModalSelectUser2 } from "../../hooks/modals";
+import { mockUploader } from "../mockUploader";
 
 import { playNotificationAudio } from "@/functions";
 
@@ -212,9 +211,6 @@ const props = defineProps({
   }
 });
 
-// Use the locale from props or fallback to currentLocale
-const locale = props.locale || currentLocale;
-
 const buttonParams = {
   unreadAmount: 12
 }
@@ -240,9 +236,10 @@ const notFoundMessage = ref(false)
 const isScrollToBottomOnUpdateObjectsEnabled = ref(false);
 const scrollToBottomOnSelectChat = ref(false)
 const inputFocus = ref(false)
-const filebumpUrl = ref('https://filebump2.services.mobilon.ru');
 const clickedReply = ref('')
 const foundMessages = ref([])
+
+provide(chottoUploadFileKey, mockUploader);
 
 const selectItem = (item) => {
   console.log("selected sidebar item", item);
@@ -363,7 +360,7 @@ const addMessage = (message) => {
     filename: message.filename || null,
     status: 'sent',
     direction: "outgoing",
-    timestamp: moment().unix(),
+    timestamp: Math.floor(Date.now() / 1000),
     reply: message.reply || null,
   });
   messages.value = getFeedObjects(); // Обновление сообщений
@@ -393,11 +390,11 @@ const sendWabaValues = (obj) => {
   addMessage(messageObject)
 }
 
-const selectChat = (chat) => {
+const selectChat = (args) => {
   scrollToBottomOnSelectChat.value = true
   inputFocus.value = true
-  selectedChat.value = chat;
-  chatsStore.setUnreadCounter(chat.chatId, 0);
+  selectedChat.value = args.chat;
+  chatsStore.setUnreadCounter(args.chat.chatId, 0);
   messages.value = getFeedObjects(); // Обновляем сообщения при выборе чата
   setTimeout(() => {
     scrollToBottomOnSelectChat.value = false
@@ -452,7 +449,10 @@ const handleEvent = async (event) => {
 };
 
 onMounted(() => {
-  locale.value = locales.find((loc) => loc.code == props.locale)
+  const foundLocale = locales.find((loc) => loc.code == props.locale)
+  if (foundLocale) {
+    currentLocale.value = foundLocale
+  }
   props.eventor.subscribe(handleEvent);
   userProfile.value = props.authProvider.getUserProfile();
   chatsStore.chats = props.dataProvider.getChats();

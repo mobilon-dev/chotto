@@ -78,6 +78,24 @@
   --chotto-videomessage-preview-button-display: flex;
   --chotto-videomessage-preview-button-flex-direction: column;
 
+  // VideoMessage play-badge variables
+  --chotto-videomessage-play-badge-position: absolute;
+  --chotto-videomessage-play-badge-top: 50%;
+  --chotto-videomessage-play-badge-left: 50%;
+  --chotto-videomessage-play-badge-transform: translate(-50%, -50%);
+  --chotto-videomessage-play-badge-display: flex;
+  --chotto-videomessage-play-badge-align-items: center;
+  --chotto-videomessage-play-badge-justify-content: center;
+  --chotto-videomessage-play-badge-width: 48px;
+  --chotto-videomessage-play-badge-height: 48px;
+  --chotto-videomessage-play-badge-border-radius: 50%;
+  --chotto-videomessage-play-badge-background-color: rgba(0, 0, 0, 0.55);
+  --chotto-videomessage-play-badge-color: #ffffff;
+  --chotto-videomessage-play-badge-pointer-events: none;
+  --chotto-videomessage-play-badge-z-index: 2;
+  --chotto-videomessage-play-badge-icon-font-size: 18px;
+  --chotto-videomessage-play-badge-icon-margin-left: 3px;
+
   // VideoMessage menu-button variables
   --chotto-videomessage-menu-button-position: absolute;
   --chotto-videomessage-menu-button-background-color: transparent;

@@ -174,6 +174,124 @@
     }
   }
 
+  &__preview-button--album {
+    width: var(--chotto-imagemessage-album-width, 100%);
+    max-width: var(--chotto-imagemessage-album-width, 100%);
+    min-width: var(--chotto-imagemessage-album-size, 280px);
+    height: var(--chotto-imagemessage-album-size, 280px);
+    max-height: var(--chotto-imagemessage-album-size, 280px);
+    overflow: hidden;
+    align-self: stretch;
+  }
+
+  &__album {
+    display: var(--chotto-imagemessage-album-display, grid);
+    gap: var(--chotto-imagemessage-album-gap, 2px);
+    width: var(--chotto-imagemessage-album-width, 100%);
+    height: var(--chotto-imagemessage-album-height, 100%);
+
+    &--2 {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+    }
+
+    &--3 {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+
+      .image-message__album-tile:first-child {
+        grid-row: 1 / 3;
+      }
+    }
+
+    &--4 {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+  }
+
+  &__album-tile {
+    position: relative;
+    display: block;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    border: none;
+    margin: 0;
+    overflow: hidden;
+    background: var(--chotto-imagemessage-album-tile-background, transparent);
+    cursor: var(--chotto-imagemessage-album-tile-cursor, zoom-in);
+  }
+
+  &__album-image {
+    width: 100%;
+    height: 100%;
+    object-fit: var(--chotto-imagemessage-album-tile-object-fit, cover);
+    display: block;
+  }
+
+  &__album-overflow {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--chotto-imagemessage-album-overflow-background, rgba(0, 0, 0, 0.55));
+    color: var(--chotto-imagemessage-album-overflow-color, #ffffff);
+    font-size: var(--chotto-imagemessage-album-overflow-font-size, 28px);
+    font-weight: 600;
+    pointer-events: none;
+  }
+
+  &__modal-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: var(--chotto-imagemessage-modal-nav-size, 40px);
+    height: var(--chotto-imagemessage-modal-nav-size, 40px);
+    border: none;
+    border-radius: var(--chotto-imagemessage-modal-nav-border-radius, 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--chotto-imagemessage-modal-nav-background, rgba(0, 0, 0, 0.55));
+    color: var(--chotto-imagemessage-modal-nav-color, #ffffff);
+    cursor: pointer;
+
+    span {
+      font-size: var(--chotto-imagemessage-modal-nav-font-size, 16px);
+    }
+
+    &--prev {
+      left: 8px;
+    }
+
+    &--next {
+      right: 8px;
+    }
+  }
+
+  &__modal-counter {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    z-index: 2;
+    padding: var(--chotto-imagemessage-modal-counter-padding, 4px 10px);
+    border-radius: var(--chotto-imagemessage-modal-counter-border-radius, 12px);
+    background: var(--chotto-imagemessage-modal-nav-background, rgba(0, 0, 0, 0.55));
+    color: var(--chotto-imagemessage-modal-counter-color, #ffffff);
+    font-size: var(--chotto-imagemessage-modal-counter-font-size, 13px);
+  }
+
   &__modal-image {
     width: var(--chotto-imagemessage-modal-image-width, 100%);
     height: var(--chotto-imagemessage-modal-image-height, auto);

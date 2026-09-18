@@ -65,6 +65,7 @@ export default [
     ignores: [
       "dist/**",
       "docs/**",
+      "storybook-static/**",
       "node_modules/**",
       ".history/**",
       "scripts/**",

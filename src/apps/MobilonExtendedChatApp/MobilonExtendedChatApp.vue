@@ -42,6 +42,7 @@
             <template #header>
               <ChatListHeader
                 title="Mobilon One 0.3"
+                :logo-enabled="true"
               >
                 <template #actions>
                   <div class="actions">
@@ -240,9 +241,7 @@
                       :commands="commands"
                       @send="addMessage"
                     /> -->
-                    <FileUploader
-                      :filebump-url="filebumpUrl"
-                    />
+                    <FileUploader />
                     <ButtonTemplateSelector
                       :templates="templates"
                       :group-templates="groupTemplates"
@@ -265,7 +264,6 @@
                       :waba-templates="wabaTemplates"
                       :group-templates="groupTemplates"
                       :mode="'click'"
-                      :filebump-url="filebumpUrl"
                       :elevated-window="false"
                       @send-waba-values="sendWabaValues"
                     />
@@ -274,8 +272,8 @@
                       :mode="'click'"
                       @select-channel="onSelectChannel"
                     />
-                    <AudioRecorder :filebump-url="filebumpUrl" />
-                    <VideoRecorder :filebump-url="filebumpUrl" />
+                    <AudioRecorder />
+                    <VideoRecorder />
                   </template-->
                 </ChatInput>
               </div>
@@ -367,14 +365,16 @@ import {
   ContactInfo, 
   BaseContainer, 
   SplashScreen,
-  ContactContextMenu
+  ContactContextMenu,
 } from "@/components";
+import { chottoUploadFileKey } from "@/hooks";
 
 import { playNotificationAudio } from "@/functions";
 
 import { useChatsStore } from "../stores/useChatStore";
 import { transformToFeed } from "../transform/transformToFeed";
 // import { useLocale } from "../locale/useLocale";
+import { mockUploader } from "../mockUploader";
 
 import { useModalCreateDialog, useModalSelectUser2, useModalCreateChat2 } from "@/hooks";
 import { themes as themesData } from '../data';
@@ -604,6 +604,7 @@ const stickers = ref([
 // Предоставляем channels и selectedChat для дочерних компонентов через provide
 provide('channels', channels);
 provide('selectedChat', selectedChat);
+provide(chottoUploadFileKey, mockUploader);
 
 // Реактивная валидация sidebar items
 const { 
@@ -620,7 +621,6 @@ const notFoundMessage = ref(false)
 const isScrollToBottomOnUpdateObjectsEnabled = ref(false);
 const scrollToBottomOnSelectChat = ref(false)
 const inputFocus = ref(false)
-const filebumpUrl = ref('https://filebump2.services.mobilon.ru');
 const clickedReply = ref('')
 const foundMessages = ref([])
 

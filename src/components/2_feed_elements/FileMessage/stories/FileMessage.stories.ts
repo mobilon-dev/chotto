@@ -655,3 +655,19 @@ export const RightMessageWithPreviewLink: Story = {
   },
   decorators: commonDecorator,
 };
+
+export const MultipleFilesInOneMessage: Story = {
+  args: {
+    message: {
+      ...fileMessage,
+      position: 'right',
+      text: 'Пакет документов по поездке.',
+      items: [
+        { url: fileMessage.url, filename: 'Документ.pdf' },
+        { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Отчет_за_квартал.pdf' },
+        { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Смета.xlsx' },
+      ],
+    } as IFileMessage,
+  },
+  decorators: commonDecorator,
+};

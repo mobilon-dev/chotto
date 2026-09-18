@@ -3,6 +3,12 @@ export interface Reply {
   type: string
   text?: string
   url?: string
+  /** URL превью картинки в цитате (для `message.image`); если нет — используется `url` */
+  imagePreviewUrl?: string
+  /** URL сжатого превью видео в ленте (для `message.video`) */
+  videoPreviewUrl?: string
+  /** URL обложки видео (картинка) в ленте/цитате (для `message.video`) */
+  coverUrl?: string
   filename?: string
   header?: string
   callDuration?: string
@@ -252,12 +258,23 @@ export interface IDateMessage {
   hasMessengerAccount?: boolean
 }
 
+/** Один файл в сообщении `message.file` с несколькими вложениями */
+export interface IFileMessageItem {
+  url: string
+  filename?: string
+  size?: number | string
+}
+
 export interface IFileMessage {
   messageId: string
-  filename: string
+  /** Имя файла для одного вложения или дубль первого элемента `items` */
+  filename?: string
   position: string
   time: string
-  url: string
+  /** URL файла для одного вложения или дубль первого элемента `items` */
+  url?: string
+  /** Несколько файлов в одном сообщении. Один элемент — обычное вложение. */
+  items?: IFileMessageItem[]
   status: string
   statusMsg?: string
   avatar?: string
@@ -281,11 +298,28 @@ export interface IFileMessage {
   canDelete?: boolean
 }
 
+/** Одно изображение в альбоме `message.image` */
+export interface IImageMessageItem {
+  url: string
+  /** URL превью для ленты. Если нет — показывается `url`. */
+  imagePreviewUrl?: string
+  filename?: string
+  size?: number | string
+}
+
 export interface IImageMessage {
   messageId: string
   position: string
   time: string
-  url: string
+  /**
+   * Полноразмерный URL (для одного фото или как дубль первого элемента `items`).
+   * Если задан `items`, в ленте используются элементы массива.
+   */
+  url?: string
+  /** URL превью для ленты. Если нет — в ленте показывается `url`. При широком просмотре открывается полноразмерный `url`. */
+  imagePreviewUrl?: string
+  /** Несколько изображений в одном сообщении. Один элемент — обычное фото. */
+  items?: IImageMessageItem[]
   alt?: string
   status: string
   statusMsg?: string
@@ -364,6 +398,10 @@ export interface IVideoMessage {
   statusMsg?: string
   time: string
   url: string
+  /** URL сжатого превью видео для ленты. Если нет — используется `url`. При широком просмотре открывается полноразмерный `url`. */
+  videoPreviewUrl?: string
+  /** URL обложки (картинка) для ленты. Приоритет в ленте: `coverUrl`, затем `videoPreviewUrl`, затем `url`. */
+  coverUrl?: string
   alt?: string
   avatar?: string
   header?: string

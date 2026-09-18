@@ -115,7 +115,7 @@
 <script setup lang="ts">
 import { unref, ref, watch, nextTick, inject, provide, computed, onMounted, onUnmounted } from 'vue';
 import type { PropType } from 'vue';
-import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview, commitChatDraftToList, getDraftFiles, MAX_ATTACHED_FILES, useStartEdit, buildEditPayload, canStartEditLastSent, isEditableLastSentCandidate } from '@/hooks';
+import { useEmojiNative, useMessageDraft, useImmediateDebouncedRef, hideEditPreview, resolveMessageDraftStore, getDraftFiles, MAX_ATTACHED_FILES, useStartEdit, buildEditPayload, canStartEditLastSent, isEditableLastSentCandidate } from '@/hooks';
 import type { UploadedFile, ResolveEditLastSentMessage } from '@/hooks';
 import { textToAppleEmojiHtml, textContainsEmoji, snapIndexToGrapheme, nextGraphemeIndex, previousGraphemeIndex } from '@/functions/renderAppleEmojis';
 import { t } from '../../../locale/useLocale';
@@ -127,6 +127,7 @@ import FilePreview from '../../2_chatinput_elements/FilePreview/FilePreview.vue'
 const emit = defineEmits(['send','typing']);
 
 const chatAppId = inject('chatAppId')
+const messageDraftStore = resolveMessageDraftStore(chatAppId as string)
 const { resetMessage, getMessage, setMessageText, setForceSendMessage, resetEdit, removeMessageFile } = useMessageDraft(chatAppId as string)
 const { startEdit } = useStartEdit(chatAppId as string)
 const { isNative, emojiSrc } = useEmojiNative(chatAppId as string)
@@ -688,7 +689,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  commitChatDraftToList(ownedDraftId)
+  messageDraftStore.commitChatDraftToList(ownedDraftId)
   document.removeEventListener('selectionchange', onDocumentSelectionChange)
   fileChipsObserver?.disconnect()
   if (selectionSyncRaf) cancelAnimationFrame(selectionSyncRaf)

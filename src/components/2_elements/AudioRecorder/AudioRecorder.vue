@@ -71,6 +71,10 @@ const props = defineProps({
     type: String,
     default: 'active',
   },
+  /**
+   * @deprecated Используйте `uploader` или `provide(chottoUploadFileKey)`.
+   * Legacy adapter: POST `{filebumpUrl}/upload`. Будет удалён в следующем major.
+   */
   filebumpUrl: {
     type: String,
     default: null,

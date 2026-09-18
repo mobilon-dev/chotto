@@ -119,6 +119,16 @@
     }
   }
 
+  &__files {
+    display: var(--chotto-filemessage-files-display, flex);
+    flex-direction: var(--chotto-filemessage-files-flex-direction, column);
+    row-gap: var(--chotto-filemessage-files-row-gap, 0);
+
+    &--many {
+      row-gap: var(--chotto-filemessage-files-many-row-gap, 10px);
+    }
+  }
+
   &__link {
     display: var(--chotto-filemessage-link-display, flex);
     justify-content: var(--chotto-filemessage-link-justify-content, flex-start);

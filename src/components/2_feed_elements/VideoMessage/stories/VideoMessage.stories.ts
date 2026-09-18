@@ -607,3 +607,48 @@ export const RightMessageWithPreviewLink: Story = {
   decorators: commonDecorator,
 };
 
+const videoPreviewUrl = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+const videoFullUrl = 'https://filebump2.services.mobilon.ru/file/i3UQnryC89WwxtigxSUXWq0ltJBhLfJXp5hT';
+const videoCoverUrl = 'https://placehold.jp/30/4caf50/ffffff/320x180.png?text=cover';
+
+export const WithCoverUrl: Story = {
+  args: {
+    message: {
+      ...videoMessage,
+      url: videoFullUrl,
+      coverUrl: videoCoverUrl,
+      text: 'В ленте — обложка, по клику открывается полноразмерный url',
+      position: 'left',
+    },
+  },
+  decorators: commonDecorator,
+};
+
+export const WithVideoPreviewUrl: Story = {
+  args: {
+    message: {
+      ...videoMessage,
+      url: videoFullUrl,
+      videoPreviewUrl,
+      text: 'В ленте — сжатое превью, по клику открывается полноразмерный url',
+      position: 'left',
+    },
+  },
+  decorators: commonDecorator,
+};
+
+export const WithCoverAndVideoPreviewUrl: Story = {
+  args: {
+    message: {
+      ...videoMessage,
+      url: videoFullUrl,
+      videoPreviewUrl,
+      coverUrl: videoCoverUrl,
+      text: 'Приоритет: обложка важнее videoPreviewUrl',
+      position: 'right',
+    },
+  },
+  decorators: commonDecorator,
+};
+
+

@@ -341,8 +341,6 @@ export interface TextMessageThemeCSSVariables {
   '--chotto-textmessage-v-enter-from-transform': string;
   /** Стартовая прозрачность при появлении */
   '--chotto-textmessage-v-enter-from-opacity': string;
-  /** CSS variable textmessage right after border top */
-  '--chotto-textmessage-right-after-border-top': string;
   /** CSS variable textmessage edit tooltip entry display */
   '--chotto-textmessage-edit-tooltip-entry-display': string;
   /** CSS variable textmessage edit tooltip entry flex direction */

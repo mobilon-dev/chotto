@@ -103,6 +103,11 @@
   --chotto-filemessage-text-container-p-white-space: pre-wrap;
 
   // FileMessage link variables
+  --chotto-filemessage-files-display: flex;
+  --chotto-filemessage-files-flex-direction: column;
+  --chotto-filemessage-files-row-gap: 0;
+  --chotto-filemessage-files-many-row-gap: 10px;
+
   --chotto-filemessage-link-display: flex;
   --chotto-filemessage-link-justify-content: flex-start;
   --chotto-filemessage-link-align-items: center;

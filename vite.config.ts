@@ -1,7 +1,6 @@
 import vue from '@vitejs/plugin-vue';
 import path from "path";
 import { defineConfig } from 'vite';
-// import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +14,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: "vuessages",
+      name: "chotto",
       formats: ['es'],
     },
     rollupOptions: {

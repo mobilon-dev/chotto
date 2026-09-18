@@ -32,7 +32,7 @@ chotto-0.3/
 │   └── index.ts             # Главная точка входа библиотеки
 ├── scripts/                 # Скрипты валидации и сборки
 ├── dist/                    # Собранная библиотека
-└── docs/                    # Документация (Storybook output)
+└── docs/                    # Markdown-документация (Storybook → storybook-static/)
 ```
 
 ### 1.2 Принципы архитектуры
@@ -144,7 +144,7 @@ chotto-0.3/
 Сложные компоненты из нескольких элементов:
 - `ChatInput` — полнофункциональное поле ввода сообщения
 - `ChatList` — список чатов с фильтрацией и поиском
-- `Feed` — лента сообщений с виртуальной прокруткой
+- `Feed` — лента сообщений с progressive (chunked) render
 - `SideBar` — боковое меню навигации
 
 #### **4_layouts** — Макеты (Layouts)
@@ -223,6 +223,8 @@ src/themes/
 │   └── vars.scss
 ├── dark/                 # Темная тема
 │   └── vars.scss
+├── glass/                # Glass-тема
+│   └── vars.scss
 ├── green/                # Зеленая тема
 │   └── vars.scss
 └── mobilon1/             # Тема Mobilon
@@ -277,6 +279,7 @@ src/themes/
 |------|-----------|----------|
 | Default | `"default"` | Светлая тема по умолчанию |
 | Dark | `"dark"` | Темная тема с нейтральными цветами |
+| Glass | `"glass"` | Полупрозрачная glass-тема |
 | Green | `"green"` | Зеленая тема с изумрудными акцентами |
 | Mobilon1 | `"mobilon1"` | Брендовая тема Mobilon |
 
@@ -405,9 +408,11 @@ src/hooks/
 │   ├── chats/
 │   ├── messages/
 │   └── sidebar/
-├── useTheme.ts                # Управление темами
-├── useMessage.ts              # Работа с сообщениями
-├── useSearchModel.ts          # Поиск
+├── useTheme.ts                # Управление темами (instance store)
+├── useMessageDraft.ts         # Черновики: instance store (provide в BaseContainer)
+├── useSearchModel.ts          # Поиск (instance store)
+├── useEmojiNative.ts          # Native/CDN emoji (instance store)
+├── provideChatAppStores.ts    # provide всех instance store в контейнере
 ├── useDelayDebouncedRef.ts    # Дебаунс с задержкой
 └── useImmediateDebouncedRef.ts # Мгновенный дебаунс
 ```
@@ -423,18 +428,32 @@ const { getTheme } = useTheme('container-id');
 const theme = getTheme(); // { id: 'container-id', theme: 'dark' }
 ```
 
-#### useModalCreateChat — Модальное окно создания чата
+#### useMessageDraft — Черновики сообщений
+
+Store создаётся в `BaseContainer` / `FloatContainer` через `provideMessageDraftStore()`.
+Публичный API хука без изменений:
 
 ```typescript
-import { useModalCreateChat } from '@mobilon-dev/chotto';
+import { useMessageDraft } from '@mobilon-dev/chotto';
 
-const { showModal } = useModalCreateChat({
-  onConfirm: (chatData) => {
-    console.log('Создан чат:', chatData);
-  }
-});
+const {
+  getMessage,
+  setMessageText,
+  addMessageFiles,
+  resetMessage,
+} = useMessageDraft(chatAppId);
+```
 
-showModal();
+#### useModalCreateChat — Модальное окно создания чата
+
+Хуки модалок асинхронные: принимают `title` и `theme`, возвращают результат после закрытия модалки.
+Предпочтительный API — `useModalCreateChat2` (имя + телефон); `useModalCreateChat` — legacy.
+
+```typescript
+import { useModalCreateChat2 } from '@mobilon-dev/chotto';
+
+const chatData = await useModalCreateChat2('Новый чат', 'default');
+// chatData: { name, phone } | undefined (если отменили)
 ```
 
 #### useChatValidator — Валидация чатов
@@ -613,40 +632,35 @@ const messagesWithDates = insertDaySeparators(messages);
 
 ### 9.1 Поддерживаемые языки
 
-- 🇷🇺 Русский (`ru.js`)
-- 🇺🇸 Английский (`en.js`)
+- 🇷🇺 Русский (`ru.ts`)
+- 🇺🇸 Английский (`en.ts`)
+
+Словари и `useLocale` — TypeScript (`src/locale/`); ключи типизированы через `LocaleMessageKey`.
 
 ### 9.2 Структура локализации
 
-```javascript
-// src/locale/ru.js
-export default {
-  component: {
-    ChatInput: {
-      InputPlaceholder: 'Введите сообщение...',
-      SendButton: 'Отправить'
-    },
-    ChatList: {
-      SearchPlaceholder: 'Поиск...',
-      NoChats: 'Нет чатов'
-    }
-    // ...
-  }
+```typescript
+// src/locale/ru.ts
+import type { LocaleMessages } from './types'
+
+export const ru: LocaleMessages = {
+  'component.ChatInput.InputPlaceholder': 'Введите сообщение',
+  'component.ChatList.Title': 'Чаты',
+  // ...
 }
 ```
 
 ### 9.3 Использование
 
 ```typescript
-import { useLocale } from '@mobilon-dev/chotto';
+import { useLocale } from '@/locale/useLocale'
 
-const { t, setLocale } = useLocale();
+const { t, locale, locales } = useLocale()
 
-// Получение перевода
-const placeholder = t('component.ChatInput.InputPlaceholder');
+const placeholder = t('component.ChatInput.InputPlaceholder')
 
 // Смена языка
-setLocale('en');
+locale.value = locales.find((l) => l.code === 'en')!
 ```
 
 ---
@@ -656,16 +670,18 @@ setLocale('en');
 ### 10.1 Конфигурация Vite
 
 **Основная сборка** (`vite.config.ts`):
-- Сборка библиотеки в ES и UMD форматах
-- Внешняя зависимость Vue (peer dependency)
+- Сборка библиотеки в формате ES (`formats: ['es']`, `preserveModules`)
+- Vue — external (не бандлится); в `package.json` сейчас указана в `dependencies`, не в `peerDependencies`
+- `lib.name`: `chotto`
 - Поддержка SCSS с modern-compiler
-- TypeScript декларации
+- TypeScript декларации (`vue-tsc --emitDeclarationOnly`)
 
 **Сборка тем** (`vite.themes.config.ts`):
 - Отдельная сборка CSS файлов тем
 - Экспорт индивидуальных тем:
   - `themes/default.css`
   - `themes/dark.css`
+  - `themes/glass.css`
   - `themes/green.css`
   - `themes/mobilon1.css`
 
@@ -678,7 +694,7 @@ setLocale('en');
   "build:lib": "vite build && vue-tsc ...",   // Сборка библиотеки
   "build:themes": "vite build --config ...",  // Сборка тем
   "storybook": "storybook dev -p 6006",       // Запуск Storybook
-  "build-storybook": "storybook build ...",   // Сборка Storybook
+  "build-storybook": "storybook build -o storybook-static",
   "validate-themes": "tsx ./scripts/...",     // Валидация тем
   "prepublishOnly": "npm run build && ...",   // Pre-publish хук
   "lint": "npx eslint .",                     // Линтинг
@@ -690,17 +706,18 @@ setLocale('en');
 
 ```json
 {
-  "main": "./dist/vuessages.umd.js",
-  "module": "./dist/vuessages.es.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/vuessages.es.js",
-      "require": "./dist/vuessages.umd.js"
+      "import": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./style.css": "./dist/chotto.css",
     "./themes/default.css": "./dist/themes/default.css",
     "./themes/dark.css": "./dist/themes/dark.css",
+    "./themes/glass.css": "./dist/themes/glass.css",
     "./themes/green.css": "./dist/themes/green.css",
     "./themes/mobilon1.css": "./dist/themes/mobilon1.css"
   }
@@ -711,18 +728,17 @@ setLocale('en');
 
 ## 11. Особенности архитектуры
 
-### 11.1 Виртуальная прокрутка
+### 11.1 Progressive render ленты
 
-Компонент `Feed` использует виртуальную прокрутку для оптимизации производительности при большом количестве сообщений.
+Компонент `Feed` использует `useFeedProgressiveRender` — поэтапный (chunked) рендер сообщений, а не классическую виртуализацию DOM. Это снижает стоимость первого paint при длинной истории без windowing по видимым элементам.
 
 ### 11.2 Ленивая загрузка модальных окон
 
 Модальные окна загружаются динамически через композируемые функции:
 
 ```typescript
-// Компонент не импортируется напрямую
-// Загружается только при вызове showModal()
-const { showModal } = useModalCreateChat({...});
+// Компонент не импортируется напрямую — dynamic import внутри хука
+const chatData = await useModalCreateChat2('Новый чат', 'default');
 ```
 
 ### 11.3 Реактивные события
@@ -878,18 +894,17 @@ const myDataProvider: DataProvider = {
 
 ### 14.1 Оптимизации
 
-- **Tree-shaking** — неиспользуемые компоненты не попадут в бандл
-- **Виртуальная прокрутка** — рендер только видимых сообщений
-- **Ленивая загрузка** — динамический импорт тяжелых компонентов
+- **Tree-shaking** — ES + `preserveModules`, неиспользуемые модули не попадают в бандл потребителя
+- **Progressive render** — поэтапный рендер ленты (`useFeedProgressiveRender`)
+- **Ленивая загрузка** — динамический импорт модалок и тяжёлых компонентов
 - **Debouncing** — оптимизация поиска и фильтрации
 - **Мемоизация** — кеширование вычисляемых значений
 
 ### 14.2 Размер бандла
 
-- **ES module**: ~XXX KB (gzipped)
-- **UMD module**: ~XXX KB (gzipped)
-- **CSS**: ~XX KB (gzipped)
-- **Each theme**: ~X KB (gzipped)
+- **ES modules** (`dist/`, preserveModules): зависит от импортов потребителя
+- **CSS**: `dist/chotto.css` + отдельные файлы тем
+- **Each theme**: отдельный CSS-файл в `dist/themes/`
 
 ---
 
@@ -986,7 +1001,7 @@ npm run storybook
 3. **Гибкая темизация** — двухуровневая система тем с валидацией
 4. **Провайдеры** — легкая интеграция с любым бэкендом
 5. **Атомарный дизайн** — понятная иерархия компонентов
-6. **Производительность** — виртуальная прокрутка, tree-shaking
+6. **Производительность** — progressive render ленты, tree-shaking
 7. **Расширяемость** — четкие паттерны для добавления функциональности
 8. **Документация** — Storybook с примерами всех компонентов
 
