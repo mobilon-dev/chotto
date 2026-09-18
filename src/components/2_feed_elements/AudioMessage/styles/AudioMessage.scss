@@ -346,7 +346,7 @@
   &:has(:deep(.message-reactions.has-reactions)) &__footer {
     margin-top: calc(
       var(--chotto-audiomessage-footer-margin-top, 15px)
-      + var(--chotto-audiomessage-footer-reactions-extra-margin-top, 4px)
+      + var(--chotto-audiomessage-footer-reactions-extra-margin-top, 0)
     );
   }
 

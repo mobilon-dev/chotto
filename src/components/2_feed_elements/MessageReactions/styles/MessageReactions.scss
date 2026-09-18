@@ -6,6 +6,10 @@
   min-height: var(--chotto-messagereactions-min-height, 0);
   z-index: var(--chotto-messagereactions-z-index, 1);
 
+  &.has-reactions {
+    margin-top: var(--chotto-messagereactions-has-reactions-margin-top, 10px);
+  }
+
   :deep(.tooltip-wrapper) {
     display: inline-flex;
   }

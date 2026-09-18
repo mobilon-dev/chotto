@@ -485,7 +485,7 @@
   }
 
   :deep(.message-reactions.has-reactions) {
-    margin: var(--chotto-imagemessage-reactions-margin, 4px 0 6px 10px);
+    margin: var(--chotto-imagemessage-reactions-margin, 10px 0 6px 10px);
   }
 }
 

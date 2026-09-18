@@ -38,7 +38,7 @@ describe('DelimiterMessage', () => {
     expect(wrapper.find('.delimiter-message__tooltip-root').exists()).toBe(false)
     const tooltipComp = wrapper.findComponent(Tooltip)
     expect(tooltipComp.exists()).toBe(true)
-    expect(tooltipComp.props('followCursor')).toBe(true)
+    expect(tooltipComp.props('position')).toBe('bottom-center')
     wrapper.unmount()
   })
 })

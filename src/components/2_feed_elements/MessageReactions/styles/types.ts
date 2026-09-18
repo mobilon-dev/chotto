@@ -14,6 +14,8 @@ export interface MessageReactionsThemeCSSVariables {
   '--chotto-messagereactions-min-height': string;
   /** Z-index контейнера реакций */
   '--chotto-messagereactions-z-index': string;
+  /** Отступ сверху, когда есть реакции */
+  '--chotto-messagereactions-has-reactions-margin-top': string;
 
   /** Позиционирование контейнера реакций без реакций */
   '--chotto-messagereactions-no-reactions-position': string;

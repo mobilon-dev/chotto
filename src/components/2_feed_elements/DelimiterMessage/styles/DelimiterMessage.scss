@@ -5,7 +5,7 @@
     justify-content: var(--chotto-delimitermessage-justify-content, center);
     width: var(--chotto-delimitermessage-width, 54%);
     height: var(--chotto-delimitermessage-height, 26px);
-    margin: var(--chotto-delimitermessage-margin, 21px auto 21px auto);
+    margin: var(--chotto-delimitermessage-margin, 2px auto);
     opacity: 1;
     transform: translateY(0);
     transition: opacity var(--chotto-delimitermessage-transition-duration, 0.4s) var(--chotto-delimitermessage-transition-timing, ease-out), 

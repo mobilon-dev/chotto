@@ -10,7 +10,6 @@
       :position="tooltipPosition"
       :offset="tooltipOffset"
       :delay="tooltipDelay"
-      :follow-cursor="tooltipFollowCursor"
     >
       <p class="delimiter-message__text">
         {{ message.text }}
@@ -41,10 +40,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  /** Позиция тултипа: top | right | bottom | left | bottom-left | top-center */
+  /** Позиция тултипа: top | right | bottom | bottom-center | left | bottom-left | top-center */
   tooltipPosition: {
     type: String,
-    default: 'top-center',
+    default: 'bottom-center',
   },
   /** Отступ тултипа от элемента (px) */
   tooltipOffset: {
@@ -55,11 +54,6 @@ const props = defineProps({
   tooltipDelay: {
     type: Number,
     default: 100,
-  },
-  /** Позиционировать тултип под курсором (FDR-0028) */
-  tooltipFollowCursor: {
-    type: Boolean,
-    default: true,
   },
 });
 

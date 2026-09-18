@@ -108,7 +108,7 @@
   }
 
   &:has(:deep(.message-reactions.has-reactions)) &__footer {
-    margin-top: var(--chotto-textmessage-footer-margin-top, 4px);
+    margin-top: var(--chotto-textmessage-footer-margin-top, 0);
   }
 
   &__info-container {

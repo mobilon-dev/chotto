@@ -18,7 +18,11 @@ import StickerPicker from '../../components/2_chatinput_elements/StickerPicker/S
 import { themes } from '../data/themes';
 import { templates, groupTemplates } from '../data';
 import { transformToFeed } from '../transform/transformToFeed';
-import type { MessageEditInfo } from '@/types';
+import {
+  updateLocalReactionsRemove,
+  updateLocalReactionsReplace,
+} from '@/components/2_feed_elements/MessageReactions/composables/useReactions';
+import type { MessageEditInfo, MessageReactions } from '@/types';
 import type { ChottoUploadFileFn } from '@/hooks';
 import sticker from '../data/images/sticker.webp';
 import audioFile from '../data/audio/file_example_MP3_700KB.mp3';
@@ -114,14 +118,7 @@ type DemoMessage = {
   coverUrl?: string;
   alt?: string;
   duration?: string | number;
-  reactions?: {
-    items: Array<{
-      key: string;
-      userId: string;
-      name?: string;
-      date?: number;
-    }>;
-  };
+  reactions?: MessageReactions;
   edited?: MessageEditInfo;
   deleted?: boolean;
   deletion?: {
@@ -542,6 +539,8 @@ export const BasicExample: Story = {
     setup() {
       const chatsRef = ref([...simpleChats]);
       const selectedChatRef = ref(chatsRef.value[0]);
+      const currentUserId = 'usr_me';
+      const currentUserName = 'Виктория';
       provide('selectedChat', selectedChatRef);
       const scrollToMessageId = ref<string | null>(null);
       const scrollToBottom = ref(false);
@@ -843,13 +842,69 @@ export const BasicExample: Story = {
         console.log('Chat action:', data);
       };
       
+      const applyReactionToSource = (
+        messageId: string,
+        type: 'reaction.add' | 'reaction.remove' | 'reaction.toggle',
+        key: string,
+      ) => {
+        const chatId = selectedChatRef.value?.chatId;
+        if (chatId == null) return;
+
+        const idx = messagesRef.value.findIndex(
+          (m) => m.messageId === messageId && m.chatId === chatId,
+        );
+        if (idx === -1) return;
+
+        const existing = messagesRef.value[idx];
+        const local: { value: MessageReactions | undefined } = {
+          value: existing.reactions
+            ? {
+                ...existing.reactions,
+                items: existing.reactions.items.map((item) => ({ ...item })),
+              }
+            : undefined,
+        };
+
+        if (type === 'reaction.remove') {
+          updateLocalReactionsRemove(local, key, currentUserId);
+        } else if (type === 'reaction.toggle') {
+          const hasMine = local.value?.items.some(
+            (item) => item.key === key && String(item.userId) === currentUserId,
+          );
+          if (hasMine) {
+            updateLocalReactionsRemove(local, key, currentUserId);
+          } else {
+            updateLocalReactionsReplace(local, key, currentUserId, currentUserName);
+          }
+        } else {
+          updateLocalReactionsReplace(local, key, currentUserId, currentUserName);
+        }
+
+        messagesRef.value[idx] = {
+          ...existing,
+          reactions: local.value,
+        };
+      };
+
       const handleMessageAction = (data: unknown) => {
         console.log('Message action:', data);
         const payload = data as {
           action?: string;
           type?: string;
           messageId?: string;
+          key?: string;
         };
+
+        if (
+          payload.messageId &&
+          payload.key &&
+          (payload.type === 'reaction.add' ||
+            payload.type === 'reaction.remove' ||
+            payload.type === 'reaction.toggle')
+        ) {
+          applyReactionToSource(payload.messageId, payload.type, payload.key);
+          return;
+        }
 
         if (payload.action === 'delete' && payload.messageId) {
           const idx = messagesRef.value.findIndex((m) => m.messageId === payload.messageId);
@@ -1008,6 +1063,8 @@ export const BasicExample: Story = {
         handleMessageAction,
         handleLoadMore,
         handleClickRepliedMessage,
+        currentUserId,
+        currentUserName,
         scrollToMessageId,
         scrollToBottom,
         themes,
@@ -1050,8 +1107,8 @@ export const BasicExample: Story = {
                     :objects="messages"
                     :scroll-to="scrollToMessageId"
                     :scroll-to-bottom="scrollToBottom"
-                    :current-user-id="'usr_me'"
-                    :reaction-user-names="{ usr_me: 'Виктория', usr_other_0: 'Василий Васильев' }"
+                    :current-user-id="currentUserId"
+                    :reaction-user-names="{ usr_me: currentUserName, usr_other_0: 'Василий Васильев' }"
                     :enable-double-click-reply="true" 
                     @message-action="handleMessageAction"
                     @click-replied-message="handleClickRepliedMessage"

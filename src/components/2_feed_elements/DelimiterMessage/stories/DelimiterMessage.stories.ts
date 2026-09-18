@@ -30,7 +30,7 @@ const meta: Meta<typeof DelimiterMessage> = {
     },
     tooltipPosition: {
       control: 'select',
-      options: ['top', 'right', 'bottom', 'left', 'bottom-left'],
+      options: ['top', 'top-center', 'right', 'bottom', 'bottom-center', 'left', 'bottom-left'],
       description: 'Позиция тултипа',
     },
   },
@@ -80,7 +80,7 @@ export const WithTooltip: Story = {
       text: 'диалог WhatsApp - 10:08',
     },
     tooltipText: 'Нажмите, чтобы скопировать время',
-    tooltipPosition: 'top',
+    tooltipPosition: 'bottom-center',
   },
 };
 

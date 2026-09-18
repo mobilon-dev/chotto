@@ -3,7 +3,7 @@
     /* В потоке ленты (не sticky у viewport) — скроллится с последним сообщением */
     position: static;
     display: var(--chotto-feedkeyboard-container-display, flex);
-    margin-top: var(--chotto-feedkeyboard-container-margin-top, 10px);
+    margin-top: var(--chotto-feedkeyboard-container-margin-top, 4px);
     margin-bottom: var(--chotto-feedkeyboard-container-margin-bottom, 10px);
     flex-wrap: var(--chotto-feedkeyboard-container-flex-wrap, wrap);
     max-width: var(--chotto-feedkeyboard-container-max-width, 100%);
