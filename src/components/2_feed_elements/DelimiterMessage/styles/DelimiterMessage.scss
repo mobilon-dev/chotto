@@ -1,13 +1,4 @@
 .delimiter-message {
-  /** Обёртка для Tooltip: заставляет wrapper занимать всю ширину, чтобы разделитель (54%) не съезжал */
-  &__tooltip-root {
-    width: 100%;
-
-    :deep(.tooltip-wrapper) {
-      width: 100%;
-    }
-  }
-
   &__container {
     display: var(--chotto-delimitermessage-display, flex);
     align-items: var(--chotto-delimitermessage-align-items, center);
@@ -44,5 +35,7 @@
     color: var(--chotto-delimitermessage-text-color, #5F5F5F);
     padding: 0 var(--chotto-delimitermessage-text-side-padding, 12px);
     margin: var(--chotto-delimitermessage-text-margin, 0);
+    width: fit-content;
+    max-width: 100%;
   }
 }

@@ -57,6 +57,11 @@
     width: var(--chotto-feed-keyboard-width, fit-content);
   }
 
+  /* FeedKeyboard («Ответ не нужен»): в потоке скролла, не sticky */
+  &__feed-keyboard {
+    position: static;
+  }
+
   &__icon-down {
     font-size: var(--chotto-feed-icon-down-font-size, 23px);
     color: var(--chotto-feed-icon-down-color, #525252);

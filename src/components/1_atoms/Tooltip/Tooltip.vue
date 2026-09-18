@@ -3,6 +3,7 @@
     ref="container" 
     class="tooltip-wrapper" 
     @mouseenter="handleTriggerEnter"
+    @mousemove="handleTriggerMove"
     @mouseleave="handleTriggerLeave"
   >
     <slot />
@@ -52,6 +53,7 @@ const STACK_GAP_PX = 6
 const HIDE_DELAY_MS = 120
 const isOverTrigger = ref(false)
 const isOverTooltip = ref(false)
+const cursorPos = ref({ x: 0, y: 0 })
 
 const props = defineProps({
   text: {
@@ -95,6 +97,11 @@ const props = defineProps({
   bubbleStyle: {
     type: Object as () => Record<string, string>,
     default: () => ({}),
+  },
+  /** Позиционировать пузырь под курсором (clientX/Y), а не по bounds триггера */
+  followCursor: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -181,10 +188,18 @@ const getTooltipPosition = (
   return r[props.position];
 };
 
+const getCursorTooltipPosition = (
+  tBounds: DOMRect,
+): { top: number; left: number } => ({
+  // «под курсором»: ниже pointer, по горизонтали — центр пузыря у X курсора
+  top: cursorPos.value.y + props.offset,
+  left: cursorPos.value.x - (tBounds.width / 2),
+});
+
 const positionTooltips = () => {
   if (!container.value || tooltipItems.value.length === 0) return;
   const bounds = container.value.getBoundingClientRect();
-  const isTopPosition = props.position.startsWith('top');
+  const isTopPosition = !props.followCursor && props.position.startsWith('top');
   const viewportPadding = 8;
   const appContainer = chatAppId ? document.getElementById(chatAppId) : null;
   const appBounds = appContainer?.getBoundingClientRect();
@@ -195,7 +210,9 @@ const positionTooltips = () => {
 
   tooltipItems.value.forEach((tooltipEl, index) => {
     const tBounds = tooltipEl.getBoundingClientRect();
-    const coords = getTooltipPosition(bounds, tBounds);
+    const coords = props.followCursor
+      ? getCursorTooltipPosition(tBounds)
+      : getTooltipPosition(bounds, tBounds);
     const shift = index * (tBounds.height + STACK_GAP_PX);
     const rawTop = isTopPosition ? coords.top - shift : coords.top + shift;
     const minTop = boundaryTop + viewportPadding;
@@ -274,9 +291,20 @@ const scheduleHide = () => {
   }, HIDE_DELAY_MS);
 };
 
-const handleTriggerEnter = () => {
+const handleTriggerEnter = (event: MouseEvent) => {
   isOverTrigger.value = true;
+  if (props.followCursor) {
+    cursorPos.value = { x: event.clientX, y: event.clientY };
+  }
   updatePosition();
+};
+
+const handleTriggerMove = (event: MouseEvent) => {
+  if (!props.followCursor) return;
+  cursorPos.value = { x: event.clientX, y: event.clientY };
+  if (show.value) {
+    positionTooltips();
+  }
 };
 
 const handleTriggerLeave = () => {

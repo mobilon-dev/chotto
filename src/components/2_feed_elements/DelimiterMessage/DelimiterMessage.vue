@@ -1,29 +1,25 @@
 <template>
-  <div v-if="effectiveTooltipText" class="delimiter-message__tooltip-root">
-    <Tooltip
-      :text="effectiveTooltipText"
-      :position="tooltipPosition"
-      :offset="tooltipOffset"
-      :delay="tooltipDelay"
-    >
-      <div
-        ref="containerRef"
-        class="delimiter-message__container"
-        :class="{ 'delimiter-message__container--removing': isRemoving }"
-      >
-        <p class="delimiter-message__text">
-          {{ message.text }}
-        </p>
-      </div>
-    </Tooltip>
-  </div>
   <div
-    v-else
     ref="containerRef"
     class="delimiter-message__container"
     :class="{ 'delimiter-message__container--removing': isRemoving }"
   >
-    <p class="delimiter-message__text">
+    <Tooltip
+      v-if="effectiveTooltipText"
+      :text="effectiveTooltipText"
+      :position="tooltipPosition"
+      :offset="tooltipOffset"
+      :delay="tooltipDelay"
+      :follow-cursor="tooltipFollowCursor"
+    >
+      <p class="delimiter-message__text">
+        {{ message.text }}
+      </p>
+    </Tooltip>
+    <p
+      v-else
+      class="delimiter-message__text"
+    >
       {{ message.text }}
     </p>
   </div>
@@ -59,6 +55,11 @@ const props = defineProps({
   tooltipDelay: {
     type: Number,
     default: 100,
+  },
+  /** Позиционировать тултип под курсором (FDR-0028) */
+  tooltipFollowCursor: {
+    type: Boolean,
+    default: true,
   },
 });
 

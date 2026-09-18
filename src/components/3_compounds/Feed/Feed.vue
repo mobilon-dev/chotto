@@ -84,6 +84,7 @@
       
       <FeedKeyboard
         v-if="feedKeyboards && feedKeyboards.length > 0"
+        class="message-feed__feed-keyboard"
         :buttons="feedKeyboards"
         :align="feedKeyboardAlign"
         @action="feedKeyboardAction"
