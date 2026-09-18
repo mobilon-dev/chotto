@@ -178,7 +178,7 @@ export function useReactionsPanel(
     openQuickPanelTimer = setTimeout(() => {
       if (!isMouseOverMessage) return
       openQuickPanel()
-    }, 1000)
+    }, 500)
   }
 
   function handleMessageMouseLeave() {

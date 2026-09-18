@@ -58,6 +58,7 @@
           :native="isNative"
           :emoji-src="emojiSrc"
           :theme="emojiTheme"
+          :display-recent="true"
           picker-type=""
           @select="onSelectEmoji"
         />
