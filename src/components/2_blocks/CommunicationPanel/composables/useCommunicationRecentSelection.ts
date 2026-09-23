@@ -1,5 +1,5 @@
 import type { ContactAttribute } from './useCommunicationAttributes';
-import { isAttributeUnconfirmed, needsAttributeConfirmation } from './useCommunicationAttributes';
+import { needsAttributeConfirmation } from './useCommunicationAttributes';
 
 export type RecentChannelEntry = {
   attributeId?: string;
@@ -83,11 +83,9 @@ export function resolveRecentChannelSelection(
 
   const attrs = organizedAttributes[channelType] ?? [];
 
-  // При неподтверждённых атрибутах оператор сам выбирает номер и канал в меню (confirm-attribute).
-  if (attrs.some(isAttributeUnconfirmed)) {
-    return null;
-  }
-
+  // One-click только по целевому recent-атрибуту. Соседние unconfirmed (not_found)
+  // не должны блокировать восстановление последнего confirmed диалога
+  // (Max→SMS→Max и т.п.) — для них по-прежнему needsAttributeConfirmation ниже.
   const attribute =
     findAttributeByRecentId(attrs, recent?.attributeId) ??
     (attrs.length === 1 ? attrs[0] : undefined);
