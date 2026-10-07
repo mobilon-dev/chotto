@@ -9,6 +9,7 @@ export { default as Tooltip } from './1_atoms/Tooltip/Tooltip.vue';
 // 1_icons
 export { default as AvatarIcon } from './1_icons/AvatarIcon.vue';
 export { default as CheckIcon } from './1_icons/CheckIcon.vue';
+export { default as VerifiedBadge } from './1_icons/VerifiedBadge.vue';
 export { default as CloseButtonIcon } from './1_icons/CloseButtonIcon.vue';
 export { default as ContactCRMIcon } from './1_icons/ContactCRMIcon.vue';
 export { default as MenuIcon } from './1_icons/MenuIcon.vue';

@@ -82,9 +82,29 @@
     overflow: var(--chotto-chatitem-info-container-overflow, hidden);
   }
 
+  &__title-row {
+    display: var(--chotto-chatitem-title-row-display, flex);
+    align-items: var(--chotto-chatitem-title-row-align-items, center);
+    gap: var(--chotto-chatitem-title-row-gap, 4px);
+    min-width: var(--chotto-chatitem-title-row-min-width, 0);
+    max-width: var(--chotto-chatitem-title-row-max-width, var(--chotto-chatitem-name-max-width, 240px));
+    margin-top: var(--chotto-chatitem-title-row-margin-top, var(--chotto-chatitem-name-margin-top, 0));
+    margin-bottom: var(--chotto-chatitem-title-row-margin-bottom, var(--chotto-chatitem-name-margin-bottom, 8px));
+    width: var(--chotto-chatitem-title-row-width, fit-content);
+
+    :deep(.tooltip-wrapper) {
+      /* не растягивать имя на всю строку — бейдж сразу справа от текста */
+      min-width: var(--chotto-chatitem-title-row-tooltip-min-width, 0);
+      flex: var(--chotto-chatitem-title-row-tooltip-flex, 0 1 auto);
+      width: var(--chotto-chatitem-title-row-tooltip-width, auto);
+      max-width: var(--chotto-chatitem-title-row-tooltip-max-width, 100%);
+      overflow: var(--chotto-chatitem-title-row-tooltip-overflow, hidden);
+    }
+  }
+
   &__name {
-    margin-top: var(--chotto-chatitem-name-margin-top, 0);
-    margin-bottom: var(--chotto-chatitem-name-margin-bottom, 8px);
+    margin-top: var(--chotto-chatitem-name-inner-margin-top, 0);
+    margin-bottom: var(--chotto-chatitem-name-inner-margin-bottom, 0);
     font-size: var(--chotto-chatitem-name-font-size, 16px);
     font-weight: var(--chotto-chatitem-name-font-weight, 400);
     overflow: var(--chotto-chatitem-name-overflow, hidden);
@@ -94,7 +114,7 @@
     line-clamp: var(--chotto-chatitem-name-line-clamp, 1);
     -webkit-box-orient: var(--chotto-chatitem-name-box-orient, vertical);
     color: var(--chotto-chatitem-name-text-color, #1E1E1E);
-    max-width: var(--chotto-chatitem-name-max-width, 240px);
+    max-width: var(--chotto-chatitem-name-inner-max-width, 100%);
 
     :deep(.chotto-emoji-slot) {
       position: relative;

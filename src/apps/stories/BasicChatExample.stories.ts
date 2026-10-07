@@ -22,8 +22,12 @@ import {
   updateLocalReactionsRemove,
   updateLocalReactionsReplace,
 } from '@/components/2_feed_elements/MessageReactions/composables/useReactions';
-import type { MessageEditInfo, MessageReactions } from '@/types';
+import type { IFeedKeyboard, MessageEditInfo, MessageReactions } from '@/types';
 import type { ChottoUploadFileFn } from '@/hooks';
+
+const SERVICE_CHANNEL_ID = 100;
+const mobilonAvatar =
+  'https://sun9-47.vkuserphoto.ru/s/v1/ig2/fRBFEr_RBpd5HnV-Ucb7jEvUQQchB3AzF6_7u6sH5hBBMBSD0x0ukgdwnB5NzvrEjsfmDnewJnfmtawWLfwyEjCN.jpg?quality=95&as=32x32,48x48,50x50&from=bu&u=B4SZU9w5kc2hsbvS9On2aQLd-7AVyp2AnCiSKHJjjaQ&cs=50x0';
 import sticker from '../data/images/sticker.webp';
 import audioFile from '../data/audio/file_example_MP3_700KB.mp3';
 import {
@@ -50,6 +54,27 @@ import {
 // Простые чаты для примера
 const simpleChats = [
   {
+    chatId: SERVICE_CHANNEL_ID,
+    name: 'Mobilon One',
+    avatar: mobilonAvatar,
+    verified: true,
+    countUnread: 3,
+    lastMessage: {
+      type: 'message.video',
+      data: {
+        text: 'Вот как легко начать работ...',
+      },
+    },
+    'lastActivity.time': '11:23',
+    'lastActivity.timestamp': '1700000100000',
+    isFixedBottom: false,
+    status: 'transparent',
+    typing: false,
+    metadata: '',
+    dialogsExpanded: false,
+    isSelected: true,
+  },
+  {
     chatId: 1,
     name: "Анна",
     avatar: 'https://polka.cs.mobilon.ru/avatars/vector/female?size=64&palette=soft&seed=Ann&style=round',
@@ -73,7 +98,7 @@ const simpleChats = [
     typing: false,
     metadata: '',
     dialogsExpanded: false,
-    isSelected: true,
+    isSelected: false,
   },
   {
     chatId: 2,
@@ -141,6 +166,53 @@ type DemoMessage = {
 };
 
 const simpleMessages: DemoMessage[] = [
+  // Сервисный канал Mobilon One
+  {
+    chatId: SERVICE_CHANNEL_ID,
+    type: 'message.text',
+    direction: 'incoming',
+    header: 'Mobilon One',
+    subText: 'Mobilon One',
+    messageId: 'sc-1',
+    text:
+      'Добрый день! 👋\n\n' +
+      'Меня зовут Маша — я ваш персональный наставник в Mobilon One. ' +
+      'Рада, что вы с нами — и желаю вам успехов в каждом клиентском диалоге!',
+    timestamp: '1762163900',
+    status: 'read',
+  },
+  {
+    chatId: SERVICE_CHANNEL_ID,
+    type: 'message.text',
+    direction: 'incoming',
+    header: 'Mobilon One',
+    subText: 'Mobilon One',
+    messageId: 'sc-2',
+    text:
+      'Здесь я буду делиться с вами:\n\n' +
+      '— Практичными инструкциями,\n' +
+      '— Новыми функциями,\n' +
+      '— Кейсами, как другие клиенты решают задачи,\n' +
+      '— И полезными лайфхаками — без воды и теории.\n\n' +
+      'Следи за сообщениями — всё это сделает твою работу легче. 📌',
+    timestamp: '1762163950',
+    status: 'read',
+  },
+  {
+    chatId: SERVICE_CHANNEL_ID,
+    type: 'message.video',
+    direction: 'incoming',
+    header: 'Mobilon One',
+    subText: 'Mobilon One',
+    messageId: 'sc-3',
+    text: 'Вот как легко начать работать в Mobilon One — всего 1 минута',
+    url: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+    coverUrl:
+      'https://sun9-62.vkuserphoto.ru/s/v1/ig2/rcM0EnOEAQjEw_kwEU8lUuqJf-AwkguYVIkHVe6UfPRkAHcg_Q0fuvJtG4Xka_ZPGuxBM2xD1lRWwl4hO97NPdBE.jpg?quality=95&as=32x18,48x27,72x40,108x61,160x90,240x135,360x202,480x270,540x304,640x360,720x405,960x540&from=bu&u=XZBdOEdWipH4C2dWS9B_CqtJz5WA8xH6pBeOxYTUXlc&cs=960x0',
+    alt: 'Mobilon One intro',
+    timestamp: '1762164000',
+    status: 'read',
+  },
   // Сообщения для чата 1 (Анна)
   {
     chatId: 1,
@@ -537,11 +609,17 @@ export const BasicExample: Story = {
       StickerPicker
     },
     setup() {
-      const chatsRef = ref([...simpleChats]);
-      const selectedChatRef = ref(chatsRef.value[0]);
+      const chatsRef = ref(simpleChats.map((chat) => ({ ...chat })));
+      const selectedChatRef = ref(
+        chatsRef.value.find((c) => c.chatId === SERVICE_CHANNEL_ID) ?? chatsRef.value[0],
+      );
       const currentUserId = 'usr_me';
       const currentUserName = 'Виктория';
       provide('selectedChat', selectedChatRef);
+
+      const isServiceChannel = computed(
+        () => selectedChatRef.value?.chatId === SERVICE_CHANNEL_ID,
+      );
       const scrollToMessageId = ref<string | null>(null);
       const scrollToBottom = ref(false);
       let scrollToTimer: ReturnType<typeof setTimeout> | null = null;
@@ -592,6 +670,25 @@ export const BasicExample: Story = {
         });
       });
 
+      const markServiceChannelRead = () => {
+        const chat = chatsRef.value.find((c) => c.chatId === SERVICE_CHANNEL_ID);
+        if (chat) {
+          chat.countUnread = 0;
+        }
+      };
+
+      const feedKeyboards = computed<IFeedKeyboard[]>(() => {
+        if (!isServiceChannel.value) return [];
+        return [
+          {
+            key: 'read',
+            text: 'Прочитано',
+            order: 1,
+            action: markServiceChannelRead,
+          },
+        ];
+      });
+
       const handleSend = (message: { 
         text?: string; 
         type?: string; 
@@ -615,7 +712,7 @@ export const BasicExample: Story = {
           text?: string;
         };
       }) => {
-        if (!selectedChatRef.value) return;
+        if (!selectedChatRef.value || isServiceChannel.value) return;
         
         const now = Date.now();
         const nowInSeconds = Math.floor(now / 1000);
@@ -832,8 +929,8 @@ export const BasicExample: Story = {
           triggerScrollToBottom();
         }
         selectedChatRef.value = chat;
-        // Обновляем счетчик непрочитанных при выборе чата
-        if (chat.countUnread > 0) {
+        // Для сервисного канала unread сбрасывается кнопкой «Прочитано»
+        if (chat.chatId !== SERVICE_CHANNEL_ID && chat.countUnread > 0) {
           chat.countUnread = 0;
         }
       };
@@ -1056,6 +1153,8 @@ export const BasicExample: Story = {
         messages: feedMessagesRef, 
         chats: chatsRef,
         selectedChat: selectedChatRef,
+        isServiceChannel,
+        feedKeyboards,
         handleSend,
         resolveEditLastSentMessage,
         handleSelectChat,
@@ -1105,17 +1204,25 @@ export const BasicExample: Story = {
                     :key="selectedChat.chatId"
                     style="height: 100%; --chotto-feed-padding: 10px 5px; --chotto-textmessage-content-max-width: 500px; --chotto-feed-scroll-behavior: auto;"
                     :objects="messages"
+                    :feed-keyboards="feedKeyboards"
+                    :feed-keyboard-align="isServiceChannel ? 'left' : 'right'"
                     :scroll-to="scrollToMessageId"
                     :scroll-to-bottom="scrollToBottom"
                     :current-user-id="currentUserId"
                     :reaction-user-names="{ usr_me: currentUserName, usr_other_0: 'Василий Васильев' }"
-                    :enable-double-click-reply="true" 
+                    :enable-double-click-reply="!isServiceChannel" 
                     @message-action="handleMessageAction"
                     @click-replied-message="handleClickRepliedMessage"
                     @load-more="handleLoadMore"
                   />
                 </div>
                 <ChatInput
+                  v-if="isServiceChannel"
+                  state="disabled"
+                  disabled-placeholder="В этом канале мы рассказываем о новинках Mobilon One"
+                />
+                <ChatInput
+                  v-else
                   :resolve-edit-last-sent-message="resolveEditLastSentMessage"
                   @send="handleSend"
                 >

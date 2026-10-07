@@ -33,11 +33,23 @@
 
   // ChatInfo title variables
   --chotto-chatinfo-title-display: flex;
+  --chotto-chatinfo-title-align-items: center;
+  --chotto-chatinfo-title-gap: 4px;
+  --chotto-chatinfo-title-min-width: 0;
+  --chotto-chatinfo-title-width: fit-content;
+  --chotto-chatinfo-title-max-width: 100%;
   --chotto-chatinfo-title-grid-column: 2;
   --chotto-chatinfo-title-color: var(--chotto-theme-primary-text-color);
   --chotto-chatinfo-title-font-size: var(--chotto-theme-title-font-size);
   --chotto-chatinfo-title-font-weight: var(--chotto-theme-title-font-weight);
   --chotto-chatinfo-title-margin: 0;
+
+  // ChatInfo name variables
+  --chotto-chatinfo-name-flex: 0 1 auto;
+  --chotto-chatinfo-name-min-width: 0;
+  --chotto-chatinfo-name-overflow: hidden;
+  --chotto-chatinfo-name-text-overflow: ellipsis;
+  --chotto-chatinfo-name-white-space: nowrap;
 
   // ChatInfo additional-title variables
   --chotto-chatinfo-additional-title-margin: auto;

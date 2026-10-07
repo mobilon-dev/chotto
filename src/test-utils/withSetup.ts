@@ -49,6 +49,7 @@ export function makeChatItem(
     isFixedTop: boolean
     isFixedBottom: boolean
     metadata: string
+    verified: boolean
   }> = {},
 ) {
   return {
@@ -66,6 +67,7 @@ export function makeChatItem(
     isFixedTop: partial.isFixedTop ?? false,
     isFixedBottom: partial.isFixedBottom ?? false,
     dialogsExpanded: false,
+    ...(partial.verified !== undefined ? { verified: partial.verified } : {}),
   }
 }
 

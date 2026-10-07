@@ -52,6 +52,8 @@ export interface IChatItem {
   chatId: number;
   name: string;
   avatar?: string;
+  /** Показать verified-бейдж рядом с именем (сервисный канал и т.п.) */
+  verified?: boolean;
   countUnread: number;
   lastMessage: string | ILastMessageObject;
   'lastActivity.time': string;

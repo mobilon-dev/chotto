@@ -9,6 +9,15 @@
     grid-gap: var(--chotto-chatinput-container-grid-gap, 0);
     grid-template-columns: var(--chotto-chatinput-container-grid-template-columns, minmax(0, 220px) auto min-content);
     grid-template-rows: var(--chotto-chatinput-container-grid-template-rows, auto auto auto auto);
+
+    &--disabled-notice {
+      display: var(--chotto-chatinput-disabled-notice-display, flex);
+      align-items: var(--chotto-chatinput-disabled-notice-align-items, center);
+      justify-content: var(--chotto-chatinput-disabled-notice-justify-content, center);
+      grid-template-columns: var(--chotto-chatinput-disabled-notice-grid-template-columns, none);
+      grid-template-rows: var(--chotto-chatinput-disabled-notice-grid-template-rows, none);
+      padding: var(--chotto-chatinput-disabled-notice-padding, 16px 20px);
+    }
   }
 
   &__reply-line {
@@ -237,6 +246,19 @@
     color: var(--chotto-chatinput-disabled-placeholder-text-color, #5F5F5F);
     text-align: var(--chotto-chatinput-disabled-placeholder-text-align, center);
     user-select: var(--chotto-chatinput-disabled-placeholder-user-select, none);
+
+    .chat-input__container--disabled-notice & {
+      grid-row: var(--chotto-chatinput-disabled-notice-placeholder-grid-row, auto);
+      grid-column: var(--chotto-chatinput-disabled-notice-placeholder-grid-column, auto);
+      align-self: var(--chotto-chatinput-disabled-notice-placeholder-align-self, center);
+      margin: var(--chotto-chatinput-disabled-notice-placeholder-margin, 0);
+      border: var(--chotto-chatinput-disabled-notice-placeholder-border, none);
+      background-color: var(--chotto-chatinput-disabled-notice-placeholder-bg, transparent);
+      padding: var(--chotto-chatinput-disabled-notice-placeholder-padding, 0);
+      min-height: var(--chotto-chatinput-disabled-notice-placeholder-min-height, 0);
+      border-radius: var(--chotto-chatinput-disabled-notice-placeholder-border-radius, 0);
+      width: var(--chotto-chatinput-disabled-notice-placeholder-width, 100%);
+    }
   }
 
   &__button {

@@ -95,7 +95,7 @@ describe('ChatInput smoke', () => {
     wrapper.unmount()
   })
 
-  it('в disabled показывает placeholder вместо textarea', () => {
+  it('в disabled показывает только пояснение без поля и кнопки отправки', () => {
     const id = `ci-disabled-${Date.now()}`
     const wrapper = mountChatInput(id, {
       state: 'disabled',
@@ -103,7 +103,9 @@ describe('ChatInput smoke', () => {
     })
 
     expect(wrapper.find('[data-testid="chat-input-textarea"]').exists()).toBe(false)
-    expect(wrapper.text()).toContain('Недоступно')
+    expect(wrapper.find('[data-testid="chat-input-send"]').exists()).toBe(false)
+    expect(wrapper.find('[data-testid="chat-input-disabled-placeholder"]').text()).toBe('Недоступно')
+    expect(wrapper.find('.chat-input__container--disabled-notice').exists()).toBe(true)
     wrapper.unmount()
   })
 })

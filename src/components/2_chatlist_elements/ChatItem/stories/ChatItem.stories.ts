@@ -117,6 +117,22 @@ export const ChatItemWithAvatar: Story = {
   },
 };
 
+export const ChatItemVerified: Story = {
+  args: {
+    chat: {
+      ...chat,
+      name: 'Mobilon One',
+      avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=blue&seed=Mobilon&style=round',
+      verified: true,
+      countUnread: 3,
+      lastMessage: 'Вот как легко начать работать в Mobilon One',
+      'lastActivity.time': '11:23',
+      typing: false,
+      actions: [],
+    },
+  },
+};
+
 
 export const ChatItemWithUnread: Story = {
   args: {

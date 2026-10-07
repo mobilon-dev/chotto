@@ -61,6 +61,16 @@ export interface ChatInfoThemeCSSVariables {
   // Title
   /** Отображение заголовка */
   '--chotto-chatinfo-title-display': string;
+  /** Выравнивание элементов заголовка по вертикали */
+  '--chotto-chatinfo-title-align-items': string;
+  /** Отступ между элементами заголовка (имя, verified badge) */
+  '--chotto-chatinfo-title-gap': string;
+  /** Минимальная ширина заголовка */
+  '--chotto-chatinfo-title-min-width': string;
+  /** Ширина заголовка */
+  '--chotto-chatinfo-title-width': string;
+  /** Максимальная ширина заголовка */
+  '--chotto-chatinfo-title-max-width': string;
   /** Колонка сетки заголовка */
   '--chotto-chatinfo-title-grid-column': string;
   /** Цвет заголовка */
@@ -71,6 +81,18 @@ export interface ChatInfoThemeCSSVariables {
   '--chotto-chatinfo-title-font-weight': string;
   /** Отступы заголовка */
   '--chotto-chatinfo-title-margin': string;
+
+  // Name
+  /** Flex имени в строке заголовка */
+  '--chotto-chatinfo-name-flex': string;
+  /** Минимальная ширина имени */
+  '--chotto-chatinfo-name-min-width': string;
+  /** Overflow имени */
+  '--chotto-chatinfo-name-overflow': string;
+  /** Обрезка длинного имени */
+  '--chotto-chatinfo-name-text-overflow': string;
+  /** Перенос строки имени */
+  '--chotto-chatinfo-name-white-space': string;
 
   // Additional title
   /** Отступы дополнительного заголовка */

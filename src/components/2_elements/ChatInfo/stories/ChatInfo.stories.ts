@@ -36,3 +36,27 @@ export const WithAvatar: Story = {
     },
   },
 };
+
+export const Verified: Story = {
+  args: {
+    chat: {
+      ...chat,
+      name: 'Mobilon One',
+      avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=blue&seed=Mobilon&style=round',
+      verified: true,
+    },
+  },
+};
+
+export const ServiceChannel: Story = {
+  args: {
+    chat: {
+      ...chat,
+      name: 'Mobilon One',
+      avatar: 'https://polka.cs.mobilon.ru/avatars/vector/man?size=64&palette=blue&seed=Mobilon&style=round',
+      verified: true,
+      'lastActivity.time': '11:23',
+    },
+    description: 'Сервисный канал',
+  },
+};

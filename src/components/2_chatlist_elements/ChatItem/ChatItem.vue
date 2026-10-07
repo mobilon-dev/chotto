@@ -31,22 +31,26 @@
       </div>
 
       <div class="chat-item__info-container">
-        <Tooltip
-          :text="chat.name"
-          position="bottom"
-        >
-          <div
-            v-if="useAppleEmojisInName"
-            class="chat-item__name"
-            v-html="nameHtml"
-          />
-          <div
-            v-else
-            class="chat-item__name"
+        <div class="chat-item__title-row">
+          <Tooltip
+            :text="chat.name"
+            position="bottom"
           >
-            {{ chat.name }}
-          </div>
-        </Tooltip>
+            <div
+              v-if="useAppleEmojisInName"
+              class="chat-item__name"
+              v-html="nameHtml"
+            />
+            <div
+              v-else
+              class="chat-item__name"
+            >
+              {{ chat.name }}
+            </div>
+          </Tooltip>
+          <VerifiedBadge v-if="chat.verified" />
+          <slot name="name-suffix" />
+        </div>
         
         <Tooltip
           :text="lastMessageText"
@@ -96,7 +100,7 @@
 
       <div class="chat-item__details-container">
         <div
-          v-if="chat['lastActivity.time'] && (chat.actions ? !buttonMenuVisible : true)"
+          v-if="chat['lastActivity.time'] && (hasChatActions ? !buttonMenuVisible : true)"
           class="chat-item__time"
         >
           {{ chat['lastActivity.time'] }}
@@ -104,10 +108,10 @@
 
         <!-- Кнопка меню размещена выше статуса и индикатора -->
         <ButtonContextMenu
-          v-if="buttonMenuVisible && chat.actions && contextMenuTrigger === 'hover'"
+          v-if="buttonMenuVisible && hasChatActions && contextMenuTrigger === 'hover'"
           mode="click"
           menu-side="bottom-right"
-          :actions="chat.actions"
+          :actions="chat.actions!"
           @click="clickAction"
           @button-click="BCMclick"
           @menu-mouse-leave="buttonMenuVisible = false"
@@ -118,9 +122,9 @@
         <!-- Контекстное меню для режима rightClick -->
         <Teleport to="body">
           <ContextMenu
-            v-if="contextMenuTrigger === 'rightClick' && chat.actions && contextMenuVisible"
+            v-if="contextMenuTrigger === 'rightClick' && hasChatActions && contextMenuVisible"
             :id="'context-menu-rightclick-' + contextMenuId"
-            :actions="chat.actions"
+            :actions="chat.actions!"
             :data-theme="getTheme().theme ? getTheme().theme : 'light'"
             @click="clickAction"
             @mouseenter="onContextMenuMouseEnter"
@@ -242,6 +246,7 @@ import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
 import ButtonContextMenu from '@/components/1_atoms/ButtonContextMenu/ButtonContextMenu.vue';
 import ContextMenu from '@/components/1_atoms/ContextMenu/ContextMenu.vue';
 import AvatarIcon from '@/components/1_icons/AvatarIcon.vue';
+import VerifiedBadge from '@/components/1_icons/VerifiedBadge.vue';
 import {
   ErrorStatusIcon,
   PendingStatusIcon,
@@ -285,6 +290,10 @@ const buttonMenuVisible = ref(false);
 const contextMenuVisible = ref(false);
 const preventEmit = ref(false)
 const containerRef = ref<HTMLElement | null>(null)
+
+const hasChatActions = computed(
+  () => (props.chat.actions?.length ?? 0) > 0,
+);
 
 const BCMclick = () => {
   preventEmit.value = true
@@ -572,7 +581,7 @@ watch(
 )
 
 const onMouseEnter = () => {
-  if (props.contextMenuTrigger === 'hover') {
+  if (props.contextMenuTrigger === 'hover' && hasChatActions.value) {
     buttonMenuVisible.value = true
   }
 }
@@ -587,7 +596,7 @@ const onMouseLeave = (event: MouseEvent) => {
 }
 
 const onRightClick = (event: MouseEvent) => {
-  if (props.contextMenuTrigger === 'rightClick' && props.chat.actions) {
+  if (props.contextMenuTrigger === 'rightClick' && hasChatActions.value) {
     showContextMenu(event)
   }
 }

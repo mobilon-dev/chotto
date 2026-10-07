@@ -25,7 +25,9 @@
       </div>
       <div class="chat-info__info-container">
         <span class="chat-info__title">
-          {{ chat.name }}
+          <span class="chat-info__name">{{ chat.name }}</span>
+          <VerifiedBadge v-if="chat.verified" />
+          <slot name="name-suffix" />
           <span
             v-if="additionalTitle"
             class="chat-info__additional-title"
@@ -59,6 +61,7 @@
 <script setup>
 import { inject, computed } from 'vue';
 import AvatarIcon from '@/components/1_icons/AvatarIcon.vue';
+import VerifiedBadge from '@/components/1_icons/VerifiedBadge.vue';
 // Define props
 const props = defineProps({
   chat: {

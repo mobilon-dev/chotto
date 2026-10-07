@@ -1,114 +1,128 @@
 <template>
-  <div class="chat-input__container">
-    <div
-      :id="'chat-input-reply-line-' + chatAppId"
-      class="chat-input__reply-line"
-      data-testid="chat-input-reply-line"
-    />
-    <div
-      :id="'chat-input-file-line-' + chatAppId"
-      class="chat-input__file-line"
-      :class="{ 'chat-input__file-line--visible': attachedFiles.length > 0 }"
-    >
-      <span class="chat-input__file-counter">
-        <span>{{ t('component.ChatInput.FilesSelected') }}</span>
-        <span>{{ filesSelectedCount }}</span>
-      </span>
-      <div class="chat-input__file-chips-wrap">
-        <button
-          v-if="canScrollLeft"
-          type="button"
-          class="chat-input__file-scroll chat-input__file-scroll--left"
-          :aria-label="t('component.ChatInput.FilesScrollLeft')"
-          @click="scrollFiles('left')"
-        >
-          <ArrowIcon />
-        </button>
-        <div
-          ref="refFileChips"
-          class="chat-input__file-chips"
-          @scroll="updateFileScrollState"
-        >
-          <FilePreview
-            v-for="(file, index) in attachedFiles"
-            :key="(file.url || file.name || '') + '-' + index"
-            :file-info="previewOf(file)"
-            @reset="removeAttachedFile(index)"
-          />
-        </div>
-        <button
-          v-if="canScrollRight"
-          type="button"
-          class="chat-input__file-scroll chat-input__file-scroll--right"
-          :aria-label="t('component.ChatInput.FilesScrollRight')"
-          @click="scrollFiles('right')"
-        >
-          <ArrowIcon />
-        </button>
-      </div>
-    </div>
-
-    <div class="chat-input__inline-buttons">
-      <slot name="inline-buttons" />
-    </div>
-      
-    <div
-      v-if="disabledPlaceholder && (state == 'disabled' || getMessage().isRecording)"
-      class="chat-input__input chat-input__disabled-placeholder"
-    >
-      {{ disabledPlaceholder }}
-    </div>
-    <div
-      v-else
-      class="chat-input__input-wrap"
-    >
+  <div
+    class="chat-input__container"
+    :class="{ 'chat-input__container--disabled-notice': showDisabledNotice }"
+    data-testid="chat-input"
+  >
+    <template v-if="showDisabledNotice">
       <div
-        v-if="useEmojiMirror"
-        ref="refMirror"
-        class="chat-input__input-mirror"
-        aria-hidden="true"
-        v-html="emojiMirrorHtml"
+        class="chat-input__disabled-placeholder"
+        data-testid="chat-input-disabled-placeholder"
+      >
+        {{ disabledPlaceholder }}
+      </div>
+    </template>
+    <template v-else>
+      <div
+        :id="'chat-input-reply-line-' + chatAppId"
+        class="chat-input__reply-line"
+        data-testid="chat-input-reply-line"
       />
-      <textarea
-        ref="refInput"
-        v-model="getMessage().text"
-        rows="1"
-        data-testid="chat-input-textarea"
-        :disabled="state == 'disabled' || getMessage().isRecording"
-        class="chat-input__input"
-        :class="{ 'chat-input__input--emoji-images': useEmojiMirror }"
-        :placeholder="inputPlaceholder"
-        @keydown="onInputKeydown"
-        @keydown.enter="keyEnter"
-        @input="sendTyping"
-        @scroll="syncMirrorScroll"
-        @select="updateSelectionState"
-        @mouseup="snapCaretAndUpdateSelection"
-        @keyup="snapCaretAndUpdateSelection"
-        @mousemove="onInputMouseMove"
-        @blur="clearSelectionHighlight"
-      />
-    </div>
-    <TextFormatToolbar
-      :textarea="refInput"
-      @format-applied="handleFormatApplied"
-    />
-    <button
-      type="button"
-      class="chat-input__button"
-      data-testid="chat-input-send"
-      :disabled="getMessage().isRecording"
-      :class="{ 'chat-input__button-disabled': disabledSendButton }"
-      @click="sendMessage"
-    >
-      <span class="">
-        <SendIcon :color="sendIconColor" />
-      </span>
-    </button>
+      <div
+        :id="'chat-input-file-line-' + chatAppId"
+        class="chat-input__file-line"
+        :class="{ 'chat-input__file-line--visible': attachedFiles.length > 0 }"
+      >
+        <span class="chat-input__file-counter">
+          <span>{{ t('component.ChatInput.FilesSelected') }}</span>
+          <span>{{ filesSelectedCount }}</span>
+        </span>
+        <div class="chat-input__file-chips-wrap">
+          <button
+            v-if="canScrollLeft"
+            type="button"
+            class="chat-input__file-scroll chat-input__file-scroll--left"
+            :aria-label="t('component.ChatInput.FilesScrollLeft')"
+            @click="scrollFiles('left')"
+          >
+            <ArrowIcon />
+          </button>
+          <div
+            ref="refFileChips"
+            class="chat-input__file-chips"
+            @scroll="updateFileScrollState"
+          >
+            <FilePreview
+              v-for="(file, index) in attachedFiles"
+              :key="(file.url || file.name || '') + '-' + index"
+              :file-info="previewOf(file)"
+              @reset="removeAttachedFile(index)"
+            />
+          </div>
+          <button
+            v-if="canScrollRight"
+            type="button"
+            class="chat-input__file-scroll chat-input__file-scroll--right"
+            :aria-label="t('component.ChatInput.FilesScrollRight')"
+            @click="scrollFiles('right')"
+          >
+            <ArrowIcon />
+          </button>
+        </div>
+      </div>
 
-    <div class="chat-input__third-line">
-      <slot name="buttons" />
-    </div>
+      <div class="chat-input__inline-buttons">
+        <slot name="inline-buttons" />
+      </div>
+        
+      <div
+        v-if="disabledPlaceholder && getMessage().isRecording"
+        class="chat-input__input chat-input__disabled-placeholder"
+      >
+        {{ disabledPlaceholder }}
+      </div>
+      <div
+        v-else
+        class="chat-input__input-wrap"
+      >
+        <div
+          v-if="useEmojiMirror"
+          ref="refMirror"
+          class="chat-input__input-mirror"
+          aria-hidden="true"
+          v-html="emojiMirrorHtml"
+        />
+        <textarea
+          ref="refInput"
+          v-model="getMessage().text"
+          rows="1"
+          data-testid="chat-input-textarea"
+          :disabled="state == 'disabled' || getMessage().isRecording"
+          class="chat-input__input"
+          :class="{ 'chat-input__input--emoji-images': useEmojiMirror }"
+          :placeholder="inputPlaceholder"
+          @keydown="onInputKeydown"
+          @keydown.enter="keyEnter"
+          @input="sendTyping"
+          @scroll="syncMirrorScroll"
+          @select="updateSelectionState"
+          @mouseup="snapCaretAndUpdateSelection"
+          @keyup="snapCaretAndUpdateSelection"
+          @mousemove="onInputMouseMove"
+          @blur="clearSelectionHighlight"
+        />
+      </div>
+      <TextFormatToolbar
+        :textarea="refInput"
+        @format-applied="handleFormatApplied"
+      />
+      <button
+        type="button"
+        class="chat-input__button"
+        data-testid="chat-input-send"
+        :disabled="getMessage().isRecording"
+        :class="{ 'chat-input__button-disabled': disabledSendButton }"
+        @click="sendMessage"
+      >
+        <span class="">
+          <SendIcon :color="sendIconColor" />
+        </span>
+      </button>
+
+      <div class="chat-input__third-line">
+        <slot name="buttons" />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -387,6 +401,11 @@ const props = defineProps({
     default: null,
   },
 })
+
+/** Только пояснение на белом фоне: без поля ввода, кнопок и send */
+const showDisabledNotice = computed(
+  () => props.state === 'disabled' && !!props.disabledPlaceholder,
+)
 
 const maxAttachedFiles = computed(() => {
   const n = Number(props.maxAttachedFiles)

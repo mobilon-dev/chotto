@@ -156,7 +156,39 @@ export interface ChatInputThemeCSSVariables {
   /** Радиус скругления выделения эмодзи */
   '--chotto-chatinput-selection-border-radius': string;
 
-  // Disabled placeholder
+  // Disabled placeholder / notice
+  /** Display контейнера с пояснением при disabled */
+  '--chotto-chatinput-disabled-notice-display': string;
+  /** Выравнивание элементов контейнера пояснения по вертикали */
+  '--chotto-chatinput-disabled-notice-align-items': string;
+  /** Выравнивание содержимого контейнера пояснения по горизонтали */
+  '--chotto-chatinput-disabled-notice-justify-content': string;
+  /** Колонки сетки контейнера пояснения */
+  '--chotto-chatinput-disabled-notice-grid-template-columns': string;
+  /** Строки сетки контейнера пояснения */
+  '--chotto-chatinput-disabled-notice-grid-template-rows': string;
+  /** Отступы контейнера с пояснением при disabled */
+  '--chotto-chatinput-disabled-notice-padding': string;
+  /** Строка сетки текста пояснения в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-grid-row': string;
+  /** Колонка сетки текста пояснения в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-grid-column': string;
+  /** Выравнивание текста пояснения относительно себя в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-align-self': string;
+  /** Отступы текста пояснения в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-margin': string;
+  /** Граница текста пояснения в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-border': string;
+  /** Фон текста пояснения в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-bg': string;
+  /** Внутренние отступы текста пояснения в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-padding': string;
+  /** Минимальная высота текста пояснения в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-min-height': string;
+  /** Радиус скругления текста пояснения в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-border-radius': string;
+  /** Ширина текста пояснения в режиме notice */
+  '--chotto-chatinput-disabled-notice-placeholder-width': string;
   /** Выравнивание текста отключенного плейсхолдера */
   '--chotto-chatinput-disabled-placeholder-text-align': string;
   /** Выбор пользователем отключенного плейсхолдера */

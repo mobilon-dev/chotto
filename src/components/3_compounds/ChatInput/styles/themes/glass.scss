@@ -115,6 +115,22 @@
   --chotto-chatinput-third-line-grid-column-end: 3;
 
   // ChatInput disabled-placeholder variables
+  --chotto-chatinput-disabled-notice-display: flex;
+  --chotto-chatinput-disabled-notice-align-items: center;
+  --chotto-chatinput-disabled-notice-justify-content: center;
+  --chotto-chatinput-disabled-notice-grid-template-columns: none;
+  --chotto-chatinput-disabled-notice-grid-template-rows: none;
+  --chotto-chatinput-disabled-notice-padding: 16px 20px;
+  --chotto-chatinput-disabled-notice-placeholder-grid-row: auto;
+  --chotto-chatinput-disabled-notice-placeholder-grid-column: auto;
+  --chotto-chatinput-disabled-notice-placeholder-align-self: center;
+  --chotto-chatinput-disabled-notice-placeholder-margin: 0;
+  --chotto-chatinput-disabled-notice-placeholder-border: none;
+  --chotto-chatinput-disabled-notice-placeholder-bg: transparent;
+  --chotto-chatinput-disabled-notice-placeholder-padding: 0;
+  --chotto-chatinput-disabled-notice-placeholder-min-height: 0;
+  --chotto-chatinput-disabled-notice-placeholder-border-radius: 0;
+  --chotto-chatinput-disabled-notice-placeholder-width: 100%;
   --chotto-chatinput-disabled-placeholder-text-align: center;
   --chotto-chatinput-disabled-placeholder-user-select: none;
 

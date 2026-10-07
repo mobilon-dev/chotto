@@ -54,9 +54,26 @@
   --chotto-chatitem-info-container-overflow: hidden;
   --chotto-chatitem-info-margin-right: 15px;
   
+  // Title row (имя + verified badge)
+  --chotto-chatitem-title-row-display: flex;
+  --chotto-chatitem-title-row-align-items: center;
+  --chotto-chatitem-title-row-gap: 4px;
+  --chotto-chatitem-title-row-min-width: 0;
+  --chotto-chatitem-title-row-max-width: 240px;
+  --chotto-chatitem-title-row-margin-top: 0;
+  --chotto-chatitem-title-row-margin-bottom: 8px;
+  --chotto-chatitem-title-row-width: fit-content;
+  --chotto-chatitem-title-row-tooltip-min-width: 0;
+  --chotto-chatitem-title-row-tooltip-flex: 0 1 auto;
+  --chotto-chatitem-title-row-tooltip-width: auto;
+  --chotto-chatitem-title-row-tooltip-max-width: 100%;
+  --chotto-chatitem-title-row-tooltip-overflow: hidden;
+
   // Name
   --chotto-chatitem-name-margin-top: 0;
   --chotto-chatitem-name-margin-bottom: 8px;
+  --chotto-chatitem-name-inner-margin-top: 0;
+  --chotto-chatitem-name-inner-margin-bottom: 0;
   --chotto-chatitem-name-overflow: hidden;
   --chotto-chatitem-name-text-overflow: ellipsis;
   --chotto-chatitem-name-display: -webkit-box;
@@ -66,6 +83,7 @@
   --chotto-chatitem-name-font-weight: var(--chotto-theme-title-font-weight);
   --chotto-chatitem-name-text-color: var(--chotto-theme-primary-text-color);
   --chotto-chatitem-name-max-width: 240px;
+  --chotto-chatitem-name-inner-max-width: 100%;
   
   // Last message
   --chotto-chatitem-last-message-overflow: hidden;

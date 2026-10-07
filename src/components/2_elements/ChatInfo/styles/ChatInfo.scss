@@ -43,11 +43,24 @@
 
   &__title {
     display: var(--chotto-chatinfo-title-display, flex);
+    align-items: var(--chotto-chatinfo-title-align-items, center);
+    gap: var(--chotto-chatinfo-title-gap, 4px);
+    min-width: var(--chotto-chatinfo-title-min-width, 0);
+    width: var(--chotto-chatinfo-title-width, fit-content);
+    max-width: var(--chotto-chatinfo-title-max-width, 100%);
     grid-column: var(--chotto-chatinfo-title-grid-column, 2);
     color: var(--chotto-chatinfo-title-color, #1E1E1E);
     font-size: var(--chotto-chatinfo-title-font-size, 16px);
     font-weight: var(--chotto-chatinfo-title-font-weight, 400);
     margin: var(--chotto-chatinfo-title-margin, 0);
+  }
+
+  &__name {
+    flex: var(--chotto-chatinfo-name-flex, 0 1 auto);
+    min-width: var(--chotto-chatinfo-name-min-width, 0);
+    overflow: var(--chotto-chatinfo-name-overflow, hidden);
+    text-overflow: var(--chotto-chatinfo-name-text-overflow, ellipsis);
+    white-space: var(--chotto-chatinfo-name-white-space, nowrap);
   }
 
   &__additional-title{

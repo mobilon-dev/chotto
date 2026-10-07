@@ -102,11 +102,43 @@ export interface ChatItemThemeCSSVariables {
   /** Отступ справа от контейнера информации */
   '--chotto-chatitem-info-margin-right': string;
 
+  // Title row (имя + verified badge)
+  /** Отображение строки заголовка чата */
+  '--chotto-chatitem-title-row-display': string;
+  /** Выравнивание элементов строки заголовка по вертикали */
+  '--chotto-chatitem-title-row-align-items': string;
+  /** Отступ между именем и бейджем в строке заголовка */
+  '--chotto-chatitem-title-row-gap': string;
+  /** Минимальная ширина строки заголовка */
+  '--chotto-chatitem-title-row-min-width': string;
+  /** Максимальная ширина строки заголовка */
+  '--chotto-chatitem-title-row-max-width': string;
+  /** Отступ сверху строки заголовка */
+  '--chotto-chatitem-title-row-margin-top': string;
+  /** Отступ снизу строки заголовка */
+  '--chotto-chatitem-title-row-margin-bottom': string;
+  /** Ширина строки заголовка */
+  '--chotto-chatitem-title-row-width': string;
+  /** Минимальная ширина tooltip-обёртки имени в строке заголовка */
+  '--chotto-chatitem-title-row-tooltip-min-width': string;
+  /** Flex tooltip-обёртки имени в строке заголовка */
+  '--chotto-chatitem-title-row-tooltip-flex': string;
+  /** Ширина tooltip-обёртки имени в строке заголовка */
+  '--chotto-chatitem-title-row-tooltip-width': string;
+  /** Максимальная ширина tooltip-обёртки имени в строке заголовка */
+  '--chotto-chatitem-title-row-tooltip-max-width': string;
+  /** Overflow tooltip-обёртки имени в строке заголовка */
+  '--chotto-chatitem-title-row-tooltip-overflow': string;
+
   // Name
-  /** Отступ сверху от имени */
+  /** Отступ сверху от имени (legacy / fallback для title-row) */
   '--chotto-chatitem-name-margin-top': string;
-  /** Отступ снизу от имени */
+  /** Отступ снизу от имени (legacy / fallback для title-row) */
   '--chotto-chatitem-name-margin-bottom': string;
+  /** Внутренний отступ сверху у текста имени */
+  '--chotto-chatitem-name-inner-margin-top': string;
+  /** Внутренний отступ снизу у текста имени */
+  '--chotto-chatitem-name-inner-margin-bottom': string;
   /** Переполнение имени */
   '--chotto-chatitem-name-overflow': string;
   /** Обрезка текста имени */
@@ -123,8 +155,10 @@ export interface ChatItemThemeCSSVariables {
   '--chotto-chatitem-name-font-weight': string;
   /** Цвет текста имени */
   '--chotto-chatitem-name-text-color': string;
-  /** Максимальная ширина имени */
+  /** Максимальная ширина имени (используется title-row) */
   '--chotto-chatitem-name-max-width': string;
+  /** Максимальная ширина текста имени внутри title-row */
+  '--chotto-chatitem-name-inner-max-width': string;
 
   // Last message
   /** Переполнение последнего сообщения */
