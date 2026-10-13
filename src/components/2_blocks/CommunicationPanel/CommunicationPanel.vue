@@ -195,7 +195,13 @@
               <CommunicationPanelCheckIcon v-else />
             </span>
           </span>
-          <span class="sub-menu-title">{{ channel.title || channel.channelId }}</span>
+          <span class="sub-menu-title">
+            <span class="sub-menu-title-text">{{ channel.title || channel.channelId }}</span>
+            <span
+              v-if="channel.isBot"
+              class="sub-menu-title-bot"
+            >бот</span>
+          </span>
           <span
             v-if="showChannelIcons"
             class="sub-menu-icon"

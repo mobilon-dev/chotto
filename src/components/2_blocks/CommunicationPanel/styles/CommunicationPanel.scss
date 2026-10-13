@@ -450,14 +450,31 @@
 }
 
 .sub-menu-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25em;
   font-size: var(--chotto-communicationpanel-submenu-title-font-size, 14px);
   color: var(--chotto-communicationpanel-submenu-title-color, #262626);
   white-space: var(--chotto-communicationpanel-submenu-title-white-space, nowrap);
   overflow: var(--chotto-communicationpanel-submenu-title-overflow, hidden);
-  text-overflow: var(--chotto-communicationpanel-submenu-title-text-overflow, ellipsis);
   font-weight: var(--chotto-communicationpanel-submenu-title-font-weight, normal);
   line-height: var(--chotto-communicationpanel-submenu-title-line-height, normal);
   min-width: var(--chotto-communicationpanel-submenu-title-min-width, 0);
+}
+
+.sub-menu-title-text {
+  overflow: hidden;
+  text-overflow: var(--chotto-communicationpanel-submenu-title-text-overflow, ellipsis);
+  white-space: inherit;
+  min-width: 0;
+}
+
+.sub-menu-title-bot {
+  flex-shrink: 0;
+  color: var(--chotto-communicationpanel-submenu-title-bot-color, #5F5F5F);
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
 }
 
 .attributes-menu :deep(.tooltip-wrapper) {

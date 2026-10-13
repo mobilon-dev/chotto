@@ -50,9 +50,25 @@ const channelsData = [
     autoAccess: false
   },
   {
+    branchId: "bch_222b",
+    channelId: "telegrambot.TGB5431",
+    title: "TG Bot №14",
+    isBot: true,
+    status: "active",
+    autoAccess: false
+  },
+  {
     branchId: "bch_333",
     channelId: "max.M333",
     title: "max 79135292926",
+    status: "active",
+    autoAccess: false
+  },
+  {
+    branchId: "bch_333b",
+    channelId: "maxbot.MB5431",
+    title: "MAX Bot №3",
+    isBot: true,
     status: "active",
     autoAccess: false
   },

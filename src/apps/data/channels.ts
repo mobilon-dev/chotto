@@ -48,6 +48,7 @@ export const channels = [
     branchId: "bch_1",
     channelId: "telegrambot.TGB5431",
     title: "TG Bot №14",
+    isBot: true,
     status: "active",
     autoAccess: false
   },

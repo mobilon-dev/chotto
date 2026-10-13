@@ -553,6 +553,8 @@ export interface CommunicationPanelThemeCSSVariables {
   '--chotto-communicationpanel-submenu-title-font-size': string;
   /** Цвет заголовка подменю */
   '--chotto-communicationpanel-submenu-title-color': string;
+  /** Цвет метки «бот» у названия канала в подменю */
+  '--chotto-communicationpanel-submenu-title-bot-color': string;
   /** Перенос пробелов заголовка подменю */
   '--chotto-communicationpanel-submenu-title-white-space': string;
   /** Переполнение заголовка подменю */

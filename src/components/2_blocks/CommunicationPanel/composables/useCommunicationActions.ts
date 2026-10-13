@@ -15,6 +15,7 @@ import {
 type Channel = {
   channelId: string;
   title?: string;
+  isBot?: boolean;
   [key: string]: unknown;
 };
 

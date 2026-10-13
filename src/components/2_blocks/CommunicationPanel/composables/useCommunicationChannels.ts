@@ -64,6 +64,8 @@ export function resolvePanelChannelTypes(
 export type Channel = {
   channelId: string;
   title?: string;
+  /** Показывать серую метку «бот» справа от названия в подменю каналов */
+  isBot?: boolean;
   [key: string]: unknown;
 };
 
@@ -168,6 +170,7 @@ export function useCommunicationChannels({
 
     if (type.includes('waba')) return 'whatsapp';
     if (type.includes('telegrambot')) return 'telegram';
+    if (type.includes('maxbot')) return 'max';
 
     return type;
   };

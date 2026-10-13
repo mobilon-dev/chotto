@@ -83,6 +83,7 @@ export function useCommunicationDialogSync({
 function normalizeChannelType(type: string): ChannelType | null {
   if (type.includes('waba')) return 'whatsapp';
   if (type.includes('telegrambot')) return 'telegram';
+  if (type.includes('maxbot')) return 'max';
   if (CHANNEL_TYPES.includes(type as ChannelType)) {
     return type as ChannelType;
   }
