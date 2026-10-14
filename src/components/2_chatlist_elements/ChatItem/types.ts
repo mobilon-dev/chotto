@@ -31,6 +31,8 @@ export interface ILastMessageObject {
   channelId?: string;
   senderId?: string;
   type?: string;
+  /** Сообщение удалено — в lastMessage показываем tombstone независимо от type */
+  deleted?: boolean;
   isVoiceMessage?: boolean;
   data?: {
     text?: string;

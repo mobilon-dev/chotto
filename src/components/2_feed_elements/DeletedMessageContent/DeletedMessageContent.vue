@@ -45,7 +45,7 @@
 import { computed } from 'vue'
 import { useLocale } from '@/locale/useLocale'
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue'
-import DeletedMessageIcon from './icons/DeletedMessageIcon.vue'
+import DeletedMessageIcon from '@/components/1_icons/DeletedMessageIcon.vue'
 
 const props = defineProps({
   /** Оригинальный текст удалённого сообщения */

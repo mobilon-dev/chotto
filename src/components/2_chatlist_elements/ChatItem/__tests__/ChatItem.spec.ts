@@ -50,3 +50,20 @@ describe('ChatItem actions menu', () => {
     wrapper.unmount()
   })
 })
+
+describe('ChatItem deleted lastMessage', () => {
+  it('при deleted: true показывает tombstone независимо от type', () => {
+    const wrapper = mountChatItem({
+      lastMessage: {
+        type: 'message.image',
+        deleted: true,
+        data: { text: 'Было фото гор', filename: 'mountains.jpg' },
+      },
+    })
+    const lastMessage = wrapper.find('.chat-item__last-message')
+    expect(lastMessage.exists()).toBe(true)
+    expect(lastMessage.text()).toContain('Сообщение удалено')
+    expect(wrapper.find('.chat-item__message-icon').exists()).toBe(true)
+    wrapper.unmount()
+  })
+})

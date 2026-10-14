@@ -153,6 +153,23 @@ export const ChatItemWithLongLastMessage: Story = {
   },
 };
 
+export const ChatItemWithDeletedLastMessage: Story = {
+  args: {
+    chat: {
+      ...chat,
+      typing: false,
+      countUnread: 0,
+      lastMessage: {
+        type: 'message.text',
+        deleted: true,
+        data: {
+          text: 'Это сообщение было удалено',
+        },
+      },
+    },
+  },
+};
+
 export const ChatItemSelected: Story = {
   args: {
     chat: {

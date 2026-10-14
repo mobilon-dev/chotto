@@ -410,11 +410,10 @@ export const chats = [
     avatar: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg',
     countUnread: 0, 
     lastMessage: {
-      type: 'message.file',
+      type: 'message.text',
+      deleted: true,
       data: {
-        text: '',
-        url: 'https://example.com/document.pdf',
-        filename: 'important-document.pdf'
+        text: 'Это сообщение было удалено',
       }
     },
     'lastActivity.time': 'час назад',

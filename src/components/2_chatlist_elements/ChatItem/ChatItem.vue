@@ -53,7 +53,7 @@
         </div>
         
         <Tooltip
-          :text="lastMessageText"
+          :text="lastMessageTooltipText"
           position="bottom"
         >
           <div
@@ -263,6 +263,7 @@ import {
   VideoIcon,
   VoiceIcon,
 } from './icons';
+import DeletedMessageIcon from '@/components/1_icons/DeletedMessageIcon.vue';
 import { IAction, IChatItem, IChatDialog, ILastMessageObject } from './types';
 
 const chatAppId = inject('chatAppId')
@@ -382,8 +383,14 @@ let timer: ReturnType<typeof setInterval> | undefined;
 const typingIndex = ref(0)
 const typingText = [t('component.ChatItem.typing') + '.', t('component.ChatItem.typing') + '..', t('component.ChatItem.typing') + '...']
 
-// Функция для получения текста из lastMessage (может быть строкой или объектом)
-const getLastMessageText = (lastMessage: string | ILastMessageObject): string => {
+const deletedMessageLabel = t('component.DeletedMessageContent.text')
+
+const isLastMessageDeleted = (lastMessage: string | ILastMessageObject): boolean => {
+  return typeof lastMessage !== 'string' && lastMessage?.deleted === true;
+};
+
+/** Исходный текст lastMessage (для тултипа удалённого сообщения) */
+const getLastMessageOriginalText = (lastMessage: string | ILastMessageObject): string => {
   if (typeof lastMessage === 'string') {
     return lastMessage;
   }
@@ -415,6 +422,14 @@ const getLastMessageText = (lastMessage: string | ILastMessageObject): string =>
     return filename;
   }
   return '';
+};
+
+// Функция для получения текста из lastMessage (может быть строкой или объектом)
+const getLastMessageText = (lastMessage: string | ILastMessageObject): string => {
+  if (isLastMessageDeleted(lastMessage)) {
+    return deletedMessageLabel;
+  }
+  return getLastMessageOriginalText(lastMessage);
 };
 
 // Функция для определения типа сообщения
@@ -479,6 +494,11 @@ const messageIcon = computed(() => {
   if (props.chat.typing || hasDraftPreview.value) {
     return null;
   }
+
+  // Удалённое сообщение — независимо от type
+  if (isLastMessageDeleted(props.chat.lastMessage)) {
+    return DeletedMessageIcon;
+  }
   
   const messageType = getMessageType(props.chat.lastMessage);
   if (!messageType) {
@@ -525,13 +545,16 @@ const messageIcon = computed(() => {
   return null;
 });
 
-// Получаем текст для отображения
-const lastMessageText = computed(() => {
+/** Тултип: для удалённых — исходный текст, иначе как в строке */
+const lastMessageTooltipText = computed(() => {
   if (props.chat.typing) {
     return typingText[typingIndex.value];
   }
   if (hasDraftPreview.value) {
     return draftPreview.value ? `${draftLabel} ${draftPreview.value}` : draftLabel
+  }
+  if (isLastMessageDeleted(props.chat.lastMessage)) {
+    return getLastMessageOriginalText(props.chat.lastMessage);
   }
   return getLastMessageText(props.chat.lastMessage);
 });
