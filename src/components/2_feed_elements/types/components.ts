@@ -28,6 +28,8 @@ export interface IFeedObject {
   callDuration?: string
   isMissedCall?: boolean
   reply?: Reply
+  /** Soft-delete: tombstone вместо контента */
+  deleted?: boolean
   linkPreview?: ILinkPreview
   keyboard?: IKeyBoard[]
 }

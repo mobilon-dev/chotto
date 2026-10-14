@@ -37,7 +37,7 @@
         v-for="(object, index) in visibleObjects"
         :id="'msg-' + feedItemKey(object, index)"
         :key="feedItemKey(object, index)"
-        v-memo="[object.messageId, object.text, object.status, object.reply, seriesFlags[renderStart + index], feedReactionsMemoKey(object)]"
+        v-memo="[object.messageId, object.text, object.status, object.reply, object.deleted, seriesFlags[renderStart + index], feedReactionsMemoKey(object)]"
         :data-timestamp="getMessageTimestamp(object)"
         data-testid="feed-message"
         :data-message-id="object.messageId"

@@ -119,4 +119,34 @@ describe('Feed smoke', () => {
     expect(wrapper.find('.text-message__menu-button').exists()).toBe(false)
     wrapper.unmount()
   })
+
+  it('пометка deleted обновляет сообщение без смены чата (v-memo)', async () => {
+    const wrapper = mountFeed([
+      makeFeedObject({
+        messageId: 'live-del-1',
+        text: 'ещё на месте',
+        position: 'right',
+      }),
+    ])
+    await nextTick()
+
+    expect(wrapper.find('.text-message__text').exists()).toBe(true)
+    expect(wrapper.find('.deleted-message-content').exists()).toBe(false)
+
+    await wrapper.setProps({
+      objects: [
+        makeFeedObject({
+          messageId: 'live-del-1',
+          text: 'ещё на месте',
+          deleted: true,
+          position: 'right',
+        }),
+      ],
+    })
+    await nextTick()
+
+    expect(wrapper.find('.text-message__text').exists()).toBe(false)
+    expect(wrapper.find('.deleted-message-content').exists()).toBe(true)
+    wrapper.unmount()
+  })
 })
