@@ -213,6 +213,8 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
 
   return {
     isInitialized,
+    /** true, пока лента прижата вниз (автоскролл при новых сообщениях) */
+    stickToBottom,
     performScrollToBottom,
     initializeScroll,
     smoothScrollToBottom,

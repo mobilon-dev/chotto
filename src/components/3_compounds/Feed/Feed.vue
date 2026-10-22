@@ -432,7 +432,8 @@ const {
 const {
   showStickyDate,
   stickyDateText,
-  show: showStickyDateComponent
+  show: showStickyDateComponent,
+  hide: hideStickyDateComponent,
 } = useStickyDate({
   feedRef: refFeed,
   trackingObjects
@@ -441,6 +442,7 @@ const {
 // Инициализация логики скролла
 const {
   isInitialized,
+  stickToBottom,
   initializeScroll,
   smoothScrollToBottom,
 } = useFeedScroll({
@@ -453,6 +455,15 @@ const defaultBackground = computed(() => {
   return props.chatBackground ?? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(chatBackgroundRaw)}`;
 });
 
+/** Sticky-дата только при ручном скролле истории; автоскролл вниз / позиция у низа — не показываем */
+function maybeShowStickyDate() {
+  if (stickToBottom.value || !isShowButton.value) {
+    hideStickyDateComponent();
+    return;
+  }
+  showStickyDateComponent();
+}
+
 function scrollTopCheck (allowLoadMore: boolean = true) {
   checkButtonVisibility();
   if (isBackfilling.value) {
@@ -460,11 +471,11 @@ function scrollTopCheck (allowLoadMore: boolean = true) {
     if (element && element.scrollTop < 300) {
       accelerateBackfill()
     }
-    showStickyDateComponent();
+    maybeShowStickyDate();
     return
   }
   checkScrollPosition(allowLoadMore);
-  showStickyDateComponent();
+  maybeShowStickyDate();
 };
 
 // вотчеры для loadMore/loadMoreDown и restoreScrollPosition
