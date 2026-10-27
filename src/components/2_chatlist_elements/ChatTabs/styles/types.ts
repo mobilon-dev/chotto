@@ -69,4 +69,6 @@ export interface ChatTabsThemeCSSVariables {
   '--chotto-chattabs-button-color': string;
   /** Контур кнопки вкладки */
   '--chotto-chattabs-button-outline': string;
+  /** Отступы кнопки вкладки */
+  '--chotto-chattabs-button-padding': string;
 }

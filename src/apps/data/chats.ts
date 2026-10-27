@@ -1,6 +1,31 @@
 import tatianaImg from '../data/images/image1.png'
 
+export const SERVICE_CHANNEL_ID = 100
+
+const mobilonAvatar =
+  'https://sun9-47.vkuserphoto.ru/s/v1/ig2/fRBFEr_RBpd5HnV-Ucb7jEvUQQchB3AzF6_7u6sH5hBBMBSD0x0ukgdwnB5NzvrEjsfmDnewJnfmtawWLfwyEjCN.jpg?quality=95&as=32x32,48x48,50x50&from=bu&u=B4SZU9w5kc2hsbvS9On2aQLd-7AVyp2AnCiSKHJjjaQ&cs=50x0'
+
 export const chats = [
+  {
+    chatId: SERVICE_CHANNEL_ID,
+    name: 'Mobilon One',
+    avatar: mobilonAvatar,
+    verified: true,
+    countUnread: 3,
+    lastMessage: {
+      type: 'message.video',
+      data: {
+        text: 'Вот как легко начать работ...',
+      },
+    },
+    'lastActivity.time': '11:23',
+    'lastActivity.timestamp': '1700000100000',
+    isFixedBottom: false,
+    status: 'transparent',
+    typing: false,
+    metadata: '',
+    dialogsExpanded: false,
+  },
   {
     chatId: 1, name: "Васильев Василий Васильевич",
     avatar: 'https://img.freepik.com/free-photo/smiley-man-relaxing-outdoors_23-2148739334.jpg',

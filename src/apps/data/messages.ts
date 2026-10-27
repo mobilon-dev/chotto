@@ -6,6 +6,52 @@ import pdfFile from './files/test.pdf';
 
 export const messages = [
   {
+    chatId: 100,
+    type: 'message.text',
+    direction: 'incoming',
+    header: 'Mobilon One',
+    subText: 'Mobilon One',
+    messageId: 'sc-1',
+    text:
+      'Добрый день! 👋\n\n' +
+      'Меня зовут Маша — я ваш персональный наставник в Mobilon One. ' +
+      'Рада, что вы с нами — и желаю вам успехов в каждом клиентском диалоге!',
+    timestamp: '1762163900',
+    status: 'read',
+  },
+  {
+    chatId: 100,
+    type: 'message.text',
+    direction: 'incoming',
+    header: 'Mobilon One',
+    subText: 'Mobilon One',
+    messageId: 'sc-2',
+    text:
+      'Здесь я буду делиться с вами:\n\n' +
+      '— Практичными инструкциями,\n' +
+      '— Новыми функциями,\n' +
+      '— Кейсами, как другие клиенты решают задачи,\n' +
+      '— И полезными лайфхаками — без воды и теории.\n\n' +
+      'Следи за сообщениями — всё это сделает твою работу легче. 📌',
+    timestamp: '1762163950',
+    status: 'read',
+  },
+  {
+    chatId: 100,
+    type: 'message.video',
+    direction: 'incoming',
+    header: 'Mobilon One',
+    subText: 'Mobilon One',
+    messageId: 'sc-3',
+    text: 'Вот как легко начать работать в Mobilon One — всего 1 минута',
+    url: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+    coverUrl:
+      'https://sun9-62.vkuserphoto.ru/s/v1/ig2/rcM0EnOEAQjEw_kwEU8lUuqJf-AwkguYVIkHVe6UfPRkAHcg_Q0fuvJtG4Xka_ZPGuxBM2xD1lRWwl4hO97NPdBE.jpg?quality=95&as=32x18,48x27,72x40,108x61,160x90,240x135,360x202,480x270,540x304,640x360,720x405,960x540&from=bu&u=XZBdOEdWipH4C2dWS9B_CqtJz5WA8xH6pBeOxYTUXlc&cs=960x0',
+    alt: 'Mobilon One intro',
+    timestamp: '1762164000',
+    status: 'read',
+  },
+  {
     chatId: 1,
     dialogId: 'dlg_43543555',
     type: "message.call",

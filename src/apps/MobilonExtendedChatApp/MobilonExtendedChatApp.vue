@@ -228,7 +228,13 @@
                     </SplashScreen>
                   </template>
                 </Feed>
-                <ChatInput 
+                <ChatInput
+                  v-if="isServiceChannel"
+                  state="disabled"
+                  disabled-placeholder="В этом канале мы рассказываем о новинках Mobilon One"
+                />
+                <ChatInput
+                  v-else
                   :focus-on-input-area="inputFocus"
                   :selected-channel="selectedDialog"
                   :max-attached-files="5"
@@ -458,6 +464,7 @@ const menuActions = [
 ];
 
 const TEST_CHAT_ID_WITHOUT_CONTACT_MENU = 5;
+const SERVICE_CHANNEL_ID = 100;
 
 const defaultContactActions = [
   {
@@ -514,6 +521,10 @@ const selectedChat = ref(null);
 const selectedDialog = ref(null);
 const confirmingAttributeId = ref(null);
 const blockedAttributeIds = ref([]);
+
+const isServiceChannel = computed(
+  () => selectedChat.value?.chatId === SERVICE_CHANNEL_ID,
+);
 
 const contactActions = computed(() => {
   if (selectedChat.value?.chatId === TEST_CHAT_ID_WITHOUT_CONTACT_MENU) {
@@ -1017,6 +1028,8 @@ const selectChat = (args) => {
         args.chat.dialogsExpanded = true
         break
       }
+    } else {
+      selectedDialog.value = null
     }
   }
   isThirdColVisible.value = true
