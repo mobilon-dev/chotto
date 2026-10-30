@@ -67,6 +67,33 @@ describe('ImageMessage preview url', () => {
     expect(document.querySelector('.image-message__modal-image')?.getAttribute('src')).toBe(fullUrl)
     wrapper.unmount()
   })
+
+  it('при ошибке загрузки preview переключает src на url', async () => {
+    const wrapper = mountImage({
+      ...makeFeedObject({ messageId: 'i4', type: 'message.image', text: '' }),
+      url: fullUrl,
+      imagePreviewUrl: previewUrl,
+      alt: 'photo',
+    })
+    const img = wrapper.find('.image-message__preview-image')
+    expect(img.attributes('src')).toBe(previewUrl)
+    await img.trigger('error')
+    expect(wrapper.find('.image-message__preview-image').attributes('src')).toBe(fullUrl)
+    wrapper.unmount()
+  })
+
+  it('не переключает src при error, если preview === url', async () => {
+    const wrapper = mountImage({
+      ...makeFeedObject({ messageId: 'i5', type: 'message.image', text: '' }),
+      url: fullUrl,
+      imagePreviewUrl: fullUrl,
+      alt: 'photo',
+    })
+    const img = wrapper.find('.image-message__preview-image')
+    await img.trigger('error')
+    expect(wrapper.find('.image-message__preview-image').attributes('src')).toBe(fullUrl)
+    wrapper.unmount()
+  })
 })
 
 describe('ImageMessage album', () => {
@@ -132,6 +159,24 @@ describe('ImageMessage album', () => {
     })
     expect(wrapper.find('.image-message__album').exists()).toBe(false)
     expect(wrapper.find('.image-message__preview-image').attributes('src')).toBe(albumItems[0].imagePreviewUrl)
+    wrapper.unmount()
+  })
+
+  it('битый preview у одного tile фолбэчит на его url, остальные не трогает', async () => {
+    const wrapper = mountImage({
+      ...makeFeedObject({ messageId: 'a6', type: 'message.image', text: '' }),
+      url: albumItems[0].url,
+      items: albumItems.slice(0, 2),
+    })
+    const images = wrapper.findAll('.image-message__album-image')
+    expect(images[0].attributes('src')).toBe(albumItems[0].imagePreviewUrl)
+    expect(images[1].attributes('src')).toBe(albumItems[1].imagePreviewUrl)
+
+    await images[0].trigger('error')
+
+    const after = wrapper.findAll('.image-message__album-image')
+    expect(after[0].attributes('src')).toBe(albumItems[0].url)
+    expect(after[1].attributes('src')).toBe(albumItems[1].imagePreviewUrl)
     wrapper.unmount()
   })
 })

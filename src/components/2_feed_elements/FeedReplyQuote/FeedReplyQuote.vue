@@ -14,6 +14,7 @@
       height="40"
       loading="lazy"
       decoding="async"
+      @error="onPreviewError"
     >
     <div class="feed-reply-quote__content">
       <p
@@ -35,6 +36,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Reply } from '@/types'
+import { useImageFeedSrc } from '@/hooks/messages'
 
 const emit = defineEmits(['reply'])
 
@@ -47,11 +49,24 @@ const props = defineProps({
 
 const MEDIA_PREVIEW_TYPES = new Set(['message.image', 'message.sticker'])
 
+const { displaySrc: mediaFeedSrc, onImageError: onPreviewError } = useImageFeedSrc(
+  () => {
+    const reply = props.message
+    if (!MEDIA_PREVIEW_TYPES.has(reply?.type || '')) return undefined
+    return reply.imagePreviewUrl
+  },
+  () => {
+    const reply = props.message
+    if (!MEDIA_PREVIEW_TYPES.has(reply?.type || '')) return undefined
+    return reply.url
+  },
+)
+
 const previewUrl = computed(() => {
   const reply = props.message
   if (reply?.type === 'message.video') return reply.coverUrl || ''
   if (!MEDIA_PREVIEW_TYPES.has(reply?.type || '')) return ''
-  const src = reply.imagePreviewUrl || reply.url
+  const src = mediaFeedSrc.value
   if (!src || src.endsWith('.tgs')) return ''
   return src
 })

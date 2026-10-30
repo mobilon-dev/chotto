@@ -92,8 +92,9 @@
               >
                 <img
                   class="image-message__album-image"
-                  :src="item.imagePreviewUrl || item.url"
+                  :src="getAlbumItemSrc(item)"
                   :alt="item.filename"
+                  @error="onAlbumItemError(item)"
                 >
                 <span
                   v-if="albumOverflow > 0 && index === visibleAlbumItems.length - 1"
@@ -111,11 +112,13 @@
                 class="image-message__blur-left"
                 :src="feedImageUrl"
                 :alt="message.alt"
+                @error="onFeedImageError"
               >
               <img
                 class="image-message__blur-right"
                 :src="feedImageUrl"
                 :alt="message.alt"
+                @error="onFeedImageError"
               >
             </div>
             <img
@@ -124,6 +127,7 @@
               :style="{ borderRadius: imageBorderRadius }"
               :src="feedImageUrl"
               :alt="message.alt"
+              @error="onFeedImageError"
             >
           </template>
 
@@ -298,7 +302,7 @@ import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIn
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply, getImageMessageItems } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply, getImageMessageItems, useImageFeedSrc, useAlbumImageFeedSrc } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { useTheme } from "@/hooks";
 import { IImageMessage } from '@/types';
@@ -368,10 +372,13 @@ const visibleAlbumItems = computed(() => imageItems.value.slice(0, ALBUM_VISIBLE
 const albumOverflow = computed(() => Math.max(0, imageItems.value.length - ALBUM_VISIBLE_LIMIT))
 const albumLayout = computed(() => String(Math.min(imageItems.value.length, ALBUM_VISIBLE_LIMIT)))
 
-const feedImageUrl = computed(() => {
-  const primary = imageItems.value[0]
-  return primary?.imagePreviewUrl || primary?.url || ''
-})
+const { displaySrc: feedImageUrl, onImageError: onFeedImageError } = useImageFeedSrc(
+  () => imageItems.value[0]?.imagePreviewUrl,
+  () => imageItems.value[0]?.url,
+)
+const { getItemSrc: getAlbumItemSrc, onItemError: onAlbumItemError } = useAlbumImageFeedSrc(
+  () => imageItems.value,
+)
 
 const modalImage = computed(() => imageItems.value[modalIndex.value] || imageItems.value[0])
 const modalImageUrl = computed(() => modalImage.value?.url || '')

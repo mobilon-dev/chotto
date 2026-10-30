@@ -480,6 +480,20 @@ export const RightWithImagePreviewUrl: Story = {
   decorators: commonDecorator,
 };
 
+/** preview 404 → после @error в ленте показывается original url */
+export const BrokenPreviewFallsBackToUrl: Story = {
+  args: {
+    message: {
+      ...imageMessage,
+      url: imageFullUrl,
+      imagePreviewUrl: 'https://example.com/missing.preview.jpg',
+      text: 'Битый imagePreviewUrl → fallback на url',
+      position: 'left',
+    },
+  },
+  decorators: commonDecorator,
+};
+
 export const RightMessageWithPreviewLink: Story = {
   args: {
     message: {

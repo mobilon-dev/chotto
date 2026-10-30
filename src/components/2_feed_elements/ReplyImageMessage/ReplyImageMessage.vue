@@ -7,6 +7,7 @@
       class="image-message__preview-image"
       :src="feedImageUrl"
       :alt="message.alt"
+      @error="onFeedImageError"
     >
   </div>
 
@@ -49,11 +50,11 @@
   setup
   lang="ts"
 >
-import { ref, computed, inject } from 'vue';
+import { ref, inject } from 'vue';
 import { IImageMessage } from '@/types';
 import ModalFullscreen from '@/components/2_modals/ModalFullscreen/ModalFullscreen.vue';
 import { useTheme } from "@/hooks";
-import { useMessageLinks } from '@/hooks/messages';
+import { useMessageLinks, useImageFeedSrc } from '@/hooks/messages';
 
 const chatAppId = inject('chatAppId')
 
@@ -68,7 +69,10 @@ const props = defineProps({
 
 const isOpenModal = ref(false);
 
-const feedImageUrl = computed(() => props.message.imagePreviewUrl || props.message.url)
+const { displaySrc: feedImageUrl, onImageError: onFeedImageError } = useImageFeedSrc(
+  () => props.message.imagePreviewUrl,
+  () => props.message.url,
+)
 
 const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 

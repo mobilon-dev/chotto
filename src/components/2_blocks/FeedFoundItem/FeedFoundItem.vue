@@ -31,6 +31,7 @@
           style="margin-right: 3px;"
           width="24"
           height="24"
+          @error="onImagePreviewError"
         >
         <span
           v-if="typePreview"
@@ -49,7 +50,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { IFeedObject } from '@/types';
-import { getPrimaryImageItem } from '@/hooks/messages';
+import { getPrimaryImageItem, useImageFeedSrc } from '@/hooks/messages';
 const props = defineProps({
   object: {
     type: Object as () => IFeedObject,
@@ -61,10 +62,20 @@ const props = defineProps({
   }
 });
 
+const { displaySrc: imageFeedSrc, onImageError: onImagePreviewError } = useImageFeedSrc(
+  () => {
+    if (props.object.type !== 'message.image') return undefined
+    return getPrimaryImageItem(props.object)?.imagePreviewUrl
+  },
+  () => {
+    if (props.object.type !== 'message.image') return undefined
+    return getPrimaryImageItem(props.object)?.url
+  },
+)
+
 const imagePreviewSrc = computed(() => {
   if (props.object.type !== 'message.image') return ''
-  const primary = getPrimaryImageItem(props.object)
-  return primary?.imagePreviewUrl || primary?.url || ''
+  return imageFeedSrc.value
 })
 
 const typePreview = computed(() => {
