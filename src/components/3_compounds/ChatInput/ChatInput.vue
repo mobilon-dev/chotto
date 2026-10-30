@@ -572,6 +572,38 @@ watch(useEmojiMirror, (enabled) => {
 })
 
 const INPUT_MIN_HEIGHT = 40
+/** Невидимый маркер строки у max-height (без padding — не даёт прыжка текста). */
+const TRAILING_LINE_MARK = '\u200b'
+
+/** Скрытый textarea для замера высоты (как MUI TextareaAutosize). */
+let heightMeasureTextarea: HTMLTextAreaElement | null = null
+
+function getHeightMeasureTextarea(): HTMLTextAreaElement {
+  if (heightMeasureTextarea) return heightMeasureTextarea
+  const node = document.createElement('textarea')
+  node.tabIndex = -1
+  node.setAttribute('aria-hidden', 'true')
+  for (const [prop, value] of Object.entries({
+    position: 'absolute',
+    visibility: 'hidden',
+    height: '0',
+    'min-height': '0',
+    'max-height': 'none',
+    overflow: 'hidden',
+    'z-index': '-1000',
+    top: '0',
+    right: '0',
+  })) {
+    node.style.setProperty(prop, value, 'important')
+  }
+  document.body.appendChild(node)
+  heightMeasureTextarea = node
+  return node
+}
+
+function stripTrailingLineMarks(text: string): string {
+  return text.split(TRAILING_LINE_MARK).join('')
+}
 
 function applySavedInputHeight(el: HTMLTextAreaElement) {
   const saved = getMessage().inputHeight
@@ -589,69 +621,71 @@ function persistInputHeight(el: HTMLTextAreaElement) {
 
 function resizeTextarea(el: HTMLTextAreaElement) {
   const text = getMessage().text || ''
-  if (el.value !== text || el.clientWidth === 0) {
+  if (el.clientWidth === 0) {
     applySavedInputHeight(el)
     return
   }
+  // DOM и черновик на кадр могут разъехаться — не откатываем высоту
+  if (el.value !== text) return
 
-  const scrollTop = el.scrollTop;
-  el.style.height = 'auto';
+  const baseText = stripTrailingLineMarks(text)
+  let nextHeight = INPUT_MIN_HEIGHT
+  let overflowing = false
 
-  const computedStyle = getComputedStyle(el);
-  const fontSize = parseFloat(computedStyle.fontSize) || 16;
-  const lineHeight = parseFloat(computedStyle.lineHeight) || fontSize * 1.4;
-  const minHeight = INPUT_MIN_HEIGHT;
-  const maxHeight = lineHeight * 11;
-  const scrollHeight = el.scrollHeight;
+  if (baseText.trim()) {
+    const cs = getComputedStyle(el)
+    const borderX = (parseFloat(cs.borderLeftWidth) || 0) + (parseFloat(cs.borderRightWidth) || 0)
+    const mirror = getHeightMeasureTextarea()
+    // clientWidth учитывает scrollbar-gutter (режим PNG-эмодзи)
+    mirror.style.boxSizing = 'border-box'
+    mirror.style.width = `${el.clientWidth + borderX}px`
+    mirror.style.font = cs.font
+    mirror.style.letterSpacing = cs.letterSpacing
+    mirror.style.lineHeight = cs.lineHeight
+    mirror.style.padding = cs.padding
+    mirror.style.border = cs.border
+    mirror.style.whiteSpace = cs.whiteSpace
+    mirror.style.wordBreak = cs.wordBreak
+    mirror.style.overflowWrap = cs.overflowWrap
+    // Хвостовой \n + пробел: пустая строка и ввод на ней дают одну высоту (MUI)
+    mirror.value = baseText.endsWith('\n') ? `${baseText} ` : baseText
 
-  const lineCount = text.split('\n').length;
-  const hasExplicitLineBreaks = lineCount > 1;
-
-  const tempEl = document.createElement('div');
-  tempEl.style.position = 'absolute';
-  tempEl.style.visibility = 'hidden';
-  tempEl.style.whiteSpace = 'nowrap';
-  tempEl.style.font = computedStyle.font;
-  tempEl.style.fontSize = computedStyle.fontSize;
-  tempEl.style.fontFamily = computedStyle.fontFamily;
-  tempEl.style.fontWeight = computedStyle.fontWeight;
-  tempEl.style.letterSpacing = computedStyle.letterSpacing;
-  tempEl.textContent = text;
-
-  document.body.appendChild(tempEl);
-  const textWidth = tempEl.offsetWidth;
-  document.body.removeChild(tempEl);
-
-  const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
-  const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
-  const availableWidth = el.clientWidth - paddingLeft - paddingRight;
-
-  const hasAutoWrap = textWidth > availableWidth;
-  const shouldGrow = hasExplicitLineBreaks || hasAutoWrap;
-
-  if (shouldGrow && scrollHeight <= minHeight + 1) {
-    applySavedInputHeight(el)
-    return
+    let contentHeight = mirror.scrollHeight
+    if (cs.boxSizing === 'border-box') {
+      contentHeight += (parseFloat(cs.borderTopWidth) || 0)
+        + (parseFloat(cs.borderBottomWidth) || 0)
+    }
+    const maxHeight = parseFloat(cs.maxHeight)
+    const cap = Number.isFinite(maxHeight) && maxHeight > 0 ? maxHeight : contentHeight
+    nextHeight = Math.max(INPUT_MIN_HEIGHT, Math.min(contentHeight, cap))
+    overflowing = contentHeight > cap + 0.5
   }
 
-  if (!text.trim()) {
-    el.style.height = minHeight + 'px';
-    el.style.overflowY = 'hidden';
-  } else if (!shouldGrow) {
-    el.style.height = minHeight + 'px';
-    el.style.overflowY = 'hidden';
-  } else if (scrollHeight <= maxHeight) {
-    el.style.height = scrollHeight + 'px';
-    el.style.overflowY = 'hidden';
-  } else {
-    el.style.height = maxHeight + 'px';
-    el.style.overflowY = 'auto';
-    el.scrollTop = scrollTop;
+  if (Math.abs(el.offsetHeight - nextHeight) >= 1) {
+    el.style.height = `${nextHeight}px`
+    persistInputHeight(el)
+  }
+  el.style.overflowY = overflowing ? 'auto' : 'hidden'
+
+  // У потолка scrollHeight игнорирует голый \n — каретка «прыгает» в начало строки
+  // (особенно с emoji-mirror). Маркер даёт высоту строки без padding и без лишней линии.
+  const normalized = overflowing && baseText.endsWith('\n')
+    ? baseText + TRAILING_LINE_MARK
+    : baseText
+  if (normalized !== text) {
+    const keepBeforeMark = normalized.endsWith(TRAILING_LINE_MARK)
+      ? normalized.length - 1
+      : normalized.length
+    setMessageText(normalized)
+    el.value = normalized
+    el.setSelectionRange(keepBeforeMark, keepBeforeMark)
   }
 
-  persistInputHeight(el)
+  if (overflowing && (el.selectionEnd ?? 0) >= baseText.length) {
+    el.scrollTop = el.scrollHeight
+  }
   syncMirrorScroll()
-  requestAnimationFrame(syncMirrorScroll)
+  if (useEmojiMirror.value) nextTick(syncMirrorScroll)
 }
 
 function applyFocusAtEnd(el: HTMLTextAreaElement) {
@@ -712,30 +746,23 @@ onUnmounted(() => {
   document.removeEventListener('selectionchange', onDocumentSelectionChange)
   fileChipsObserver?.disconnect()
   if (selectionSyncRaf) cancelAnimationFrame(selectionSyncRaf)
+  if (heightMeasureTextarea) {
+    heightMeasureTextarea.remove()
+    heightMeasureTextarea = null
+  }
 });
 
 const keyEnter = (event: KeyboardEvent) => {
-  if (event.shiftKey) {
-    if (refInput.value instanceof HTMLTextAreaElement){
-      let caret = refInput.value.selectionStart;
-      if (caret){
-        refInput.value.setRangeText("\n", caret, caret, "end");
+  if (event.shiftKey || event.ctrlKey) {
+    if (refInput.value instanceof HTMLTextAreaElement) {
+      const caret = refInput.value.selectionStart
+      if (caret != null) {
+        refInput.value.setRangeText('\n', caret, caret, 'end')
         setMessageText(refInput.value.value)
       }
     }
-    event.preventDefault();
-  }
-  else if (event.ctrlKey) {
-    if (refInput.value instanceof HTMLTextAreaElement){
-      let caret = refInput.value.selectionStart;
-      if (caret){
-        refInput.value.setRangeText("\n", caret, caret, "end");
-        setMessageText(refInput.value.value)
-      }
-    }
-    event.preventDefault();
-  }
-  else {
+    event.preventDefault()
+  } else {
     event.preventDefault()
     sendMessage()
   }
@@ -780,7 +807,8 @@ function cancelEditMode() {
 function isEditTextUnchanged(): boolean {
   const draft = getMessage()
   if (!draft.edit) return false
-  return (draft.text ?? '').trim() === (draft.edit.text ?? '').trim()
+  return stripTrailingLineMarks(draft.text ?? '').trim()
+    === stripTrailingLineMarks(draft.edit.text ?? '').trim()
 }
 
 const sendMessage = () => {
@@ -791,7 +819,9 @@ const sendMessage = () => {
     return
   }
 
-  if (Message.value.text != '' || attachedFiles.value.length) {
+  const plainText = stripTrailingLineMarks(Message.value.text ?? '')
+
+  if (plainText != '' || attachedFiles.value.length) {
     const messageObject: IInputMessage = {
       type: '',
       text: '',
@@ -803,7 +833,7 @@ const sendMessage = () => {
 
     const files = attachedFiles.value
     if (files.length) {
-      const caption = Message.value.text.trim()
+      const caption = plainText.trim()
       files.forEach((file, index) => {
         const fileMessage: IInputMessage = {
           type: 'message.' + file.type,
@@ -820,7 +850,7 @@ const sendMessage = () => {
       })
     } else {
       messageObject.type = 'message.text';
-      messageObject.text = Message.value.text.trim();
+      messageObject.text = plainText.trim();
       if (Message.value.reply){
         messageObject.reply = Message.value.reply
       }

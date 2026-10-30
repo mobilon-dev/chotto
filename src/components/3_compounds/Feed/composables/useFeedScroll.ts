@@ -7,6 +7,9 @@ import { Ref, ref, nextTick, watch, onUnmounted } from 'vue';
  * режим stick-to-bottom: при открытии чата лента прижимается вниз
  * и остаётся там, пока растёт контент (картинки, клавиатура и т.п.).
  * Любой пользовательский скролл сразу выключает этот режим.
+ *
+ * При сжатии viewport (рост поля ввода) тоже удерживаем низ, если
+ * пользователь был у последних сообщений — как в Telegram.
  */
 
 interface UseFeedScrollOptions<T = unknown> {
@@ -17,6 +20,8 @@ interface UseFeedScrollOptions<T = unknown> {
   /** Внешний флаг, который триггерит прокрутку вниз */
   scrollToBottomRef: Ref<boolean>;
 }
+
+const NEAR_BOTTOM_PX = 100;
 
 export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottomRef }: UseFeedScrollOptions<T>) {
   /**
@@ -35,12 +40,22 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
   let pointerIsDown = false;
   let listenersElement: HTMLElement | null = null;
   let resizeObserver: ResizeObserver | null = null;
+  let lastFeedScrollHeight = 0;
+  let lastFeedClientHeight = 0;
 
   function snapToBottom(): void {
     if (!stickToBottom.value) return;
 
     const element = feedRef.value;
     if (!element) return;
+
+    const top = element.scrollTop;
+    const maxTop = Math.max(0, element.scrollHeight - element.clientHeight);
+    lastFeedScrollHeight = element.scrollHeight;
+    lastFeedClientHeight = element.clientHeight;
+
+    // Уже у низа — не трогаем scrollTop (лишние присвоения дают видимый «подпрыг»)
+    if (Math.abs(top - maxTop) < 1) return;
 
     isProgrammaticScroll = true;
     element.style.scrollBehavior = 'auto';
@@ -73,10 +88,58 @@ export function useFeedScroll<T = unknown>({ feedRef, objectsRef, scrollToBottom
     freezeScrollPosition();
   }
 
+  /**
+   * Обрабатывает изменение размеров ленты / её детей.
+   * Рост поля ввода уменьшает clientHeight — если пользователь был у низа,
+   * прижимаем скролл, чтобы последнее сообщение оставалось видимым.
+   */
+  function handleFeedResize(): void {
+    const element = feedRef.value;
+    if (!element) return;
+
+    const { scrollHeight, clientHeight, scrollTop } = element;
+    const prevScrollHeight = lastFeedScrollHeight;
+    const prevClientHeight = lastFeedClientHeight;
+
+    lastFeedScrollHeight = scrollHeight;
+    lastFeedClientHeight = clientHeight;
+
+    // Первый замер после observe — только запоминаем размеры
+    if (!prevScrollHeight && !prevClientHeight) {
+      if (stickToBottom.value) {
+        snapToBottom();
+      }
+      return;
+    }
+
+    const prevDistanceFromBottom = prevScrollHeight - scrollTop - prevClientHeight;
+    const wasNearBottom = stickToBottom.value || prevDistanceFromBottom < NEAR_BOTTOM_PX;
+
+    if (wasNearBottom) {
+      stickToBottom.value = true;
+      snapToBottom();
+      return;
+    }
+
+    // Пользователь читает историю: при росте контента сохраняем отступ от низа,
+    // при одном только сжатии viewport (инпут) scrollTop не трогаем.
+    const scrollHeightChanged = scrollHeight !== prevScrollHeight;
+    if (scrollHeightChanged && scrollHeight > prevScrollHeight) {
+      isProgrammaticScroll = true;
+      element.style.scrollBehavior = 'auto';
+      element.scrollTop = scrollTop + (scrollHeight - prevScrollHeight);
+      requestAnimationFrame(() => {
+        isProgrammaticScroll = false;
+      });
+    }
+  }
+
   function observeFeed(element: HTMLElement): void {
     resizeObserver?.disconnect();
+    lastFeedScrollHeight = element.scrollHeight;
+    lastFeedClientHeight = element.clientHeight;
     resizeObserver = new ResizeObserver(() => {
-      snapToBottom();
+      handleFeedResize();
     });
     resizeObserver.observe(element);
     for (const child of element.children) {

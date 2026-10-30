@@ -15,6 +15,8 @@ export interface ChatWrapperThemeCSSVariables {
   // Selected chat
   /** Высота выбранного чата */
   '--chotto-chatwrapper-selected-chat-height': string;
+  /** Минимальная высота выбранного чата (для сжатия ленты при росте инпута) */
+  '--chotto-chatwrapper-selected-chat-min-height': string;
   /** Ширина выбранного чата */
   '--chotto-chatwrapper-selected-chat-width': string;
   /** Отображение выбранного чата */
@@ -23,6 +25,8 @@ export interface ChatWrapperThemeCSSVariables {
   '--chotto-chatwrapper-selected-chat-flex-direction': string;
   /** Выравнивание элементов выбранного чата по вертикали */
   '--chotto-chatwrapper-selected-chat-align-items': string;
+  /** Overflow выбранного чата */
+  '--chotto-chatwrapper-selected-chat-overflow': string;
 
   // Chat panel
   /** Цвет фона панели чата */

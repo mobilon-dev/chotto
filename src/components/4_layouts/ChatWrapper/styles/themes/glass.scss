@@ -7,10 +7,12 @@
 
   // ChatWrapper selected-chat variables
   --chotto-chatwrapper-selected-chat-height: 100%;
+  --chotto-chatwrapper-selected-chat-min-height: 0;
   --chotto-chatwrapper-selected-chat-width: 100%;
   --chotto-chatwrapper-selected-chat-display: flex;
   --chotto-chatwrapper-selected-chat-flex-direction: column;
   --chotto-chatwrapper-selected-chat-align-items: stretch;
+  --chotto-chatwrapper-selected-chat-overflow: hidden;
 
   // ChatWrapper chat-panel variables - glassmorphism эффект
   --chotto-chatwrapper-chat-panel-background-color: linear-gradient(
