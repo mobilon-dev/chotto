@@ -30,8 +30,17 @@ describe('parseMarkdown', () => {
     expect(html).toContain('цитата')
   })
 
-  it('рендерит переносы строк через полный render', () => {
+  it('рендерит переносы через полный render без soft-break <br>', () => {
     const html = parseMarkdown('строка1\nстрока2')
-    expect(html).toContain('<br')
+    expect(html).toContain('<p>')
+    expect(html).not.toContain('<br')
+    expect(html).toContain('строка1')
+    expect(html).toContain('строка2')
+  })
+
+  it('не вставляет <br> внутри абзаца после пустой строки (pre-wrap в ленте)', () => {
+    const html = parseMarkdown('aaaaaaa\n\naaaaaaaa\naaaaaaa\naaaaaaaa')
+    expect(html).toContain('<p>')
+    expect(html).not.toMatch(/<br\s*\/?>/)
   })
 })

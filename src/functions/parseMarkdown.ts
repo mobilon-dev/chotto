@@ -18,7 +18,9 @@ import MarkdownIt from 'markdown-it'
 // Создаём экземпляр markdown-it с настройками для чата
 const md = new MarkdownIt('default', {
   html: true, // Разрешаем HTML-теги (для <u>)
-  breaks: true, // Преобразуем переносы строк в <br>
+  // breaks: false — иначе каждый \n → <br>, а в ленте ещё white-space: pre-wrap,
+  // и перенос удваивается (пустая строка между каждой строкой при наличии \n\n в тексте).
+  breaks: false,
   linkify: false, // Отключаем авто-ссылки, так как их обрабатывает linkifyStr
 })
 
