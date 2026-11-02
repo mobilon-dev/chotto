@@ -169,7 +169,11 @@ export function useCommunicationActions({
       return;
     }
 
+    // Phone: один голосовой канал — сразу phone-call; два и больше — submenu как у мессенджеров.
     if (channelType === 'phone') {
+      if (hasMultipleChannels(channelType)) {
+        return;
+      }
       handlePhoneCall(attribute);
       return;
     }

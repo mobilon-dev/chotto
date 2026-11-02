@@ -740,7 +740,6 @@ const shouldShowSubMenu = computed(() =>
   showSubMenu.value &&
   hoveredAttribute.value &&
   availableChannels.value.length > 0 &&
-  activeChannelType.value !== 'phone' &&
   hasMultipleChannels(activeChannelType.value)
 );
 
