@@ -15,7 +15,6 @@ interface UseFeedTopSpacerOptions {
 export function useFeedTopSpacer({ feedRef, objectsLengthRef }: UseFeedTopSpacerOptions) {
   const topSpacerPx = ref(0);
   let resizeObserver: ResizeObserver | null = null;
-  let observedElement: HTMLElement | null = null;
 
   function measure() {
     const el = feedRef.value;
@@ -45,7 +44,6 @@ export function useFeedTopSpacer({ feedRef, objectsLengthRef }: UseFeedTopSpacer
 
   function observe(element: HTMLElement | null) {
     resizeObserver?.disconnect();
-    observedElement = element;
     if (!element) return;
     resizeObserver = new ResizeObserver(() => scheduleMeasure());
     resizeObserver.observe(element);
@@ -69,7 +67,6 @@ export function useFeedTopSpacer({ feedRef, objectsLengthRef }: UseFeedTopSpacer
   onUnmounted(() => {
     resizeObserver?.disconnect();
     resizeObserver = null;
-    observedElement = null;
   });
 
   return {
