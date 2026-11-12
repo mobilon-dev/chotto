@@ -23,6 +23,12 @@
   padding: var(--chotto-feed-padding, 10px 13px 10px 13px);
   position: var(--chotto-feed-position, relative);
   
+  &__top-spacer {
+    flex-shrink: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+
   &__loading {
     margin: var(--chotto-feed-loading-margin, 10px 0 30px 0);
   }

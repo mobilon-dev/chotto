@@ -16,6 +16,12 @@
     >
       <!-- Контент перед сообщениями -->
       <slot name="prepend" />
+      <!-- Short feed: запас overflow сверху, чтобы жест вверх всегда был возможен (#16649) -->
+      <div
+        class="message-feed__top-spacer"
+        :style="{ height: `${topSpacerPx}px` }"
+        aria-hidden="true"
+      />
       <div
         v-show="isLoadingMore"
         class="message-feed__loading"
@@ -158,7 +164,7 @@ import LoadingIndicator from '@/components/1_atoms/LoadingIndicator/LoadingIndic
 import MessageReactionsOverlay from '@/components/2_feed_elements/MessageReactions/MessageReactionsOverlay.vue';
 
 import { IFeedObject, IFeedTyping, IFeedUnreadButton, IFeedKeyboard, IFeedMessageMenuAction, MessageReactions } from '@/types';
-import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo, useFeedProgressiveRender, provideFeedReactionsOverlay } from './composables';
+import { useStickyDate, useFeedScroll, useFeedButton, useFeedGrouping, useFeedLoadMore, useFeedMessageVisibility, useFeedComponents, useFeedReply, useFeedKeyboard, useFeedScrollTo, useFeedProgressiveRender, useFeedTopSpacer, provideFeedReactionsOverlay } from './composables';
 import { throttle } from './functions/throttle';
 import { getDefaultMessageMenuActions } from './utils/getDefaultMessageMenuActions';
 import { isSmsFeedMessage } from '@/functions';
@@ -383,7 +389,23 @@ const emit = defineEmits([
   'delimiterRead',
 ]);
 
-// Инициализация логики подгрузки сообщений
+// Скролл раньше load-more: stickToBottom глушит авто top-load (#16649)
+const {
+  isInitialized,
+  stickToBottom,
+  initializeScroll,
+  smoothScrollToBottom,
+} = useFeedScroll({
+  feedRef: refFeed,
+  objectsRef: computed(() => props.objects),
+  scrollToBottomRef: computed(() => props.scrollToBottom),
+})
+
+const { topSpacerPx, scheduleMeasure: scheduleTopSpacerMeasure } = useFeedTopSpacer({
+  feedRef: refFeed,
+  objectsLengthRef: computed(() => props.objects.length),
+})
+
 const {
   checkScrollPosition,
   startScrollWatch,
@@ -393,6 +415,7 @@ const {
   feedRef: refFeed,
   emit,
   isLoadingMoreRef: computed(() => props.isLoadingMore),
+  stickToBottomRef: stickToBottom,
 })
 
 // Инициализация логики ответов
@@ -437,18 +460,6 @@ const {
 } = useStickyDate({
   feedRef: refFeed,
   trackingObjects
-})
-
-// Инициализация логики скролла
-const {
-  isInitialized,
-  stickToBottom,
-  initializeScroll,
-  smoothScrollToBottom,
-} = useFeedScroll({
-  feedRef: refFeed,
-  objectsRef: computed(() => props.objects),
-  scrollToBottomRef: computed(() => props.scrollToBottom),
 })
 
 const defaultBackground = computed(() => {
@@ -521,6 +532,7 @@ watch(
       requestAnimationFrame(() => {
         resetAllowFlags()
         scrollTopCheck(false)
+        scheduleTopSpacerMeasure()
         trackingObjects.value = document.querySelectorAll('.tracking-message')
         restartObserving()
       })

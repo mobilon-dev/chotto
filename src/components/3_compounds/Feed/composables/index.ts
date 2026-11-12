@@ -9,5 +9,6 @@ export * from './useFeedReactionsOverlay';
 export * from './useFeedReply';
 export * from './useFeedScroll';
 export * from './useFeedScrollTo';
+export * from './useFeedTopSpacer';
 export * from './useStickyDate';
 

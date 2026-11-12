@@ -74,4 +74,32 @@ describe('useFeedLoadMore', () => {
     expect(emit).toHaveBeenCalledWith('loadMoreDown')
     scope.stop()
   })
+
+  it('при stickToBottom не триггерит top-load даже если scrollTop < 300 (#16649)', () => {
+    const feedRef = ref(
+      mockFeedElement({ scrollTop: 80, scrollHeight: 580, clientHeight: 500 }),
+    )
+    const stickToBottom = ref(true)
+    const api = useFeedLoadMore({ feedRef, stickToBottomRef: stickToBottom })
+    api.allowLoadMoreTop.value = true
+
+    api.checkScrollPosition(true)
+
+    expect(api.allowLoadMoreTop.value).toBe(true)
+    expect(api.pendingTopRestore.value).toBe(false)
+  })
+
+  it('после ухода от stickToBottom top-load снова срабатывает у верха', () => {
+    const feedRef = ref(
+      mockFeedElement({ scrollTop: 40, scrollHeight: 2000, clientHeight: 500 }),
+    )
+    const stickToBottom = ref(false)
+    const api = useFeedLoadMore({ feedRef, stickToBottomRef: stickToBottom })
+    api.allowLoadMoreTop.value = true
+
+    api.checkScrollPosition(true)
+
+    expect(api.allowLoadMoreTop.value).toBe(false)
+    expect(api.pendingTopRestore.value).toBe(true)
+  })
 })

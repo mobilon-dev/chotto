@@ -4,12 +4,19 @@ interface UseFeedLoadMoreOptions {
   feedRef: Ref<HTMLElement | null>;
   emit?: (event: 'loadMore' | 'loadMoreDown', ...args: unknown[]) => void;
   isLoadingMoreRef?: Ref<boolean>;
+  /** Пока лента прижата вниз — top load-more не эмитим (#16649 journal 77620). */
+  stickToBottomRef?: Ref<boolean>;
 }
 
 /**
  * Композабл для управления подгрузкой сообщений сверху/снизу и восстановлением позиции скролла
  */
-export function useFeedLoadMore({ feedRef, emit, isLoadingMoreRef }: UseFeedLoadMoreOptions) {
+export function useFeedLoadMore({
+  feedRef,
+  emit,
+  isLoadingMoreRef,
+  stickToBottomRef,
+}: UseFeedLoadMoreOptions) {
   const allowLoadMoreTop = ref(false);
   const allowLoadMoreBottom = ref(false);
   const movingDown = ref(false);
@@ -20,6 +27,8 @@ export function useFeedLoadMore({ feedRef, emit, isLoadingMoreRef }: UseFeedLoad
   const prevScrollTop = ref(0);
   const pendingTopRestore = ref(false);
   const topLoadJustHappened = ref(false);
+
+  const isStuckToBottom = () => Boolean(stickToBottomRef && unref(stickToBottomRef));
 
   /**
    * Проверяет позицию скролла и управляет флагами загрузки
@@ -32,7 +41,7 @@ export function useFeedLoadMore({ feedRef, emit, isLoadingMoreRef }: UseFeedLoad
 
     if (isScrollByMouseButton.value) {
       // Режим скролла мышью
-      if (element.scrollTop < 300) {
+      if (element.scrollTop < 300 && !isStuckToBottom()) {
         movingDown.value = false;
         allowLoadMoreTop.value = false;
       }
@@ -41,8 +50,8 @@ export function useFeedLoadMore({ feedRef, emit, isLoadingMoreRef }: UseFeedLoad
         movingDown.value = true;
       }
     } else if (allowLoadMore) {
-      // Автоматический режим
-      if (element.scrollTop < 300) {
+      // Автоматический режим — top только после пользовательского ухода от низа (#16649)
+      if (element.scrollTop < 300 && !isStuckToBottom()) {
         // Сохраняем метрики перед top-prepend
         prevScrollHeight.value = element.scrollHeight;
         prevScrollTop.value = element.scrollTop;
@@ -157,4 +166,3 @@ export function useFeedLoadMore({ feedRef, emit, isLoadingMoreRef }: UseFeedLoad
     resetAllowFlags,
   };
 }
-
