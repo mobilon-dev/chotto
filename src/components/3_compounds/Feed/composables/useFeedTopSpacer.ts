@@ -1,7 +1,10 @@
 import { Ref, ref, watch, nextTick, onUnmounted } from 'vue';
 
-/** Запас overflow сверху, чтобы short feed всегда скроллился (#16649). */
-export const FEED_TOP_LOAD_OVERFLOW_PX = 320;
+/**
+ * Порог «почти заполнен viewport»: только тогда добиваем минимальный overflow
+ * для native-scroll. Short feed без дырки — load-more через wheel (#16649 journal 77879).
+ */
+export const FEED_TOP_LOAD_OVERFLOW_PX = 8;
 
 interface UseFeedTopSpacerOptions {
   feedRef: Ref<HTMLElement | null>;
@@ -9,8 +12,8 @@ interface UseFeedTopSpacerOptions {
 }
 
 /**
- * Высота top-spacer: content + spacer дают scrollHeight >= clientHeight + OVERFLOW,
- * чтобы жест «вверх» был возможен при любом числе сообщений.
+ * Высота top-spacer: не раздуваем short feed до clientHeight.
+ * Пустой запас только если контент уже почти на всю высоту (tip-over ≤ OVERFLOW).
  */
 export function useFeedTopSpacer({ feedRef, objectsLengthRef }: UseFeedTopSpacerOptions) {
   const topSpacerPx = ref(0);
@@ -26,7 +29,12 @@ export function useFeedTopSpacer({ feedRef, objectsLengthRef }: UseFeedTopSpacer
     const spacerEl = el.querySelector('.message-feed__top-spacer') as HTMLElement | null;
     const currentSpacer = spacerEl?.offsetHeight ?? 0;
     const contentHeight = el.scrollHeight - currentSpacer;
-    const needed = Math.max(0, el.clientHeight - contentHeight + FEED_TOP_LOAD_OVERFLOW_PX);
+    const shortfall = el.clientHeight - contentHeight;
+    // shortfall > OVERFLOW → short feed, spacer = 0 (ползунок по фактической высоте)
+    // 0 < shortfall ≤ OVERFLOW → минимальный tip-over для native scroll
+    // shortfall ≤ 0 → уже overflow, spacer не нужен
+    const needed =
+      shortfall > 0 && shortfall <= FEED_TOP_LOAD_OVERFLOW_PX ? shortfall + 1 : 0;
     if (needed !== topSpacerPx.value) {
       topSpacerPx.value = needed;
     }

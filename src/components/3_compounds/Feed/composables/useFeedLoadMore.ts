@@ -152,6 +152,64 @@ export function useFeedLoadMore({
     allowLoadMoreBottom.value = true;
   };
 
+  /**
+   * Явный жест пользователя (wheel/touch вверх) на short feed без overflow (#16649 journal 77879).
+   * Обходит stickToBottom: жест = намерение догрузить, даже если лента «у низа».
+   */
+  const requestTopLoadFromUserGesture = () => {
+    const element = unref(feedRef);
+    if (!element || !allowLoadMoreTop.value) return false;
+
+    prevScrollHeight.value = element.scrollHeight;
+    prevScrollTop.value = element.scrollTop;
+    pendingTopRestore.value = true;
+    allowLoadMoreTop.value = false;
+    return true;
+  };
+
+  /**
+   * Wheel вверх на short feed (нет native overflow) → один top load-more.
+   */
+  const handleWheelForTopLoad = (event: WheelEvent) => {
+    if (event.deltaY >= 0) return;
+    const element = unref(feedRef);
+    if (!element) return;
+
+    const noOverflow = element.scrollHeight <= element.clientHeight + 1;
+    if (!noOverflow) return;
+    if (!allowLoadMoreTop.value) return;
+
+    requestTopLoadFromUserGesture();
+  };
+
+  let touchStartY: number | null = null;
+
+  const handleTouchStartForTopLoad = (event: TouchEvent) => {
+    touchStartY = event.touches[0]?.clientY ?? null;
+  };
+
+  const handleTouchMoveForTopLoad = (event: TouchEvent) => {
+    if (touchStartY == null) return;
+    const element = unref(feedRef);
+    if (!element) return;
+
+    const noOverflow = element.scrollHeight <= element.clientHeight + 1;
+    if (!noOverflow) return;
+
+    const y = event.touches[0]?.clientY;
+    if (y == null) return;
+    // палец вниз = контент «вверх» (overscroll к истории)
+    if (y - touchStartY < 24) return;
+    if (!allowLoadMoreTop.value) return;
+
+    touchStartY = null;
+    requestTopLoadFromUserGesture();
+  };
+
+  const handleTouchEndForTopLoad = () => {
+    touchStartY = null;
+  };
+
   return {
     allowLoadMoreTop,
     allowLoadMoreBottom,
@@ -164,5 +222,10 @@ export function useFeedLoadMore({
     startScrollWatch,
     stopScrollWatch,
     resetAllowFlags,
+    requestTopLoadFromUserGesture,
+    handleWheelForTopLoad,
+    handleTouchStartForTopLoad,
+    handleTouchMoveForTopLoad,
+    handleTouchEndForTopLoad,
   };
 }

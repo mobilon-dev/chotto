@@ -17,7 +17,7 @@ describe('useFeedTopSpacer', () => {
     rafSpy.mockRestore()
   })
 
-  it('для short content задаёт spacer до clientHeight + overflow', async () => {
+  it('для short content (большая дырка) spacer = 0 — ползунок по фактической высоте (#16649 journal 77879)', async () => {
     const spacer = { offsetHeight: 0 } as HTMLElement
     const feedEl = {
       clientHeight: 500,
@@ -30,7 +30,25 @@ describe('useFeedTopSpacer', () => {
     const { result, scope } = withSetup(() => useFeedTopSpacer({ feedRef, objectsLengthRef }))
     await nextTick()
 
-    expect(result.topSpacerPx.value).toBe(500 - 120 + FEED_TOP_LOAD_OVERFLOW_PX)
+    expect(result.topSpacerPx.value).toBe(0)
+    scope.stop()
+  })
+
+  it('для почти полного viewport делает минимальный tip-over', async () => {
+    const spacer = { offsetHeight: 0 } as HTMLElement
+    const shortfall = Math.max(1, FEED_TOP_LOAD_OVERFLOW_PX - 2)
+    const feedEl = {
+      clientHeight: 500,
+      scrollHeight: 500 - shortfall,
+      querySelector: vi.fn(() => spacer),
+    } as unknown as HTMLElement
+    const feedRef = ref<HTMLElement | null>(feedEl)
+    const objectsLengthRef = ref(8)
+
+    const { result, scope } = withSetup(() => useFeedTopSpacer({ feedRef, objectsLengthRef }))
+    await nextTick()
+
+    expect(result.topSpacerPx.value).toBe(shortfall + 1)
     scope.stop()
   })
 

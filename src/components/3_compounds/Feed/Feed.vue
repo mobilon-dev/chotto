@@ -11,17 +11,21 @@
       data-testid="feed-scroll"
       :style="{ backgroundImage: `url(${defaultBackground})` }"
       @scroll="throttledScrollTopCheck()"
+      @wheel="handleWheelForTopLoad"
+      @touchstart.passive="handleTouchStartForTopLoad"
+      @touchmove.passive="handleTouchMoveForTopLoad"
+      @touchend="handleTouchEndForTopLoad"
       @mousedown="startScrollWatch"
       @mouseup="stopScrollWatch"
     >
-      <!-- Контент перед сообщениями -->
-      <slot name="prepend" />
-      <!-- Short feed: запас overflow сверху, чтобы жест вверх всегда был возможен (#16649) -->
+      <!-- Short feed: минимальный overflow сверху (#16649 / journal 77879) — выше prepend, чтобы не было пустоты между панелью и сообщениями -->
       <div
         class="message-feed__top-spacer"
         :style="{ height: `${topSpacerPx}px` }"
         aria-hidden="true"
       />
+      <!-- Контент перед сообщениями (NewContactPanel и т.п.) -->
+      <slot name="prepend" />
       <div
         v-show="isLoadingMore"
         class="message-feed__loading"
@@ -411,6 +415,10 @@ const {
   startScrollWatch,
   stopScrollWatch,
   resetAllowFlags,
+  handleWheelForTopLoad,
+  handleTouchStartForTopLoad,
+  handleTouchMoveForTopLoad,
+  handleTouchEndForTopLoad,
 } = useFeedLoadMore({
   feedRef: refFeed,
   emit,

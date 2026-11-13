@@ -102,4 +102,44 @@ describe('useFeedLoadMore', () => {
     expect(api.allowLoadMoreTop.value).toBe(false)
     expect(api.pendingTopRestore.value).toBe(true)
   })
+
+  it('wheel вверх на short feed (без overflow) запрашивает top-load даже при stickToBottom (#16649)', () => {
+    const feedRef = ref(
+      mockFeedElement({ scrollTop: 0, scrollHeight: 200, clientHeight: 500 }),
+    )
+    const stickToBottom = ref(true)
+    const api = useFeedLoadMore({ feedRef, stickToBottomRef: stickToBottom })
+    api.allowLoadMoreTop.value = true
+
+    api.handleWheelForTopLoad({ deltaY: -40 } as WheelEvent)
+
+    expect(api.allowLoadMoreTop.value).toBe(false)
+    expect(api.pendingTopRestore.value).toBe(true)
+  })
+
+  it('wheel вниз на short feed не триггерит top-load', () => {
+    const feedRef = ref(
+      mockFeedElement({ scrollTop: 0, scrollHeight: 200, clientHeight: 500 }),
+    )
+    const api = useFeedLoadMore({ feedRef })
+    api.allowLoadMoreTop.value = true
+
+    api.handleWheelForTopLoad({ deltaY: 40 } as WheelEvent)
+
+    expect(api.allowLoadMoreTop.value).toBe(true)
+    expect(api.pendingTopRestore.value).toBe(false)
+  })
+
+  it('wheel вверх на длинной ленте не обходит scroll-path (есть overflow)', () => {
+    const feedRef = ref(
+      mockFeedElement({ scrollTop: 100, scrollHeight: 2000, clientHeight: 500 }),
+    )
+    const api = useFeedLoadMore({ feedRef })
+    api.allowLoadMoreTop.value = true
+
+    api.handleWheelForTopLoad({ deltaY: -40 } as WheelEvent)
+
+    expect(api.allowLoadMoreTop.value).toBe(true)
+    expect(api.pendingTopRestore.value).toBe(false)
+  })
 })
