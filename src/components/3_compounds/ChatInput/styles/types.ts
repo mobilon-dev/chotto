@@ -5,6 +5,8 @@ export interface ChatInputThemeCSSVariables {
   // Container
   /** Позиционирование контейнера ввода чата */
   '--chotto-chatinput-container-position': string;
+  /** Порядок наложения контейнера ввода чата */
+  '--chotto-chatinput-container-z-index': string;
   /** Отображение контейнера ввода чата */
   '--chotto-chatinput-container-display': string;
   /** Выравнивание элементов контейнера ввода чата */
@@ -21,6 +23,8 @@ export interface ChatInputThemeCSSVariables {
   '--chotto-chatinput-container-grid-template-columns': string;
   /** Шаблон строк сетки контейнера ввода чата */
   '--chotto-chatinput-container-grid-template-rows': string;
+  /** Тень контейнера ввода чата */
+  '--chotto-chatinput-container-box-shadow': string;
 
   // Reply line
   /** Колонка сетки строки ответа */

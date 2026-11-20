@@ -5,6 +5,7 @@
   --chotto-chatinput-button-padding: 1px 0 0 3px;
   --chotto-chatinput-button-margin: 0 9px 2px 4px;
   --chotto-chatinput-container-border-top: none;
+  --chotto-chatinput-container-box-shadow: 0px -2px 4px 0px rgba(0, 0, 0, 0.05);
   --chotto-chatinput-input-line-height: 1.4;
   --chotto-chatinput-input-min-height: 40px;
   --chotto-chatinput-input-max-rows: 10;
@@ -27,6 +28,7 @@
   --chotto-chatinput-inline-buttons-gap: 7px;
   --chotto-chatinput-inline-buttons-height: 30px;
   --chotto-chatinput-container-position: relative;
+  --chotto-chatinput-container-z-index: 1;
   --chotto-chatinput-container-display: grid;
   --chotto-chatinput-container-align-items: end;
   --chotto-chatinput-container-grid-template-columns: min-content auto min-content;

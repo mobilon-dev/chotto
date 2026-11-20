@@ -1,11 +1,14 @@
 [data-theme="light"] {
   // ChatInfo container variables
+  --chotto-chatinfo-container-position: relative;
+  --chotto-chatinfo-container-z-index: 1;
   --chotto-chatinfo-container-border-radius: 0;
   --chotto-chatinfo-container-padding: 10px 15px 10px 15px;
   --chotto-chatinfo-container-border-bottom: var(--chotto-chat-info-border-bottom, 1px solid var(--chotto-theme-item-border-color));
   --chotto-chatinfo-container-background-color: transparent;
   --chotto-chatinfo-container-backdrop-filter: none;
   --chotto-chatinfo-container-max-height: 60px;
+  --chotto-chatinfo-container-box-shadow: none;
 
   // ChatInfo base-line variables
   --chotto-chatinfo-base-line-display: flex;

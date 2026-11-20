@@ -2,9 +2,11 @@
   // ChatInput container variables
   --chotto-chatinput-container-bg: transparent;
   --chotto-chatinput-container-border-top: none;
+  --chotto-chatinput-container-box-shadow: none;
   --chotto-chatinput-container-padding: 12px 0 8px 15px;
   --chotto-chatinput-container-grid-gap: 0;
   --chotto-chatinput-container-position: relative;
+  --chotto-chatinput-container-z-index: 1;
   --chotto-chatinput-container-display: grid;
   --chotto-chatinput-container-align-items: end;
   --chotto-chatinput-container-grid-template-columns: min-content auto min-content;

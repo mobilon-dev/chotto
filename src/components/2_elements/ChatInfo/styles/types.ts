@@ -3,6 +3,10 @@
  */
 export interface ChatInfoThemeCSSVariables {
   // Container
+  /** Позиционирование контейнера информации о чате */
+  '--chotto-chatinfo-container-position': string;
+  /** Порядок наложения контейнера информации о чате */
+  '--chotto-chatinfo-container-z-index': string;
   /** Радиус границы контейнера информации о чате */
   '--chotto-chatinfo-container-border-radius': string;
   /** Отступы контейнера информации о чате */
@@ -15,6 +19,8 @@ export interface ChatInfoThemeCSSVariables {
   '--chotto-chatinfo-container-backdrop-filter': string;
   /** Максимальная высота контейнера информации о чате */
   '--chotto-chatinfo-container-max-height': string;
+  /** Тень контейнера информации о чате */
+  '--chotto-chatinfo-container-box-shadow': string;
 
   // Base line
   /** Отображение базовой линии */

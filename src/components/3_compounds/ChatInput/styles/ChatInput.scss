@@ -1,6 +1,7 @@
 .chat-input {
   &__container {
     position: var(--chotto-chatinput-container-position, relative);
+    z-index: var(--chotto-chatinput-container-z-index, 1);
     display: var(--chotto-chatinput-container-display, grid);
     align-items: var(--chotto-chatinput-container-align-items, end);
     border-top: var(--chotto-chatinput-container-border-top, none);
@@ -9,6 +10,7 @@
     grid-gap: var(--chotto-chatinput-container-grid-gap, 0);
     grid-template-columns: var(--chotto-chatinput-container-grid-template-columns, minmax(0, 220px) auto min-content);
     grid-template-rows: var(--chotto-chatinput-container-grid-template-rows, auto auto auto auto);
+    box-shadow: var(--chotto-chatinput-container-box-shadow, 0px -2px 4px 0px rgba(0, 0, 0, 0.05));
 
     &--disabled-notice {
       display: var(--chotto-chatinput-disabled-notice-display, flex);
