@@ -1,0 +1,231 @@
+.contact-pick-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+
+.contact-pick-subheader {
+  display: flex;
+  align-items: center;
+  gap: var(--chotto-contactpick-subheader-gap, 18px);
+  height: var(--chotto-contactpick-subheader-height, 64px);
+  padding: var(--chotto-contactpick-subheader-padding, 0 16px);
+  flex: none;
+
+  &__title {
+    margin: 0;
+    font-size: var(--chotto-contactpick-subheader-title-size, 19px);
+    font-weight: var(--chotto-contactpick-subheader-title-weight, 600);
+    color: var(--chotto-contactpick-subheader-title-color, #1e1e1e);
+  }
+
+  &__back {
+    width: var(--chotto-contactpick-back-size, 36px);
+    height: var(--chotto-contactpick-back-size, 36px);
+    border: 0;
+    background: none;
+    border-radius: var(--chotto-contactpick-back-border-radius, 50%);
+    color: var(--chotto-contactpick-back-color, #1e1e1e);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+      background: var(--chotto-contactpick-hover-bg, #f3f3f3);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--chotto-contactpick-focus-outline, #1765c0);
+      outline-offset: 2px;
+    }
+  }
+}
+
+.contact-pick-search-wrap {
+  padding: var(--chotto-contactpick-search-wrap-padding, 0 16px 10px);
+  flex: none;
+}
+
+.contact-pick-search {
+  display: flex;
+  align-items: center;
+  gap: var(--chotto-contactpick-search-gap, 10px);
+  height: var(--chotto-contactpick-search-height, 40px);
+  padding: var(--chotto-contactpick-search-padding, 0 12px);
+  border: 1px solid var(--chotto-contactpick-search-border, #d0d0d0);
+  border-radius: var(--chotto-contactpick-search-radius, 4px);
+  background: var(--chotto-contactpick-search-bg, #fff);
+
+  &:focus-within {
+    border-color: var(--chotto-contactpick-search-focus-border, #3396ff);
+  }
+
+  &__icon {
+    flex: none;
+    display: flex;
+    color: var(--chotto-contactpick-search-icon-color, #5f5f5f);
+  }
+
+  &__input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    font-size: var(--chotto-contactpick-search-font-size, 15px);
+    background: none;
+    color: var(--chotto-contactpick-search-input-color, #1e1e1e);
+
+    &::placeholder {
+      color: var(--chotto-contactpick-search-placeholder, #acacac);
+      opacity: 1;
+    }
+  }
+}
+
+.contact-pick-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+
+  &__items {
+    padding-bottom: var(--chotto-contactpick-list-padding-bottom, 20px);
+  }
+}
+
+.contact-pick-row {
+  display: flex;
+  align-items: center;
+  gap: var(--chotto-contactpick-row-gap, 14px);
+  padding: var(--chotto-contactpick-row-padding, 12px 16px);
+  cursor: pointer;
+  border: 0;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+
+  &:hover {
+    background: var(--chotto-contactpick-row-hover-bg, #fafafa);
+  }
+
+  &--active {
+    background: var(--chotto-contactpick-row-active-bg, #f3f3f3);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--chotto-contactpick-focus-outline, #1765c0);
+    outline-offset: -2px;
+  }
+
+  &__avatar {
+    width: var(--chotto-contactpick-avatar-size, 50px);
+    height: var(--chotto-contactpick-avatar-size, 50px);
+    border-radius: var(--chotto-contactpick-avatar-border-radius, 50%);
+    flex: none;
+    display: grid;
+    place-items: center;
+    color: var(--chotto-contactpick-avatar-text-color, #fff);
+    font-size: var(--chotto-contactpick-avatar-font-size, 17px);
+    font-weight: 600;
+    background: var(--chotto-contactpick-avatar-bg, #c9ced6);
+  }
+
+  &__avatar--action {
+    background: var(--chotto-contactpick-avatar-action-bg, #3396ff);
+  }
+
+  &__name {
+    font-size: var(--chotto-contactpick-name-size, 16px);
+    color: var(--chotto-contactpick-name-color, #1e1e1e);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.contact-pick-letter {
+  padding: var(--chotto-contactpick-letter-padding, 18px 20px 6px);
+  font-size: var(--chotto-contactpick-letter-size, 13px);
+  color: var(--chotto-contactpick-letter-color, #5f5f5f);
+}
+
+.contact-pick-empty {
+  padding: var(--chotto-contactpick-empty-padding, 18px 20px 8px);
+  color: var(--chotto-contactpick-empty-color, #5f5f5f);
+  font-size: var(--chotto-contactpick-empty-size, 14px);
+}
+
+.contact-pick-banner {
+  margin: var(--chotto-contactpick-banner-margin, 0 16px 8px);
+  padding: var(--chotto-contactpick-banner-padding, 10px 12px);
+  border-radius: var(--chotto-contactpick-banner-radius, 8px);
+  background: var(--chotto-contactpick-banner-bg, #eaf4ff);
+  color: var(--chotto-contactpick-banner-color, #0b4f99);
+  font-size: var(--chotto-contactpick-banner-font-size, 13px);
+  line-height: 1.45;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex: none;
+
+  &__spin {
+    width: 14px;
+    height: 14px;
+    border-width: var(--chotto-contactpick-banner-spin-border-width, 2px);
+    border-style: solid;
+    border-color: var(--chotto-contactpick-banner-spin-border-color, #9ccaff);
+    border-top-color: var(--chotto-contactpick-banner-spin-color, #3396ff);
+    border-radius: var(--chotto-contactpick-banner-spin-border-radius, 50%);
+    animation: contact-pick-spin 1s linear infinite;
+    flex: none;
+  }
+}
+
+@keyframes contact-pick-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.contact-pick-footer {
+  padding: var(--chotto-contactpick-footer-padding, 16px 24px 24px);
+  flex: none;
+  text-align: center;
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: var(--chotto-contactpick-footer-min-width, 150px);
+    height: var(--chotto-contactpick-footer-height, 40px);
+    padding: var(--chotto-contactpick-footer-button-padding, 0 30px);
+    border-radius: var(--chotto-contactpick-footer-button-radius, 20px);
+    border: 1px solid var(--chotto-contactpick-footer-border, #3396ff);
+    background: var(--chotto-contactpick-footer-button-bg, #fff);
+    color: var(--chotto-contactpick-footer-color, #3396ff);
+    font-weight: 600;
+    font-size: var(--chotto-contactpick-footer-font-size, 15px);
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover:not(:disabled) {
+      background: var(--chotto-contactpick-footer-hover-bg, #eaf4ff);
+    }
+
+    &:disabled {
+      border-color: var(--chotto-contactpick-footer-disabled-border, #d0d0d0);
+      color: var(--chotto-contactpick-footer-disabled-color, #acacac);
+      cursor: not-allowed;
+      background: var(--chotto-contactpick-footer-button-disabled-bg, #fff);
+    }
+  }
+}

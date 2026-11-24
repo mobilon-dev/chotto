@@ -29,3 +29,22 @@
 - `chats` (Array, required) - массив объектов чатов
 - `loading` (Boolean, optional) - состояние загрузки
 - `filter` (String, optional) - фильтр для поиска чатов
+- `listMode` (`'chats' | 'pick' | 'create'`, default `chats`) — стек видов колонки списка (in-column «Новый чат» / «Новый контакт»)
+
+## Слоты (listMode)
+
+| Режим | Слот | Назначение |
+|-------|------|------------|
+| `pick` | `#pick` | Экран выбора контакта (`ContactPickSubheader`, `ContactPickList`, …) |
+| `create` | `#create` | Форма нового контакта + `ContactPickFooterButton` |
+
+В режимах `pick` / `create` обычный список чатов, фильтр и табы не рендерятся. Заголовок колонки (`#header`) переключается на стороне приложения.
+
+## Связанные компоненты
+
+- `ChatListAddButton` — кнопка «+» по макету mobilon1
+- Модуль `ContactPick/`: `ContactPickSubheader`, `ContactPickSearchField`, `ContactPickList`, `ContactPickInfoBanner`, `ContactPickFooterButton`
+
+## Deprecation
+
+Для нового флоу не используйте `useModalCreateChat2` из header: обрабатывайте `chat.new` / клик по `ChatListAddButton` и переключайте `listMode` на `pick`.

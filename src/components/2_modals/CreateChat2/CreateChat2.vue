@@ -1,3 +1,7 @@
+/**
+ * @deprecated In-column сценарий «Новый контакт» в `ChatList` (`listMode: create`).
+ * Модалка остаётся для legacy-интеграций до удаления `useModalCreateChat2`.
+ */
 <template>
   <div class="create-chat-form">
     <h2 class="create-chat-title">

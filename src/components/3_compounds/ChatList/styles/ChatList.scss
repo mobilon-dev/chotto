@@ -6,6 +6,25 @@
   flex-direction: var(--chotto-chatlist-flex-direction, column);
   height: var(--chotto-chatlist-height, 70%);
 
+  &--pick,
+  &--create {
+    height: var(--chotto-chatlist-alternate-height, 100%);
+    min-height: 0;
+  }
+
+  &__alternate-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+
+    &--pick,
+    &--create {
+      height: 100%;
+    }
+  }
+
   &__filter {
     margin: var(--chotto-chatlist-filter-margin, 0 16px 10px 15px);
   }
@@ -242,4 +261,31 @@
 .menu-leave-to {
   transform: var(--chotto-chatlist-menu-transform, scale(var(--chotto-chatlist-menu-scale, 0.9)));
   opacity: var(--chotto-chatlist-menu-opacity, 0);
+}
+
+.chat-list-add-button {
+  width: var(--chotto-chatlist-add-button-size, 40px);
+  height: var(--chotto-chatlist-add-button-size, 40px);
+  border-radius: var(--chotto-chatlist-add-button-border-radius, 50%);
+  border: var(--chotto-chatlist-add-button-border, 0);
+  background: var(--chotto-chatlist-add-button-bg, #3396ff);
+  color: var(--chotto-chatlist-add-button-color, #fff);
+  font-size: var(--chotto-chatlist-add-button-font-size, 26px);
+  font-weight: var(--chotto-chatlist-add-button-font-weight, 300);
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  flex: none;
+  box-shadow: var(--chotto-chatlist-add-button-shadow, none);
+
+  &:hover {
+    background: var(--chotto-chatlist-add-button-hover-bg, #1f86f0);
+  }
+
+  &:focus-visible {
+    outline: var(--chotto-chatlist-add-button-focus-outline, 2px solid #1765c0);
+    outline-offset: 2px;
+  }
 }

@@ -49,6 +49,23 @@ export { default as WABATemplateSelector } from './2_chatinput_elements/WABATemp
 export { default as ChatFilter } from './2_chatlist_elements/ChatFilter/ChatFilter.vue';
 export { default as ChatItem } from './2_chatlist_elements/ChatItem/ChatItem.vue';
 export { default as ChatTabs } from './2_chatlist_elements/ChatTabs/ChatTabs.vue';
+export {
+  ContactPickColumn,
+  ContactPickSubheader,
+  ContactPickSearchField,
+  ContactPickRow,
+  ContactPickNewRow,
+  ContactPickList,
+  ContactPickEmpty,
+  ContactPickInfoBanner,
+  ContactPickFooterButton,
+} from './2_chatlist_elements/ContactPick';
+export type { ContactPickItem, ContactPickLetterGroup } from './2_chatlist_elements/ContactPick/types';
+export {
+  getContactSortLetter,
+  groupContactsByLetter,
+  sortContactsForPick,
+} from './2_chatlist_elements/ContactPick/utils/groupContactsByLetter';
 
 // 2_elements
 export { default as AudioRecorder } from './2_elements/AudioRecorder/AudioRecorder.vue';
@@ -105,6 +122,7 @@ export { default as SelectUser } from './2_modals/SelectUser/SelectUser.vue';
 // 3_compounds
 export { default as ChatInput } from './3_compounds/ChatInput/ChatInput.vue';
 export { default as ChatListHeader } from './3_compounds/ChatList/ChatListHeader.vue';
+export { default as ChatListAddButton } from './3_compounds/ChatList/ChatListAddButton.vue';
 export { default as ChatList } from './3_compounds/ChatList/ChatList.vue';
 export { default as Feed } from './3_compounds/Feed/Feed.vue';
 export { default as SideBar } from './3_compounds/SideBar/SideBar.vue';

@@ -1,6 +1,10 @@
 import { useModal } from './useModal';
 import Modal from '@/components/2_modals/Modal/Modal.vue';
 
+/**
+ * @deprecated Для Mobilon One используйте in-column флоу `ChatList` (`listMode: pick | create`)
+ * и слоты `#pick` / `#create`. Будет удалён после стабилизации нового сценария.
+ */
 export const useModalCreateChat2 = async (title: string, theme: string) => {
   const data = await useModal({
     //в component должен быть встроен emit change(key: value)

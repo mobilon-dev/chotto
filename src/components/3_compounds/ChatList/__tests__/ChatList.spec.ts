@@ -77,4 +77,29 @@ describe('ChatList smoke', () => {
     expect(wrapper.text()).toContain('Нет чатов')
     wrapper.unmount()
   })
+
+  it('в режиме pick не рендерит список чатов, показывает слот', () => {
+    const wrapper = mount(ChatList, {
+      props: {
+        chats: sampleChats,
+        filterEnabled: false,
+        listMode: 'pick',
+      },
+      slots: {
+        pick: '<div data-testid="pick-slot">pick content</div>',
+      },
+      global: {
+        provide: { chatAppId: 'chat-list-pick' },
+        stubs: {
+          LoadingIndicator: true,
+          ChatTabs: true,
+        },
+      },
+    })
+
+    expect(wrapper.find('[data-testid="chat-item"]').exists()).toBe(false)
+    expect(wrapper.find('[data-testid="chat-list-pick"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="pick-slot"]').exists()).toBe(true)
+    wrapper.unmount()
+  })
 })

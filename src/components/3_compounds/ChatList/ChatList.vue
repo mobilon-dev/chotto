@@ -1,114 +1,71 @@
 <template>
   <div
     class="chat-list"
+    :class="listModeClass"
     data-testid="chat-list"
   >
-    <slot name="header" />
+    <template v-if="isChatsMode">
+      <slot name="header" />
 
+      <!--  ???? не понятно зачем этот слот  -->
+      <slot name="sidebar" />
 
-    <!--  ???? не понятно зачем этот слот  -->
-    <slot name="sidebar" />
-
-    <ChatFilter
-      v-if="filterEnabled"
-      class="chat-list__filter"
-      @update="getFilter"
-    />
-
-    <ChatTabs
-      v-if="dialogTabs && dialogTabs.length > 0"
-      :tabs="dialogTabs"
-      @tab-click="handleTabClick"
-    />
-
-    <!-- Индикатор поиска -->
-    <div 
-      v-if="isSearching || searchQuery"
-      class="chat-list__search-indicator"
-    >
-      <div class="chat-list__search-content">
-        <div class="chat-list__search-text">
-          <span
-            v-if="isSearching"
-            class="chat-list__search-progress"
-          >
-            {{ searchProgress || 'Поиск...' }}
-          </span>
-          <span
-            v-else
-            class="chat-list__search-query"
-          >
-            Поиск "{{ searchQuery }}" завершён
-            <span
-              v-if="searchStats.loaded > 0"
-              class="chat-list__search-stats"
-            >
-              ({{ searchStats.loaded }} {{ searchStats.total !== '?' ? `из ${searchStats.total}` : '' }})
-            </span>
-          </span>
-        </div>
-        <button 
-          v-if="searchQuery"
-          class="chat-list__search-clear"
-          title="Очистить поиск"
-          @click="emit('clear-search')"
-        >
-          <i class="pi pi-times" />
-        </button>
-      </div>
-    </div>
-
-    <!-- Закреплённые элементы сверху (вне скролла) -->
-    <div 
-      v-if="!props.isLoading && getSortedAndFilteredChats().filter(c => c.isFixedTop).length > 0"
-      class="chat-list__fixed-items-top"
-    >
-      <ChatItem
-        v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedTop)"
-        :key="chat.chatId"
-        class="chat-list__item"
-        :chat="chat"
-        :show-dialogs="showDialogs"
-        :context-menu-trigger="props.contextMenuTrigger"
-        @select="selectChat"
-        @expand="expandChat"
-        @action="action"
+      <ChatFilter
+        v-if="filterEnabled"
+        class="chat-list__filter"
+        @update="getFilter"
       />
-    </div>
 
-    <!-- Скроллируемая область с обычными чатами -->
-    <div 
-      ref="refChatList"
-      class="chat-list__items"
-      @scroll="scrollCheck"
-      @mousedown="startScrollWatch"
-      @mouseup="stopScrollWatch"
-    >
-      <LoadingIndicator
-        class="chat-list__loading-indicator"
-        :is-loading="props.isLoading"
+      <ChatTabs
+        v-if="dialogTabs && dialogTabs.length > 0"
+        :tabs="dialogTabs"
+        @tab-click="handleTabClick"
       />
-      <div
-        v-if="!props.isLoading && getSortedAndFilteredChats().length === 0"
-        class="chat-list__no-data"
-        :style="noDataStyle"
+
+      <!-- Индикатор поиска -->
+      <div 
+        v-if="isSearching || searchQuery"
+        class="chat-list__search-indicator"
       >
-        <div class="chat-list__placeholder">
-          <p class="chat-list__placeholder-title">
-            {{ emptyStateTitle }}
-          </p>
-          <p
-            v-if="emptyStateHint"
-            class="chat-list__placeholder-hint"
+        <div class="chat-list__search-content">
+          <div class="chat-list__search-text">
+            <span
+              v-if="isSearching"
+              class="chat-list__search-progress"
+            >
+              {{ searchProgress || 'Поиск...' }}
+            </span>
+            <span
+              v-else
+              class="chat-list__search-query"
+            >
+              Поиск "{{ searchQuery }}" завершён
+              <span
+                v-if="searchStats.loaded > 0"
+                class="chat-list__search-stats"
+              >
+                ({{ searchStats.loaded }} {{ searchStats.total !== '?' ? `из ${searchStats.total}` : '' }})
+              </span>
+            </span>
+          </div>
+          <button 
+            v-if="searchQuery"
+            class="chat-list__search-clear"
+            title="Очистить поиск"
+            @click="emit('clear-search')"
           >
-            {{ emptyStateHint }}
-          </p>
+            <i class="pi pi-times" />
+          </button>
         </div>
       </div>
 
-      <template v-else>
+      <!-- Закреплённые элементы сверху (вне скролла) -->
+      <div 
+        v-if="!props.isLoading && getSortedAndFilteredChats().filter(c => c.isFixedTop).length > 0"
+        class="chat-list__fixed-items-top"
+      >
         <ChatItem
-          v-for="chat in getSortedAndFilteredChats().filter(c => !c.isFixedBottom && !c.isFixedTop)"
+          v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedTop)"
           :key="chat.chatId"
           class="chat-list__item"
           :chat="chat"
@@ -118,35 +75,96 @@
           @expand="expandChat"
           @action="action"
         />
-      </template>
+      </div>
+
+      <!-- Скроллируемая область с обычными чатами -->
+      <div 
+        ref="refChatList"
+        class="chat-list__items"
+        @scroll="scrollCheck"
+        @mousedown="startScrollWatch"
+        @mouseup="stopScrollWatch"
+      >
+        <LoadingIndicator
+          class="chat-list__loading-indicator"
+          :is-loading="props.isLoading"
+        />
+        <div
+          v-if="!props.isLoading && getSortedAndFilteredChats().length === 0"
+          class="chat-list__no-data"
+          :style="noDataStyle"
+        >
+          <div class="chat-list__placeholder">
+            <p class="chat-list__placeholder-title">
+              {{ emptyStateTitle }}
+            </p>
+            <p
+              v-if="emptyStateHint"
+              class="chat-list__placeholder-hint"
+            >
+              {{ emptyStateHint }}
+            </p>
+          </div>
+        </div>
+
+        <template v-else>
+          <ChatItem
+            v-for="chat in getSortedAndFilteredChats().filter(c => !c.isFixedBottom && !c.isFixedTop)"
+            :key="chat.chatId"
+            class="chat-list__item"
+            :chat="chat"
+            :show-dialogs="showDialogs"
+            :context-menu-trigger="props.contextMenuTrigger"
+            @select="selectChat"
+            @expand="expandChat"
+            @action="action"
+          />
+        </template>
+      </div>
+
+      <!-- Закреплённые элементы снизу (вне скролла) -->
+      <div 
+        v-if="!props.isLoading && getSortedAndFilteredChats().filter(c => c.isFixedBottom).length > 0"
+        class="chat-list__fixed-items-bottom"
+      >
+        <ChatItem
+          v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedBottom)"
+          :key="chat.chatId"
+          class="chat-list__item"
+          :chat="chat"
+          :show-dialogs="showDialogs"
+          :context-menu-trigger="props.contextMenuTrigger"
+          @select="selectChat"
+          @expand="expandChat"
+          @action="action"
+        />
+      </div>
+      <transition>
+        <button
+          v-if="isShowButton"
+          class="chat-list__button-up"
+          @click="scrollToTopForce"
+        >
+          <span class="pi pi-angle-up chat-list__icon-down" />
+        </button>
+      </transition>
+    </template>
+
+    <div
+      v-else-if="props.listMode === 'pick'"
+      class="chat-list__alternate-view chat-list__alternate-view--pick"
+      data-testid="chat-list-pick"
+    >
+      <slot name="pick" />
     </div>
 
-    <!-- Закреплённые элементы снизу (вне скролла) -->
-    <div 
-      v-if="!props.isLoading && getSortedAndFilteredChats().filter(c => c.isFixedBottom).length > 0"
-      class="chat-list__fixed-items-bottom"
+    <div
+      v-else-if="props.listMode === 'create'"
+      class="chat-list__alternate-view chat-list__alternate-view--create"
+      data-testid="chat-list-create"
     >
-      <ChatItem
-        v-for="chat in getSortedAndFilteredChats().filter(c => c.isFixedBottom)"
-        :key="chat.chatId"
-        class="chat-list__item"
-        :chat="chat"
-        :show-dialogs="showDialogs"
-        :context-menu-trigger="props.contextMenuTrigger"
-        @select="selectChat"
-        @expand="expandChat"
-        @action="action"
-      />
+      <slot name="create" />
     </div>
-    <transition>
-      <button
-        v-if="isShowButton"
-        class="chat-list__button-up"
-        @click="scrollToTopForce"
-      >
-        <span class="pi pi-angle-up chat-list__icon-down" />
-      </button>
-    </transition>
   </div>
 </template>
 
@@ -230,10 +248,30 @@ const props = defineProps({
     type: String,
     default: 'Добавьте номер телефона и Имя в карточку контакта',
   },
+  listMode: {
+    type: String,
+    default: 'chats',
+    validator: (value) => ['chats', 'pick', 'create'].includes(value),
+  },
 });
 
 // Define emits
-const emit = defineEmits(['select', 'action', 'loadMoreChats', 'expand', 'tab-click', 'search', 'clear-search']);
+const emit = defineEmits([
+  'select',
+  'action',
+  'loadMoreChats',
+  'expand',
+  'tab-click',
+  'search',
+  'clear-search',
+  'list-back',
+]);
+
+const isChatsMode = computed(() => props.listMode === 'chats');
+
+const listModeClass = computed(() => (
+  props.listMode === 'chats' ? null : `chat-list--${props.listMode}`
+));
 
 const refChatList = ref();
 const noDataOffset = ref(0);

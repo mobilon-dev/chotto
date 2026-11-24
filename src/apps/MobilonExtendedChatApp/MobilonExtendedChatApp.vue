@@ -30,6 +30,7 @@
             ref="refChatList"
             :chats="sortedChats"
             filter-enabled
+            :list-mode="chatListMode"
             :dialog-tabs="dialogTabs"
             :active-tab-id="activeTabId"
             :context-menu-trigger="'rightClick'"
@@ -39,23 +40,76 @@
             @load-more-chats="loadMoreChats"
             @tab-click="handleTabClick"
           >
-            <template #header>
+            <template
+              v-if="chatListMode === 'chats'"
+              #header
+            >
               <ChatListHeader
                 title="Mobilon One 0.3"
                 :logo-enabled="true"
               >
                 <template #actions>
-                  <div class="actions">
-                    <button
-                      class="add-chat-button"
-                      title="Добавить чат с контактом"
-                      @click="createChat"
-                    >
-                      <i class="pi pi-plus" />
-                    </button>
-                  </div>
+                  <ChatListAddButton @click="openPick" />
                 </template>
               </ChatListHeader>
+            </template>
+
+            <template #pick>
+              <ContactPickColumn>
+                <ContactPickSubheader
+                  title="Новый чат"
+                  @back="backToChats"
+                />
+                <ContactPickSearchField v-model="pickQuery" />
+                <ContactPickInfoBanner
+                  v-if="pickBitrixExportInProgress"
+                  :loading="true"
+                >
+                  Загружаем контакты, список может быть неполным
+                </ContactPickInfoBanner>
+                <ContactPickList
+                  :items="filteredPickContacts"
+                  :search-query="pickQuery"
+                  :selected-id="selectedPickContactId"
+                  @select="onPickContact"
+                  @new-contact="openCreateFromPick"
+                />
+              </ContactPickColumn>
+            </template>
+
+            <template #create>
+              <ContactPickColumn>
+                <ContactPickSubheader
+                  title="Новый контакт"
+                  @back="backToPick"
+                />
+                <p style="margin: 0; padding: 12px 16px; font-size: 14px; color: #5f5f5f;">
+                  Демо: имя и телефон для проверки флоу. Слот #create заполняет приложение-потребитель.
+                </p>
+                <label style="display: block; padding: 0 16px 12px;">
+                  Имя
+                  <input
+                    v-model="createFirstName"
+                    type="text"
+                    placeholder="Имя"
+                    style="display: block; width: 100%; margin-top: 4px;"
+                  >
+                </label>
+                <label style="display: block; padding: 0 16px 12px;">
+                  Телефон
+                  <input
+                    v-model="createPhone"
+                    type="tel"
+                    placeholder="+7"
+                    style="display: block; width: 100%; margin-top: 4px;"
+                  >
+                </label>
+                <ContactPickFooterButton
+                  label="Сохранить контакт"
+                  :disabled="!canSubmitCreateContact"
+                  @click="submitCreateContact"
+                />
+              </ContactPickColumn>
             </template>
           </ChatList>
           <FeedSearch 
@@ -348,6 +402,13 @@ import {
   ChatInput,
   ChatListHeader,
   ChatList,
+  ChatListAddButton,
+  ContactPickColumn,
+  ContactPickSubheader,
+  ContactPickSearchField,
+  ContactPickList,
+  ContactPickInfoBanner,
+  ContactPickFooterButton,
   Feed,
   // UserProfile,
   ThemeMode,
@@ -382,7 +443,7 @@ import { transformToFeed } from "../transform/transformToFeed";
 // import { useLocale } from "../locale/useLocale";
 import { mockUploader } from "../mockUploader";
 
-import { useModalCreateDialog, useModalSelectUser2, useModalCreateChat2 } from "@/hooks";
+import { useModalCreateDialog, useModalSelectUser2 } from "@/hooks";
 import { themes as themesData } from '../data';
 import {
   approveSticker,
@@ -483,6 +544,127 @@ const chatsStore = useChatsStore();
 
 // Сортировка чатов: сначала по количеству непрочитанных (больше сверху),
 // затем по времени последней активности (новые сверху)
+const chatListMode = ref('chats');
+const pickQuery = ref('');
+const selectedPickContactId = ref(null);
+const pickBitrixExportInProgress = ref(false);
+const createFirstName = ref('');
+const createPhone = ref('');
+
+const demoPickContacts = computed(() => {
+  const seen = new Set();
+  const items = [];
+
+  for (const chat of chatsStore.chats) {
+    const name = chat.name?.trim();
+    if (!name || seen.has(name)) {
+      continue;
+    }
+    seen.add(name);
+    const color = chat.status && chat.status !== 'transparent' ? chat.status : undefined;
+    items.push({
+      id: chat.chatId,
+      name,
+      avatarColor: typeof color === 'string' ? color : undefined,
+    });
+  }
+
+  return items;
+});
+
+const filteredPickContacts = computed(() => {
+  const q = pickQuery.value.trim().toLowerCase();
+  if (!q) {
+    return demoPickContacts.value;
+  }
+  return demoPickContacts.value.filter((contact) => (
+    contact.name.toLowerCase().includes(q)
+  ));
+});
+
+const canSubmitCreateContact = computed(() => (
+  Boolean(createFirstName.value.trim() || createPhone.value.trim())
+));
+
+const openPick = () => {
+  chatListMode.value = 'pick';
+  pickQuery.value = '';
+  selectedPickContactId.value = null;
+};
+
+const backToChats = () => {
+  chatListMode.value = 'chats';
+  pickQuery.value = '';
+  selectedPickContactId.value = null;
+};
+
+const backToPick = () => {
+  chatListMode.value = 'pick';
+};
+
+const prefillCreateFromPickQuery = () => {
+  const q = pickQuery.value.trim();
+  createFirstName.value = '';
+  createPhone.value = '';
+  if (!q) {
+    return;
+  }
+  if (q.startsWith('@')) {
+    createFirstName.value = q.slice(1);
+    return;
+  }
+  const digits = q.replace(/\D/g, '');
+  if (digits.length >= 6) {
+    createPhone.value = q;
+    return;
+  }
+  createFirstName.value = q;
+};
+
+const openCreateFromPick = () => {
+  prefillCreateFromPickQuery();
+  chatListMode.value = 'create';
+};
+
+const onPickContact = (item) => {
+  selectedPickContactId.value = item.id;
+  const chat = chatsStore.chats.find((c) => c.chatId === item.id);
+  if (!chat) {
+    return;
+  }
+  const dialog = chat.dialogs?.find((d) => d.isSelected) ?? chat.dialogs?.[0] ?? null;
+  selectChat({ chat, dialog });
+};
+
+const addDemoChatFromContact = (name, phone) => {
+  const newChat = {
+    chatId: Date.now(),
+    name,
+    title: name,
+    countUnread: 0,
+    unreadCount: 0,
+    lastMessage: 'Новый чат создан',
+    contact: {
+      name,
+      phone,
+      attributes: [],
+    },
+  };
+  chatsStore.chats.unshift(newChat);
+  selectChat({ chat: newChat, dialog: null });
+};
+
+const submitCreateContact = () => {
+  const name = createFirstName.value.trim() || createPhone.value.trim() || 'Новый контакт';
+  const phone = createPhone.value.trim();
+  addDemoChatFromContact(name, phone);
+  chatListMode.value = 'chats';
+  pickQuery.value = '';
+  selectedPickContactId.value = null;
+  createFirstName.value = '';
+  createPhone.value = '';
+};
+
 const sortedChats = computed(() => {
   if (!chatsStore.chats || chatsStore.chats.length === 0) {
     return [];
@@ -1126,45 +1308,6 @@ const handleConfirmAttribute = async (data) => {
   }
 };
 
-// Демонстрационная функция создания чата
-const createChat = async () => {
-  try {
-    // Получаем текущую тему из DOM
-    const selectedTheme = Array.from(document.querySelectorAll('div[data-theme]'))[0]?.getAttribute('data-theme') || 'mobilon1';
-    
-    // Открываем модальное окно CreateChat2
-    const result = await useModalCreateChat2('Создание чата с контактом', selectedTheme);
-    
-    console.log('Демо: Данные из модального окна:', result);
-    console.log('Демо: Имя контакта:', result.contact.name);
-    console.log('Демо: Телефон контакта:', result.contact.phone);
-    
-    // Демонстрационная логика: создаем моковый чат и добавляем его в список
-    if (result.contact.name && result.contact.phone) {
-      const newChat = {
-        chatId: Date.now(), // Используем timestamp как ID
-        name: result.contact.name,
-        title: result.contact.name,
-        unreadCount: 0,
-        lastMessage: 'Новый чат создан',
-        contact: {
-          name: result.contact.name,
-          phone: result.contact.phone,
-          attributes: []
-        },
-      };
-      
-      // Добавляем новый чат в начало списка
-      chatsStore.chats.unshift(newChat);
-      console.log('Демо: Новый чат добавлен в список:', newChat);
-    }
-    
-  } catch (error) {
-    console.log('Демо: Модальное окно было закрыто или произошла ошибка:', error);
-  }
-};
-
-
 const handleEvent = async (event) => {
   console.log(event)
   if (event.type === "message") {
@@ -1360,14 +1503,4 @@ onMounted(() => {
   }
 }
 
-.add-chat-button {
-  background-color: transparent;
-  border: none;
-  color: gray;
-  cursor: pointer;
-
-  :hover {
-    color: black;
-  }
-}
 </style>

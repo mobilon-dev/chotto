@@ -36,6 +36,7 @@
 @use '../../components/2_chatlist_elements/ChatFilter/styles/themes/default.scss' as chatfilter-default;
 @use '../../components/2_chatlist_elements/ChatItem/styles/themes/default.scss' as chatitem-default;
 @use '../../components/2_chatlist_elements/ChatTabs/styles/themes/default.scss' as chattabs-default;
+@use '../../components/2_chatlist_elements/ContactPick/styles/themes/default.scss' as contactpick-default;
 
 // 2_elements
 @use '../../components/2_elements/AudioRecorder/styles/themes/default.scss' as audiorecorder-default;

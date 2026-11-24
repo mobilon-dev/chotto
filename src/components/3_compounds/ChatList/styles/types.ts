@@ -266,4 +266,30 @@ export interface ChatListThemeCSSVariables {
   '--chotto-chatlist-title-beta-badge-tooltip-wrapper-display': string;
   /** CSS variable chatlist items position */
   '--chotto-chatlist-items-position': string;
+
+  // Alternate list modes (pick / create)
+  /** Высота колонки в режимах pick / create */
+  '--chotto-chatlist-alternate-height': string;
+
+  // Add chat button
+  /** Размер кнопки «+» */
+  '--chotto-chatlist-add-button-size': string;
+  /** Фон кнопки «+» */
+  '--chotto-chatlist-add-button-bg': string;
+  /** Фон кнопки «+» при наведении */
+  '--chotto-chatlist-add-button-hover-bg': string;
+  /** Цвет символа кнопки «+» */
+  '--chotto-chatlist-add-button-color': string;
+  /** Размер шрифта кнопки «+» */
+  '--chotto-chatlist-add-button-font-size': string;
+  /** Граница кнопки «+» */
+  '--chotto-chatlist-add-button-border': string;
+  /** Тень кнопки «+» */
+  '--chotto-chatlist-add-button-shadow': string;
+  /** Скругление кнопки «+» */
+  '--chotto-chatlist-add-button-border-radius': string;
+  /** Толщина шрифта кнопки «+» */
+  '--chotto-chatlist-add-button-font-weight': string;
+  /** Контур фокуса кнопки «+» */
+  '--chotto-chatlist-add-button-focus-outline': string;
 }
