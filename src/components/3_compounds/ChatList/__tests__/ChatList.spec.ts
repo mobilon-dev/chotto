@@ -102,4 +102,23 @@ describe('ChatList smoke', () => {
     expect(wrapper.find('[data-testid="pick-slot"]').exists()).toBe(true)
     wrapper.unmount()
   })
+
+  it('не показывает плашку «Поиск завершён» при searchQuery (#17022)', () => {
+    const wrapper = mountChatList({ searchQuery: 'dbnnen789' })
+    expect(wrapper.find('.chat-list__search-indicator').exists()).toBe(false)
+    expect(wrapper.text()).not.toContain('завершён')
+    wrapper.unmount()
+  })
+
+  it('показывает индикатор только пока isSearching', () => {
+    const wrapper = mountChatList({
+      searchQuery: 'dbnnen789',
+      isSearching: true,
+      searchProgress: 'Ищем...',
+    })
+    expect(wrapper.find('.chat-list__search-indicator').exists()).toBe(true)
+    expect(wrapper.text()).toContain('Ищем...')
+    expect(wrapper.text()).not.toContain('завершён')
+    wrapper.unmount()
+  })
 })

@@ -22,40 +22,17 @@
         @tab-click="handleTabClick"
       />
 
-      <!-- Индикатор поиска -->
-      <div 
-        v-if="isSearching || searchQuery"
+      <!-- Индикатор только во время поиска; плашка «завершён» убрана (#17022) -->
+      <div
+        v-if="isSearching"
         class="chat-list__search-indicator"
       >
         <div class="chat-list__search-content">
           <div class="chat-list__search-text">
-            <span
-              v-if="isSearching"
-              class="chat-list__search-progress"
-            >
+            <span class="chat-list__search-progress">
               {{ searchProgress || 'Поиск...' }}
             </span>
-            <span
-              v-else
-              class="chat-list__search-query"
-            >
-              Поиск "{{ searchQuery }}" завершён
-              <span
-                v-if="searchStats.loaded > 0"
-                class="chat-list__search-stats"
-              >
-                ({{ searchStats.loaded }} {{ searchStats.total !== '?' ? `из ${searchStats.total}` : '' }})
-              </span>
-            </span>
           </div>
-          <button 
-            v-if="searchQuery"
-            class="chat-list__search-clear"
-            title="Очистить поиск"
-            @click="emit('clear-search')"
-          >
-            <i class="pi pi-times" />
-          </button>
         </div>
       </div>
 
