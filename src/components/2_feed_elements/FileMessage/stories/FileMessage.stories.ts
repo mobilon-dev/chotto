@@ -27,6 +27,7 @@ type Story = StoryObj<typeof FileMessage>;
 const fileMessage: IFileMessage = {
   filename: "document.pdf",
   url: pdfFile,
+  size: 1572864,
   time: '20:55',
   status: 'read',
   position: 'left',
@@ -656,6 +657,18 @@ export const RightMessageWithPreviewLink: Story = {
   decorators: commonDecorator,
 };
 
+export const LongFileName: Story = {
+  args: {
+    message: {
+      ...fileMessage,
+      position: 'left',
+      filename: 'Очень_длинное_название_договора_с_контрагентом_за_2025_год_финальная_версия.pdf',
+      size: 524288,
+    } as IFileMessage,
+  },
+  decorators: commonDecorator,
+};
+
 export const MultipleFilesInOneMessage: Story = {
   args: {
     message: {
@@ -663,9 +676,9 @@ export const MultipleFilesInOneMessage: Story = {
       position: 'right',
       text: 'Пакет документов по поездке.',
       items: [
-        { url: fileMessage.url, filename: 'Документ.pdf' },
-        { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Отчет_за_квартал.pdf' },
-        { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Смета.xlsx' },
+        { url: fileMessage.url, filename: 'Документ.pdf', size: 1048576 },
+        { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Отчет_за_квартал.pdf', size: 204800 },
+        { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Смета.xlsx', size: 51200 },
       ],
     } as IFileMessage,
   },

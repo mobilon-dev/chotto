@@ -35,7 +35,12 @@
     <div
       ref="contentRef"
       class="file-message__content"
-      :class="{ 'is-first': isFirstInSeries, 'with-avatar-indent': !isFirstInSeries && message.avatar }"
+      :class="{
+        'is-first': isFirstInSeries,
+        'with-avatar-indent': !isFirstInSeries && message.avatar,
+        'file-message__content--with-files': fileItems.length > 0 && !message.deleted,
+        'file-message__content--has-caption': Boolean(message.text?.trim()),
+      }"
       :style="{ gridRow: message.subText ? '2' : '1' }"
       @mouseenter="hoverActionsEnabled && showMenu()"
       @pointerenter="onContentPointerEnter"
@@ -82,12 +87,20 @@
             :href="item.url"
             @click.prevent="downloadFile(item)"
           >
-            <span class="pi pi-file" />
-            <p class="file-message__filename-text">
-              {{ item.filename || defaultFilename(index) }}
-            </p>
-            <div class="file-message__download-button">
-              <span class="pi pi-download" />
+            <FileMessageDocumentIcon class="file-message__file-icon" />
+            <div class="file-message__info">
+              <p
+                class="file-message__filename-text"
+                :title="displayFilename(item, index)"
+              >
+                {{ displayFilename(item, index) }}
+              </p>
+              <p
+                v-if="fileMetaLine(item, index)"
+                class="file-message__file-meta"
+              >
+                {{ fileMetaLine(item, index) }}
+              </p>
             </div>
           </a>
         </div>
@@ -199,8 +212,9 @@ import MessageReactions from '@/components/2_feed_elements/MessageReactions/Mess
 import MessageStatusIndicator from '@/components/2_feed_elements/MessageStatusIndicator/MessageStatusIndicator.vue';
 import MessageSmsInvite from '@/components/2_feed_elements/MessageSmsInvite/MessageSmsInvite.vue';
 import DeletedMessageContent from '@/components/2_feed_elements/DeletedMessageContent/DeletedMessageContent.vue';
+import FileMessageDocumentIcon from './icons/FileMessageDocumentIcon.vue';
 import Tooltip from '@/components/1_atoms/Tooltip/Tooltip.vue';
-import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply, getFileMessageItems } from '@/hooks/messages';
+import { useMessageLinks, useMessageActions, useMessageMenuActions, useMessageHoverActions, useMessageReactionsInFeed, useChannelAccentColor, useSubtextTooltip, buildReplyPayload, useStartReply, getFileMessageItems, formatFileMetaLine, decodeDisplayFilename } from '@/hooks/messages';
 import { getStatus, getMessageClass, getStatusTitle, createReactionHandlers } from "@/functions";
 import { IFileMessage, IFileMessageItem } from '@/types';
 
@@ -254,6 +268,15 @@ const { linkedHtml, inNewWindow } = useMessageLinks(() => props.message.text)
 function defaultFilename(index: number) {
   if (props.message.filename && index === 0) return props.message.filename
   return `file-${props.message.messageId}${fileItems.value.length > 1 ? `-${index + 1}` : ''}`
+}
+
+function displayFilename(item: IFileMessageItem, index: number) {
+  const raw = item.filename || defaultFilename(index)
+  return decodeDisplayFilename(raw) ?? raw
+}
+
+function fileMetaLine(item: IFileMessageItem, index: number) {
+  return formatFileMetaLine(displayFilename(item, index), item.url, item.size)
 }
 const { menuActions } = useMessageMenuActions(() => props.message)
 const { hoverActionsEnabled, reactionsActive } = useMessageHoverActions(
@@ -329,9 +352,10 @@ const downloadFile = async (item?: IFileMessageItem) => {
   const target = item ?? fileItems.value[0]
   if (!target?.url) return
 
-  const downloadName = target.filename
+  const rawDownloadName = target.filename
     || (item ? defaultFilename(fileItems.value.indexOf(item)) : props.message.filename)
     || `file-${props.message.messageId}`
+  const downloadName = decodeDisplayFilename(rawDownloadName) ?? rawDownloadName
 
   try {
     const targetUrl = new URL(target.url, window.location.href)

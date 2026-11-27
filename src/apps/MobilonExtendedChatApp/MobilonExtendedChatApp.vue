@@ -1148,6 +1148,8 @@ const addMessage = (message) => {
     dialogId: selectedDialog.value?.dialogId,
     url: message.url || null,
     filename: message.filename || null,
+    size: message.size ?? null,
+    items: message.items ?? null,
     status: 'sent',
     direction: 'outgoing',
     timestamp: Math.floor(Date.now() / 1000),

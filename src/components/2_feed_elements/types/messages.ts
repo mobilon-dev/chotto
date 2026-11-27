@@ -273,6 +273,10 @@ export interface IFileMessage {
   time: string
   /** URL файла для одного вложения или дубль первого элемента `items` */
   url?: string
+  /** Размер файла в байтах (одно вложение без `items`) */
+  size?: number | string
+  filesize?: number | string
+  fileSize?: number | string
   /** Несколько файлов в одном сообщении. Один элемент — обычное вложение. */
   items?: IFileMessageItem[]
   status: string

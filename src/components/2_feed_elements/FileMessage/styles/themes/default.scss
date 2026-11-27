@@ -4,6 +4,9 @@
   --chotto-filemessage-content-width: fit-content;
   --chotto-filemessage-content-border-radius: var(--chotto-theme-message-border-radius, 14px);
   --chotto-filemessage-content-padding: 4px 8px;
+  --chotto-filemessage-content-padding-right: 8px;
+  --chotto-filemessage-content-box-sizing: border-box;
+  --chotto-filemessage-block-width: 400px;
   --chotto-filemessage-content-max-width: 25rem;
   // FileMessage bottom shadow variables
   --chotto-filemessage-bottom-shadow-display: block;
@@ -77,20 +80,63 @@
   // FileMessage link variables
   --chotto-filemessage-link-display: flex;
   --chotto-filemessage-link-justify-content: flex-start;
-  --chotto-filemessage-link-align-items: center;
-  --chotto-filemessage-link-column-gap: 12px;
+  --chotto-filemessage-link-align-items: flex-start;
+  --chotto-filemessage-link-column-gap: 10px;
+  --chotto-filemessage-files-width: 100%;
+  --chotto-filemessage-files-min-width: 0;
+  --chotto-filemessage-files-max-width: 100%;
+  --chotto-filemessage-files-box-sizing: border-box;
+  --chotto-filemessage-link-width: 100%;
+  --chotto-filemessage-link-min-width: 0;
+  --chotto-filemessage-link-max-width: 100%;
+  --chotto-filemessage-link-box-sizing: border-box;
+  --chotto-filemessage-link-overflow: hidden;
+  --chotto-filemessage-link-text-decoration: none;
+  --chotto-filemessage-link-hover-text-decoration: none;
   --chotto-filemessage-link-span-color: var(--chotto-theme-secondary-text-color);
   --chotto-filemessage-link-span-font-size: var(--chotto-theme-button-icon-size);
+  --chotto-filemessage-file-icon-flex-shrink: 0;
+  --chotto-filemessage-file-icon-size: 40px;
+  --chotto-filemessage-file-icon-circle-fill: #F5F5F5;
+  --chotto-filemessage-file-icon-glyph-fill: var(--chotto-theme-secondary-text-color);
+
+  // FileMessage file info block
+  --chotto-filemessage-info-display: flex;
+  --chotto-filemessage-info-flex-direction: column;
+  --chotto-filemessage-info-flex: 1;
+  --chotto-filemessage-info-row-gap: 2px;
+  --chotto-filemessage-info-min-width: 0;
+  --chotto-filemessage-info-max-width: 100%;
+  --chotto-filemessage-info-overflow: hidden;
 
   // FileMessage filename text variables
+  --chotto-filemessage-filename-text-display: -webkit-box;
   --chotto-filemessage-filename-text-overflow: hidden;
   --chotto-filemessage-filename-text-text-overflow: ellipsis;
-  --chotto-filemessage-filename-text-webkit-line-clamp: 1;
-  --chotto-filemessage-filename-text-line-clamp: 1;
+  --chotto-filemessage-filename-text-webkit-line-clamp: 2;
+  --chotto-filemessage-filename-text-line-clamp: 2;
   --chotto-filemessage-filename-text-webkit-box-orient: vertical;
-  --chotto-filemessage-filename-text-margin-right: 40px;
+  --chotto-filemessage-filename-text-margin: 0;
+  --chotto-filemessage-filename-text-padding: 0;
+  --chotto-filemessage-filename-text-width: 100%;
+  --chotto-filemessage-filename-text-min-width: 0;
+  --chotto-filemessage-filename-text-max-width: 100%;
+  --chotto-filemessage-filename-text-line-height: 1.25;
+  --chotto-filemessage-filename-text-max-height: calc(2 * 1.25 * var(--chotto-theme-text-font-size, 14px));
+  --chotto-filemessage-filename-text-overflow-wrap: anywhere;
+  --chotto-filemessage-filename-text-word-break: normal;
+  --chotto-filemessage-filename-text-hyphens: none;
   --chotto-filemessage-filename-text-font-size: var(--chotto-theme-text-font-size);
   --chotto-filemessage-filename-text-color: var(--chotto-theme-primary-text-color);
+
+  // FileMessage type / size meta
+  --chotto-filemessage-file-meta-margin: 0;
+  --chotto-filemessage-file-meta-overflow: hidden;
+  --chotto-filemessage-file-meta-text-overflow: ellipsis;
+  --chotto-filemessage-file-meta-white-space: nowrap;
+  --chotto-filemessage-file-meta-line-height: 1.2;
+  --chotto-filemessage-file-meta-font-size: var(--chotto-theme-small-text-font-size);
+  --chotto-filemessage-file-meta-color: var(--chotto-theme-secondary-text-color);
 
   // FileMessage footer variables
   --chotto-filemessage-footer-display: flex;
@@ -111,17 +157,6 @@
   --chotto-filemessage-info-container-column-gap: 4px;
   --chotto-filemessage-info-container-flex-shrink: 0;
   --chotto-filemessage-info-container-margin-left: auto;
-
-  // FileMessage download button variables
-  --chotto-filemessage-download-button-margin-bottom: 5px;
-  --chotto-filemessage-download-button-margin-left: auto;
-  --chotto-filemessage-download-button-border: none;
-  --chotto-filemessage-download-button-border-radius: 12px;
-  --chotto-filemessage-download-button-background-color: transparent;
-  --chotto-filemessage-download-button-padding: 0;
-  --chotto-filemessage-download-button-cursor: pointer;
-  --chotto-filemessage-download-button-span-color: var(--chotto-theme-secondary-text-color);
-  --chotto-filemessage-download-button-span-font-size: var(--chotto-theme-text-icon-size);
 
   // FileMessage views variables
   --chotto-filemessage-views-display: flex;

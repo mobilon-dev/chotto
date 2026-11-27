@@ -12,6 +12,12 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-content-padding': string;
   /** Максимальная ширина контейнера контента файла */
   '--chotto-filemessage-content-max-width': string;
+  /** box-sizing контейнера контента */
+  '--chotto-filemessage-content-box-sizing': string;
+  /** Отступ справа у пузыря с файлом */
+  '--chotto-filemessage-content-padding-right': string;
+  /** Фиксированная ширина пузыря только с файлом (включая padding) */
+  '--chotto-filemessage-block-width': string;
 
   /** Отображение нижней «тени» пузыря */
   '--chotto-filemessage-bottom-shadow-display': string;
@@ -126,7 +132,14 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-files-row-gap': string;
   /** Вертикальный промежуток между файлами (несколько файлов) */
   '--chotto-filemessage-files-many-row-gap': string;
-
+  /** Фиксированная ширина блока с файлом(ами) */
+  '--chotto-filemessage-files-width': string;
+  /** Минимальная ширина блока с файлом(ами) */
+  '--chotto-filemessage-files-min-width': string;
+  /** Максимальная ширина блока с файлом(ами) */
+  '--chotto-filemessage-files-max-width': string;
+  /** box-sizing списка файлов */
+  '--chotto-filemessage-files-box-sizing': string;
   /** Отображение ссылки на файл */
   '--chotto-filemessage-link-display': string;
   /** Выравнивание по главной оси ссылки */
@@ -135,10 +148,48 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-link-align-items': string;
   /** Промежуток между элементами ссылки */
   '--chotto-filemessage-link-column-gap': string;
+  /** Фиксированная ширина блока файла */
+  '--chotto-filemessage-link-width': string;
+  /** Минимальная ширина блока файла */
+  '--chotto-filemessage-link-min-width': string;
+  /** Максимальная ширина блока файла */
+  '--chotto-filemessage-link-max-width': string;
+  /** box-sizing строки файла */
+  '--chotto-filemessage-link-box-sizing': string;
+  /** overflow строки файла */
+  '--chotto-filemessage-link-overflow': string;
+  /** text-decoration строки файла */
+  '--chotto-filemessage-link-text-decoration': string;
+  /** text-decoration строки файла при наведении */
+  '--chotto-filemessage-link-hover-text-decoration': string;
   /** Цвет иконки в ссылке */
   '--chotto-filemessage-link-span-color': string;
   /** Размер иконки в ссылке */
   '--chotto-filemessage-link-span-font-size': string;
+
+  /** Сжатие SVG-иконки файла */
+  '--chotto-filemessage-file-icon-flex-shrink': string;
+  /** Размер SVG-иконки файла */
+  '--chotto-filemessage-file-icon-size': string;
+  /** Заливка круга SVG-иконки */
+  '--chotto-filemessage-file-icon-circle-fill': string;
+  /** Заливка глифа SVG-иконки */
+  '--chotto-filemessage-file-icon-glyph-fill': string;
+
+  /** Отображение блока имени и метаданных */
+  '--chotto-filemessage-info-display': string;
+  /** Направление блока имени и метаданных */
+  '--chotto-filemessage-info-flex-direction': string;
+  /** flex блока имени и метаданных */
+  '--chotto-filemessage-info-flex': string;
+  /** Промежуток между именем и метаданными */
+  '--chotto-filemessage-info-row-gap': string;
+  /** min-width блока имени и метаданных */
+  '--chotto-filemessage-info-min-width': string;
+  /** max-width блока имени и метаданных */
+  '--chotto-filemessage-info-max-width': string;
+  /** overflow блока имени и метаданных */
+  '--chotto-filemessage-info-overflow': string;
 
   /** Управление переполнением текста имени файла */
   '--chotto-filemessage-filename-text-overflow': string;
@@ -150,12 +201,47 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-filename-text-line-clamp': string;
   /** Ориентация блоков строк имени файла */
   '--chotto-filemessage-filename-text-webkit-box-orient': string;
-  /** Отступ справа у имени файла */
-  '--chotto-filemessage-filename-text-margin-right': string;
+  /** display имени файла */
+  '--chotto-filemessage-filename-text-display': string;
+  /** Внешние отступы имени файла */
+  '--chotto-filemessage-filename-text-margin': string;
+  /** Внутренние отступы имени файла */
+  '--chotto-filemessage-filename-text-padding': string;
+  /** width имени файла */
+  '--chotto-filemessage-filename-text-width': string;
+  /** min-width имени файла */
+  '--chotto-filemessage-filename-text-min-width': string;
+  /** max-width имени файла */
+  '--chotto-filemessage-filename-text-max-width': string;
+  /** line-height имени файла */
+  '--chotto-filemessage-filename-text-line-height': string;
+  /** max-height имени файла */
+  '--chotto-filemessage-filename-text-max-height': string;
+  /** overflow-wrap имени файла */
+  '--chotto-filemessage-filename-text-overflow-wrap': string;
+  /** word-break имени файла */
+  '--chotto-filemessage-filename-text-word-break': string;
+  /** hyphens имени файла */
+  '--chotto-filemessage-filename-text-hyphens': string;
   /** Размер шрифта имени файла */
   '--chotto-filemessage-filename-text-font-size': string;
   /** Цвет имени файла */
   '--chotto-filemessage-filename-text-color': string;
+
+  /** margin метаданных файла */
+  '--chotto-filemessage-file-meta-margin': string;
+  /** overflow метаданных файла */
+  '--chotto-filemessage-file-meta-overflow': string;
+  /** text-overflow метаданных файла */
+  '--chotto-filemessage-file-meta-text-overflow': string;
+  /** white-space метаданных файла */
+  '--chotto-filemessage-file-meta-white-space': string;
+  /** line-height метаданных файла */
+  '--chotto-filemessage-file-meta-line-height': string;
+  /** Размер шрифта метаданных (тип · размер) */
+  '--chotto-filemessage-file-meta-font-size': string;
+  /** Цвет метаданных файла */
+  '--chotto-filemessage-file-meta-color': string;
 
   /** Отображение футера (реакции + время) */
   '--chotto-filemessage-footer-display': string;
@@ -187,25 +273,6 @@ export interface FileMessageThemeCSSVariables {
   '--chotto-filemessage-info-container-flex-shrink': string;
   /** Отступ слева у контейнера информации */
   '--chotto-filemessage-info-container-margin-left': string;
-
-  /** Отступ снизу кнопки скачивания */
-  '--chotto-filemessage-download-button-margin-bottom': string;
-  /** Отступ слева кнопки скачивания */
-  '--chotto-filemessage-download-button-margin-left': string;
-  /** Граница кнопки скачивания */
-  '--chotto-filemessage-download-button-border': string;
-  /** Скругление кнопки скачивания */
-  '--chotto-filemessage-download-button-border-radius': string;
-  /** Фон кнопки скачивания */
-  '--chotto-filemessage-download-button-background-color': string;
-  /** Внутренние отступы кнопки скачивания */
-  '--chotto-filemessage-download-button-padding': string;
-  /** Курсор кнопки скачивания */
-  '--chotto-filemessage-download-button-cursor': string;
-  /** Цвет иконки внутри кнопки */
-  '--chotto-filemessage-download-button-span-color': string;
-  /** Размер иконки внутри кнопки */
-  '--chotto-filemessage-download-button-span-font-size': string;
 
   /** Отображение блока просмотров */
   '--chotto-filemessage-views-display': string;

@@ -85,9 +85,9 @@ const simpleChats = [
         text: 'Пакет документов',
         filename: 'Расписание.pdf',
         items: [
-          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Расписание.pdf' },
-          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Смета.xlsx' },
-          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Отчет_за_квартал.pdf' },
+          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Расписание.pdf', size: 262144 },
+          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Смета.xlsx', size: 10340000 },
+          { url: 'https://axiomabio.com/pdf/test.pdf', filename: 'Отчет_за_квартал.pdf', size: 262144 },
         ],
       },
     },
@@ -162,7 +162,7 @@ type DemoMessage = {
     callDuration?: string;
     isMissedCall?: boolean;
   };
-  size?: string;
+  size?: number | string;
 };
 
 const simpleMessages: DemoMessage[] = [
@@ -415,9 +415,9 @@ const simpleMessages: DemoMessage[] = [
     url: "https://axiomabio.com/pdf/test.pdf",
     filename: "Расписание.pdf",
     items: [
-      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Расписание.pdf" },
-      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Смета.xlsx" },
-      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Отчет_за_квартал.pdf" },
+      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Расписание.pdf", size: 262144 },
+      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Смета.xlsx", size: 10340000 },
+      { url: "https://axiomabio.com/pdf/test.pdf", filename: "Отчет_за_квартал.pdf", size: 262144 },
     ],
     timestamp: '1762164460',
     status: 'read',
@@ -517,6 +517,7 @@ const simpleMessages: DemoMessage[] = [
     messageId: '8',
     url: "https://axiomabio.com/pdf/test.pdf",
     filename: "Расписание.pdf",
+    size: 44576,
     timestamp: '1762164200',
     status: 'read',
   },
@@ -694,7 +695,7 @@ export const BasicExample: Story = {
         type?: string; 
         url?: string; 
         filename?: string; 
-        size?: string;
+        size?: number | string;
         alt?: string;
         reply?: {
           messageId: string;
@@ -798,7 +799,7 @@ export const BasicExample: Story = {
           url?: string;
           filename?: string;
           alt?: string;
-          size?: string;
+          size?: number | string;
           reply?: typeof message.reply;
         } = {
           chatId: currentChatId,
@@ -849,7 +850,7 @@ export const BasicExample: Story = {
           url?: string;
           filename?: string;
           alt?: string;
-          size?: string;
+          size?: number | string;
           reply?: typeof message.reply;
         } = {
           chatId: senderChatId,

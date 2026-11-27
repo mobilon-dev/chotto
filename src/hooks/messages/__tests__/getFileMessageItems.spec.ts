@@ -45,6 +45,44 @@ describe('getFileMessageItems', () => {
     }])
   })
 
+  it('берёт size из filesize / fileSize на корне', () => {
+    expect(getFileMessageItems({
+      url: 'https://example.com/root.pdf',
+      filename: 'a.pdf',
+      filesize: 2048,
+    })[0].size).toBe(2048)
+    expect(getFileMessageItems({
+      url: 'https://example.com/root.pdf',
+      filename: 'a.pdf',
+      fileSize: '4096',
+    })[0].size).toBe('4096')
+  })
+
+  it('подставляет корневой size первому элементу items без size', () => {
+    expect(getFileMessageItems({
+      size: 512,
+      items: [
+        { url: 'https://example.com/1.pdf', filename: 'one.pdf' },
+        { url: 'https://example.com/2.pdf', filename: 'two.pdf', size: 1024 },
+      ],
+    })).toEqual([
+      { url: 'https://example.com/1.pdf', filename: 'one.pdf', size: 512 },
+      { url: 'https://example.com/2.pdf', filename: 'two.pdf', size: 1024 },
+    ])
+  })
+
+  it('прокидывает size из корня сообщения', () => {
+    expect(getFileMessageItems({
+      url: 'https://example.com/root.pdf',
+      filename: 'a.pdf',
+      size: 2048,
+    })).toEqual([{
+      url: 'https://example.com/root.pdf',
+      filename: 'a.pdf',
+      size: 2048,
+    }])
+  })
+
   it('без url и items возвращает пустой список', () => {
     expect(getFileMessageItems({})).toEqual([])
     expect(getPrimaryFileItem(undefined)).toBeUndefined()

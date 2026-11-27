@@ -45,6 +45,18 @@ describe('FileMessage smoke', () => {
     wrapper.unmount()
   })
 
+  it('показывает тип файла и размер', () => {
+    const wrapper = mountFile({
+      ...makeFeedObject({ messageId: 'f1b', text: '', type: 'message.file' }),
+      filename: 'doc.pdf',
+      url: 'https://example.com/doc.pdf',
+      size: 1048576,
+      position: 'left',
+    })
+    expect(wrapper.find('.file-message__file-meta').text()).toBe('PDF - 1МБ')
+    wrapper.unmount()
+  })
+
   it('deleted показывает tombstone без ссылки на файл', () => {
     const wrapper = mountFile({
       ...makeFeedObject({ messageId: 'f2', deleted: true, type: 'message.file' }),
@@ -79,6 +91,17 @@ describe('FileMessage smoke', () => {
     expect(wrapper.find('.file-message__files--many').exists()).toBe(true)
     expect(wrapper.findAll('.file-message__link')).toHaveLength(2)
     expect(wrapper.findAll('.file-message__filename-text')[1].text()).toBe('two.pdf')
+    wrapper.unmount()
+  })
+
+  it('декодирует percent-encoded имя файла', () => {
+    const wrapper = mountFile({
+      ...makeFeedObject({ messageId: 'f-enc', text: '', type: 'message.file' }),
+      url: 'https://example.com/doc.pdf',
+      filename: '%D0%A0%D0%B0%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5.pdf',
+      position: 'left',
+    })
+    expect(wrapper.find('.file-message__filename-text').text()).toBe('Расписание.pdf')
     wrapper.unmount()
   })
 
